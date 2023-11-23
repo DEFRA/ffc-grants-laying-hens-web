@@ -1,0 +1,95 @@
+{
+    "applying": "Agent",
+    "otherItems": "None of the above",
+    "agentsDetails": {
+        "title": "Mr",
+        "firstName": "Geoff",
+        "lastName": "Hopkin",
+        "businessName": "My Farm Business",
+        "emailAddress": "me@me.com",
+        "landline": "",
+        "mobile": "08765 443322",
+        "address1": "88 The Street",
+        "address2": "",
+        "town": "Newcastle",
+        "county": "Tyne And Wear",
+        "postcode": "AB12 7YY"
+    },
+    "farmerDetails": {
+        "title": "Mrs",
+        "firstName": "Mary",
+        "lastName": "Jones",
+        "emailAddress": "test@test.com",
+        "landline": "01888 123665",
+        "mobile": "08870 554024",
+        "address1": "123 Road",
+        "address2": "Fulford",
+        "town": "York",
+        "county": "North Yorkshire",
+        "postcode": "YO33 4FF"
+    },
+    "confirmationId": "12345678",
+    "applicantType": [
+        "Dairy (including calf rearing)",
+        "Pigs",
+        "Sheep",
+        "Laying hens",
+        "Meat chickens",
+        "Aquaculture",
+        "Arable",
+        "Horticulture"
+    ],
+    "legalStatus": "Sole trader",
+    "inEngland": "Yes",
+    "planningPermission": "Should be in place by the time I make my full application",
+    "projectStart": "Yes, preparatory work",
+    "tenancy": "Yes",
+    "tenancyAgreement": null,
+    "businessDetails": {
+        "projectName": "Test Project",
+        "businessName": "Test Business"
+    },
+    "projectType": "",
+    "applicantBusiness": "",
+    "project": "Building new calf housing",
+    "minimumFloorArea": "Yes",
+    "housedIndividually": "No",
+    "isolateCalves": "Yes",
+    "strawBedding": "Yes",
+    "concreteFlooring": "Yes",
+    "enrichment": "Yes",
+    "structure": "A-frame building",
+    "structureEligibility": null,
+    "drainageSlope": "Yes",
+    "additionalItems": "Yes",
+    "roofSolarPV": "Yes",
+    "upgradingExistingBuilding": "Yes",
+    "heritageSite": "Yes",
+    "solarPVSystem": "Yes",
+    "SolarPVCost": "37500",
+    "calculatedGrantSolar": "15000",
+    "calfHousingCost": 60000,
+    "calculatedGrantCalf": 15000,
+    "projectCost": 100000,
+    "potentialFunding": "40000.00",
+    "remainingCost": "60000.00",
+    "housing": "Yes",
+    "calfGroupSize": "2 to 3",
+    "moistureControl": [
+        "A drain or drainage channel inside the pen",
+        "Positioning drinking areas near drainage and away from bedding"
+    ],
+    "permanentSickPen": [
+        "A permanent sick pen",
+        "A separate air space"
+    ],
+    "environmentalImpact": "Collect and store rainwater",
+    "sustainableMaterials": [
+        "Low carbon concrete",
+        "Steel replacement products"
+    ],
+    "introducingInnovation": [
+        "Technology",
+        "Collaboration"
+    ]
+}

@@ -1,0 +1,105 @@
+{
+  "name": "ffc-grants-cattle-housing-web",
+  "version": "2.31.5",
+  "description": "Web frontend for FTF Cattle Housing scheme",
+  "homepage": "https://github.com/DEFRA/ffc-grants-cattle-housing-web",
+  "main": "app/index.js",
+  "scripts": {
+    "build": "webpack",
+    "build:watch": "webpack --watch",
+    "lint": "standard",
+    "lint-fix": "standard --fix",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "start:watch": "npm-run-all --parallel build:watch start:nodemon",
+    "start:nodemon": "nodemon --verbose --inspect=0.0.0.0 --ext js,njk --legacy-watch app/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DEFRA/ffc-grants-cattle-housing-web.git"
+  },
+  "author": "Defra",
+  "contributors": [
+    "Paul Andrews <paul.andrews@defra.gov.uk>",
+    "Satish Chatap github.com/govTechSatish",
+    "Madiha Khan github.com/diya2214",
+    "Ogbu Olu github.com/ogbk",
+    "Ellie Tahmasebi github.com/ellietms"
+  ],
+  "license": "OGL-UK-3.0",
+  "bugs": {
+    "url": "https://github.com/DEFRA/ffc-grants-cattle-housing-web/issues"
+  },
+  "dependencies": {
+    "@defra/hapi-gapi": "^2.1.1",
+    "@hapi/catbox-redis": "^6.0.2",
+    "@hapi/cookie": "^11.0.2",
+    "@hapi/crumb": "^8.0.1",
+    "@hapi/hapi": "^21.3.0",
+    "@hapi/inert": "^7.0.0",
+    "@hapi/vision": "^7.0.0",
+    "@hapi/wreck": "^18.0.0",
+    "@hapi/yar": "^11.0.0",
+    "applicationinsights": "^2.5.0",
+    "bcrypt": "^5.0.1",
+    "dialog-polyfill": "^0.5.6",
+    "dotenv": "^16.0.1",
+    "ffc-messaging": "^2.6.5",
+    "ffc-protective-monitoring": "^1.0.3",
+    "govuk-frontend": "^4.3.1",
+    "joi": "^17.6.0",
+    "nunjucks": "^3.2.4",
+    "uuid": "^8.3.2"
+  },
+  "overrides": {
+    "@azure/identity": {
+      "jsonwebtoken": "9.0.0"
+    },
+    "semver": "7.5.3",
+    "import-in-the-middle": "1.4.2"
+  },
+  "devDependencies": {
+    "@hapi/catbox-memory": "^5.0.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "jest-junit": "^14.0.1",
+    "mini-css-extract-plugin": "^2.6.1",
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.2",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.54.7",
+    "sass-loader": "^13.0.2",
+    "snyk": "^1.1051.0",
+    "standard": "^16.0.4",
+    "string-replace-loader": "^3.1.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "beforeEach",
+      "expect",
+      "it",
+      "test",
+      "afterEach",
+      "jest",
+      "beforeAll",
+      "afterAll",
+      "browser",
+      "assert",
+      "$",
+      "XMLHttpRequest"
+    ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/test-output/**"
+    ]
+  }
+}

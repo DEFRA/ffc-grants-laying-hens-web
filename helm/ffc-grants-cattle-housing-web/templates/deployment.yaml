@@ -1,0 +1,8 @@
+{{- include "ffc-helm-library.deployment" (list . "ffc-grants-cattle-housing-web.deployment") -}}
+{{- define "ffc-grants-cattle-housing-web.deployment" -}}
+spec:
+  template:
+    spec:
+      containers:
+      - {{ include "ffc-helm-library.container" (list . "ffc-grants-cattle-housing-web.container") }}
+{{- end -}}

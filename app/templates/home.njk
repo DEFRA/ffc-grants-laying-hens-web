@@ -1,0 +1,71 @@
+{% extends '.layout.njk' %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% block pageTitle %}
+  {{ siteTitle }} - Start
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <title>Check if you can apply for a Calf Housing for Health and Welfare Grant</title>
+      <div class="govuk-body">
+      <h1 class="govuk-heading-xl">Check if you can apply for a Calf Housing for Health and Welfare Grant</h1>
+      <p>Use this service to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>check if you can apply for a grant for your project (takes about 20 minutes)</li>
+        <li>estimate how much grant funding you could get (takes about 20 minutes if you have all the project details)</li>
+      </ul>
+      <p class="govuk-body">You need to complete the checker in one session as you cannot save your information.</p>
+      <h2 class="govuk-heading-m">Who can apply</h2>
+      <p class="govuk-body">You can apply if you:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>are a dairy, beef or mixed farmer</li>
+        <li>will do the grant-funded work in England</li>
+        <li>are building new calf housing or extending or refurbishing existing calf housing</li>
+      </ul>
+      <p class="govuk-body">You can apply for up to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>40% of estimated costs of calf housing</li>
+        <li>25% of the estimated costs of buying and installing a solar PV system on the grant-funded calf housing</li>
+      </ul>
+      <p>The minimum grant you can claim is £15,000 (40% of £37,500). The maximum grant is £500,000.</p>
+      {{ govukInsetText({
+        text: "If your project is eligible, you will be able to submit your online application to the Rural Payments Agency (RPA)"
+      }) }}
+
+      {{ govukButton({
+        classes: "govuk-!-margin-top-2 govuk-!-margin-bottom-8",
+        href: button.nextLink,
+        isStartButton: true,
+        text: button.text
+      }) }}
+    </div>
+      <h2 class="govuk-heading-m">Before you start</h2>
+      
+      <p class="govuk-body">To use the checker, you need:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>information about your business (for example, number of employees and turnover)</li>
+        <li>information about the project (for example, building structure, average floor space per calf, floor and bedding type)</li>
+        <li>an estimate of the total cost of the project</li>
+      </ul>
+
+      <p class="govuk-body govuk-!-margin-bottom-8">If you do not enter any information for more than 20 minutes, your application will time out and you will have to start again.</p>
+      
+      <h2 class="govuk-heading-m">Problems using the online service</h2>
+      <p class="govuk-body">If you have any problems using the online service, call the RPA and follow the options for the Farming Transformation Fund scheme.</p>
+
+      <br><h3 class="govuk-heading-s">Telephone</h3>
+      <ul class="govuk-list">
+      <li>Telephone: 0300 0200 301</li>
+      <li>Monday to Friday, 9am to 5pm (except public holidays)</li>
+      </ul>
+      <p class="govuk-body"><a class="govuk-link" target="_blank" rel="noopener noreferrer" href="https://www.gov.uk/call-charges">Find out about call charges (opens in new tab)</a></p>
+      <h3 class="govuk-heading-s">Email</h3>
+      <p class="govuk-body"><a class="govuk-link" title="Send email to RPA" href="mailto:FTF@rpa.gov.uk">FTF@rpa.gov.uk</a></p>
+    </div>
+  </div>
+{% endblock %}

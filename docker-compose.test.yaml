@@ -1,0 +1,17 @@
+version: '3.8'
+
+# This override file should be used when running automated tests so
+# that test output is saved to the host
+
+services:
+  ffc-grants-cattle-housing-web:
+    build:
+      target: development
+    image: ffc-grants-cattle-housing-web-development
+    environment:
+      NODE_ENV: test
+      GOOGLE_TAG_MANAGER_KEY: 'GTM-WJ5C78H'
+      SESSION_CACHE_TTL: 1200000
+    command: npm run test
+    volumes:
+      - ./test-output/:/home/node/test-output/
