@@ -1,6 +1,6 @@
 version: '3.8'
 
 services:
-  ffc-grants-cattle-housing-web:
+  ffc-grants-laying-hens-web:
     command: >
       sh -c "npm run test:watch"

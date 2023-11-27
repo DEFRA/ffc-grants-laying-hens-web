@@ -47,7 +47,7 @@ describe('Cookies page', () => {
 
         const postResponse = await global.__SERVER__.inject(postOptions)
         expect(postResponse.statusCode).toBe(302)
-        expect(postResponse.headers.location).toBe('/upgrading-calf-housing/cookies?updated=true')
+        expect(postResponse.headers.location).toBe('/laying-hens/cookies?updated=true')
     })
 
 })

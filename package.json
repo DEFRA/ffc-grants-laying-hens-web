@@ -1,8 +1,8 @@
 {
-  "name": "ffc-grants-cattle-housing-web",
+  "name": "ffc-grants-laying-hens-web",
   "version": "2.31.5",
-  "description": "Web frontend for FTF Cattle Housing scheme",
-  "homepage": "https://github.com/DEFRA/ffc-grants-cattle-housing-web",
+  "description": "Web frontend for laying hens",
+  "homepage": "https://github.com/DEFRA/ffc-grants-laying-hens-web",
   "main": "app/index.js",
   "scripts": {
     "build": "webpack",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DEFRA/ffc-grants-cattle-housing-web.git"
+    "url": "git+https://github.com/DEFRA/ffc-grants-laying-hens-web.git"
   },
   "author": "Defra",
   "contributors": [
@@ -28,7 +28,7 @@
   ],
   "license": "OGL-UK-3.0",
   "bugs": {
-    "url": "https://github.com/DEFRA/ffc-grants-cattle-housing-web/issues"
+    "url": "https://github.com/DEFRA/ffc-grants-laying-hens-web/issues"
   },
   "dependencies": {
     "@defra/hapi-gapi": "^2.1.1",

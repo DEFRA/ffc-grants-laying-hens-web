@@ -165,7 +165,7 @@ describe('Project cost page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     console.log('payload: ', postResponse.payload)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/upgrading-calf-housing/potential-amount-capped')
+    expect(postResponse.headers.location).toBe('/laying-hens/potential-amount-capped')
   })
 
   it('should store valid user input and redirect to potential-amount page', async () => {

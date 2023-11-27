@@ -2,7 +2,7 @@ const createMessage = (body, type, options) => {
   return {
     body,
     type,
-    source: 'ffc-grants-cattle-housing-web',
+    source: 'ffc-grants-laying-hens-web',
     ...options
   }
 }

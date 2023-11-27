@@ -378,7 +378,7 @@ const showPostPage = (currentQuestion, request, h) => {
   switch (baseUrl) {
     case 'project-cost':
       if (payload[Object.keys(payload)[0]] > 1250000) {
-        return h.redirect('/upgrading-calf-housing/potential-amount-capped')
+        return h.redirect('/laying-hens/potential-amount-capped')
       }
       break
     case 'project-cost-solar':
@@ -392,7 +392,7 @@ const showPostPage = (currentQuestion, request, h) => {
         setYarValue(request, 'calculatedGrantSolar', null)
         setYarValue(request, 'remainingCost', getYarValue(request, 'projectCost') - 500000)
 
-        return h.redirect('/upgrading-calf-housing/potential-amount-conditional')
+        return h.redirect('/laying-hens/potential-amount-conditional')
         // solar capping
       } else if (getYarValue(request, 'calculatedGrant') > 500000) {
         const solarCap = 500000 - getYarValue(request, 'calculatedGrantCalf')
@@ -404,7 +404,7 @@ const showPostPage = (currentQuestion, request, h) => {
         const remaingCostSolar = (getYarValue(request, 'SolarPVCost') - solarCap)
         setYarValue(request, 'remainingCost', Number(getYarValue(request, 'remainingCostCalf')) + remaingCostSolar)
 
-        return h.redirect('/upgrading-calf-housing/potential-amount-solar-capped')
+        return h.redirect('/laying-hens/potential-amount-solar-capped')
       }
   }
 

@@ -71,7 +71,7 @@ const config = {
   fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.score.request`,
   eligibilityAnswersMsgType: `${msgTypePrefix}.slurry.eligibility.details`,
   contactDetailsMsgType: `${msgTypePrefix}.slurry.contact.details`,
-  msgSrc: 'ffc-grants-cattle-housing-web'
+  msgSrc: 'ffc-grants-laying-hens-web'
 }
 
 // Validate config

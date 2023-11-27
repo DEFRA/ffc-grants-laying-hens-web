@@ -62,7 +62,7 @@ describe('Get & Post Handlers', () => {
     mockH = { redirect: jest.fn() }
 
     await getHandler(question)({}, mockH)
-    expect(mockH.redirect).toHaveBeenCalledWith('/upgrading-calf-housing/start')
+    expect(mockH.redirect).toHaveBeenCalledWith('/laying-hens/start')
   })
 
   test('is eligible if calculated grant = min grant - whether grant is capped or not', async () => { // TODO: I don't understand this test is trying to check for
@@ -75,7 +75,7 @@ describe('Get & Post Handlers', () => {
     mockH = { redirect: jest.fn() }
 
     await getHandler(question)({}, mockH)
-    expect(mockH.redirect).toHaveBeenCalledWith('/upgrading-calf-housing/start')
+    expect(mockH.redirect).toHaveBeenCalledWith('/laying-hens/start')
   })
 
   // mock userScore function in handler.js
@@ -106,7 +106,7 @@ describe('Get & Post Handlers', () => {
         questions: scoreData.desirability.questions
       })
       expect(getDesirabilityAnswersSpy).toHaveBeenCalledTimes(1)
-		  expect(getUserScoreSpy).toHaveBeenCalledTimes(1)
+      expect(getUserScoreSpy).toHaveBeenCalledTimes(1)
     })
 
     test('Strong score - environmental impact', async () => {
@@ -134,7 +134,7 @@ describe('Get & Post Handlers', () => {
       })
 
       expect(getDesirabilityAnswersSpy).toHaveBeenCalledTimes(1)
-		  expect(getUserScoreSpy).toHaveBeenCalledTimes(1)
+      expect(getUserScoreSpy).toHaveBeenCalledTimes(1)
     })
 
     test('Default score - environmental impact', async () => {
@@ -161,7 +161,7 @@ describe('Get & Post Handlers', () => {
       })
 
       expect(getDesirabilityAnswersSpy).toHaveBeenCalledTimes(1)
-		  expect(getUserScoreSpy).toHaveBeenCalledTimes(1)
+      expect(getUserScoreSpy).toHaveBeenCalledTimes(1)
     })
   })
 
