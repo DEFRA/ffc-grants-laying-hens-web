@@ -285,7 +285,7 @@ const questionBank = {
           order: 30,
           title: 'Is the planned project in England?',
           hint: {
-            text: 'The location of the calf housing'
+            text: 'The location of the Laying Hens'
           },
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           pageTitle: '',

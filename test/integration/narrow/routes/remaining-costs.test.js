@@ -1,10 +1,10 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /remaining-costs', () => {
-  const varList = { 
-    projectCost: '1234567', 
-    calculatedGrant: '312000', 
-    remainingCost: 740740.20 
+  const varList = {
+    projectCost: '1234567',
+    calculatedGrant: '312000',
+    remainingCost: 740740.20
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -74,7 +74,7 @@ describe('Page: /remaining-costs', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/upgrading-calf-housing/potential-amount-conditional\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount-conditional\" class=\"govuk-back-link\">Back</a>')
   })
   it('page loads with correct back link - potential-amount-solar-capped', async () => {
     varList.SolarPVCost = 2000000000
@@ -86,7 +86,7 @@ describe('Page: /remaining-costs', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/upgrading-calf-housing/potential-amount-solar-capped\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount-solar-capped\" class=\"govuk-back-link\">Back</a>')
   })
   it('page loads with correct back link - potential-amount-solar', async () => {
     varList.SolarPVCost = 5000
@@ -99,7 +99,7 @@ describe('Page: /remaining-costs', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/upgrading-calf-housing/potential-amount-solar\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount-solar\" class=\"govuk-back-link\">Back</a>')
   })
 
   it('page loads with correct back link - potential-amount-capped', async () => {
@@ -111,7 +111,7 @@ describe('Page: /remaining-costs', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/upgrading-calf-housing/potential-amount-capped\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount-capped\" class=\"govuk-back-link\">Back</a>')
   })
 
   it('page loads with correct back link - potential-amount', async () => {
@@ -123,6 +123,6 @@ describe('Page: /remaining-costs', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/upgrading-calf-housing/potential-amount\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount\" class=\"govuk-back-link\">Back</a>')
   })
 })

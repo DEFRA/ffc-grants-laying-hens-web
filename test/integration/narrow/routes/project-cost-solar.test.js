@@ -133,7 +133,7 @@ describe('Project cost solar page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     console.log('payload: ', postResponse.payload)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/upgrading-calf-housing/potential-amount-conditional')
+    expect(postResponse.headers.location).toBe('/laying-hens/potential-amount-conditional')
   })
 
   it('should redirected to the Potential amount solar capped page if the solar grant entered is too high', async () => {
@@ -152,7 +152,7 @@ describe('Project cost solar page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     console.log('payload: ', postResponse.payload)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/upgrading-calf-housing/potential-amount-solar-capped')
+    expect(postResponse.headers.location).toBe('/laying-hens/potential-amount-solar-capped')
   })
 
   it('should redirected to the Potential amount solar page if all values entered correctly', async () => {

@@ -1,8 +1,8 @@
 environment: development
-name: ffc-grants-cattle-housing-web
+name: ffc-grants-laying-hens-web
 namespace: ffc-grants
 workstream: ffc-grants
-image: ffc-grants-cattle-housing-web
+image: ffc-grants-laying-hens-web
 
 labels: {}
 
@@ -14,10 +14,10 @@ azureIdentity:
   resourceID: not-a-real-resourceID
 
 containerConfigMap:
-  name: ffc-grants-cattle-housing-web-config-map
+  name: ffc-grants-laying-hens-web-config-map
 
 containerSecret:
-  name: ffc-grants-cattle-housing-web-container-secret
+  name: ffc-grants-laying-hens-web-container-secret
   type: Opaque
 
 deployment:
@@ -43,7 +43,7 @@ container:
   redisPassword: redis
   cookiePassword: thisisnotarealpasswordthisisnotarealpassword
   redisPort: 6379
-  redisPartition: ffc-grants-cattle-housing-web
+  redisPartition: ffc-grants-laying-hens-web
   sessionCacheTTL: 1200000
   messageQueueHost: dummy
   contactDetailsQueueAddress: contact-details

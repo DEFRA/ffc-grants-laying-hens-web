@@ -1,0 +1,8 @@
+{{- include "ffc-helm-library.deployment" (list . "ffc-grants-laying-hens-web.deployment") -}}
+{{- define "ffc-grants-laying-hens-web.deployment" -}}
+spec:
+  template:
+    spec:
+      containers:
+      - {{ include "ffc-helm-library.container" (list . "ffc-grants-laying-hens-web.container") }}
+{{- end -}}

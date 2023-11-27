@@ -4,13 +4,13 @@ version: '3.8'
 # to provide dependencies and expose ports for local testing
 
 services:
-  ffc-grants-cattle-housing-web:
+  ffc-grants-laying-hens-web:
     build:
       context: .
       target: development
     depends_on:
       - redis
-    image: ffc-grants-cattle-housing-web-development
+    image: ffc-grants-laying-hens-web-development
     environment:
       NODE_ENV: development
     ports:

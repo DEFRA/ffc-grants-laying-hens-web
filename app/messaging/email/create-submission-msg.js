@@ -100,9 +100,9 @@ const getPlanningPermissionDoraValue = (planningPermission) => {
 function getSpreadsheetDetails(submission, desirabilityScore) {
   const today = new Date()
   const todayStr = today.toLocaleDateString('en-GB')
-  // const schemeName = 'Calf Housing for Health and Welfare'
-  const subScheme = 'FTF-AHW-Calf Housing'
-  const subTheme = 'Calf housing for health and welfare'
+  // const schemeName = 'Laying Hens for Health and Welfare'
+  const subScheme = 'FTF-AHW-Laying Hens'
+  const subTheme = 'Laying Hens for health and welfare'
 
   // format array for applicantType field and individual fields
   let businessTypeArray
@@ -128,7 +128,7 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
       submission.confirmationId.trim(),
       today
     ),
-    uploadLocation: `Farming Investment Fund/Farming Transformation Fund/${spreadsheetConfig.uploadEnvironment}/Cattle Housing/`,
+    uploadLocation: `Farming Investment Fund/Farming Transformation Fund/${spreadsheetConfig.uploadEnvironment}/Laying Hens/`,
     worksheets: [
       {
         title: 'DORA DATA',
@@ -185,8 +185,8 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
           generateRow(440, 'Solar exempt - Upgrade to existing', submission.upgradingExistingBuilding ?? ''),
           generateRow(441, 'Solar exempt - World Heritage Site', submission.heritageSite ?? ''),
           generateRow(442, 'Buy Solar PV system', submission.solarPVSystem ?? ''),
-          generateRow(443, 'Calf housing cost', submission?.projectCostSolar?.calfHousingCost ?? String(Number(submission.projectCost).toFixed(2))),
-          generateRow(444, 'Calf housing grant amount', submission.calculatedGrantCalf ?? submission.calculatedGrant),
+          generateRow(443, 'Laying Hens cost', submission?.projectCostSolar?.calfHousingCost ?? String(Number(submission.projectCost).toFixed(2))),
+          generateRow(444, 'Laying Hens grant amount', submission.calculatedGrantCalf ?? submission.calculatedGrant),
           generateRow(445, 'Solar cost', submission?.projectCostSolar?.SolarPVCost ?? ''),
           generateRow(446, 'Solar grant amount', submission.calculatedGrantSolar ?? ''),
 

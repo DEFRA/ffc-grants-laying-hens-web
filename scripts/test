@@ -4,7 +4,7 @@ set -e
 projectRoot="$(a="/$0"; a=${a%/*}; a=${a:-.}; a=${a#/}/; cd "$a/.." || return; pwd)"
 # command="$@"
 
-service="ffc-grants-cattle-housing-web"
+service="ffc-grants-laying-hens-web"
 
 show_help() {
   echo "

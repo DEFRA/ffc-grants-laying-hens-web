@@ -1,5 +1,5 @@
-{{- include "ffc-helm-library.container-config-map" (list . "ffc-grants-cattle-housing-web.config-map") -}}
-{{- define "ffc-grants-cattle-housing-web.config-map" -}}
+{{- include "ffc-helm-library.container-config-map" (list . "ffc-grants-laying-hens-web.config-map") -}}
+{{- define "ffc-grants-laying-hens-web.config-map" -}}
 data:
   NODE_ENV: {{ quote .Values.environment }}
   PORT: {{ quote .Values.container.port }}  

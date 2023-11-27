@@ -7,7 +7,7 @@ describe('create message test', () => {
     expect(message).toEqual({
       body: 'test',
       type: 'newTest',
-      source: 'ffc-grants-cattle-housing-web',
+      source: 'ffc-grants-laying-hens-web',
       mock: 'yes'
     })
   })

@@ -1,3 +1,0 @@
-{{- include "ffc-helm-library.azure-identity" (list . "ffc-grants-cattle-housing-web.azure-identity") -}}
-{{- define "ffc-grants-cattle-housing-web.azure-identity" -}}
-{{- end -}}

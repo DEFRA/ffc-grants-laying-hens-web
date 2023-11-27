@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const urlPrefix = '/upgrading-calf-housing'
+const urlPrefix = '/laying-hens'
 const startPageUrl = '/start'
 const serviceEndDate = '2024/07/12'
 const serviceEndTime = '23:59:59'
@@ -30,7 +30,7 @@ const schema = Joi.object({
   }),
   appInsights: {
     key: Joi.string(),
-    role: Joi.string().default('ffc-grants-cattle-housing')
+    role: Joi.string().default('ffc-grants-laying-hens')
   }
 })
 

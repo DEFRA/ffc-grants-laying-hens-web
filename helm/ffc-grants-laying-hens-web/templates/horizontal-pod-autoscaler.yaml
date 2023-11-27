@@ -1,5 +1,5 @@
-{{- include "ffc-helm-library.horizontal-pod-autoscaler" (list . "ffc-grants-cattle-housing-web.horizontal-pod-autoscaler") -}}
-{{- define "ffc-grants-cattle-housing-web.horizontal-pod-autoscaler" -}}
+{{- include "ffc-helm-library.horizontal-pod-autoscaler" (list . "ffc-grants-laying-hens-web.horizontal-pod-autoscaler") -}}
+{{- define "ffc-grants-laying-hens-web.horizontal-pod-autoscaler" -}}
 spec:
   metrics:
   - type: Resource
