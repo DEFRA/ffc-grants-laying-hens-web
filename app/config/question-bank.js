@@ -198,7 +198,7 @@ const questionBank = {
               html: '<ul class="govuk-list govuk-list--bullet"><li>Sole trader</li><li>Partnership</li><li>Limited company</li><li>Charity</li><li>Trust</li><li>Limited liability partnership</li><li>Community interest company</li><li>Limited partnership</li><li>Industrial and provident society</li><li>Co-operative society (Co-Op)</li><li>Community benefit society (BenCom)</li></ul>'
             },
             messageLink: {
-              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             },
             warning: {
@@ -285,7 +285,7 @@ const questionBank = {
           order: 30,
           title: 'Is the planned project in England?',
           hint: {
-            text: 'The location of the Laying Hens'
+            text: 'The site where the work will happen'
           },
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           pageTitle: '',
@@ -298,8 +298,8 @@ const questionBank = {
             messageContent: 'This grant is only for projects in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
@@ -318,7 +318,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the project is in England'
+              error: 'Select yes if the planned project is in England'
             }
           ],
           answers: [
