@@ -23,6 +23,7 @@ describe('Page: /planning-permission-condition', () => {
     const getResponse = await global.__SERVER__.inject(getOptions)
     expect(getResponse.statusCode).toBe(200)
     expect(getResponse.payload).toContain('You may be able to apply for a grant from this scheme')
+    expect(getResponse.payload).toContain('You must have secured planning permission before you submit a full application. The application deadline is 31 December 2025.')
   })
   it('page loads with correct back link', async () => {
     const getOptions = {

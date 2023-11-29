@@ -345,13 +345,13 @@ const questionBank = {
           nextUrl: 'project-started',
           preValidationKeys: ['inEngland'],
           ineligibleContent: {
-            messageContent: 'Any planning permission must be in place before you submit your full application.',
+            messageContent: 'You must have secured planning permission before you submit a full application.',
             messageLink: {
-              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: 'Improving Adding Value',
+          // fundingPriorities: 'Improving Adding Value',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -360,14 +360,14 @@ const questionBank = {
               content: [{
                 para: `You must have secured planning permission before you submit a full application.
 
-                        The application deadline is 30 April 2025.`
+                        The application deadline is 31 December 2025.`
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select when the project will have project planning permission'
+              error: 'Select if the project has planning permission'
             }
           ],
           answers: [
@@ -402,7 +402,11 @@ const questionBank = {
           preValidationKeys: ['planningPermission'],
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place before you submit your full application. The application deadline is 30 April 2025.'
+            messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 31 December 2025.',
+            messageLink: {
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for.'
+            }
           },
           yarKey: 'planningPermissionCondition'
         },
