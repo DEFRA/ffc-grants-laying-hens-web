@@ -542,15 +542,8 @@ const questionBank = {
           url: 'project-responsibility',
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
+          nextUrl: 'project', 
           // routing TBC
-          // dependantNextUrl: {
-          //   dependentQuestionYarKey: 'projectSubject',
-          //   dependentAnswerKeysArray: ['project-subject-A2'],
-          //   urlOptions: {
-          //     thenUrl: '',
-          //     elseUrl: ''
-          //   }
-          // },
           preValidationObject: {
             preValidationKeys: ['tenancy'],
             preValidationAnswer: ['tenancy-A2'],
