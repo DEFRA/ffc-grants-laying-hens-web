@@ -35,7 +35,7 @@ describe('Page: /project-started', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select the option that applies to your project')
+    expect(postResponse.payload).toContain('Select if you have already started work on the project')
   })
 
   it('user selects ineligible option: \'Yes, we have begun project work\' -> display ineligible page', async () => {
@@ -63,12 +63,25 @@ describe('Page: /project-started', () => {
     expect(postResponse.headers.location).toBe('tenancy')
   })
 
-  it('page loads with correct back link', async () => {
+  it('page loads with correct back link - /planning-permission', async () => {
+    varList.planningPermission = 'Not needed'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-started`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"planning-permission\" class=\"govuk-back-link\">Back</a>')
+  })
+
+  it('page loads with correct back link - /planning-permission-condition', async () => {
+    varList.planningPermission = 'Should be in place by the time I make my full application'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-started`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"planning-permission-condition\" class=\"govuk-back-link\">Back</a>')
   })
 })

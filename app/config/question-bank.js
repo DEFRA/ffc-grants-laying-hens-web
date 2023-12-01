@@ -432,7 +432,7 @@ const questionBank = {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
             messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
@@ -446,7 +446,7 @@ const questionBank = {
                 para: `
                 You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.
                 
-                Before you start the project, you can:`,
+                Before you start the project you can:`,
                 items: [
                   'get quotes from suppliers',
                   'apply for planning permission (this can take a long time)'
@@ -457,7 +457,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select the option that applies to your project'
+              error: 'Select if you have already started work on the project'
             }
           ],
           answers: [
@@ -481,6 +481,9 @@ const questionBank = {
               value: 'No, we have not done any work on this project yet'
             }
           ],
+          warning: {
+            text: 'You must not start project work or commit to project costs before receiving your funding agreement.'
+          },
           yarKey: 'projectStart'
         },
         {
@@ -488,13 +491,13 @@ const questionBank = {
           order: 60,
           title: 'Is the planned project on land the business owns?',
           hint: {
-            text: 'The location of the calf housing'
+            text: 'The site where the work will happen'
           },
           pageTitle: '',
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-started',
-          nextUrl: 'project',
+          nextUrl: 'project-responsibility',
           preValidationKeys: ['projectStart'],
           fundingPriorities: '',
           type: 'single-answer',
@@ -504,7 +507,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You must own the land or have a tenancy in place for 5 years after the final grant payment.'
+                para: 'If you are a tenant farmer, you have the option to ask your landlord to underwrite your agreement.'
               }]
             }]
           },
