@@ -79,7 +79,6 @@ describe('Page: /planning-permission', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('planning-permission-condition')
-    // expect(getResponse.payload).toContain('You may be able to apply for a grant from this scheme')
   })
 
   it('should load the condition page with correct heading', async () => {
