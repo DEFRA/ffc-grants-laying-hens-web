@@ -543,7 +543,7 @@ const questionBank = {
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
           nextUrl: 'project', 
-          // routing TBC
+          // routing TBC 
           preValidationObject: {
             preValidationKeys: ['tenancy'],
             preValidationAnswer: ['tenancy-A2'],
