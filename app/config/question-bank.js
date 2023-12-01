@@ -497,7 +497,7 @@ const questionBank = {
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-started',
-          nextUrl: 'project-responsibility',
+          nextUrl: 'project',
           preValidationKeys: ['projectStart'],
           fundingPriorities: '',
           type: 'single-answer',
@@ -525,7 +525,7 @@ const questionBank = {
             {
               key: 'tenancy-A2',
               value: 'No',
-              redirectUrl: 'tenancy-length'
+              redirectUrl: 'project-responsibility'
             }
           ],
           yarKey: 'tenancy'
