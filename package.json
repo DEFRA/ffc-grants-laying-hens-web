@@ -1,86 +1,105 @@
 {
-  "author": "Kaz Iyiola <kaz.iyiola@defra.gov.uk>",
-  "license": "OGL-UK-3.0",
-  "name": "ffc-grants-productivity-web",
-  "version": "1.1.1",
-  "description": "FFC apply for FFC grant front end",
-  "homepage": "https://github.com/DEFRA/ffc-grants-productivity-web",
-  "contributors": [],
-  "keywords": [
-    "wdio",
-    "webdriver",
-    "webdriverio",
-    "cucumber",
-    "test",
-    "selenium"
-  ],
+  "name": "ffc-grants-laying-hens-web",
+  "version": "1.0.0",
+  "description": "Web frontend for laying hens",
+  "homepage": "https://github.com/DEFRA/ffc-grants-laying-hens-web",
+  "main": "app/index.js",
   "scripts": {
-    "test": "wdio wdio.bs.conf.js",
-    "test:local": "wdio wdio.local.conf.js",
-    "test:browserstack": "wdio wdio.bs.conf.js",
-    "test:debug": "node --inspect-brk=0.0.0.0 ./node_modules/@wdio/cli/bin/wdio.js wdio.conf.js"
+    "build": "webpack",
+    "build:watch": "webpack --watch",
+    "lint": "standard",
+    "lint-fix": "standard --fix",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "start:watch": "npm-run-all --parallel build:watch start:nodemon",
+    "start:nodemon": "nodemon --verbose --inspect=0.0.0.0 --ext js,njk --legacy-watch app/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DEFRA/ffc-grants-laying-hens-web.git"
+  },
+  "author": "Defra",
+  "contributors": [
+    "Paul Andrews <paul.andrews@defra.gov.uk>",
+    "Satish Chatap github.com/govTechSatish",
+    "Madiha Khan github.com/diya2214",
+    "Ogbu Olu github.com/ogbk",
+    "Ellie Tahmasebi github.com/ellietms"
+  ],
+  "license": "OGL-UK-3.0",
+  "bugs": {
+    "url": "https://github.com/DEFRA/ffc-grants-laying-hens-web/issues"
   },
   "dependencies": {
-    "@babel/cli": "^7.21.0",
-    "@babel/plugin-proposal-export-default-from": "^7.5.2",
-    "@babel/preset-env": "^7.4.2",
-    "@babel/register": "^7.4.0",
-    "@rpii/wdio-report-events": "^0.2.0",
-    "@types/cucumber": "^4.0.7",
-    "@wdio/browserstack-service": "^7.29.1",
-    "@wdio/cli": "^7.30.2",
-    "@wdio/config": "^7.30.2",
-    "@wdio/reporter": "^7.25.0",
-    "@wdio/selenium-standalone-service": "^7.30.2",
-    "@wdio/static-server-service": "^7.30.2",
-    "axe-webdriverio": "^0.2.0",
-    "browserstack-local": "^1.5.1",
-    "chai": "^4.1.2",
-    "cross-env": "^5.2.0",
-    "ecstatic": "^4.1.4",
-    "hosted-git-info": "^4.0.2",
-    "selenium-server": "^3.141.59",
-    "selenium-standalone": "^6.17.0",
-    "wdio-geckodriver-service": "^1.0.0",
-    "webdriverio": "^7.30.2",
-    "ws": "^7.2.0"
+    "@defra/hapi-gapi": "^2.1.1",
+    "@hapi/catbox-redis": "^6.0.2",
+    "@hapi/cookie": "^11.0.2",
+    "@hapi/crumb": "^8.0.1",
+    "@hapi/hapi": "^21.3.0",
+    "@hapi/inert": "^7.0.0",
+    "@hapi/vision": "^7.0.0",
+    "@hapi/wreck": "^18.0.0",
+    "@hapi/yar": "^11.0.0",
+    "applicationinsights": "^2.5.0",
+    "bcrypt": "^5.0.1",
+    "dialog-polyfill": "^0.5.6",
+    "dotenv": "^16.0.1",
+    "ffc-messaging": "^2.6.5",
+    "ffc-protective-monitoring": "^1.0.3",
+    "govuk-frontend": "^4.3.1",
+    "joi": "^17.6.0",
+    "nunjucks": "^3.2.4",
+    "uuid": "^8.3.2"
   },
   "overrides": {
+    "@azure/identity": {
+      "jsonwebtoken": "9.0.0"
+    },
     "semver": "7.5.3",
-    "axios": "^1.6.2",
-    "chromedriver": "^119.0.1"
+    "import-in-the-middle": "1.4.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.5",
-    "@babel/plugin-proposal-export-default-from": "^7.16.7",
-    "@babel/plugin-syntax-export-default-from": "^7.8.3",
-    "@babel/preset-env": "^7.16.5",
-    "@babel/register": "^7.16.5",
-    "@rpii/wdio-html-reporter": "^7.0.0",
-    "@wdio/browserstack-service": "^7.16.13",
-    "@wdio/cucumber-framework": "^8.17.0",
-    "@wdio/local-runner": "^7.30.1",
-    "@wdio/spec-reporter": "^7.30.2",
-    "@wdio/sync": "^5.23.0",
-    "babel-jest": "^24.8.0",
-    "geckodriver": "^3.0.2",
-    "http-server": "^14.1.1",
-    "jest": "^26.6.3",
-    "npm-run-all": "^4.1.5",
-    "pngjs": "^5.0.0",
-    "standard": "12.0.1",
-    "wdio-chromedriver-service": "^7.3.2"
+    "@hapi/catbox-memory": "^5.0.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "jest-junit": "^14.0.1",
+    "mini-css-extract-plugin": "^2.6.1",
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.2",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.54.7",
+    "sass-loader": "^13.0.2",
+    "snyk": "^1.1051.0",
+    "standard": "^16.0.4",
+    "string-replace-loader": "^3.1.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   },
   "standard": {
     "globals": [
-      "browser",
-      "it",
-      "expect",
       "describe",
-      "jest",
       "beforeEach",
+      "expect",
+      "it",
+      "test",
+      "afterEach",
+      "jest",
+      "beforeAll",
+      "afterAll",
+      "browser",
       "assert",
-      "$"
+      "$",
+      "XMLHttpRequest"
+    ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/test-output/**"
     ]
   }
 }
