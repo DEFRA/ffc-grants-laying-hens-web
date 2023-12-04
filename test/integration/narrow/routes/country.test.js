@@ -36,7 +36,7 @@ describe('Page: /country', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the project is in England')
+    expect(postResponse.payload).toContain('Select yes if the planned project is in England')
   })
 
   it('user selects ineligible option: \'No\' -> display ineligible page', async () => {

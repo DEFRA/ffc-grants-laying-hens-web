@@ -198,7 +198,7 @@ const questionBank = {
               html: '<ul class="govuk-list govuk-list--bullet"><li>Sole trader</li><li>Partnership</li><li>Limited company</li><li>Charity</li><li>Trust</li><li>Limited liability partnership</li><li>Community interest company</li><li>Limited partnership</li><li>Industrial and provident society</li><li>Co-operative society (Co-Op)</li><li>Community benefit society (BenCom)</li></ul>'
             },
             messageLink: {
-              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             },
             warning: {
@@ -285,7 +285,7 @@ const questionBank = {
           order: 30,
           title: 'Is the planned project in England?',
           hint: {
-            text: 'The location of the Laying Hens'
+            text: 'The site where the work will happen'
           },
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           pageTitle: '',
@@ -298,8 +298,8 @@ const questionBank = {
             messageContent: 'This grant is only for projects in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
@@ -318,7 +318,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the project is in England'
+              error: 'Select yes if the planned project is in England'
             }
           ],
           answers: [
@@ -345,13 +345,13 @@ const questionBank = {
           nextUrl: 'project-started',
           preValidationKeys: ['inEngland'],
           ineligibleContent: {
-            messageContent: 'Any planning permission must be in place before you submit your full application.',
+            messageContent: 'You must have secured planning permission before you submit a full application.',
             messageLink: {
-              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: 'Improving Adding Value',
+          // fundingPriorities: 'Improving Adding Value',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -360,14 +360,14 @@ const questionBank = {
               content: [{
                 para: `You must have secured planning permission before you submit a full application.
 
-                        The application deadline is 30 April 2025.`
+                        The application deadline is 31 December 2025.`
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select when the project will have project planning permission'
+              error: 'Select if the project has planning permission'
             }
           ],
           answers: [
@@ -402,7 +402,11 @@ const questionBank = {
           preValidationKeys: ['planningPermission'],
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place before you submit your full application. The application deadline is 30 April 2025.'
+            messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 31 December 2025.',
+            messageLink: {
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for.'
+            }
           },
           yarKey: 'planningPermissionCondition'
         },
@@ -428,7 +432,7 @@ const questionBank = {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
             messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
@@ -442,7 +446,7 @@ const questionBank = {
                 para: `
                 You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.
                 
-                Before you start the project, you can:`,
+                Before you start the project you can:`,
                 items: [
                   'get quotes from suppliers',
                   'apply for planning permission (this can take a long time)'
@@ -453,7 +457,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select the option that applies to your project'
+              error: 'Select if you have already started work on the project'
             }
           ],
           answers: [
@@ -477,6 +481,9 @@ const questionBank = {
               value: 'No, we have not done any work on this project yet'
             }
           ],
+          warning: {
+            text: 'You must not start project work or commit to project costs before receiving your funding agreement.'
+          },
           yarKey: 'projectStart'
         },
         {
@@ -484,7 +491,7 @@ const questionBank = {
           order: 60,
           title: 'Is the planned project on land the business owns?',
           hint: {
-            text: 'The location of the calf housing'
+            text: 'The site where the work will happen'
           },
           pageTitle: '',
           url: 'tenancy',
@@ -500,7 +507,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You must own the land or have a tenancy in place for 5 years after the final grant payment.'
+                para: 'If you are a tenant farmer, you have the option to ask your landlord to underwrite your agreement.'
               }]
             }]
           },
@@ -518,10 +525,64 @@ const questionBank = {
             {
               key: 'tenancy-A2',
               value: 'No',
-              redirectUrl: 'tenancy-length'
+              redirectUrl: 'project-responsibility'
             }
           ],
           yarKey: 'tenancy'
+        },
+        {
+          key: 'project-responsibility',
+          order: 65,
+          title: 'Will you take full responsibility for your project?',
+          hint: {
+            html: `If you are on a short tenancy, you can ask your landlord to underwrite your agreement. This means they will take over your agreement if your tenancy ends. For example, your landlord could pass the agreed project to the new tenant.<br/><br/>
+            This approach is optional and we will only ask for details at full application.`
+          },
+          pageTitle: '',
+          url: 'project-responsibility',
+          baseUrl: 'project-responsibility',
+          backUrl: 'tenancy',
+          nextUrl: 'project', 
+          // routing TBC 
+          preValidationObject: {
+            preValidationKeys: ['tenancy'],
+            preValidationAnswer: ['tenancy-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['tenancy']
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswercount: 1,
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [
+                  {
+                    para: 'You must complete your project and keep the grant-funded items fit for purpose for 5 years after the date you receive your final grant payment.',
+                    items: []
+                  }
+                ],
+              }
+            ]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you will take full responsibility for your project'
+            }
+          ],
+          answers: [
+            {
+              key: 'project-responsibility-A1',
+              value: 'Yes, I plan to take full responsibility for my project'
+            },
+            {
+              key: 'project-responsibility-A2',
+              value: 'No, I plan to ask my landlord to underwrite my agreement'
+            }
+          ],
+          yarKey: 'projectResponsibility'
         },
         {
           key: 'tenancy-length',
