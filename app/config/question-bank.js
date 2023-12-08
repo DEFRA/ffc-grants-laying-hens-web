@@ -2665,7 +2665,7 @@ const questionBank = {
           yarKey: 'applying'
         },
         {
-          key: 'farmer-details',
+          key: 'applicant-details', //
           order: 380,
           title: 'Applicant’s details',
           pageTitle: '',
@@ -2798,7 +2798,7 @@ const questionBank = {
               type: 'tel',
               classes: 'govuk-input--width-10',
               label: {
-                text: 'Mobile number',
+                text: 'Mobile phone number',
                 classes: 'govuk-label'
               },
               hint: {
