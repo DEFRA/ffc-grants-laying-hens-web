@@ -25,8 +25,6 @@ describe('Page: /business-details', () => {
     expect(response.payload).toContain('Number of employees')
     expect(response.payload).toContain('Business turnover (£)')
     expect(response.payload).toContain('Single Business Identifier')
-    expect(response.payload).toContain('Calving system (optional)')
-    expect(response.payload).toContain('Number of calves (optional)')
   })
 
   it('no option selected -> show error message', async () => {
@@ -43,18 +41,6 @@ describe('Page: /business-details', () => {
     expect(postResponse.payload).toContain('Enter a business name')
     expect(postResponse.payload).toContain('Enter the number of employees')
     expect(postResponse.payload).toContain('Enter the business turnover')
-  })
-
-  it('user came from \'CHECK DETAILS\' page -> display <Back to details> button', async () => {
-    varList.reachedCheckDetails = true
-
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/business-details`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Back to details')
   })
 
   it('should validate project name - maximum characters is 100', async () => {
@@ -88,6 +74,7 @@ describe('Page: /business-details', () => {
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Name must be 100 characters or fewer')
   })
+
   it('should validate number of employees - no spaces', async () => {
     const postOptions = {
       method: 'POST',
@@ -280,68 +267,6 @@ describe('Page: /business-details', () => {
     expect(postResponse.payload).toContain('SBI number must have 9 characters, like 011115678')
   })
 
-  it('should validate calvesNumber - should be: Number must be between 1-9999999', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/business-details`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: {
-        projectName: 'Project Name',
-        businessName: 'Business Name',
-        numberEmployees: '1234',
-        businessTurnover: '5678',
-        calvingSystem: 'Other',
-        calvesNumber: '99999999',
-        crumb: crumbToken
-      }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Number must be between 1-9999999')
-  })
-
-  it('should validate calvesNumber - When a decimal is entered: Number of calves must be a whole number', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/business-details`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: {
-        projectName: 'Project Name',
-        businessName: 'Business Name',
-        numberEmployees: '1234',
-        businessTurnover: '5678',
-        calvingSystem: 'Other',
-        calvesNumber: '993.5',
-        crumb: crumbToken
-      }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Number of calves must be a whole number')
-  })
-
-  it('should validate calvesNumber - When invalid characters are entered: Number of calves should only include numbers', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/business-details`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: {
-        projectName: 'Project Name',
-        businessName: 'Business Name',
-        numberEmployees: '1234',
-        businessTurnover: '5678',
-        calvingSystem: 'Other',
-        calvesNumber: 'dfhhfdfh',
-        crumb: crumbToken
-      }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Number of calves should only include numbers')
-  })
 
   it('store user response and redirect to applicant page: /applying, sbi is optional', async () => {
     const postOptions = {
@@ -354,26 +279,6 @@ describe('Page: /business-details', () => {
         numberEmployees: '1234',
         businessTurnover: '5678',
         calvingSystem: 'Other',
-        calvesNumber: '123',
-        crumb: crumbToken
-      }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('applying')
-  })
-
-  it('store user response and redirect to applicant page: /applying, calvingSystem is optional', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/business-details`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: {
-        projectName: 'Project Name',
-        businessName: 'Business Name',
-        numberEmployees: '1234',
-        businessTurnover: '5678',
         calvesNumber: '123',
         crumb: crumbToken
       }

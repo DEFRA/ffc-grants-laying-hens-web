@@ -2464,7 +2464,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'For example Browns Hill Farm calf housing project'
+                text: 'For example Browns Hill Farm laying hens housing'
               },
               validate: [
                 {
@@ -2488,7 +2488,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: "If you're registered on the Rural Payments system, enter business name as registered"
+                text: 'If you’re registered on the Rural Payments system, enter business name as registered'
               },
               validate: [
                 {
@@ -2582,52 +2582,6 @@ const questionBank = {
                 }
               ]
             },
-            {
-              yarKey: 'calvingSystem',
-              type: 'select',
-              title: 'Calving system (optional)',
-              classes: 'govuk-input--width-10',
-              label: {
-                text: 'Calving system (optional)',
-                classes: 'govuk-label'
-              },
-              answers: [
-                'Year round',
-                'Spring block',
-                'Autumn block',
-                'Other'
-              ]
-            },
-            {
-              yarKey: 'calvesNumber',
-              type: 'text',
-              title: 'Number of calves (optional)',
-              classes: 'govuk-input--width-4',
-              label: {
-                text: 'Number of calves (optional)',
-                classes: 'govuk-label'
-              },
-              hint: {
-                text: 'Maximum number of calves housed annually after project'
-              },
-              validate: [
-                {
-                  type: 'REGEX',
-                  regex: ONLY_DIGITS_REGEX,
-                  error: 'Number of calves should only include numbers'
-                },
-                {
-                  type: 'REGEX',
-                  regex: WHOLE_NUMBER_REGEX,
-                  error: 'Number of calves must be a whole number'
-                },
-                {
-                  type: 'MAX_ONLY', // max only
-                  max: 9999999,
-                  error: 'Number must be between 1-9999999'
-                }
-              ]
-            }
           ],
           yarKey: 'businessDetails'
         },
