@@ -2987,8 +2987,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
@@ -3013,8 +3013,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
@@ -3035,8 +3035,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
@@ -3101,7 +3101,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a mobile number (if you do not have a mobile, enter your landline number)',
+                  error: 'Enter a mobile phone number (if you do not have a mobile, enter your landline number)',
                   extraFieldsToCheck: ['landlineNumber']
                 },
                 {
@@ -3131,7 +3131,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a landline number (if you do not have a landline, enter your mobile number)',
+                  error: 'Enter a landline number (if you do not have a landline, enter your mobile phone number)',
                   extraFieldsToCheck: ['mobileNumber']
                 },
                 {
@@ -3162,7 +3162,12 @@ const questionBank = {
                 {
                   type: 'NOT_EMPTY',
                   error: 'Enter your address line 1'
-                }
+                },
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
               ]
             },
             {
@@ -3172,7 +3177,14 @@ const questionBank = {
               label: {
                 html: 'Address line 2 (optional)',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
+              ]
             },
             {
               yarKey: 'town',
@@ -3235,7 +3247,6 @@ const questionBank = {
             }
           ],
           yarKey: 'agentsDetails'
-
         },
         {
           key: 'check-details',
