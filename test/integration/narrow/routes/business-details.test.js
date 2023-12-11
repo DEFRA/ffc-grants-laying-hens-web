@@ -43,36 +43,36 @@ describe('Page: /business-details', () => {
     expect(postResponse.payload).toContain('Enter the business turnover')
   })
 
-  it('should validate project name - maximum characters is 100', async () => {
+  it('should validate project name - maximum characters is 30', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/business-details`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: {
-        projectName: 'abcdefghijklmonopqrstuvwxyzabcdefghijklmonopqrstuvwxyzabcdefghijklmonopqrstuvwxyzabcdefghijklmonopqrs',
+        projectName: 'qwwwrtayuopliuytglpomnhytyiokee', // 31
         crumb: crumbToken
       }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Name must be 100 characters or fewer')
+    expect(postResponse.payload).toContain('Name must be 30 characters or fewer')
   })
 
-  it('should validate business name - maximum characters is 100', async () => {
+  it('should validate business name - maximum characters is 30', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/business-details`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: {
-        businessName: 'abcdefghijklmonopqrstuvwxyzabcdefghijklmonopqrstuvwxyzabcdefghijklmonopqrstuvwxyzabcdefghijklmonopqrs',
+        businessName: 'qwwwrtayuopliuytglpomnhytyiokee', // 31,
         crumb: crumbToken
       }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Name must be 100 characters or fewer')
+    expect(postResponse.payload).toContain('Name must be 30 characters or fewer')
   })
 
   it('should validate number of employees - no spaces', async () => {

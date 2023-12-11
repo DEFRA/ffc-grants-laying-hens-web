@@ -2474,8 +2474,13 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens, spaces and apostrophes'
                 }
               ]
             },
@@ -2498,8 +2503,13 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens, spaces and apostrophes'
                 }
               ]
             },
@@ -2528,8 +2538,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX',
                   min: 1,
-                  max: 9999,
-                  error: 'Number must be between 1-9999'
+                  max: 9999999,
+                  error: 'Number must be between 1-9999999'
                 }
               ]
             },
@@ -2564,7 +2574,7 @@ const questionBank = {
             },
             {
               yarKey: 'sbi',
-              type: 'text',
+              type: 'number',
               title: 'Single Business Identifier (SBI) - Optional',
               classes: 'govuk-input govuk-input--width-10',
               label: {
