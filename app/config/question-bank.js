@@ -2629,7 +2629,7 @@ const questionBank = {
           yarKey: 'applying'
         },
         {
-          key: 'applicant-details', //
+          key: 'applicant-details',
           order: 380,
           title: 'Applicant’s details',
           pageTitle: '',
@@ -2678,8 +2678,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
@@ -2705,8 +2705,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
