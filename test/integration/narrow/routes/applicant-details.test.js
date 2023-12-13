@@ -57,6 +57,19 @@ describe('Page: /applicant-details', () => {
     expect(postResponse.payload).toContain('Enter a project postcode, like AA1 1AA')
   })
 
+  it('user came from \'CHECK DETAILS\' page -> display <Back to details> button', async () => {
+    varList.reachedCheckDetails = true
+
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/applicant-details`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Back to details')
+  })
+
+
   it('validate first name - no digits', async () => {
     const postOptions = {
       method: 'POST',
