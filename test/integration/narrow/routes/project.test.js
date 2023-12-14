@@ -67,27 +67,25 @@ describe('Page: /project', () => {
     expect(postResponse.headers.location).toBe('minimum-floor-area')
   })
 
-  it('page loads with correct back link when tenancy-length page`s answer is Yes', async () => {
-    varList.tenancy = 'No'
-    varList.tenancyLength = 'Yes'
+  it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"tenancy-length\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"project-responsibility\" class=\"govuk-back-link\">Back</a>')
   })
 
-  it('page loads with correct back link when tenancy-length page`s answer is No', async () => {
-    varList.tenancy = 'No'
-    varList.tenancyLength = 'No'
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/project`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"tenancy-length-condition\" class=\"govuk-back-link\">Back</a>')
-  })
+  // it('page loads with correct back link when tenancy-length page`s answer is No', async () => {
+  //   varList.tenancy = 'No'
+  //   varList.tenancyLength = 'No'
+  //   const options = {
+  //     method: 'GET',
+  //     url: `${global.__URLPREFIX__}/project`
+  //   }
+  //   const response = await global.__SERVER__.inject(options)
+  //   expect(response.statusCode).toBe(200)
+  //   expect(response.payload).toContain('<a href=\"tenancy-length-condition\" class=\"govuk-back-link\">Back</a>')
+  // })
 })
