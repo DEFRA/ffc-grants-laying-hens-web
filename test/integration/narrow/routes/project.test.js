@@ -76,7 +76,6 @@ describe('Page: /project', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"project-responsibility\" class=\"govuk-back-link\">Back</a>')
   })
-
   // it('page loads with correct back link when tenancy-length page`s answer is No', async () => {
   //   varList.tenancy = 'No'
   //   varList.tenancyLength = 'No'
