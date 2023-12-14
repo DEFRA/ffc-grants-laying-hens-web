@@ -22,6 +22,13 @@ describe('confirm page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('I confirm that, to the best of my knowledge, the details I have provided are correct.')
+    expect(response.payload).toContain('I understand the project’s eligibility and score is based on the answers I provided.')
+    expect(response.payload).toContain('I am aware that the information I submit will be checked by the RPA.')
+    expect(response.payload).toContain('I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.')
+    expect(response.payload).toContain('Improving our schemes')
+    expect(response.payload).toContain('Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.')
+    expect(response.payload).toContain('I consent to being contacted by Defra or a third party about service improvements')
     expect(response.payload).toContain('Confirm and send')
   })
 

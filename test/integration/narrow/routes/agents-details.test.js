@@ -50,8 +50,8 @@ describe('Page: /agent-details', () => {
     expect(postResponse.payload).toContain('Enter your business name')
     expect(postResponse.payload).toContain('Enter your email address')
     expect(postResponse.payload).toContain('Confirm your email address')
-    expect(postResponse.payload).toContain('Enter a mobile number (if you do not have a mobile, enter your landline number)')
-    expect(postResponse.payload).toContain('Enter a landline number (if you do not have a landline, enter your mobile number)')
+    expect(postResponse.payload).toContain('Enter a mobile phone number (if you do not have a mobile, enter your landline number)')
+    expect(postResponse.payload).toContain('Enter a landline number (if you do not have a landline, enter your mobile phone number)')
     expect(postResponse.payload).toContain('Enter your address line 1')
     expect(postResponse.payload).toContain('Enter your town')
     expect(postResponse.payload).toContain('Select your county')
@@ -102,20 +102,20 @@ describe('Page: /agent-details', () => {
     expect(postResponse.payload).toContain('Name must only include letters, hyphens and apostrophes')
   })
 
-  it('validate business name - Maximum 100 characters', async () => {
+  it('validate business name - Maximum 30 characters', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agent-details`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: {
-        businessName: 'abcdefghijklmonopqrstuvwxyzabcdefghijklmonopqrstuvwxyzabcdefghijklmonopqrstuvwxyzabcdefghijklmonopqrs',
+        businessName: 'asgejloplmndghhsbanjouperntyuio', // 31 characters
         crumb: crumbToken
       }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Name must be 100 characters or fewer')
+    expect(postResponse.payload).toContain('Name must be 30 characters or fewer')
   })
 
   it('validate email', async () => {
@@ -235,7 +235,7 @@ describe('Page: /agent-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a landline number (if you do not have a landline, enter your mobile number)')
+    expect(postResponse.payload).toContain('Enter a landline number (if you do not have a landline, enter your mobile phone number)')
   })
 
   it('validate town: fail when user adds non text characters (digits or other characters)', async () => {

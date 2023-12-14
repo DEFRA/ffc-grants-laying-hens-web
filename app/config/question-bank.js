@@ -2464,7 +2464,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'For example Browns Hill Farm calf housing project'
+                text: 'For example Browns Hill Farm laying hens housing'
               },
               validate: [
                 {
@@ -2474,8 +2474,13 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens, spaces and apostrophes'
                 }
               ]
             },
@@ -2488,7 +2493,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: "If you're registered on the Rural Payments system, enter business name as registered"
+                text: 'If you’re registered on the Rural Payments system, enter business name as registered'
               },
               validate: [
                 {
@@ -2498,8 +2503,13 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens, spaces and apostrophes'
                 }
               ]
             },
@@ -2528,8 +2538,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX',
                   min: 1,
-                  max: 9999,
-                  error: 'Number must be between 1-9999'
+                  max: 9999999,
+                  error: 'Number must be between 1-9999999'
                 }
               ]
             },
@@ -2564,7 +2574,7 @@ const questionBank = {
             },
             {
               yarKey: 'sbi',
-              type: 'text',
+              type: 'number',
               title: 'Single Business Identifier (SBI) - Optional',
               classes: 'govuk-input govuk-input--width-10',
               label: {
@@ -2582,52 +2592,6 @@ const questionBank = {
                 }
               ]
             },
-            {
-              yarKey: 'calvingSystem',
-              type: 'select',
-              title: 'Calving system (optional)',
-              classes: 'govuk-input--width-10',
-              label: {
-                text: 'Calving system (optional)',
-                classes: 'govuk-label'
-              },
-              answers: [
-                'Year round',
-                'Spring block',
-                'Autumn block',
-                'Other'
-              ]
-            },
-            {
-              yarKey: 'calvesNumber',
-              type: 'text',
-              title: 'Number of calves (optional)',
-              classes: 'govuk-input--width-4',
-              label: {
-                text: 'Number of calves (optional)',
-                classes: 'govuk-label'
-              },
-              hint: {
-                text: 'Maximum number of calves housed annually after project'
-              },
-              validate: [
-                {
-                  type: 'REGEX',
-                  regex: ONLY_DIGITS_REGEX,
-                  error: 'Number of calves should only include numbers'
-                },
-                {
-                  type: 'REGEX',
-                  regex: WHOLE_NUMBER_REGEX,
-                  error: 'Number of calves must be a whole number'
-                },
-                {
-                  type: 'MAX_ONLY', // max only
-                  max: 9999999,
-                  error: 'Number must be between 1-9999999'
-                }
-              ]
-            }
           ],
           yarKey: 'businessDetails'
         },
@@ -2665,7 +2629,7 @@ const questionBank = {
           yarKey: 'applying'
         },
         {
-          key: 'farmer-details',
+          key: 'applicant-details',
           order: 380,
           title: 'Applicant’s details',
           pageTitle: '',
@@ -2714,8 +2678,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
@@ -2741,8 +2705,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
@@ -2798,7 +2762,7 @@ const questionBank = {
               type: 'tel',
               classes: 'govuk-input--width-10',
               label: {
-                text: 'Mobile number',
+                text: 'Mobile phone number',
                 classes: 'govuk-label'
               },
               hint: {
@@ -2976,7 +2940,6 @@ const questionBank = {
             }
           ],
           yarKey: 'farmerDetails'
-
         },
         {
           key: 'agent-details',
@@ -3023,8 +2986,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
@@ -3049,8 +3012,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
@@ -3071,8 +3034,8 @@ const questionBank = {
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
-                  max: 100,
-                  error: 'Name must be 100 characters or fewer'
+                  max: 30,
+                  error: 'Name must be 30 characters or fewer'
                 }
               ]
             },
@@ -3137,7 +3100,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a mobile number (if you do not have a mobile, enter your landline number)',
+                  error: 'Enter a mobile phone number (if you do not have a mobile, enter your landline number)',
                   extraFieldsToCheck: ['landlineNumber']
                 },
                 {
@@ -3167,7 +3130,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a landline number (if you do not have a landline, enter your mobile number)',
+                  error: 'Enter a landline number (if you do not have a landline, enter your mobile phone number)',
                   extraFieldsToCheck: ['mobileNumber']
                 },
                 {
@@ -3198,7 +3161,12 @@ const questionBank = {
                 {
                   type: 'NOT_EMPTY',
                   error: 'Enter your address line 1'
-                }
+                },
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
               ]
             },
             {
@@ -3208,7 +3176,14 @@ const questionBank = {
               label: {
                 html: 'Address line 2 (optional)',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
+              ]
             },
             {
               yarKey: 'town',
@@ -3271,7 +3246,6 @@ const questionBank = {
             }
           ],
           yarKey: 'agentsDetails'
-
         },
         {
           key: 'check-details',
@@ -3309,8 +3283,7 @@ const questionBank = {
             I am aware that the information I submit will be checked by the RPA.</br></br>
             I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.
             <h2 class="govuk-heading-m">Improving our schemes</h2>
-            Defra may wish to contact you to take part in optional research activities to help us improve our programmes and delivery. 
-            Please confirm if you are happy for us to contact you to take part in optional research activities.`
+            Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`
           },
           answers: [
             {

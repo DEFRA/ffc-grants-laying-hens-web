@@ -124,7 +124,7 @@ const getConsentOptionalData = (consentOptional) => {
     items: setOptionsLabel(consentOptional,
       [{
         value: 'CONSENT_OPTIONAL',
-        text: '(Optional) I consent to being contacted.'
+        text: '(Optional) I consent to being contacted by Defra or a third party about service improvements'
       }]
     )
   }

@@ -25,7 +25,7 @@ describe('Page: /applicant-details', () => {
     expect(response.payload).toContain('Last name')
     expect(response.payload).toContain('Contact details')
     expect(response.payload).toContain('Email address')
-    expect(response.payload).toContain('Mobile number')
+    expect(response.payload).toContain('Mobile phone number')
     expect(response.payload).toContain('Landline number')
     expect(response.payload).toContain('Business address')
     expect(response.payload).toContain('Address line 1')
@@ -68,6 +68,7 @@ describe('Page: /applicant-details', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Back to details')
   })
+
 
   it('validate first name - no digits', async () => {
     const postOptions = {
@@ -306,5 +307,15 @@ describe('Page: /applicant-details', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Enter an email address that matches')
+  })
+
+  it('page loads with correct back link', async () => {
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/applicant-details`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"applying\" class=\"govuk-back-link\">Back</a>')
   })
 })
