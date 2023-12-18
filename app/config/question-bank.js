@@ -535,7 +535,7 @@ const questionBank = {
           order: 65,
           title: 'Will you take full responsibility for your project?',
           hint: {
-            html: `If you are on a short tenancy, you can ask your landlord to underwrite your agreement. This means they will take over your agreement if your tenancy ends. For example, your landlord could pass the agreed project to the new tenant.<br/><br/>
+            html: `If you are on a short tenancy, you can ask your landlord to underwrite your agreement. This means they will take over your agreement if your tenancy ends.<br/><br/>
             This approach is optional and we will only ask for details at full application.`
           },
           pageTitle: '',
@@ -2416,7 +2416,7 @@ const questionBank = {
           baseUrl: 'score',
           backUrl: 'introducing-innovation',
           nextUrl: 'business-details',
-          preValidationKeys: ['introducingInnovation'],
+          // preValidationKeys: ['introducingInnovation'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your results',
@@ -2449,7 +2449,7 @@ const questionBank = {
           baseUrl: 'business-details',
           backUrl: 'score',
           nextUrl: 'applying',
-          preValidationKeys: ['introducingInnovation'],
+          // preValidationKeys: ['introducingInnovation'],
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
@@ -2603,7 +2603,7 @@ const questionBank = {
           url: 'applying',
           baseUrl: 'applying',
           backUrl: 'business-details',
-          preValidationKeys: ['businessDetails'],
+          // preValidationKeys: ['businessDetails'],
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -2636,7 +2636,7 @@ const questionBank = {
           url: 'applicant-details',
           baseUrl: 'applicant-details',
           nextUrl: 'check-details',
-          preValidationKeys: ['applying'],
+          // preValidationKeys: ['applying'],
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A2'],
@@ -2954,7 +2954,7 @@ const questionBank = {
           backUrl: 'applying',
           nextUrl: 'applicant-details',
           summaryPageUrl: 'check-details',
-          preValidationKeys: ['applying'],
+          // preValidationKeys: ['applying'],
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-input',
@@ -3255,7 +3255,7 @@ const questionBank = {
           url: 'check-details',
           backUrl: 'applicant-details',
           nextUrl: 'confirm',
-          preValidationKeys: ['applying'],
+          // preValidationKeys: ['applying'],
           ineligibleContent: {},
           pageData: {
             businessDetailsLink: 'business-details',
@@ -3274,7 +3274,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          preValidationKeys: ['farmerDetails'],
+          // preValidationKeys: ['farmerDetails'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -3300,7 +3300,7 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          preValidationKeys: ['farmerDetails'],
+          // preValidationKeys: ['farmerDetails'],
           ga: { name: 'confirmation', params: {} },
           maybeEligible: true,
           maybeEligibleContent: {
