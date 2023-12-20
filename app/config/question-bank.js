@@ -647,18 +647,17 @@ const questionBank = {
           order: 70,
           title: 'What is your project?',
           baseUrl: 'project',
-          backUrl: 'project-responsibility', //temporary backUrl
+          // backUrl: 'project-responsibility',
           nextUrl: 'minimum-floor-area',
           url: 'project',
-          // backUrlObject: {
-          //   dependentQuestionYarKey: 'tenancyLength',
-          //   dependentAnswerKeysArray: ['tenancy-length-A1'],
-          //   urlOptions: {
-          //     thenUrl: 'tenancy-length',
-          //     elseUrl: 'tenancy-length-condition',
-          //     nonDependentUrl: 'tenancy'
-          //   }
-          // },
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A1'],
+            urlOptions: {
+              thenUrl: 'tenancy',
+              elseUrl: 'project-responsibility'
+            }
+          },
           preValidationKeys: ['tenancy'],
           ineligibleContent: {
             messageContent: `
