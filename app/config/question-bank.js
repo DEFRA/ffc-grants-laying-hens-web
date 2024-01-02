@@ -2679,6 +2679,10 @@ const questionBank = {
                   min: 0,
                   max: 30,
                   error: 'Name must be 30 characters or fewer'
+                },
+                {
+                  type: 'NOT_ALLOWED_ONLY_ONE_SPECIAL_CHAR',
+                  error: 'Name must include letters'
                 }
               ]
             },
@@ -2706,6 +2710,10 @@ const questionBank = {
                   min: 0,
                   max: 30,
                   error: 'Name must be 30 characters or fewer'
+                },
+                {
+                  type: 'NOT_ALLOWED_ONLY_ONE_SPECIAL_CHAR',
+                  error: 'Last name must include letters'
                 }
               ]
             },
@@ -2836,6 +2844,10 @@ const questionBank = {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
+                {
+                  type: 'NOT_ALLOWED_ONLY_ONE_SPECIAL_CHAR',
+                  error: 'Address must include letters'
                 }
               ]
             },
@@ -2852,6 +2864,10 @@ const questionBank = {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
+                {
+                  type: 'NOT_ALLOWED_ONLY_ONE_SPECIAL_CHAR',
+                  error: 'Address must include letters'
                 }
               ]
             },
@@ -2872,6 +2888,10 @@ const questionBank = {
                   type: 'REGEX',
                   regex: ONLY_TEXT_REGEX,
                   error: 'Town must only include letters, hyphens and spaces'
+                },
+                {
+                  type: 'NOT_ALLOWED_ONLY_ONE_SPECIAL_CHAR',
+                  error: 'Town must include letters'
                 }
               ]
             },

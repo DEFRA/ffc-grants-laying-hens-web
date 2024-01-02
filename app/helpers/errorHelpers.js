@@ -65,6 +65,11 @@ const validateAnswerField = (value, validationType, details, payload) => {
       return (value.length >= min && value.length <= max)
     }
 
+    case 'NOT_ALLOWED_ONLY_ONE_SPECIAL_CHAR':{
+      console.log(value.length)
+      return !(value.length === 1 && !value.match(/^[a-zA-Z0-9]$/))
+    }
+
     case 'MIN_MAX': {
       const { min, max } = details
       return (value >= min && value <= max)
