@@ -66,7 +66,6 @@ const validateAnswerField = (value, validationType, details, payload) => {
     }
 
     case 'NOT_ALLOWED_ONLY_ONE_SPECIAL_CHAR':{
-      console.log(value.length)
       return !(value.length === 1 && !value.match(/^[a-zA-Z]$/))
     }
 
