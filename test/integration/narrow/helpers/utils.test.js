@@ -66,7 +66,7 @@ describe('Utils', () => {
     const mockAnswerList = ['applicant-type-A1', 'applicant-type-A2', 'applicant-type-A3']
 
     getYarValue.mockReturnValueOnce([ 'Laying hens (including pullets)', 'Meat chickens' ])
-    getYarValue.mockReturnValueOnce([ 'Laying hens (including pullets)', 'Meat chickens', 'Meat chickens' ])
+    getYarValue.mockReturnValueOnce([ 'Laying hens (including pullets)', 'Meat chickens', 'Beef (including calf rearing)' ])
     
     expect(allAnswersSelected([], 'applicant-type', mockAnswerList)).toBe(false)
     expect(allAnswersSelected([], 'applicant-type', mockAnswerList)).toBe(true)
