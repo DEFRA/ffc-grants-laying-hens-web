@@ -96,7 +96,7 @@ const questionBank = {
             text: 'Select all that apply'
           },
           ineligibleContent: {
-            messageContent: 'This grant is only for dairy and beef (including calf rearing) farmers.',
+            messageContent: 'This grant is for laying hen or pullet farmers.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
@@ -106,7 +106,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'This grant is only for dairy and beef (including calf rearing) farmers.'
+                para: 'This grant is for laying hen or pullet farmers.'
               }]
             }]
           },
@@ -115,44 +115,45 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select the option that applies to you'
+              error: 'Select what type of farmer you are'
             },
             {
               type: 'STANDALONE_ANSWER',
               error: 'You cannot select that combination of options',
               standaloneObject: {
                 questionKey: 'applicant-type',
-                answerKey: 'applicant-type-A10'
+                answerKey: 'applicant-type-A9'
               }
             }
           ],
           answers: [
             {
               key: 'applicant-type-A1',
-              value: 'Beef (including calf rearing)'
+              value: 'Laying hens (including pullets)'
             },
             {
               key: 'applicant-type-A2',
-              value: 'Dairy (including calf rearing)'
+              value: 'Meat chickens',
+              notEligible: true
             },
             {
               key: 'applicant-type-A3',
-              value: 'Pigs',
+              value: 'Beef (including calf rearing)',
               notEligible: true
             },
             {
               key: 'applicant-type-A4',
-              value: 'Sheep',
+              value: 'Dairy (including calf rearing)',
               notEligible: true
             },
             {
               key: 'applicant-type-A5',
-              value: 'Laying hens',
+              value: 'Pigs',
               notEligible: true
             },
             {
               key: 'applicant-type-A6',
-              value: 'Meat chickens',
+              value: 'Sheep',
               notEligible: true
             },
             {
@@ -162,11 +163,6 @@ const questionBank = {
             },
             {
               key: 'applicant-type-A8',
-              value: 'Arable',
-              notEligible: true
-            },
-            {
-              key: 'applicant-type-A9',
               value: 'Horticulture',
               notEligible: true
             },
@@ -174,7 +170,7 @@ const questionBank = {
               value: 'divider'
             },
             {
-              key: 'applicant-type-A10',
+              key: 'applicant-type-A9',
               value: 'None of the above',
               notEligible: true
             }
