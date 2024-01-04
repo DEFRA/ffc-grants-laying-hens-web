@@ -76,14 +76,14 @@ describe('Page: /agent-details', () => {
       url: `${global.__URLPREFIX__}/agent-details`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: {
-        firstName: '123',
+        firstName: 'Jonathan 123',
         crumb: crumbToken
       }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Name must only include letters, hyphens and apostrophes')
+    expect(postResponse.payload).toContain('First name must only include letters, hyphens and apostrophes')
   })
 
   it('validate last name - no digits', async () => {
@@ -99,7 +99,7 @@ describe('Page: /agent-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Name must only include letters, hyphens and apostrophes')
+    expect(postResponse.payload).toContain('Last name must include letters')
   })
 
   it('validate business name - Maximum 30 characters', async () => {

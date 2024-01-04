@@ -68,7 +68,7 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Name must be 30 characters or fewer')
+    expect(postResponse.payload).toContain('Project name must be 30 characters or fewer')
   })
 
   it('should validate business name - maximum characters is 30', async () => {
@@ -84,7 +84,7 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Name must be 30 characters or fewer')
+    expect(postResponse.payload).toContain('Business name must be 30 characters or fewer')
   })
 
   it('should validate number of employees - no spaces', async () => {
