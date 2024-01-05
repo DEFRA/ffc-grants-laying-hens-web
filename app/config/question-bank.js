@@ -13,7 +13,8 @@ const {
   CHARS_MAX_25,
   STRUCTURE_ELIGIBLITY_REGEX,
   TWO_DP_NUMBER,
-  ONLY_DIGITS_AND_DECIMAL_REGEX
+  ONLY_DIGITS_AND_DECIMAL_REGEX,
+  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER
 } = require('../helpers/regex')
 
 const {
@@ -2470,12 +2471,12 @@ const questionBank = {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
                   max: 30,
-                  error: 'Name must be 30 characters or fewer'
+                  error: 'Project name must be 30 characters or fewer'
                 },
                 {
                   type: 'REGEX',
                   regex: NAME_ONLY_REGEX,
-                  error: 'Name must only include letters, hyphens, spaces and apostrophes'
+                  error: 'Project name must only include letters, hyphens, spaces and apostrophes'
                 }
               ]
             },
@@ -2499,12 +2500,12 @@ const questionBank = {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
                   max: 30,
-                  error: 'Name must be 30 characters or fewer'
+                  error: 'Business name must be 30 characters or fewer'
                 },
                 {
                   type: 'REGEX',
                   regex: NAME_ONLY_REGEX,
-                  error: 'Name must only include letters, hyphens, spaces and apostrophes'
+                  error: 'Business name must only include letters, hyphens, spaces and apostrophes'
                 }
               ]
             },
@@ -2667,14 +2668,19 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'First name must include letters'
+                },
+                {
+                  type: 'REGEX',
                   regex: NAME_ONLY_REGEX,
-                  error: 'Name must only include letters, hyphens and apostrophes'
+                  error: 'First name must only include letters, hyphens and apostrophes'
                 },
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
                   max: 30,
-                  error: 'Name must be 30 characters or fewer'
+                  error: 'First name must be 30 characters or fewer'
                 }
               ]
             },
@@ -2694,14 +2700,19 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'Last name must include letters'
+                },
+                {
+                  type: 'REGEX',
                   regex: NAME_ONLY_REGEX,
-                  error: 'Name must only include letters, hyphens and apostrophes'
+                  error: 'Last name must only include letters, hyphens and apostrophes'
                 },
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
                   max: 30,
-                  error: 'Name must be 30 characters or fewer'
+                  error: 'Last name must include letters'
                 }
               ]
             },
@@ -2830,6 +2841,11 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'Address must include letters'
+                },
+                {
+                  type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 }
@@ -2844,6 +2860,11 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               validate: [
+                {
+                  type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'Address must include letters'
+                },
                 {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
@@ -2863,6 +2884,11 @@ const questionBank = {
                 {
                   type: 'NOT_EMPTY',
                   error: 'Enter your town'
+                },
+                {
+                  type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'Town must include letters'
                 },
                 {
                   type: 'REGEX',
@@ -2975,14 +3001,19 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'First name must include letters'
+                },
+                {
+                  type: 'REGEX',
                   regex: NAME_ONLY_REGEX,
-                  error: 'Name must only include letters, hyphens and apostrophes'
+                  error: 'First name must only include letters, hyphens and apostrophes'
                 },
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
                   max: 30,
-                  error: 'Name must be 30 characters or fewer'
+                  error: 'First name must be 30 characters or fewer'
                 }
               ]
             },
@@ -3001,14 +3032,19 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'Last name must include letters'
+                },
+                {
+                  type: 'REGEX',
                   regex: NAME_ONLY_REGEX,
-                  error: 'Name must only include letters, hyphens and apostrophes'
+                  error: 'Last name must only include letters, hyphens and apostrophes'
                 },
                 {
                   type: 'MIN_MAX_CHARS',
                   min: 0,
                   max: 30,
-                  error: 'Name must be 30 characters or fewer'
+                  error: 'Last name must include letters'
                 }
               ]
             },
@@ -3159,6 +3195,11 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'Address must include letters'
+                },
+                {
+                  type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
@@ -3173,6 +3214,11 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               validate: [
+                {
+                  type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'Address must include letters'
+                },
                 {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
@@ -3192,6 +3238,11 @@ const questionBank = {
                 {
                   type: 'NOT_EMPTY',
                   error: 'Enter your town'
+                },
+                {
+                  type: 'REGEX',
+                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  error: 'Town must include letters'
                 },
                 {
                   type: 'REGEX',
