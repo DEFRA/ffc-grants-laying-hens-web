@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-laying-hens-web",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Web frontend for laying hens",
   "homepage": "https://github.com/DEFRA/ffc-grants-laying-hens-web",
   "main": "app/index.js",
