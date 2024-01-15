@@ -1,4 +1,4 @@
-# FFC laying hens Web
+# FFC Laying Hens Web
 
 Web frontend for laying hens
 
