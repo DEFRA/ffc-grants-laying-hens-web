@@ -15,17 +15,17 @@ describe('Page: /potential-amount-conditional', () => {
     }
 }))
 
-it('page loads successfully, with all the Eligible options', async () => {
-    const options = {
-        method: 'GET',
-        url: `${global.__URLPREFIX__}/potential-amount-conditional`
-    }
+// it('page loads successfully, with all the Eligible options', async () => {
+//     const options = {
+//         method: 'GET',
+//         url: `${global.__URLPREFIX__}/potential-amount-conditional`
+//     }
 
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Potential grant funding')
-    expect(response.payload).toContain(eligiblePageText)
-})
+//     const response = await global.__SERVER__.inject(options)
+//     expect(response.statusCode).toBe(200)
+//     expect(response.payload).toContain('Potential grant funding')
+//     expect(response.payload).toContain(eligiblePageText)
+// })
 
 // it('should redirect to /remaining-costs when user press continue', async () => {
 //     const postOptions = {

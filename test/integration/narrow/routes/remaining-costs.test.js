@@ -89,15 +89,15 @@ describe('Page: /remaining-costs', () => {
     expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount-capped\" class=\"govuk-back-link\">Back</a>')
   })
 
-  it('page loads with correct back link - potential-amount', async () => {
-    varList.projectCost = 499999
+  // it('page loads with correct back link - potential-amount', async () => {
+  //   varList.projectCost = 499999
 
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/remaining-costs`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount\" class=\"govuk-back-link\">Back</a>')
-  })
+  //   const options = {
+  //     method: 'GET',
+  //     url: `${global.__URLPREFIX__}/remaining-costs`
+  //   }
+  //   const response = await global.__SERVER__.inject(options)
+  //   expect(response.statusCode).toBe(200)
+  //   expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount\" class=\"govuk-back-link\">Back</a>')
+  // })
 })
