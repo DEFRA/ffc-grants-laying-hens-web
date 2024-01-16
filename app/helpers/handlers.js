@@ -40,8 +40,9 @@ const createModel = (data, backUrl, url) => {
 
 const getPage = async (question, request, h) => {
   const { url, backUrl, nextUrlObject, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
+  const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
-  const isRedirect = guardPage(request, preValidationKeys, preValidationKeysRule)
+  const isRedirect = guardPage(request, preValidationObject)
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }

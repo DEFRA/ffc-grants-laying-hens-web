@@ -541,12 +541,12 @@ const questionBank = {
           backUrl: 'tenancy',
           nextUrl: 'project', 
           // routing TBC 
-          preValidationObject: {
-            preValidationKeys: ['tenancy'],
-            preValidationAnswer: ['tenancy-A2'],
-            preValidationRule: 'AND',
-            preValidationUrls: ['tenancy']
-          },
+          // preValidationObject: {
+          //   preValidationKeys: ['tenancy'],
+          //   preValidationAnswer: ['tenancy-A2'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['tenancy']
+          // },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswercount: 1,
