@@ -187,7 +187,7 @@ const questionBank = {
           nextUrl: 'country',
           url: 'legal-status',
           baseUrl: 'legal-status',
-          preValidationKeys: ['applicantType'],
+          // preValidationKeys: ['applicantType'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -290,7 +290,7 @@ const questionBank = {
           nextUrl: 'planning-permission',
           url: 'country',
           baseUrl: 'country',
-          preValidationKeys: ['legalStatus'],
+          // preValidationKeys: ['legalStatus'],
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
@@ -340,7 +340,7 @@ const questionBank = {
           baseUrl: 'planning-permission',
           backUrl: 'country',
           nextUrl: 'project-started',
-          preValidationKeys: ['inEngland'],
+          // preValidationKeys: ['inEngland'],
           ineligibleContent: {
             messageContent: 'You must have secured planning permission before you submit a full application.',
             messageLink: {
@@ -396,7 +396,7 @@ const questionBank = {
           backUrl: 'planning-permission',
           nextUrl: 'project-started',
           maybeEligible: true,
-          preValidationKeys: ['planningPermission'],
+          // preValidationKeys: ['planningPermission'],
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 31 December 2025.',
@@ -424,7 +424,7 @@ const questionBank = {
               elseUrl: 'planning-permission-condition'
             }
           },
-          preValidationKeys: ['inEngland'],
+          // preValidationKeys: ['inEngland'],
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
@@ -495,7 +495,7 @@ const questionBank = {
           baseUrl: 'tenancy',
           backUrl: 'project-started',
           nextUrl: 'project',
-          preValidationKeys: ['projectStart'],
+          // preValidationKeys: ['projectStart'],
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -541,12 +541,12 @@ const questionBank = {
           backUrl: 'tenancy',
           nextUrl: 'project', 
           // routing TBC 
-          preValidationObject: {
-            preValidationKeys: ['tenancy'],
-            preValidationAnswer: ['tenancy-A2'],
-            preValidationRule: 'AND',
-            preValidationUrls: ['tenancy']
-          },
+          // preValidationObject: {
+          //   preValidationKeys: ['tenancy'],
+          //   preValidationAnswer: ['tenancy-A2'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['tenancy']
+          // },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswercount: 1,
@@ -592,7 +592,7 @@ const questionBank = {
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
           backUrl: 'tenancy',
-          preValidationKeys: ['tenancy'],
+          // preValidationKeys: ['tenancy'],
           nextUrl: 'project',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -631,7 +631,7 @@ const questionBank = {
           order: 62,
           url: 'tenancy-length-condition',
           backUrl: 'tenancy-length',
-          preValidationKeys: ['tenancyLength'],
+          // preValidationKeys: ['tenancyLength'],
           nextUrl: 'project',
           maybeEligible: true,
           maybeEligibleContent: {
@@ -726,7 +726,7 @@ const questionBank = {
           // },
           nextUrl: 'potential-amount',
           fundingPriorities: '',
-          preValidationKeys: [],
+          // preValidationKeys: [],
           grantInfo: {
             minGrant: MIN_GRANT,
             maxGrant: MAX_GRANT,
@@ -783,7 +783,7 @@ const questionBank = {
           baseUrl: 'potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
+          // preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -800,7 +800,7 @@ const questionBank = {
           baseUrl: 'potential-amount-capped',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
+          // preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -820,7 +820,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
           nextUrl: 'housing',
-          preValidationKeys: ['projectCost'],
+          // preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
             insertText: {
@@ -920,7 +920,7 @@ const questionBank = {
           baseUrl: 'business-details',
           backUrl: 'score',
           nextUrl: 'applying',
-          // preValidationKeys: ['introducingInnovation'],
+          // preValidationKeys: [],
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',

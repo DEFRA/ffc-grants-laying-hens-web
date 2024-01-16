@@ -36,7 +36,7 @@ module.exports = [{
     }
   },
   handler: async (request, h, _err) => {
-    const preValidationKeys = ['otherItems']
+    // const preValidationKeys = ['otherItems']
     const isRedirect = guardPage(request, preValidationKeys, null)
 
     if (isRedirect) {
