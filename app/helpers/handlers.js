@@ -51,11 +51,6 @@ const getPage = async (question, request, h) => {
 
   switch (url) {
     case 'project-cost':
-      setYarValue(request, 'projectCostSolar', null)
-      setYarValue(request, 'calculatedGrantSolar', null)
-      setYarValue(request, 'SolarPVCost', null)
-      setYarValue(request, 'calculatedGrantSolarPreCap', null)
-      setYarValue(request, 'calculatedGrantCalf', null)
       break
     case 'remaining-costs':
       const SolarPVCost = getYarValue(request, 'SolarPVCost')
@@ -264,17 +259,6 @@ const showPostPage = (currentQuestion, request, h) => {
     } else {
       thisAnswer = answers?.find(answer => (answer.value === value))
     }
-    if (key === 'roofSolarPV' && value === 'Yes') {
-      setYarValue(request, 'heritageSite', null)
-      setYarValue(request, 'upgradingExistingBuilding', null)
-      setYarValue(request, 'projectCostSolar', null)
-      setYarValue(request, 'calculatedGrantSolar', null)
-      setYarValue(request, 'SolarPVCost', null)
-      setYarValue(request, 'calculatedGrantSolarPreCap', null)
-    }
-    if (key === 'upgradingExistingBuilding' && value === 'Yes') {
-      setYarValue(request, 'heritageSite', null)
-    }
 
     if (type !== 'multi-input' && key !== 'secBtn') {
       setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
@@ -299,42 +283,20 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, yarKey, dataObject)
   }
 
-  if (title) {
-    currentQuestion = {
-      ...currentQuestion,
-      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-      ))
-    }
-  }
+  // if (title) {
+  //   currentQuestion = {
+  //     ...currentQuestion,
+  //     title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+  //       formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+  //     ))
+  //   }
+  // }
 
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     return errors
   }
-  if (currentQuestion?.grantInfoSolar) { // double check
-    const projectCostSolar = getYarValue(request, 'projectCostSolar')
-    const calfHousingCost = projectCostSolar.calfHousingCost
-    const solarCost = projectCostSolar.SolarPVCost
-    setYarValue(request, 'calfHousingCost', calfHousingCost)
-    setYarValue(request, 'SolarPVCost', solarCost)
-    setYarValue(request, 'projectCost', Number(calfHousingCost) + Number(solarCost))
-    // calf housing
-    const { calculatedGrant, remainingCost } = getGrantValues(calfHousingCost, currentQuestion.grantInfo)
-    setYarValue(request, 'calculatedGrantCalf', calculatedGrant)
-    setYarValue(request, 'remainingCostCalf', remainingCost)
-    // Solar
-    const { calculatedGrantSolar, remainingCostSolar } = getGrantValuesSolar(solarCost, currentQuestion.grantInfoSolar)
-    setYarValue(request, 'calculatedGrantSolar', calculatedGrantSolar)
-    setYarValue(request, 'remainingCostSolar', remainingCostSolar)
-    // overall
-    setYarValue(request, 'calculatedGrant', Number(calculatedGrant) + Number(calculatedGrantSolar))
-    setYarValue(request, 'remainingCost', Number(remainingCost) + Number(remainingCostSolar))
-  } else if (currentQuestion.grantInfo) {
-    const { calculatedGrant, remainingCost } = getGrantValues(getYarValue(request, 'projectCost'), currentQuestion.grantInfo)
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
-  }
+
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     // if (thisAnswer?.alsoMaybeEligible) {
@@ -381,31 +343,6 @@ const showPostPage = (currentQuestion, request, h) => {
         return h.redirect('/laying-hens/potential-amount-capped')
       }
       break
-    case 'project-cost-solar':
-      // ineligible as calf housing too low
-      if (getYarValue(request, 'calculatedGrantCalf') < 15000) {
-        return h.view('not-eligible', NOT_ELIGIBLE)
-        // calf housing only
-      } else if (getYarValue(request, 'calculatedGrantCalf') >= 500000) {
-        setYarValue(request, 'calculatedGrant', 500000)
-        // reset SolarPVCost value
-        setYarValue(request, 'calculatedGrantSolar', null)
-        setYarValue(request, 'remainingCost', getYarValue(request, 'projectCost') - 500000)
-
-        return h.redirect('/laying-hens/potential-amount-conditional')
-        // solar capping
-      } else if (getYarValue(request, 'calculatedGrant') > 500000) {
-        const solarCap = 500000 - getYarValue(request, 'calculatedGrantCalf')
-        // store capped solar value for potential amount solar capped page
-        setYarValue(request, 'calculatedGrantSolarPreCap', getYarValue(request, 'SolarPVCost') * 0.25)
-        // set cap for solar and grant
-        setYarValue(request, 'calculatedGrantSolar', solarCap)
-        setYarValue(request, 'calculatedGrant', 500000)
-        const remaingCostSolar = (getYarValue(request, 'SolarPVCost') - solarCap)
-        setYarValue(request, 'remainingCost', Number(getYarValue(request, 'remainingCostCalf')) + remaingCostSolar)
-
-        return h.redirect('/laying-hens/potential-amount-solar-capped')
-      }
   }
 
   if (thisAnswer?.redirectUrl) {

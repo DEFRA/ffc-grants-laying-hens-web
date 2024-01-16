@@ -645,7 +645,7 @@ const questionBank = {
           title: 'What is your project?',
           baseUrl: 'project',
           // backUrl: 'project-responsibility',
-          nextUrl: 'minimum-floor-area',
+          nextUrl: 'project-cost',
           url: 'project',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
@@ -655,7 +655,7 @@ const questionBank = {
               elseUrl: 'project-responsibility'
             }
           },
-          preValidationKeys: ['tenancy'],
+          // preValidationKeys: ['tenancy'],
           ineligibleContent: {
             messageContent: `
                 <div class="govuk-list govuk-list--bullet">
@@ -714,18 +714,19 @@ const questionBank = {
           classes: 'govuk-input--width-10',
           url: 'project-cost',
           baseUrl: 'project-cost',
-          backUrlObject: {
-            dependentQuestionYarKey: 'heritageSite',
-            dependentAnswerKeysArray: ['heritage-site-A2'],
-            urlOptions: {
-              thenUrl: 'heritage-site',
-              elseUrl: 'solar-PV-system',
-              nonDependentUrl: 'solar-PV-system'
-            }
-          },
+          backUrl: 'project',
+          // backUrlObject: {
+          //   dependentQuestionYarKey: 'heritageSite',
+          //   dependentAnswerKeysArray: ['heritage-site-A2'],
+          //   urlOptions: {
+          //     thenUrl: 'heritage-site',
+          //     elseUrl: 'solar-PV-system',
+          //     nonDependentUrl: 'solar-PV-system'
+          //   }
+          // },
           nextUrl: 'potential-amount',
           fundingPriorities: '',
-          preValidationKeys: ['roofSolarPV'],
+          preValidationKeys: [],
           grantInfo: {
             minGrant: MIN_GRANT,
             maxGrant: MAX_GRANT,
@@ -808,24 +809,6 @@ const questionBank = {
             warning: {
               text: 'There’s no guarantee the project will receive a grant.'
             }
-          }
-        },
-        {
-          key: 'potential-amount-conditional',
-          order: 232,
-          url: 'potential-amount-conditional',
-          baseUrl: 'potential-amount-conditional',
-          backUrl: 'project-cost-solar',
-          nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: 'You have requested the maximum grant amount of £500,000 for calf housing.',
-            warning: {
-              text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
-            },
-            extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.'
           }
         },
         {
@@ -1891,7 +1874,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(item => ALL_URLS.push(item.url))
 
-const YAR_KEYS = ['itemsTotalValue', 'remainingCost', 'calculatedGrant', 'remainingCostSolar', 'calculatedGrantSolar', 'remainingCostCalf', 'calculatedGrantCalf', 'yesStructureEligibility', 'calfHousingCost', 'SolarPVCost', 'calculatedGrantSolarPreCap']
+const YAR_KEYS = ['itemsTotalValue', 'remainingCost', 'calculatedGrant', 'remainingCostCalf', 'calculatedGrantCalf', 'calfHousingCost']
 ALL_QUESTIONS.forEach(item => YAR_KEYS.push(item.yarKey))
 module.exports = {
   questionBank,

@@ -1,4 +1,3 @@
-const { formatAnswerArray } = require('./../helpers/standardised-grant-amounts-array')
 const { formatOtherItems } = require('./../helpers/other-items-sizes')
 
 function isChecked (data, option) {
@@ -148,13 +147,6 @@ const getAllInputs = (data, question, conditionalHtml, request) => {
 }
 
 const getOptions = (data, question, conditionalHtml, request) => {
-  if (question?.costDataType && question.answers.length <= 2) {
-    const answersList = formatAnswerArray(request, question.key, question.costDataType, question.hintArray).reverse()
-
-    for (const answer in answersList) {
-      question.answers.unshift(answersList[answer])
-    }
-  }
 
   switch (question.type) {
     case 'input':
