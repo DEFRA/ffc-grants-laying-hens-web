@@ -50,9 +50,10 @@
     {% endif %}
   </div>
 {% endmacro %}
-{% macro conditionalButtons (showSecondaryButton, contBtnText, secButtonText ) %}
+{% macro conditionalButtons (showSecondaryButton, contBtnText, secButtonText, nextUrl ) %}
   {{ govukButton({
       text: contBtnText,
+      href: nextUrl,
       attributes: {id: contBtnText.split(' ').join('-')}
     }) }} &nbsp;
   {% if showSecondaryButton %}
