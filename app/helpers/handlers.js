@@ -53,24 +53,7 @@ const getPage = async (question, request, h) => {
     case 'project-cost':
       break
     case 'remaining-costs':
-      const SolarPVCost = getYarValue(request, 'SolarPVCost')
-      const calfGrant = getYarValue(request, 'calculatedGrantCalf')
-      const projectCost = getYarValue(request, 'projectCost')
-
-      if (calfGrant && calfGrant >= 500000) {
-        question.backUrl = `${urlPrefix}/potential-amount-conditional`
-      } else if (SolarPVCost && SolarPVCost > (500000 - calfGrant) / 0.25) {
-        question.backUrl = `${urlPrefix}/potential-amount-solar-capped`
-      } else if (SolarPVCost) {
-        question.backUrl = `${urlPrefix}/potential-amount-solar`
-      } else if (projectCost > 1250000) {
-        question.backUrl = `${urlPrefix}/potential-amount-capped`
-      } else {
-        question.backUrl = `${urlPrefix}/potential-amount`
-      }
-
       break
-
     case 'score':
       const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
       const formatAnswersForScoring = createDesirabilityMsg(desirabilityAnswers)

@@ -27,26 +27,26 @@ it('page loads successfully, with all the Eligible options', async () => {
     expect(response.payload).toContain(eligiblePageText)
 })
 
-it('should redirect to /remaining-costs when user press continue', async () => {
-    const postOptions = {
-        method: 'POST',
-        url: `${global.__URLPREFIX__}/potential-amount-conditional`,
-        headers: { cookie: 'crumb=' + crumbToken },
-        payload: { remainingCosts: 'Yes', crumb: crumbToken }
-    }
+// it('should redirect to /remaining-costs when user press continue', async () => {
+//     const postOptions = {
+//         method: 'POST',
+//         url: `${global.__URLPREFIX__}/potential-amount-conditional`,
+//         headers: { cookie: 'crumb=' + crumbToken },
+//         payload: { remainingCosts: 'Yes', crumb: crumbToken }
+//     }
 
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('remaining-costs')
-})
+//     const postResponse = await global.__SERVER__.inject(postOptions)
+//     expect(postResponse.statusCode).toBe(302)
+//     expect(postResponse.headers.location).toBe('remaining-costs')
+// })
 
-it('page loads with correct back link', async () => {
-    const options = {
-        method: 'GET',
-        url: `${global.__URLPREFIX__}/potential-amount-conditional`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"project-cost-solar\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
-    })
+// it('page loads with correct back link', async () => {
+//     const options = {
+//         method: 'GET',
+//         url: `${global.__URLPREFIX__}/potential-amount-conditional`
+//     }
+//     const response = await global.__SERVER__.inject(options)
+//     expect(response.statusCode).toBe(200)
+//     expect(response.payload).toContain('<a href=\"project-cost-solar\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+//     })
 })

@@ -1,8 +1,6 @@
 const { getOptions, setOptionsLabel } = require('../../../../app/helpers/answer-options')
 
-jest.mock('../../../../app/helpers/standardised-grant-amounts-array', () => ({
-  formatAnswerArray: (a, b, c, d) => ([ 'answer-1', 'answer-2' ]),
-}));
+
 describe('answer-options', () => {
   test('check getOptions()', () => {
     let question = {

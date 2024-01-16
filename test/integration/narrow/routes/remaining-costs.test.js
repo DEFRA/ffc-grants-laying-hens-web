@@ -76,31 +76,6 @@ describe('Page: /remaining-costs', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount-conditional\" class=\"govuk-back-link\">Back</a>')
   })
-  it('page loads with correct back link - potential-amount-solar-capped', async () => {
-    varList.SolarPVCost = 2000000000
-    varList.calculatedGrantSolar = 499999
-    varList.calculatedGrantCalf = 499999
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/remaining-costs`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount-solar-capped\" class=\"govuk-back-link\">Back</a>')
-  })
-  it('page loads with correct back link - potential-amount-solar', async () => {
-    varList.SolarPVCost = 5000
-    // varList.calculatedGrantSolar = 499999
-    varList.calculatedGrantCalf = 125000
-
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/remaining-costs`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/laying-hens/potential-amount-solar\" class=\"govuk-back-link\">Back</a>')
-  })
 
   it('page loads with correct back link - potential-amount-capped', async () => {
     varList.projectCost = 12600000
