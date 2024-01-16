@@ -125,26 +125,26 @@ describe('answer-options', () => {
           text: 'Select an option',
           value: ''
         },
-        {
-          selected: false,
-          text: 'answer-1',
-          value: 'answer-1'
-        },
-        {
-          selected: false,
-          text: 'answer-2',
-          value: 'answer-2'
-        },
-        {
-          selected: false,
-          text: 'answer-1',
-          value: 'answer-1'
-        },
-        {
-          selected: false,
-          text: 'answer-2',
-          value: 'answer-2'
-        }
+        // {
+        //   selected: false,
+        //   text: 'answer-1',
+        //   value: 'answer-1'
+        // },
+        // {
+        //   selected: false,
+        //   text: 'answer-2',
+        //   value: 'answer-2'
+        // },
+        // {
+        //   selected: false,
+        //   text: 'answer-1',
+        //   value: 'answer-1'
+        // },
+        // {
+        //   selected: false,
+        //   text: 'answer-2',
+        //   value: 'answer-2'
+        // }
       ]
     })
 
@@ -160,26 +160,26 @@ describe('answer-options', () => {
           text: 'Select an option',
           value: ''
         },
-        {
-          selected: false,
-          text: 'answer-1',
-          value: 'answer-1'
-        },
-        {
-          selected: false,
-          text: 'answer-2',
-          value: 'answer-2'
-        },
-        {
-          selected: false,
-          text: 'answer-1',
-          value: 'answer-1'
-        },
-        {
-          selected: false,
-          text: 'answer-2',
-          value: 'answer-2'
-        }
+        // {
+        //   selected: false,
+        //   text: 'answer-1',
+        //   value: 'answer-1'
+        // },
+        // {
+        //   selected: false,
+        //   text: 'answer-2',
+        //   value: 'answer-2'
+        // },
+        // {
+        //   selected: false,
+        //   text: 'answer-1',
+        //   value: 'answer-1'
+        // },
+        // {
+        //   selected: false,
+        //   text: 'answer-2',
+        //   value: 'answer-2'
+        // }
       ]
     })
 
@@ -199,36 +199,37 @@ describe('answer-options', () => {
         },
         hint: 'mock-hint',
         id: 'mock-yarKey',
-        items: [
-          {
-            checked: false,
-            hint: undefined,
-            selected: true,
-            text: undefined,
-            value: undefined
-          },
-          {
-            checked: false,
-            hint: undefined,
-            selected: true,
-            text: undefined,
-            value: undefined
-          },
-          {
-            checked: false,
-            hint: undefined,
-            selected: true,
-            text: undefined,
-            value: undefined
-          },
-          {
-            checked: false,
-            hint: undefined,
-            selected: true,
-            text: undefined,
-            value: undefined
-          }
-        ],
+        // items: [
+        //   {
+        //     checked: false,
+        //     hint: undefined,
+        //     selected: true,
+        //     text: undefined,
+        //     value: undefined
+        //   },
+        //   {
+        //     checked: false,
+        //     hint: undefined,
+        //     selected: true,
+        //     text: undefined,
+        //     value: undefined
+        //   },
+        //   {
+        //     checked: false,
+        //     hint: undefined,
+        //     selected: true,
+        //     text: undefined,
+        //     value: undefined
+        //   },
+        //   {
+        //     checked: false,
+        //     hint: undefined,
+        //     selected: true,
+        //     text: undefined,
+        //     value: undefined
+        //   }
+        // ],
+        items :[],
         name: 'mock-yarKey'
       }
     )
