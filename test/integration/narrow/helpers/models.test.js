@@ -145,7 +145,6 @@ describe('Models', () => {
 
     expect(getModel([], question, {}).backUrl).toBeNull()
     expect(getModel([], question, {}).backUrl).toEqual('tenancy')
-    expect(getModel([], question, {}).backUrl).toEqual('tenancy')
   })
 
   test('inspect getModel().warningDetails', () => {

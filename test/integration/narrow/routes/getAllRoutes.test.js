@@ -42,7 +42,6 @@ describe('All default GET routes', () => {
 
   ALL_QUESTIONS.forEach(question => {
     varList.consentMain = 'Hello'
-    varList.structure = 'Other' // for structure eligibility
 
     it(`should load ${question.key} page successfully`, async () => {
       // for score page only

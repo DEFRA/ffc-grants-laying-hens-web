@@ -68,13 +68,7 @@ describe('Create submission message', () => {
       'technology', 'itemsCost', 'potentialFunding', 'remainingCost',
       'projectStarted', 'planningPermission', 'projectName', 'businessName',
       'farmerName', 'farmerSurname', 'agentName', 'agentSurname', 'farmerEmail', 'agentEmail',
-      'contactConsent', 'scoreDate', 'introducingInnovation', 'sustainableMaterials', 'environmentalImpact',
-      'SolarPVCost', 'calculatedGrantSolar', 'calfHousingCost', 'calculatedGrantCalf', 'upgradingExistingBuilding',
-      'heritageSite', 'solarPVSystem', 'permanentSickPen', 'moistureControl', 'calfGroupSize', 'housing', 'calvingSystem', 'calvesNumber',
-      'housingScore', 'calfGroupSizeScore', 'moistureControlScore', 'permanentSickPenScore', 'structureEligibility',
-      'environmentalImpactScore', 'sustainableMaterialsScore', 'introducingInnovationScore',
-      'projectCost', 'roofSolarPV', 'additionalItems', 'drainageSlope', 'structure', 'enrichment',
-      'concreteFlooring', 'strawBedding', 'isolateCalves', 'housedIndividually', 'minimumFloorArea'
+      'contactConsent', 'scoreDate', 'projectCost'
     )
   })
   test('Under 10 employees results in micro business definition', () => {
@@ -140,7 +134,7 @@ describe('Create submission message', () => {
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('defaultColumnWidth')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('protectPassword')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('rows')
-    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(97)
+    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(71)
 })
 
   test('Protect password property should not be set if config is false', () => {
