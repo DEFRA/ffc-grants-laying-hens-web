@@ -187,7 +187,7 @@ const questionBank = {
           nextUrl: 'country',
           url: 'legal-status',
           baseUrl: 'legal-status',
-          preValidationKeys: ['applicantType'],
+          // preValidationKeys: ['applicantType'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -290,7 +290,7 @@ const questionBank = {
           nextUrl: 'planning-permission',
           url: 'country',
           baseUrl: 'country',
-          preValidationKeys: ['legalStatus'],
+          // preValidationKeys: ['legalStatus'],
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
@@ -340,7 +340,7 @@ const questionBank = {
           baseUrl: 'planning-permission',
           backUrl: 'country',
           nextUrl: 'project-started',
-          preValidationKeys: ['inEngland'],
+          // preValidationKeys: ['inEngland'],
           ineligibleContent: {
             messageContent: 'You must have secured planning permission before you submit a full application.',
             messageLink: {
@@ -396,7 +396,7 @@ const questionBank = {
           backUrl: 'planning-permission',
           nextUrl: 'project-started',
           maybeEligible: true,
-          preValidationKeys: ['planningPermission'],
+          // preValidationKeys: ['planningPermission'],
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 31 December 2025.',
@@ -424,7 +424,7 @@ const questionBank = {
               elseUrl: 'planning-permission-condition'
             }
           },
-          preValidationKeys: ['inEngland'],
+          // preValidationKeys: ['inEngland'],
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
@@ -495,7 +495,7 @@ const questionBank = {
           baseUrl: 'tenancy',
           backUrl: 'project-started',
           nextUrl: 'project',
-          preValidationKeys: ['projectStart'],
+          // preValidationKeys: ['projectStart'],
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -592,7 +592,7 @@ const questionBank = {
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
           backUrl: 'tenancy',
-          preValidationKeys: ['tenancy'],
+          // preValidationKeys: ['tenancy'],
           nextUrl: 'project',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -631,7 +631,7 @@ const questionBank = {
           order: 62,
           url: 'tenancy-length-condition',
           backUrl: 'tenancy-length',
-          preValidationKeys: ['tenancyLength'],
+          // preValidationKeys: ['tenancyLength'],
           nextUrl: 'project',
           maybeEligible: true,
           maybeEligibleContent: {
@@ -645,7 +645,7 @@ const questionBank = {
           title: 'What is your project?',
           baseUrl: 'project',
           // backUrl: 'project-responsibility',
-          nextUrl: 'minimum-floor-area',
+          nextUrl: 'project-cost',
           url: 'project',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
@@ -655,7 +655,7 @@ const questionBank = {
               elseUrl: 'project-responsibility'
             }
           },
-          preValidationKeys: ['tenancy'],
+          // preValidationKeys: ['tenancy'],
           ineligibleContent: {
             messageContent: `
                 <div class="govuk-list govuk-list--bullet">
@@ -708,950 +708,25 @@ const questionBank = {
           yarKey: 'project'
         },
         {
-          key: 'minimum-floor-area',
-          order: 80,
-          title: 'Will each calf have the minimum floor area?',
-          baseUrl: 'minimum-floor-area',
-          backUrl: 'project',
-          nextUrl: 'housed-individually',
-          url: 'minimum-floor-area',
-          hint: {
-            html: `<div class:"govuk-hint">
-                    The minimum area must be:</br></br>
-                    <ul>
-                    <li>3m² per calf for calves under 100kg</li>
-                    <li>4m² per calf for calves between 100kg and 150kg</li>
-                    <li>5m² per calf for calves over 150kg</li>
-                    </ul></br>
-
-                    This includes the lying, standing and feeding/drinking areas.
-                  </div>`
-          },
-          warning: {
-            text: 'The required area per calf for each group or pair may change over time so the housing design should account for this.'
-          },
-          preValidationKeys: ['project'],
-          ineligibleContent: {
-            messageContent: `
-              <div class="govuk-list govuk-list--bullet">
-                  Each calf must have the minimum floor area:
-                  <ul>
-                    <li>3m² per calf for calves under 100kg</li>
-                    <li>4m² per calf for calves between 100kg and 150kg</li>
-                    <li>5m² per calf for calves over 150kg</li></br>
-                  </ul>
-              </div>`,
-            insertText: { text: 'This includes the lying, standing and feeding/drinking areas.' },
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you might be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'Each calf must have at least the minimum floor area.'
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if each calf will have the minimum floor area'
-            }
-          ],
-          answers: [
-            {
-              key: 'minimum-floor-area-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'minimum-floor-area-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'minimumFloorArea'
-        },
-        {
-          key: 'housed-individually',
-          order: 100,
-          title: 'Will calves over 7 days old be housed individually?',
-          baseUrl: 'housed-individually',
-          url: 'housed-individually',
-          nextUrl: 'isolate-calves',
-          backUrl: 'minimum-floor-area',
-          preValidationKeys: ['minimumFloorArea'],
-          ineligibleContent: {
-            messageContent: '<p class="govuk-body">Calves can only be housed individually in exceptional circumstances (for example, illness or no other calves of similar age).</p>',
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you might be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'Calves can only be housed individually in exceptional circumstances (for example, illness or no other calves of similar age).'
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select the option that applies to you'
-            }
-          ],
-          answers: [
-            {
-              key: 'housed-individually-A1',
-              value: 'Yes',
-              notEligible: true
-            },
-            {
-              key: 'housed-individually-A2',
-              value: 'No'
-            },
-            {
-              key: 'housed-individually-A3',
-              value: 'Only in exceptional circumstance',
-              hint: {
-                html: 'For example illness, no other calves of similar age'
-              }
-            }
-          ],
-          yarKey: 'housedIndividually'
-        },
-        {
-          key: 'isolate-calves',
-          order: 110,
-          title: 'Will the building have facilities to temporarily isolate sick calves?',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          baseUrl: 'isolate-calves',
-          url: 'isolate-calves',
-          backUrl: 'housed-individually',
-          nextUrl: 'flooring-and-bedding',
-          preValidationKeys: ['housedIndividually'],
-          ineligibleContent: {
-            messageContent: 'The building must have facilities to temporarily isolate sick calves (for example, a temporary pen erected in an existing pen to isolate a sick calf).',
-            insertText: { text: 'Sick calves may need to be temporarily isolated to prevent spreading disease.' },
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you might be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The building must have facilities to temporarily isolate sick calves (for example, a temporary pen erected in an existing pen to isolate a sick calf).',
-                additionalPara: 'Sick calves may need to be temporarily isolated to prevent spreading disease.'
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if there will be facilities to temporarily isolate sick calves'
-            }
-          ],
-          answers: [
-            {
-              key: 'isolate-calves-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'isolate-calves-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'isolateCalves'
-        },
-        {
-          key: 'flooring-and-bedding',
-          order: 130,
-          title: 'Will the calf housing have both concrete flooring and cereal straw bedding?',
-          baseUrl: 'flooring-and-bedding',
-          url: 'flooring-and-bedding',
-          hint: {
-            text: 'It cannot have slatted or hardcore flooring'
-          },
-          backUrl: 'isolate-calves',
-          nextUrl: 'enrichment',
-          preValidationKeys: ['isolateCalves'],
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          ineligibleContent: {
-            messageContent: 'The calf housing must have solid concrete flooring and cereal straw bedding.',
-            insertText: { text: 'It cannot have slatted or hardcore flooring.' },
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The calf housing must have solid concrete flooring and cereal straw bedding.'
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the calf housing will have concrete flooring and cereal straw bedding'
-            }
-          ],
-          answers: [
-            {
-              key: 'flooring-and-bedding-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'flooring-and-bedding-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'concreteFlooring'
-        },
-        {
-          key: 'enrichment',
-          order: 140,
-          title: 'Will there be at least one enrichment item per pair or group of calves?',
-          hint: {
-            text: 'Not including straw bedding and social contact'
-          },
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          baseUrl: 'enrichment',
-          url: 'enrichment',
-          backUrl: 'flooring-and-bedding',
-          nextUrl: 'structure',
-          preValidationKeys: ['concreteFlooring'],
-          ineligibleContent: {
-            messageContent: 'Each pair or group of calves must have at least one enrichment item (for example brushes or hanging balls).',
-            insertText: {
-              text: 'This does not include straw bedding and social contact.'
-            },
-            additionalPara: 'The grant will fund off-the-shelf items for cattle. Other enrichment items (for example cardboard boxes) are not funded.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'Each pair or group of calves must have at least one enrichment item (for example brushes or hanging balls).',
-                additionalPara: 'The grant will fund off-the-shelf items for cattle. Other enrichment items (for example cardboard boxes) are not funded.'
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if there will be at least one enrichment item per pair or group of calves'
-            }
-          ],
-          answers: [
-            {
-              key: 'enrichment-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'enrichment-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'enrichment'
-        },
-        {
-          key: 'structure',
-          order: 150,
-          title: 'What type of structure is your building?',
-          pageTitle: '',
-          url: 'structure',
-          baseUrl: 'structure',
-          backUrl: 'enrichment',
-          nextUrl: 'drainage-slope',
-          preValidationKeys: ['enrichment'],
-          ineligibleContent: {
-            messageContent: `<p class="govuk-body">Each pair or group of calves must have at least one enrichment item, such as:</p>
-                              <div class="govuk-list govuk-list--bullet">
-                                    <ul>
-                                      <li>brushes</li>
-                                      <li>hanging balls</li>
-                                    </ul>
-                              </div>`,
-            insertText: { text: 'This does not include straw bedding and social contact.' },
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'All buildings must be permanent structures.'
-                }]
-              }
-            ]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select the option that applies to you'
-            }
-          ],
-          answers: [
-            {
-              key: 'structure-A1',
-              value: 'A-frame building'
-            },
-            {
-              key: 'structure-A2',
-              value: 'Mono-pitch building'
-            },
-            {
-              key: 'structure-A3',
-              value: 'A permanent open-sided structure with igloos/hutches'
-            },
-            {
-              key: 'structure-A4',
-              value: 'Other',
-              redirectUrl: 'structure-eligibility'
-            }
-          ],
-          yarKey: 'structure'
-        },
-        {
-          key: 'structure-eligibility',
-          order: 160,
-          title: 'Does your building structure meet the eligibility criteria?',
-          hint: {
-            html: `<div class:"govuk-hint">
-            All buildings must:</br></br>
-            <ul>
-            <li>be permanent structures</li>
-            <li>have adequate drainage</li>
-            <li>protect calves from draughts with solid walls/barriers to calf height</li></ul>
-            </div>`
-          },
-          pageTitle: '',
-          backUrl: 'structure',
-          nextUrl: 'drainage-slope',
-          url: 'structure-eligibility',
-          baseUrl: 'structure-eligibility',
-          preValidationKeys: ['structure'],
-          preValidationKeysRule: { condition: 'ANY', dependency: 'Other' },
-          ineligibleContent: {
-            messageContent: `<p class="govuk-body">All buildings must:</p>
-            <div class="govuk-list govuk-list--bullet">
-                  <ul>
-                    <li>be permanent structures</li>
-                    <li>have adequate drainage</li>
-                    <li>protect calves from draughts with solid walls/barriers to calf height</li>
-                  </ul>
-            </div>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if your building structure meets the eligibility criteria'
-            },
-            {
-              dependentKey: 'yesStructureEligibility',
-              type: 'REGEX',
-              regex: STRUCTURE_ELIGIBLITY_REGEX,
-              error: 'Description must only include letters, numbers, full stops, commas, hyphens and apostrophes'
-            },
-            {
-              dependentKey: 'yesStructureEligibility',
-              type: 'NOT_EMPTY',
-              error: 'Enter the description of the building structure'
-            },
-            {
-              dependentKey: 'yesStructureEligibility',
-              type: 'REGEX',
-              regex: CHARS_MAX_25,
-              error: 'Description must be 250 characters or less'
-            }
-          ],
-          answers: [
-            {
-              key: 'structure-eligibility-A1',
-              conditional: true,
-              value: 'Yes'
-            },
-            {
-              key: 'structure-eligibility-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'structureEligibility',
-          conditionalKey: 'yesStructureEligibility',
-          conditionalLabelData: 'Enter the description of the building structure'
-        },
-        {
-          key: 'drainage-slope',
-          order: 170,
-          title: 'Will the floor in bedded areas slope towards a drain or drainage channel?',
-          hint: {
-            text: 'The floor must have at least 5% gradient'
-          },
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          pageTitle: '',
-          backUrlObject: {
-            dependentQuestionYarKey: 'structure',
-            dependentAnswerKeysArray: ['structure-A1', 'structure-A2', 'structure-A3'],
-            urlOptions: {
-              thenUrl: 'structure',
-              elseUrl: 'structure-eligibility'
-            }
-          },
-          nextUrl: 'draught-protection',
-          url: 'drainage-slope',
-          baseUrl: 'drainage-slope',
-          preValidationKeys: ['structure'],
-          ineligibleContent: {
-            messageContent: 'The building must have sloped flooring with a 1 in 20 (5%) gradient in bedded areas that slopes towards a drain or drainage channel. ',
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The building must have sloped flooring with a 1 in 20 (5%) gradient in bedded areas that slopes towards a drain or drainage channel.'
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the floor in bedded areas slope towards a drain or drainage channel'
-            }
-          ],
-          answers: [
-            {
-              key: 'drainage-slope-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'drainage-slope-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'drainageSlope'
-        },
-        {
-          key: 'draught-protection',
-          order: 180,
-          title: 'Will calves be protected from draughts?',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          pageTitle: '',
-          backUrl: 'drainage-slope',
-          nextUrl: 'additional-items',
-          url: 'draught-protection',
-          baseUrl: 'draught-protection',
-          preValidationKeys: ['drainageSlope'],
-          ineligibleContent: {
-            messageContent: 'All projects must have permanent external calf-height solid walls/barriers to keep out drafts.',
-            insertText: { text: 'For a permanent open-sided structure with igloos/hutches, this may mean adding permanent solid sides to the outside pens (straw bales are not sufficient).' },
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `All projects must have permanent external calf-height solid walls/barriers to keep out drafts.
-
-                      For a permanent open-sided structure with igloos/hutches, this may mean adding permanent solid sides to the outside pens (straw bales are not sufficient).`
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the calves will be protected from draughts'
-            }
-          ],
-          answers: [
-            {
-              key: 'draught-protection-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'draught-protection-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'draughtProtection'
-        },
-        {
-          key: 'additional-items',
-          order: 190,
-          title: 'Will the building have these items?',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          hint: {
-            html: `<div class:"govuk-hint">
-            The building must have:</br></br>
-            <ul>
-            <li>access to a water supply</li>
-            <li>at least 2 IP66 electrical sockets in the building</li>
-            <li>fitted lighting of at least 50 lux (lux is equal to one lumen per square metre)</li>
-            <li>temperature and humidity data loggers (capable of autonomously recording temperature/humidity over a defined period and storing data to view later)</li>
-            </ul>
-            </div>`
-          },
-          pageTitle: '',
-          backUrl: 'draught-protection',
-          nextUrl: 'roof-solar-PV',
-          url: 'additional-items',
-          baseUrl: 'additional-items',
-          preValidationKeys: ['draughtProtection'],
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'The building must have:',
-                  items: [
-                    'access to a water supply',
-                    'at least 2 IP66 electrical sockets in the building',
-                    'fitted lighting of at least 50 lux',
-                    'temperature and humidity data loggers'
-                  ]
-                }]
-              }
-            ]
-          },
-          ineligibleContent: {
-            messageContent: `<p class="govuk-body">The building must have:</p>
-            <div class="govuk-list govuk-list--bullet">
-                  <ul>
-                    <li>access to a water supply</li>
-                    <li>at least 2 IP66 electrical sockets in the building</li>
-                    <li>fitted lighting of at least 50 lux (lux is equal to one lumen per square metre)</li>
-                    <li>temperature and humidity data loggers (capable of autonomously recording temperature/humidity over a defined period and storing data to view later)</li>
-                  </ul>
-            </div>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the building will have these items'
-            }
-          ],
-          answers: [
-            {
-              key: 'additional-items-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'additional-items-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'additionalItems'
-        },
-        {
-          key: 'roof-solar-PV',
-          order: 210,
-          title: 'Will the roof of the grant-funded calf housing be able to support solar PV panels?',
-          hint: {
-            html: `<div class:"govuk-hint">
-            You must provide confirmation from a building expert, contractor or structural engineer that your roof can support PV panels for your full application. Confirmation is not funded by this grant.</br></br>
-            Your roof is exempt if:
-            <ul>
-            <li>the building is listed or on a World Heritage Site</li>
-            <li> you've upgraded an existing building and would not otherwise make changes to the roof </li>
-            <li>the roof faces only north or is heavily shaded </li>
-            <li>the roof does not have 20m² of clear roof space </li>
-            <li>the roof has a pitch less than 15 degrees or greater than 50 degrees</li>
-            </ul>
-            </div>`
-          },
-          pageTitle: '',
-          backUrl: 'additional-items',
-          nextUrlObject: {
-            dependentQuestionYarKey: 'project',
-            dependentAnswerKeysArray: ['project-A1'],
-            urlOptions: {
-              thenUrl: 'heritage-site',
-              elseUrl: 'upgrading-existing-building'
-            }
-          },
-          url: 'roof-solar-PV',
-          baseUrl: 'roof-solar-PV',
-          preValidationKeys: ['additionalItems'],
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The roof must be able to support solar PV panels, allowing for potential use in the future.'
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: `<p class="govuk-body">The roof must be able to support solar PV panels unless:</p>
-            <div class="govuk-list govuk-list--bullet">
-                  <ul>
-                    <li>the building is listed or on a World Heritage Site</li>
-                    <li>you've upgraded an existing building and would not otherwise make changes to the roof</li>
-                    <li>the roof faces only north or is heavily shaded</li>
-                    <li>the roof does not have 20m² of clear roof space</li>
-                    <li>the roof has a pitch less than 15 degrees or greater than 50 degrees</li>
-                  </ul>
-            </div>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the roof is able to support solar PV panels'
-            }
-          ],
-          answers: [
-            {
-              key: 'roof-solar-PV-A1',
-              value: 'Yes',
-              redirectUrl: 'solar-PV-system'
-            },
-            {
-              key: 'roof-solar-PV-A2',
-              value: 'No',
-              notEligible: true
-            },
-            {
-              key: 'roof-solar-PV-A3',
-              value: 'My roof is exempt'
-            }
-          ],
-          yarKey: 'roofSolarPV'
-        },
-        {
-          key: 'upgrading-existing-building',
-          order: 211,
-          title: 'Are you upgrading an existing building and not making changes to the roof?',
-          pageTitle: '',
-          hint: {
-            text: 'You can apply for grant funding to buy and install a solar PV system if you are upgrading an existing building and not making changes to the roof.'
-          },
-          backUrl: 'roof-solar-PV',
-          nextUrl: 'solar-PV-system',
-          url: 'upgrading-existing-building',
-          baseUrl: 'upgrading-existing-building',
-          preValidationKeys: ['roofSolarPV'],
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select if you are upgrading an existing building and not making changes to the roof'
-            }
-          ],
-          answers: [
-            {
-              key: 'upgrading-existing-building-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'upgrading-existing-building-A2',
-              value: 'No',
-              redirectUrl: 'heritage-site'
-            }
-          ],
-          yarKey: 'upgradingExistingBuilding'
-        },
-        {
-          key: 'heritage-site',
-          order: 212,
-          title: 'Is your building listed or on a World Heritage Site?',
-          pageTitle: '',
-          hint: {
-            text: 'You can apply for grant funding to buy and install a solar PV system if your building is listed or on a World Heritage Site.'
-          },
-          backUrlObject: {
-            dependentQuestionYarKey: 'project',
-            dependentAnswerKeysArray: ['project-A1'],
-            urlOptions: {
-              thenUrl: 'roof-solar-PV',
-              elseUrl: 'upgrading-existing-building'
-            }
-          },
-          nextUrl: 'solar-PV-system',
-          url: 'heritage-site',
-          baseUrl: 'heritage-site',
-          preValidationKeys: ['roofSolarPV'],
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select if your building is listed or on a World Heritage Site'
-            }
-          ],
-          answers: [
-            {
-              key: 'heritage-site-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'heritage-site-A2',
-              value: 'No',
-              redirectUrl: 'project-cost'
-            }
-          ],
-          yarKey: 'heritageSite'
-        },
-        {
-          key: 'solar-PV-system',
-          order: 213,
-          title: 'Will you buy a solar PV system with this grant?',
-          hint: {
-            html: `<div class:"govuk-hint">
-            You can choose to buy and install a solar PV system on the grant-funded calf housing as part of the grant.</br></br>
-            A solar PV system can include:
-            <ul>
-            <li>an electrical grid connection (your housing must have an existing energy supply)</li>
-            <li>solar panels</li>
-            <li>an inverter</li>
-            <li>a utility meter</li>
-            <li>a battery</li>
-            </ul>
-            </div>`
-          },
-          pageTitle: '',
-          backUrlObject: {
-            dependentQuestionYarKey: ['upgradingExistingBuilding', 'heritageSite'],
-            dependentAnswerKeysArray: ['upgrading-existing-building-A2', 'heritage-site-A1'],
-            urlOptions: {
-              thenUrl: 'heritage-site',
-              elseUrl: 'upgrading-existing-building',
-              nonDependentUrl: 'roof-solar-PV'
-            }
-          },
-          nextUrl: 'project-cost-solar',
-          url: 'solar-PV-system',
-          baseUrl: 'solar-PV-system',
-          preValidationKeys: ['roofSolarPV'],
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'You do not have to buy and install a solar PV system to be eligible for this grant'
-              }]
-            }]
-          },
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select if you will use the grant for a solar PV system'
-            }
-          ],
-          answers: [
-            {
-              key: 'solar-PV-system-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'solar-PV-system-A2',
-              value: 'No',
-              redirectUrl: 'project-cost'
-            }
-          ],
-          yarKey: 'solarPVSystem'
-        },
-        {
-          key: 'project-cost-solar',
-          order: 214,
-          pageTitle: '',
-          title: 'Estimated project costs',
-          classes: 'govuk-input--width-10',
-          url: 'project-cost-solar',
-          baseUrl: 'project-cost-solar',
-          backUrl: 'solar-PV-system',
-          nextUrl: 'potential-amount-solar',
-          fundingPriorities: '',
-          preValidationKeys: ['solarPVSystem'],
-          type: 'multi-input',
-          grantInfo: {
-            minGrant: MIN_GRANT,
-            maxGrant: MAX_GRANT,
-            grantPercentage: GRANT_PERCENTAGE,
-            cappedGrant: true
-          },
-          grantInfoSolar: {
-            minGrant: 0,
-            maxGrant: 485000,
-            grantPercentage: 25,
-            cappedGrant: false
-          },
-          hint: {
-            html: `
-                  <p>You can only apply for a grant of up to:<p/>
-                  <ul>
-                    <li>40% of the estimated costs of calf housing</li>
-                    <li>25% of the estimated costs of buying and installing a solar PV system</li>
-                  </ul>
-                  <p>The minimum grant amount you can apply for the calf housing costs is £15,000 (40% of £37,500). The maximum grant is £500,000.</p>
-                  <p>Do not include VAT<p/>
-                  <p>Enter total estimated amounts, for example 95,000<p/>
-              `
-          },
-          minAnswerCount: '',
-          maxAnswerCount: '',
-          allFields: [
-            {
-              yarKey: 'calfHousingCost',
-              type: 'number',
-              classes: 'govuk-input--width-10',
-              label: {
-                html: '<b>Calf housing costs</b>',
-                classes: 'govuk-label'
-              },
-              prefix: {
-                text: '£'
-              },
-              validate: [
-                {
-                  type: 'NOT_EMPTY',
-                  error: 'Enter the estimated total cost of the calf housing'
-                },
-                {
-                  type: 'MIN_MAX',
-                  min: 1,
-                  max: 9999999,
-                  error: 'Enter a whole number with a maximum of 7 digits'
-                },
-                {
-                  type: 'REGEX',
-                  regex: WHOLE_NUMBER_REGEX,
-                  error: 'Enter a whole number with a maximum of 7 digits'
-                }
-              ]
-            },
-            {
-              yarKey: 'SolarPVCost',
-              type: 'number',
-              classes: 'govuk-input--width-10',
-              label: {
-                html: '<b>Solar PV system costs</b>',
-                classes: 'govuk-label'
-              },
-              prefix: {
-                text: '£'
-              },
-              validate: [
-                {
-                  type: 'NOT_EMPTY',
-                  error: 'Enter the estimated total cost of the solar PV system'
-                },
-                {
-                  type: 'MIN_MAX',
-                  min: 1,
-                  max: 9999999,
-                  error: 'Enter a whole number with a maximum of 7 digits'
-                },
-                {
-                  type: 'REGEX',
-                  regex: WHOLE_NUMBER_REGEX,
-                  error: 'Enter a whole number with a maximum of 7 digits'
-                }
-              ]
-            }
-          ],
-          ineligibleContent: {
-            messageHeader: 'You cannot apply for a grant from this scheme',
-            messageContent: 'The minimum grant you can apply for the calf housing costs is £15,000 (40% of £37,500). The maximum grant is £500,000.',
-            insertText: { text: 'You cannot apply for funding for a solar PV system if you have not requested the minimum funding amount for calf housing.' },
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          yarKey: 'projectCostSolar'
-        },
-        {
           key: 'project-cost',
           order: 220,
           pageTitle: '',
           classes: 'govuk-input--width-10',
           url: 'project-cost',
           baseUrl: 'project-cost',
-          backUrlObject: {
-            dependentQuestionYarKey: 'heritageSite',
-            dependentAnswerKeysArray: ['heritage-site-A2'],
-            urlOptions: {
-              thenUrl: 'heritage-site',
-              elseUrl: 'solar-PV-system',
-              nonDependentUrl: 'solar-PV-system'
-            }
-          },
+          backUrl: 'project',
+          // backUrlObject: {
+          //   dependentQuestionYarKey: 'heritageSite',
+          //   dependentAnswerKeysArray: ['heritage-site-A2'],
+          //   urlOptions: {
+          //     thenUrl: 'heritage-site',
+          //     elseUrl: 'solar-PV-system',
+          //     nonDependentUrl: 'solar-PV-system'
+          //   }
+          // },
           nextUrl: 'potential-amount',
           fundingPriorities: '',
-          preValidationKeys: ['roofSolarPV'],
+          // preValidationKeys: [],
           grantInfo: {
             minGrant: MIN_GRANT,
             maxGrant: MAX_GRANT,
@@ -1708,74 +783,11 @@ const questionBank = {
           baseUrl: 'potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
+          // preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
             messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
-            warning: {
-              text: 'There’s no guarantee the project will receive a grant.'
-            }
-          }
-        },
-        {
-          key: 'potential-amount-capped',
-          order: 231,
-          url: 'potential-amount-capped',
-          baseUrl: 'potential-amount-capped',
-          backUrl: 'project-cost',
-          nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: `The maximum grant you can apply for is £500,000.
-            You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
-            warning: {
-              text: 'There’s no guarantee the project will receive a grant.'
-            }
-          }
-        },
-        {
-          key: 'potential-amount-solar',
-          order: 232,
-          url: 'potential-amount-solar',
-          baseUrl: 'potential-amount-solar',
-          backUrl: 'project-cost-solar',
-          nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: `<p class="govuk-body">You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}</p>
-            <p class="govuk-body">This grant amount combines:<p>
-            <ul>
-            <li>£{{_calculatedGrantCalf_}} for calf housing costs (40% of £{{_calfHousingCost_}})</li>
-            <li>£{{_calculatedGrantSolar_}} for solar PV costs (25% of £{{_SolarPVCost_}})</li>
-            </ul>`,
-            warning: {
-              text: 'There\'s no guarantee the project will receive a grant.'
-            }
-          }
-        },
-        {
-          key: 'potential-amount-solar-capped',
-          order: 233,
-          url: 'potential-amount-solar-capped',
-          baseUrl: 'potential-amount-solar-capped',
-          backUrl: 'project-cost-solar',
-          nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: `<p class="govuk-body">You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}</p>
-            <p class="govuk-body">This grant amount combines:<p>
-            <ul>
-            <li>£{{_calculatedGrantCalf_}} for calf housing costs (40% of £{{_calfHousingCost_}})</li>
-            <li>£{{_calculatedGrantSolar_}} for solar PV costs (25% of £{{_SolarPVCost_}} is £{{_calculatedGrantSolarPreCap_}}, capped at £{{_calculatedGrantSolar_}})</li>
-            </ul>
-            <p class="govuk-body">As calf housing costs take grant funding priority, you may be able to apply for a grant of up to £{{_calculatedGrantSolar_}} for solar PV system costs. The maximum grant is £500,000.`,
             warning: {
               text: 'There’s no guarantee the project will receive a grant.'
             }
@@ -1800,6 +812,24 @@ const questionBank = {
           }
         },
         {
+          key: 'potential-amount-capped',
+          order: 231,
+          url: 'potential-amount-capped',
+          baseUrl: 'potential-amount-capped',
+          backUrl: 'project-cost',
+          nextUrl: 'remaining-costs',
+          // preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: `The maximum grant you can apply for is £500,000.
+            You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
+        {
           key: 'remaining-costs',
           order: 240,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
@@ -1808,7 +838,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
           nextUrl: 'housing',
-          preValidationKeys: ['projectCost'],
+          // preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
             insertText: {
@@ -1868,543 +898,6 @@ const questionBank = {
           yarKey: 'remainingCosts'
         },
         {
-          key: 'housing',
-          order: 250,
-          url: 'housing',
-          baseUrl: 'housing',
-          backUrl: 'remaining-costs',
-          nextUrl: 'group-size',
-          preValidationKeys: ['remainingCosts'],
-          pageTitle: '',
-          title: 'Are you moving from individually housing calves over 7 days old to pair or group housing?',
-          fundingPriorities: '',
-          type: 'single-answer',
-          ga: { name: 'eligibility_passed', params: {} },
-          score: {
-            isScore: true
-          },
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you are moving from individually housed calves over 7 days old to pair or group housing'
-            }
-          ],
-          answers: [
-            {
-              key: 'housing-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'housing-A2',
-              value: 'No'
-            }
-          ],
-          sidebar: {
-            values: [
-              {
-                heading: 'Funding Priorities',
-                content: [{
-                  para: 'The RPA want to fund projects that will increase social contact between calves.',
-                  additionalPara: 'By law, calves cannot be housed individually beyond 8 weeks.'
-                }]
-              }
-            ]
-          },
-          yarKey: 'housing'
-        },
-        {
-          key: 'calf-group-size',
-          order: 260,
-          url: 'group-size',
-          baseUrl: 'group-size',
-          backUrl: 'housing',
-          nextUrl: 'moisture-control',
-          preValidationKeys: ['housing'],
-          pageTitle: '',
-          title: 'What will be the average group size for calves over 7 days old?',
-          fundingPriorities: '',
-          type: 'single-answer',
-          score: {
-            isScore: true
-          },
-          sidebar: {
-            values: [
-              {
-                heading: 'Funding Priorities',
-                content: [{
-                  para: 'RPA wants to fund projects that increase social interaction for calves, with a preference for groups of 4 to 8, followed by groups with fewer than 13 calves.'
-                }]
-              }
-            ]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select what size the average calf group will be for calves over 7 days old'
-            }
-          ],
-          answers: [
-            {
-              key: 'calf-group-size-A1',
-              value: '2 to 3'
-            },
-            {
-              key: 'calf-group-size-A2',
-              value: '4 to 8'
-            },
-            {
-              key: 'calf-group-size-A3',
-              value: '9 to 12'
-            },
-            {
-              key: 'calf-group-size-A4',
-              value: '13 or more'
-            }
-          ],
-          yarKey: 'calfGroupSize'
-        },
-        {
-          key: 'moisture-control',
-          order: 290,
-          url: 'moisture-control',
-          baseUrl: 'moisture-control',
-          backUrl: 'group-size',
-          nextUrl: 'permanent-sick-pen',
-          preValidationKeys: ['calfGroupSize'],
-          pageTitle: '',
-          title: 'How will your building control moisture?',
-          hint: {
-            text: 'Select all that apply'
-          },
-          fundingPriorities: '',
-          type: 'multi-answer',
-          score: {
-            isScore: true
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select how your building will control moisture'
-            },
-            {
-              type: 'STANDALONE_ANSWER',
-              error: 'You cannot select that combination of options',
-              standaloneObject: {
-                questionKey: 'moisture-control',
-                answerKey: 'moisture-control-A4'
-              }
-            }
-          ],
-          answers: [
-            {
-              key: 'moisture-control-A1',
-              value: 'A drain or drainage channel inside the pen'
-            },
-            {
-              key: 'moisture-control-A2',
-              value: 'Positioning drinking areas near drainage and away from bedding'
-            },
-            {
-              key: 'moisture-control-A3',
-              value: 'A separate preparation or washing area'
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'moisture-control-A4',
-              value: 'None of the above'
-            }
-          ],
-          sidebar: {
-            values: [
-              {
-                heading: 'Funding Priorities',
-                content: [{
-                  para: 'RPA wants to fund projects that go beyond the regulatory baseline to control building moisture.'
-                }]
-              }
-            ]
-          },
-          yarKey: 'moistureControl'
-        },
-        {
-          key: 'permanent-sick-pen',
-          order: 300,
-          title: 'What type of sick pen will your building have?',
-          hint: {
-            text: 'Select all that apply'
-          },
-          pageTitle: '',
-          preValidationKeys: ['moistureControl'],
-          url: 'permanent-sick-pen',
-          baseUrl: 'permanent-sick-pen',
-          backUrl: 'moisture-control',
-          warning: {
-            text: 'To create a separate air space, the area must have solid walls up to ceiling height blocking it from the calf housing.'
-          },
-          // nextUrl: 'environmental-impact',
-          nextUrlObject: {
-            dependentQuestionYarKey: 'SolarPVCost',
-            dependentAnswerKeysArray: [
-            ],
-            urlOptions: {
-              thenUrl: 'environmental-impact',
-              elseUrl: 'rainwater'
-            }
-          },
-          sidebar: {
-            values: [{
-              heading: 'Funding Priorities',
-              content: [{
-                para: 'RPA wants to fund buildings that go beyond the regulatory baseline by having:',
-                items: ['a permanent sick pen', 'a separate air space', 'a permanent heat source (for example heat lamps)'],
-                additionalPara: 'To create a separate air space, the area must have solid walls up to ceiling height blocking it from the calf housing.'
-
-              }]
-            }]
-          },
-          fundingPriorities: '',
-          type: 'multi-answer',
-          score: {
-            isScore: true
-          },
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select if your building will have a permanent sick pen with separate air space'
-            },
-            {
-              type: 'STANDALONE_ANSWER',
-              error: 'You cannot select that combination of options',
-              standaloneObject: {
-                questionKey: 'permanent-sick-pen',
-                answerKey: 'permanent-sick-pen-A4'
-              }
-            }
-          ],
-          answers: [
-            {
-              key: 'permanent-sick-pen-A1',
-              value: 'A permanent sick pen'
-            },
-            {
-              key: 'permanent-sick-pen-A2',
-              value: 'A separate air space'
-            },
-            {
-              key: 'permanent-sick-pen-A3',
-              value: 'A permanent heat source (for example heat lamps)'
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'permanent-sick-pen-A4',
-              value: 'None of the above'
-            }
-          ],
-          yarKey: 'permanentSickPen'
-        },
-        {
-          key: 'environmental-impact',
-          order: 320,
-          title: 'How will the building minimise environmental impact?',
-          hint: {
-            text: 'Select all that apply'
-          },
-          pageTitle: '',
-          url: 'environmental-impact',
-          baseUrl: 'environmental-impact',
-          preValidationKeys: ['permanentSickPen'],
-          backUrl: 'permanent-sick-pen',
-          nextUrl: 'sustainable-materials',
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: 'RPA wants to fund buildings that enhance environmental sustainability and help meet government environmental targets.'
-              }]
-            }]
-          },
-          fundingPriorities: '',
-          type: 'multi-answer',
-          score: {
-            isScore: true
-          },
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select how your building will minimise environmental impact'
-            },
-            {
-              type: 'STANDALONE_ANSWER',
-              error: 'You cannot select that combination of options',
-              standaloneObject: {
-                questionKey: 'environmental-impact',
-                answerKey: 'environmental-impact-A3'
-              }
-            }
-          ],
-          answers: [
-            {
-              key: 'environmental-impact-A1',
-              value: 'Solar PV panels on the roof of the building'
-            },
-            {
-              key: 'environmental-impact-A2',
-              value: 'Collect and store rainwater'
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'environmental-impact-A3',
-              value: 'None of the above'
-            }
-          ],
-          yarKey: 'environmentalImpact'
-        },
-        {
-          key: 'rainwater',
-          order: 320,
-          title: 'Will your building collect and store rainwater?',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          pageTitle: '',
-          url: 'rainwater',
-          baseUrl: 'rainwater',
-          preValidationKeys: ['permanentSickPen'],
-          backUrl: 'permanent-sick-pen',
-          nextUrl: 'sustainable-materials',
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: 'RPA wants to fund buildings that enhance environmental sustainability and help meet government environmental targets.'
-              }]
-            }]
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          score: {
-            isScore: true
-          },
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if your building will collect and store rainwater'
-            }
-          ],
-          answers: [
-            {
-              key: 'environmental-impact-A2',
-              text: 'Yes',
-              value: 'Collect and store rainwater'
-            },
-            {
-              key: 'environmental-impact-A3',
-              text: 'No',
-              value: 'None of the above'
-            }
-          ],
-          yarKey: 'environmentalImpact'
-        },
-        {
-          key: 'sustainable-materials',
-          order: 330,
-          title: 'Will your building use sustainable materials?',
-          hint: {
-            text: 'Select all that apply'
-          },
-          pageTitle: '',
-          url: 'sustainable-materials',
-          baseUrl: 'sustainable-materials',
-          backUrlObject: {
-            dependentQuestionYarKey: 'SolarPVCost',
-            dependentAnswerKeysArray: [
-            ],
-            urlOptions: {
-              thenUrl: 'environmental-impact',
-              elseUrl: 'rainwater'
-            }
-          },
-          nextUrl: 'introducing-innovation',
-          preValidationKeys: ['environmentalImpact'],
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: `RPA wants to fund buildings that use sustainable materials.
-
-                      You should consult building experts for advice on building materials to ensure they are fit for purpose.`,
-                items: []
-              }]
-            }]
-          },
-          fundingPriorities: '',
-          type: 'multi-answer',
-          score: {
-            isScore: true
-          },
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select if your building will use sustainable materials'
-            },
-            {
-              type: 'STANDALONE_ANSWER',
-              error: 'You cannot select that combination of options',
-              standaloneObject: {
-                questionKey: 'sustainable-materials',
-                answerKey: 'sustainable-materials-A8'
-              }
-            }
-          ],
-          answers: [
-            {
-              key: 'sustainable-materials-A1',
-              value: 'Low carbon concrete',
-              hint: {
-                text: 'Alternatives to Ordinary Portland Cement that have higher embodied CO2 (for example, lower carbon aggregates, Portland Limestone Cements or low-cement-concrete)'
-              }
-            },
-            {
-              key: 'sustainable-materials-A2',
-              value: 'Steel replacement products',
-              hint: {
-                text: 'Fibre reinforced polymer (FRP), resin pilling, carbon fibre'
-              }
-            },
-            {
-              key: 'sustainable-materials-A3',
-              value: 'Sustainably sourced timber',
-              hint: {
-                text: 'Timber certified by FSC, PEFC, SFI, or CSA'
-              }
-            },
-            {
-              key: 'sustainable-materials-A4',
-              value: 'Reused materials already on site',
-              hint: {
-                text: 'For example wooden cladding, fencing, pen dividers'
-              }
-            },
-            {
-              key: 'sustainable-materials-A5',
-              value: 'Reused or secondhand materials from elsewhere',
-              hint: {
-                text: `Wooden cladding, fencing, pen dividers if sourced on site. If elsewhere,
-                      a supplier quote must include a statement that the item has not been previously purchased with public funding, 
-                      is fit for purpose and is expected to last at least 5 years`
-              }
-            },
-            {
-              key: 'sustainable-materials-A6',
-              value: 'Recycled materials',
-              hint: {
-                text: 'Materials with a recycled content of more than 40%'
-              }
-            },
-            {
-              key: 'sustainable-materials-A7',
-              value: 'Something else'
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'sustainable-materials-A8',
-              value: 'None of the above'
-            }
-          ],
-          yarKey: 'sustainableMaterials'
-        },
-        {
-          key: 'introducing-innovation',
-          order: 340,
-          title: 'Is your project introducing innovation?',
-          hint: {
-            html: `Collaborations, technologies or techniques that are new to your farm
-                  <p> Select all that apply</p> `
-          },
-          pageTitle: '',
-          url: 'introducing-innovation',
-          baseUrl: 'introducing-innovation',
-          backUrl: 'sustainable-materials',
-          nextUrl: 'score',
-          preValidationKeys: ['sustainableMaterials'],
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: 'RPA wants to fund projects that introduce innovation, such as:',
-                items: [
-                  'technology',
-                  'collaboration',
-                  'techniques'
-                ]
-              }]
-            }]
-          },
-          fundingPriorities: '',
-          type: 'multi-answer',
-          score: {
-            isScore: true
-          },
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select how your project is introducing innovation'
-            },
-            {
-              type: 'STANDALONE_ANSWER',
-              error: 'You cannot select that combination of options',
-              standaloneObject: {
-                questionKey: 'introducing-innovation',
-                answerKey: 'introducing-innovation-A4'
-              }
-            }
-          ],
-          answers: [
-            {
-              key: 'introducing-innovation-A1',
-              value: 'Technology',
-              hint: {
-                text: 'Machinery or equipment that is new to your funded building. For example, automated ventilation control systems, veterinary equipment.'
-              }
-            },
-            {
-              key: 'introducing-innovation-A2',
-              value: 'Collaboration',
-              hint: {
-                text: 'Collaborations that are new to your farm or build significantly on existing partnerships. For example, partnerships with educational institutions, other farms or the local community.'
-              }
-            },
-            {
-              key: 'introducing-innovation-A3',
-              value: 'Techniques',
-              hint: {
-                text: 'Techniques that improve stockperson’s skills or animal health and welfare. For example, the use of long-term analgesics for castration or disbudding.'
-              }
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'introducing-innovation-A4',
-              value: 'None of the above'
-            }
-          ],
-          yarKey: 'introducingInnovation'
-        },
-        {
           key: 'score',
           order: 350,
           title: 'Score results',
@@ -2445,7 +938,7 @@ const questionBank = {
           baseUrl: 'business-details',
           backUrl: 'score',
           nextUrl: 'applying',
-          // preValidationKeys: ['introducingInnovation'],
+          // preValidationKeys: [],
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
@@ -3399,7 +1892,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(item => ALL_URLS.push(item.url))
 
-const YAR_KEYS = ['itemsTotalValue', 'remainingCost', 'calculatedGrant', 'remainingCostSolar', 'calculatedGrantSolar', 'remainingCostCalf', 'calculatedGrantCalf', 'yesStructureEligibility', 'calfHousingCost', 'SolarPVCost', 'calculatedGrantSolarPreCap']
+const YAR_KEYS = ['itemsTotalValue', 'remainingCost', 'calculatedGrant', 'remainingCostCalf', 'calculatedGrantCalf', 'calfHousingCost']
 ALL_QUESTIONS.forEach(item => YAR_KEYS.push(item.yarKey))
 module.exports = {
   questionBank,
