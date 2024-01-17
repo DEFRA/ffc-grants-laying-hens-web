@@ -41,7 +41,7 @@ describe('All default GET routes', () => {
 	})
 
   ALL_QUESTIONS.forEach(question => {
-    // varList.consentMain = 'Hello'
+    varList.consentMain = 'Hello'
 
     it(`should load ${question.key} page successfully`, async () => {
       // for score page only
