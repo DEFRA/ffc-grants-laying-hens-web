@@ -14,7 +14,8 @@ const {
   STRUCTURE_ELIGIBLITY_REGEX,
   TWO_DP_NUMBER,
   ONLY_DIGITS_AND_DECIMAL_REGEX,
-  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER
+  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+  MIN_3_LETTERS
 } = require('../helpers/regex')
 
 const {
@@ -1334,14 +1335,14 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
-                  error: 'Address must include letters'
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
                 {
                   type: 'REGEX',
-                  regex: ADDRESS_REGEX,
-                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
-                }
+                  regex: MIN_3_LETTERS,
+                  error: 'Address must include at least 3 letters'
+                },
               ]
             },
             {
@@ -1355,14 +1356,14 @@ const questionBank = {
               validate: [
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
-                  error: 'Address must include letters'
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
                 {
                   type: 'REGEX',
-                  regex: ADDRESS_REGEX,
-                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
-                }
+                  regex: MIN_3_LETTERS,
+                  error: 'Address must include at least 3 letters'
+                },
               ]
             },
             {
@@ -1688,13 +1689,13 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
-                  error: 'Address must include letters'
-                },
-                {
-                  type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
+               {
+                  type: 'REGEX',
+                  regex:  MIN_3_LETTERS,
+                  error: 'Address must include at least 3 letters'
                 },
               ]
             },
@@ -1709,13 +1710,13 @@ const questionBank = {
               validate: [
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
-                  error: 'Address must include letters'
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
                 {
                   type: 'REGEX',
-                  regex: ADDRESS_REGEX,
-                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                  regex: MIN_3_LETTERS,
+                  error: 'Address must include at least 3 letters'
                 },
               ]
             },
