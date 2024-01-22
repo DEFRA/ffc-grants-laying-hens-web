@@ -26,7 +26,7 @@ const DECIMAL_EXCLUDE_REGEX = /^[^.]*(?!.)$/g // check
 const PROJECT_COST_REGEX = /^[1-9]\d*$/
 const STRUCTURE_ELIGIBLITY_REGEX = /^[a-zA-Z0-9,.' -]*$/
 const TWO_DP_NUMBER = /^\d+(\.?)(\d{0,2})$/
-const MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER = /^[a-zA-Z0-9][a-zA-Z0-9\s]*[a-zA-Z][a-zA-Z0-9\s]*$/
+const MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER = /^[a-zA-Z]{2}.*/
 const MIN_3_LETTERS = /^(.*[a-zA-Z]){3,}.*$/
 
 module.exports = {
