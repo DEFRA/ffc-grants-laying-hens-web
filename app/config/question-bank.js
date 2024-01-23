@@ -495,7 +495,7 @@ const questionBank = {
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-started',
-          nextUrl: 'project',
+          nextUrl: 'poultry-type',
           // preValidationKeys: ['projectStart'],
           fundingPriorities: '',
           type: 'single-answer',
@@ -540,7 +540,7 @@ const questionBank = {
           url: 'project-responsibility',
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
-          nextUrl: 'project', 
+          nextUrl: 'poultry-type', 
           // routing TBC 
           // preValidationObject: {
           //   preValidationKeys: ['tenancy'],
@@ -639,6 +639,67 @@ const questionBank = {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You will need to extend your tenancy agreement for 5 years after the final grant payment.'
           }
+        },
+        {
+          key: 'poultry-type',
+          order: 80,
+          title: 'What type of poultry is the project for?',
+          pageTitle: '',
+          url: 'poultry-type',
+          baseUrl: 'poultry-type',
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A1'],
+            urlOptions: {
+              thenUrl: 'tenancy',
+              elseUrl: 'project-responsibility'
+            }
+          },
+          nextUrl: 'project-type',
+          ineligibleContent: {
+            messageContent: 'This grant is only for laying hen or pullet projects.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'This grant is for replacing or refurbishing existing housing for laying hens or pullets.'
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what type of poultry the project is for'
+            }
+          ],
+          answers: [
+            {
+              key: 'poultry-type-A1',
+              value: 'Laying hens (over 15 weeks old)'
+            },
+            {
+              key: 'poultry-type-A2',
+              value: 'Pullets (up to and including 15 weeks old)',
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'poultry-type-A3',
+              value: 'None of the above',
+              notEligible: true
+            }
+          ],
+          yarKey: 'poultryType'
         },
         {
           key: 'project',
