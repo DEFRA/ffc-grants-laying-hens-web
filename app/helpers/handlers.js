@@ -40,7 +40,7 @@ const createModel = (data, backUrl, url) => {
 
 const formatIfVariable = (field, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-    field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName)) || 0) : getYarValue(request, additionalYarKeyName)
+    field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)) : getYarValue(request, additionalYarKeyName)
   ))
 
   return field
@@ -246,7 +246,7 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'onScorePage', false)
   }
 
-  // formatting variables block
+  // formatting variables block - needed for error validations
   if (title?.includes('{{_')) {
     currentQuestion = {
       ...currentQuestion,
@@ -254,7 +254,7 @@ const showPostPage = (currentQuestion, request, h) => {
     }
   }
 
-  if (currentQuestion?.validate[0].error.includes('{{_')) {
+  if (currentQuestion?.validate && currentQuestion.validate[0].error.includes('{{_')) {
     currentQuestion = {
       ...currentQuestion,
       validate: [
