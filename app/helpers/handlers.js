@@ -38,6 +38,17 @@ const createModel = (data, backUrl, url) => {
   }
 }
 
+const formatTitle = (question, title, request) => {
+  question = {
+    ...question,
+    title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+      title.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName)) || 0) : getYarValue(request, additionalYarKeyName)
+    ))
+  }
+  
+  return question
+}
+
 const getPage = async (question, request, h) => {
   const { url, backUrl, nextUrlObject, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
@@ -48,6 +59,10 @@ const getPage = async (question, request, h) => {
   }
   if (getYarValue(request, 'current-score') && question.order < 250) {
     return h.redirect(`${urlPrefix}/housing`)
+  }
+
+  if (title && title.includes('{{_')) {
+    question = formatTitle(question, title, request)
   }
 
   switch (url) {
@@ -169,14 +184,14 @@ const getPage = async (question, request, h) => {
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
-  if (title) {
-    question = {
-      ...question,
-      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-      ))
-    }
-  }
+  // if (title) {
+  //   question = {
+  //     ...question,
+  //     title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+  //       formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+  //     ))
+  //   }
+  // }
 
   const data = getDataFromYarValue(request, yarKey, type)
 
