@@ -3,10 +3,6 @@ const { getQuestionAnswer } = require('../helpers/utils')
 const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {
     case 'NOT_EMPTY': {
-      return (!!value)
-    }
-
-    case 'NOT_EMPTY_EXTRA': {
       if (value) {
         return true
       }
@@ -38,22 +34,22 @@ const validateAnswerField = (value, validationType, details, payload) => {
       return payload[fieldsToCampare[0]] === payload[fieldsToCampare[1]]
     }
 
-    case 'COMBINATION_ANSWER': {
-      const selectedAnswer = [value].flat()
-      const {
-        combinationObject: {
-          questionKey: combinationQuestionKey,
-          combinationAnswerKeys
-        }
-      } = details
-      const combinationanswers = combinationAnswerKeys.map(answerKey => getQuestionAnswer(combinationQuestionKey, answerKey))
+    // case 'COMBINATION_ANSWER': {
+    //   const selectedAnswer = [value].flat()
+    //   const {
+    //     combinationObject: {
+    //       questionKey: combinationQuestionKey,
+    //       combinationAnswerKeys
+    //     }
+    //   } = details
+    //   const combinationanswers = combinationAnswerKeys.map(answerKey => getQuestionAnswer(combinationQuestionKey, answerKey))
 
-      if (selectedAnswer.includes(combinationanswers[0]) && selectedAnswer.length > 1) {
-        return selectedAnswer.every((answer, index) => answer === combinationanswers[index])
-      }
+    //   if (selectedAnswer.includes(combinationanswers[0]) && selectedAnswer.length > 1) {
+    //     return selectedAnswer.every((answer, index) => answer === combinationanswers[index])
+    //   }
 
-      return true
-    }
+    //   return true
+    // }
 
     case 'REGEX': {
       const { regex } = details
@@ -70,24 +66,24 @@ const validateAnswerField = (value, validationType, details, payload) => {
       return (value >= min && value <= max)
     }
 
-    case 'MIN_ONLY': {
-      const { min } = details
-      return (value >= min)
-    }
+    // case 'MIN_ONLY': {
+    //   const { min } = details
+    //   return (value >= min)
+    // }
 
-    case 'MAX_ONLY': {
-      const { max } = details
-      return (value <= max)
-    }
+    // case 'MAX_ONLY': {
+    //   const { max } = details
+    //   return (value <= max)
+    // }
 
-    case 'ZERO_CHECK': {
-      return (value != 0)
-    }
+    // case 'ZERO_CHECK': {
+    //   return (value != 0)
+    // }
 
-    case 'MAX_SELECT': {
-      const { max } = details
-      return ([value].flat().length <= max)
-    }
+    // case 'MAX_SELECT': {
+    //   const { max } = details
+    //   return ([value].flat().length <= max)
+    // }
     default:
       return false
   }
