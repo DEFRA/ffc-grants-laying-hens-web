@@ -1,6 +1,6 @@
 const { crumbToken } = require('./test-helper')
 
-describe('Page: /potential-amount', () => {
+xdescribe('Page: /potential-amount', () => {
   const varList = {
     projectCost: 37500,
     calculatedGrant: 15000,

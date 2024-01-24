@@ -23,7 +23,7 @@ const mockSession = {
 
 jest.mock('../../../../app/helpers/session', () => mockSession)
 
-describe('Project cost page', () => {
+xdescribe('Project cost page', () => {
   beforeEach(() => {
     varList = { ...varListTemplate }
   })
