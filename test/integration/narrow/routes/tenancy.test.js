@@ -39,7 +39,7 @@ describe('Page: /tenancy', () => {
     expect(postResponse.payload).toContain('Select yes if the planned project is on land the business owns')
   })
 
-  it('user selects \'Yes\' -> store user response and redirect to /project', async () => {
+  it('user selects \'Yes\' -> store user response and redirect to /poultry-type', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
