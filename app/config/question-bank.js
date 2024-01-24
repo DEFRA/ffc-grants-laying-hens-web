@@ -495,7 +495,7 @@ const questionBank = {
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-started',
-          nextUrl: 'project',
+          nextUrl: 'poultry-type',
           // preValidationKeys: ['projectStart'],
           fundingPriorities: '',
           type: 'single-answer',
@@ -540,7 +540,7 @@ const questionBank = {
           url: 'project-responsibility',
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
-          nextUrl: 'project', 
+          nextUrl: 'poultry-type', 
           // routing TBC 
           // preValidationObject: {
           //   preValidationKeys: ['tenancy'],
@@ -641,13 +641,12 @@ const questionBank = {
           }
         },
         {
-          key: 'project',
-          order: 70,
-          title: 'What is your project?',
-          baseUrl: 'project',
-          // backUrl: 'project-responsibility',
-          nextUrl: 'project-cost',
-          url: 'project',
+          key: 'poultry-type',
+          order: 80,
+          title: 'What type of poultry is the project for?',
+          pageTitle: '',
+          url: 'poultry-type',
+          baseUrl: 'poultry-type',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A1'],
@@ -656,57 +655,115 @@ const questionBank = {
               elseUrl: 'project-responsibility'
             }
           },
-          // preValidationKeys: ['tenancy'],
+          nextUrl: 'project-type',
           ineligibleContent: {
-            messageContent: `
-                <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">This grant is for:</p>
-                      <ul>
-                        <li>building new calf housing</li>
-                        <li>upgrade existing buildings to house calves</li>
-                      </ul>
-                </div>`,
+            messageContent: 'This grant is only for laying hen or pullet projects.',
             messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you might be eligible for.'
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
             }
           },
+          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'This grant is for:',
-                items: ['building new calf housing', 'upgrade existing buildings to house calves']
+                para: 'This grant is for replacing or refurbishing existing housing for laying hens or pullets.'
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select the option that applies to you'
+              error: 'Select what type of poultry the project is for'
             }
           ],
           answers: [
             {
-              key: 'project-A1',
-              value: 'Building new calf housing'
+              key: 'poultry-type-A1',
+              text: 'Laying hens (over 15 weeks old)',
+              value: 'hen'
             },
             {
-              key: 'project-A2',
-              value: 'Upgrade existing buildings to house calves'
+              key: 'poultry-type-A2',
+              text: 'Pullets (up to and including 15 weeks old)',
+              value: 'pullet',
             },
             {
               value: 'divider'
             },
             {
-              key: 'project-A3',
-              value: 'Something else',
+              key: 'poultry-type-A3',
+              value: 'None of the above',
               notEligible: true
             }
           ],
-          yarKey: 'project'
+          yarKey: 'poultryType'
+        },
+        {
+          key: 'building-items',
+          order: 82,
+          title: `Will the {{_poultryType_}} housing have these items?`,
+          hint: {
+            html: `
+                  <p>The building must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a fixed structure with a solid concrete floor</li>
+                    <li>water-tight roof and walls</li>
+                    <li>capped roof and wall inlets and outlets</li>
+                    <li>catch trays under all chimneys and roof-mounted vents.</li>
+                  </ul>
+            </span>`
+          },
+          pageTitle: '',
+          url: 'building-items',
+          baseUrl: 'building-items',
+          backUrl: 'project-type',
+          nextUrl: 'capped-inlets',
+          // preValidationKeys: ['poultryType'],
+          ineligibleContent: {
+            messageContent: 'You cannot apply for a grant from this scheme',
+            insertText: {
+              html: `
+                  <p>The building must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a fixed structure with a solid concrete floor</li>
+                    <li>water-tight roof and walls</li>
+                    <li>capped roof and wall inlets and outlets</li>
+                    <li>catch trays under all chimneys and roof-mounted vents.</li>
+                  </ul>
+            </span>`
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have these items'
+            }
+          ],
+          answers: [
+            {
+              key: 'building-items-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'building-items-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'buildingItems'
         },
         {
           key: 'project-cost',
