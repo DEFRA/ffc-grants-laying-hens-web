@@ -186,7 +186,7 @@ const getPage = async (question, request, h) => {
       break
   }
 
-  let confirmationId = ''
+  const confirmationId = ''
   await processGA(question, request)
 
   if (question.maybeEligible) {
