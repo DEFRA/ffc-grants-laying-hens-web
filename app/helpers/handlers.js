@@ -180,7 +180,7 @@ const getPage = async (question, request, h) => {
       break
     case 'remaining-costs':
       break
-    case 'score':    
+    case 'score':
       return scorePageData(request, backUrl, url, h)
     default:
       break
