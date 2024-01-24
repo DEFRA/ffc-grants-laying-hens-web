@@ -59,7 +59,7 @@ const getPage = async (question, request, h) => {
   }
 
   // formatting variables block
-  if (title && title.includes('{{_')) {
+  if (title?.includes('{{_')) {
     question = {
       ...question,
       title: formatIfVariable(title, request)
@@ -247,7 +247,7 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   // formatting variables block
-  if (title.includes('{{_')) {
+  if (title?.includes('{{_')) {
     currentQuestion = {
       ...currentQuestion,
       title: formatIfVariable(title, request)
