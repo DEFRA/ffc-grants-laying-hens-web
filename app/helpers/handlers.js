@@ -38,6 +38,14 @@ const createModel = (data, backUrl, url) => {
   }
 }
 
+const formatIfVariable = (field, request) => {
+  field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+    field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)) : getYarValue(request, additionalYarKeyName)
+  ))
+
+  return field
+}
+
 const getPage = async (question, request, h) => {
   const { url, backUrl, nextUrlObject, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
@@ -48,6 +56,14 @@ const getPage = async (question, request, h) => {
   }
   if (getYarValue(request, 'current-score') && question.order < 250) {
     return h.redirect(`${urlPrefix}/housing`)
+  }
+
+  // formatting variables block
+  if (title?.includes('{{_')) {
+    question = {
+      ...question,
+      title: formatIfVariable(title, request)
+    }
   }
 
   switch (url) {
@@ -169,14 +185,14 @@ const getPage = async (question, request, h) => {
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
-  if (title) {
-    question = {
-      ...question,
-      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-      ))
-    }
-  }
+  // if (title) {
+  //   question = {
+  //     ...question,
+  //     title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+  //       formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+  //     ))
+  //   }
+  // }
 
   const data = getDataFromYarValue(request, yarKey, type)
 
@@ -222,12 +238,32 @@ const getPage = async (question, request, h) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, type } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, type, validate } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
 
   if (baseUrl !== 'score') {
     setYarValue(request, 'onScorePage', false)
+  }
+
+  // formatting variables block - needed for error validations
+  if (title?.includes('{{_')) {
+    currentQuestion = {
+      ...currentQuestion,
+      title: formatIfVariable(title, request)
+    }
+  }
+
+  if (currentQuestion?.validate && currentQuestion.validate[0].error.includes('{{_')) {
+    currentQuestion = {
+      ...currentQuestion,
+      validate: [
+        {
+          ...validate[0],
+          error: formatIfVariable(currentQuestion.validate[0].error, request)
+        }
+      ]
+    }
   }
 
   let thisAnswer
