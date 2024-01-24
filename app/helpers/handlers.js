@@ -246,7 +246,14 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'onScorePage', false)
   }
 
-  // page validation formatting in case of error
+  // formatting variables block
+  if (title && title.includes('{{_')) {
+    currentQuestion = {
+      ...currentQuestion,
+      title: formatIfVariable(title, request)
+    }
+  }
+
   if (currentQuestion.validate[0].error.includes('{{_')) {
     currentQuestion = {
       ...currentQuestion,
