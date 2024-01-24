@@ -8,15 +8,10 @@ const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 
 const senders = require('../messaging/senders')
-const createMsg = require('../messaging/create-msg')
-const createDesirabilityMsg = require('./../messaging/scoring/create-desirability-msg')
-const { getUserScore } = require('../messaging/application')
 
 const emailFormatting = require('./../messaging/email/process-submission')
 const gapiService = require('../services/gapi-service')
 const { startPageUrl, urlPrefix } = require('../config/server')
-
-const { tableOrder } = require('../helpers/score-table-helper')
 
 const {
   getConfirmationId,
@@ -28,7 +23,11 @@ const {
 } = require('./pageHelpers')
 const desirability = require('./../messaging/scoring/create-desirability-msg')
 
-const scoreViewTemplate = 'score'
+const { getUserScore } = require('../messaging/application')
+const { tableOrder } = require('../helpers/score-table-helper')
+const createMsg = require('../messaging/create-msg')
+const createDesirabilityMsg = require('./../messaging/scoring/create-desirability-msg')
+
 
 const createModel = (data, backUrl, url) => {
   return {
@@ -46,16 +45,126 @@ const formatIfVariable = (field, request) => {
   return field
 }
 
+const scorePageData = async (request, backUrl, url, h) => {
+  const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
+  const formatAnswersForScoring = createDesirabilityMsg(desirabilityAnswers)
+
+  try {
+    const msgData = await getUserScore(formatAnswersForScoring, request.yar.id)
+
+    setYarValue(request, 'current-score', msgData.desirability.overallRating.band) // do we need this alongside overAllScore? Having both seems redundant
+
+    // Mocked score res
+    let scoreChance
+    switch (msgData.desirability.overallRating.band.toLowerCase()) {
+      case 'strong':
+        scoreChance = 'is likely to'
+        break
+      case 'average':
+        scoreChance = 'might'
+        break
+      default:
+        scoreChance = 'is unlikely to'
+        break
+    }
+
+    setYarValue(request, 'overAllScore', msgData)
+
+    const questions = msgData.desirability.questions.map(desirabilityQuestion => {
+      if (desirabilityQuestion.key === 'environmental-impact' && getYarValue(request, 'SolarPVCost') === null) {
+        desirabilityQuestion.key = 'rainwater'
+        if (desirabilityQuestion.answers[0].input[0].value === 'None of the above') {
+          desirabilityQuestion.answers[0].input[0].value = 'No'
+        } else {
+          desirabilityQuestion.answers[0].input[0].value = 'Yes'
+        }
+      }
+
+      const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
+      desirabilityQuestion.title = tableQuestion.title
+      desirabilityQuestion.desc = tableQuestion.desc ?? ''
+      desirabilityQuestion.url = `${urlPrefix}/${tableQuestion.url}`
+      desirabilityQuestion.order = tableQuestion.order
+      desirabilityQuestion.unit = tableQuestion?.unit
+      desirabilityQuestion.pageTitle = tableQuestion.pageTitle
+      desirabilityQuestion.fundingPriorities = tableQuestion.fundingPriorities
+      return desirabilityQuestion
+    })
+
+    await gapiService.sendGAEvent(request, { name: 'score', params: { score_presented: msgData.desirability.overallRating.band } })
+    setYarValue(request, 'onScorePage', true)
+
+    return h.view('score', createModel({
+      titleText: msgData.desirability.overallRating.band,
+      scoreData: msgData,
+      questions: questions.sort((a, b) => a.order - b.order),
+      scoreChance: scoreChance
+    }, backUrl, url))
+
+  } catch (error) {
+    console.log(error)
+    await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.EXCEPTION, params: { error: error.message } })
+    return h.view('500')
+  }
+
+}
+
+const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl, backUrl, h) => {
+  let { maybeEligibleContent } = question
+  maybeEligibleContent.title = question.title
+  let consentOptionalData
+
+  if (maybeEligibleContent.reference) {
+    if (!getYarValue(request, 'consentMain')) {
+      return h.redirect(startPageUrl)
+    }
+    confirmationId = getConfirmationId(request.yar.id)
+    try {
+      const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
+      await senders.sendDesirabilitySubmitted(emailData, request.yar.id) // replace with sendDesirabilitySubmitted, and replace first param with call to function in process-submission
+      console.log('[CONFIRMATION EVENT SENT]')
+    } catch (err) {
+      console.log('ERROR: ', err)
+    }
+    maybeEligibleContent = {
+      ...maybeEligibleContent,
+      reference: {
+        ...maybeEligibleContent.reference,
+        html: maybeEligibleContent.reference.html.replace(
+          SELECT_VARIABLE_TO_REPLACE, (_ignore, _confirmatnId) => (
+            confirmationId
+          )
+        )
+      }
+    }
+    request.yar.reset()
+  }
+
+  maybeEligibleContent = {
+    ...maybeEligibleContent,
+    messageContent: maybeEligibleContent.messageContent.replace(
+      SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+      )
+    )
+  }
+
+  if (url === 'confirm') {
+    const consentOptional = getYarValue(request, 'consentOptional')
+    consentOptionalData = getConsentOptionalData(consentOptional)
+  }
+
+  const MAYBE_ELIGIBLE = { ...maybeEligibleContent, consentOptionalData, url, nextUrl, backUrl }
+  return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+}
+
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
+  const { url, backUrl, nextUrlObject, type, title, yarKey } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
   if (isRedirect) {
     return h.redirect(startPageUrl)
-  }
-  if (getYarValue(request, 'current-score') && question.order < 250) {
-    return h.redirect(`${urlPrefix}/housing`)
   }
 
   // formatting variables block
@@ -72,127 +181,17 @@ const getPage = async (question, request, h) => {
     case 'remaining-costs':
       break
     case 'score':
-      const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
-      const formatAnswersForScoring = createDesirabilityMsg(desirabilityAnswers)
-      try {
-        const msgData = await getUserScore(formatAnswersForScoring, request.yar.id)
-
-        setYarValue(request, 'current-score', msgData.desirability.overallRating.band) // do we need this alongside overAllScore? Having both seems redundant
-
-        // Mocked score res
-        let scoreChance
-        switch (msgData.desirability.overallRating.band.toLowerCase()) {
-          case 'strong':
-            scoreChance = 'is likely to'
-            break
-          case 'average':
-            scoreChance = 'might'
-            break
-          default:
-            scoreChance = 'is unlikely to'
-            break
-        }
-
-        setYarValue(request, 'overAllScore', msgData)
-
-        const questions = msgData.desirability.questions.map(desirabilityQuestion => {
-          if (desirabilityQuestion.key === 'environmental-impact' && getYarValue(request, 'SolarPVCost') === null) {
-            desirabilityQuestion.key = 'rainwater'
-            if (desirabilityQuestion.answers[0].input[0].value === 'None of the above') {
-              desirabilityQuestion.answers[0].input[0].value = 'No'
-            } else {
-              desirabilityQuestion.answers[0].input[0].value = 'Yes'
-            }
-          }
-
-          const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
-          desirabilityQuestion.title = tableQuestion.title
-          desirabilityQuestion.desc = tableQuestion.desc ?? ''
-          desirabilityQuestion.url = `${urlPrefix}/${tableQuestion.url}`
-          desirabilityQuestion.order = tableQuestion.order
-          desirabilityQuestion.unit = tableQuestion?.unit
-          desirabilityQuestion.pageTitle = tableQuestion.pageTitle
-          desirabilityQuestion.fundingPriorities = tableQuestion.fundingPriorities
-          desirabilityQuestion.answers = desirabilityQuestion.answers
-          return desirabilityQuestion
-        })
-
-        await gapiService.sendGAEvent(request, { name: 'score', params: { score_presented: msgData.desirability.overallRating.band } })
-        setYarValue(request, 'onScorePage', true)
-
-        return h.view(scoreViewTemplate, createModel({
-          titleText: msgData.desirability.overallRating.band,
-          scoreData: msgData,
-          questions: questions.sort((a, b) => a.order - b.order),
-          scoreChance: scoreChance
-        }, backUrl, url))
-      } catch (error) {
-        console.log(error)
-        await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.EXCEPTION, params: { error: error.message } })
-        return h.view('500')
-      }
+      return scorePageData(request, backUrl, url, h)
+    default:
+      break
   }
 
-  let confirmationId = ''
+  const confirmationId = ''
   await processGA(question, request)
 
   if (question.maybeEligible) {
-    let { maybeEligibleContent } = question
-    maybeEligibleContent.title = question.title
-    let consentOptionalData
-
-    if (maybeEligibleContent.reference) {
-      if (!getYarValue(request, 'consentMain')) {
-        return h.redirect(startPageUrl)
-      }
-      confirmationId = getConfirmationId(request.yar.id)
-      try {
-        const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
-        await senders.sendDesirabilitySubmitted(emailData, request.yar.id) // replace with sendDesirabilitySubmitted, and replace first param with call to function in process-submission
-        console.log('[CONFIRMATION EVENT SENT]')
-      } catch (err) {
-        console.log('ERROR: ', err)
-      }
-      maybeEligibleContent = {
-        ...maybeEligibleContent,
-        reference: {
-          ...maybeEligibleContent.reference,
-          html: maybeEligibleContent.reference.html.replace(
-            SELECT_VARIABLE_TO_REPLACE, (_ignore, _confirmatnId) => (
-              confirmationId
-            )
-          )
-        }
-      }
-      request.yar.reset()
-    }
-
-    maybeEligibleContent = {
-      ...maybeEligibleContent,
-      messageContent: maybeEligibleContent.messageContent.replace(
-        SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-          formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-        )
-      )
-    }
-
-    if (url === 'confirm') {
-      const consentOptional = getYarValue(request, 'consentOptional')
-      consentOptionalData = getConsentOptionalData(consentOptional)
-    }
-
-    const MAYBE_ELIGIBLE = { ...maybeEligibleContent, consentOptionalData, url, nextUrl, backUrl }
-    return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+    return maybeEligibleGet(request, confirmationId, question, url, nextUrl, backUrl, h)
   }
-
-  // if (title) {
-  //   question = {
-  //     ...question,
-  //     title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-  //       formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-  //     ))
-  //   }
-  // }
 
   const data = getDataFromYarValue(request, yarKey, type)
 
@@ -303,15 +302,6 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, yarKey, dataObject)
   }
 
-  // if (title) {
-  //   currentQuestion = {
-  //     ...currentQuestion,
-  //     title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-  //       formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-  //     ))
-  //   }
-  // }
-
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     return errors
@@ -319,50 +309,12 @@ const showPostPage = (currentQuestion, request, h) => {
 
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
-    // if (thisAnswer?.alsoMaybeEligible) {
-    //   const {
-    //     dependentQuestionKey,
-    //     dependentQuestionYarKey,
-    //     uniqueAnswer,
-    //     notUniqueAnswer,
-    //     maybeEligibleContent
-    //   } = thisAnswer.alsoMaybeEligible
-
-    //   const prevAnswer = getYarValue(request, dependentQuestionYarKey)
-
-    //   const dependentQuestion = ALL_QUESTIONS.find(thisQuestion => (
-    //     thisQuestion.key === dependentQuestionKey &&
-    //     thisQuestion.yarKey === dependentQuestionYarKey
-    //   ))
-
-    //   let dependentAnswer
-    //   let openMaybeEligible
-
-    //   if (notUniqueAnswer) {
-    //     dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === notUniqueAnswer)).value
-    //     openMaybeEligible = notUniqueSelection(prevAnswer, dependentAnswer)
-    //   } else if (uniqueAnswer) {
-    //     dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === uniqueAnswer)).value
-    //     openMaybeEligible = uniqueSelection(prevAnswer, dependentAnswer)
-    //   }
-
-    //   if (openMaybeEligible) {
-    //     maybeEligibleContent.title = currentQuestion.title
-    //     const { url } = currentQuestion
-    //     const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, backUrl: baseUrl }
-    //     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
-    //   }
-    // }
     gapiService.sendGAEvent(request, { name: gapiService.eventTypes.ELIMINATION, params: {} })
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 
-  switch (baseUrl) {
-    case 'project-cost':
-      if (payload[Object.keys(payload)[0]] > 1250000) {
-        return h.redirect('/laying-hens/potential-amount-capped')
-      }
-      break
+  if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
+    return h.redirect('/laying-hens/potential-amount-capped')
   }
 
   if (thisAnswer?.redirectUrl) {
