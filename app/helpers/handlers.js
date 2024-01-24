@@ -189,15 +189,6 @@ const getPage = async (question, request, h) => {
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
-  // if (title) {
-  //   question = {
-  //     ...question,
-  //     title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-  //       formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-  //     ))
-  //   }
-  // }
-
   const data = getDataFromYarValue(request, yarKey, type)
 
   let conditionalHtml
@@ -307,15 +298,6 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, yarKey, dataObject)
   }
 
-  // if (title) {
-  //   currentQuestion = {
-  //     ...currentQuestion,
-  //     title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-  //       formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-  //     ))
-  //   }
-  // }
-
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     return errors
@@ -323,50 +305,12 @@ const showPostPage = (currentQuestion, request, h) => {
 
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
-    // if (thisAnswer?.alsoMaybeEligible) {
-    //   const {
-    //     dependentQuestionKey,
-    //     dependentQuestionYarKey,
-    //     uniqueAnswer,
-    //     notUniqueAnswer,
-    //     maybeEligibleContent
-    //   } = thisAnswer.alsoMaybeEligible
-
-    //   const prevAnswer = getYarValue(request, dependentQuestionYarKey)
-
-    //   const dependentQuestion = ALL_QUESTIONS.find(thisQuestion => (
-    //     thisQuestion.key === dependentQuestionKey &&
-    //     thisQuestion.yarKey === dependentQuestionYarKey
-    //   ))
-
-    //   let dependentAnswer
-    //   let openMaybeEligible
-
-    //   if (notUniqueAnswer) {
-    //     dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === notUniqueAnswer)).value
-    //     openMaybeEligible = notUniqueSelection(prevAnswer, dependentAnswer)
-    //   } else if (uniqueAnswer) {
-    //     dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === uniqueAnswer)).value
-    //     openMaybeEligible = uniqueSelection(prevAnswer, dependentAnswer)
-    //   }
-
-    //   if (openMaybeEligible) {
-    //     maybeEligibleContent.title = currentQuestion.title
-    //     const { url } = currentQuestion
-    //     const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, backUrl: baseUrl }
-    //     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
-    //   }
-    // }
     gapiService.sendGAEvent(request, { name: gapiService.eventTypes.ELIMINATION, params: {} })
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 
-  switch (baseUrl) {
-    case 'project-cost':
-      if (payload[Object.keys(payload)[0]] > 1250000) {
-        return h.redirect('/laying-hens/potential-amount-capped')
-      }
-      break
+  if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
+    return h.redirect('/laying-hens/potential-amount-capped')
   }
 
   if (thisAnswer?.redirectUrl) {
