@@ -46,7 +46,7 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
   return h.view('page', modelWithErrors)
 }
 
-const validateFunction = (validate, isconditionalAnswer, payload, yarKey, errorHrefList, placeholderInputError) => { 
+const validateFunction = (validate, isconditionalAnswer, payload, yarKey, errorHrefList, placeholderInputError) => {
 
   if (validate) {
     placeholderInputError = checkInputError(validate, isconditionalAnswer, payload, yarKey)
@@ -75,17 +75,6 @@ const checkErrors = (payload, currentQuestion, h, request) => {
       ({ yarKey: inputYarKey, validate: inputValidate, answers: inputAnswers }) => {
         isconditionalAnswer = inputAnswers?.find(answer => answer.conditional)?.value === payload[inputYarKey]
 
-        // if (inputValidate) {
-        //   placeholderInputError = checkInputError(inputValidate, isconditionalAnswer, payload, inputYarKey)
-
-        //   if (placeholderInputError) {
-        //     errorHrefList.push({
-        //       text: placeholderInputError.error,
-        //       href: `#${placeholderInputError.dependentKey ?? inputYarKey}`
-        //     })
-        //   }
-        // }
-
         errorHrefList = validateFunction(inputValidate, isconditionalAnswer, payload, inputYarKey, errorHrefList, placeholderInputError)
       }
     )
@@ -107,16 +96,6 @@ const checkErrors = (payload, currentQuestion, h, request) => {
 
   const payloadValue = typeof payload[yarKey] === 'string' ? payload[yarKey].trim() : payload[yarKey]
   isconditionalAnswer = payload[yarKey]?.includes(conditionalAnswer?.value)
-  // if (validate) {
-  //   placeholderInputError = checkInputError(validate, isconditionalAnswer, payload, yarKey)
-
-  //   if (placeholderInputError) {
-  //     errorHrefList.push({
-  //       text: placeholderInputError.error,
-  //       href: `#${placeholderInputError.dependentKey ?? yarKey}`
-  //     })
-  //   }
-  // }
 
   errorHrefList = validateFunction(validate, isconditionalAnswer, payload, yarKey, errorHrefList, placeholderInputError)
 
