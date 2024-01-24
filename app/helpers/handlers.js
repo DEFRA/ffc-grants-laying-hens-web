@@ -247,14 +247,14 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   // formatting variables block
-  if (title && title.includes('{{_')) {
+  if (title.includes('{{_')) {
     currentQuestion = {
       ...currentQuestion,
       title: formatIfVariable(title, request)
     }
   }
 
-  if (currentQuestion.validate[0].error.includes('{{_')) {
+  if (currentQuestion?.validate[0].error.includes('{{_')) {
     currentQuestion = {
       ...currentQuestion,
       validate: [
