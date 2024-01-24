@@ -779,128 +779,128 @@ const questionBank = {
           ],
           yarKey: 'buildingItems'
         },
-        // {
-        //   key: 'project-cost',
-        //   order: 220,
-        //   pageTitle: '',
-        //   classes: 'govuk-input--width-10',
-        //   url: 'project-cost',
-        //   baseUrl: 'project-cost',
-        //   backUrl: 'project-type',
-        //   // backUrlObject: {
-        //   //   dependentQuestionYarKey: 'heritageSite',
-        //   //   dependentAnswerKeysArray: ['heritage-site-A2'],
-        //   //   urlOptions: {
-        //   //     thenUrl: 'heritage-site',
-        //   //     elseUrl: 'solar-PV-system',
-        //   //     nonDependentUrl: 'solar-PV-system'
-        //   //   }
-        //   // },
-        //   nextUrl: 'potential-amount',
-        //   fundingPriorities: '',
-        //   // preValidationKeys: [],
-        //   grantInfo: {
-        //     minGrant: MIN_GRANT,
-        //     maxGrant: MAX_GRANT,
-        //     grantPercentage: GRANT_PERCENTAGE,
-        //     cappedGrant: true
-        //   },
-        //   type: 'input',
-        //   prefix: {
-        //     text: '£'
-        //   },
-        //   label: {
-        //     text: 'What is the total estimated cost of the calf housing?',
-        //     classes: 'govuk-label--l',
-        //     isPageHeading: true
-        //   },
-        //   hint: {
-        //     html: `
-        //           <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £15,000 (40% of £37,500). The maximum grant is £500,000.<p/>
-        //           <p>Do not include VAT<p/>
-        //           <p>Enter amount, for example 95,000<p/>
-        //       `
-        //   },
-        //   validate: [
-        //     {
-        //       type: 'NOT_EMPTY',
-        //       error: 'Enter the estimated total cost for the items'
-        //     },
-        //     {
-        //       type: 'REGEX',
-        //       regex: PROJECT_COST_REGEX,
-        //       error: 'Enter a whole number with a maximum of 7 digits'
-        //     },
-        //     {
-        //       type: 'MIN_MAX_CHARS',
-        //       min: 1,
-        //       max: 7,
-        //       error: 'Enter a whole number with a maximum of 7 digits'
-        //     }
-        //   ],
-        //   ineligibleContent: {
-        //     messageContent: 'The minimum grant you can apply for the calf housing costs is £15,000 (40% of £37,500). The maximum grant is £500,000.',
-        //     messageLink: {
-        //       url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-        //       title: 'See other grants you may be eligible for.'
-        //     }
-        //   },
-        //   answers: [],
-        //   yarKey: 'projectCost'
-        // },
-        // {
-        //   key: 'potential-amount',
-        //   order: 230,
-        //   url: 'potential-amount',
-        //   baseUrl: 'potential-amount',
-        //   backUrl: 'project-cost',
-        //   nextUrl: 'remaining-costs',
-        //   // preValidationKeys: ['projectCost'],
-        //   maybeEligible: true,
-        //   maybeEligibleContent: {
-        //     messageHeader: 'Potential grant funding',
-        //     messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
-        //     warning: {
-        //       text: 'There’s no guarantee the project will receive a grant.'
-        //     }
-        //   }
-        // },
-        // {
-        //   key: 'potential-amount-conditional',
-        //   order: 232,
-        //   url: 'potential-amount-conditional',
-        //   baseUrl: 'potential-amount-conditional',
-        //   backUrl: 'project-cost-solar',
-        //   nextUrl: 'remaining-costs',
-        //   preValidationKeys: ['projectCost'],
-        //   maybeEligible: true,
-        //   maybeEligibleContent: {
-        //     messageHeader: 'Potential grant funding',
-        //     messageContent: 'You have requested the maximum grant amount of £500,000 for calf housing.',
-        //     warning: {
-        //       text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
-        //     },
-        //     extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.'
-        //   }
-        // },
-        // {
-        //   key: 'potential-amount-capped',
-        //   order: 231,
-        //   url: 'potential-amount-capped',
-        //   baseUrl: 'potential-amount-capped',
-        //   backUrl: 'project-cost',
-        //   nextUrl: 'remaining-costs',
-        //   // preValidationKeys: ['projectCost'],
-        //   maybeEligible: true,
-        //   maybeEligibleContent: {
-        //     messageHeader: 'Potential grant funding',
-        //     messageContent: `The maximum grant you can apply for is £500,000.
-        //     You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
-        //     warning: {
-        //       text: 'There’s no guarantee the project will receive a grant.'
-        //     }
-        //   }
-        // },
+        {
+          key: 'project-cost',
+          order: 220,
+          pageTitle: '',
+          classes: 'govuk-input--width-10',
+          url: 'project-cost',
+          baseUrl: 'project-cost',
+          backUrl: 'project-type',
+          // backUrlObject: {
+          //   dependentQuestionYarKey: 'heritageSite',
+          //   dependentAnswerKeysArray: ['heritage-site-A2'],
+          //   urlOptions: {
+          //     thenUrl: 'heritage-site',
+          //     elseUrl: 'solar-PV-system',
+          //     nonDependentUrl: 'solar-PV-system'
+          //   }
+          // },
+          nextUrl: 'potential-amount',
+          fundingPriorities: '',
+          // preValidationKeys: [],
+          grantInfo: {
+            minGrant: MIN_GRANT,
+            maxGrant: MAX_GRANT,
+            grantPercentage: GRANT_PERCENTAGE,
+            cappedGrant: true
+          },
+          type: 'input',
+          prefix: {
+            text: '£'
+          },
+          label: {
+            text: 'What is the total estimated cost of the calf housing?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £15,000 (40% of £37,500). The maximum grant is £500,000.<p/>
+                  <p>Do not include VAT<p/>
+                  <p>Enter amount, for example 95,000<p/>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the estimated total cost for the items'
+            },
+            {
+              type: 'REGEX',
+              regex: PROJECT_COST_REGEX,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'MIN_MAX_CHARS',
+              min: 1,
+              max: 7,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            }
+          ],
+          ineligibleContent: {
+            messageContent: 'The minimum grant you can apply for the calf housing costs is £15,000 (40% of £37,500). The maximum grant is £500,000.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          answers: [],
+          yarKey: 'projectCost'
+        },
+        {
+          key: 'potential-amount',
+          order: 230,
+          url: 'potential-amount',
+          baseUrl: 'potential-amount',
+          backUrl: 'project-cost',
+          nextUrl: 'remaining-costs',
+          // preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
+        {
+          key: 'potential-amount-conditional',
+          order: 232,
+          url: 'potential-amount-conditional',
+          baseUrl: 'potential-amount-conditional',
+          backUrl: 'project-cost-solar',
+          nextUrl: 'remaining-costs',
+          preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You have requested the maximum grant amount of £500,000 for calf housing.',
+            warning: {
+              text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
+            },
+            extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.'
+          }
+        },
+        {
+          key: 'potential-amount-capped',
+          order: 231,
+          url: 'potential-amount-capped',
+          baseUrl: 'potential-amount-capped',
+          backUrl: 'project-cost',
+          nextUrl: 'remaining-costs',
+          // preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: `The maximum grant you can apply for is £500,000.
+            You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
         {
           key: 'remaining-costs',
           order: 240,
