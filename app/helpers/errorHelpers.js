@@ -3,14 +3,15 @@ const { getQuestionAnswer } = require('../helpers/utils')
 const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {
     case 'NOT_EMPTY': {
-      if (value) {
-        return true
+      const { extraFieldsToCheck } = details
+
+      if (extraFieldsToCheck && !value) {
+        return extraFieldsToCheck.some(extraField => (
+          !!payload[extraField]
+        ))
       }
 
-      const { extraFieldsToCheck } = details
-      return extraFieldsToCheck.some(extraField => (
-        !!payload[extraField]
-      ))
+      return !!value
     }
 
     case 'STANDALONE_ANSWER': {
