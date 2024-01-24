@@ -4,18 +4,21 @@ const { getYarValue } = require('../helpers/session')
 
 const { validateAnswerField, checkInputError } = require('../helpers/errorHelpers')
 
+// Fix sonarcloud complaint by making this type a constant
+const multi = 'multi-input'
+
 const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
   const { yarKey, type, conditionalKey, conditionalLabelData } = currentQuestion
   let conditionalHtml
 
   if (conditionalKey) {
     const conditionalFieldError = errorList.find(thisErrorHref => thisErrorHref.href.includes(conditionalKey))?.text
-    const conditionalFieldValue = (type === 'multi-input') ? getYarValue(request, yarKey)[conditionalKey] : getYarValue(request, conditionalKey)
+    const conditionalFieldValue = (type === multi) ? getYarValue(request, yarKey)[conditionalKey] : getYarValue(request, conditionalKey)
     conditionalHtml = getHtml(conditionalKey, conditionalLabelData, conditionalFieldValue, conditionalFieldError)
   }
   const baseModel = getModel(value, currentQuestion, request, conditionalHtml)
 
-  if (type === 'multi-input') {
+  if (type === multi) {
     const baseModelItems = baseModel.items.map(thisItem => {
       const matchingErrorHref = errorList.find(thisErrorHref => thisErrorHref.href.includes(thisItem.id))
 
@@ -43,29 +46,47 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
   return h.view('page', modelWithErrors)
 }
 
+const validateFunction = (validate, isconditionalAnswer, payload, yarKey, errorHrefList, placeholderInputError) => { 
+
+  if (validate) {
+    placeholderInputError = checkInputError(validate, isconditionalAnswer, payload, yarKey)
+
+    if (placeholderInputError) {
+      errorHrefList.push({
+        text: placeholderInputError.error,
+        href: `#${placeholderInputError.dependentKey ?? yarKey}`
+      })
+    }
+  }
+
+  return errorHrefList
+}
+
 const checkErrors = (payload, currentQuestion, h, request) => {
   const { yarKey, answers, validate } = currentQuestion
   const conditionalAnswer = answers?.find(answer => answer.conditional)
-  const errorHrefList = []
+  let errorHrefList = []
   let isconditionalAnswer
   let placeholderInputError
-  if (currentQuestion.type === 'multi-input') {
+  if (currentQuestion.type === multi) {
     const allFields =  currentQuestion.allFields
 
     allFields.forEach(
       ({ yarKey: inputYarKey, validate: inputValidate, answers: inputAnswers }) => {
         isconditionalAnswer = inputAnswers?.find(answer => answer.conditional)?.value === payload[inputYarKey]
 
-        if (inputValidate) {
-          placeholderInputError = checkInputError(inputValidate, isconditionalAnswer, payload, inputYarKey)
+        // if (inputValidate) {
+        //   placeholderInputError = checkInputError(inputValidate, isconditionalAnswer, payload, inputYarKey)
 
-          if (placeholderInputError) {
-            errorHrefList.push({
-              text: placeholderInputError.error,
-              href: `#${placeholderInputError.dependentKey ?? inputYarKey}`
-            })
-          }
-        }
+        //   if (placeholderInputError) {
+        //     errorHrefList.push({
+        //       text: placeholderInputError.error,
+        //       href: `#${placeholderInputError.dependentKey ?? inputYarKey}`
+        //     })
+        //   }
+        // }
+
+        errorHrefList = validateFunction(inputValidate, isconditionalAnswer, payload, inputYarKey, errorHrefList, placeholderInputError)
       }
     )
 
@@ -86,16 +107,18 @@ const checkErrors = (payload, currentQuestion, h, request) => {
 
   const payloadValue = typeof payload[yarKey] === 'string' ? payload[yarKey].trim() : payload[yarKey]
   isconditionalAnswer = payload[yarKey]?.includes(conditionalAnswer?.value)
-  if (validate) {
-    placeholderInputError = checkInputError(validate, isconditionalAnswer, payload, yarKey)
+  // if (validate) {
+  //   placeholderInputError = checkInputError(validate, isconditionalAnswer, payload, yarKey)
 
-    if (placeholderInputError) {
-      errorHrefList.push({
-        text: placeholderInputError.error,
-        href: `#${placeholderInputError.dependentKey ?? yarKey}`
-      })
-    }
-  }
+  //   if (placeholderInputError) {
+  //     errorHrefList.push({
+  //       text: placeholderInputError.error,
+  //       href: `#${placeholderInputError.dependentKey ?? yarKey}`
+  //     })
+  //   }
+  // }
+
+  errorHrefList = validateFunction(validate, isconditionalAnswer, payload, yarKey, errorHrefList, placeholderInputError)
 
   if (errorHrefList.length > 0) {
     return customiseErrorText(payloadValue, currentQuestion, errorHrefList, h, request)
