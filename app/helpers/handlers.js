@@ -38,15 +38,12 @@ const createModel = (data, backUrl, url) => {
   }
 }
 
-const formatTitle = (question, title, request) => {
-  question = {
-    ...question,
-    title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-      title.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName)) || 0) : getYarValue(request, additionalYarKeyName)
-    ))
-  }
-  
-  return question
+const formatIfVariable = (field, request) => {
+  field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+    field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName)) || 0) : getYarValue(request, additionalYarKeyName)
+  ))
+
+  return field
 }
 
 const getPage = async (question, request, h) => {
@@ -61,8 +58,12 @@ const getPage = async (question, request, h) => {
     return h.redirect(`${urlPrefix}/housing`)
   }
 
+  // formatting variables block
   if (title && title.includes('{{_')) {
-    question = formatTitle(question, title, request)
+    question = {
+      ...question,
+      title: formatIfVariable(title, request)
+    }
   }
 
   switch (url) {
@@ -237,12 +238,25 @@ const getPage = async (question, request, h) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, type } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, type, validate } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
 
   if (baseUrl !== 'score') {
     setYarValue(request, 'onScorePage', false)
+  }
+
+  // page validation formatting in case of error
+  if (currentQuestion.validate[0].error.includes('{{_')) {
+    currentQuestion = {
+      ...currentQuestion,
+      validate: [
+        {
+          ...validate[0],
+          error: formatIfVariable(currentQuestion.validate[0].error, request)
+        }
+      ]
+    }
   }
 
   let thisAnswer

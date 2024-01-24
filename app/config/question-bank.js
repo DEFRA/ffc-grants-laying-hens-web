@@ -749,7 +749,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what type of poultry the project is for'
+              error: 'Select yes if the {{_poultryType_}} housing will have these items'
             }
           ],
           answers: [
