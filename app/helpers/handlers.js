@@ -8,15 +8,10 @@ const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 
 const senders = require('../messaging/senders')
-const createMsg = require('../messaging/create-msg')
-const createDesirabilityMsg = require('./../messaging/scoring/create-desirability-msg')
-const { getUserScore } = require('../messaging/application')
 
 const emailFormatting = require('./../messaging/email/process-submission')
 const gapiService = require('../services/gapi-service')
 const { startPageUrl, urlPrefix } = require('../config/server')
-
-const { tableOrder } = require('../helpers/score-table-helper')
 
 const {
   getConfirmationId,
@@ -28,7 +23,11 @@ const {
 } = require('./pageHelpers')
 const desirability = require('./../messaging/scoring/create-desirability-msg')
 
-const scoreViewTemplate = 'score'
+const { getUserScore } = require('../messaging/application')
+const { tableOrder } = require('../helpers/score-table-helper')
+const createMsg = require('../messaging/create-msg')
+const createDesirabilityMsg = require('./../messaging/scoring/create-desirability-msg')
+
 
 const createModel = (data, backUrl, url) => {
   return {
@@ -46,16 +45,77 @@ const formatIfVariable = (field, request) => {
   return field
 }
 
+const scorePageData = async (request, backUrl, url, h) => {
+  const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
+  const formatAnswersForScoring = createDesirabilityMsg(desirabilityAnswers)
+
+  try {
+    const msgData = await getUserScore(formatAnswersForScoring, request.yar.id)
+
+    setYarValue(request, 'current-score', msgData.desirability.overallRating.band) // do we need this alongside overAllScore? Having both seems redundant
+
+    // Mocked score res
+    let scoreChance
+    switch (msgData.desirability.overallRating.band.toLowerCase()) {
+      case 'strong':
+        scoreChance = 'is likely to'
+        break
+      case 'average':
+        scoreChance = 'might'
+        break
+      default:
+        scoreChance = 'is unlikely to'
+        break
+    }
+
+    setYarValue(request, 'overAllScore', msgData)
+
+    const questions = msgData.desirability.questions.map(desirabilityQuestion => {
+      if (desirabilityQuestion.key === 'environmental-impact' && getYarValue(request, 'SolarPVCost') === null) {
+        desirabilityQuestion.key = 'rainwater'
+        if (desirabilityQuestion.answers[0].input[0].value === 'None of the above') {
+          desirabilityQuestion.answers[0].input[0].value = 'No'
+        } else {
+          desirabilityQuestion.answers[0].input[0].value = 'Yes'
+        }
+      }
+
+      const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
+      desirabilityQuestion.title = tableQuestion.title
+      desirabilityQuestion.desc = tableQuestion.desc ?? ''
+      desirabilityQuestion.url = `${urlPrefix}/${tableQuestion.url}`
+      desirabilityQuestion.order = tableQuestion.order
+      desirabilityQuestion.unit = tableQuestion?.unit
+      desirabilityQuestion.pageTitle = tableQuestion.pageTitle
+      desirabilityQuestion.fundingPriorities = tableQuestion.fundingPriorities
+      return desirabilityQuestion
+    })
+
+    await gapiService.sendGAEvent(request, { name: 'score', params: { score_presented: msgData.desirability.overallRating.band } })
+    setYarValue(request, 'onScorePage', true)
+
+    return h.view('score', createModel({
+      titleText: msgData.desirability.overallRating.band,
+      scoreData: msgData,
+      questions: questions.sort((a, b) => a.order - b.order),
+      scoreChance: scoreChance
+    }, backUrl, url))
+
+  } catch (error) {
+    console.log(error)
+    await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.EXCEPTION, params: { error: error.message } })
+    return h.view('500')
+  }
+
+}
+
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
+  const { url, backUrl, nextUrlObject, type, title, yarKey } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
   if (isRedirect) {
     return h.redirect(startPageUrl)
-  }
-  if (getYarValue(request, 'current-score') && question.order < 250) {
-    return h.redirect(`${urlPrefix}/housing`)
   }
 
   // formatting variables block
@@ -71,66 +131,10 @@ const getPage = async (question, request, h) => {
       break
     case 'remaining-costs':
       break
-    case 'score':
-      const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
-      const formatAnswersForScoring = createDesirabilityMsg(desirabilityAnswers)
-      try {
-        const msgData = await getUserScore(formatAnswersForScoring, request.yar.id)
-
-        setYarValue(request, 'current-score', msgData.desirability.overallRating.band) // do we need this alongside overAllScore? Having both seems redundant
-
-        // Mocked score res
-        let scoreChance
-        switch (msgData.desirability.overallRating.band.toLowerCase()) {
-          case 'strong':
-            scoreChance = 'is likely to'
-            break
-          case 'average':
-            scoreChance = 'might'
-            break
-          default:
-            scoreChance = 'is unlikely to'
-            break
-        }
-
-        setYarValue(request, 'overAllScore', msgData)
-
-        const questions = msgData.desirability.questions.map(desirabilityQuestion => {
-          if (desirabilityQuestion.key === 'environmental-impact' && getYarValue(request, 'SolarPVCost') === null) {
-            desirabilityQuestion.key = 'rainwater'
-            if (desirabilityQuestion.answers[0].input[0].value === 'None of the above') {
-              desirabilityQuestion.answers[0].input[0].value = 'No'
-            } else {
-              desirabilityQuestion.answers[0].input[0].value = 'Yes'
-            }
-          }
-
-          const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
-          desirabilityQuestion.title = tableQuestion.title
-          desirabilityQuestion.desc = tableQuestion.desc ?? ''
-          desirabilityQuestion.url = `${urlPrefix}/${tableQuestion.url}`
-          desirabilityQuestion.order = tableQuestion.order
-          desirabilityQuestion.unit = tableQuestion?.unit
-          desirabilityQuestion.pageTitle = tableQuestion.pageTitle
-          desirabilityQuestion.fundingPriorities = tableQuestion.fundingPriorities
-          desirabilityQuestion.answers = desirabilityQuestion.answers
-          return desirabilityQuestion
-        })
-
-        await gapiService.sendGAEvent(request, { name: 'score', params: { score_presented: msgData.desirability.overallRating.band } })
-        setYarValue(request, 'onScorePage', true)
-
-        return h.view(scoreViewTemplate, createModel({
-          titleText: msgData.desirability.overallRating.band,
-          scoreData: msgData,
-          questions: questions.sort((a, b) => a.order - b.order),
-          scoreChance: scoreChance
-        }, backUrl, url))
-      } catch (error) {
-        console.log(error)
-        await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.EXCEPTION, params: { error: error.message } })
-        return h.view('500')
-      }
+    case 'score':    
+      return scorePageData(request, backUrl, url, h)
+    default:
+      break
   }
 
   let confirmationId = ''
