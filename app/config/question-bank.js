@@ -583,64 +583,6 @@ const questionBank = {
           yarKey: 'projectResponsibility'
         },
         {
-          key: 'tenancy-length',
-          order: 61,
-          title: 'Do you have a tenancy agreement for 5 years after the final grant payment?',
-          hint: {
-            text: 'The location of the calf housing'
-          },
-          pageTitle: '',
-          url: 'tenancy-length',
-          baseUrl: 'tenancy-length',
-          backUrl: 'tenancy',
-          // preValidationKeys: ['tenancy'],
-          nextUrl: 'project',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'You must own the land or have a tenancy in place for 5 years after the final grant payment.',
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the land has a tenancy agreement in place for 5 years after the final grant payment.'
-            }
-          ],
-          answers: [
-            {
-              key: 'tenancy-length-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'tenancy-length-A2',
-              value: 'No',
-              redirectUrl: 'tenancy-length-condition'
-            }
-          ],
-          yarKey: 'tenancyLength'
-        },
-        {
-          key: 'tenancy-length-condition',
-          title: 'You may be able to apply for a grant from this scheme',
-          order: 62,
-          url: 'tenancy-length-condition',
-          backUrl: 'tenancy-length',
-          // preValidationKeys: ['tenancyLength'],
-          nextUrl: 'project',
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'You will need to extend your tenancy agreement for 5 years after the final grant payment.'
-          }
-        },
-        {
           key: 'poultry-type',
           order: 80,
           title: 'What type of poultry is the project for?',
@@ -702,6 +644,78 @@ const questionBank = {
             }
           ],
           yarKey: 'poultryType'
+        },
+        {
+          key: 'project-type',
+          order: 70,
+          title: 'What is your project?',
+          url: 'project-type',
+          baseUrl: 'project-type',
+          backUrl: 'poultry-type',
+          nextUrl: 'building-items',
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">This grant is only for:</p>
+                      <ul>
+                        <li>replacing an existing housing for laying hens or pullets</li>
+                        <li>refurbishing existing housing for laying hens or pullets</li>
+                        <li>adding a veranda to existing housing</li>
+                      </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `You can apply for grant funding for either a housing project or adding a veranda only to existing housing.
+
+                The RPA will award grant funding for adding a veranda only to existinghousing on a first-come first-served basis. You do not need to complete any eligibility or scoring questions.
+
+                To apply for grant funding for housing projects, you need to complete eligibility and scoring questions.`,
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what is your project'
+            }
+          ],
+          answers: [
+            {
+              key: 'project-type-A1',
+              value: 'Replacing existing housing'
+            },
+            {
+              key: 'project-type-A2',
+              value: 'Refurbishing existing housing'
+            },
+            {
+              key: 'project-type-A3',
+              value: 'Adding a veranda only to existing housing',
+              hint: {
+                text: 'The RPA will award the grant funding for adding a veranda only to existing housing on a first-come first-served basis'
+              },
+              redirectUrl: 'business-details'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'project-type-A4',
+              value: 'None of the above',
+              notEligible: true
+            }
+          ],
+          yarKey: 'projectType'
         },
         {
           key: 'building-items',
@@ -772,7 +786,7 @@ const questionBank = {
           classes: 'govuk-input--width-10',
           url: 'project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project',
+          backUrl: 'project-type',
           // backUrlObject: {
           //   dependentQuestionYarKey: 'heritageSite',
           //   dependentAnswerKeysArray: ['heritage-site-A2'],
@@ -994,7 +1008,7 @@ const questionBank = {
           pageTitle: '',
           url: 'business-details',
           baseUrl: 'business-details',
-          backUrl: 'score',
+          backUrl: 'project-type',
           nextUrl: 'applying',
           // preValidationKeys: [],
           fundingPriorities: '',
