@@ -1008,7 +1008,7 @@ const questionBank = {
           pageTitle: '',
           url: 'business-details',
           baseUrl: 'business-details',
-          backUrl: 'score',
+          backUrl: 'project-type',
           nextUrl: 'applying',
           // preValidationKeys: [],
           fundingPriorities: '',
