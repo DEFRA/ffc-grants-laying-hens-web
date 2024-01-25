@@ -37,7 +37,7 @@ describe('Page: /capped-inlets-outlets', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('elect yes if all the roof and wall inlets and outlets will be capped')
+    expect(postResponse.payload).toContain('Select yes if all the roof and wall inlets and outlets will be capped')
   })
 
   it('user selects `Replacing existing housing` on /projectType page and eligible option `Yes` -> store user response and redirect to /replacing-insulation', async () => {
@@ -51,7 +51,7 @@ describe('Page: /capped-inlets-outlets', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/laying-hens/replacing-insulation')
+    expect(postResponse.headers.location).toBe('replacing-insulation')
   })
 
   it('user selects `Refurbishing existing housing` on /projectType page and eligible option `Yes` -> store user response and redirect to /refurbishing-insulation', async () => {
@@ -65,7 +65,7 @@ describe('Page: /capped-inlets-outlets', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/laying-hens/refurbishing-insulation')
+    expect(postResponse.headers.location).toBe('refurbishing-insulation')
   })
 
 
