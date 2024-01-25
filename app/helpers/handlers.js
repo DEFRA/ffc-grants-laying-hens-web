@@ -27,8 +27,6 @@ const { getUserScore } = require('../messaging/application')
 const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const createDesirabilityMsg = require('./../messaging/scoring/create-desirability-msg')
-const { getQuestionAnswer } = require('./utils')
-
 
 const createModel = (data, backUrl, url) => {
   return {
@@ -317,7 +315,6 @@ const showPostPage = (currentQuestion, request, h) => {
   if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount-capped')
   }
-
 
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
