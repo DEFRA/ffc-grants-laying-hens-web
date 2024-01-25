@@ -1,5 +1,9 @@
 const { getQuestionAnswer } = require('../helpers/utils')
 
+const minMaxCheck = (value, min, max) => {
+  return (value >= min && value <= max)
+}
+
 const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {
     case 'NOT_EMPTY': {
@@ -42,12 +46,12 @@ const validateAnswerField = (value, validationType, details, payload) => {
 
     case 'MIN_MAX_CHARS': {
       const { min, max } = details
-      return (value.length >= min && value.length <= max)
+      return minMaxCheck(value.length, min, max)
     }
 
     case 'MIN_MAX': {
       const { min, max } = details
-      return (value >= min && value <= max)
+      return minMaxCheck(value, min, max)
     }
 
     default:
