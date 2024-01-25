@@ -68,7 +68,7 @@ describe('Page: /building-items', () => {
     expect(postResponse.payload).toContain('Select yes if the pullet housing will have these items')
   })
 
-  it('user selects eligible option -> store user response and redirect to /capped-inlets', async () => {
+  it('user selects eligible option -> store user response and redirect to /capped-inlets-outlets', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-items`,
@@ -78,7 +78,7 @@ describe('Page: /building-items', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('capped-inlets')
+    expect(postResponse.headers.location).toBe('capped-inlets-outlets')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
