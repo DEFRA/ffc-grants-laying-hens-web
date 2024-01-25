@@ -27,6 +27,7 @@ const { getUserScore } = require('../messaging/application')
 const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const createDesirabilityMsg = require('./../messaging/scoring/create-desirability-msg')
+const { getQuestionAnswer } = require('./utils')
 
 
 const createModel = (data, backUrl, url) => {
@@ -315,6 +316,14 @@ const showPostPage = (currentQuestion, request, h) => {
 
   if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount-capped')
+  }
+
+  if(baseUrl === 'capped-inlets-outlets') {
+    if(getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A1')) {
+      return h.redirect('/laying-hens/replacing-insulation')
+    } else {
+      return h.redirect('/laying-hens/refurbishing-insulation')
+    }
   }
 
   if (thisAnswer?.redirectUrl) {
