@@ -786,7 +786,14 @@ const questionBank = {
           url: 'capped-inlets-outlets',
           baseUrl: 'capped-inlets-outlets',
           backUrl: 'building-items',
-          nextUrl: 'building-items',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation'
+            }
+          },
           ineligibleContent: {
             messageContent: 'All roof and wall inlets and outlets must be capped with mesh that has a spacing of 6 millimetres (mm) or less.',
             messageLink: {

@@ -318,13 +318,6 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.redirect('/laying-hens/potential-amount-capped')
   }
 
-  if(baseUrl === 'capped-inlets-outlets') {
-    if(getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A1')) {
-      return h.redirect('/laying-hens/replacing-insulation')
-    } else {
-      return h.redirect('/laying-hens/refurbishing-insulation')
-    }
-  }
 
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
