@@ -45,6 +45,33 @@ const formatIfVariable = (field, request) => {
   return field
 }
 
+const titleCheck = (question, title, request) => {
+  if (title?.includes('{{_')) {
+    question = {
+      ...question,
+      title: formatIfVariable(title, request)
+    }
+  }
+
+  return question
+}
+
+const validateErrorCheck = (question, validate, request) => {
+  if (question?.validate && question.validate[0].error.includes('{{_')) {
+    question = {
+      ...question,
+      validate: [
+        {
+          ...validate[0],
+          error: formatIfVariable(question.validate[0].error, request)
+        }
+      ]
+    }
+  }
+
+  return question
+}
+
 const scorePageData = async (request, backUrl, url, h) => {
   const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
   const formatAnswersForScoring = createDesirabilityMsg(desirabilityAnswers)
@@ -168,12 +195,7 @@ const getPage = async (question, request, h) => {
   }
 
   // formatting variables block
-  if (title?.includes('{{_')) {
-    question = {
-      ...question,
-      title: formatIfVariable(title, request)
-    }
-  }
+  question = titleCheck(question, title, request)
 
   switch (url) {
     case 'project-cost':
@@ -246,24 +268,8 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   // formatting variables block - needed for error validations
-  if (title?.includes('{{_')) {
-    currentQuestion = {
-      ...currentQuestion,
-      title: formatIfVariable(title, request)
-    }
-  }
-
-  if (currentQuestion?.validate && currentQuestion.validate[0].error.includes('{{_')) {
-    currentQuestion = {
-      ...currentQuestion,
-      validate: [
-        {
-          ...validate[0],
-          error: formatIfVariable(currentQuestion.validate[0].error, request)
-        }
-      ]
-    }
-  }
+  currentQuestion = titleCheck(currentQuestion, title, request)
+  currentQuestion = validateErrorCheck(currentQuestion, validate, request)
 
   let thisAnswer
   let dataObject
