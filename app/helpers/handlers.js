@@ -6,7 +6,6 @@ const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
-
 const senders = require('../messaging/senders')
 
 const emailFormatting = require('./../messaging/email/process-submission')
@@ -27,7 +26,6 @@ const { getUserScore } = require('../messaging/application')
 const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const createDesirabilityMsg = require('./../messaging/scoring/create-desirability-msg')
-
 
 const createModel = (data, backUrl, url) => {
   return {
@@ -50,6 +48,27 @@ const titleCheck = (question, title, request) => {
     question = {
       ...question,
       title: insertYarValue(title, request)
+    }
+  }
+
+  return question
+}
+
+const sidebarCheck = (question, request) => {
+  if (question.sidebar?.values[0]?.content[0]?.para.includes('{{_')) {
+    question = {
+      ...question,
+      sidebar: {
+        values: [
+          {
+            ...question.sidebar.values[0],
+            content: [{
+              para: insertYarValue(question.sidebar.values[0].content[0].para, request)
+            }
+            ]
+          }
+        ]
+      }
     }
   }
 
@@ -196,6 +215,7 @@ const getPage = async (question, request, h) => {
 
   // formatting variables block
   question = titleCheck(question, title, request)
+  question = sidebarCheck(question, request)
 
   switch (url) {
     case 'project-cost':
@@ -245,7 +265,6 @@ const getPage = async (question, request, h) => {
       }
     }
     // case 'score':
-
     case 'business-details':
     case 'agent-details':
     case 'applicant-details': {
@@ -270,6 +289,7 @@ const showPostPage = (currentQuestion, request, h) => {
   // formatting variables block - needed for error validations
   currentQuestion = titleCheck(currentQuestion, title, request)
   currentQuestion = validateErrorCheck(currentQuestion, validate, request)
+  currentQuestion = sidebarCheck(currentQuestion, request)
 
   let thisAnswer
   let dataObject
@@ -313,7 +333,6 @@ const showPostPage = (currentQuestion, request, h) => {
     return errors
   }
 
-
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request, { name: gapiService.eventTypes.ELIMINATION, params: {} })
     return h.view('not-eligible', NOT_ELIGIBLE)
@@ -356,5 +375,6 @@ const processGA = async (question, request) => {
 module.exports = {
   getHandler,
   getPostHandler,
+  insertYarValue,
   createModel
 }

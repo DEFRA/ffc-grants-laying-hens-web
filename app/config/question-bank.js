@@ -720,7 +720,7 @@ const questionBank = {
         {
           key: 'building-items',
           order: 82,
-          title: `Will the {{_poultryType_}} housing have these items?`,
+          title: 'Will the {{_poultryType_}} housing have these items?',
           hint: {
             html: `
                   <p>The building must have:</p>
@@ -736,7 +736,7 @@ const questionBank = {
           url: 'building-items',
           baseUrl: 'building-items',
           backUrl: 'project-type',
-          nextUrl: 'capped-inlets',
+          nextUrl: 'capped-inlets-outlets',
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant from this scheme',
@@ -778,6 +778,260 @@ const questionBank = {
             }
           ],
           yarKey: 'buildingItems'
+        },
+        {
+          key: 'capped-inlets-outlets',
+          order: 71,
+          title: 'Will all roof and wall inlets and outlets be capped with mesh that has a spacing of 6 millimetres (mm) or less?',
+          url: 'capped-inlets-outlets',
+          baseUrl: 'capped-inlets-outlets',
+          backUrl: 'building-items',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation'
+            }
+          },
+          ineligibleContent: {
+            messageContent: 'All roof and wall inlets and outlets must be capped with mesh that has a spacing of 6 millimetres (mm) or less.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The housing must have roof and wall inlets and outlets that are capped with mesh that has a spacing (aperture) of 6mm or less.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if all the roof and wall inlets and outlets will be capped'
+            }
+          ],
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          answers: [
+            {
+              key: 'capped-inlets-outlets-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'capped-inlets-outlets-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'cappedInletsOutlets'
+        },
+        {
+          key: 'changing-area',
+          order: 92,
+          title: 'Will the {{_poultryType_}} housing have a biosecure changing area at each external pedestrian access point?',
+          hint: {
+            html: `
+              <span>
+                <p>The building must have a biosecure changing area at each external pedestrian point with:</p>
+                <ul class="govuk-list--bullet">
+                  <li>changing facilities, divided by a floor-mounted physical barrier into a clean area and a dirty area</li>
+                  <li>in the dirty area, handwashing facilities and storage for clothes and boots that you use outside of the housing</li>
+                  <li>in the clean area, a footbath and storage for clothes and boots that you use inside of the shed</li>
+                </ul>
+            </span>`
+          },
+          pageTitle: '',
+          url: 'changing-area',
+          baseUrl: 'changing-area',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation'
+              // nonDependentUrl: 'solar-PV-system'
+            }
+          },
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'egg-store-access',
+              elseUrl: 'vaccination-lobby'
+            }
+          },
+          // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The {{_poultryType_}} housing must have an effective hygiene barrier.
+
+                If you're refurbishing an existing building and have limited internal space, you can add a shed onto the main entrance as a biosecure changing area.`,
+                items: []
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `
+              <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">
+                  The housing must have a biosecure changing area 
+                  at each external pedestrian point with:
+                </p>
+                <ul>
+                  <li>changing facilities, divided by a floor-mounted 
+                  physical barrier into a clean area and a dirty area</li>
+                  <li>in the dirty area, handwashing facilities and storage 
+                  for clothes and boots that you use outside of the 
+                  housing </li>
+                  <li>in the clean area, a footbath and storage for 
+                  clothes and boots that you use inside of the shed.</li>
+                  </ul>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have a biosecure changing area'
+            }
+          ],
+          answers: [
+            {
+              key: 'changing-area-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'changing-area-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'changingArea'
+        },
+        {
+          key: 'egg-store-access',
+          order: 94,
+          title: 'Will there be direct external access to the egg store separate to the entrance lobby?',
+          pageTitle: '',
+          url: 'egg-store-access',
+          baseUrl: 'egg-store-access',
+          backUrl: 'changing-area',
+          nextUrl: 'aviary-system',
+          // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You must be able to remove eggs and deliver empty egg trays to and from the building\'s egg store without going into the building\'s entrance lobby or connected changing area.',
+                items: []
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `
+                <p class="govuk-body">
+                You must be able to remove eggs and deliver empty egg trays to and from the hen housing's egg store without going into the entrance lobby or connected changing area.
+                </p>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if there will be direct external access to the egg store separate to the entrance lobby'
+            }
+          ],
+          answers: [
+            {
+              key: 'egg-store-access-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'egg-store-access-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'eggStoreAccess'
+        },
+        {
+          key: 'aviary-system',
+          order: 96,
+          title: 'Will the housing have a laying hen aviary system?',
+          pageTitle: '',
+          url: 'aviary-system',
+          baseUrl: 'aviary-system',
+          backUrl: 'egg-store-access',
+          nextUrl: 'aviary-welfare',
+          // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The housing must have a laying hen aviary system.This cannot be a combi-cage aviary system.',
+                items: []
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `
+                <p class="govuk-body">
+                The hen housing must have a laying hen aviary system.
+                </p>`,
+            insertText: {
+              html: '<p>You must not install a combi-cage system in your grant-funded housing.</p>'
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          warning: {
+            text: 'You must not install a combi-cage system in your grant-funded housing.'
+          },
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the housing will have a laying hen aviary system'
+            }
+          ],
+          answers: [
+            {
+              key: 'aviary-system-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'aviary-system-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'aviarySystem'
         },
         {
           key: 'project-cost',
@@ -1763,7 +2017,7 @@ const questionBank = {
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
-               {
+                {
                   type: 'REGEX',
                   regex:  MIN_3_LETTERS,
                   error: 'Address must include at least 3 letters'
