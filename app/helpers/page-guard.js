@@ -48,19 +48,20 @@ function guardPage (request, guardData) {
         // check for all keys (that every key and value pair exists)
 
         preValidationList.forEach(preValidation => {
-          if (preValidation?.values?.filter((answer) => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length === 0) {
+          if (preValidation?.values?.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length === 0) {
             result = true
           }
         })
         break
+
       case 'OR':
 
         preValidationList.forEach(preValidation => {
-          if (preValidation.values.filter((answer) => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0) {
+          if (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0) {
             inverseResult = false
           }
         })
-        
+
         result = inverseResult
         break
 
@@ -68,15 +69,17 @@ function guardPage (request, guardData) {
         // check if answer exists in list (if key and value pair contains needed answer)
         preValidationList.forEach(preValidation => {
 
-          if ((!getYarValue(request, preValidation.key)) || (preValidation.values.filter((answer) => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0)){
+          if (
+            (!getYarValue(request, preValidation.key)) || 
+            (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0)){
             result = true
           }
         })
         break
-      
+
       default:
         break
-        
+
     }
   }
   
