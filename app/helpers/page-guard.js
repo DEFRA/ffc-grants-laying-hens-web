@@ -15,7 +15,10 @@ function guardPage (request, guardData) {
   const serviceDecommissioned = expiringToday || dateExpired
   const isServiceDecommissioned = (request.url.pathname !== startPageUrl && currentUrl !== 'login' && serviceDecommissioned)
 
-  if (isServiceDecommissioned) return isServiceDecommissioned
+  if (isServiceDecommissioned) { 
+    return isServiceDecommissioned 
+  }
+
   if (guardData) {
 
     if (Array.isArray(guardData)) {
@@ -69,6 +72,9 @@ function guardPage (request, guardData) {
             result = true
           }
         })
+        break
+      
+      default:
         break
         
     }
