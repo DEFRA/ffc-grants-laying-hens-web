@@ -1,17 +1,7 @@
 const { getUrl } = require('../helpers/urls')
 const { getOptions } = require('../helpers/answer-options')
-const { getYarValue, setYarValue } = require('../helpers/session')
+const { getYarValue } = require('../helpers/session')
 const { getQuestionByKey, allAnswersSelected } = require('../helpers/utils')
-
-// const getPrefixSufixString = (prefixSufix, selectedValueOfLinkedQuestion) => {
-//   if (prefixSufix.linkedPrefix || prefixSufix.linkedSufix) {
-//     selectedValueOfLinkedQuestion = prefixSufix.linkedPrefix.concat(selectedValueOfLinkedQuestion)
-//   }
-//   if (prefixSufix.linkedSufix) {
-//     selectedValueOfLinkedQuestion = selectedValueOfLinkedQuestion.concat(prefixSufix.linkedSufix)
-//   }
-//   return selectedValueOfLinkedQuestion
-// }
 
 const getDependentSideBar = (sidebar, request) => {
   const { values, dependentQuestionKeys } = sidebar
@@ -25,20 +15,6 @@ const getDependentSideBar = (sidebar, request) => {
       values[index].content[0].items = ['Not needed']
     }
 
-    if (sidebar.linkedQuestionkey && index < sidebar.linkedQuestionkey.length) {
-      const yarValueOfLinkedQuestion = getQuestionByKey(sidebar.linkedQuestionkey[index]).yarKey
-      let selectedValueOfLinkedQuestion = getYarValue(request, yarValueOfLinkedQuestion)
-
-      // if (selectedValueOfLinkedQuestion && sidebar.prefixSufix) {
-      //   selectedValueOfLinkedQuestion = getPrefixSufixString(sidebar.prefixSufix[index], selectedValueOfLinkedQuestion)
-      // }
-
-      // if (selectedValueOfLinkedQuestion && values[index].content[0].items[0] !== 'Not needed') {
-      //   values[index].content[0].items.push(selectedValueOfLinkedQuestion)
-      // } else {
-      //   setYarValue(request, 'coverSize', '')
-      // }
-    }
   })
   return {
     ...sidebar
@@ -82,9 +58,7 @@ const getModel = (data, question, request, conditionalHtml = '') => {
 
   title = title ?? label?.text
 
-  const sideBarText = (sidebar?.dependentQuestionKeys)
-    ? getDependentSideBar(sidebar, request)
-    : sidebar
+  const sideBarText = sidebar
 
   let warningDetails
   if (warningCondition) {
