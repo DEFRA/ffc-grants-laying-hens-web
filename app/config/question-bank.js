@@ -736,7 +736,7 @@ const questionBank = {
           url: 'building-items',
           baseUrl: 'building-items',
           backUrl: 'project-type',
-          nextUrl: 'capped-inlets',
+          nextUrl: 'capped-inlets-outlets',
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant from this scheme',
@@ -778,6 +778,59 @@ const questionBank = {
             }
           ],
           yarKey: 'buildingItems'
+        },
+        {
+          key: 'capped-inlets-outlets',
+          order: 71,
+          title: 'Will all roof and wall inlets and outlets be capped with mesh that has a spacing of 6 millimetres (mm) or less?',
+          url: 'capped-inlets-outlets',
+          baseUrl: 'capped-inlets-outlets',
+          backUrl: 'building-items',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation'
+            }
+          },
+          ineligibleContent: {
+            messageContent: 'All roof and wall inlets and outlets must be capped with mesh that has a spacing of 6 millimetres (mm) or less.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The housing must have roof and wall inlets and outlets that are capped with mesh that has a spacing (aperture) of 6mm or less.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if all the roof and wall inlets and outlets will be capped'
+            }
+          ],
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          answers: [
+            {
+              key: 'capped-inlets-outlets-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'capped-inlets-outlets-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'cappedInletsOutlets'
         },
         {
           key: 'project-cost',

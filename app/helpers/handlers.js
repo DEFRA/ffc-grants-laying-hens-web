@@ -28,7 +28,6 @@ const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const createDesirabilityMsg = require('./../messaging/scoring/create-desirability-msg')
 
-
 const createModel = (data, backUrl, url) => {
   return {
     backLink: backUrl,
