@@ -266,6 +266,23 @@ const showPostPage = (currentQuestion, request, h) => {
     }
   }
 
+  if (currentQuestion?.sidebar?.values[0]?.content[0]?.para.includes('{{_')) {
+    currentQuestion = {
+      ...currentQuestion,
+      sidebar: {
+        values: [
+          {
+            ...currentQuestion.sidebar.values[0],
+            content: [{
+              para: insertYarValue(currentQuestion.sidebar.values[0].content[0].para, request)
+            }
+            ]
+          }
+        ]
+      }
+    }
+  }
+
   if (currentQuestion?.validate && currentQuestion.validate[0].error.includes('{{_')) {
     currentQuestion = {
       ...currentQuestion,
