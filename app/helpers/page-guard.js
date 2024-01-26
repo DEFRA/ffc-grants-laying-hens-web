@@ -15,8 +15,8 @@ function guardPage (request, guardData) {
   const serviceDecommissioned = expiringToday || dateExpired
   const isServiceDecommissioned = (request.url.pathname !== startPageUrl && currentUrl !== 'login' && serviceDecommissioned)
 
-  if (isServiceDecommissioned) { 
-    return isServiceDecommissioned 
+  if (isServiceDecommissioned) {
+    return isServiceDecommissioned
   }
 
   if (guardData) {
@@ -70,7 +70,7 @@ function guardPage (request, guardData) {
         preValidationList.forEach(preValidation => {
 
           if (
-            (!getYarValue(request, preValidation.key)) || 
+            (!getYarValue(request, preValidation.key)) ||
             (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0)){
             result = true
           }
