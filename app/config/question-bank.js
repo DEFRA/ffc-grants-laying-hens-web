@@ -833,6 +833,101 @@ const questionBank = {
           yarKey: 'cappedInletsOutlets'
         },
         {
+          key: 'refurbishing-insulation',
+          order: 72,
+          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation?',
+          url: 'refurbishing-insulation',
+          baseUrl: 'refurbishing-insulation',
+          backUrl: 'capped-inlets-outlets',
+          nextUrl: 'changing-area',
+          ineligibleContent: {
+            messageContent: 'The housing must have full wall and roof insulation.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The {{_poultryType_}} housing must have full wall and roof insulation. ',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have full wall and roof insulation'
+            }
+          ],
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          answers: [
+            {
+              key: 'refurbishing-insulation-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'refurbishing-insulation-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'refurbishingInsulation'
+        },
+        {
+          key: 'replacing-insulation',
+          order: 73,
+          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation, with a U-Value of less than 0.3W/m2/°C?',
+          url: 'replacing-insulation',
+          baseUrl: 'replacing-insulation',
+          backUrl: 'capped-inlets-outlets',
+          nextUrl: 'changing-area',
+          ineligibleContent: {
+            messageContent: 'The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m2/°C.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The wall and roof insulation of the {{_poultryType_}} housing must have a U- Value of less than 0.3W/m2/°C.
+
+                The U-Value measures the rate of heat transfer from inside a building to outside.`,
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have full wall and roof insulation'
+            }
+          ],
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          answers: [
+            {
+              key: 'replacing-insulation-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'replacing-insulation-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'replacingInsulation'
+        },
+
+        {
           key: 'project-cost',
           order: 220,
           pageTitle: '',
