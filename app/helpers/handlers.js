@@ -37,7 +37,7 @@ const createModel = (data, backUrl, url) => {
   }
 }
 
-const formatIfVariable = (field, request) => {
+const insertYarValue = (field, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
     field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)) : getYarValue(request, additionalYarKeyName)
   ))
@@ -49,7 +49,7 @@ const titleCheck = (question, title, request) => {
   if (title?.includes('{{_')) {
     question = {
       ...question,
-      title: formatIfVariable(title, request)
+      title: insertYarValue(title, request)
     }
   }
 
@@ -63,7 +63,7 @@ const validateErrorCheck = (question, validate, request) => {
       validate: [
         {
           ...validate[0],
-          error: formatIfVariable(question.validate[0].error, request)
+          error: insertYarValue(question.validate[0].error, request)
         }
       ]
     }
