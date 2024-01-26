@@ -1,10 +1,10 @@
 const { getQuestionAnswer } = require('../helpers/utils')
 
-const minMaxCheck = (value, min, max) => 
+const minMaxCheck = (value, min, max) =>
   value >= min && value <= max
 
 
-const regexCheck = (regex, value) => 
+const regexCheck = (regex, value) =>
   !value || regex.test(value)
 
 
