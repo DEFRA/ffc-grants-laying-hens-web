@@ -6,7 +6,6 @@ const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
-
 const senders = require('../messaging/senders')
 
 const emailFormatting = require('./../messaging/email/process-submission')
@@ -36,7 +35,7 @@ const createModel = (data, backUrl, url) => {
   }
 }
 
-const formatIfVariable = (field, request) => {
+const insertYarValue = (field, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
     field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)) : getYarValue(request, additionalYarKeyName)
   ))
@@ -170,7 +169,23 @@ const getPage = async (question, request, h) => {
   if (title?.includes('{{_')) {
     question = {
       ...question,
-      title: formatIfVariable(title, request)
+      title: insertYarValue(title, request)
+    }
+  }
+  if (question.sidebar?.values[0]?.content[0]?.para.includes('{{_')) {
+    question = {
+      ...question,
+      sidebar: {
+        values: [
+          {
+            ...question.sidebar.values[0],
+            content: [{
+              para: insertYarValue(question.sidebar.values[0].content[0].para, request)
+            }
+            ]
+          }
+        ]
+      }
     }
   }
 
@@ -222,7 +237,6 @@ const getPage = async (question, request, h) => {
       }
     }
     // case 'score':
-
     case 'business-details':
     case 'agent-details':
     case 'applicant-details': {
@@ -248,7 +262,7 @@ const showPostPage = (currentQuestion, request, h) => {
   if (title?.includes('{{_')) {
     currentQuestion = {
       ...currentQuestion,
-      title: formatIfVariable(title, request)
+      title: insertYarValue(title, request)
     }
   }
 
@@ -258,7 +272,7 @@ const showPostPage = (currentQuestion, request, h) => {
       validate: [
         {
           ...validate[0],
-          error: formatIfVariable(currentQuestion.validate[0].error, request)
+          error: insertYarValue(currentQuestion.validate[0].error, request)
         }
       ]
     }
@@ -306,7 +320,6 @@ const showPostPage = (currentQuestion, request, h) => {
     return errors
   }
 
-
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request, { name: gapiService.eventTypes.ELIMINATION, params: {} })
     return h.view('not-eligible', NOT_ELIGIBLE)
@@ -349,5 +362,6 @@ const processGA = async (question, request) => {
 module.exports = {
   getHandler,
   getPostHandler,
+  insertYarValue,
   createModel
 }
