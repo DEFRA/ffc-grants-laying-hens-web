@@ -1,12 +1,12 @@
 const { getQuestionAnswer } = require('../helpers/utils')
 
-const minMaxCheck = (value, min, max) => {
-  return (value >= min && value <= max)
-}
+const minMaxCheck = (value, min, max) => 
+  value >= min && value <= max
 
-const regexCheck = (regex, value) => {
-  return (!value || regex.test(value))
-}
+
+const regexCheck = (regex, value) => 
+  !value || regex.test(value)
+
 
 const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {
