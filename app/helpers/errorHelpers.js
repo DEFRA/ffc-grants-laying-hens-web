@@ -4,6 +4,10 @@ const minMaxCheck = (value, min, max) => {
   return (value >= min && value <= max)
 }
 
+const regexCheck = (regex, value) => {
+  return (!value || regex.test(value))
+}
+
 const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {
     case 'NOT_EMPTY': {
@@ -41,7 +45,7 @@ const validateAnswerField = (value, validationType, details, payload) => {
 
     case 'REGEX': {
       const { regex } = details
-      return (!value || regex.test(value))
+      return regexCheck(regex, value)
     }
 
     case 'MIN_MAX_CHARS': {
