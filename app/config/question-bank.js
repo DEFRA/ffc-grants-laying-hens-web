@@ -1290,6 +1290,54 @@ const questionBank = {
           yarKey: 'aviaryLightingSystem'
         },
         {
+          key: 'ventilation-air-speed',
+          order: 101,
+          title: 'Will the {{_poultryType_}} housing ventilation be able to provide an air speed of 1 metre per second over birds?',
+          pageTitle: '',
+          url: 'ventilation-air-speed',
+          baseUrl: 'ventilation-air-speed',
+          backUrl: 'mechanical-ventilation',
+          // preValidationKeys: ['poultryType'],
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-ventilation-rate',
+              elseUrl: 'pullet-ventilation-rate'
+            }
+          },
+          ineligibleContent: {
+            messageContent: 'The housing ventilation must provide an air speed of 1 metre per second over birds.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+        
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing ventilation will be able to provide an air speed of 1 metre per second over birds'
+            }
+          ],
+          answers: [
+            {
+              key: 'ventilation-air-speed-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'ventilation-air-speed-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'ventilationAirSpeed'
+        },
+        {
           key: 'project-cost',
           order: 220,
           pageTitle: '',
