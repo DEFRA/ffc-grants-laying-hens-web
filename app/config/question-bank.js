@@ -729,8 +729,7 @@ const questionBank = {
                     <li>water-tight roof and walls</li>
                     <li>capped roof and wall inlets and outlets</li>
                     <li>catch trays under all chimneys and roof-mounted vents.</li>
-                  </ul>
-            </span>`
+                  </ul>`
           },
           pageTitle: '',
           url: 'building-items',
@@ -1386,6 +1385,67 @@ const questionBank = {
             }
           ],
           yarKey: 'henVentilationRate'
+        },
+        {
+          key: 'ventilation-air-quality',
+          order: 104,
+          title: 'Will the ventilation maintain the required air quality parameters?',
+          pageTitle: '',
+          url: 'ventilation-air-quality',
+          baseUrl: 'ventilation-air-quality',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-ventilation-rate',
+              elseUrl: 'pullet-ventilation-rate'
+            }
+          },
+          nextUrl: 'lighting-system',
+          ineligibleContent: {
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+            <p class="govuk-body">The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
+                  <ul>
+                    <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
+                    <li>percentage relative humidity (%rH) level of 40% to 70%</li>
+                  </ul>
+            </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+        hint: {
+          html: `
+                <p>The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
+                <ul class="govuk-list--bullet">
+                    <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
+                    <li>percentage relative humidity (%rH) level of 40% to 70%</li>
+                </ul>`
+        },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the lighting system will provide non-flicker light from dimmable LEDs'
+            }
+          ],
+          answers: [
+            {
+              key: 'ventilation-air-quality-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'ventilation-air-quality-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'ventilationAirQuality'
         },
         {
           key: 'project-cost',
