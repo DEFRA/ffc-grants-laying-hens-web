@@ -676,7 +676,7 @@ const questionBank = {
               content: [{
                 para: `You can apply for grant funding for either a housing project or adding a veranda only to existing housing.
 
-                The RPA will award grant funding for adding a veranda only to existinghousing on a first-come first-served basis. You do not need to complete any eligibility or scoring questions.
+                The RPA will award grant funding for adding a veranda only to existing housing on a first-come first-served basis. You do not need to complete any eligibility or scoring questions.
 
                 To apply for grant funding for housing projects, you need to complete eligibility and scoring questions.`,
                 items: []
@@ -1083,7 +1083,9 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The housing must have a laying hen aviary system.This cannot be a combi-cage aviary system.',
+                para: `The housing must have a laying hen aviary system. 
+                
+                This cannot be a combi-cage aviary system.`,
                 items: []
               }]
             }]
@@ -1126,6 +1128,65 @@ const questionBank = {
             }
           ],
           yarKey: 'aviarySystem'
+        },
+        {
+          key: 'aviary-welfare',
+          order: 97,
+          title: `Will the aviary system meet the manufacture's recommendation for high welfare?`,
+          pageTitle: '',
+          url: 'aviary-welfare',
+          baseUrl: 'aviary-welfare',
+          backUrl: 'aviary-system',
+          nextUrl: 'manure-removal',
+          hint: {
+            text: 'The birds must be able to move between levels without flying or jumping more than one metre in height'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The aviary system must either:',
+                items: [`have welfare ramps and platforms in positions that meet the manufacturer's recommendation for a high welfare system`,
+              'be designed for hens to move between levels without ramps and platforms']
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                <div class="govuk-body">The aviary system must either:</div>
+                      <ul>
+                        <li>have welfare ramps and platforms in positions that meet the manufacturer's recommendation for a high welfare system</li>
+                        <li>be designed for hens to move between levels without ramps and platforms.</li>
+                      </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if the aviary system will meet the recommendation for high welfare'
+            }
+          ],
+          answers: [
+            {
+              key: 'aviary-welfare-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'aviary-welfare-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'aviaryWelfare'
         },
         {
           key: 'project-cost',
