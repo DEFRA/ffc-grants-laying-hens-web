@@ -1,9 +1,6 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /manure-removal', () => {
-  const varList = {
-    poultryType: '',
-  }
 
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
