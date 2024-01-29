@@ -1338,6 +1338,56 @@ const questionBank = {
           yarKey: 'ventilationAirSpeed'
         },
         {
+          key: 'hen-ventilation-rate',
+          order: 102,
+          title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 10,800m3 per hour per 1000 hens?',
+          pageTitle: '',
+          url: 'hen-ventilation-rate',
+          baseUrl: 'hen-ventilation-rate',
+          backUrl: 'ventilation-air-speed',
+          nextUrl: 'ventilation-air-quality',
+          hint: {
+            text: 'For birds up to 2.5kg in body mass'
+          },
+          ineligibleContent: {
+            messageContent: 'The housing ventilation must have a ventilation rate of 10,800m3 per hour per 1000 hens.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The ventilation system must be able to provide a ventilation rate (MXVR) of 10,800m3 per hour per 1000 hens in the case of high heat scenarios.'
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the ventilation system will meet the ventilation rate'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-ventilation-rate-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-ventilation-rate-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'henVentilationRate'
+        },
+        {
           key: 'project-cost',
           order: 220,
           pageTitle: '',
