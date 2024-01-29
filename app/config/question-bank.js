@@ -1189,6 +1189,54 @@ const questionBank = {
           yarKey: 'aviaryWelfare'
         },
         {
+          key: 'manure-removal',
+          order: 98,
+          title: 'Will the aviary system automatically remove manure?',
+          pageTitle: '',
+          url: 'manure-removal',
+          baseUrl: 'manure-removal',
+          backUrl: 'aviary-welfare',
+          nextUrl: 'aviary-lighting-system',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'To ensure good air quality, the aviary system must have an integrated automatic manure-removal system.',
+                items: []
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The aviary system must have an integrated automatic manure-removal system to ensure good air quality.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the aviary system will automatically remove manure'
+            }
+          ],
+          answers: [
+            {
+              key: 'manure-removal-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'manure-removal-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'manureRemoval'
+        },
+        {
           key: 'project-cost',
           order: 220,
           pageTitle: '',
