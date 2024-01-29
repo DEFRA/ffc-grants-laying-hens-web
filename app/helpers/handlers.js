@@ -43,6 +43,54 @@ const insertYarValue = (field, request) => {
   return field
 }
 
+const titleCheck = (question, title, request) => {
+  if (title?.includes('{{_')) {
+    question = {
+      ...question,
+      title: insertYarValue(title, request)
+    }
+  }
+
+  return question
+}
+
+const sidebarCheck = (question, request) => {
+  if (question.sidebar?.values[0]?.content[0]?.para.includes('{{_')) {
+    question = {
+      ...question,
+      sidebar: {
+        values: [
+          {
+            ...question.sidebar.values[0],
+            content: [{
+              para: insertYarValue(question.sidebar.values[0].content[0].para, request)
+            }
+            ]
+          }
+        ]
+      }
+    }
+  }
+
+  return question
+}
+
+const validateErrorCheck = (question, validate, request) => {
+  if (question?.validate && question.validate[0].error.includes('{{_')) {
+    question = {
+      ...question,
+      validate: [
+        {
+          ...validate[0],
+          error: insertYarValue(question.validate[0].error, request)
+        }
+      ]
+    }
+  }
+
+  return question
+}
+
 const scorePageData = async (request, backUrl, url, h) => {
   const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
   const formatAnswersForScoring = createDesirabilityMsg(desirabilityAnswers)
@@ -166,28 +214,8 @@ const getPage = async (question, request, h) => {
   }
 
   // formatting variables block
-  if (title?.includes('{{_')) {
-    question = {
-      ...question,
-      title: insertYarValue(title, request)
-    }
-  }
-  if (question.sidebar?.values[0]?.content[0]?.para.includes('{{_')) {
-    question = {
-      ...question,
-      sidebar: {
-        values: [
-          {
-            ...question.sidebar.values[0],
-            content: [{
-              para: insertYarValue(question.sidebar.values[0].content[0].para, request)
-            }
-            ]
-          }
-        ]
-      }
-    }
-  }
+  question = titleCheck(question, title, request)
+  question = sidebarCheck(question, request)
 
   switch (url) {
     case 'project-cost':
@@ -259,41 +287,9 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   // formatting variables block - needed for error validations
-  if (title?.includes('{{_')) {
-    currentQuestion = {
-      ...currentQuestion,
-      title: insertYarValue(title, request)
-    }
-  }
-
-  if (currentQuestion?.sidebar?.values[0]?.content[0]?.para.includes('{{_')) {
-    currentQuestion = {
-      ...currentQuestion,
-      sidebar: {
-        values: [
-          {
-            ...currentQuestion.sidebar.values[0],
-            content: [{
-              para: insertYarValue(currentQuestion.sidebar.values[0].content[0].para, request)
-            }
-            ]
-          }
-        ]
-      }
-    }
-  }
-
-  if (currentQuestion?.validate && currentQuestion.validate[0].error.includes('{{_')) {
-    currentQuestion = {
-      ...currentQuestion,
-      validate: [
-        {
-          ...validate[0],
-          error: insertYarValue(currentQuestion.validate[0].error, request)
-        }
-      ]
-    }
-  }
+  currentQuestion = titleCheck(currentQuestion, title, request)
+  currentQuestion = validateErrorCheck(currentQuestion, validate, request)
+  currentQuestion = sidebarCheck(currentQuestion, request)
 
   let thisAnswer
   let dataObject

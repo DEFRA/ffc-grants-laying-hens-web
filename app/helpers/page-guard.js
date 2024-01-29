@@ -3,7 +3,9 @@ const { startPageUrl, serviceEndDate, serviceEndTime } = require('../config/serv
 const { getQuestionAnswer } = require('./utils')
 
 function guardPage (request, guardData) {
-  const result = false
+  let result = false
+  let inverseResult = true
+  // or result needs a specific variable because its annoying
   const currentUrl = request.url.pathname.split('/').pop()
   const today = new Date(new Date().toDateString())
   const decomissionServiceDate = new Date(serviceEndDate)
@@ -13,7 +15,10 @@ function guardPage (request, guardData) {
   const serviceDecommissioned = expiringToday || dateExpired
   const isServiceDecommissioned = (request.url.pathname !== startPageUrl && currentUrl !== 'login' && serviceDecommissioned)
 
-  if (isServiceDecommissioned) return isServiceDecommissioned
+  if (isServiceDecommissioned) {
+    return isServiceDecommissioned
+  }
+
   if (guardData) {
 
     if (Array.isArray(guardData)) {
@@ -28,8 +33,7 @@ function guardPage (request, guardData) {
         key: guardData.preValidationKeys[i],
         values: (guardData?.preValidationAnswer.filter((answer) => answer.startsWith(guardData.preValidationUrls[i]))),
         url: guardData.preValidationUrls[i]
-      }
-      )
+      })
     }
     // should format preValidations as below
     //   preValidationObject: {
@@ -42,78 +46,43 @@ function guardPage (request, guardData) {
     switch (guardData?.preValidationRule) {
       case 'AND':
         // check for all keys (that every key and value pair exists)
-        for (let i = 0; i < preValidationList.length; i++) {
-          if (preValidationList[i]?.values?.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length === 0) {
-            return true
+
+        preValidationList.forEach(preValidation => {
+          if (preValidation?.values?.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length === 0) {
+            result = true
           }
-        }
-        return false
+        })
+        break
 
       case 'OR':
-        // check for one of the keys (if any key value pair exists)
-        for (let i = 0; i < preValidationList.length; i++) {
-          if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
-            return false
+
+        preValidationList.forEach(preValidation => {
+          if (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0) {
+            inverseResult = false
           }
-        }
-        return true
+        })
+
+        result = inverseResult
+        break
 
       case 'NOT':
         // check if answer exists in list (if key and value pair contains needed answer)
-        for (let i = 0; i < preValidationList.length; i++) {
-          if (!getYarValue(request, preValidationList[i].key)){
-            return true
-          } else if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
-            return true
-          }
-        }
+        preValidationList.forEach(preValidation => {
 
-        return false
-
-        case 'SPECIFICANDANY':
-          // page guard take action if nothing has selected OR if first(spesific-checkbox) and second(any option - radiobox) preValidationAnswer not selected.
-        for (let i = 0; i < preValidationList.length; i++) {
-          if (getYarValue(request, preValidationList[i].key) === null){
-            return true
-          } else if (preValidationList[i].values.filter((answer) => getYarValue(request, preValidationList[i].key).includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0 ) {
-              if (getYarValue(request, preValidationList[i + 1].key)){
-                return false
-              }
-            } else {
-              if (getYarValue(request, preValidationList[i + 1].key) === null){
-                return false
-              }
-            }
-            return true  
+          if (
+            (!getYarValue(request, preValidation.key)) ||
+            (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0)){
+            result = true
           }
+        })
+        break
 
-          case 'NOTOR':
-            // page guard take action if nothing has selected OR if first(checkbox) OR second(radiobox) preValidationAnswer selected.
-          for (let i = 0; i < preValidationList.length; i++) {
-            if (getYarValue(request, preValidationList[i].key) === null && getYarValue(request, preValidationList[i + 1].key) === null){
-              return true
-            } else if (getYarValue(request, preValidationList[i + 1].key) === getQuestionAnswer(preValidationList[i + 1].url, preValidationList[i + 1].values[i])) {
-              return true
-            } else if (preValidationList[i].values.filter((answer) => [getYarValue(request, preValidationList[i].key)].flat().includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0) {
-                return true
-            } else {
-                return false
-            }
-          }
+      default:
+        break
 
-        case 'NOTINCLUDES':
-          // check if answer does not exist in list (if key and value pair not contains needed answer)
-          for(let i = 0; i < preValidationList.length; i++) {
-            if (!getYarValue(request, preValidationList[i].key)){
-              return true
-            } if (preValidationList[i].values.filter((answer) => !getYarValue(request, preValidationList[i].key).includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0) {
-              return true
-            }
-          }
-  
-          return false
     }
   }
+  
   return result
 }
 
