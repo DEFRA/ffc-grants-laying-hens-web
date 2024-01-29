@@ -1326,9 +1326,9 @@ const questionBank = {
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £15,000 (40% of £37,500). The maximum grant is £500,000.<p/>
-                  <p>Do not include VAT<p/>
-                  <p>Enter amount, for example 95,000<p/>
+                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £15,000 (40% of £37,500). The maximum grant is £500,000.</p>
+                  <p>Do not include VAT</p>
+                  <p>Enter amount, for example 95,000</p>
               `
           },
           validate: [
@@ -1390,7 +1390,7 @@ const questionBank = {
             warning: {
               text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
             },
-            extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.'
+            extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.</p>'
           }
         },
         {

@@ -1,7 +1,8 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /aviary-lighting-system', () => {
-
+  let varList = {}
+  
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
