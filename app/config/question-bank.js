@@ -1189,6 +1189,107 @@ const questionBank = {
           yarKey: 'aviaryWelfare'
         },
         {
+          key: 'manure-removal',
+          order: 98,
+          title: 'Will the aviary system automatically remove manure?',
+          pageTitle: '',
+          url: 'manure-removal',
+          baseUrl: 'manure-removal',
+          backUrl: 'aviary-welfare',
+          nextUrl: 'aviary-lighting-system',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'To ensure good air quality, the aviary system must have an integrated automatic manure-removal system.',
+                items: []
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The aviary system must have an integrated automatic manure-removal system to ensure good air quality.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the aviary system will automatically remove manure'
+            }
+          ],
+          answers: [
+            {
+              key: 'manure-removal-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'manure-removal-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'manureRemoval'
+        },
+        {
+          key: 'aviary-lighting-system',
+          order: 99,
+          title: 'Will the aviary system have an integrated LED lighting system?',
+          pageTitle: '',
+          url: 'aviary-lighting-system',
+          baseUrl: 'aviary-lighting-system',
+          backUrl: 'manure-removal',
+          nextUrl: 'mechanical-ventilation',
+          hint: {
+            text: 'This provides dimmable non-flicker lighting at each level of the aviary system, including top perches and under the system'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The lighting system must have:',
+                items: ['non-flicker lighting', 'zonal dimming to provide an automated dawn and dusk.']
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The aviary system must have an integrated LED lighting system.',
+            insertText: { text: 'The lighting system must have non-flicker lighting and zonal dimming to provide an automated dawn and dusk.'},
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+        
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the aviary system will have an integrated LED lighting system'
+            }
+          ],
+          answers: [
+            {
+              key: 'aviary-lighting-system-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'aviary-lighting-system-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'aviaryLightingSystem'
+        },
+        {
           key: 'project-cost',
           order: 220,
           pageTitle: '',
@@ -1225,9 +1326,9 @@ const questionBank = {
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £15,000 (40% of £37,500). The maximum grant is £500,000.<p/>
-                  <p>Do not include VAT<p/>
-                  <p>Enter amount, for example 95,000<p/>
+                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £15,000 (40% of £37,500). The maximum grant is £500,000.</p>
+                  <p>Do not include VAT</p>
+                  <p>Enter amount, for example 95,000</p>
               `
           },
           validate: [
@@ -1289,7 +1390,7 @@ const questionBank = {
             warning: {
               text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
             },
-            extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.'
+            extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.</p>'
           }
         },
         {
