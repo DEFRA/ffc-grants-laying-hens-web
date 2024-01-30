@@ -57,8 +57,8 @@ function generateExcelFilename(scheme, projectName, businessName, referenceNumbe
 
 // Formats array of businessType for C430-440
 function formatBusinessTypeC53(businessType) {
-  let returnArray = []
-  for (type in businessType) {
+  const returnArray = []
+  for (let type in businessType) {
     // set up for capitalising where necessary
     if (businessType[type] === 'Laying hens') {
       businessType[type] = 'Laying Hens'
@@ -73,12 +73,12 @@ function formatBusinessTypeC53(businessType) {
 }
 
 // formats for business type dora field (single answer accepted)
-function getBusinessTypeC53(businessTypeArray) {
-  if (businessTypeArray.includes('Farmer with Horticulture') || businessTypeArray.includes('Farmer with Arable')) {
+function getBusinessTypeC53(businessTypeArray, horticulture, beef) {
+  if (businessTypeArray.includes(horticulture) || businessTypeArray.includes('Farmer with Arable')) {
     return 'Mixed farming'
   } else if (businessTypeArray.length > 1) {
     return 'Farmer with livestock'
-  } else if (businessTypeArray[0] === 'Farmer with Beef (including calf rearing)') {
+  } else if (businessTypeArray[0] === beef) {
     return 'Beef Farmer'
   } else {
     return 'Dairy farmer'
@@ -95,6 +95,81 @@ const getPlanningPermissionDoraValue = (planningPermission) => {
     default:
       return 'Approved'
   }
+}
+
+const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore) => {
+  
+  const horticulture = 'Farmer with Horticulture'
+  const beef = 'Farmer with Beef (including calf rearing)'
+
+  return [
+    generateRow(1, 'Field Name', 'Field Value', true),
+    generateRow(2, 'FA or OA(EOI):', 'Outline Application'),
+    generateRow(40, 'Scheme', 'Farming Transformation Fund'),
+    generateRow(39, 'Sub scheme', subScheme),
+    generateRow(43, 'Theme', subTheme),
+    generateRow(90, 'Sub-Theme / Project type', submission.project),
+    generateRow(41, 'Owner', 'RD'),
+    generateRow(53, 'Business type', getBusinessTypeC53(businessTypeArray, horticulture, beef)), // design action
+    generateRow(341, 'Grant Launch Date', '07/09/2023'),
+    generateRow(23, 'Business Form Classification (Status of Applicant)', submission.legalStatus),
+    generateRow(405, 'Project Type', submission.project),
+
+    generateRow(44, 'Description of Project', projectDescriptionString),
+
+    // If chosen say yes, else be blank
+    generateRow(431, beef, businessTypeArray.includes(beef) ? 'Yes' : ''),
+    generateRow(432, 'Farmer with Dairy (including calf rearing)', businessTypeArray.includes('Farmer with Dairy (including calf rearing)') ? 'Yes' : ''),
+    generateRow(433, 'Farmer with Pigs', businessTypeArray.includes('Farmer with Pigs') ? 'Yes' : ''),
+    generateRow(434, 'Farmer with Sheep', businessTypeArray.includes('Farmer with Sheep') ? 'Yes' : ''),
+    generateRow(435, 'Farmer with Laying Hens', businessTypeArray.includes('Farmer with Laying Hens') ? 'Yes' : ''),
+    generateRow(436, 'Farmer with Meat Chickens', businessTypeArray.includes('Farmer with Meat Chickens') ? 'Yes' : ''),
+    generateRow(437, 'Farmer with Aquaculture', businessTypeArray.includes('Farmer with Aquaculture') ? 'Yes' : ''), // replace with arable and shift up
+    generateRow(439, horticulture, businessTypeArray.includes(horticulture) ? 'Yes' : ''),
+
+
+    generateRow(45, 'Location of project (postcode)', submission.farmerDetails.projectPostcode),
+    generateRow(376, 'Project Started', submission.projectStart),
+    generateRow(342, 'Land owned by Farm', submission.tenancy),
+    generateRow(343, 'Tenancy for next 5 years', submission.tenancyLength ?? ''),
+    generateRow(55, 'Total project expenditure', String(Number(submission.projectCost).toFixed(2))),
+    generateRow(57, 'Grant rate', '40'),
+    generateRow(56, 'Grant amount requested', submission.calculatedGrant),
+    generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
+    generateRow(346, 'Planning Permission Status', getPlanningPermissionDoraValue(submission.planningPermission)),
+    generateRow(366, 'Date of OA decision', ''), // confirm
+    generateRow(42, 'Project name', submission.businessDetails.projectName),
+    generateRow(4, 'Single business identifier (SBI)', submission.businessDetails.sbi || '000000000'), // sbi is '' if not set so use || instead of ??
+    generateRow(429, 'Calving System', submission.businessDetails.calvingSystem ?? ''),
+    generateRow(430, 'Number of Calves', submission.businessDetails.calvesNumber ?? ''),
+    generateRow(7, 'Business name', submission.businessDetails.businessName),
+    generateRow(367, 'Annual Turnover', submission.businessDetails.businessTurnover),
+    generateRow(22, 'Employees', submission.businessDetails.numberEmployees),
+    generateRow(20, 'Business size', calculateBusinessSize(submission.businessDetails.numberEmployees)),
+    generateRow(91, 'Are you an AGENT applying on behalf of your customer', submission.applying === 'Agent' ? 'Yes' : 'No'),
+    generateRow(5, 'Surname', submission.farmerDetails.lastName),
+    generateRow(6, 'Forename', submission.farmerDetails.firstName),
+    generateRow(8, 'Address line 1', submission.farmerDetails.address1),
+    generateRow(9, 'Address line 2', submission.farmerDetails.address2),
+    generateRow(11, 'Address line 4 (town)', submission.farmerDetails.town),
+    generateRow(12, 'Address line 5 (county)', submission.farmerDetails.county),
+    generateRow(13, 'Postcode (use capitals)', submission.farmerDetails.postcode),
+    generateRow(16, 'Landline number', submission.farmerDetails.landlineNumber ?? ''),
+    generateRow(17, 'Mobile number', submission.farmerDetails.mobileNumber ?? ''),
+    generateRow(18, 'Email', submission.farmerDetails.emailAddress),
+    generateRow(89, 'Customer Marketing Indicator: So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please indicate if you are happy for us, or a third party working for us, to contact you', submission.consentOptional ? 'Yes' : 'No'),
+    generateRow(368, 'Date ready for QC or decision', todayStr),
+    generateRow(369, 'Eligibility Reference No.', submission.confirmationId),
+    generateRow(94, 'Current location of file', 'NA Automated'),
+    generateRow(92, 'RAG rating', 'Green'),
+    generateRow(93, 'RAG date reviewed ', todayStr),
+    generateRow(54, 'Electronic OA received date ', todayStr),
+    generateRow(370, 'Status', 'Pending RPA review'),
+    generateRow(85, 'Full Application Submission Date', '30/04/2025'),
+    generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
+    generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
+    ...addAgentDetails(submission.agentsDetails)
+  ]
 }
 
 function getSpreadsheetDetails(submission, desirabilityScore) {
@@ -135,74 +210,7 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
         ...(spreadsheetConfig.protectEnabled ? { protectPassword: spreadsheetConfig.protectPassword } : {}),
         hideEmptyRows: spreadsheetConfig.hideEmptyRows,
         defaultColumnWidth: 30,
-        rows: [
-          generateRow(1, 'Field Name', 'Field Value', true),
-          generateRow(2, 'FA or OA(EOI):', 'Outline Application'),
-          generateRow(40, 'Scheme', 'Farming Transformation Fund'),
-          generateRow(39, 'Sub scheme', subScheme),
-          generateRow(43, 'Theme', subTheme),
-          generateRow(90, 'Sub-Theme / Project type', submission.project),
-          generateRow(41, 'Owner', 'RD'),
-          generateRow(53, 'Business type', getBusinessTypeC53(businessTypeArray)), // design action
-          generateRow(341, 'Grant Launch Date', '07/09/2023'),
-          generateRow(23, 'Business Form Classification (Status of Applicant)', submission.legalStatus),
-          generateRow(405, 'Project Type', submission.project),
-
-          generateRow(44, 'Description of Project', projectDescriptionString),
-
-          // If chosen say yes, else be blank
-          generateRow(431, 'Farmer with Beef (including calf rearing)', businessTypeArray.includes('Farmer with Beef (including calf rearing)') ? 'Yes' : ''),
-          generateRow(432, 'Farmer with Dairy (including calf rearing)', businessTypeArray.includes('Farmer with Dairy (including calf rearing)') ? 'Yes' : ''),
-          generateRow(433, 'Farmer with Pigs', businessTypeArray.includes('Farmer with Pigs') ? 'Yes' : ''),
-          generateRow(434, 'Farmer with Sheep', businessTypeArray.includes('Farmer with Sheep') ? 'Yes' : ''),
-          generateRow(435, 'Farmer with Laying Hens', businessTypeArray.includes('Farmer with Laying Hens') ? 'Yes' : ''),
-          generateRow(436, 'Farmer with Meat Chickens', businessTypeArray.includes('Farmer with Meat Chickens') ? 'Yes' : ''),
-          generateRow(437, 'Farmer with Aquaculture', businessTypeArray.includes('Farmer with Aquaculture') ? 'Yes' : ''), // replace with arable and shift up
-          generateRow(439, 'Farmer with Horticulture', businessTypeArray.includes('Farmer with Horticulture') ? 'Yes' : ''),
-
-
-          generateRow(45, 'Location of project (postcode)', submission.farmerDetails.projectPostcode),
-          generateRow(376, 'Project Started', submission.projectStart),
-          generateRow(342, 'Land owned by Farm', submission.tenancy),
-          generateRow(343, 'Tenancy for next 5 years', submission.tenancyLength ?? ''),
-          generateRow(55, 'Total project expenditure', String(Number(submission.projectCost).toFixed(2))),
-          generateRow(57, 'Grant rate', '40'),
-          generateRow(56, 'Grant amount requested', submission.calculatedGrant),
-          generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
-          generateRow(346, 'Planning Permission Status', getPlanningPermissionDoraValue(submission.planningPermission)),
-          generateRow(366, 'Date of OA decision', ''), // confirm
-          generateRow(42, 'Project name', submission.businessDetails.projectName),
-          generateRow(4, 'Single business identifier (SBI)', submission.businessDetails.sbi || '000000000'), // sbi is '' if not set so use || instead of ??
-          generateRow(429, 'Calving System', submission.businessDetails.calvingSystem ?? ''),
-          generateRow(430, 'Number of Calves', submission.businessDetails.calvesNumber ?? ''),
-          generateRow(7, 'Business name', submission.businessDetails.businessName),
-          generateRow(367, 'Annual Turnover', submission.businessDetails.businessTurnover),
-          generateRow(22, 'Employees', submission.businessDetails.numberEmployees),
-          generateRow(20, 'Business size', calculateBusinessSize(submission.businessDetails.numberEmployees)),
-          generateRow(91, 'Are you an AGENT applying on behalf of your customer', submission.applying === 'Agent' ? 'Yes' : 'No'),
-          generateRow(5, 'Surname', submission.farmerDetails.lastName),
-          generateRow(6, 'Forename', submission.farmerDetails.firstName),
-          generateRow(8, 'Address line 1', submission.farmerDetails.address1),
-          generateRow(9, 'Address line 2', submission.farmerDetails.address2),
-          generateRow(11, 'Address line 4 (town)', submission.farmerDetails.town),
-          generateRow(12, 'Address line 5 (county)', submission.farmerDetails.county),
-          generateRow(13, 'Postcode (use capitals)', submission.farmerDetails.postcode),
-          generateRow(16, 'Landline number', submission.farmerDetails.landlineNumber ?? ''),
-          generateRow(17, 'Mobile number', submission.farmerDetails.mobileNumber ?? ''),
-          generateRow(18, 'Email', submission.farmerDetails.emailAddress),
-          generateRow(89, 'Customer Marketing Indicator: So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please indicate if you are happy for us, or a third party working for us, to contact you', submission.consentOptional ? 'Yes' : 'No'),
-          generateRow(368, 'Date ready for QC or decision', todayStr),
-          generateRow(369, 'Eligibility Reference No.', submission.confirmationId),
-          generateRow(94, 'Current location of file', 'NA Automated'),
-          generateRow(92, 'RAG rating', 'Green'),
-          generateRow(93, 'RAG date reviewed ', todayStr),
-          generateRow(54, 'Electronic OA received date ', todayStr),
-          generateRow(370, 'Status', 'Pending RPA review'),
-          generateRow(85, 'Full Application Submission Date', '30/04/2025'),
-          generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
-          generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
-          ...addAgentDetails(submission.agentsDetails)
-        ]
+        rows: generateDoraRows(submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore)
       }
     ]
   }
