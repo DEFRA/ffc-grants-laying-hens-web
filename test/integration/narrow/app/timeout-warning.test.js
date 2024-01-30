@@ -197,6 +197,16 @@ describe('Timeout Warning', () => {
     expect(result.saveLastFocusedEl()).toBe(undefined)
     expect(result.$lastFocusedEl).toBe(null)
 
+    global.document.activeElement = true
+    let mockBody = document.createElement('body')
+    mockBody.id = 'testing'
+    Object.defineProperty(document, 'activeElement', {
+      get: () => mockBody
+    })
+    global.document.querySelector = jest.fn((param) => ('value'))
+    expect(result.saveLastFocusedEl()).toBe(undefined)
+    expect(result.$lastFocusedEl).toBe('value')
+
   })
 
   it('test TimeoutWarning.focusLastFocusedEl()', () => {
