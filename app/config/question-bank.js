@@ -976,8 +976,7 @@ const questionBank = {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">
-                  The housing must have a biosecure changing area 
-                  at each external pedestrian point with:
+                  The housing must have a biosecure changing area at each external pedestrian point with:
                 </p>
                 <ul>
                   <li>changing facilities, divided by a floor-mounted 
