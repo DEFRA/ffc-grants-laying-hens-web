@@ -217,11 +217,13 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
       }
       return h.view('evidence-summary', evidenceSummaryModel)
     }
-    case 'project':
+
+    case 'project': {
       if (getYarValue(request, 'tenancy') === 'Yes') {
         setYarValue(request, 'tenancyLength', null)
       }
       return h.view('page', getModel(data, question, request, conditionalHtml))
+    }
 
     case 'business-details':
     case 'agent-details':
@@ -292,7 +294,8 @@ const multiInputPostHandler = (currentQuestion, request, dataObject, payload, ya
   setYarValue(request, yarKey, dataObject)
 }
 
-const multiInputForLoop = (payload, answers, thisAnswer, type, yarKey, request) => {
+const multiInputForLoop = (payload, answers, type, yarKey, request) => {
+  let thisAnswer
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
@@ -327,7 +330,7 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = validateErrorCheck(currentQuestion, validate, request)
   currentQuestion = sidebarCheck(currentQuestion, request)
 
-  const thisAnswer = multiInputForLoop(payload, answers, thisAnswer, type, yarKey, request)
+  const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
 
   let dataObject
   if (type === 'multi-input') {
