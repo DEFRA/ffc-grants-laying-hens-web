@@ -1,7 +1,7 @@
 const { getYarValue, setYarValue } = require('../helpers/session')
 const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
-const { getGrantValues, getGrantValuesSolar } = require('../helpers/grants-info')
+const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
 const { getUrl } = require('../helpers/urls')
@@ -272,6 +272,47 @@ const getPage = async (question, request, h) => {
 
 }
 
+const multiInputPostHandler = (currentQuestion, request, dataObject, payload, yarKey) => {
+  const allFields = currentQuestion.allFields
+  allFields.forEach(field => {
+    const payloadYarVal = payload[field.yarKey]
+      ? payload[field.yarKey].replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
+      : ''
+    dataObject = {
+      ...dataObject,
+      [field.yarKey]: (
+        (field.yarKey === 'postcode' || field.yarKey === 'projectPostcode')
+          ? payloadYarVal
+          : payload[field.yarKey] || ''
+      ),
+      ...field.conditionalKey ? { [field.conditionalKey]: payload[field.conditionalKey] } : {}
+    }
+  })
+  setYarValue(request, yarKey, dataObject)
+}
+
+const multiInputForLoop = (payload, answers, thisAnswer, type, yarKey, request) => {
+  if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
+    setYarValue(request, yarKey, '')
+  }
+
+  for (const [key, value] of Object.entries(payload)) {
+    // if statement added for multi-input eligibility for non-eligible
+    if (typeof (value) === 'object') {
+      thisAnswer = answers?.find(answer => (answer.value === value[0]))
+    } else {
+      thisAnswer = answers?.find(answer => (answer.value === value))
+    }
+
+    if (type !== 'multi-input' && key !== 'secBtn') {
+      setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
+    }
+  }
+
+  return thisAnswer
+  
+}
+
 const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, type, validate } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
@@ -288,39 +329,11 @@ const showPostPage = (currentQuestion, request, h) => {
 
   let thisAnswer
   let dataObject
+  
+  thisAnswer = multiInputForLoop(payload, answers, thisAnswer, type, yarKey, request)
 
-  if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
-    setYarValue(request, yarKey, '')
-  }
-  for (const [key, value] of Object.entries(payload)) {
-    // if statement added for multi-input eligibility for non-eligible
-    if (typeof (value) === 'object') {
-      thisAnswer = answers?.find(answer => (answer.value === value[0]))
-    } else {
-      thisAnswer = answers?.find(answer => (answer.value === value))
-    }
-
-    if (type !== 'multi-input' && key !== 'secBtn') {
-      setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
-    }
-  }
   if (type === 'multi-input') {
-    const allFields = currentQuestion.allFields
-    allFields.forEach(field => {
-      const payloadYarVal = payload[field.yarKey]
-        ? payload[field.yarKey].replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
-        : ''
-      dataObject = {
-        ...dataObject,
-        [field.yarKey]: (
-          (field.yarKey === 'postcode' || field.yarKey === 'projectPostcode')
-            ? payloadYarVal
-            : payload[field.yarKey] || ''
-        ),
-        ...field.conditionalKey ? { [field.conditionalKey]: payload[field.conditionalKey] } : {}
-      }
-    })
-    setYarValue(request, yarKey, dataObject)
+    multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
   }
 
   const errors = checkErrors(payload, currentQuestion, h, request)
@@ -329,7 +342,11 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
-    gapiService.sendGAEvent(request, { name: gapiService.eventTypes.ELIMINATION, params: {} })
+    
+    gapiService.sendGAEvent(request, 
+      { name: gapiService.eventTypes.ELIMINATION, params: {} 
+    })
+
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 

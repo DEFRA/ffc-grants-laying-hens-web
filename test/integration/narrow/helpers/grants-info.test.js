@@ -1,5 +1,5 @@
 describe('Grants Info', () => {
-  const { getGrantValues, getGrantValuesSolar } = require('../../../../app/helpers/grants-info')
+  const { getGrantValues } = require('../../../../app/helpers/grants-info')
 
   test('is eligible if calculated grant = min grant - whether grant is capped or not', () => {
     const projectCostValue = '50'
@@ -81,83 +81,4 @@ describe('Grants Info', () => {
     expect(Number(cappedGrantResult.calculatedGrant) + Number(cappedGrantResult.remainingCost)).toEqual(Number(projectCostValue))
   })
 
-  test('solar - is eligible if calculated grant = min grant - whether grant is capped or not', () => {
-    const projectCostValue = '50'
-    const grantsInfo = {
-      minGrant: 10,
-      maxGrant: 1000,
-      grantPercentage: 20,
-      cappedGrant: false
-    }
-
-    expect(Number(projectCostValue)).toBe(50)
-
-    const notCappedGrantResult = getGrantValuesSolar(projectCostValue, grantsInfo)
-    expect(notCappedGrantResult.isEligibleSolar).toBe(true)
-
-    grantsInfo.cappedGrant = true
-    const cappedGrantResult = getGrantValuesSolar(projectCostValue, grantsInfo)
-    expect(cappedGrantResult.isEligibleSolar).toBe(true)
-  })
-
-  test('solar - is not eligible if calculated grant < min grant - whether grant is capped or not', () => {
-    const projectCostValue = '49'
-    const grantsInfo = {
-      minGrant: 10,
-      maxGrant: 1000,
-      grantPercentage: 20,
-      cappedGrant: false
-    }
-
-    expect(Number(projectCostValue)).toBe(49)
-
-    const notCappedGrantResult = getGrantValuesSolar(projectCostValue, grantsInfo)
-    expect(notCappedGrantResult.isEligibleSolar).toBe(false)
-
-    grantsInfo.cappedGrant = true
-    const cappedGrantResult = getGrantValuesSolar(projectCostValue, grantsInfo)
-    expect(cappedGrantResult.isEligibleSolar).toBe(false)
-  })
-
-  test('solar - if (calculatedGrant < maxGrant ) => [calculatedGrant + remainingCost = projectCostValue] - whether grant is capped or not', () => {
-    const projectCostValue = '50'
-    const grantsInfo = {
-      minGrant: 10,
-      maxGrant: 1000,
-      grantPercentage: 20,
-      cappedGrant: false
-    }
-
-    expect(Number(projectCostValue)).toBe(50)
-
-    const notCappedGrantResult = getGrantValuesSolar(projectCostValue, grantsInfo)
-    expect(notCappedGrantResult.calculatedGrantSolar < grantsInfo.maxGrant)
-    expect(Number(notCappedGrantResult.calculatedGrantSolar) + Number(notCappedGrantResult.remainingCostSolar)).toEqual(Number(projectCostValue))
-
-    grantsInfo.cappedGrant = true
-    const cappedGrantResult = getGrantValuesSolar(projectCostValue, grantsInfo)
-    expect(cappedGrantResult.calculatedGrantSolar < grantsInfo.maxGrant)
-    expect(Number(cappedGrantResult.calculatedGrantSolar) + Number(cappedGrantResult.remainingCostSolar)).toEqual(Number(projectCostValue))
-  })
-
-  test('solar - if (calculatedGrant > maxGrant ) => [calculatedGrant + remainingCost = projectCostValue] - whether grant is capped or not', () => {
-    const projectCostValue = '50000'
-    const grantsInfo = {
-      minGrant: 10,
-      maxGrant: 1000,
-      grantPercentage: 20,
-      cappedGrant: false
-    }
-
-    expect(Number(projectCostValue)).toBe(50000)
-
-    const notCappedGrantResult = getGrantValuesSolar(projectCostValue, grantsInfo)
-    expect(notCappedGrantResult.calculatedGrantSolar > grantsInfo.maxGrant)
-    expect(Number(notCappedGrantResult.calculatedGrantSolar) + Number(notCappedGrantResult.remainingCostSolar)).toEqual(Number(projectCostValue))
-
-    grantsInfo.cappedGrant = true
-    const cappedGrantResult = getGrantValuesSolar(projectCostValue, grantsInfo)
-    expect(cappedGrantResult.calculatedGrantSolar > grantsInfo.maxGrant)
-    expect(Number(cappedGrantResult.calculatedGrantSolar) + Number(cappedGrantResult.remainingCostSolar)).toEqual(Number(projectCostValue))
-  })
 })
