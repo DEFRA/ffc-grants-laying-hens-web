@@ -676,7 +676,7 @@ const questionBank = {
               content: [{
                 para: `You can apply for grant funding for either a housing project or adding a veranda only to existing housing.
 
-                The RPA will award grant funding for adding a veranda only to existinghousing on a first-come first-served basis. You do not need to complete any eligibility or scoring questions.
+                The RPA will award grant funding for adding a veranda only to existing housing on a first-come first-served basis. You do not need to complete any eligibility or scoring questions.
 
                 To apply for grant funding for housing projects, you need to complete eligibility and scoring questions.`,
                 items: []
@@ -729,8 +729,7 @@ const questionBank = {
                     <li>water-tight roof and walls</li>
                     <li>capped roof and wall inlets and outlets</li>
                     <li>catch trays under all chimneys and roof-mounted vents.</li>
-                  </ul>
-            </span>`
+                  </ul>`
           },
           pageTitle: '',
           url: 'building-items',
@@ -1083,7 +1082,9 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The housing must have a laying hen aviary system.This cannot be a combi-cage aviary system.',
+                para: `The housing must have a laying hen aviary system. 
+                
+                This cannot be a combi-cage aviary system.`,
                 items: []
               }]
             }]
@@ -1128,6 +1129,325 @@ const questionBank = {
           yarKey: 'aviarySystem'
         },
         {
+          key: 'aviary-welfare',
+          order: 97,
+          title: `Will the aviary system meet the manufacture's recommendation for high welfare?`,
+          pageTitle: '',
+          url: 'aviary-welfare',
+          baseUrl: 'aviary-welfare',
+          backUrl: 'aviary-system',
+          nextUrl: 'manure-removal',
+          hint: {
+            text: 'The birds must be able to move between levels without flying or jumping more than one metre in height'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The aviary system must either:',
+                items: [`have welfare ramps and platforms in positions that meet the manufacturer's recommendation for a high welfare system`,
+              'be designed for hens to move between levels without ramps and platforms']
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                <div class="govuk-body">The aviary system must either:</div>
+                      <ul>
+                        <li>have welfare ramps and platforms in positions that meet the manufacturer's recommendation for a high welfare system</li>
+                        <li>be designed for hens to move between levels without ramps and platforms.</li>
+                      </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if the aviary system will meet the recommendation for high welfare'
+            }
+          ],
+          answers: [
+            {
+              key: 'aviary-welfare-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'aviary-welfare-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'aviaryWelfare'
+        },
+        {
+          key: 'manure-removal',
+          order: 98,
+          title: 'Will the aviary system automatically remove manure?',
+          pageTitle: '',
+          url: 'manure-removal',
+          baseUrl: 'manure-removal',
+          backUrl: 'aviary-welfare',
+          nextUrl: 'aviary-lighting-system',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'To ensure good air quality, the aviary system must have an integrated automatic manure-removal system.',
+                items: []
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The aviary system must have an integrated automatic manure-removal system to ensure good air quality.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the aviary system will automatically remove manure'
+            }
+          ],
+          answers: [
+            {
+              key: 'manure-removal-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'manure-removal-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'manureRemoval'
+        },
+        {
+          key: 'aviary-lighting-system',
+          order: 99,
+          title: 'Will the aviary system have an integrated LED lighting system?',
+          pageTitle: '',
+          url: 'aviary-lighting-system',
+          baseUrl: 'aviary-lighting-system',
+          backUrl: 'manure-removal',
+          nextUrl: 'mechanical-ventilation',
+          hint: {
+            text: 'This provides dimmable non-flicker lighting at each level of the aviary system, including top perches and under the system'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The lighting system must have:',
+                items: ['non-flicker lighting', 'zonal dimming to provide an automated dawn and dusk.']
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The aviary system must have an integrated LED lighting system.',
+            insertText: { text: 'The lighting system must have non-flicker lighting and zonal dimming to provide an automated dawn and dusk.'},
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+        
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the aviary system will have an integrated LED lighting system'
+            }
+          ],
+          answers: [
+            {
+              key: 'aviary-lighting-system-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'aviary-lighting-system-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'aviaryLightingSystem'
+        },
+        {
+          key: 'ventilation-air-speed',
+          order: 101,
+          title: 'Will the {{_poultryType_}} housing ventilation be able to provide an air speed of 1 metre per second over birds?',
+          pageTitle: '',
+          url: 'ventilation-air-speed',
+          baseUrl: 'ventilation-air-speed',
+          backUrl: 'mechanical-ventilation',
+          // preValidationKeys: ['poultryType'],
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-ventilation-rate',
+              elseUrl: 'pullet-ventilation-rate'
+            }
+          },
+          ineligibleContent: {
+            messageContent: 'The housing ventilation must provide an air speed of 1 metre per second over birds.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+        
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing ventilation will be able to provide an air speed of 1 metre per second over birds'
+            }
+          ],
+          answers: [
+            {
+              key: 'ventilation-air-speed-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'ventilation-air-speed-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'ventilationAirSpeed'
+        },
+        {
+          key: 'hen-ventilation-rate',
+          order: 102,
+          title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 10,800m3 per hour per 1000 hens?',
+          pageTitle: '',
+          url: 'hen-ventilation-rate',
+          baseUrl: 'hen-ventilation-rate',
+          backUrl: 'ventilation-air-speed',
+          nextUrl: 'ventilation-air-quality',
+          hint: {
+            text: 'For birds up to 2.5kg in body mass'
+          },
+          ineligibleContent: {
+            messageContent: 'The housing ventilation must have a ventilation rate of 10,800m3 per hour per 1000 hens.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The ventilation system must be able to provide a ventilation rate (MXVR) of 10,800m3 per hour per 1000 hens in the case of high heat scenarios.'
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the ventilation system will meet the ventilation rate'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-ventilation-rate-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-ventilation-rate-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'henVentilationRate'
+        },
+        {
+          key: 'ventilation-air-quality',
+          order: 104,
+          title: 'Will the ventilation maintain the required air quality parameters?',
+          pageTitle: '',
+          url: 'ventilation-air-quality',
+          baseUrl: 'ventilation-air-quality',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-ventilation-rate',
+              elseUrl: 'pullet-ventilation-rate'
+            }
+          },
+          nextUrl: 'lighting-system',
+          ineligibleContent: {
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+            <p class="govuk-body">The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
+                  <ul>
+                    <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
+                    <li>percentage relative humidity (%rH) level of 40% to 70%</li>
+                  </ul>
+            </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+        hint: {
+          html: `
+                <p>The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
+                <ul class="govuk-list--bullet">
+                    <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
+                    <li>percentage relative humidity (%rH) level of 40% to 70%</li>
+                </ul>`
+        },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the lighting system will provide non-flicker light from dimmable LEDs'
+            }
+          ],
+          answers: [
+            {
+              key: 'ventilation-air-quality-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'ventilation-air-quality-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'ventilationAirQuality'
+        },
+        {
           key: 'project-cost',
           order: 220,
           pageTitle: '',
@@ -1164,9 +1484,9 @@ const questionBank = {
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £15,000 (40% of £37,500). The maximum grant is £500,000.<p/>
-                  <p>Do not include VAT<p/>
-                  <p>Enter amount, for example 95,000<p/>
+                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £15,000 (40% of £37,500). The maximum grant is £500,000.</p>
+                  <p>Do not include VAT</p>
+                  <p>Enter amount, for example 95,000</p>
               `
           },
           validate: [
@@ -1228,7 +1548,7 @@ const questionBank = {
             warning: {
               text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
             },
-            extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.'
+            extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.</p>'
           }
         },
         {
