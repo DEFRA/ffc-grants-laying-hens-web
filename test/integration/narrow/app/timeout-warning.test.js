@@ -6,7 +6,7 @@ const dialogPolyfill = require('dialog-polyfill')
 
 // mock module object - parameter of constructor TimeoutWarning
 let mockModule = {
-  querySelector: jest.fn((param) => (`mqs_${param}`)),
+  querySelector: jest.fn((param) => ({innerHTML: `mqs_${param}`})),
   getAttribute: jest.fn((param) => null)
 }
 const origMockModule = mockModule
@@ -31,13 +31,13 @@ describe('Timeout Warning', () => {
     expect(new TimeoutWarning(mockModule)).toEqual({
       $module: mockModule,
       $lastFocusedEl: null,
-      $closeButton: 'mqs_.js-dialog-close',
-      $cancelButton: 'mqs_.js-dialog-cancel',
+      $closeButton: { innerHTML: 'mqs_.js-dialog-close' },
+      $cancelButton: { innerHTML: 'mqs_.js-dialog-cancel' },
       overLayClass: 'govuk-timeout-warning-overlay',
       $fallBackElement: 'dqs_.govuk-timeout-warning-fallback',
       timers: [],
-      $countdown: 'mqs_.timer',
-      $accessibleCountdown: 'mqs_.at-timer',
+      $countdown: { innerHTML: 'mqs_.timer' },
+      $accessibleCountdown: { innerHTML: 'mqs_.at-timer' },
       idleMinutesBeforeTimeOut: 20,
       timeOutRedirectUrl: 'timeout',
       minutesTimeOutModalVisible: 5,
