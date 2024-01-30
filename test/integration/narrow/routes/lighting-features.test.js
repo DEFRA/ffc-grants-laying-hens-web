@@ -85,6 +85,7 @@ describe('Page: /lighting-features', () => {
     expect(postResponse.payload).toContain('the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)')
     expect(postResponse.payload).toContain('an option for red light')
     expect(postResponse.payload).toContain('a fail-safe standby device in case of electrical or other failure')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
   it('page loads with correct back link', async () => {
