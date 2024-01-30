@@ -204,8 +204,8 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   return h.view('maybe-eligible', MAYBE_ELIGIBLE)
 }
 
-const getUrlSwitchFunction = async (url, data, question, request, conditionalHtml, backUrl, nextUrl, h) => {
-  switch (url) {
+const getUrlSwitchFunction = async (data, question, request, conditionalHtml, backUrl, nextUrl, h) => {
+  switch (question.url) {
     case 'check-details': {
       return h.view('check-details', getCheckDetailsModel(request, question, backUrl, nextUrl))
     }
@@ -217,11 +217,12 @@ const getUrlSwitchFunction = async (url, data, question, request, conditionalHtm
       }
       return h.view('evidence-summary', evidenceSummaryModel)
     }
-    case 'project': {
+    case 'project':
       if (getYarValue(request, 'tenancy') === 'Yes') {
         setYarValue(request, 'tenancyLength', null)
       }
-    }
+      return h.view('page', getModel(data, question, request, conditionalHtml))
+
     case 'business-details':
     case 'agent-details':
     case 'applicant-details':
@@ -268,7 +269,7 @@ const getPage = async (question, request, h) => {
     )
   }
 
-  return (getUrlSwitchFunction(url, data, question, request, conditionalHtml, backUrl, nextUrl, h))
+  return (getUrlSwitchFunction(data, question, request, conditionalHtml, backUrl, nextUrl, h))
 
 }
 
@@ -310,7 +311,6 @@ const multiInputForLoop = (payload, answers, thisAnswer, type, yarKey, request) 
   }
 
   return thisAnswer
-  
 }
 
 const showPostPage = (currentQuestion, request, h) => {
@@ -327,11 +327,9 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = validateErrorCheck(currentQuestion, validate, request)
   currentQuestion = sidebarCheck(currentQuestion, request)
 
-  let thisAnswer
-  let dataObject
-  
-  thisAnswer = multiInputForLoop(payload, answers, thisAnswer, type, yarKey, request)
+  const thisAnswer = multiInputForLoop(payload, answers, thisAnswer, type, yarKey, request)
 
+  let dataObject
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
   }
@@ -342,7 +340,6 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
-    
     gapiService.sendGAEvent(request, 
       { name: gapiService.eventTypes.ELIMINATION, params: {} 
     })

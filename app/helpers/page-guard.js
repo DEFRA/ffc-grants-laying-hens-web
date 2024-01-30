@@ -2,7 +2,7 @@ const { getYarValue } = require('../helpers/session')
 const { startPageUrl, serviceEndDate, serviceEndTime } = require('../config/server')
 const { getQuestionAnswer } = require('./utils')
 
-function isServiceDecommissioned(request, serviceEndDate, serviceEndTime, startPageUrl) {
+function isServiceDecommissioned(request) {
   const currentUrl = request.url.pathname.split('/').pop();
   const today = new Date(new Date().toDateString());
   const decomissionServiceDate = new Date(serviceEndDate);
@@ -58,9 +58,9 @@ const guardDataCheck = (guardData, preValidationList, result, inverseResult, req
 
 function guardPage (request, guardData) {
   let result = false
-  let inverseResult = true
+  const inverseResult = true
 
-  if (isServiceDecommissioned(request, serviceEndDate, serviceEndTime, startPageUrl)) {
+  if (isServiceDecommissioned(request)) {
     return true;
   }
 
