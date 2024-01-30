@@ -204,6 +204,32 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   return h.view('maybe-eligible', MAYBE_ELIGIBLE)
 }
 
+const getUrlSwitchFunction = async (url, data, question, request, conditionalHtml, backUrl, nextUrl, h) => {
+  switch (url) {
+    case 'check-details': {
+      return h.view('check-details', getCheckDetailsModel(request, question, backUrl, nextUrl))
+    }
+
+    case 'planning-permission-summary': {
+      const evidenceSummaryModel = getEvidenceSummaryModel(request, question, backUrl, nextUrl)
+      if (evidenceSummaryModel.redirect) {
+        return h.redirect(startPageUrl)
+      }
+      return h.view('evidence-summary', evidenceSummaryModel)
+    }
+    case 'project': {
+      if (getYarValue(request, 'tenancy') === 'Yes') {
+        setYarValue(request, 'tenancyLength', null)
+      }
+    }
+    case 'business-details':
+    case 'agent-details':
+    case 'applicant-details':
+    default:
+      return h.view('page', getModel(data, question, request, conditionalHtml))
+  }
+}
+
 const getPage = async (question, request, h) => {
   const { url, backUrl, nextUrlObject, type, title, yarKey } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
@@ -217,15 +243,9 @@ const getPage = async (question, request, h) => {
   question = titleCheck(question, title, request)
   question = sidebarCheck(question, request)
 
-  switch (url) {
-    case 'project-cost':
-      break
-    case 'remaining-costs':
-      break
-    case 'score':
-      return scorePageData(request, backUrl, url, h)
-    default:
-      break
+  // score contains maybe eligible, so can't be included in getUrlSwitchFunction
+  if (url === 'score') {
+    return scorePageData(request, backUrl, url, h)
   }
 
   const confirmationId = ''
@@ -248,33 +268,8 @@ const getPage = async (question, request, h) => {
     )
   }
 
-  switch (url) {
-    case 'check-details': {
-      return h.view('check-details', getCheckDetailsModel(request, question, backUrl, nextUrl))
-    }
-    case 'planning-permission-summary': {
-      const evidenceSummaryModel = getEvidenceSummaryModel(request, question, backUrl, nextUrl)
-      if (evidenceSummaryModel.redirect) {
-        return h.redirect(startPageUrl)
-      }
-      return h.view('evidence-summary', evidenceSummaryModel)
-    }
-    case 'project': {
-      if (getYarValue(request, 'tenancy') === 'Yes') {
-        setYarValue(request, 'tenancyLength', null)
-      }
-    }
-    // case 'score':
-    case 'business-details':
-    case 'agent-details':
-    case 'applicant-details': {
-      return h.view('page', getModel(data, question, request, conditionalHtml))
-    }
-    default:
-      break
-  }
+  return (getUrlSwitchFunction(url, data, question, request, conditionalHtml, backUrl, nextUrl, h))
 
-  return h.view('page', getModel(data, question, request, conditionalHtml))
 }
 
 const showPostPage = (currentQuestion, request, h) => {
