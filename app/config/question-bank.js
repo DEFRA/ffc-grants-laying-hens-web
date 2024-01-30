@@ -1146,7 +1146,7 @@ const questionBank = {
               content: [{
                 para: 'The aviary system must either:',
                 items: [`have welfare ramps and platforms in positions that meet the manufacturer's recommendation for a high welfare system`,
-              'be designed for hens to move between levels without ramps and platforms']
+                  'be designed for hens to move between levels without ramps and platforms']
               }]
             }]
           },
@@ -1395,7 +1395,6 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-        
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -1546,14 +1545,14 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-        hint: {
-          html: `
+          hint: {
+            html: `
                 <p>The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
                 <ul class="govuk-list--bullet">
                     <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
                     <li>percentage relative humidity (%rH) level of 40% to 70%</li>
                 </ul>`
-        },
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
