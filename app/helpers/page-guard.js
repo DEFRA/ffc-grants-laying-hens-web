@@ -2,21 +2,66 @@ const { getYarValue } = require('../helpers/session')
 const { startPageUrl, serviceEndDate, serviceEndTime } = require('../config/server')
 const { getQuestionAnswer } = require('./utils')
 
+function isServiceDecommissioned(request) {
+  const currentUrl = request.url.pathname.split('/').pop();
+  const today = new Date(new Date().toDateString());
+  const decomissionServiceDate = new Date(serviceEndDate);
+  const time = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/London' });
+  const dateExpired = +today > +decomissionServiceDate;
+  const expiringToday = (+today === +decomissionServiceDate) && (time > serviceEndTime);
+  const serviceDecommissioned = expiringToday || dateExpired;
+  return (request.url.pathname !== startPageUrl && currentUrl !== 'login' && serviceDecommissioned);
+}
+
+const guardDataCheck = (guardData, preValidationList, result, inverseResult, request) => {
+  switch (guardData?.preValidationRule) {
+    case 'AND':
+      // check for all keys (that every key and value pair exists)
+
+      preValidationList.forEach(preValidation => {
+        if (preValidation?.values?.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length === 0) {
+          result = true
+        }
+      })
+      break
+
+    case 'OR':
+
+      preValidationList.forEach(preValidation => {
+        if (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0) {
+          inverseResult = false
+        }
+      })
+
+      result = inverseResult
+      break
+
+    case 'NOT':
+      // check if answer exists in list (if key and value pair contains needed answer)
+      preValidationList.forEach(preValidation => {
+
+        if (
+          (!getYarValue(request, preValidation.key)) ||
+          (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0)){
+          result = true
+        }
+      })
+      break
+
+    default:
+      break
+
+  }
+
+  return result
+}
+
 function guardPage (request, guardData) {
   let result = false
-  let inverseResult = true
-  // or result needs a specific variable because its annoying
-  const currentUrl = request.url.pathname.split('/').pop()
-  const today = new Date(new Date().toDateString())
-  const decomissionServiceDate = new Date(serviceEndDate)
-  const time = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/London' })
-  const dateExpired = +today > +decomissionServiceDate
-  const expiringToday = (+today === +decomissionServiceDate) && (time > serviceEndTime)
-  const serviceDecommissioned = expiringToday || dateExpired
-  const isServiceDecommissioned = (request.url.pathname !== startPageUrl && currentUrl !== 'login' && serviceDecommissioned)
+  const inverseResult = true
 
-  if (isServiceDecommissioned) {
-    return isServiceDecommissioned
+  if (isServiceDecommissioned(request)) {
+    return true;
   }
 
   if (guardData) {
@@ -43,44 +88,7 @@ function guardPage (request, guardData) {
     //     preValidationUrls: ['project-subject']
     // },
 
-    switch (guardData?.preValidationRule) {
-      case 'AND':
-        // check for all keys (that every key and value pair exists)
-
-        preValidationList.forEach(preValidation => {
-          if (preValidation?.values?.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length === 0) {
-            result = true
-          }
-        })
-        break
-
-      case 'OR':
-
-        preValidationList.forEach(preValidation => {
-          if (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0) {
-            inverseResult = false
-          }
-        })
-
-        result = inverseResult
-        break
-
-      case 'NOT':
-        // check if answer exists in list (if key and value pair contains needed answer)
-        preValidationList.forEach(preValidation => {
-
-          if (
-            (!getYarValue(request, preValidation.key)) ||
-            (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0)){
-            result = true
-          }
-        })
-        break
-
-      default:
-        break
-
-    }
+    result = guardDataCheck(guardData, preValidationList, result, inverseResult, request)
   }
   
   return result
