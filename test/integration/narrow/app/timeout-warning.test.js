@@ -203,13 +203,16 @@ describe('Timeout Warning', () => {
     Object.defineProperty(document, 'activeElement', {
       get: () => mockBody
     })
-    global.document.querySelector = jest.fn((param) => ('value'))
+    jest.spyOn(document, 'querySelector').mockImplementation((param) => ('value'))
     expect(result.saveLastFocusedEl()).toBe(undefined)
     expect(result.$lastFocusedEl).toBe('value')
 
-    global.document.querySelector = null
+    document.querySelector = null
     expect(result.saveLastFocusedEl()).toBe(undefined)
     expect(result.$lastFocusedEl).toBe(mockBody)
+
+    // resetting document.querySelector after tests
+    document.querySelector = jest.fn((param) => null)
 
   })
 
@@ -335,8 +338,8 @@ describe('Timeout Warning', () => {
     expect(timeoutInstance.redirect.bind).toHaveBeenCalledTimes(1);
 
     delete window.localStorage
-    window.localStorage = null
-
+    window.localStorage = false
+    timeoutInstance.checkIfShouldHaveTimedOut();
     expect(timeoutInstance.redirect.bind).toHaveBeenCalledTimes(1);
 
 
