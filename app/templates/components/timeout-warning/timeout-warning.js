@@ -29,18 +29,17 @@ class TimeoutWarning {
     if (!this.$module) {
       return
     }
-  
+
     // Check that dialog element has native or polyfill support
     if (!this.dialogSupported()) {
       return
     }
-  
+
     // Start watching for idleness
     this.countIdleTime()
-  
     this.$closeButton.addEventListener('click', this.closeDialog.bind(this))
     this.$module.addEventListener('keydown', this.escClose.bind(this))
-  
+
     // Debugging tip: This event doesn't kick in in Chrome if you have Inspector panel open and have clicked on it
     // as it is now the active element. Click on the window to make it active before moving to another tab.
     window.addEventListener('focus', this.checkIfShouldHaveTimedOut.bind(this))
@@ -70,17 +69,17 @@ class TimeoutWarning {
   countIdleTime() {
     let idleTime
     const milliSecondsBeforeTimeOut = this.idleMinutesBeforeTimeOut * 60000
-  
+
     // reset the timer when page reloads
     window.onload = resetIdleTime.bind(this)
-  
+
     function resetIdleTime () {
       // As page reloads, reset idle time
       clearTimeout(idleTime)
-  
+
       // Start new idle time
       idleTime = setTimeout(this.openDialog.bind(this), milliSecondsBeforeTimeOut)
-  
+
       // TO DO - Step A of client/server interaction
       // Set last interactive time on server by periodically ping server
       // with AJAX when user interacts with client side
@@ -132,7 +131,7 @@ class TimeoutWarning {
       this.$lastFocusedEl = document.querySelector(':focus')
     }
   }
-  
+
   // Set focus back on last focused el when modal closed
   setFocusOnLastFocusedEl() {
     if (this.$lastFocusedEl) {
@@ -141,7 +140,7 @@ class TimeoutWarning {
       }, 0)
     }
   }
-  
+
   // Set page content to inert to indicate to screenreaders it's inactive
   // NB: This will look for #content for toggling inert state
   makePageContentInert() {
@@ -150,7 +149,7 @@ class TimeoutWarning {
       document.querySelector('#content').setAttribute('aria-hidden', 'true')
     }
   }
-  
+
   // Make page content active when modal is not open
   // NB: This will look for #content for toggling inert state
   removeInertFromPageContent() {
@@ -159,11 +158,11 @@ class TimeoutWarning {
       document.querySelector('#content').setAttribute('aria-hidden', 'false')
     }
   }
-  
+
   isDialogOpen() {
     return this.$module.open
   }
-  
+
   closeDialog() {
     if (this.isDialogOpen()) {
       document.querySelector('body').classList.remove(this.overLayClass)
@@ -171,18 +170,18 @@ class TimeoutWarning {
       this.setFocusOnLastFocusedEl()
       this.removeInertFromPageContent()
       window.location.reload()
-  
+
       this.clearTimers()
     }
   }
-  
+
   // Clears modal timer
   clearTimers() {
     for (const timer of this.timers) {
       clearTimeout(timer)
     }
   }
-  
+
   disableBackButtonWhenOpen() {
     window.addEventListener('popstate', function () {
       if (this.isDialogOpen()) {
@@ -192,7 +191,7 @@ class TimeoutWarning {
       }
     })
   }
-  
+
   // Close modal when ESC pressed
   escClose(event) {
     // get the target element
@@ -200,7 +199,7 @@ class TimeoutWarning {
       this.closeDialog()
     }
   }
-  
+
   // Do a timestamp comparison with server when the page regains focus to check
   // if the user should have been timed out already.
   // This could happen but because the computer went to sleep, the browser crashed etc.
@@ -209,12 +208,12 @@ class TimeoutWarning {
       // TO DO - client/server interaction
       // GET last interactive time from server before timing out user
       // to ensure that user hasn’t interacted with site in another tab
-  
+
       // If less time than data-minutes-idle-timeout left, call this.openDialog.bind(this)
       const timeUserLastInteractedWithPage = new Date(window.localStorage.getItem('timeUserLastInteractedWithPage'))
-  
+
       const seconds = Math.abs((timeUserLastInteractedWithPage - new Date()) / 1000)
-  
+
       // TO DO: use both idlemin and timemodalvisible
       if (seconds > this.idleMinutesBeforeTimeOut * 60) {
         this.redirect.bind(this)
@@ -266,7 +265,7 @@ class TimeoutWarning {
     // Please add additional information in the modal body content or in below extraText which will get announced to AT the first time the time out opens
     const text = `We will reset your answers if you do not respond in ${minutesText} ${secondsText}.`
     const atText = this.getAtText(minLeftText, secondsLeft, secLeftText, minutesLeft)
-  
+
     if (timerExpired) {
       $accessibleCountdown.innerHTML = $countdown.innerHTML = REDIRECT_MESSAGE
       setTimeout($module.redirect.bind($module), 4000)
