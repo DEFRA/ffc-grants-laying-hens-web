@@ -46,6 +46,20 @@ function addAgentDetails(agentsDetails) {
   ]
 }
 
+function addFarmerTypeBlock(beef, horticulture, businessTypeArray) {
+  return [
+    // If chosen say yes, else be blank
+    generateRow(431, beef, businessTypeArray.includes(beef) ? 'Yes' : ''),
+    generateRow(432, 'Farmer with Dairy (including calf rearing)', businessTypeArray.includes('Farmer with Dairy (including calf rearing)') ? 'Yes' : ''),
+    generateRow(433, 'Farmer with Pigs', businessTypeArray.includes('Farmer with Pigs') ? 'Yes' : ''),
+    generateRow(434, 'Farmer with Sheep', businessTypeArray.includes('Farmer with Sheep') ? 'Yes' : ''),
+    generateRow(435, 'Farmer with Laying Hens', businessTypeArray.includes('Farmer with Laying Hens') ? 'Yes' : ''),
+    generateRow(436, 'Farmer with Meat Chickens', businessTypeArray.includes('Farmer with Meat Chickens') ? 'Yes' : ''),
+    generateRow(437, 'Farmer with Aquaculture', businessTypeArray.includes('Farmer with Aquaculture') ? 'Yes' : ''), // replace with arable and shift up
+    generateRow(439, horticulture, businessTypeArray.includes(horticulture) ? 'Yes' : ''),
+  ]
+}
+
 function generateExcelFilename(scheme, projectName, businessName, referenceNumber, today) {
   const dateTime = new Intl.DateTimeFormat('en-GB', {
     timeStyle: 'short',
@@ -58,7 +72,7 @@ function generateExcelFilename(scheme, projectName, businessName, referenceNumbe
 // Formats array of businessType for C430-440
 function formatBusinessTypeC53(businessType) {
   const returnArray = []
-  for (let type in businessType) {
+  for (const type in businessType) {
     // set up for capitalising where necessary
     if (businessType[type] === 'Laying hens') {
       businessType[type] = 'Laying Hens'
@@ -98,7 +112,6 @@ const getPlanningPermissionDoraValue = (planningPermission) => {
 }
 
 const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore) => {
-  
   const horticulture = 'Farmer with Horticulture'
   const beef = 'Farmer with Beef (including calf rearing)'
 
@@ -117,16 +130,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
 
     generateRow(44, 'Description of Project', projectDescriptionString),
 
-    // If chosen say yes, else be blank
-    generateRow(431, beef, businessTypeArray.includes(beef) ? 'Yes' : ''),
-    generateRow(432, 'Farmer with Dairy (including calf rearing)', businessTypeArray.includes('Farmer with Dairy (including calf rearing)') ? 'Yes' : ''),
-    generateRow(433, 'Farmer with Pigs', businessTypeArray.includes('Farmer with Pigs') ? 'Yes' : ''),
-    generateRow(434, 'Farmer with Sheep', businessTypeArray.includes('Farmer with Sheep') ? 'Yes' : ''),
-    generateRow(435, 'Farmer with Laying Hens', businessTypeArray.includes('Farmer with Laying Hens') ? 'Yes' : ''),
-    generateRow(436, 'Farmer with Meat Chickens', businessTypeArray.includes('Farmer with Meat Chickens') ? 'Yes' : ''),
-    generateRow(437, 'Farmer with Aquaculture', businessTypeArray.includes('Farmer with Aquaculture') ? 'Yes' : ''), // replace with arable and shift up
-    generateRow(439, horticulture, businessTypeArray.includes(horticulture) ? 'Yes' : ''),
-
+    ...addFarmerTypeBlock(beef, horticulture, businessTypeArray),
 
     generateRow(45, 'Location of project (postcode)', submission.farmerDetails.projectPostcode),
     generateRow(376, 'Project Started', submission.projectStart),
@@ -140,8 +144,6 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(366, 'Date of OA decision', ''), // confirm
     generateRow(42, 'Project name', submission.businessDetails.projectName),
     generateRow(4, 'Single business identifier (SBI)', submission.businessDetails.sbi || '000000000'), // sbi is '' if not set so use || instead of ??
-    generateRow(429, 'Calving System', submission.businessDetails.calvingSystem ?? ''),
-    generateRow(430, 'Number of Calves', submission.businessDetails.calvesNumber ?? ''),
     generateRow(7, 'Business name', submission.businessDetails.businessName),
     generateRow(367, 'Annual Turnover', submission.businessDetails.businessTurnover),
     generateRow(22, 'Employees', submission.businessDetails.numberEmployees),
