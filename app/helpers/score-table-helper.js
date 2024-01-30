@@ -1,3 +1,5 @@
+const healthWelfare = 'Improve health/welfare'
+const environment = 'Improve the environment'
 const tableOrder = [
   {
     key: 'housing',
@@ -5,7 +7,7 @@ const tableOrder = [
     title: 'Housing',
     pageTitle: 'Housing',
     url: 'housing',
-    fundingPriorities: 'Improve health/welfare',
+    fundingPriorities: healthWelfare,
     yarKey: 'housing'
   },
   {
@@ -14,7 +16,7 @@ const tableOrder = [
     title: 'Average calf group size',
     pageTitle: 'Average calf group size',
     url: 'group-size',
-    fundingPriorities: 'Improve health/welfare',
+    fundingPriorities: healthWelfare,
     yarKey: 'calfGroupSize'
   },
   {
@@ -23,7 +25,7 @@ const tableOrder = [
     title: 'Control building moisture',
     pageTitle: 'control building moisture',
     url: 'moisture-control',
-    fundingPriorities: 'Improve health/welfare',
+    fundingPriorities: healthWelfare,
     yarKey: 'moistureControl'
   },
   {
@@ -32,7 +34,7 @@ const tableOrder = [
     title: 'Sick pen type',
     pageTitle: 'Sick pen type',
     url: 'permanent-sick-pen',
-    fundingPriorities: 'Improve health/welfare',
+    fundingPriorities: healthWelfare,
     yarKey: 'permanentSickPen'
   },
   {
@@ -41,7 +43,7 @@ const tableOrder = [
     title: 'Environmental impact',
     pageTitle: 'Enviornmental impact',
     url: 'environmental-impact',
-    fundingPriorities: 'Improve the environment',
+    fundingPriorities: environment,
     yarKey: 'environmentalImpact'
   },
   {
@@ -50,7 +52,7 @@ const tableOrder = [
     title: 'Collect and store rainwater',
     pageTitle: 'Collect and store rainwate',
     url: 'rainwater',
-    fundingPriorities: 'Improve the environment',
+    fundingPriorities: environment,
     yarKey: 'environmentalImpact'
   },
   {
@@ -59,7 +61,7 @@ const tableOrder = [
     title: 'Sustainable materials',
     pageTitle: 'Sustainable materials',
     url: 'sustainable-materials',
-    fundingPriorities: 'Improve the environment',
+    fundingPriorities: environment,
     yarKey: 'sustainableMaterials'
   },
   {
@@ -68,7 +70,7 @@ const tableOrder = [
     title: 'Innovation',
     pageTitle: 'Innovation',
     url: 'introducing-innovation',
-    fundingPriorities: 'Improve the environment',
+    fundingPriorities: environment,
     yarKey: 'introducingInnovation'
   }
 

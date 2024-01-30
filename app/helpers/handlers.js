@@ -1,7 +1,7 @@
 const { getYarValue, setYarValue } = require('../helpers/session')
 const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
-const { getGrantValues, getGrantValuesSolar } = require('../helpers/grants-info')
+const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
 const { getUrl } = require('../helpers/urls')
@@ -204,6 +204,35 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   return h.view('maybe-eligible', MAYBE_ELIGIBLE)
 }
 
+const getUrlSwitchFunction = async (data, question, request, conditionalHtml, backUrl, nextUrl, h) => {
+  switch (question.url) {
+    case 'check-details': {
+      return h.view('check-details', getCheckDetailsModel(request, question, backUrl, nextUrl))
+    }
+
+    case 'planning-permission-summary': {
+      const evidenceSummaryModel = getEvidenceSummaryModel(request, question, backUrl, nextUrl)
+      if (evidenceSummaryModel.redirect) {
+        return h.redirect(startPageUrl)
+      }
+      return h.view('evidence-summary', evidenceSummaryModel)
+    }
+
+    case 'project': {
+      if (getYarValue(request, 'tenancy') === 'Yes') {
+        setYarValue(request, 'tenancyLength', null)
+      }
+      return h.view('page', getModel(data, question, request, conditionalHtml))
+    }
+
+    case 'business-details':
+    case 'agent-details':
+    case 'applicant-details':
+    default:
+      return h.view('page', getModel(data, question, request, conditionalHtml))
+  }
+}
+
 const getPage = async (question, request, h) => {
   const { url, backUrl, nextUrlObject, type, title, yarKey } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
@@ -217,15 +246,9 @@ const getPage = async (question, request, h) => {
   question = titleCheck(question, title, request)
   question = sidebarCheck(question, request)
 
-  switch (url) {
-    case 'project-cost':
-      break
-    case 'remaining-costs':
-      break
-    case 'score':
-      return scorePageData(request, backUrl, url, h)
-    default:
-      break
+  // score contains maybe eligible, so can't be included in getUrlSwitchFunction
+  if (url === 'score') {
+    return scorePageData(request, backUrl, url, h)
   }
 
   const confirmationId = ''
@@ -248,33 +271,49 @@ const getPage = async (question, request, h) => {
     )
   }
 
-  switch (url) {
-    case 'check-details': {
-      return h.view('check-details', getCheckDetailsModel(request, question, backUrl, nextUrl))
+  return (getUrlSwitchFunction(data, question, request, conditionalHtml, backUrl, nextUrl, h))
+
+}
+
+const multiInputPostHandler = (currentQuestion, request, dataObject, payload, yarKey) => {
+  const allFields = currentQuestion.allFields
+  allFields.forEach(field => {
+    const payloadYarVal = payload[field.yarKey]
+      ? payload[field.yarKey].replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
+      : ''
+    dataObject = {
+      ...dataObject,
+      [field.yarKey]: (
+        (field.yarKey === 'postcode' || field.yarKey === 'projectPostcode')
+          ? payloadYarVal
+          : payload[field.yarKey] || ''
+      ),
+      ...field.conditionalKey ? { [field.conditionalKey]: payload[field.conditionalKey] } : {}
     }
-    case 'planning-permission-summary': {
-      const evidenceSummaryModel = getEvidenceSummaryModel(request, question, backUrl, nextUrl)
-      if (evidenceSummaryModel.redirect) {
-        return h.redirect(startPageUrl)
-      }
-      return h.view('evidence-summary', evidenceSummaryModel)
-    }
-    case 'project': {
-      if (getYarValue(request, 'tenancy') === 'Yes') {
-        setYarValue(request, 'tenancyLength', null)
-      }
-    }
-    // case 'score':
-    case 'business-details':
-    case 'agent-details':
-    case 'applicant-details': {
-      return h.view('page', getModel(data, question, request, conditionalHtml))
-    }
-    default:
-      break
+  })
+  setYarValue(request, yarKey, dataObject)
+}
+
+const multiInputForLoop = (payload, answers, type, yarKey, request) => {
+  let thisAnswer
+  if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
+    setYarValue(request, yarKey, '')
   }
 
-  return h.view('page', getModel(data, question, request, conditionalHtml))
+  for (const [key, value] of Object.entries(payload)) {
+    // if statement added for multi-input eligibility for non-eligible
+    if (typeof (value) === 'object') {
+      thisAnswer = answers?.find(answer => (answer.value === value[0]))
+    } else {
+      thisAnswer = answers?.find(answer => (answer.value === value))
+    }
+
+    if (type !== 'multi-input' && key !== 'secBtn') {
+      setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
+    }
+  }
+
+  return thisAnswer
 }
 
 const showPostPage = (currentQuestion, request, h) => {
@@ -291,41 +330,11 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = validateErrorCheck(currentQuestion, validate, request)
   currentQuestion = sidebarCheck(currentQuestion, request)
 
-  let thisAnswer
+  const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
+
   let dataObject
-
-  if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
-    setYarValue(request, yarKey, '')
-  }
-  for (const [key, value] of Object.entries(payload)) {
-    // if statement added for multi-input eligibility for non-eligible
-    if (typeof (value) === 'object') {
-      thisAnswer = answers?.find(answer => (answer.value === value[0]))
-    } else {
-      thisAnswer = answers?.find(answer => (answer.value === value))
-    }
-
-    if (type !== 'multi-input' && key !== 'secBtn') {
-      setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
-    }
-  }
   if (type === 'multi-input') {
-    const allFields = currentQuestion.allFields
-    allFields.forEach(field => {
-      const payloadYarVal = payload[field.yarKey]
-        ? payload[field.yarKey].replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
-        : ''
-      dataObject = {
-        ...dataObject,
-        [field.yarKey]: (
-          (field.yarKey === 'postcode' || field.yarKey === 'projectPostcode')
-            ? payloadYarVal
-            : payload[field.yarKey] || ''
-        ),
-        ...field.conditionalKey ? { [field.conditionalKey]: payload[field.conditionalKey] } : {}
-      }
-    })
-    setYarValue(request, yarKey, dataObject)
+    multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
   }
 
   const errors = checkErrors(payload, currentQuestion, h, request)
@@ -334,7 +343,10 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
-    gapiService.sendGAEvent(request, { name: gapiService.eventTypes.ELIMINATION, params: {} })
+    gapiService.sendGAEvent(request,
+      { name: gapiService.eventTypes.ELIMINATION, params: {}
+    })
+
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 

@@ -3,6 +3,8 @@ const Joi = require('joi')
 const { getDataFromYarValue } = require('./../helpers/pageHelpers')
 const { getYarValue } = require('../helpers/session')
 
+const multiAnswer = 'multi-answer'
+
 function getAllDetails (request, confirmationId) {
   return YAR_KEYS.reduce(
     (allDetails, key) => {
@@ -29,11 +31,11 @@ function getDesirabilityAnswers (request) {
     const val = {
       housing: getYarValue(request, 'housing'),
       calfGroupSize: getYarValue(request, 'calfGroupSize'),
-      moistureControl: getDataFromYarValue(request, 'moistureControl', 'multi-answer'),
-      permanentSickPen: getDataFromYarValue(request, 'permanentSickPen', 'multi-answer'),
-      environmentalImpact: getDataFromYarValue(request, 'environmentalImpact', 'multi-answer'),
-      sustainableMaterials: getDataFromYarValue(request, 'sustainableMaterials', 'multi-answer'),
-      introducingInnovation: getDataFromYarValue(request, 'introducingInnovation', 'multi-answer')
+      moistureControl: getDataFromYarValue(request, 'moistureControl', multiAnswer),
+      permanentSickPen: getDataFromYarValue(request, 'permanentSickPen', multiAnswer),
+      environmentalImpact: getDataFromYarValue(request, 'environmentalImpact', multiAnswer),
+      sustainableMaterials: getDataFromYarValue(request, 'sustainableMaterials', multiAnswer),
+      introducingInnovation: getDataFromYarValue(request, 'introducingInnovation', multiAnswer)
     }
     
     const result = desirabilityAnswersSchema.validate(val, {
