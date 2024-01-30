@@ -207,6 +207,10 @@ describe('Timeout Warning', () => {
     expect(result.saveLastFocusedEl()).toBe(undefined)
     expect(result.$lastFocusedEl).toBe('value')
 
+    global.document.querySelector = null
+    expect(result.saveLastFocusedEl()).toBe(undefined)
+    expect(result.$lastFocusedEl).toBe(mockBody)
+
   })
 
   it('test TimeoutWarning.focusLastFocusedEl()', () => {
