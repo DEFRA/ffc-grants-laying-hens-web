@@ -1298,6 +1298,73 @@ const questionBank = {
           ],
           yarKey: 'henVeranda'
         },
+        {
+          key: 'hen-veranda-features',
+          order: 122,
+          title: 'Will the veranda have these features?',
+          hint: {
+            html: `
+                  <p>The veranda of the housing must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a solid concrete floor</li>
+                    <li>a waterproof insulated roof</li>
+                    <li>guttering and a downpipe to feed into the drainage system of the main building</li>
+                    <li>a perimeter wall at least 1 metre high</li>
+                    <li>lockable pop holes within the perimeter wall, unless the veranda forms part of an indoor barn system</li>
+                    <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
+                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
+                  </ul>`
+          },
+          pageTitle: '',
+          url: 'hen-veranda-features',
+          baseUrl: 'hen-veranda-features',
+          backUrl: 'hen-veranda',
+          nextUrl: 'hen-veranda-biosecurity',
+          // preValidationKeys: ['poultryType'],
+          ineligibleContent: {
+            messageContent: 'You cannot apply for a grant from this scheme',
+            insertText: {
+              html: `
+                  <p>The veranda of the housing must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a solid concrete floor </li>
+                    <li>a waterproof insulated roof</li>
+                    <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
+                    <li>a perimeter wall at least 1 metre high</li>
+                    <li>lockable pop holes in the perimeter wall, unless the veranda forms part of an indoor barn system</li>
+                    <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
+                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
+                  </ul>
+            </span>`
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the veranda will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-veranda-features-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-veranda-features-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'henVerandaFeatures'
+        },
 
         {
           key: 'aviary-lighting-system',
