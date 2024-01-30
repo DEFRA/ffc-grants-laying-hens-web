@@ -105,7 +105,7 @@ describe('Timeout Warning', () => {
     expect(new TimeoutWarning(mockModule).countIdleTime()).toBe(undefined)
   })
 
-  xit('test TimeoutWarning.openDialog()', () => {
+  it('test TimeoutWarning.openDialog()', () => {
     mockModule = {
       ...mockModule,
       open: 'mock-module-open'
@@ -131,7 +131,7 @@ describe('Timeout Warning', () => {
     result.clearTimers()
   })
 
-  xit('test TimeoutWarning.startUiCountdown()', () => {
+  it('test TimeoutWarning.startUiCountdown()', () => {
     global.navigator.userAgent = ''
 
     let result
