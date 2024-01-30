@@ -191,7 +191,26 @@ describe('Timeout Warning', () => {
     global.document.activeElement = 'mock-element'
     result = new TimeoutWarning(mockModule)
     expect(result.saveLastFocusedEl()).toBe(undefined)
+
+    global.document.activeElement = document.body
+    result = new TimeoutWarning(mockModule)
+    expect(result.saveLastFocusedEl()).toBe(undefined)
     expect(result.$lastFocusedEl).toBe(null)
+
+  })
+
+  it('test TimeoutWarning.focusLastFocusedEl()', () => {
+    const mockElement = { focus: jest.fn() };
+    let timeoutInstance = new TimeoutWarning(mockModule)
+
+    timeoutInstance.$lastFocusedEl= null
+    timeoutInstance.setFocusOnLastFocusedEl()
+    expect(timeoutInstance.$lastFocusedEl).toBeNull();
+
+    timeoutInstance.$lastFocusedEl = mockElement
+    timeoutInstance.setFocusOnLastFocusedEl()
+    expect(timeoutInstance.$lastFocusedEl).toBeDefined();
+
   })
 
   it('test TimeoutWarning.makePageContentInert()', () => {
