@@ -26,7 +26,13 @@ const getHtml = (label, labelData, fieldValueData, error) => {
           </span>
           ${error}
         </span>
-        <textarea class="govuk-textarea govuk-textarea--error govuk-js-character-count" id="${label}" name="${label}" rows="5" autocomplete="off" aria-describedby="${label}-info ${label}-error">
+        <textarea 
+          class="govuk-textarea govuk-textarea--error govuk-js-character-count" 
+          id="${label}" 
+          name="${label}" 
+          rows="5" 
+          autocomplete="off" 
+          aria-describedby="${label}-info ${label}-error">
           ${fieldValue}
         </textarea>
       </div>
