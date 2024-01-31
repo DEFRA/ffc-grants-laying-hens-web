@@ -85,7 +85,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   }
   if (Object.keys(payload).length === 0 && currentQuestion.type) {
     placeholderInputError = validate.find(
-      ({ type, dependentKey, ...details }) => (validateAnswerField(payload[yarKey], type, details, payload) === false))
+      ({ type, _dependentKey, ...details }) => (validateAnswerField(payload[yarKey], type, details, payload) === false))
 
     errorHrefList.push({
       text: placeholderInputError.error,
@@ -102,6 +102,8 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   if (errorHrefList.length > 0) {
     return customiseErrorText(payloadValue, currentQuestion, errorHrefList, h, request)
   }
+
+  return false
 }
 
 module.exports = {

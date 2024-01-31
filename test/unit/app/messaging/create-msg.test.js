@@ -26,5 +26,19 @@ describe('create-msg', () => {
       sustainableMaterials: ['hello'],
       introducingInnovation: ['hello']
     })
+
+    dict = {
+      housing: null,
+      calfGroupSize: null,
+      moistureControl: null,
+      permanentSickPen: null,
+      environmentalImpact: null,
+      sustainableMaterials: null,
+      introducingInnovation: null
+    }
+
+    expect(getDesirabilityAnswers({})).toEqual(null)
+
+
   })
 })

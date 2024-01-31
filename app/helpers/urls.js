@@ -2,7 +2,7 @@ const urlPrefix = require('../config/server').urlPrefix
 const { getYarValue } = require('../helpers/session')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
-const getUrl = (urlObject, url, request, secBtn, currentUrl) => {
+const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
   const scorePath = `${urlPrefix}/score`
   const chekDetailsPath = `${urlPrefix}/check-details`
   const secBtnPath = secBtn === 'Back to score' ? scorePath : chekDetailsPath
@@ -45,8 +45,8 @@ const checkAnswerExist = (dependentQuestionYarKey, request, yarKeysToCheck) => {
 }
 
 const checkSelectElseUrl = (request, dependentQuestionYarKey, isNonDependantAnswer) => {
-  return dependentQuestionYarKey.some(dependentQuestionYarKey => {
-    return getYarValue(request, dependentQuestionYarKey) && !isNonDependantAnswer
+  return dependentQuestionYarKey.some(questionYarKey => {
+    return getYarValue(request, questionYarKey) && !isNonDependantAnswer
   })
 }
 

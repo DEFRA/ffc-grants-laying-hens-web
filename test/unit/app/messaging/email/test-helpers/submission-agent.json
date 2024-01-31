@@ -76,5 +76,8 @@
     "introducingInnovation": [
         "Technology",
         "Collaboration"
-    ]
+    ],
+    "consentOptional": true,
+    "structureEligibility": "Yes"
+
 }
