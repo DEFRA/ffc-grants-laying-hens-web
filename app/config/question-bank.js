@@ -1364,6 +1364,58 @@ const questionBank = {
           ],
           yarKey: 'henVerandaFeatures'
         },
+        {
+          key: 'hen-veranda-biosecurity',
+          order: 122,
+          title: 'Will the veranda have the capacity to be made biosecure with mesh that has a spacing of 6mm or less?',
+          hint: {
+            text: 'This is to stop wild birds and rodents from entering during housing orders'
+          },
+          pageTitle: '',
+          url: 'hen-veranda-biosecurity',
+          baseUrl: 'hen-veranda-biosecurity',
+          backUrl: 'hen-veranda-features',
+          nextUrl: 'hen-pop-holes',
+          // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You must be able to make the veranda secure with mesh that has a spacing (aperture) of 6mm or less during disease driven housing orders.',
+                items: []
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The veranda must be capable of being  secured with mesh (with a maximum of 6mm spacing) during disease driven housing orders.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the veranda will have the capacity to be made biosecure'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-veranda-biosecurity-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-veranda-biosecurity-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'henVerandaBiosecurity'
+        },
 
         {
           key: 'aviary-lighting-system',
