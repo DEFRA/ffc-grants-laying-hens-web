@@ -1387,7 +1387,7 @@ const questionBank = {
             }]
           },
           ineligibleContent: {
-            messageContent: 'The veranda must be capable of being  secured with mesh (with a maximum of 6mm spacing) during disease driven housing orders.',
+            messageContent: 'The veranda must be capable of being secured with mesh (with a maximum of 6mm spacing) during disease driven housing orders.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
