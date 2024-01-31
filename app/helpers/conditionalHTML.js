@@ -26,7 +26,9 @@ const getHtml = (label, labelData, fieldValueData, error) => {
           </span>
           ${error}
         </span>
-        <textarea class="govuk-textarea govuk-textarea--error govuk-js-character-count" id="${label}" name="${label}" rows="5" autocomplete="off" aria-describedby="${label}-info ${label}-error">${fieldValue}</textarea>
+        <textarea class="govuk-textarea govuk-textarea--error govuk-js-character-count" id="${label}" name="${label}" rows="5" autocomplete="off" aria-describedby="${label}-info ${label}-error">
+          ${fieldValue}
+        </textarea>
       </div>
       <div id="${label}-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
         You can enter up to 250 characters
