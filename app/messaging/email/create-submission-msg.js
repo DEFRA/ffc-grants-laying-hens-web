@@ -160,8 +160,8 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(17, 'Mobile number', submission.farmerDetails.mobileNumber ?? ''),
     generateRow(18, 'Email', submission.farmerDetails.emailAddress),
     generateRow(89, 
-      'Customer Marketing Indicator: So that we can continue to improve our services and schemes, we may wish to contact you in the future.\
-      Please indicate if you are happy for us, or a third party working for us, to contact you', 
+      'Customer Marketing Indicator: So that we can continue to improve our services and schemes, we may wish to contact you in the future.',
+      + ' Please indicate if you are happy for us, or a third party working for us, to contact you', 
       submission.consentOptional ? 'Yes' : 'No'),
     generateRow(368, 'Date ready for QC or decision', todayStr),
     generateRow(369, 'Eligibility Reference No.', submission.confirmationId),
