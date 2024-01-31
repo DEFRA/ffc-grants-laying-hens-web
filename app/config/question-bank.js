@@ -1366,7 +1366,7 @@ const questionBank = {
         },
         {
           key: 'hen-veranda-biosecurity',
-          order: 122,
+          order: 123,
           title: 'Will the veranda have the capacity to be made biosecure with mesh that has a spacing of 6mm or less?',
           hint: {
             text: 'This is to stop wild birds and rodents from entering during housing orders'
@@ -1416,7 +1416,6 @@ const questionBank = {
           ],
           yarKey: 'henVerandaBiosecurity'
         },
-
         {
           key: 'aviary-lighting-system',
           order: 125,
@@ -1719,12 +1718,14 @@ const questionBank = {
           },
           ineligibleContent: {
             messageContent: `
-                  <p>The housing lighting system must have:</p>
+            <div class="govuk-list govuk-list--bullet">
+                  <p class="govuk-body">The housing lighting system must have:</p>
                   <ul>
                       <li>the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)</li>
                       <li>an option for red light</li>
                       <li>a fail-safe standby device in case of electrical or other failure</li>
-                  </ul>`,
+                  </ul>
+               </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1809,6 +1810,68 @@ const questionBank = {
             {
               type: 'NOT_EMPTY',
               error: 'Select yes if the internal hen housing will have lockable pop holes'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-pop-holes-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-pop-holes-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'henPopHoles'
+        },
+        {
+          key: 'concrete-apron',
+          order: 190,
+          title: 'Will the {{_poultryType_}} housing have a continuous concrete apron around its perimeter?',
+          pageTitle: '',
+          url: 'concrete-apron',
+          baseUrl: 'concrete-apron',
+          backUrlObject: {
+            dependentQuestionYarKey: ['poultryType', 'henPopHoles'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            nonDependentAnswerKeysArray: ['hen-pop-holes-A1'],
+            urlOptions: {
+              thenUrl: 'hen-veranda',
+              elseUrl: 'hen-pop-holes',
+              nonDependentUrl: 'lighting-features',
+            }
+          },
+          nextUrl: 'vehicle-washing',
+          hint: {
+            text: 'This must include any veranda areas if there is no adjacent range, for example barn systems'
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'The {{_poultryType_}} housing and any barn-system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+                  items: [],
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: 'The housing and any barn system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have a continuous concrete apron'
             }
           ],
           answers: [
