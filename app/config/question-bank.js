@@ -719,7 +719,7 @@ const questionBank = {
         },
         {
           key: 'building-items',
-          order: 82,
+          order: 80,
           title: 'Will the {{_poultryType_}} housing have these items?',
           hint: {
             html: `
@@ -780,7 +780,7 @@ const questionBank = {
         },
         {
           key: 'capped-inlets-outlets',
-          order: 71,
+          order: 85,
           title: 'Will all roof and wall inlets and outlets be capped with mesh that has a spacing of 6 millimetres (mm) or less?',
           url: 'capped-inlets-outlets',
           baseUrl: 'capped-inlets-outlets',
@@ -833,7 +833,7 @@ const questionBank = {
         },
         {
           key: 'refurbishing-insulation',
-          order: 72,
+          order: 90,
           title: 'Will the {{_poultryType_}} housing have full wall and roof insulation?',
           url: 'refurbishing-insulation',
           baseUrl: 'refurbishing-insulation',
@@ -879,7 +879,7 @@ const questionBank = {
         },
         {
           key: 'replacing-insulation',
-          order: 73,
+          order: 95,
           title: 'Will the {{_poultryType_}} housing have full wall and roof insulation, with a U-Value of less than 0.3W/m2/°C?',
           url: 'replacing-insulation',
           baseUrl: 'replacing-insulation',
@@ -927,7 +927,7 @@ const questionBank = {
         },
         {
           key: 'changing-area',
-          order: 92,
+          order: 100,
           title: 'Will the {{_poultryType_}} housing have a biosecure changing area at each external pedestrian access point?',
           hint: {
             html: `
@@ -976,8 +976,7 @@ const questionBank = {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">
-                  The housing must have a biosecure changing area 
-                  at each external pedestrian point with:
+                  The housing must have a biosecure changing area at each external pedestrian point with:
                 </p>
                 <ul>
                   <li>changing facilities, divided by a floor-mounted 
@@ -1018,7 +1017,7 @@ const questionBank = {
         },
         {
           key: 'egg-store-access',
-          order: 94,
+          order: 105,
           title: 'Will there be direct external access to the egg store separate to the entrance lobby?',
           pageTitle: '',
           url: 'egg-store-access',
@@ -1070,7 +1069,7 @@ const questionBank = {
         },
         {
           key: 'aviary-system',
-          order: 96,
+          order: 110,
           title: 'Will the housing have a laying hen aviary system?',
           pageTitle: '',
           url: 'aviary-system',
@@ -1130,8 +1129,8 @@ const questionBank = {
         },
         {
           key: 'aviary-welfare',
-          order: 97,
-          title: `Will the aviary system meet the manufacture's recommendation for high welfare?`,
+          order: 115,
+          title: 'Will the aviary system meet the manufacture\'s recommendation for high welfare?',
           pageTitle: '',
           url: 'aviary-welfare',
           baseUrl: 'aviary-welfare',
@@ -1146,7 +1145,7 @@ const questionBank = {
               content: [{
                 para: 'The aviary system must either:',
                 items: [`have welfare ramps and platforms in positions that meet the manufacturer's recommendation for a high welfare system`,
-              'be designed for hens to move between levels without ramps and platforms']
+                  'be designed for hens to move between levels without ramps and platforms']
               }]
             }]
           },
@@ -1189,7 +1188,7 @@ const questionBank = {
         },
         {
           key: 'manure-removal',
-          order: 98,
+          order: 120,
           title: 'Will the aviary system automatically remove manure?',
           pageTitle: '',
           url: 'manure-removal',
@@ -1236,8 +1235,139 @@ const questionBank = {
           yarKey: 'manureRemoval'
         },
         {
+          key: 'hen-veranda',
+          order: 121,
+          title: 'Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?',
+          pageTitle: '',
+          url: 'hen-veranda',
+          baseUrl: 'hen-veranda',
+          hint: {
+            text: 'Housing projects that do not have access to an area at least 30% the size of the indoor housing area are exempt from adding a veranda'
+          },
+          backUrl: 'lighting-features',
+          nextUrl: 'hen-veranda-features',
+          ineligibleContent: {
+            messageContent: 'The housing must have a veranda that is at least the same size as 30% of the indoor bird housing area footprint in size.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `You must add a veranda that is at least the same size as 30% the indoor bird housing area footprint.
+
+                Housing projects that do not have access to an external area at least 30% of the indoor housing area are exempt.
+                
+                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`,
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-veranda-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-veranda-A2',
+              value: 'No',
+              notEligible: true
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'hen-veranda-A3',
+              value: 'My project is exempt',
+              redirectUrl: 'concrete-apron'
+            }
+          ],
+          yarKey: 'henVeranda'
+        },
+        {
+          key: 'hen-veranda-features',
+          order: 122,
+          title: 'Will the veranda have these features?',
+          hint: {
+            html: `
+                  <p>The veranda of the housing must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a solid concrete floor</li>
+                    <li>a waterproof insulated roof</li>
+                    <li>guttering and a downpipe to feed into the drainage system of the main building</li>
+                    <li>a perimeter wall at least 1 metre high</li>
+                    <li>lockable pop holes within the perimeter wall, unless the veranda forms part of an indoor barn system</li>
+                    <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
+                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
+                  </ul>`
+          },
+          pageTitle: '',
+          url: 'hen-veranda-features',
+          baseUrl: 'hen-veranda-features',
+          backUrl: 'hen-veranda',
+          nextUrl: 'hen-veranda-biosecurity',
+          // preValidationKeys: ['poultryType'],
+          ineligibleContent: {
+            messageContent: 'You cannot apply for a grant from this scheme',
+            insertText: {
+              html: `
+                  <p>The veranda of the housing must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a solid concrete floor </li>
+                    <li>a waterproof insulated roof</li>
+                    <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
+                    <li>a perimeter wall at least 1 metre high</li>
+                    <li>lockable pop holes in the perimeter wall, unless the veranda forms part of an indoor barn system</li>
+                    <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
+                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
+                  </ul>
+            </span>`
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the veranda will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-veranda-features-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-veranda-features-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'henVerandaFeatures'
+        },
+
+        {
           key: 'aviary-lighting-system',
-          order: 99,
+          order: 125,
           title: 'Will the aviary system have an integrated LED lighting system?',
           pageTitle: '',
           url: 'aviary-lighting-system',
@@ -1264,7 +1394,6 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-        
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -1290,7 +1419,7 @@ const questionBank = {
         },
         {
           key: 'ventilation-air-speed',
-          order: 101,
+          order: 130,
           title: 'Will the {{_poultryType_}} housing ventilation be able to provide an air speed of 1 metre per second over birds?',
           pageTitle: '',
           url: 'ventilation-air-speed',
@@ -1312,7 +1441,6 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-        
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -1338,7 +1466,7 @@ const questionBank = {
         },
         {
           key: 'hen-ventilation-rate',
-          order: 102,
+          order: 135,
           title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 10,800m3 per hour per 1000 hens?',
           pageTitle: '',
           url: 'hen-ventilation-rate',
@@ -1388,7 +1516,7 @@ const questionBank = {
         },
         {
           key: 'ventilation-air-quality',
-          order: 104,
+          order: 140,
           title: 'Will the ventilation maintain the required air quality parameters?',
           pageTitle: '',
           url: 'ventilation-air-quality',
@@ -1416,14 +1544,14 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-        hint: {
-          html: `
+          hint: {
+            html: `
                 <p>The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
                 <ul class="govuk-list--bullet">
                     <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
                     <li>percentage relative humidity (%rH) level of 40% to 70%</li>
                 </ul>`
-        },
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -1646,7 +1774,7 @@ const questionBank = {
         },
         {
           key: 'project-cost',
-          order: 220,
+          order: 145,
           pageTitle: '',
           classes: 'govuk-input--width-10',
           url: 'project-cost',
@@ -1715,7 +1843,7 @@ const questionBank = {
         },
         {
           key: 'potential-amount',
-          order: 230,
+          order: 150,
           url: 'potential-amount',
           baseUrl: 'potential-amount',
           backUrl: 'project-cost',
@@ -1732,7 +1860,7 @@ const questionBank = {
         },
         {
           key: 'potential-amount-conditional',
-          order: 232,
+          order: 155,
           url: 'potential-amount-conditional',
           baseUrl: 'potential-amount-conditional',
           backUrl: 'project-cost-solar',
@@ -1750,7 +1878,7 @@ const questionBank = {
         },
         {
           key: 'potential-amount-capped',
-          order: 231,
+          order: 160,
           url: 'potential-amount-capped',
           baseUrl: 'potential-amount-capped',
           backUrl: 'project-cost',
@@ -1768,7 +1896,7 @@ const questionBank = {
         },
         {
           key: 'remaining-costs',
-          order: 240,
+          order: 165,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
           url: 'remaining-costs',
@@ -1836,7 +1964,7 @@ const questionBank = {
         },
         {
           key: 'score',
-          order: 350,
+          order: 170,
           title: 'Score results',
           url: 'score',
           baseUrl: 'score',
