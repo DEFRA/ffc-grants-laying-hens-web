@@ -102,6 +102,8 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   if (errorHrefList.length > 0) {
     return customiseErrorText(payloadValue, currentQuestion, errorHrefList, h, request)
   }
+
+  return false
 }
 
 module.exports = {
