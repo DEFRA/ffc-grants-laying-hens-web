@@ -1532,13 +1532,13 @@ const questionBank = {
           nextUrl: 'lighting-system',
           ineligibleContent: {
             messageContent: `
-            <div class="govuk-list govuk-list--bullet">
-            <p class="govuk-body">The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
-                  <ul>
-                    <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
-                    <li>percentage relative humidity (%rH) level of 40% to 70%</li>
-                  </ul>
-            </div>`,
+                <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
+                      <ul>
+                        <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
+                        <li>percentage relative humidity (%rH) level of 40% to 70%</li>
+                      </ul>
+                </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1559,7 +1559,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the lighting system will provide non-flicker light from dimmable LEDs'
+              error: 'Select yes if the ventilation will maintain the required air quality parameters'
             }
           ],
           answers: [
@@ -1574,6 +1574,203 @@ const questionBank = {
             }
           ],
           yarKey: 'ventilationAirQuality'
+        },
+        {
+          key: 'lighting-system',
+          order: 175,
+          title: 'Will the housing lighting system provide non-flicker light from dimmable LEDs?',
+          pageTitle: '',
+          url: 'lighting-system',
+          baseUrl: 'lighting-system',
+          backUrl: 'ventilation-air-quality',
+          nextUrl: 'lighting-features',
+          hint: {
+            text: 'Housing lighting must be ceiling-mounted and cover the whole barn area including the floor litter'
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'The lighting must be able to provide:',
+                  items: [
+                      'non-flicker light between approximately 3000 Kelvin and 4000 Kelvin colour temperature',
+                      'zonal dimming between 0 lux and 60 lux',
+                  ]
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: 'Housing lighting must be ceiling-mounted and cover the whole barn area including the floor litter.',
+            insertText: {
+              html:  
+                  `<div class="govuk-list govuk-list--bullet">
+                      <p>The lighting must be able to provide:</p>
+                      <ul>
+                          <li>non-flicker light between approximately 3000 Kelvin and 4000 Kelvin colour temperature</li>
+                          <li>zonal dimming between 0 lux and 60 lux</li>
+                      </ul>
+                   </div>`
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the lighting system will provide non-flicker light from dimmable LEDs'
+            }
+          ],
+          answers: [
+            {
+              key: 'lighting-system-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'lighting-system-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'lightingSystem'
+        },
+        {
+          key: 'lighting-features',
+          order: 180,
+          title: 'Will the housing\'s lighting system have these features?',
+          pageTitle: '',
+          url: 'lighting-features',
+          baseUrl: 'lighting-features',
+          backUrl: 'lighting-system',
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-veranda',
+              elseUrl: 'concrete-apron'
+            }
+          },
+          hint: {
+            html: `<p>The housing lighting system must have:</p>
+                  <ul>
+                      <li>the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)</li>
+                      <li>an option for red light</li>
+                      <li>a fail-safe standby device in case of electrical or other failures</li>
+                  </ul>`
+          },
+          ineligibleContent: {
+            messageContent: `
+                  <p>The housing lighting system must have:</p>
+                  <ul>
+                      <li>the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)</li>
+                      <li>an option for red light</li>
+                      <li>a fail-safe standby device in case of electrical or other failure</li>
+                  </ul>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the housing’s lighting system will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'lighting-features-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'lighting-features-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'lightingFeatures'
+        },
+        {
+          key: 'hen-pop-holes',
+          order: 185,
+          title: 'Will the internal hen housing have lockable pop holes for the hens to enter the veranda through?',
+          pageTitle: '',
+          url: 'hen-pop-holes',
+          baseUrl: 'hen-pop-holes',
+          backUrl: 'hen-veranda-biosecurity',
+          nextUrl: 'concrete-apron',
+          hint: {
+            text: 'You must not put perches in front of the pop holes'
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'Pop holes must:',
+                  items: [
+                      'be at least 35cm high and 40cm wide',
+                      'extend along the entire length of the building',
+                  ],
+                  additionalPara: `
+                  The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
+
+                  The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.`
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: 
+            `<p class="govuk-body">Pop holes must:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>be at least 35cm high and 40cm wide</li>
+                    <li>extend along the entire length of the building</li>
+                </ul>
+             <p class="govuk-body">The pop hole openings must add up to a total of 2 metres for every 1,000 hens.</p>`,
+            insertText: {
+              html: `
+                  <p>The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.</p>
+                  <p>You must not put perches in front of the pop holes.</p>`    
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the internal hen housing will have lockable pop holes'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-pop-holes-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-pop-holes-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'henPopHoles'
         },
         {
           key: 'project-cost',

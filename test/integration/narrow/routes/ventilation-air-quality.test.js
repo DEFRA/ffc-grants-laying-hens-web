@@ -36,7 +36,7 @@ describe('Page: /ventilation-air-quality', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the lighting system will provide non-flicker light from dimmable LEDs')
+    expect(postResponse.payload).toContain('Select yes if the ventilation will maintain the required air quality parameters')
   })
 
   it('user selects eligible option -> store user response and redirect to /lighting-system', async () => {
