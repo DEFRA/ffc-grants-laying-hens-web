@@ -1516,7 +1516,7 @@ const questionBank = {
         {
           key: 'hen-ventilation-rate',
           order: 135,
-          title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 10,800m3 per hour per 1000 hens?',
+          title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 10,800m³ per hour per 1000 hens?',
           pageTitle: '',
           url: 'hen-ventilation-rate',
           baseUrl: 'hen-ventilation-rate',
@@ -1526,7 +1526,7 @@ const questionBank = {
             text: 'For birds up to 2.5kg in body mass'
           },
           ineligibleContent: {
-            messageContent: 'The housing ventilation must have a ventilation rate of 10,800m3 per hour per 1000 hens.',
+            messageContent: 'The housing ventilation must have a ventilation rate of 10,800m³ per hour per 1000 hens.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1536,7 +1536,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The ventilation system must be able to provide a ventilation rate (MXVR) of 10,800m3 per hour per 1000 hens in the case of high heat scenarios.'
+                para: 'The ventilation system must be able to provide a ventilation rate (MXVR) of 10,800m³ per hour per 1000 hens in the case of high heat scenarios.'
               }]
             }]
           },
