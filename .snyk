@@ -10,8 +10,8 @@ ignore:
   SNYK-JS-INFLIGHT-6095116:
     - '*':
         reason: None Given
-        expires: 2024-02-01T13:54:14.339Z
-        created: 2024-01-02T13:54:14.343Z
+        expires: 2024-03-02T14:03:34.697Z
+        created: 2024-02-01T14:03:34.705Z
   SNYK-JS-AXIOS-6124857:
     - '*':
         reason: None Given
