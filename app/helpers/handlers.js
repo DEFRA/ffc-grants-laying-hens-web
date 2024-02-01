@@ -20,12 +20,11 @@ const {
   getDataFromYarValue,
   getConsentOptionalData
 } = require('./pageHelpers')
-const desirability = require('./../messaging/scoring/create-desirability-msg')
 
 const { getUserScore } = require('../messaging/application')
 const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
-const createDesirabilityMsg = require('./../messaging/scoring/create-desirability-msg')
+const { desirability } = require('./../messaging/scoring/create-desirability-msg')
 
 const createModel = (data, backUrl, url) => {
   return {
@@ -93,7 +92,7 @@ const validateErrorCheck = (question, validate, request) => {
 
 const scorePageData = async (request, backUrl, url, h) => {
   const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
-  const formatAnswersForScoring = createDesirabilityMsg(desirabilityAnswers)
+  const formatAnswersForScoring = desirability(desirabilityAnswers)
 
   try {
     const msgData = await getUserScore(formatAnswersForScoring, request.yar.id)

@@ -10,6 +10,7 @@ describe('login page', () => {
       else return 'Error'
     }
   }))
+
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -24,18 +25,16 @@ describe('login page', () => {
     expect(response.payload).toContain('login')
   })
 
-  // bcrypt.compareSync how to test
-  xit('login with correct username but incorrect password', async () => {
+  it('login with correct username but incorrect password', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/login`,
-      payload: { username: 'username', password: 'password', crumb: crumbToken },
+      payload: { username: 'test_username', password: 'password', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toBe('ok')
     expect(() => require('../../../app/routes/login')).toThrow()
   })
 
@@ -52,17 +51,22 @@ describe('login page', () => {
     expect(postResponse.payload).toContain('login')
   })
 
-  // bcrypt.compareSync how to test
-  xit('redirect to /start when entering correct details', async () => {
+  it('redirect to /start when entering correct details', async () => {
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/login`,
-      payload: { username: 'some conscent', password: 'password', crumb: crumbToken },
+      payload: { username: 'test_username', password: undefined, crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
+    global.__SERVER__.ext('onPreAuth', (request, h) => {
+      request.cookieAuth = { set: jest.fn() };
+      return h.continue;
+    });
+    
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('start')
+    expect(postResponse.headers.location).toBe('/laying-hens/start')
   })
 })

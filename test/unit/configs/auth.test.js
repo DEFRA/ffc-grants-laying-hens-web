@@ -65,4 +65,28 @@ describe('auth', () => {
         });
         expect(server.auth.default).toHaveBeenCalledWith('session-auth');
     });
+
+    it('should validate the session correctly', async () => {
+        const server = {
+          register: jest.fn(),
+          auth: {
+            strategy: jest.fn(),
+            default: jest.fn()
+          }
+        };
+    
+        await auth.plugin.register(server, {});
+    
+        // Call the validateFunc with a session that is authenticated
+        const validateFunc = server.auth.strategy.mock.calls[0][2].validateFunc;
+        const { valid, credentials } = validateFunc({}, { authenticated: true });
+    
+        expect(valid).toBe(true);
+        expect(credentials).toEqual(authConfig.credentials);
+    
+        // Call the validateFunc with a session that is not authenticated
+        const { valid: validNotAuthenticated } = validateFunc({}, { authenticated: false });
+    
+        expect(validNotAuthenticated).toBe(false);
+      });
 });
