@@ -2,6 +2,8 @@ const createServer = require('../../../../app/server');
 const authConfig = require('../../../../app/config/auth');
 const cacheConfig = require('../../../../app/config/cache');
 
+let useRedisValue = true
+
 const mockRegisterSpy = jest.fn();
 const mockedInfo = {
   created: 1666795964619,
@@ -31,8 +33,17 @@ jest.mock('@hapi/hapi', () => {
 });
 
 describe('Server test', () => {
-  test('When authConfig is enabled - createServer returns server with registered plugins - cacheConfig.useRedis true', async () => {
-    cacheConfig.useRedis = true
+
+  beforeEach(() => {
+    jest.resetModules()
+    jest.doMock('../../../../app/config/cache', () => ({
+      useRedis: useRedisValue
+    }));
+    
+  })
+
+  test('When authConfig is enabled - createServer returns server with registered plugins - cacheConfig.useRedis true', async () => { 
+    useRedisValue = true
 
     const ogEnabled = authConfig.enabled;
     authConfig.enabled = true;
@@ -53,7 +64,7 @@ describe('Server test', () => {
   })
 
   test('When authConfig is enabled - createServer returns server with registered plugins - cacheconfig.useRedis false', async () => {
-    cacheConfig.useRedis = false
+    useRedisValue = false
 
     const ogEnabled = authConfig.enabled;
     authConfig.enabled = true;

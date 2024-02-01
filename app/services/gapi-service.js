@@ -2,12 +2,12 @@ const appInsights = require('./app-insights')
 const { getYarValue } = require('../helpers/session')
 const blockDefaultPageViews = ['login', 'start', 'applying', 'session-timeout']
 
-const isBlockDefaultPageView = (url) => {
+const isBlockDefaultPageView = url => {
   const currentUrl = url.split('/').pop().toString().toLowerCase()
   return blockDefaultPageViews.indexOf(currentUrl) >= 0 && !url.includes('assets')
 }
 
-const grant_type = 'Laying Hens'
+const grantType = 'Laying Hens'
 
 const eventTypes = {
   PAGEVIEW: 'pageview',
@@ -21,7 +21,7 @@ const eventTypes = {
 const sendGAEvent = async (request, metrics) => {
   const timeSinceStart = getTimeofJourneySinceStart(request).toString()
   const pagePath = request.route.path
-  const host_name = request.info.hostname
+  const hostName = request.info.hostname
   const { name, params } = metrics
   const isEliminationEvent = name === eventTypes.ELIMINATION
   const isEligibilityEvent = name === eventTypes.ELIGIBILITY
@@ -35,9 +35,9 @@ const sendGAEvent = async (request, metrics) => {
     ...(isConfirmationEvent && { final_score: getYarValue(request, 'current-score'), user_type: getYarValue(request, 'applying'), confirmation_time: timeSinceStart }),
     ...(params?.score_presented && { score_presented: params.score_presented }),
     ...(params?.scoreReached && { scoreReached: params.scoreReached }),
-    grant_type,
+    grant_type: grantType,
     page_title: pagePath,
-    host_name
+    host_name: hostName
   }
   try {
     console.log(name, 'dmetrics:::::: ', dmetrics)
@@ -50,7 +50,7 @@ const sendGAEvent = async (request, metrics) => {
   console.log('[ %s MATRIC SENT ]', name.toUpperCase())
 }
 
-const getTimeofJourneySinceStart = (request) => {
+const getTimeofJourneySinceStart = request => {
   if (getYarValue(request, 'journey-start-time')) {
     return Math.abs(((new Date()).getTime() - (new Date(getYarValue(request, 'journey-start-time'))).getTime()) / 1000)
   }

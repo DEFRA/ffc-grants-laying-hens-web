@@ -2,7 +2,7 @@ const { getHtml } = require('../helpers/conditionalHTML')
 const { setOptionsLabel } = require('../helpers/answer-options')
 const { getYarValue, setYarValue } = require('../helpers/session')
 
-const getConfirmationId = (guid) => {
+const getConfirmationId = guid => {
   const prefix = 'CH'
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
@@ -111,7 +111,7 @@ const getDataFromYarValue = (request, yarKey, type) => {
   return data
 }
 
-const getConsentOptionalData = (consentOptional) => {
+const getConsentOptionalData = consentOptional => {
   return {
     hiddenInput: {
       id: 'consentMain',

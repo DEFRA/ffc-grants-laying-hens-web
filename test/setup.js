@@ -33,7 +33,7 @@ beforeEach(async () => {
     return {
       credentials: {
         username: 'test_username',
-        passwordHash: ''
+        passwordHash: '12345'
       },
       cookie: {
         name: 'session-auth',

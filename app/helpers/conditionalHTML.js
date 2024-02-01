@@ -3,7 +3,7 @@ const getHtml = (label, labelData, fieldValueData, error) => {
 
   if (label === 'yesStructureEligibility') {
     return !error
-      ? 
+      ?
       `<div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="250">
         <div class="govuk-form-group">
           <label class="govuk-label" for="${label}">

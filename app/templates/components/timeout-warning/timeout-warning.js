@@ -119,7 +119,7 @@ class TimeoutWarning {
 
     const seconds = 60 * minutes
 
-    $countdown.innerHTML = minutes + ' minute' + (minutes > 1 ? 's' : '')
+    $countdown.innerHTML = `${minutes} minute${minutes > 1 ? 's' : ''}`
     this.runTimer(seconds, timers, iOS, timerRunOnce, $accessibleCountdown, $module, $countdown)
   }
 
@@ -232,15 +232,15 @@ class TimeoutWarning {
     const pluralText = (time > 1 ? 's' : '')
     const timeText = (isMinute === true ? 'minute' : 'second')
     if (isMinute) {
-      return time > 0 ? '<span class="tabular-numbers">' + time + '</span> ' + timeText + pluralText + '' : ' '
+      return time > 0 ? `<span class="tabular-numbers">${time}</span> ${timeText}${pluralText}` : ' '
     } else {
-      return time >= 1 ? '<span class="tabular-numbers">' + time + '</span> ' + timeText + pluralText + '' : ' '
+      return time >= 1 ? `<span class="tabular-numbers">${time}</span> ${timeText}${pluralText}` : ' '
     }
   }
 
   getAtText (minLeftText, secondsLeft, secLeftText, minutesLeft) {
-    const atMinutesText = minutesLeft > 0 ? minutesLeft + ' minute' + minLeftText + '' : ''
-    const atSecondsText = secondsLeft >= 1 ? ' ' + secondsLeft + ' second' + secLeftText + '' : ''
+    const atMinutesText = minutesLeft > 0 ? `${minutesLeft} minute${minLeftText}` : '';
+    const atSecondsText = secondsLeft >= 1 ? ` ${secondsLeft} second${secLeftText}` : '';
     let atText = 'We will reset your answers if you do not respond in ' + atMinutesText
     if (atSecondsText) {
       if (minutesLeft > 0) {

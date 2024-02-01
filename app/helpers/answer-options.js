@@ -4,7 +4,7 @@ function isChecked (data, option) {
 }
 
 function setOptionsLabel (data, answers, conditionalHtml) {
-  return answers.map((answer) => {
+  return answers.map(answer => {
     const { value, hint, text, conditional } = answer
 
     if (value === 'divider') {
@@ -36,7 +36,7 @@ function setOptionsLabel (data, answers, conditionalHtml) {
 function setSelectLabels (data, selectList) {
   return [
     { text: 'Select an option', value: '' },
-    ...selectList.map((selectValue) => {
+    ...selectList.map(selectValue => {
       return {
         value: selectValue,
         text: selectValue,
@@ -51,6 +51,7 @@ const inputOptions = (data, question, conditionalHtml) => {
   const { yarKey, title, hint, answers, classes = 'govuk-fieldset__legend--l' } = question
   return {
     classes,
+    hint,
     id: yarKey,
     name: yarKey,
     fieldset: {
@@ -60,7 +61,6 @@ const inputOptions = (data, question, conditionalHtml) => {
         classes
       }
     },
-    hint,
     items: setOptionsLabel(data, answers, conditionalHtml)
   }
 }
@@ -70,10 +70,10 @@ const selectField = (data, question) => {
 
   return {
     classes,
-    id: yarKey,
-    name: yarKey,
     label,
     hint,
+    id: yarKey,
+    name: yarKey,
     items: setSelectLabels(data, answers)
   }
 }
@@ -81,14 +81,14 @@ const selectField = (data, question) => {
 const textField = (data, question, _request = null) => {
   const { yarKey, prefix, suffix, label, classes, inputmode, pattern } = question
   return {
-    id: yarKey,
-    name: yarKey,
     inputmode,
     pattern,
     classes,
     prefix,
     suffix,
     label,
+    id: yarKey,
+    name: yarKey,
     hint: question.hint,
     value: data || ''
   }
@@ -106,7 +106,7 @@ const getAllInputs = (data, question, conditionalHtml, request) => {
     })
     data = dataObject
   }
-  return allFields.map((field) => {
+  return allFields.map(field => {
     const { type, endFieldset } = field
     let fieldItems
     switch (type) {

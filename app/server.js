@@ -83,9 +83,7 @@ async function registerPlugins(server) {
           hitTypes: ['pageview']
         }
       ],
-      sessionIdProducer: async request => {
-        return request.yar ? request.yar.id : Uuid.v4()
-      },
+      sessionIdProducer: async request => request.yar ? request.yar.id : Uuid.v4(),
       batchSize: 20,
       batchInterval: 15000
     }

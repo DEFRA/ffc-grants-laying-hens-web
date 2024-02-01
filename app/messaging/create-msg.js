@@ -27,7 +27,7 @@ const desirabilityAnswersSchema = Joi.object({
 
 function getDesirabilityAnswers (request) {
   try {
-    
+
     const val = {
       housing: getYarValue(request, 'housing'),
       calfGroupSize: getYarValue(request, 'calfGroupSize'),
@@ -37,7 +37,7 @@ function getDesirabilityAnswers (request) {
       sustainableMaterials: getDataFromYarValue(request, 'sustainableMaterials', multiAnswer),
       introducingInnovation: getDataFromYarValue(request, 'introducingInnovation', multiAnswer)
     }
-    
+
     const result = desirabilityAnswersSchema.validate(val, {
       abortEarly: false
     })

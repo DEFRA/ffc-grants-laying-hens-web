@@ -1,4 +1,5 @@
 const { crumbToken } = require('./test-helper')
+const bcrypt = require('bcrypt');
 
 describe('login page', () => {
   const varList = { farmerDetails: 'someValue', contractorsDetails: 'someValue' }
@@ -10,6 +11,14 @@ describe('login page', () => {
       else return 'Error'
     }
   }))
+
+  beforeEach(() => {
+    bcryptSpy = jest.spyOn(bcrypt, 'compareSync')
+  })
+
+  afterEach(() => {
+    bcryptSpy.mockRestore();
+  });
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -38,6 +47,21 @@ describe('login page', () => {
     expect(() => require('../../../app/routes/login')).toThrow()
   })
 
+  it('login with correct password but incorrect username', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/login`,
+      payload: { username: 'hello', password: '12345', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    bcryptSpy.mockReturnValue(true);
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(() => require('../../../app/routes/login')).toThrow()
+  })
+
   it('login with incorrect details goes to fail action', async () => {
     const postOptions = {
       method: 'POST',
@@ -56,7 +80,7 @@ describe('login page', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/login`,
-      payload: { username: 'test_username', password: undefined, crumb: crumbToken },
+      payload: { username: 'test_username', password: '12345', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
@@ -64,6 +88,8 @@ describe('login page', () => {
       request.cookieAuth = { set: jest.fn() };
       return h.continue;
     });
+
+    bcryptSpy.mockReturnValue(true);
     
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
