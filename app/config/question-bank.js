@@ -1884,6 +1884,56 @@ const questionBank = {
           yarKey: 'concreteApron'
         },
         {
+          key: 'vaccination-lobby',
+          order: 195,
+          title: 'Will there be a designated vaccination lobby with internal and external access?',
+          pageTitle: '',
+          url: 'vaccination-lobby',
+          baseUrl: 'vaccination-lobby',
+          backUrl: 'changing-area',
+          nextUrl: 'housing-density',
+          hint: {
+            text: 'Internal access from the bird living area and external access from the loading bay'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The housing must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if there will be a designated vaccination lobby'
+            }
+          ],
+          answers: [
+            {
+              key: 'vaccination-lobby-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'vaccination-lobby-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'vaccinationLobby'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
