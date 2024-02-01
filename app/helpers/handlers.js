@@ -307,6 +307,10 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
       thisAnswer = answers?.find(answer => (answer.value === value))
     }
 
+    if (key === 'henVeranda' && value === 'My project is exempt') {
+      setYarValue(request, 'henPopHoles', null)
+    }
+
     if (type !== 'multi-input' && key !== 'secBtn') {
       setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
     }
