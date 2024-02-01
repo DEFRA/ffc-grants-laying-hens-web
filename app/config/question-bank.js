@@ -878,13 +878,13 @@ const questionBank = {
         {
           key: 'replacing-insulation',
           order: 95,
-          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation, with a U-Value of less than 0.3W/m2/°C?',
+          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation, with a U-Value of less than 0.3W/m²/°C?',
           url: 'replacing-insulation',
           baseUrl: 'replacing-insulation',
           backUrl: 'capped-inlets-outlets',
           nextUrl: 'changing-area',
           ineligibleContent: {
-            messageContent: 'The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m2/°C.',
+            messageContent: 'The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m²/°C.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -896,7 +896,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The wall and roof insulation of the {{_poultryType_}} housing must have a U- Value of less than 0.3W/m2/°C.
+                para: `The wall and roof insulation of the {{_poultryType_}} housing must have a U- Value of less than 0.3W/m²/°C.
 
                 The U-Value measures the rate of heat transfer from inside a building to outside.`,
                 items: []
