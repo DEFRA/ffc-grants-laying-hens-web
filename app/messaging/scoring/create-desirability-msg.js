@@ -6,6 +6,8 @@ function getUserAnswer (answers, userInput) {
     return [userInput].flat().map(answer =>
       ({ key: Object.keys(answers).find(key => answers[key] === answer), value: answer }))
   }
+
+  return
 }
 
 function getDesirabilityDetails (questionKey, userInput) {
@@ -42,4 +44,7 @@ function desirability (userInput) {
   }
 }
 
-module.exports = desirability
+// had to export getUSerAnswer in order to test the if(answer) function, given that answer always came from 
+//   hardcoded list at top of file.
+// function not used anywhere else other than this file and test file 
+module.exports = { desirability, getUserAnswer }
