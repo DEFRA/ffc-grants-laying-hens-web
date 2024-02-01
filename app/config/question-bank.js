@@ -1305,7 +1305,7 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                     <li>a solid concrete floor</li>
                     <li>a waterproof insulated roof</li>
-                    <li>guttering and a downpipe to feed into the drainage system of the main building</li>
+                    <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
                     <li>a perimeter wall at least 1 metre high</li>
                     <li>lockable pop holes within the perimeter wall, unless the veranda forms part of an indoor barn system</li>
                     <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
@@ -1319,21 +1319,20 @@ const questionBank = {
           nextUrl: 'hen-veranda-biosecurity',
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
-            messageContent: 'You cannot apply for a grant from this scheme',
-            insertText: {
-              html: `
-                  <p>The veranda of the housing must have:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a solid concrete floor </li>
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">The veranda of the housing must have:</p>
+                <ul class="govuk-list--bullet">
+                    <li>a solid concrete floor</li>
                     <li>a waterproof insulated roof</li>
                     <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
                     <li>a perimeter wall at least 1 metre high</li>
                     <li>lockable pop holes in the perimeter wall, unless the veranda forms part of an indoor barn system</li>
                     <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
                     <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
-                  </ul>
-            </span>`
-            },
+                </ul>
+            </div>
+            `,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1708,7 +1707,7 @@ const questionBank = {
           },
           hint: {
             html: `<p>The housing lighting system must have:</p>
-                  <ul>
+                  <ul >
                       <li>the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)</li>
                       <li>an option for red light</li>
                       <li>a fail-safe standby device in case of electrical or other failures</li>
