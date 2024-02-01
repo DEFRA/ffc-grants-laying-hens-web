@@ -1168,7 +1168,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if the aviary system will meet the recommendation for high welfare'
+              error: 'Select yes if the aviary system will meet the recommendation for high welfare'
             }
           ],
           answers: [

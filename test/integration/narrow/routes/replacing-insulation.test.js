@@ -22,7 +22,7 @@ describe('Page: /replacing-insulation', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the hen housing have full wall and roof insulation, with a U-Value of less than 0.3W/m2/°C?')
+    expect(response.payload).toContain('Will the hen housing have full wall and roof insulation, with a U-Value of less than 0.3W/m²/°C?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -36,7 +36,7 @@ describe('Page: /replacing-insulation', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the pullet housing have full wall and roof insulation, with a U-Value of less than 0.3W/m2/°C?')
+    expect(response.payload).toContain('Will the pullet housing have full wall and roof insulation, with a U-Value of less than 0.3W/m²/°C?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -92,7 +92,7 @@ describe('Page: /replacing-insulation', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m2/°C.')
+    expect(postResponse.payload).toContain('The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m²/°C.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
