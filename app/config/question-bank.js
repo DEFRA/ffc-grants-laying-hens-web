@@ -1934,6 +1934,66 @@ const questionBank = {
           yarKey: 'vaccinationLobby'
         },
         {
+          key: 'housing-density',
+          order: 200,
+          title: 'Will the pullets be housed at a maximum stocking density of 20kg per metres squared (m²) of the total usable area at 16 weeks of age?',
+          pageTitle: '',
+          url: 'housing-density',
+          baseUrl: 'housing-density',
+          backUrl: 'vaccination-lobby',
+          nextUrl: 'pullet-housing-requirements',
+          hint: {
+            text: 'This must be 33kg per m² at floor level'
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:',
+                  items: ['20kg per m² of the total usable area', '33kg per m² of the total usable area at floor level'],
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+            <p class="govuk-body">The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+                  <ul>
+                    <li>20kg per m² of the total usable area</li>
+                    <li>33kg per m² of the total usable area at floor level</li>
+                  </ul>
+            </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullets will be housed at a maximum stocking density'
+            }
+          ],
+          answers: [
+            {
+              key: 'housing-density-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'housing-density-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'housingDensity'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
