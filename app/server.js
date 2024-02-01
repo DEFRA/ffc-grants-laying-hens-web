@@ -14,8 +14,19 @@ const authConfig = require('./config/auth')
 
 require('dotenv').config()
 
-async function createServer () {
-  const server = Hapi.server({
+function getSecurityPolicy () {
+  return "default-src 'self';" +
+    "object-src 'none';" +
+    "script-src 'self' www.google-analytics.com *.googletagmanager.com ajax.googleapis.com *.googletagmanager.com/gtm.js 'unsafe-inline' 'unsafe-eval' 'unsafe-hashes';" +
+    "form-action 'self';" +
+    "base-uri 'self';" +
+    "connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com;" +
+    "style-src 'self' 'unsafe-inline' tagmanager.google.com *.googleapis.com;" +
+    "img-src 'self' *.google-analytics.com *.googletagmanager.com;"
+}
+
+function getServerConfig() {
+  return {
     port: process.env.PORT,
     cache: [{
       name: 'session',
@@ -24,8 +35,9 @@ async function createServer () {
         options: cacheConfig.catboxOptions
       }
     }]
-  })
-
+  }
+}
+async function registerPlugins(server) {
   if (authConfig.enabled) {
     await server.register(require('./plugins/auth'))
   }
@@ -108,6 +120,12 @@ async function createServer () {
       }
     }]
   )
+}
+
+async function createServer () {
+  const server = Hapi.server(getServerConfig())
+
+  await registerPlugins(server)
 
   const routes = [].concat(
     require('./routes/healthy'),
@@ -153,15 +171,5 @@ async function createServer () {
 
   return server
 
-  function getSecurityPolicy () {
-    return "default-src 'self';" +
-      "object-src 'none';" +
-      "script-src 'self' www.google-analytics.com *.googletagmanager.com ajax.googleapis.com *.googletagmanager.com/gtm.js 'unsafe-inline' 'unsafe-eval' 'unsafe-hashes';" +
-      "form-action 'self';" +
-      "base-uri 'self';" +
-      "connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com;" +
-      "style-src 'self' 'unsafe-inline' tagmanager.google.com *.googleapis.com;" +
-      "img-src 'self' *.google-analytics.com *.googletagmanager.com;"
-  }
 }
 module.exports = createServer
