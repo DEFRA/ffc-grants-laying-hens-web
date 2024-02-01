@@ -2114,6 +2114,66 @@ const questionBank = {
           yarKey: 'multiTierSystem'
         },
         {
+          key: 'rearing-aviary-system',
+          order: 215,
+          title: 'Will your rearing aviary system have these features?',
+          pageTitle: '',
+          url: 'rearing-aviary-system',
+          baseUrl: 'rearing-aviary-system',
+          backUrl: 'multi-tier-system',
+          nextUrl: 'mechanical-ventilation',
+          hint: {
+            html:`
+                <p>The rearing aviary system must have:</p>
+                <ul>
+                    <li>the capacity to provide or retain friable litter while the birds are held within the system</li>
+                    <li>an integrated manure removal belt-system</li>
+                    <li>integrated height-adjustable feed lines, nipple drinkers and platforms</li>
+                    <li>integrated and fully dimmable non-flicker LED lighting</li>
+                    <li>welfare ramps when the pullets are 14 days old</li>
+                </ul>`
+          },
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                    <p>The rearing aviary system must have:</p>
+                    <ul>
+                        <li>the capacity to provide or retain friable litter while the birds are held within the system</li>
+                        <li>an integrated manure removal belt-system</li>
+                        <li>integrated height-adjustable feed lines, nipple drinkers and platforms</li>
+                        <li>integrated and fully dimmable non-flicker LED lighting</li>
+                        <li>welfare ramps when the pullets are 14 days old</li>
+                    </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if your rearing aviary system will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'rearing-aviary-system-A1',
+              value: 'Yes',
+            },
+            {
+              key: 'rearing-aviary-system-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'rearingAviarySystem'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
