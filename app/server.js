@@ -37,6 +37,31 @@ function getServerConfig() {
     }]
   }
 }
+
+function getHeaderConfig(server) {
+return {
+  plugin: require('./plugins/header'),
+  options: {
+    keys: [
+      { key: 'X-Frame-Options', value: 'deny' },
+      { key: 'X-Content-Type-Options', value: 'nosniff' },
+      { key: 'Access-Control-Allow-Origin', value: server.info.uri },
+      { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+      { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
+      { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+      { key: 'X-XSS-Protection', value: '1; mode=block' },
+      { key: 'Strict-Transport-Security', value: 'max-age=31536000;' },
+      { key: 'Cache-Control', value: 'no-cache' },
+      { key: 'Referrer-Policy', value: 'no-referrer' },
+      {
+        key: 'Content-Security-Policy',
+        value: getSecurityPolicy()
+      }
+    ]
+  }
+}
+}
+
 async function registerPlugins(server) {
   if (authConfig.enabled) {
     await server.register(require('./plugins/auth'))
@@ -46,27 +71,7 @@ async function registerPlugins(server) {
   await server.register(vision)
   await server.register(require('./plugins/cookies'))
   await server.register(require('./plugins/error-pages'))
-  await server.register({
-    plugin: require('./plugins/header'),
-    options: {
-      keys: [
-        { key: 'X-Frame-Options', value: 'deny' },
-        { key: 'X-Content-Type-Options', value: 'nosniff' },
-        { key: 'Access-Control-Allow-Origin', value: server.info.uri },
-        { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
-        { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
-        { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
-        { key: 'X-XSS-Protection', value: '1; mode=block' },
-        { key: 'Strict-Transport-Security', value: 'max-age=31536000;' },
-        { key: 'Cache-Control', value: 'no-cache' },
-        { key: 'Referrer-Policy', value: 'no-referrer' },
-        {
-          key: 'Content-Security-Policy',
-          value: getSecurityPolicy()
-        }
-      ]
-    }
-  })
+  await server.register(getHeaderConfig(server))
   // GTM Server side
   await server.register({
     plugin: require('./plugins/gapi'),
