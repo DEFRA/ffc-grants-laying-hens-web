@@ -1263,7 +1263,7 @@ const questionBank = {
               content: [{
                 para: `You must add a veranda that is at least the same size as 30% of the indoor bird housing area footprint.
 
-                Housing projects that do not have access to an external area at least 30% of the indoor housing area are exempt.
+                Housing projects that do not have access to an external area of at least 30% of the indoor housing area are exempt.
                 
                 You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`,
                 items: []
