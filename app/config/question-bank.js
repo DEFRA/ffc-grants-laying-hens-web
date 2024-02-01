@@ -2051,6 +2051,69 @@ const questionBank = {
           yarKey: 'pulletHousingRequirements'
         },
         {
+          key: 'multi-tier-system',
+          order: 210,
+          title: 'Which multi-tier system will the pullet housing have?',
+          pageTitle: '',
+          url: 'multi-tier-system',
+          baseUrl: 'multi-tier-system',
+          backUrl: 'pullet-housing-requirements',
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'The pullet housing must have a multi-tier system to enable the birds to transition between levels without flying or jumping more than 1m in height, horizontally or vertically.',
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: 'The pullet housing must have a multi-tier system.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what multi-tier system the pullet housing will have'
+            }
+          ],
+          answers: [
+            {
+              key: 'multi-tier-system-A1',
+              value: 'Rearing aviary',
+              redirectUrl: 'rearing-aviary-system',
+              hint: {
+                text: 'A system that houses birds within tiers during the first 2 weeks of rearing, that you can open to enable them to access the barn flow after 2 weeks'
+              }
+            },
+            {
+              key: 'multi-tier-system-A2',
+              value: 'Step-up system',
+              redirectUrl: 'step-up-system',
+              hint: {
+                text: 'A floor system that can change to match a rearing aviary post-brooding, with adjustable elevated tiers you can add and gradually raise as the birds grow'
+              }
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'multi-tier-system-A3',
+              value: 'None of the above',
+              notEligible: true
+            },
+          ],
+          yarKey: 'multiTierSystem'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
