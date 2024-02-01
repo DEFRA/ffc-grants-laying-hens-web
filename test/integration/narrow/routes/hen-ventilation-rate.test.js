@@ -19,7 +19,7 @@ describe('Page: /hen-ventilation-rate', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the ventilation system be able to provide a ventilation rate (MXVR) of 10,800m3 per hour per 1000 hens?')
+    expect(response.payload).toContain('Will the ventilation system be able to provide a ventilation rate (MXVR) of 10,800m³ per hour per 1000 hens?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -60,7 +60,7 @@ describe('Page: /hen-ventilation-rate', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The housing ventilation must have a ventilation rate of 10,800m3 per hour per 1000 hens.')
+    expect(postResponse.payload).toContain('The housing ventilation must have a ventilation rate of 10,800m³ per hour per 1000 hens.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
