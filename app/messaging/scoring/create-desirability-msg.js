@@ -7,7 +7,7 @@ function getUserAnswer (answers, userInput) {
       ({ key: Object.keys(answers).find(key => answers[key] === answer), value: answer }))
   }
 
-  return
+  return {}
 }
 
 function getDesirabilityDetails (questionKey, userInput) {
@@ -44,7 +44,7 @@ function desirability (userInput) {
   }
 }
 
-// had to export getUSerAnswer in order to test the if(answer) function, given that answer always came from 
+// had to export getUSerAnswer in order to test the if(answer) function, given that answer always came from
 //   hardcoded list at top of file.
-// function not used anywhere else other than this file and test file 
+// function not used anywhere else other than this file and test file
 module.exports = { desirability, getUserAnswer }

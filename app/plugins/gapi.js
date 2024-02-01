@@ -26,7 +26,7 @@ exports.plugin = {
                 {
                   page_path: request.route.path,
                   scoreReached: getYarValue(request, 'onScorePage') ? '/laying-hens/score' : '0'
-                } 
+                }
             })
         }
         if (statusFamily === 5) {
