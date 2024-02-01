@@ -738,18 +738,16 @@ const questionBank = {
           nextUrl: 'capped-inlets-outlets',
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
-            messageContent: 'You cannot apply for a grant from this scheme',
-            insertText: {
-              html: `
-                  <p>The building must have:</p>
+            messageContent: `
+              <div class="govuk-list govuk-list--bullet">
+                  <p class="govuk-body">The building must have:</p>
                   <ul class="govuk-list--bullet">
-                    <li>a fixed structure with a solid concrete floor</li>
-                    <li>water-tight roof and walls</li>
-                    <li>capped roof and wall inlets and outlets</li>
-                    <li>catch trays under all chimneys and roof-mounted vents.</li>
+                      <li>a fixed structure with a solid concrete floor</li>
+                      <li>water-tight roof and walls</li>
+                      <li>capped roof and wall inlets and outlets</li>
+                      <li>catch trays under all chimneys and roof-mounted vents.</li>
                   </ul>
-            </span>`
-            },
+              </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -880,13 +878,13 @@ const questionBank = {
         {
           key: 'replacing-insulation',
           order: 95,
-          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation, with a U-Value of less than 0.3W/m2/°C?',
+          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation, with a U-Value of less than 0.3W/m²/°C?',
           url: 'replacing-insulation',
           baseUrl: 'replacing-insulation',
           backUrl: 'capped-inlets-outlets',
           nextUrl: 'changing-area',
           ineligibleContent: {
-            messageContent: 'The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m2/°C.',
+            messageContent: 'The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m²/°C.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -898,7 +896,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The wall and roof insulation of the {{_poultryType_}} housing must have a U- Value of less than 0.3W/m2/°C.
+                para: `The wall and roof insulation of the {{_poultryType_}} housing must have a U- Value of less than 0.3W/m²/°C.
 
                 The U-Value measures the rate of heat transfer from inside a building to outside.`,
                 items: []
@@ -1170,7 +1168,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if the aviary system will meet the recommendation for high welfare'
+              error: 'Select yes if the aviary system will meet the recommendation for high welfare'
             }
           ],
           answers: [
@@ -1261,9 +1259,9 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You must add a veranda that is at least the same size as 30% the indoor bird housing area footprint.
+                para: `You must add a veranda that is at least the same size as 30% of the indoor bird housing area footprint.
 
-                Housing projects that do not have access to an external area at least 30% of the indoor housing area are exempt.
+                Housing projects that do not have access to an external area of at least 30% of the indoor housing area are exempt.
                 
                 You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`,
                 items: []
@@ -1366,7 +1364,7 @@ const questionBank = {
         },
         {
           key: 'hen-veranda-biosecurity',
-          order: 122,
+          order: 123,
           title: 'Will the veranda have the capacity to be made biosecure with mesh that has a spacing of 6mm or less?',
           hint: {
             text: 'This is to stop wild birds and rodents from entering during housing orders'
@@ -1416,7 +1414,6 @@ const questionBank = {
           ],
           yarKey: 'henVerandaBiosecurity'
         },
-
         {
           key: 'aviary-lighting-system',
           order: 125,
@@ -1719,12 +1716,14 @@ const questionBank = {
           },
           ineligibleContent: {
             messageContent: `
-                  <p>The housing lighting system must have:</p>
+            <div class="govuk-list govuk-list--bullet">
+                  <p class="govuk-body">The housing lighting system must have:</p>
                   <ul>
                       <li>the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)</li>
                       <li>an option for red light</li>
                       <li>a fail-safe standby device in case of electrical or other failure</li>
-                  </ul>`,
+                  </ul>
+               </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1823,6 +1822,67 @@ const questionBank = {
             }
           ],
           yarKey: 'henPopHoles'
+        },
+        {
+          key: 'concrete-apron',
+          order: 190,
+          title: 'Will the {{_poultryType_}} housing have a continuous concrete apron around its perimeter?',
+          pageTitle: '',
+          url: 'concrete-apron',
+          baseUrl: 'concrete-apron',
+          backUrlObject: {
+            dependentQuestionYarKey: ['henVeranda'],
+            dependentAnswerKeysArray: ['hen-veranda-A1'],
+            urlOptions: {
+              thenUrl: 'hen-pop-holes',
+              elseUrl: 'hen-veranda',
+              nonDependentUrl: 'lighting-features'
+            }
+          },
+          nextUrl: 'vehicle-washing',
+          hint: {
+            text: 'This must include any veranda areas if there is no adjacent range, for example barn systems'
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'The {{_poultryType_}} housing and any barn-system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+                  items: [],
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: 'The housing and any barn system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have a continuous concrete apron'
+            }
+          ],
+          answers: [
+            {
+              key: 'concrete-apron-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'concrete-apron-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'concreteApron'
         },
         {
           key: 'project-cost',

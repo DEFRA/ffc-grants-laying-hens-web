@@ -36,7 +36,7 @@ describe('Page: /aviary-welfare', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select if the aviary system will meet the recommendation for high welfare')
+    expect(postResponse.payload).toContain('Select yes if the aviary system will meet the recommendation for high welfare')
   })
 
   it('user selects eligible option -> store user response and redirect to /manure-removal', async () => {
