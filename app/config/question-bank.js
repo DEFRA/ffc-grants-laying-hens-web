@@ -1994,6 +1994,63 @@ const questionBank = {
           yarKey: 'housingDensity'
         },
         {
+          key: 'pullet-housing-requirements',
+          order: 205,
+          title: 'Will the pullet housing have these features?',
+          pageTitle: '',
+          url: 'pullet-housing-requirements',
+          baseUrl: 'pullet-housing-requirements',
+          backUrl: 'housing-density',
+          nextUrl: 'multi-tier-system',
+          hint: {
+            html: `
+                  <p>The pullet housing must have:</p>
+                  <ul class="govuk-list--bullet">
+                      <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
+                      <li>height adjustable perches at equal to or more than 8cm per pullet</li>
+                      <li>a minimum of 50% of the floor area covered in litter</li>
+                  </ul>
+                `
+                },
+          ineligibleContent: {
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+            <p class="govuk-body">The pullet housing must have:</p>
+                  <ul>
+                    <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
+                    <li>height adjustable perches at equal to or more than 8cm per pullet</li>
+                    <li>a minimum of 50% of the floor area covered in litter</li>
+                  </ul>
+            </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullet housing will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-housing-requirements-A1',
+              value: 'Yes',
+            },
+            {
+              key: 'pullet-housing-requirements-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'pulletHousingRequirements'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
