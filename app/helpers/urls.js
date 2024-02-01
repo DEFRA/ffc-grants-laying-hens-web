@@ -45,9 +45,8 @@ const checkAnswerExist = (dependentQuestionYarKey, request, yarKeysToCheck) => {
 }
 
 const checkSelectElseUrl = (request, dependentQuestionYarKey, isNonDependantAnswer) => {
-  return dependentQuestionYarKey.some(questionYarKey => {
-    return getYarValue(request, questionYarKey) && !isNonDependantAnswer
-  })
+  return dependentQuestionYarKey.some(questionYarKey => getYarValue(request, questionYarKey) && !isNonDependantAnswer
+  )
 }
 
 module.exports = {

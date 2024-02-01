@@ -33,9 +33,7 @@ module.exports = [{
   options: {
     auth: false
   },
-  handler: (request, h) => {
-    return h.view(viewTemplate, createModel(request.state.cookies_policy, request.query.updated))
-  }
+  handler: (request, h) => h.view(viewTemplate, createModel(request.state.cookies_policy, request.query.updated))
 }, {
   method: 'POST',
   path: currentPath,

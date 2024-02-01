@@ -14,7 +14,7 @@ const uniqueSelection = (answers, option) => (
     )
 )
 
-const getQuestionByKey = (questionKey) => ALL_QUESTIONS.find(({ key }) => (key === questionKey))
+const getQuestionByKey = questionKey => ALL_QUESTIONS.find(({ key }) => (key === questionKey))
 
 const getQuestionAnswer = (questionKey, answerKey) => {
   const question = getQuestionByKey(questionKey)

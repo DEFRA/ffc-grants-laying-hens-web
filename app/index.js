@@ -6,7 +6,7 @@ const init = async () => {
   console.log('Server running on %s', server.info.uri)
 }
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
   console.log(err)
   process.exit(1)
 })
