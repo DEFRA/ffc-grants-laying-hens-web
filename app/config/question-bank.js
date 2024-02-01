@@ -2174,6 +2174,60 @@ const questionBank = {
           yarKey: 'rearingAviarySystem'
         },
         {
+          key: 'step-up-system',
+          order: 220,
+          title: 'Will your step-up system have these features?',
+          pageTitle: '',
+          url: 'step-up-system',
+          baseUrl: 'step-up-system',
+          backUrl: 'multi-tier-system',
+          nextUrl: 'mechanical-ventilation',
+          hint: {
+            html:`
+                <p>The step-up system must have:</p>
+                <ul>
+                    <li>height-adjustable tiers that may include food and water at, or before, 10 days</li>
+                    <li>welfare ramps</li>
+                </ul>`
+          },
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                    <p>The step-up system must have:</p>
+                    <ul>
+                        <li>height-adjustable tiers that may include food and water at, or before, 10 days</li>
+                        <li>welfare ramps</li>
+                    </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if your step-up system will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'step-up-system-A1',
+              value: 'Yes',
+            },
+            {
+              key: 'step-up-system-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'stepUpSystem'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
