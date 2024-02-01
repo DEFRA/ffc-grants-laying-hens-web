@@ -100,7 +100,7 @@ function getBusinessTypeC53(businessTypeArray, horticulture, beef) {
 }
 
 // confirm following values and mapping
-const getPlanningPermissionDoraValue = (planningPermission) => {
+const getPlanningPermissionDoraValue = planningPermission => {
   switch (planningPermission) {
     case 'Should be in place by the time I make my full application':
       return 'Applied for'
@@ -281,8 +281,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
 }
 
 function spreadsheet(submission, desirabilityScore) {
-  const data = getSpreadsheetDetails(submission, desirabilityScore)
-  return data
+  return getSpreadsheetDetails(submission, desirabilityScore)
 }
 
 module.exports = function (submission, desirabilityScore, rating = '') {

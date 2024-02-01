@@ -364,16 +364,12 @@ const showPostPage = (currentQuestion, request, h) => {
   return h.redirect(getUrl(nextUrlObject, nextUrl, request, payload.secBtn, currentQuestion.url))
 }
 
-const getHandler = (question) => {
-  return (request, h) => {
-    return getPage(question, request, h)
-  }
+const getHandler = question => {
+  return (request, h) => getPage(question, request, h)
 }
 
-const getPostHandler = (currentQuestion) => {
-  return (request, h) => {
-    return showPostPage(currentQuestion, request, h)
-  }
+const getPostHandler = currentQuestion => {
+  return (request, h) => showPostPage(currentQuestion, request, h)
 }
 
 const processGA = async (question, request) => {

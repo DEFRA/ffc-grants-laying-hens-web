@@ -76,7 +76,7 @@ function guardPage (request, guardData) {
     for (let i = 0; i < guardData.preValidationKeys.length; i++) {
       preValidationList.push({
         key: guardData.preValidationKeys[i],
-        values: (guardData?.preValidationAnswer.filter((answer) => answer.startsWith(guardData.preValidationUrls[i]))),
+        values: (guardData?.preValidationAnswer.filter(answer => answer.startsWith(guardData.preValidationUrls[i]))),
         url: guardData.preValidationUrls[i]
       })
     }
@@ -90,7 +90,7 @@ function guardPage (request, guardData) {
 
     result = guardDataCheck(guardData, preValidationList, result, inverseResult, request)
   }
-  
+
   return result
 }
 

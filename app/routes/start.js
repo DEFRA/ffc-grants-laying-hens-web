@@ -5,7 +5,5 @@ const nextPath = `${urlPrefix}/applicant-type`
 module.exports = {
   method: 'GET',
   path: currentPath,
-  handler: (_request, h) => {
-    return h.view('home', { button: { nextLink: nextPath, text: 'Start now' } })
-  }
+  handler: (_request, h) => h.view('home', { button: { nextLink: nextPath, text: 'Start now' } })
 }
