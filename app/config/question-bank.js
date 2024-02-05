@@ -1499,16 +1499,12 @@ const questionBank = {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">
-                  The housing must have a biosecure changing area at each external pedestrian point with:
+                The ventilation must have:
                 </p>
                 <ul>
-                  <li>changing facilities, divided by a floor-mounted 
-                  physical barrier into a clean area and a dirty area</li>
-                  <li>in the dirty area, handwashing facilities and storage 
-                  for clothes and boots that you use outside of the 
-                  housing </li>
-                  <li>in the clean area, a footbath and storage for 
-                  clothes and boots that you use inside of the shed.</li>
+                <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
+                <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
+                <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
                   </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
