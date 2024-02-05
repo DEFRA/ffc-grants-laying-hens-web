@@ -360,6 +360,9 @@ const showPostPage = (currentQuestion, request, h) => {
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
+  if (thisAnswer?.yarKeysReset) {
+    thisAnswer.yarKeysReset.forEach((yarKey) => setYarValue(request, yarKey, ''))
+  }
 
   return h.redirect(getUrl(nextUrlObject, nextUrl, request, payload.secBtn, currentQuestion.url))
 }
