@@ -1884,6 +1884,350 @@ const questionBank = {
           yarKey: 'concreteApron'
         },
         {
+          key: 'vaccination-lobby',
+          order: 195,
+          title: 'Will there be a designated vaccination lobby with internal and external access?',
+          pageTitle: '',
+          url: 'vaccination-lobby',
+          baseUrl: 'vaccination-lobby',
+          backUrl: 'changing-area',
+          nextUrl: 'housing-density',
+          hint: {
+            text: 'Internal access from the bird living area and external access from the loading bay'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The housing must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if there will be a designated vaccination lobby'
+            }
+          ],
+          answers: [
+            {
+              key: 'vaccination-lobby-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'vaccination-lobby-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'vaccinationLobby'
+        },
+        {
+          key: 'housing-density',
+          order: 200,
+          title: 'Will the pullets be housed at a maximum stocking density of 20kg per metres squared (m²) of the total usable area at 16 weeks of age?',
+          pageTitle: '',
+          url: 'housing-density',
+          baseUrl: 'housing-density',
+          backUrl: 'vaccination-lobby',
+          nextUrl: 'pullet-housing-requirements',
+          hint: {
+            text: 'This must be 33kg per m² at floor level'
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:',
+                  items: ['20kg per m² of the total usable area', '33kg per m² of the total usable area at floor level'],
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+            <p class="govuk-body">The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+                  <ul>
+                    <li>20kg per m² of the total usable area</li>
+                    <li>33kg per m² of the total usable area at floor level</li>
+                  </ul>
+            </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullets will be housed at a maximum stocking density'
+            }
+          ],
+          answers: [
+            {
+              key: 'housing-density-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'housing-density-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'housingDensity'
+        },
+        {
+          key: 'pullet-housing-requirements',
+          order: 205,
+          title: 'Will the pullet housing have these features?',
+          pageTitle: '',
+          url: 'pullet-housing-requirements',
+          baseUrl: 'pullet-housing-requirements',
+          backUrl: 'housing-density',
+          nextUrl: 'multi-tier-system',
+          hint: {
+            html: `
+                  <p>The pullet housing must have:</p>
+                  <ul class="govuk-list--bullet">
+                      <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
+                      <li>height adjustable perches at equal to or more than 8cm per pullet</li>
+                      <li>a minimum of 50% of the floor area covered in litter</li>
+                  </ul>
+                `
+                },
+          ineligibleContent: {
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+            <p class="govuk-body">The pullet housing must have:</p>
+                  <ul>
+                    <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
+                    <li>height adjustable perches at equal to or more than 8cm per pullet</li>
+                    <li>a minimum of 50% of the floor area covered in litter</li>
+                  </ul>
+            </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullet housing will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-housing-requirements-A1',
+              value: 'Yes',
+            },
+            {
+              key: 'pullet-housing-requirements-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'pulletHousingRequirements'
+        },
+        {
+          key: 'multi-tier-system',
+          order: 210,
+          title: 'Which multi-tier system will the pullet housing have?',
+          pageTitle: '',
+          url: 'multi-tier-system',
+          baseUrl: 'multi-tier-system',
+          backUrl: 'pullet-housing-requirements',
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'The pullet housing must have a multi-tier system to enable the birds to transition between levels without flying or jumping more than 1m in height, horizontally or vertically.',
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: 'The pullet housing must have a multi-tier system.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what multi-tier system the pullet housing will have'
+            }
+          ],
+          answers: [
+            {
+              key: 'multi-tier-system-A1',
+              value: 'Rearing aviary',
+              redirectUrl: 'rearing-aviary-system',
+              hint: {
+                text: 'A system that houses birds within tiers during the first 2 weeks of rearing, that you can open to enable them to access the barn flow after 2 weeks'
+              }
+            },
+            {
+              key: 'multi-tier-system-A2',
+              value: 'Step-up system',
+              redirectUrl: 'step-up-system',
+              hint: {
+                text: 'A floor system that can change to match a rearing aviary post-brooding, with adjustable elevated tiers you can add and gradually raise as the birds grow'
+              }
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'multi-tier-system-A3',
+              value: 'None of the above',
+              notEligible: true
+            },
+          ],
+          yarKey: 'multiTierSystem'
+        },
+        {
+          key: 'rearing-aviary-system',
+          order: 215,
+          title: 'Will your rearing aviary system have these features?',
+          pageTitle: '',
+          url: 'rearing-aviary-system',
+          baseUrl: 'rearing-aviary-system',
+          backUrl: 'multi-tier-system',
+          nextUrl: 'mechanical-ventilation',
+          hint: {
+            html:`
+                <p>The rearing aviary system must have:</p>
+                <ul>
+                    <li>the capacity to provide or retain friable litter while the birds are held within the system</li>
+                    <li>an integrated manure removal belt-system</li>
+                    <li>integrated height-adjustable feed lines, nipple drinkers and platforms</li>
+                    <li>integrated and fully dimmable non-flicker LED lighting</li>
+                    <li>welfare ramps when the pullets are 14 days old</li>
+                </ul>`
+          },
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                    <p>The rearing aviary system must have:</p>
+                    <ul>
+                        <li>the capacity to provide or retain friable litter while the birds are held within the system</li>
+                        <li>an integrated manure removal belt-system</li>
+                        <li>integrated height-adjustable feed lines, nipple drinkers and platforms</li>
+                        <li>integrated and fully dimmable non-flicker LED lighting</li>
+                        <li>welfare ramps when the pullets are 14 days old</li>
+                    </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if your rearing aviary system will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'rearing-aviary-system-A1',
+              value: 'Yes',
+            },
+            {
+              key: 'rearing-aviary-system-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'rearingAviarySystem'
+        },
+        {
+          key: 'step-up-system',
+          order: 220,
+          title: 'Will your step-up system have these features?',
+          pageTitle: '',
+          url: 'step-up-system',
+          baseUrl: 'step-up-system',
+          backUrl: 'multi-tier-system',
+          nextUrl: 'mechanical-ventilation',
+          hint: {
+            html:`
+                <p>The step-up system must have:</p>
+                <ul>
+                    <li>height-adjustable tiers that may include food and water at, or before, 10 days</li>
+                    <li>welfare ramps</li>
+                </ul>`
+          },
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                    <p>The step-up system must have:</p>
+                    <ul>
+                        <li>height-adjustable tiers that may include food and water at, or before, 10 days</li>
+                        <li>welfare ramps</li>
+                    </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if your step-up system will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'step-up-system-A1',
+              value: 'Yes',
+            },
+            {
+              key: 'step-up-system-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'stepUpSystem'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
