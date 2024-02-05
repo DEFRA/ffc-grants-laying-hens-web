@@ -26,6 +26,8 @@ const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
 
+const maxGrantConstant = 1250000
+
 const createModel = (data, backUrl, url) => {
   return {
     backLink: backUrl,
@@ -75,7 +77,7 @@ const sidebarCheck = (question, request) => {
 }
 
 const validateErrorCheck = (question, validate, request) => {
-  if (question?.validate && question.validate[0].error.includes('{{_')) {
+  if (question?.validate[0].error.includes('{{_')) {
     question = {
       ...question,
       validate: [
@@ -353,7 +355,7 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 
-  if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
+  if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > maxGrantConstant) {
     return h.redirect('/laying-hens/potential-amount-capped')
   }
 
