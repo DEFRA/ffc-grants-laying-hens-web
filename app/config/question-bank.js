@@ -2388,6 +2388,51 @@ const questionBank = {
           yarKey: 'vehicleWashing'
         },
         {
+          key: 'soiled-water-drainage',
+          order: 235,
+          title: 'Will the designated washing and disinfecting area have the drainage system and storage tanks for soiled water?',
+          pageTitle: '',
+          url: 'soiled-water-drainage',
+          baseUrl: 'soiled-water-drainage',
+          backUrl: 'vehicle-washing',
+          nextUrl: 'external-taps',
+          hint: {
+            text: 'This is separate from rainwater drainage'
+          },
+          ineligibleContent: {
+            messageContent: 'The designated washing and disinfecting area must have a drainage system and storage tanks for soiled water.',
+            insertText: {
+              text: 'This is separate from rainwater drainage.'
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the designated washing and disinfecting area will have a drainage system and storage tanks'
+            }
+          ],
+          answers: [
+            {
+              key: 'soiled-water-drainage-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'soiled-water-drainage-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'soiledWaterDrainage'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
