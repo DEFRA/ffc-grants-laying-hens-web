@@ -2,7 +2,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /poultry-type', () => {
   const varList = {
-    tenancy: 'Yes',
+    tenancy: 'Yes'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -45,7 +45,7 @@ describe('Page: /poultry-type', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/poultry-type`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { poultryType: 'Laying hens (over 15 weeks old)', crumb: crumbToken }
+      payload: { poultryType: 'hen', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -75,7 +75,7 @@ describe('Page: /poultry-type', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"tenancy\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="tenancy" class="govuk-back-link">Back</a>')
   })
 
   it('`No` option selected on /tenancy -> page loads with correct back link', async () => {
@@ -86,6 +86,6 @@ describe('Page: /poultry-type', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"project-responsibility\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="project-responsibility" class="govuk-back-link">Back</a>')
   })
 })

@@ -627,7 +627,8 @@ const questionBank = {
             {
               key: 'poultry-type-A1',
               text: 'Laying hens (over 15 weeks old)',
-              value: 'hen'
+              value: 'hen',
+              yarKeysReset: ['multiTierSystem']
             },
             {
               key: 'poultry-type-A2',
@@ -1466,6 +1467,74 @@ const questionBank = {
           yarKey: 'aviaryLightingSystem'
         },
         {
+          key: 'mechanical-ventilation',
+          order: 124,
+          title: 'Will the {{_poultryType_}} housing have a mechanical ventilation system with these features?',
+          hint: {
+            html: `
+              <span>
+                <p>The ventilation must have:</p>
+                <ul class="govuk-list--bullet">
+                  <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
+                  <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
+                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
+                </ul>
+            </span>`
+          },
+          pageTitle: '',
+          url: 'mechanical-ventilation',
+          baseUrl: 'mechanical-ventilation',
+          backUrlObject: {
+            dependentQuestionYarKey: ['multiTierSystem'],
+            dependentAnswerKeysArray: ['multi-tier-system-A1'],
+            urlOptions: {
+              thenUrl: 'rearing-aviary-system',
+              elseUrl: 'step-up-system',
+              nonDependentUrl: 'aviary-lighting-system'
+            }
+          },
+          nextUrl: 'ventilation-air-speed',
+          // preValidationKeys: ['poultryType'],
+          ineligibleContent: {
+            messageContent: `
+              <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">
+                The ventilation must have:
+                </p>
+                <ul>
+                <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
+                <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
+                <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
+                  </ul>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have a mechanical ventilation system with these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'mechanical-ventilation-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'mechanical-ventilation-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'mechanicalVentilation'
+        },
+        {
           key: 'ventilation-air-speed',
           order: 130,
           title: 'Will the {{_poultryType_}} housing ventilation be able to provide an air speed of 1 metre per second over birds?',
@@ -1788,7 +1857,7 @@ const questionBank = {
                     <li>be at least 35cm high and 40cm wide</li>
                     <li>extend along the entire length of the building</li>
                 </ul>
-             <p class="govuk-body">The pop hole openings must add up to a total of 2 metres for every 1,000 hens.</p>`,
+            <p class="govuk-body">The pop hole openings must add up to a total of 2 metres for every 1,000 hens.</p>`,
             insertText: {
               html: `
                   <p>The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.</p>
