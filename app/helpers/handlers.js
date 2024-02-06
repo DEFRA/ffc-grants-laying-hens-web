@@ -273,9 +273,7 @@ const getPage = async (question, request, h) => {
       request
     )
   }
-
   return (getUrlSwitchFunction(data, question, request, conditionalHtml, backUrl, nextUrl, h))
-
 }
 
 const multiInputPostHandler = (currentQuestion, request, dataObject, payload, yarKey) => {
@@ -351,8 +349,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request,
-      { name: gapiService.eventTypes.ELIMINATION, params: {}
-    })
+      { name: gapiService.eventTypes.ELIMINATION, params: {} })
 
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
