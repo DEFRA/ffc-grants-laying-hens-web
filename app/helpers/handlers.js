@@ -26,8 +26,6 @@ const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
 
-const maxGrantConstant = 1250000
-
 const createModel = (data, backUrl, url) => {
   return {
     backLink: backUrl,
@@ -356,7 +354,7 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 
-  if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > maxGrantConstant) {
+  if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount-capped')
   }
 
