@@ -109,7 +109,7 @@ describe('Page: /mechanical-ventilation', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"aviary-lighting-system\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="aviary-lighting-system" class="govuk-back-link">Back</a>')
   })
 
   it('page loads with correct back link - pullet / Rearing aviary journey', async () => {
@@ -121,7 +121,7 @@ describe('Page: /mechanical-ventilation', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"rearing-aviary-system\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="rearing-aviary-system" class="govuk-back-link">Back</a>')
   })
 
   it('page loads with correct back link - pullet / Rearing aviary journey', async () => {
@@ -133,6 +133,6 @@ describe('Page: /mechanical-ventilation', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"step-up-system\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="step-up-system" class="govuk-back-link">Back</a>')
   })
 })
