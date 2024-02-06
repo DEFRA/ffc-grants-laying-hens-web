@@ -66,7 +66,7 @@ describe('Page: /soiled-water-drainage', () => {
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link - /concrete-apron', async () => {
+  it('page loads with correct back link - /vehicle-washing', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/soiled-water-drainage`

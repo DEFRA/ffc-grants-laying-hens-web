@@ -2433,6 +2433,53 @@ const questionBank = {
           yarKey: 'soiledWaterDrainage'
         },
         {
+          key: 'external-taps',
+          order: 240,
+          title: 'Will the {{_poultryType_}} housing have an external tap at each main pedestrian access point?',
+          pageTitle: '',
+          url: 'external-taps',
+          baseUrl: 'external-taps',
+          backUrl: 'soiled-water-drainage',
+          nextUrl: 'roof-solar-PV',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.'
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have an external tap at each main pedestrian access point'
+            }
+          ],
+          answers: [
+            {
+              key: 'external-taps-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'external-taps-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'externalTaps'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
