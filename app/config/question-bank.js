@@ -2297,6 +2297,189 @@ const questionBank = {
           yarKey: 'stepUpSystem'
         },
         {
+          key: 'pullet-ventilation-rate',
+          order: 225,
+          title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 9,000m³ per hour per 1000 pullets?',
+          url: 'pullet-ventilation-rate',
+          baseUrl: 'pullet-ventilation-rate',
+          backUrl: 'ventilation-air-speed',
+          nextUrl: 'ventilation-air-quality',
+          hint: {
+            text: 'For birds up to 2kg in body mass'
+          },
+          ineligibleContent: {
+            messageContent: 'The housing ventilation must have a ventilation rate of 9,000m³ per hour per 1000 pullets.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The ventilation system must be able to provide a ventilation rate (MXVR) of 9,000m³ per hour per 1000 pullets in the case of high heat scenarios.'
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the ventilation system will meet the ventilation rate'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-ventilation-rate-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'pullet-ventilation-rate-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'pulletVentilationRate'
+        },
+        {
+          key: 'vehicle-washing',
+          order: 230,
+          title: 'Will the {{_poultryType_}} housing have a designated area for washing and disinfecting vehicles?',
+          pageTitle: '',
+          url: 'vehicle-washing',
+          baseUrl: 'vehicle-washing',
+          backUrl: 'concrete-apron',
+          nextUrl: 'soiled-water-drainage',
+          hint: {
+            text: 'This must include an area of concrete parking which is appropriate to the size of the vehicles entering the facility (minimum width of 3 metres)'
+          },
+          ineligibleContent: {
+            messageContent: 'There must be a designated washing and disinfecting area for vehicles entering the facility.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have a designated area for washing and disinfecting vehicles'
+            }
+          ],
+          answers: [
+            {
+              key: 'vehicle-washing-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'vehicle-washing-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'vehicleWashing'
+        },
+        {
+          key: 'soiled-water-drainage',
+          order: 235,
+          title: 'Will the designated washing and disinfecting area have the drainage system and storage tanks for soiled water?',
+          pageTitle: '',
+          url: 'soiled-water-drainage',
+          baseUrl: 'soiled-water-drainage',
+          backUrl: 'vehicle-washing',
+          nextUrl: 'external-taps',
+          hint: {
+            text: 'This is separate from rainwater drainage'
+          },
+          ineligibleContent: {
+            messageContent: 'The designated washing and disinfecting area must have a drainage system and storage tanks for soiled water.',
+            insertText: {
+              text: 'This is separate from rainwater drainage.'
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the designated washing and disinfecting area will have a drainage system and storage tanks'
+            }
+          ],
+          answers: [
+            {
+              key: 'soiled-water-drainage-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'soiled-water-drainage-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'soiledWaterDrainage'
+        },
+        {
+          key: 'external-taps',
+          order: 240,
+          title: 'Will the {{_poultryType_}} housing have an external tap at each main pedestrian access point?',
+          pageTitle: '',
+          url: 'external-taps',
+          baseUrl: 'external-taps',
+          backUrl: 'soiled-water-drainage',
+          nextUrl: 'roof-solar-PV',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.'
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have an external tap at each main pedestrian access point'
+            }
+          ],
+          answers: [
+            {
+              key: 'external-taps-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'external-taps-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'externalTaps'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
