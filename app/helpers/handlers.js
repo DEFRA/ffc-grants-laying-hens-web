@@ -81,6 +81,7 @@ const sidebarCheck = (question, request) => {
 }
 
 const validateErrorCheck = (question, validate, request) => {
+ // this sonar issue fix actually breaks all tests
   if (question?.validate && question.validate[0].error.includes('{{_')) {
     question = {
       ...question,

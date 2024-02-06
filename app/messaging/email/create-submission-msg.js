@@ -30,15 +30,21 @@ function calculateBusinessSize(employees) {
   }
 }
 
-function addAgentDetails(agentsDetails) {
+function addAgentDetailsAddress(agentsDetails) {
   return [
-    generateRow(26, 'Agent Surname', agentsDetails?.lastName ?? ''),
-    generateRow(27, 'Agent Forename', agentsDetails?.firstName ?? ''),
     generateRow(29, 'Agent Address line 1', agentsDetails?.address1 ?? ''),
     generateRow(30, 'Agent Address line 2', agentsDetails?.address2 ?? ''),
     generateRow(32, 'Agent Address line 4 (town)', agentsDetails?.town ?? ''),
     generateRow(33, 'Agent Address line 5 (County)', agentsDetails?.county ?? ''),
-    generateRow(34, 'Agent Postcode (use capitals)', agentsDetails?.postcode ?? ''),
+    generateRow(34, 'Agent Postcode (use capitals)', agentsDetails?.postcode ?? '')
+  ]
+}
+
+function addAgentDetails(agentsDetails) {
+  return [
+    generateRow(26, 'Agent Surname', agentsDetails?.lastName ?? ''),
+    generateRow(27, 'Agent Forename', agentsDetails?.firstName ?? ''),
+    ...addAgentDetailsAddress(agentsDetails),
     generateRow(35, 'Agent Landline number', agentsDetails?.landlineNumber ?? ''),
     generateRow(36, 'Agent Mobile number', agentsDetails?.mobileNumber ?? ''),
     generateRow(37, 'Agent Email', agentsDetails?.emailAddress ?? ''),
