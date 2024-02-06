@@ -2346,6 +2346,48 @@ const questionBank = {
           yarKey: 'pulletVentilationRate'
         },
         {
+          key: 'vehicle-washing',
+          order: 230,
+          title: 'Will the {{_poultryType_}} housing have a designated area for washing and disinfecting vehicles?',
+          pageTitle: '',
+          url: 'vehicle-washing',
+          baseUrl: 'vehicle-washing',
+          backUrl: 'concrete-apron',
+          nextUrl: 'soiled-water-drainage',
+          hint: {
+            text: 'This must include an area of concrete parking which is appropriate to the size of the vehicles entering the facility (minimum width of 3 metres)'
+          },
+          ineligibleContent: {
+            messageContent: 'There must be a designated washing and disinfecting area for vehicles entering the facility.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have a designated area for washing and disinfecting vehicles'
+            }
+          ],
+          answers: [
+            {
+              key: 'vehicle-washing-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'vehicle-washing-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'vehicleWashing'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
