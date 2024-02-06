@@ -34,6 +34,12 @@ const createModel = (data, backUrl, url) => {
   }
 }
 
+const checkYarKeyReset = (thisAnswer, request) => {
+  if (thisAnswer?.yarKeysReset) {
+    thisAnswer.yarKeysReset.forEach(yarKey => setYarValue(request, yarKey, ''))
+  }
+}
+
 const insertYarValue = (field, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
     field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)) : getYarValue(request, additionalYarKeyName)
@@ -146,13 +152,11 @@ const scorePageData = async (request, backUrl, url, h) => {
       questions: questions.sort((a, b) => a.order - b.order),
       scoreChance: scoreChance
     }, backUrl, url))
-
   } catch (error) {
     console.log(error)
     await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.EXCEPTION, params: { error: error.message } })
     return h.view('500')
   }
-
 }
 
 const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl, backUrl, h) => {
@@ -270,9 +274,7 @@ const getPage = async (question, request, h) => {
       request
     )
   }
-
   return (getUrlSwitchFunction(data, question, request, conditionalHtml, backUrl, nextUrl, h))
-
 }
 
 const multiInputPostHandler = (currentQuestion, request, dataObject, payload, yarKey) => {
@@ -348,8 +350,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request,
-      { name: gapiService.eventTypes.ELIMINATION, params: {}
-    })
+      { name: gapiService.eventTypes.ELIMINATION, params: {} })
 
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
@@ -361,6 +362,8 @@ const showPostPage = (currentQuestion, request, h) => {
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
+
+  checkYarKeyReset(thisAnswer, request)
 
   return h.redirect(getUrl(nextUrlObject, nextUrl, request, payload.secBtn, currentQuestion.url))
 }
