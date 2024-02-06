@@ -129,8 +129,6 @@ class TimeoutWarning {
       this.$lastFocusedEl = null
     } else if (document.querySelector) {
       this.$lastFocusedEl = document.querySelector(':focus')
-    } else {
-      console.log('Element is normal')
     }
   }
 
@@ -284,8 +282,6 @@ class TimeoutWarning {
       } else if (secondsLeft % 15 === 0) {
         // Update screen reader friendly content every 15 secs
         $accessibleCountdown.innerHTML = atText
-      } else {
-        console.log('idk keeps going?')
       }
       // JS doesn't allow resetting timers globally so timers need to be retained for resetting.
       timers.push(setTimeout(() => this.runTimer(seconds, timers, iOS, timerRunOnce, $accessibleCountdown, $module, $countdown), 1000))

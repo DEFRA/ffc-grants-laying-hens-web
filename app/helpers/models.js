@@ -68,8 +68,6 @@ const getModel = (data, question, request, conditionalHtml = '') => {
     }
   } else if (warning) {
     warningDetails = warning
-  } else {
-    console.log('No warning or warning condition')
   }
   return {
     type,

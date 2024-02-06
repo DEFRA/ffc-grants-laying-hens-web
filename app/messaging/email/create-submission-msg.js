@@ -84,8 +84,6 @@ function formatBusinessTypeC53(businessType) {
       businessType[type] = 'Laying Hens'
     } else if (businessType[type] === 'Meat chickens') {
       businessType[type] = 'Meat Chickens'
-    } else {
-      console.log('No rename needed')
     }
 
     // assign values for DORA
