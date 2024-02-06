@@ -34,8 +34,7 @@ const checkAnswerExist = (dependentQuestionYarKey, request, yarKeysToCheck) => {
     const dependentAnswer = getYarValue(request, questionYarKey)
     return !!ALL_QUESTIONS.find(thisQuestion => (
       thisQuestion.yarKey === questionYarKey &&
-      thisQuestion.answers &&
-      thisQuestion.answers.some(answer => (
+      thisQuestion?.answers.some(answer => (
         !!dependentAnswer &&
         yarKeysToCheck.includes(answer.key) &&
         dependentAnswer.includes(answer.value)
