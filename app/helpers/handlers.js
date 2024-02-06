@@ -34,7 +34,7 @@ const createModel = (data, backUrl, url) => {
   }
 }
 
-const checkYarKeyReset = (thisAnswer) => {
+const checkYarKeyReset = (thisAnswer, request) => {
   if (thisAnswer?.yarKeysReset) {
     thisAnswer.yarKeysReset.forEach(yarKey => setYarValue(request, yarKey, ''))
   }
@@ -151,13 +151,11 @@ const scorePageData = async (request, backUrl, url, h) => {
       questions: questions.sort((a, b) => a.order - b.order),
       scoreChance: scoreChance
     }, backUrl, url))
-
   } catch (error) {
     console.log(error)
     await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.EXCEPTION, params: { error: error.message } })
     return h.view('500')
   }
-
 }
 
 const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl, backUrl, h) => {
@@ -367,7 +365,7 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.redirect(thisAnswer?.redirectUrl)
   }
 
-  checkYarKeyReset(thisAnswer)
+  checkYarKeyReset(thisAnswer, request)
 
   return h.redirect(getUrl(nextUrlObject, nextUrl, request, payload.secBtn, currentQuestion.url))
 }
