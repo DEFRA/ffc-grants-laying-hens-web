@@ -47,11 +47,9 @@ describe('Page: /poultry-type', () => {
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { poultryType: 'hen', crumb: crumbToken }
     }
-    const mockH = { checkYarKeyReset: jest.fn() }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(mockH.checkYarKeyReset).toHaveBeenCalled()
     expect(postResponse.headers.location).toBe('project-type')
   })
 
