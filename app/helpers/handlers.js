@@ -34,6 +34,12 @@ const createModel = (data, backUrl, url) => {
   }
 }
 
+const checkYarKeyReset = (thisAnswer) => {
+  if (thisAnswer?.yarKeysReset) {
+    thisAnswer.yarKeysReset.forEach(yarKey => setYarValue(request, yarKey, ''))
+  }
+}
+
 const insertYarValue = (field, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
     field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)) : getYarValue(request, additionalYarKeyName)
@@ -360,9 +366,8 @@ const showPostPage = (currentQuestion, request, h) => {
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
-  if (thisAnswer?.yarKeysReset) {
-    thisAnswer.yarKeysReset.forEach((yarKey) => setYarValue(request, yarKey, ''))
-  }
+
+  checkYarKeyReset(thisAnswer)
 
   return h.redirect(getUrl(nextUrlObject, nextUrl, request, payload.secBtn, currentQuestion.url))
 }
