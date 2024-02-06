@@ -652,8 +652,15 @@ const questionBank = {
           title: 'What is your project?',
           url: 'project-type',
           baseUrl: 'project-type',
-          backUrl: 'poultry-type',
-          nextUrl: 'building-items',
+          backUrl: 'start',
+          nextUrl: 'applicant-type',
+          hint: {
+            html: `If you want to apply for grant funding for multiple hen or 
+              pullet housing projects, you must submit an application for each 
+              project.<br/><br/>
+              If you want to apply for multiple veranda projects you must 
+              submit an application for each project.`
+          },
           ineligibleContent: {
             messageContent: `
                 <div class="govuk-list govuk-list--bullet">
@@ -675,11 +682,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You can apply for grant funding for either a housing project or adding a veranda only to existing housing.
-
-                The RPA will award grant funding for adding a veranda only to existing housing on a first-come first-served basis. You do not need to complete any eligibility or scoring questions.
-
-                To apply for grant funding for housing projects, you need to complete eligibility and scoring questions.`,
+                para: 'You can apply for grant funding for either a housing project or adding a veranda only to existing housing.',
                 items: []
               }]
             }]
@@ -705,7 +708,7 @@ const questionBank = {
               hint: {
                 text: 'The RPA will award the grant funding for adding a veranda only to existing housing on a first-come first-served basis'
               },
-              redirectUrl: 'business-details'
+              redirectUrl: 'veranda-only'
             },
             {
               value: 'divider'
