@@ -2482,6 +2482,55 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
+          key: 'veranda-only',
+          order: 245,
+          title: 'Will the veranda be at least the same size as 30% of the indoor bird housing area footprint?',
+          pageTitle: '',
+          url: 'veranda-only',
+          baseUrl: 'veranda-only',
+          backUrl: 'poultry-type',
+          nextUrl: 'veranda-features',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The veranda must be at least the same size as 30% of the indoor bird housing area footprint. 
+                
+                You must exclude the veranda's floor area from calculations of stocking density (even if providing24 hour access).`
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The veranda must be at least the same size as 30% of the indoor bird housing area footprint in size.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the veranda will be at least the same size as 30% of the indoor bird housing area footprint'
+            }
+          ],
+          answers: [
+            {
+              key: 'veranda-only-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'veranda-only-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'verandaOnly'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
