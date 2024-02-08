@@ -53,19 +53,6 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
-  it('user selects `Adding a veranda only to existing housing` -> store user response and redirect to /veranda-only', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/project-type`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { projectType: 'Adding a veranda only to existing housing', crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('veranda-only')
-  })
-
   it('user selects `Replacing existing housing` -> store user response and redirect to /applicant-type', async () => {
     const postOptions = {
       method: 'POST',

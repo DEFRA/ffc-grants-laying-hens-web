@@ -656,10 +656,10 @@ const questionBank = {
           nextUrl: 'applicant-type',
           hint: {
             html: `If you want to apply for grant funding for multiple hen or 
-              pullet housing projects, you must submit an application for each 
-              project.<br/><br/>
-              If you want to apply for multiple veranda projects you must 
-              submit an application for each project.`
+                pullet housing projects, you must submit an application for each 
+                project.<br/><br/>
+                If you want to apply for multiple veranda projects you must 
+                submit an application for each project.`
           },
           ineligibleContent: {
             messageContent: `
@@ -708,7 +708,6 @@ const questionBank = {
               hint: {
                 text: 'The RPA will award the grant funding for adding a veranda only to existing housing on a first-come first-served basis'
               },
-              redirectUrl: 'veranda-only'
             },
             {
               value: 'divider'
