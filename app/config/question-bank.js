@@ -2595,6 +2595,56 @@ const questionBank = {
           yarKey: 'verandaFeatures'
         },
         {
+          key: 'veranda-biosecurity',
+          order: 255,
+          title: 'Will the veranda have the capacity to be made biosecure with mesh that has a spacing of 6mm or less?',
+          pageTitle: '',
+          url: 'veranda-biosecurity',
+          baseUrl: 'veranda-biosecurity',
+          backUrl: 'veranda-features',
+          nextUrl: 'veranda-pop-holes',
+          hint: {
+            text: 'This is to stop wild birds and rodents from entering during housing orders'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `You must be able to make the veranda secure with mesh that has a spacing (aperture) of 6mm or less during housing orders.`
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The veranda must be capable of being secured with mesh (with a maximum of 6mm spacing) during housing orders.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the veranda will have the capacity to be made biosecure'
+            }
+          ],
+          answers: [
+            {
+              key: 'veranda-biosecurity-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'veranda-biosecurity-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'verandaBiosecurity'
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',
