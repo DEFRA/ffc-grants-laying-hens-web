@@ -92,7 +92,7 @@ const questionBank = {
           ga: { journeyStart: true },
           url: 'applicant-type',
           baseUrl: 'applicant-type',
-          backUrl: 'start',
+          backUrl: 'project-type',
           nextUrl: 'legal-status',
           hint: {
             text: 'Select all that apply'
@@ -597,7 +597,14 @@ const questionBank = {
               elseUrl: 'project-responsibility'
             }
           },
-          nextUrl: 'project-type',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A3'],
+            urlOptions: {
+              thenUrl: 'veranda-only',
+              elseUrl: 'building-items'
+            }
+          },
           ineligibleContent: {
             messageContent: 'This grant is only for laying hen or pullet projects.',
             messageLink: {
@@ -737,7 +744,7 @@ const questionBank = {
           pageTitle: '',
           url: 'building-items',
           baseUrl: 'building-items',
-          backUrl: 'project-type',
+          backUrl: 'poultry-type',
           nextUrl: 'capped-inlets-outlets',
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
