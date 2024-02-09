@@ -92,7 +92,7 @@ const questionBank = {
           ga: { journeyStart: true },
           url: 'applicant-type',
           baseUrl: 'applicant-type',
-          backUrl: 'start',
+          backUrl: 'project-type',
           nextUrl: 'legal-status',
           hint: {
             text: 'Select all that apply'
@@ -597,7 +597,14 @@ const questionBank = {
               elseUrl: 'project-responsibility'
             }
           },
-          nextUrl: 'project-type',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A3'],
+            urlOptions: {
+              thenUrl: 'veranda-only',
+              elseUrl: 'building-items'
+            }
+          },
           ineligibleContent: {
             messageContent: 'This grant is only for laying hen or pullet projects.',
             messageLink: {
@@ -652,8 +659,15 @@ const questionBank = {
           title: 'What is your project?',
           url: 'project-type',
           baseUrl: 'project-type',
-          backUrl: 'poultry-type',
-          nextUrl: 'building-items',
+          backUrl: 'start',
+          nextUrl: 'applicant-type',
+          hint: {
+            html: `If you want to apply for grant funding for multiple hen or 
+                pullet housing projects, you must submit an application for each 
+                project.<br/><br/>
+                If you want to apply for multiple veranda projects you must 
+                submit an application for each project.`
+          },
           ineligibleContent: {
             messageContent: `
                 <div class="govuk-list govuk-list--bullet">
@@ -675,11 +689,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You can apply for grant funding for either a housing project or adding a veranda only to existing housing.
-
-                The RPA will award grant funding for adding a veranda only to existing housing on a first-come first-served basis. You do not need to complete any eligibility or scoring questions.
-
-                To apply for grant funding for housing projects, you need to complete eligibility and scoring questions.`,
+                para: 'You can apply for grant funding for either a housing project or adding a veranda only to existing housing.',
                 items: []
               }]
             }]
@@ -705,7 +715,6 @@ const questionBank = {
               hint: {
                 text: 'The RPA will award the grant funding for adding a veranda only to existing housing on a first-come first-served basis'
               },
-              redirectUrl: 'business-details'
             },
             {
               value: 'divider'
@@ -735,7 +744,7 @@ const questionBank = {
           pageTitle: '',
           url: 'building-items',
           baseUrl: 'building-items',
-          backUrl: 'project-type',
+          backUrl: 'poultry-type',
           nextUrl: 'capped-inlets-outlets',
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
@@ -2478,6 +2487,243 @@ const questionBank = {
             }
           ],
           yarKey: 'externalTaps'
+        },
+        {
+          key: 'veranda-only',
+          order: 245,
+          title: 'Will the veranda be at least the same size as 30% of the indoor bird housing area footprint?',
+          pageTitle: '',
+          url: 'veranda-only',
+          baseUrl: 'veranda-only',
+          backUrl: 'poultry-type',
+          nextUrl: 'veranda-features',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The veranda must be at least the same size as 30% of the indoor bird housing area footprint. 
+                
+                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The veranda must be at least the same size as 30% of the indoor bird housing area footprint in size.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the veranda will be at least the same size as 30% of the indoor bird housing area footprint'
+            }
+          ],
+          answers: [
+            {
+              key: 'veranda-only-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'veranda-only-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'verandaOnly'
+        },
+        {
+          key: 'veranda-features',
+          order: 250,
+          title: 'Will the veranda have these features?',
+          pageTitle: '',
+          url: 'veranda-features',
+          baseUrl: 'veranda-features',
+          backUrl: 'veranda-only',
+          nextUrl: 'veranda-biosecurity',
+          hint: {
+            html: `
+                  <p>The veranda of the housing must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a solid concrete floor</li>
+                    <li>a waterproof insulated roof</li>
+                    <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
+                    <li>a perimeter wall at least 1 metre high</li>
+                    <li>lockable pop holes within the perimeter wall, unless the veranda forms part of an indoor barn system</li>
+                    <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
+                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
+                  </ul>`
+          },
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">The veranda of the housing must have:</p>
+                      <ul>
+                        <li>a solid concrete floor</li>
+                        <li>a waterproof insulated roof</li>
+                        <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
+                        <li>a perimeter wall at least 1 metre high</li>
+                        <li>lockable pop holes in the perimeter wall, unless the veranda forms part of an indoor barn system</li>
+                        <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
+                        <li>a dimmable LED lighting system between 0 lux and 60 lux.</li>
+                      </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the veranda will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'veranda-features-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'veranda-features-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'verandaFeatures'
+        },
+        {
+          key: 'veranda-biosecurity',
+          order: 255,
+          title: 'Will the veranda have the capacity to be made biosecure with mesh that has a spacing of 6mm or less?',
+          pageTitle: '',
+          url: 'veranda-biosecurity',
+          baseUrl: 'veranda-biosecurity',
+          backUrl: 'veranda-features',
+          nextUrl: 'veranda-pop-holes',
+          hint: {
+            text: 'This is to stop wild birds and rodents from entering during housing orders'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `You must be able to make the veranda secure with mesh that has a spacing (aperture) of 6mm or less during housing orders.`
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'The veranda must be capable of being secured with mesh (with a maximum of 6mm spacing) during housing orders.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the veranda will have the capacity to be made biosecure'
+            }
+          ],
+          answers: [
+            {
+              key: 'veranda-biosecurity-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'veranda-biosecurity-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'verandaBiosecurity'
+        },
+        {
+          key: 'veranda-pop-holes',
+          order: 260,
+          title: 'Will the internal {{_poultryType_}} housing have lockable pop holes for the hens to enter the veranda through?',
+          pageTitle: '',
+          url: 'veranda-pop-holes',
+          baseUrl: 'veranda-pop-holes',
+          backUrl: 'veranda-biosecurity',
+          nextUrl: 'veranda-project-cost',
+          hint: {
+            text: 'You must not put perches in front of the pop holes'
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'Pop holes must:',
+                  items: [
+                      'be at least 35cm high and 40cm wide',
+                      'extend along the entire length of the building',
+                  ],
+                  additionalPara: `
+                  The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
+
+                  The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.`
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent:  `
+            <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">Pop holes must:</p>
+                <ul>
+                    <li>be at least 35cm high and 40cm wide</li>
+                    <li>extend along the entire length of the building</li>
+                </ul>
+                <p>The pop hole openings must add up to a total of 2 metres for every 1,000 hens.</p>
+            </div>`,
+            insertText: {
+              html: `
+                  <p>The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.</p>
+                  <p>You must not put perches in front of the pop holes.</p>
+              `
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the internal {{_poultryType_}} housing will have lockable pop holes'
+            }
+          ],
+          answers: [
+            {
+              key: 'veranda-pop-holes-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'veranda-pop-holes-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'verandaPopHoles'
         },
         {
           key: 'project-cost',

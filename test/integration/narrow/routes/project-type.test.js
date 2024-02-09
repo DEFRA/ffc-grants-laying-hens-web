@@ -53,20 +53,7 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
-  it('user selects `Adding a veranda only to existing housing` -> store user response and redirect to /business-details', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/project-type`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { projectType: 'Adding a veranda only to existing housing', crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('business-details')
-  })
-
-  it('user selects `Replacing existing housing` -> store user response and redirect to /building-items', async () => {
+  it('user selects `Replacing existing housing` -> store user response and redirect to /applicant-type', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,
@@ -76,10 +63,10 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('building-items')
+    expect(postResponse.headers.location).toBe('applicant-type')
   })
 
-  it('user selects `Refurbishing existing housing` -> store user response and redirect to /building-items', async () => {
+  it('user selects `Refurbishing existing housing` -> store user response and redirect to /applicant-type', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,
@@ -89,7 +76,7 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('building-items')
+    expect(postResponse.headers.location).toBe('applicant-type')
   })
 
   it('page loads with correct back link ', async () => {
@@ -99,6 +86,6 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"poultry-type\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"start\" class=\"govuk-back-link\">Back</a>')
   })
 })
