@@ -1250,7 +1250,7 @@ const questionBank = {
           url: 'hen-veranda',
           baseUrl: 'hen-veranda',
           hint: {
-            text: 'Housing projects that do not have access to an area at least 30% the size of the indoor housing area are exempt from adding a veranda'
+            text: 'Housing projects that do not have access to an area at least 30% of the size of the indoor housing area are exempt from adding a veranda'
           },
           backUrl: 'lighting-features',
           nextUrl: 'hen-veranda-features',
