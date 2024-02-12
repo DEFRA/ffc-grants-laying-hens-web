@@ -11,30 +11,48 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <title>Check if you can apply for a Laying Hens for Health and Welfare Grant</title>
+      <title>Check if you can apply for a Laying Hens Housing for Health and Welfare Grant</title>
       <div class="govuk-body">
-      <h1 class="govuk-heading-xl">Check if you can apply for a Laying Hens for Health and Welfare Grant</h1>
+      <h1 class="govuk-heading-xl">Check if you can apply for a Laying Hens Housing for Health and Welfare Grant</h1>
       <p>Use this service to:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>check if you can apply for a grant for your project (takes about 20 minutes)</li>
-        <li>estimate how much grant funding you could get (takes about 20 minutes if you have all the project details)</li>
+        <li>check if you are eligible to apply for a grant for your project (takes about 5 minutes)</li>
+        <li>check how well your project fits the funding priorities (takes about 15 minutes if you have all the project details</li>
       </ul>
       <p class="govuk-body">You need to complete the checker in one session as you cannot save your information.</p>
       <h2 class="govuk-heading-m">Who can apply</h2>
       <p class="govuk-body">You can apply if you:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>are a dairy, beef or mixed farmer</li>
+        <li>are a laying hen or puller farmer</li>
         <li>will do the grant-funded work in England</li>
-        <li>are building new calf housing or extending or refurbishing existing calf housing</li>
       </ul>
-      <p class="govuk-body">You can apply for up to:</p>
+      <h2 class="govuk-heading-m">What you can apply for</h2>
+      <p>You can apply for grant funding to replace or refurbish existing laying hen or pullet housing, or to add a veranda to laying hen or pullet housing.</p>
+      <p>If you are applying for grant funding to replace or refurbish housing, you 
+          can also apply for grant funding to add a solar photovoltaic (PV) system to he housing.
+      </p>
+      <p>You must submit an application for each project. You can apply for grant funding for either housing projects or veranda projects.</p>
+        
+      <p>You can apply for up to 40% of estimated costs of:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>40% of estimated costs of calf housing</li>
-        <li>25% of the estimated costs of buying and installing a solar PV system on the grant-funded calf housing</li>
+        <li>replacing or refurbishing laying hen or pullet housing</li>
+        <li>adding a veranda to existing housing</li>
       </ul>
-      <p>The minimum grant you can claim is £15,000 (40% of £37,500). The maximum grant is £500,000.</p>
+
+      <p>Funding for a solar PV system will be capped at the lowest of these 2 amounts, either:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>the cost of 75m² of the bird floorspace or</li>
+        <li>25% of the invoice price for purchase and installation of the solar PV system</li>
+      </ul>
+      <p>For laying hen or pullet housing and a solar PV system, the maximum grant you can apply for is £500,000. The minimum grant is £15,000 (40% of £37,500).</p>
+      <p>For adding a laying hen or pullet veranda only, the maximum grant you can 
+        apply for is £100,000. The minimum grant is £5,000 (40% of £12,500). 
+        The RPA will award the grant funding for verandas on a first-come first- 
+        served basis.
+      </p>
+
       {{ govukInsetText({
-        text: "If your project is eligible, you will be able to submit your online application to the Rural Payments Agency (RPA)"
+        text: 'If your project is eligible, you will be able to submit your online application to the Rural Payments Agency (RPA).'
       }) }}
 
       {{ govukButton({
@@ -49,8 +67,9 @@
       <p class="govuk-body">To use the checker, you need:</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>information about your business (for example, number of employees and turnover)</li>
-        <li>information about the project (for example, building structure, average floor space per calf, floor and bedding type)</li>
-        <li>an estimate of the total cost of the project</li>
+        <li>information about the project (for example, building structure)</li>
+        <li>a list of the items you’d like to buy for the project</li>
+        <li>an estimate of the total cost of the items</li>
       </ul>
 
       <p class="govuk-body govuk-!-margin-bottom-8">If you do not enter any information for more than 20 minutes, your application will time out and you will have to start again.</p>
