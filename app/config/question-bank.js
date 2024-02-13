@@ -2852,11 +2852,11 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'remaining-costs-A1',
+              key: 'veranda-remaining-costs-A1',
               value: 'Yes'
             },
             {
-              key: 'remaining-costs-A2',
+              key: 'veranda-remaining-costs-A2',
               value: 'No',
               notEligible: true
             }
