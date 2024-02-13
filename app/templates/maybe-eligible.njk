@@ -6,6 +6,8 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/panel/macro.njk" import govukPanel %}
 {% from "./components/macro.njk" import crumbToken %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
 
 {% block pageTitle %}
   {{messageHeader}}{{reference.titleText}} - {{siteTitle}}
@@ -52,6 +54,10 @@
         {{ govukWarningText(warning) }}
       {% endif %}
 
+      {% if insertText %} 
+        {{ govukInsetText(insertText) }}
+      {% endif %}
+
       {% if extraMessageContent %}
         <p class="govuk-body">{{ extraMessageContent | safe}}</p>
       {% endif %}
@@ -73,7 +79,7 @@
   </div>
 
 
-  {%if url === 'confirm' %}
+  {%if url === 'confirm' or url === 'veranda-confirm' %}
     <div class="govuk-grid-column-two-thirds">
       <form method="POST" action="{{ url }}" autocomplete="off" novalidate="novalidate">
         {{ crumbToken(crumb)}}
