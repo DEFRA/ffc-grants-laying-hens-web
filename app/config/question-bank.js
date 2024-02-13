@@ -2795,6 +2795,75 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
+          key: 'veranda-remaining-costs',
+          order: 150,
+          title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
+          pageTitle: '',
+          url: 'veranda-remaining-costs',
+          baseUrl: 'veranda-remaining-costs',
+          backUrl: 'potential-amount',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'applyingFor',
+            dependentAnswerKeysArray: ['applying-for-A2'],
+            urlOptions: {
+              thenUrl: 'grid-reference',
+              elseUrl: 'planning-permission'
+            }
+          },
+          // preValidationKeys: ['referenceCostCalculated'],
+          ineligibleContent: {
+            messageContent: `<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>
+            <div class="govuk-list govuk-list--bullet">
+                  You can use:
+                  <ul>
+                    <li>loans</li>
+                    <li>overdrafts</li>
+                    <li>the Basic Payment Scheme</li>
+                  </ul>
+            </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [
+                  {
+                    para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.
+                  You can use:`,
+                    items: ['loans', 'overdrafts', 'the Basic Payment Scheme']
+                  }
+                ]
+              }
+            ]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you can pay the remaining costs'
+            }
+          ],
+          answers: [
+            {
+              key: 'remaining-costs-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'remaining-costs-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'verandaRemainingCosts'
+        },
+        {
           key: 'potential-amount',
           order: 150,
           url: 'potential-amount',

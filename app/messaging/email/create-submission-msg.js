@@ -268,6 +268,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       projectCost: getCurrencyFormat(submission.projectCost),
       potentialFunding: getCurrencyFormat(submission.calculatedGrant),
       remainingCost: submission.remainingCosts,
+      verandaRemainingCost: submission.verandaRemainingCosts,
 
       projectName: submission.businessDetails.projectName,
       projectType: submission.projectType,
