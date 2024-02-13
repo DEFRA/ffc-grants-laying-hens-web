@@ -2201,7 +2201,7 @@ const questionBank = {
           backUrl: 'multi-tier-system',
           nextUrl: 'mechanical-ventilation',
           hint: {
-            html:`
+            html: `
                 <p>The rearing aviary system must have:</p>
                 <ul>
                     <li>the capacity to provide or retain friable litter while the birds are held within the system</li>
@@ -2261,7 +2261,7 @@ const questionBank = {
           backUrl: 'multi-tier-system',
           nextUrl: 'mechanical-ventilation',
           hint: {
-            html:`
+            html: `
                 <p>The step-up system must have:</p>
                 <ul>
                     <li>height-adjustable tiers that may include food and water at, or before, 10 days</li>
@@ -2682,7 +2682,7 @@ const questionBank = {
             ]
           },
           ineligibleContent: {
-            messageContent:  `
+            messageContent: `
             <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">Pop holes must:</p>
                 <ul>
@@ -3179,7 +3179,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'First name must include letters'
                 },
                 {
@@ -3211,7 +3211,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Last name must include letters'
                 },
                 {
@@ -3398,7 +3398,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Town must include letters'
                 },
                 {
@@ -3512,7 +3512,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'First name must include letters'
                 },
                 {
@@ -3543,7 +3543,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Last name must include letters'
                 },
                 {
@@ -3711,7 +3711,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_3_LETTERS,
+                  regex: MIN_3_LETTERS,
                   error: 'Address must include at least 3 letters'
                 },
               ]
@@ -3752,7 +3752,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Town must include letters'
                 },
                 {
@@ -3811,7 +3811,14 @@ const questionBank = {
           pageTitle: 'Check details',
           url: 'check-details',
           backUrl: 'applicant-details',
-          nextUrl: 'confirm',
+          nextUrlObject: {
+            dependentQuestionYarKey: ['projectType'],
+            dependentAnswerKeysArray: ['project-type-A3'],
+            urlOptions: {
+              thenUrl: 'veranda-confirm',
+              elseUrl: 'confirm'
+            }
+          },
           // preValidationKeys: ['applying'],
           ineligibleContent: {},
           pageData: {
@@ -3840,6 +3847,35 @@ const questionBank = {
             I am aware that the information I submit will be checked by the RPA.</br></br>
             I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.
             <h2 class="govuk-heading-m">Improving our schemes</h2>
+            Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`
+          },
+          answers: [
+            {
+              key: 'consentOptional',
+              value: 'CONSENT_OPTIONAL'
+            }
+          ],
+          yarKey: 'consentOptional'
+        },
+        {
+          key: 'veranda-confirm',
+          title: 'Confirm and send',
+          order: 410,
+          url: 'veranda-confirm',
+          backUrl: 'check-details',
+          nextUrl: 'confirmation',
+          // preValidationKeys: ['farmerDetails'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Confirm and send',
+            messageContent: `I confirm that, to the best of my knowledge, the details I have provided are correct.</br></br>
+            I understand the project’s eligibility and score is based on the answers I provided.</br></br>
+            I am aware that the information I submit will be checked by the RPA.</br></br>
+            I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.`,
+            insertText: {
+              text: 'I understand that the RPA will award the grant funding for adding a veranda only to existing housing on a first-come first-served basis.'
+            },
+            extraMessageContent: `<h2 class="govuk-heading-m">Improving our schemes</h2>
             Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`
           },
           answers: [

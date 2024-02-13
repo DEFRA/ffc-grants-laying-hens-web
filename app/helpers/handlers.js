@@ -199,7 +199,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     )
   }
 
-  if (url === 'confirm') {
+  if (url === 'confirm' || url === 'veranda-confirm') {
     const consentOptional = getYarValue(request, 'consentOptional')
     consentOptionalData = getConsentOptionalData(consentOptional)
   }
