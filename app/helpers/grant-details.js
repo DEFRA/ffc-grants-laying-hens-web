@@ -1,5 +1,5 @@
-const MIN_GRANT = 15000
-const MAX_GRANT = 500000
+const MIN_GRANT = 5000
+const MAX_GRANT = 100000
 const GRANT_PERCENTAGE = 40
 
 module.exports = {

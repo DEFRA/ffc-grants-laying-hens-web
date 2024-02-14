@@ -2201,7 +2201,7 @@ const questionBank = {
           backUrl: 'multi-tier-system',
           nextUrl: 'mechanical-ventilation',
           hint: {
-            html:`
+            html: `
                 <p>The rearing aviary system must have:</p>
                 <ul>
                     <li>the capacity to provide or retain friable litter while the birds are held within the system</li>
@@ -2261,7 +2261,7 @@ const questionBank = {
           backUrl: 'multi-tier-system',
           nextUrl: 'mechanical-ventilation',
           hint: {
-            html:`
+            html: `
                 <p>The step-up system must have:</p>
                 <ul>
                     <li>height-adjustable tiers that may include food and water at, or before, 10 days</li>
@@ -2682,7 +2682,7 @@ const questionBank = {
             ]
           },
           ineligibleContent: {
-            messageContent:  `
+            messageContent: `
             <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">Pop holes must:</p>
                 <ul>
@@ -2724,6 +2724,85 @@ const questionBank = {
             }
           ],
           yarKey: 'verandaPopHoles'
+        },
+        {
+          key: 'veranda-project-cost',
+          order: 265,
+          pageTitle: '',
+          classes: 'govuk-input--width-10',
+          url: 'veranda-project-cost',
+          baseUrl: 'veranda-project-cost',
+          backUrl: 'veranda-pop-holes',
+          nextUrl: 'veranda-potential-amount',
+          fundingPriorities: '',
+          preValidationKeys: [],
+          grantInfo: {
+            minGrant: MIN_GRANT,
+            maxGrant: MAX_GRANT,
+            grantPercentage: GRANT_PERCENTAGE,
+            cappedGrant: true
+          },
+          type: 'input',
+          prefix: {
+            text: '£'
+          },
+          id: 'projectCost',
+          label: {
+            text: 'What is the total estimated cost of the veranda project?',
+            classes: 'govuk-label--l',
+            isPageHeading: true,
+            for: 'projectCost'
+          },
+          hint: {
+            html: `
+                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £5,000 (40% of £12,500). The maximum grant is £100,000.</p>
+                  <p>Do not include VAT</p>
+                  <p>Enter amount, for example 50,000</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the total estimated total cost of the veranda project'
+            },
+            {
+              type: 'REGEX',
+              regex: PROJECT_COST_REGEX,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'MIN_MAX_CHARS',
+              min: 1,
+              max: 7,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            }
+          ],
+          ineligibleContent: {
+            messageContent: 'The minimum grant you can apply for veranda project costs is £5,000 (40% of £12,500).',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          answers: [],
+          yarKey: 'projectCost'
+        },
+        { //TODO
+          key: 'veranda-potential-amount',
+          order: 270,
+          url: 'veranda-potential-amount',
+          baseUrl: 'veranda-potential-amount',
+          backUrl: 'veranda-project-cost',
+          nextUrl: 'remaining-costs',
+          // preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
         },
         {
           key: 'project-cost',
@@ -3248,7 +3327,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'First name must include letters'
                 },
                 {
@@ -3280,7 +3359,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Last name must include letters'
                 },
                 {
@@ -3467,7 +3546,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Town must include letters'
                 },
                 {
@@ -3581,7 +3660,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'First name must include letters'
                 },
                 {
@@ -3612,7 +3691,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Last name must include letters'
                 },
                 {
@@ -3780,7 +3859,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_3_LETTERS,
+                  regex: MIN_3_LETTERS,
                   error: 'Address must include at least 3 letters'
                 },
               ]
@@ -3821,7 +3900,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex:  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Town must include letters'
                 },
                 {
@@ -3880,7 +3959,14 @@ const questionBank = {
           pageTitle: 'Check details',
           url: 'check-details',
           backUrl: 'applicant-details',
-          nextUrl: 'confirm',
+          nextUrlObject: {
+            dependentQuestionYarKey: ['projectType'],
+            dependentAnswerKeysArray: ['project-type-A3'],
+            urlOptions: {
+              thenUrl: 'veranda-confirm',
+              elseUrl: 'confirm'
+            }
+          },
           // preValidationKeys: ['applying'],
           ineligibleContent: {},
           pageData: {
@@ -3909,6 +3995,35 @@ const questionBank = {
             I am aware that the information I submit will be checked by the RPA.</br></br>
             I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.
             <h2 class="govuk-heading-m">Improving our schemes</h2>
+            Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`
+          },
+          answers: [
+            {
+              key: 'consentOptional',
+              value: 'CONSENT_OPTIONAL'
+            }
+          ],
+          yarKey: 'consentOptional'
+        },
+        {
+          key: 'veranda-confirm',
+          title: 'Confirm and send',
+          order: 410,
+          url: 'veranda-confirm',
+          backUrl: 'check-details',
+          nextUrl: 'confirmation',
+          // preValidationKeys: ['farmerDetails'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Confirm and send',
+            messageContent: `I confirm that, to the best of my knowledge, the details I have provided are correct.</br></br>
+            I understand the project’s eligibility and score is based on the answers I provided.</br></br>
+            I am aware that the information I submit will be checked by the RPA.</br></br>
+            I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.`,
+            insertText: {
+              text: 'I understand that the RPA will award the grant funding for adding a veranda only to existing housing on a first-come first-served basis.'
+            },
+            extraMessageContent: `<h2 class="govuk-heading-m">Improving our schemes</h2>
             Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`
           },
           answers: [
