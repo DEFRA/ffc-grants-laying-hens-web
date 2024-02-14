@@ -2880,15 +2880,8 @@ const questionBank = {
           pageTitle: '',
           url: 'veranda-remaining-costs',
           baseUrl: 'veranda-remaining-costs',
-          backUrl: 'potential-amount',
-          nextUrlObject: {
-            dependentQuestionYarKey: 'applyingFor',
-            dependentAnswerKeysArray: ['applying-for-A2'],
-            urlOptions: {
-              thenUrl: 'grid-reference',
-              elseUrl: 'planning-permission'
-            }
-          },
+          backUrl: 'veranda-potential-amount',
+          nextUrl: 'business-details',
           // preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: `<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>`,
