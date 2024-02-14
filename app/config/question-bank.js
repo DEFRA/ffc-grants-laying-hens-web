@@ -2726,6 +2726,85 @@ const questionBank = {
           yarKey: 'verandaPopHoles'
         },
         {
+          key: 'veranda-project-cost',
+          order: 265,
+          pageTitle: '',
+          classes: 'govuk-input--width-10',
+          url: 'veranda-project-cost',
+          baseUrl: 'veranda-project-cost',
+          backUrl: 'veranda-pop-holes',
+          nextUrl: 'veranda-potential-amount',
+          fundingPriorities: '',
+          preValidationKeys: [],
+          grantInfo: {
+            minGrant: MIN_GRANT,
+            maxGrant: MAX_GRANT,
+            grantPercentage: GRANT_PERCENTAGE,
+            cappedGrant: true
+          },
+          type: 'input',
+          prefix: {
+            text: '£'
+          },
+          id: 'projectCost',
+          label: {
+            text: 'What is the total estimated cost of the veranda project?',
+            classes: 'govuk-label--l',
+            isPageHeading: true,
+            for: 'projectCost'
+          },
+          hint: {
+            html: `
+                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £5,000 (40% of £12,500). The maximum grant is £100,000.</p>
+                  <p>Do not include VAT</p>
+                  <p>Enter amount, for example 50,000</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the total estimated total cost of the veranda project'
+            },
+            {
+              type: 'REGEX',
+              regex: PROJECT_COST_REGEX,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'MIN_MAX_CHARS',
+              min: 1,
+              max: 7,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            }
+          ],
+          ineligibleContent: {
+            messageContent: 'The minimum grant you can apply for veranda project costs is £5,000 (40% of £12,500).',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          answers: [],
+          yarKey: 'projectCost'
+        },
+        { //TODO
+          key: 'veranda-potential-amount',
+          order: 270,
+          url: 'veranda-potential-amount',
+          baseUrl: 'veranda-potential-amount',
+          backUrl: 'veranda-project-cost',
+          nextUrl: 'remaining-costs',
+          // preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
+        {
           key: 'project-cost',
           order: 145,
           pageTitle: '',

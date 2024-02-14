@@ -358,6 +358,13 @@ const showPostPage = (currentQuestion, request, h) => {
   if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount-capped')
   }
+  
+  if (yarKey === 'projectCost') {
+    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+    setYarValue(request, 'calculatedGrant', calculatedGrant)
+    setYarValue(request, 'remainingCost', remainingCost)
+    setYarValue(request, 'projectCost', projectCost)
+  }
 
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
