@@ -2935,7 +2935,7 @@ const questionBank = {
               notEligible: true
             }
           ],
-          yarKey: 'verandaRemainingCosts'
+          yarKey: 'remainingCosts'
         },
         {
           key: 'potential-amount',

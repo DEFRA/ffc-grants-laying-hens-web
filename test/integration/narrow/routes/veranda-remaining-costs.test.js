@@ -33,7 +33,7 @@ describe('Page: /veranda-remaining-costs', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-remaining-costs`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { verandaRemainingCosts: '', crumb: crumbToken }
+      payload: { remainingCosts: '', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -46,7 +46,7 @@ describe('Page: /veranda-remaining-costs', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-remaining-costs`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { verandaRemainingCosts: 'No', crumb: crumbToken }
+      payload: { remainingCosts: 'No', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -58,7 +58,7 @@ describe('Page: /veranda-remaining-costs', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-remaining-costs`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { verandaRemainingCosts: 'Yes', crumb: crumbToken }
+      payload: { remainingCosts: 'Yes', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
