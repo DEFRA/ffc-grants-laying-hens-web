@@ -2793,7 +2793,7 @@ const questionBank = {
           url: 'veranda-potential-amount',
           baseUrl: 'veranda-potential-amount',
           backUrl: 'veranda-project-cost',
-          nextUrl: 'remaining-costs',
+          nextUrl: 'veranda-remaining-costs',
           // preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -2889,17 +2889,19 @@ const questionBank = {
               elseUrl: 'planning-permission'
             }
           },
-          // preValidationKeys: ['referenceCostCalculated'],
+          // preValidationKeys: ['projectCost'],
           ineligibleContent: {
-            messageContent: `<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>
-            <div class="govuk-list govuk-list--bullet">
-                  You can use:
-                  <ul>
+            messageContent: `<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>`,
+            insertText: {
+              html: `
+                  <p>You can use:</p>
+                  <ul class="govuk-list--bullet">
                     <li>loans</li>
                     <li>overdrafts</li>
                     <li>the Basic Payment Scheme</li>
                   </ul>
-            </div>`,
+            </span>`
+            },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
