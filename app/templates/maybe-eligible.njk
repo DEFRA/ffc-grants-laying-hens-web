@@ -48,6 +48,11 @@
       {%if messageHeader%}
       <h1 class="govuk-heading-l">{{messageHeader}}</h1>
       {% endif %}
+
+      {% if potentialAmountConditional %}
+        <p class="govuk-body">{{ additionalSentence | safe}}</p>
+      {% endif %}
+
       <p class="govuk-body">{{ messageContent | safe}}</p>
 
       {% if warning %} 
