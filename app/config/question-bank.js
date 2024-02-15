@@ -3145,6 +3145,14 @@ const questionBank = {
           url: 'business-details',
           baseUrl: 'business-details',
           backUrl: 'project-type',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A3'],
+            urlOptions: {
+              thenUrl: 'veranda-remaining-costs',
+              elseUrl: 'project-type'
+            }
+          },
           nextUrl: 'applying',
           // preValidationKeys: [],
           fundingPriorities: '',

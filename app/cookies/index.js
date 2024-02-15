@@ -38,7 +38,7 @@ module.exports = {
   validSession,
   sessionIgnorePaths: [
     `${urlPrefix}/start`,
-    `${urlPrefix}/applicant-type`,
+    `${urlPrefix}/project-type`,
     `${urlPrefix}/session-timeout`,
     `${urlPrefix}/cookies`,
     `${urlPrefix}/accessibility`,
