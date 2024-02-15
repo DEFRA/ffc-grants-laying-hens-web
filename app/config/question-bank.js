@@ -3144,7 +3144,6 @@ const questionBank = {
           pageTitle: '',
           url: 'business-details',
           baseUrl: 'business-details',
-          backUrl: 'project-type',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
             dependentAnswerKeysArray: ['project-type-A3'],
