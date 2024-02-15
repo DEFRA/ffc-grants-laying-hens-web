@@ -2834,7 +2834,7 @@ const questionBank = {
           answers: [],
           yarKey: 'projectCost'
         },
-        { //TODO
+        {
           key: 'veranda-potential-amount',
           order: 270,
           url: 'veranda-potential-amount',
@@ -2986,7 +2986,7 @@ const questionBank = {
         },
         {
           key: 'potential-amount',
-          order: 150,
+          order: 155,
           url: 'potential-amount',
           baseUrl: 'potential-amount',
           backUrl: 'project-cost',
@@ -3003,7 +3003,7 @@ const questionBank = {
         },
         {
           key: 'potential-amount-conditional',
-          order: 155,
+          order: 160,
           url: 'potential-amount-conditional',
           baseUrl: 'potential-amount-conditional',
           backUrl: 'project-cost-solar',
@@ -3021,7 +3021,7 @@ const questionBank = {
         },
         {
           key: 'potential-amount-capped',
-          order: 160,
+          order: 165,
           url: 'potential-amount-capped',
           baseUrl: 'potential-amount-capped',
           backUrl: 'project-cost',
@@ -3039,7 +3039,7 @@ const questionBank = {
         },
         {
           key: 'remaining-costs',
-          order: 165,
+          order: 170,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
           url: 'remaining-costs',
@@ -3107,7 +3107,7 @@ const questionBank = {
         },
         {
           key: 'score',
-          order: 170,
+          order: 175,
           title: 'Score results',
           url: 'score',
           baseUrl: 'score',
