@@ -164,6 +164,12 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   maybeEligibleContent.title = question.title
   let consentOptionalData
 
+  if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') > 250000) {
+    question.maybeEligibleContent.potentialAmountConditional = true
+  } else {
+    question.maybeEligibleContent.potentialAmountConditional = false
+  }
+
   if (maybeEligibleContent.reference) {
     if (!getYarValue(request, 'consentMain')) {
       return h.redirect(startPageUrl)

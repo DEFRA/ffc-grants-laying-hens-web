@@ -2844,7 +2844,9 @@ const questionBank = {
           // preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
+            potentialAmountConditional: false,
             messageHeader: 'Potential grant funding',
+            additionalSentence: 'The maximum grant you can apply for is £100,000.',
             messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
             warning: {
               text: 'There’s no guarantee the project will receive a grant.'
