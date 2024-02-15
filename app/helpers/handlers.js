@@ -8,7 +8,7 @@ const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const senders = require('../messaging/senders')
 
-const emailFormatting = require('./../messaging/email/process-submission')
+// const emailFormatting = require('./../messaging/email/process-submission')
 const gapiService = require('../services/gapi-service')
 const { startPageUrl, urlPrefix } = require('../config/server')
 
@@ -175,13 +175,13 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
       return h.redirect(startPageUrl)
     }
     confirmationId = getConfirmationId(request.yar.id)
-    try {
-      const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
-      await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
-      console.log('[CONFIRMATION EVENT SENT]')
-    } catch (err) {
-      console.log('ERROR: ', err)
-    }
+    // try {
+    //   const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
+    //   await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
+    //   console.log('[CONFIRMATION EVENT SENT]')
+    // } catch (err) {
+    //   console.log('ERROR: ', err)
+    // }
     maybeEligibleContent = {
       ...maybeEligibleContent,
       reference: {
