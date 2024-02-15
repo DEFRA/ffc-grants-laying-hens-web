@@ -2489,6 +2489,53 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
+          key: 'bird-number',
+          order: 240,
+          title: 'Do you have 1,000 or more birds on your farm?',
+          pageTitle: '',
+          url: 'bird-number',
+          baseUrl: 'bird-number',
+          backUrl: 'external-taps',
+          nextUrl: 'roof-solar-PV',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You must have at least 1,000 birds (laying hens, pullets, or both) on your farm currently to be eligible for grant funding.'
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'You must have at least 1,000 birds on your farm currently.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you currently have 1,000 or more birds on your farm'
+            }
+          ],
+          answers: [
+            {
+              key: 'bird-number-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'bird-number-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'birdNumber'
+        },
+        {
           key: 'veranda-only',
           order: 245,
           title: 'Will the veranda be at least the same size as 30% of the indoor bird housing area footprint?',
