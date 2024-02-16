@@ -57,7 +57,7 @@ describe('Page: /current-system', () => {
     expect(postResponse.headers.location).toBe('ramp-connection')
   })
 
-  it('page loads with correct back link - /external-taps', async () => {
+  it('page loads with correct back link - /remaining-costs', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/current-system`
