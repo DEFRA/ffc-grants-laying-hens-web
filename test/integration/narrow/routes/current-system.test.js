@@ -49,7 +49,7 @@ describe('Page: /current-system', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/current-system`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { currentSystem: 'Yes',  crumb: crumbToken }
+      payload: { currentSystem: 'Colony cage',  crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
