@@ -3125,7 +3125,7 @@ const questionBank = {
           minAnswerCount: 1,
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               content: [{
                 para: 'RPA want to prioritise supporting farmers that are transitioning out of using colony cages, or to high-welfare multi-tier aviary systems.'
               }]
@@ -3183,7 +3183,7 @@ const questionBank = {
           nextUrl: 'multi-tier-system',
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               content: [{
                 para: 'RPA want to fund multi-tier systems that have 3 tiers or fewer.'
               }]
@@ -3210,6 +3210,49 @@ const questionBank = {
             }
           ],
           yarKey: 'threeTiers'
+        },
+        {
+          key: 'easy-grip-perches',
+          order: 80,
+          title:'Will the perches have a design feature that help the {{_poultryType_}} grip the perches?',
+          hint: {
+            text: 'For example, easy-grip shape, ridged structure, material or coating features'
+          },
+          pageTitle: '',
+          url: 'easy-grip-perches',
+          baseUrl: 'easy-grip-perches',
+          backUrl: 'natural-light',
+          nextUrl: 'housing-biosecurity',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to support projects which provide easy-grip perches.`
+              }]
+            }]
+          },
+          // preValidationKeys: ['naturalLight'],
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the perches will have a design feature that help the {{_poultryType_}} grip the perches'
+            }
+          ],
+          answers: [
+            {
+              key: 'easy-grip-perches-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'easy-grip-perches-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'easyGripPerches'
         },
         {
           key: 'score',
