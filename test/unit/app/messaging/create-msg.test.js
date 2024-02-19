@@ -1,12 +1,12 @@
 describe('create-msg', () => {
-  jest.mock('../../../../app/helpers/session')
-  const { getYarValue } = require('../../../../app/helpers/session')
+  jest.mock('ffc-grants-common-functionality')
+  const { session } = require('ffc-grants-common-functionality')
 
   const { getDesirabilityAnswers } = require('../../../../app/messaging/create-msg')
 
   test('check getDesirabilityAnswers()', () => {
     let dict
-    getYarValue.mockImplementation((req, key) => (dict[key]))
+    session.getYarValue.mockImplementation((req, key) => (dict[key]))
 
     dict = {
       housing: 'hello',

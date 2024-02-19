@@ -1,13 +1,13 @@
 const { getUrl } = require('../helpers/urls')
 const { getOptions } = require('../helpers/answer-options')
-const { getYarValue } = require('../helpers/session')
+const { session } = require('ffc-grants-common-functionality')
 const { getQuestionByKey, allAnswersSelected } = require('../helpers/utils')
 
 const getDependentSideBar = (sidebar, request) => {
   const { values, dependentQuestionKeys } = sidebar
   dependentQuestionKeys.forEach((dependentQuestionKey, index) => {
     const yarKey = getQuestionByKey(dependentQuestionKey).yarKey
-    const selectedAnswers = getYarValue(request, yarKey)
+    const selectedAnswers = session.getYarValue(request, yarKey)
 
     if (selectedAnswers) {
       values[index].content[0].items = [selectedAnswers].flat()
@@ -33,7 +33,7 @@ const showBackToDetailsButton = (key, request) => {
     case 'applicant-details':
     case 'agent-details':
     case 'score': {
-      return !!getYarValue(request, 'reachedCheckDetails')
+      return !!session.getYarValue(request, 'reachedCheckDetails')
     }
     default:
       return false
@@ -45,7 +45,7 @@ const showBackToEvidenceSummaryButton = (key, request) => {
     case 'planning-permission':
     case 'planning-permission-evidence':
     case 'grid-reference': {
-      return !!getYarValue(request, 'reachedEvidenceSummary')
+      return !!session.getYarValue(request, 'reachedEvidenceSummary')
     }
     default:
       return false
@@ -54,7 +54,7 @@ const showBackToEvidenceSummaryButton = (key, request) => {
 
 const getModel = (data, question, request, conditionalHtml = '') => {
   let { type, backUrl, key, backUrlObject, sidebar, title, hint, score, label, warning, warningCondition, nextUrl, nextUrlObject } = question
-  const hasScore = !!getYarValue(request, 'current-score')
+  const hasScore = !!session.getYarValue(request, 'current-score')
 
   title = title ?? label?.text
 

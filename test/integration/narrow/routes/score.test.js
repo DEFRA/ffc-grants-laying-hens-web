@@ -4,13 +4,18 @@ const varList = {
     introducingInnovation: 'wer'
 }
 
-jest.mock('../../../../app/helpers/session', () => ({
-	setYarValue: (request, key, value) => null,
-	getYarValue: (request, key) => {
-		if (Object.keys(varList).includes(key)) return varList[ key ]
-		else return 'Error'
-	}
-}))
+jest.mock('ffc-grants-common-functionality', () => ({
+    session: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return 'Error'
+      }
+    },
+	regex: {
+		PROJECT_COST_REGEX: /^[1-9]\d*$/
+	  }
+  }))
 
 describe('Score page', () => {
 	let crumCookie

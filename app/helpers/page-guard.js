@@ -1,4 +1,4 @@
-const { getYarValue } = require('../helpers/session')
+const { session } = require('ffc-grants-common-functionality')
 const { startPageUrl, serviceEndDate, serviceEndTime } = require('../config/server')
 const { getQuestionAnswer } = require('./utils')
 
@@ -19,7 +19,7 @@ const guardDataCheck = (guardData, preValidationList, result, inverseResult, req
       // check for all keys (that every key and value pair exists)
 
       preValidationList.forEach(preValidation => {
-        if (preValidation?.values?.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length === 0) {
+        if (preValidation?.values?.filter(answer => getQuestionAnswer(preValidation.url, answer) === session.getYarValue(request, preValidation.key)).length === 0) {
           result = true
         }
       })
@@ -28,7 +28,7 @@ const guardDataCheck = (guardData, preValidationList, result, inverseResult, req
     case 'OR':
 
       preValidationList.forEach(preValidation => {
-        if (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0) {
+        if (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === session.getYarValue(request, preValidation.key)).length > 0) {
           inverseResult = false
         }
       })
@@ -41,8 +41,8 @@ const guardDataCheck = (guardData, preValidationList, result, inverseResult, req
       preValidationList.forEach(preValidation => {
 
         if (
-          (!getYarValue(request, preValidation.key)) ||
-          (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0)){
+          (!session.getYarValue(request, preValidation.key)) ||
+          (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === session.getYarValue(request, preValidation.key)).length > 0)){
           result = true
         }
       })
@@ -67,7 +67,7 @@ function guardPage (request, guardData) {
   if (guardData) {
 
     if (Array.isArray(guardData)) {
-      return guardData.filter(dependcyKey => getYarValue(request, dependcyKey) === null).length > 0
+      return guardData.filter(dependcyKey => session.getYarValue(request, dependcyKey) === null).length > 0
     }
     // filter list of answers with keys?
 

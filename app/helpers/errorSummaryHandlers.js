@@ -1,6 +1,6 @@
 const { getModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
-const { getYarValue } = require('../helpers/session')
+const { session } = require('ffc-grants-common-functionality')
 
 const { validateAnswerField, checkInputError } = require('../helpers/errorHelpers')
 
@@ -13,7 +13,7 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
 
   if (conditionalKey) {
     const conditionalFieldError = errorList.find(thisErrorHref => thisErrorHref.href.includes(conditionalKey))?.text
-    const conditionalFieldValue = (type === multi) ? getYarValue(request, yarKey)[conditionalKey] : getYarValue(request, conditionalKey)
+    const conditionalFieldValue = (type === multi) ? session.getYarValue(request, yarKey)[conditionalKey] : session.getYarValue(request, conditionalKey)
     conditionalHtml = getHtml(conditionalKey, conditionalLabelData, conditionalFieldValue, conditionalFieldError)
   }
   const baseModel = getModel(value, currentQuestion, request, conditionalHtml)

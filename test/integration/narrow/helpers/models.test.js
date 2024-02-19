@@ -19,8 +19,8 @@ const { allAnswersSelected } = require('../../../../app/helpers/utils')
 jest.mock('../../../../app/helpers/urls')
 const { getUrl } = require('../../../../app/helpers/urls')
 
-jest.mock('../../../../app/helpers/session')
-const { getYarValue } = require('../../../../app/helpers/session')
+jest.mock('ffc-grants-common-functionality')
+const { session } = require('ffc-grants-common-functionality')
 
 describe('Models', () => {
   const question = {
@@ -134,10 +134,10 @@ describe('Models', () => {
   })
 
   test('inspect getModel().backUrl', () => { // TODO: Refactor this
-    getYarValue.mockReturnValueOnce('mock-value')
-    getYarValue.mockReturnValueOnce('mock-value')
-    getYarValue.mockReturnValueOnce(undefined)
-    getYarValue.mockReturnValueOnce('mock-value')
+    session.getYarValue.mockReturnValueOnce('mock-value')
+    session.getYarValue.mockReturnValueOnce('mock-value')
+    session.getYarValue.mockReturnValueOnce(undefined)
+    session.getYarValue.mockReturnValueOnce('mock-value')
 
     getUrl.mockReturnValueOnce('remaining-costs')
     getUrl.mockReturnValueOnce('tenancy')
@@ -217,10 +217,10 @@ describe('Models', () => {
       }
     }
 
-    getYarValue.mockReturnValueOnce('mock-value')
-    getYarValue.mockReturnValueOnce('mock-value')
-    getYarValue.mockReturnValueOnce(undefined)
-    getYarValue.mockReturnValueOnce(undefined)
+    session.getYarValue.mockReturnValueOnce('mock-value')
+    session.getYarValue.mockReturnValueOnce('mock-value')
+    session.getYarValue.mockReturnValueOnce(undefined)
+    session.getYarValue.mockReturnValueOnce(undefined)
 
     expect(getModel([], questionForSidebar, {})).toEqual({
       type: 'mock_type',
@@ -297,7 +297,7 @@ describe('Models', () => {
 
   // test('inspect getModel().sidebarText', () => {
   //   let dict = {}
-  //   getYarValue.mockImplementation((req, key) => (dict[key]))
+  //   session.getYarValue.mockImplementation((req, key) => (dict[key]))
 
   //   expect(getModel([], question, {}).sideBarText.values[0].content[0].items).toBeUndefined()
 

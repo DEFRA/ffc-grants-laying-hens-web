@@ -1,6 +1,6 @@
 const { getHtml } = require('../helpers/conditionalHTML')
 const { setOptionsLabel } = require('../helpers/answer-options')
-const { getYarValue, setYarValue } = require('../helpers/session')
+const { session } = require('ffc-grants-common-functionality')
 
 const getConfirmationId = guid => {
   const prefix = 'CH'
@@ -10,7 +10,7 @@ const getConfirmationId = guid => {
 const handleConditinalHtmlData = (type, labelData, yarKey, request) => {
   const isMultiInput = type === 'multi-input'
   const label = isMultiInput ? 'sbi' : yarKey
-  const fieldValue = isMultiInput ? getYarValue(request, yarKey)?.sbi : getYarValue(request, yarKey)
+  const fieldValue = isMultiInput ? session.getYarValue(request, yarKey)?.sbi : session.getYarValue(request, yarKey)
   return getHtml(label, labelData, fieldValue)
 }
 
@@ -29,12 +29,12 @@ const saveValuesToArray = (yarKey, fields) => {
 }
 
 const getCheckDetailsModel = (request, question, backUrl, nextUrl) => {
-  setYarValue(request, 'reachedCheckDetails', true)
+  session.setYarValue(request, 'reachedCheckDetails', true)
 
-  const applying = getYarValue(request, 'applying')
-  const businessDetails = getYarValue(request, 'businessDetails')
-  const agentDetails = getYarValue(request, 'agentsDetails')
-  const farmerDetails = getYarValue(request, 'farmerDetails')
+  const applying = session.getYarValue(request, 'applying')
+  const businessDetails = session.getYarValue(request, 'businessDetails')
+  const agentDetails = session.getYarValue(request, 'agentsDetails')
+  const farmerDetails = session.getYarValue(request, 'farmerDetails')
 
   const agentContact = saveValuesToArray(agentDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
   const agentAddress = saveValuesToArray(agentDetails, ['address1', 'address2', 'town', 'county', 'postcode'])
@@ -75,12 +75,12 @@ const getCheckDetailsModel = (request, question, backUrl, nextUrl) => {
 }
 
 const getEvidenceSummaryModel = (request, question, backUrl, nextUrl) => {
-  setYarValue(request, 'reachedEvidenceSummary', true)
+  session.setYarValue(request, 'reachedEvidenceSummary', true)
 
-  const planningPermission = getYarValue(request, 'planningPermission')
-  const gridReference = getYarValue(request, 'gridReference')
+  const planningPermission = session.getYarValue(request, 'planningPermission')
+  const gridReference = session.getYarValue(request, 'gridReference')
   const hasEvidence = !planningPermission.startsWith('Not yet')
-  if (hasEvidence && !getYarValue(request, 'PlanningPermissionEvidence')) {
+  if (hasEvidence && !session.getYarValue(request, 'PlanningPermissionEvidence')) {
     return { redirect: true }
   }
 
@@ -93,8 +93,8 @@ const getEvidenceSummaryModel = (request, question, backUrl, nextUrl) => {
     ...(hasEvidence
       ? {
           evidence: {
-            planningAuthority: getYarValue(request, 'PlanningPermissionEvidence').planningAuthority,
-            planningReferenceNumber: getYarValue(request, 'PlanningPermissionEvidence').planningReferenceNumber
+            planningAuthority: session.getYarValue(request, 'PlanningPermissionEvidence').planningAuthority,
+            planningReferenceNumber: session.getYarValue(request, 'PlanningPermissionEvidence').planningReferenceNumber
           }
         }
       : {}
@@ -103,7 +103,7 @@ const getEvidenceSummaryModel = (request, question, backUrl, nextUrl) => {
 }
 
 const getDataFromYarValue = (request, yarKey, type) => {
-  let data = getYarValue(request, yarKey) || null
+  let data = session.getYarValue(request, yarKey) || null
   if (type === 'multi-answer' && !!data) {
     data = [data].flat()
   }

@@ -5,12 +5,17 @@ const senders = require('../../../../app/messaging/senders')
 describe('confirm page', () => {
   const varList = { farmerDetails: 'someValue', contractorsDetails: 'someValue' }
 
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      console.log(key, 'key')
-      if (varList[key]) return varList[key]
-      else return 'Error'
+  jest.mock('ffc-grants-common-functionality', () => ({
+    session: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return 'Error'
+      }
+    },
+    regex: {
+      PROJECT_COST_REGEX: /^[1-9]\d*$/,
+      SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig
     }
   }))
 

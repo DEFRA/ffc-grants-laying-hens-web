@@ -1,9 +1,8 @@
-const { getYarValue, setYarValue } = require('../helpers/session')
 const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
-const { regex } = require('ffc-grants-common-functionality')
+const { regex, session } = require('ffc-grants-common-functionality')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const senders = require('../messaging/senders')
@@ -36,13 +35,13 @@ const createModel = (data, backUrl, url) => {
 
 const checkYarKeyReset = (thisAnswer, request) => {
   if (thisAnswer?.yarKeysReset) {
-    thisAnswer.yarKeysReset.forEach(yarKey => setYarValue(request, yarKey, ''))
+    thisAnswer.yarKeysReset.forEach(yarKey => session.setYarValue(request, yarKey, ''))
   }
 }
 
 const insertYarValue = (field, request) => {
   field = field.replace(regex.SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-    field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)) : getYarValue(request, additionalYarKeyName)
+    field.includes('£') ? (formatUKCurrency(session.getYarValue(request, additionalYarKeyName) || 0)) : session.getYarValue(request, additionalYarKeyName)
   ))
 
   return field
@@ -104,7 +103,7 @@ const scorePageData = async (request, backUrl, url, h) => {
   try {
     const msgData = await getUserScore(formatAnswersForScoring, request.yar.id)
 
-    setYarValue(request, 'current-score', msgData.desirability.overallRating.band) // do we need this alongside overAllScore? Having both seems redundant
+    session.setYarValue(request, 'current-score', msgData.desirability.overallRating.band) // do we need this alongside overAllScore? Having both seems redundant
 
     // Mocked score res
     let scoreChance
@@ -120,10 +119,10 @@ const scorePageData = async (request, backUrl, url, h) => {
         break
     }
 
-    setYarValue(request, 'overAllScore', msgData)
+    session.setYarValue(request, 'overAllScore', msgData)
 
     const questions = msgData.desirability.questions.map(desirabilityQuestion => {
-      if (desirabilityQuestion.key === 'environmental-impact' && getYarValue(request, 'SolarPVCost') === null) {
+      if (desirabilityQuestion.key === 'environmental-impact' && session.getYarValue(request, 'SolarPVCost') === null) {
         desirabilityQuestion.key = 'rainwater'
         if (desirabilityQuestion.answers[0].input[0].value === 'None of the above') {
           desirabilityQuestion.answers[0].input[0].value = 'No'
@@ -144,7 +143,7 @@ const scorePageData = async (request, backUrl, url, h) => {
     })
 
     await gapiService.sendGAEvent(request, { name: 'score', params: { score_presented: msgData.desirability.overallRating.band } })
-    setYarValue(request, 'onScorePage', true)
+    session.setYarValue(request, 'onScorePage', true)
 
     return h.view('score', createModel({
       titleText: msgData.desirability.overallRating.band,
@@ -164,19 +163,19 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   maybeEligibleContent.title = question.title
   let consentOptionalData
 
-  if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') > 250000) {
+  if (url === 'veranda-potential-amount' && session.getYarValue(request, 'projectCost') > 250000) {
     question.maybeEligibleContent.potentialAmountConditional = true
   } else {
     question.maybeEligibleContent.potentialAmountConditional = false
   }
 
   if (maybeEligibleContent.reference) {
-    if (!getYarValue(request, 'consentMain')) {
+    if (!session.getYarValue(request, 'consentMain')) {
       return h.redirect(startPageUrl)
     }
     confirmationId = getConfirmationId(request.yar.id)
     // try {
-    //   const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
+    //   const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: session.getYarValue(request, 'overAllScore') }, request.yar.id)
     //   await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
     //   console.log('[CONFIRMATION EVENT SENT]')
     // } catch (err) {
@@ -200,13 +199,13 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     ...maybeEligibleContent,
     messageContent: maybeEligibleContent.messageContent.replace(
       regex.SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+        formatUKCurrency(session.getYarValue(request, additionalYarKeyName) || 0)
       )
     )
   }
 
   if (url === 'confirm' || url === 'veranda-confirm') {
-    const consentOptional = getYarValue(request, 'consentOptional')
+    const consentOptional = session.getYarValue(request, 'consentOptional')
     consentOptionalData = getConsentOptionalData(consentOptional)
   }
 
@@ -229,8 +228,8 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
     }
 
     case 'project': {
-      if (getYarValue(request, 'tenancy') === 'Yes') {
-        setYarValue(request, 'tenancyLength', null)
+      if (session.getYarValue(request, 'tenancy') === 'Yes') {
+        session.setYarValue(request, 'tenancyLength', null)
       }
       return h.view('page', getModel(data, question, request, conditionalHtml))
     }
@@ -299,13 +298,13 @@ const multiInputPostHandler = (currentQuestion, request, dataObject, payload, ya
       ...field.conditionalKey ? { [field.conditionalKey]: payload[field.conditionalKey] } : {}
     }
   })
-  setYarValue(request, yarKey, dataObject)
+  session.setYarValue(request, yarKey, dataObject)
 }
 
 const multiInputForLoop = (payload, answers, type, yarKey, request) => {
   let thisAnswer
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
-    setYarValue(request, yarKey, '')
+    session.setYarValue(request, yarKey, '')
   }
 
   for (const [key, value] of Object.entries(payload)) {
@@ -317,11 +316,11 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
     }
 
     if (key === 'henVeranda' && value === 'My project is exempt') {
-      setYarValue(request, 'henPopHoles', null)
+      session.setYarValue(request, 'henPopHoles', null)
     }
 
     if (type !== 'multi-input' && key !== 'secBtn') {
-      setYarValue(request, key, key === 'projectPostcode' ? value.replace(regex.DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
+      session.setYarValue(request, key, key === 'projectPostcode' ? value.replace(regex.DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
     }
   }
 
@@ -334,7 +333,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
 
   if (baseUrl !== 'score') {
-    setYarValue(request, 'onScorePage', false)
+    session.setYarValue(request, 'onScorePage', false)
   }
 
   // formatting variables block - needed for error validations
@@ -367,9 +366,9 @@ const showPostPage = (currentQuestion, request, h) => {
   
   if (yarKey === 'projectCost') {
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
-    setYarValue(request, 'projectCost', projectCost)
+    session.setYarValue(request, 'calculatedGrant', calculatedGrant)
+    session.setYarValue(request, 'remainingCost', remainingCost)
+    session.setYarValue(request, 'projectCost', projectCost)
   }
 
   if (thisAnswer?.redirectUrl) {
@@ -388,7 +387,7 @@ const getPostHandler = currentQuestion => (request, h) => showPostPage(currentQu
 const processGA = async (question, request) => {
   if (question.ga) {
     if (question.ga.journeyStart) {
-      setYarValue(request, 'journey-start-time', Date.now())
+      session.setYarValue(request, 'journey-start-time', Date.now())
       console.log('[JOURNEY STARTED] ')
     } else {
       await gapiService.sendGAEvent(request, question.ga)

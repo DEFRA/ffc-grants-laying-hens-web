@@ -6,11 +6,16 @@ describe('Page: /project-responsibility', () => {
     tenancy: 'No'
   }
 
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return null
+  jest.mock('ffc-grants-common-functionality', () => ({
+    session: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
+    },
+    regex: {
+      PROJECT_COST_REGEX: /^[1-9]\d*$/
     }
   }))
 

@@ -7,13 +7,19 @@ xdescribe('Page: /potential-amount-conditional', () => {
     }
     const eligiblePageText = 'You have requested the maximum grant amount of £500,000 for calf housing.'
 
-    jest.mock('../../../../app/helpers/session', () => ({
+    jest.mock('ffc-grants-common-functionality', () => ({
+      session: {
         setYarValue: (request, key, value) => null,
         getYarValue: (request, key) => {
-            if (varList[key]) return varList[key]
-            else return undefined
-    }
-}))
+          if (varList[key]) return varList[key]
+          else return undefined
+        }
+      },
+      regex: {
+        PROJECT_COST_REGEX: /^[1-9]\d*$/,
+        SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig
+      }
+    }))
 
 it('page loads successfully, with all the Eligible options', async () => {
     const options = {
