@@ -3173,6 +3173,45 @@ const questionBank = {
           yarKey: 'currentSystem'
         },
         {
+          key: 'three-tiers',
+          order: 240,
+          title: 'Will the multi-tier system have 3 tiers or fewer directly above each other?',
+          pageTitle: '',
+          url: 'three-tiers',
+          baseUrl: 'three-tiers',
+          backUrl: 'maximum-tier-height',
+          nextUrl: 'multi-tier-system',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'RPA want to fund multi-tier systems that have 3 tiers or fewer.'
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the multi-tier system will have 3 tiers or fewer directly above each other'
+            }
+          ],
+          answers: [
+            {
+              key: 'three-tiers-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'three-tiers-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'threeTiers'
+        },
+        {
           key: 'score',
           order: 175,
           title: 'Score results',
