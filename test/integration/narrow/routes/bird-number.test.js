@@ -21,7 +21,7 @@ describe('Page: /bird-number', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Do you have 1,000 or more birds on your farm?')
+    expect(response.payload).toContain('Do you have at least 1,000 birds on your farm currently?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -36,7 +36,7 @@ describe('Page: /bird-number', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if you currently have 1,000 or more birds on your farm')
+    expect(postResponse.payload).toContain('Select yes if you currently have at least 1,000 birds on your farm')
   })
 
   it('user selects eligible option -> store user response and redirect to /roof-solar-PV', async () => {
@@ -49,7 +49,7 @@ describe('Page: /bird-number', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('roof-solar-PV')
+    expect(postResponse.headers.location).toBe('legal-status')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -66,13 +66,13 @@ describe('Page: /bird-number', () => {
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link - /external-taps', async () => {
+  it('page loads with correct back link - /applicant-type', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/bird-number`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"external-taps\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"applicant-type\" class=\"govuk-back-link\">Back</a>')
   })
 })
