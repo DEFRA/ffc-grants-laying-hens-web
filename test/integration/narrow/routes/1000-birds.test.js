@@ -39,7 +39,7 @@ describe('Page: /1000-birds', () => {
     expect(postResponse.payload).toContain('Select yes if you currently have at least 1,000 birds on your farm')
   })
 
-  it('user selects eligible option -> store user response and redirect to /roof-solar-PV', async () => {
+  it('user selects eligible option -> store user response and redirect to /legal-status', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/1000-birds`,
