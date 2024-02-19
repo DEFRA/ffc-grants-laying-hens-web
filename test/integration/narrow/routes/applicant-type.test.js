@@ -56,7 +56,7 @@ describe('Page: /applicant-type', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('legal-status')
+    expect(postResponse.headers.location).toBe('1000-birds')
   })
   it('page loads with correct back link', async () => {
     const options = {
