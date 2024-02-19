@@ -1,6 +1,6 @@
 const { crumbToken } = require('./test-helper')
 
-describe('Page: /bird-number', () => {
+describe('Page: /1000-birds', () => {
   let varList = {
     poultryType: 'hen',
   }
@@ -16,7 +16,7 @@ describe('Page: /bird-number', () => {
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/bird-number`
+      url: `${global.__URLPREFIX__}/1000-birds`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -29,7 +29,7 @@ describe('Page: /bird-number', () => {
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/bird-number`,
+      url: `${global.__URLPREFIX__}/1000-birds`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { crumb: crumbToken }
     }
@@ -42,7 +42,7 @@ describe('Page: /bird-number', () => {
   it('user selects eligible option -> store user response and redirect to /roof-solar-PV', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/bird-number`,
+      url: `${global.__URLPREFIX__}/1000-birds`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { birdNumber: 'Yes',  crumb: crumbToken }
     }
@@ -55,7 +55,7 @@ describe('Page: /bird-number', () => {
   it('user selects ineligible option `No` -> display ineligible page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/bird-number`,
+      url: `${global.__URLPREFIX__}/1000-birds`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { birdNumber: 'No', crumb: crumbToken }
     }
@@ -69,7 +69,7 @@ describe('Page: /bird-number', () => {
   it('page loads with correct back link - /applicant-type', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/bird-number`
+      url: `${global.__URLPREFIX__}/1000-birds`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
