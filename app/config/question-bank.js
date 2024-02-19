@@ -2489,14 +2489,17 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
-          key: 'bird-number',
+          key: '1000-birds',
           order: 240,
-          title: 'Do you have 1,000 or more birds on your farm?',
+          title: 'Do you have at least 1,000 birds on your farm currently?',
+          hint: {
+            text: 'This can be laying hens, pullets or both'
+          },
           pageTitle: '',
-          url: 'bird-number',
-          baseUrl: 'bird-number',
-          backUrl: 'external-taps',
-          nextUrl: 'roof-solar-PV',
+          url: '1000-birds',
+          baseUrl: '1000-birds',
+          backUrl: 'applicant-type',
+          nextUrl: 'legal-status',
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -2519,7 +2522,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you currently have 1,000 or more birds on your farm'
+              error: 'Select yes if you currently have at least 1,000 birds on your farm'
             }
           ],
           answers: [
