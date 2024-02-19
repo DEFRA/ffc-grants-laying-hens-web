@@ -73,7 +73,7 @@ describe('Page: /easy-grip-perches', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/easy-grip-perches`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { buildingItems: 'Yes', crumb: crumbToken }
+      payload: { easyGripPerches: 'Yes', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
