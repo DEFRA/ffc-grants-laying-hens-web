@@ -1,22 +1,4 @@
-const {
-  CHARS_MIN_10,
-  POSTCODE_REGEX,
-  WHOLE_NUMBER_REGEX,
-  SBI_REGEX,
-  NAME_ONLY_REGEX,
-  PHONE_REGEX,
-  EMAIL_REGEX,
-  ONLY_TEXT_REGEX,
-  ONLY_DIGITS_REGEX,
-  ADDRESS_REGEX,
-  PROJECT_COST_REGEX,
-  CHARS_MAX_25,
-  STRUCTURE_ELIGIBLITY_REGEX,
-  TWO_DP_NUMBER,
-  ONLY_DIGITS_AND_DECIMAL_REGEX,
-  MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
-  MIN_3_LETTERS
-} = require('../helpers/regex')
+const { regex } = require('ffc-grants-common-functionality')
 
 const {
   MIN_GRANT,
@@ -61,7 +43,7 @@ const { LIST_COUNTIES } = require('../helpers/all-counties')
           {
             type: 'REGEX',
             error: 'Error message',
-            regex: SAVED_REGEX
+            regex: regex.SAVED_REGEX
           },
           {
             type: 'MIN_MAX',
@@ -2814,7 +2796,7 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              regex: PROJECT_COST_REGEX,
+              regex: regex.PROJECT_COST_REGEX,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
@@ -2902,7 +2884,7 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              regex: PROJECT_COST_REGEX,
+              regex: regex.PROJECT_COST_REGEX,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
@@ -3185,7 +3167,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: NAME_ONLY_REGEX,
+                  regex: regex.NAME_ONLY_REGEX,
                   error: 'Project name must only include letters, hyphens, spaces and apostrophes'
                 }
               ]
@@ -3214,7 +3196,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: NAME_ONLY_REGEX,
+                  regex: regex.NAME_ONLY_REGEX,
                   error: 'Business name must only include letters, hyphens, spaces and apostrophes'
                 }
               ]
@@ -3238,7 +3220,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: WHOLE_NUMBER_REGEX,
+                  regex: regex.WHOLE_NUMBER_REGEX,
                   error: 'Number of employees must be a whole number, like 305'
                 },
                 {
@@ -3267,7 +3249,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: WHOLE_NUMBER_REGEX,
+                  regex: regex.WHOLE_NUMBER_REGEX,
                   error: 'Business turnover must be a whole number, like 100000'
                 },
                 {
@@ -3293,7 +3275,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'REGEX',
-                  regex: SBI_REGEX,
+                  regex: regex.SBI_REGEX,
                   error: 'SBI number must have 9 characters, like 011115678'
                 }
               ]
@@ -3378,12 +3360,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: regex.MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'First name must include letters'
                 },
                 {
                   type: 'REGEX',
-                  regex: NAME_ONLY_REGEX,
+                  regex: regex.NAME_ONLY_REGEX,
                   error: 'First name must only include letters, hyphens and apostrophes'
                 },
                 {
@@ -3410,12 +3392,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: regex.MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Last name must include letters'
                 },
                 {
                   type: 'REGEX',
-                  regex: NAME_ONLY_REGEX,
+                  regex: regex.NAME_ONLY_REGEX,
                   error: 'Last name must only include letters, hyphens and apostrophes'
                 },
                 {
@@ -3448,7 +3430,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: EMAIL_REGEX,
+                  regex: regex.EMAIL_REGEX,
                   error: 'Enter an email address in the correct format, like name@example.com'
                 }
               ]
@@ -3492,12 +3474,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: CHARS_MIN_10,
+                  regex: regex.CHARS_MIN_10,
                   error: 'Your mobile number must have at least 10 characters'
                 },
                 {
                   type: 'REGEX',
-                  regex: PHONE_REGEX,
+                  regex: regex.PHONE_REGEX,
                   error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
                 }
               ]
@@ -3522,12 +3504,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: CHARS_MIN_10,
+                  regex: regex.CHARS_MIN_10,
                   error: 'Your landline number must have at least 10 characters'
                 },
                 {
                   type: 'REGEX',
-                  regex: PHONE_REGEX,
+                  regex: regex.PHONE_REGEX,
                   error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
                 }
               ]
@@ -3551,12 +3533,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: ADDRESS_REGEX,
+                  regex: regex.ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_3_LETTERS,
+                  regex: regex.MIN_3_LETTERS,
                   error: 'Address must include at least 3 letters'
                 },
               ]
@@ -3572,12 +3554,12 @@ const questionBank = {
               validate: [
                 {
                   type: 'REGEX',
-                  regex: ADDRESS_REGEX,
+                  regex: regex.ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_3_LETTERS,
+                  regex: regex.MIN_3_LETTERS,
                   error: 'Address must include at least 3 letters'
                 },
               ]
@@ -3597,12 +3579,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: regex.MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Town must include letters'
                 },
                 {
                   type: 'REGEX',
-                  regex: ONLY_TEXT_REGEX,
+                  regex: regex.ONLY_TEXT_REGEX,
                   error: 'Town must only include letters, hyphens and spaces'
                 }
               ]
@@ -3640,7 +3622,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: POSTCODE_REGEX,
+                  regex: regex.POSTCODE_REGEX,
                   error: 'Enter a business postcode, like AA1 1AA'
                 }
               ]
@@ -3664,7 +3646,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: POSTCODE_REGEX,
+                  regex: regex.POSTCODE_REGEX,
                   error: 'Enter a project postcode, like AA1 1AA'
                 }
               ]
@@ -3711,12 +3693,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: regex.MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'First name must include letters'
                 },
                 {
                   type: 'REGEX',
-                  regex: NAME_ONLY_REGEX,
+                  regex: regex.NAME_ONLY_REGEX,
                   error: 'First name must only include letters, hyphens and apostrophes'
                 },
                 {
@@ -3742,12 +3724,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: regex.MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Last name must include letters'
                 },
                 {
                   type: 'REGEX',
-                  regex: NAME_ONLY_REGEX,
+                  regex: regex.NAME_ONLY_REGEX,
                   error: 'Last name must only include letters, hyphens and apostrophes'
                 },
                 {
@@ -3802,7 +3784,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: EMAIL_REGEX,
+                  regex: regex.EMAIL_REGEX,
                   error: 'Enter an email address in the correct format, like name@example.com'
                 }
               ]
@@ -3846,12 +3828,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: CHARS_MIN_10,
+                  regex: regex.CHARS_MIN_10,
                   error: 'Your mobile number must have at least 10 characters'
                 },
                 {
                   type: 'REGEX',
-                  regex: PHONE_REGEX,
+                  regex: regex.PHONE_REGEX,
                   error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
                 }
               ]
@@ -3876,12 +3858,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: CHARS_MIN_10,
+                  regex: regex.CHARS_MIN_10,
                   error: 'Your landline number must have at least 10 characters'
                 },
                 {
                   type: 'REGEX',
-                  regex: PHONE_REGEX,
+                  regex: regex.PHONE_REGEX,
                   error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
                 }
               ]
@@ -3905,12 +3887,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: ADDRESS_REGEX,
+                  regex: regex.ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_3_LETTERS,
+                  regex: regex.MIN_3_LETTERS,
                   error: 'Address must include at least 3 letters'
                 },
               ]
@@ -3926,12 +3908,12 @@ const questionBank = {
               validate: [
                 {
                   type: 'REGEX',
-                  regex: ADDRESS_REGEX,
+                  regex: regex.ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_3_LETTERS,
+                  regex: regex.MIN_3_LETTERS,
                   error: 'Address must include at least 3 letters'
                 },
               ]
@@ -3951,12 +3933,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
+                  regex: regex.MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
                   error: 'Town must include letters'
                 },
                 {
                   type: 'REGEX',
-                  regex: ONLY_TEXT_REGEX,
+                  regex: regex.ONLY_TEXT_REGEX,
                   error: 'Town must only include letters, hyphens and spaces'
                 }
               ]
@@ -3995,7 +3977,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: POSTCODE_REGEX,
+                  regex: regex.POSTCODE_REGEX,
                   error: 'Enter a postcode, like AA1 1AA'
                 }
               ]

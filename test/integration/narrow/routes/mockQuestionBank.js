@@ -1,22 +1,4 @@
-const {
-  WHOLE_NUMBER_REGEX_ZERO,
-  CURRENCY_FORMAT,
-  CHARS_MAX_10,
-  CHARS_MIN_10,
-  CHARS_MAX_18,
-  CHARS_MAX_100,
-  CHARS_MAX_250,
-  POSTCODE_REGEX,
-  WHOLE_NUMBER_REGEX,
-  NUMBER_REGEX,
-  PROJECT_COST_REGEX,
-  SBI_REGEX,
-  NAME_ONLY_REGEX,
-  PHONE_REGEX,
-  EMAIL_REGEX,
-  ADDRESS_REGEX
-
-} = require('../../../../app/helpers/regex')
+const { regex } = require('ffc-grants-common-functionality')
 
 const urlPrefix = global.__URLPREFIX__
 
@@ -596,7 +578,7 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              regex: PROJECT_COST_REGEX,
+              regex: regex.PROJECT_COST_REGEX,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
@@ -887,7 +869,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'REGEX',
-                  regex: WHOLE_NUMBER_REGEX_ZERO,
+                  regex: regex.WHOLE_NUMBER_REGEX_ZERO,
                   error: 'Number of items must be a number, like 18'
                 }
               ]
@@ -943,7 +925,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: NAME_ONLY_REGEX,
+                  regex: regex.NAME_ONLY_REGEX,
                   error: 'Name must only include letters, hyphens and apostrophes'
                 }
               ]
@@ -964,7 +946,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: NAME_ONLY_REGEX,
+                  regex: regex.NAME_ONLY_REGEX,
                   error: 'Name must only include letters, hyphens and apostrophes'
                 }
               ]
@@ -991,7 +973,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: EMAIL_REGEX,
+                  regex: regex.EMAIL_REGEX,
                   error: 'Enter an email address in the correct format, like name@example.com'
                 }
               ]
@@ -1015,12 +997,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: CHARS_MIN_10,
+                  regex: regex.CHARS_MIN_10,
                   error: 'Your mobile number must have at least 10 characters'
                 },
                 {
                   type: 'REGEX',
-                  regex: PHONE_REGEX,
+                  regex: regex.PHONE_REGEX,
                   error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
                 }
               ]
@@ -1045,12 +1027,12 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: CHARS_MIN_10,
+                  regex: regex.CHARS_MIN_10,
                   error: 'Your landline number must have at least 10 characters'
                 },
                 {
                   type: 'REGEX',
-                  regex: PHONE_REGEX,
+                  regex: regex.PHONE_REGEX,
                   error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
                 }
               ]
@@ -1074,7 +1056,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: ADDRESS_REGEX,
+                  regex: regex.ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
               ]
@@ -1090,7 +1072,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'REGEX',
-                  regex: ADDRESS_REGEX,
+                  regex: regex.ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
                 },
               ]
@@ -1143,7 +1125,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: POSTCODE_REGEX,
+                  regex: regex.POSTCODE_REGEX,
                   error: 'Enter a business postcode, like AA1 1AA'
                 }
               ]
@@ -1167,7 +1149,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: POSTCODE_REGEX,
+                  regex: regex.POSTCODE_REGEX,
                   error: 'Enter a project postcode, like AA1 1AA'
                 }
               ]

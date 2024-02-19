@@ -3,7 +3,7 @@ const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
-const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
+const { regex } = require('ffc-grants-common-functionality')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const senders = require('../messaging/senders')
@@ -41,7 +41,7 @@ const checkYarKeyReset = (thisAnswer, request) => {
 }
 
 const insertYarValue = (field, request) => {
-  field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+  field = field.replace(regex.SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
     field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)) : getYarValue(request, additionalYarKeyName)
   ))
 
@@ -187,7 +187,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
       reference: {
         ...maybeEligibleContent.reference,
         html: maybeEligibleContent.reference.html.replace(
-          SELECT_VARIABLE_TO_REPLACE, (_ignore, _confirmatnId) => (
+          regex.SELECT_VARIABLE_TO_REPLACE, (_ignore, _confirmatnId) => (
             confirmationId
           )
         )
@@ -199,7 +199,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   maybeEligibleContent = {
     ...maybeEligibleContent,
     messageContent: maybeEligibleContent.messageContent.replace(
-      SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+      regex.SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       )
     )
@@ -287,7 +287,7 @@ const multiInputPostHandler = (currentQuestion, request, dataObject, payload, ya
   const allFields = currentQuestion.allFields
   allFields.forEach(field => {
     const payloadYarVal = payload[field.yarKey]
-      ? payload[field.yarKey].replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
+      ? payload[field.yarKey].replace(regex.DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
       : ''
     dataObject = {
       ...dataObject,
@@ -321,7 +321,7 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
     }
 
     if (type !== 'multi-input' && key !== 'secBtn') {
-      setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
+      setYarValue(request, key, key === 'projectPostcode' ? value.replace(regex.DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
     }
   }
 
