@@ -2490,7 +2490,7 @@ const questionBank = {
         },
         {
           key: 'bird-number',
-          order: 240,
+          order: 270,
           title: 'Do you have 1,000 or more birds on your farm?',
           pageTitle: '',
           url: 'bird-number',
@@ -3109,7 +3109,7 @@ const questionBank = {
         },
         {
           key: 'current-system',
-          order: 20,
+          order: 275,
           title: 'What type of {{_poultryType_}} housing system do you currently use?',
           pageTitle: '',
           backUrl: 'remaining-costs',
@@ -3174,7 +3174,7 @@ const questionBank = {
         },
         {
           key: 'three-tiers',
-          order: 240,
+          order: 280,
           title: 'Will the multi-tier system have 3 tiers or fewer directly above each other?',
           pageTitle: '',
           url: 'three-tiers',
@@ -3210,6 +3210,45 @@ const questionBank = {
             }
           ],
           yarKey: 'threeTiers'
+        },
+        {
+          key: 'ramp-connection',
+          order: 285,
+          title: 'Will every level of the multi-tier system be connected to another level by a ramp?',
+          pageTitle: '',
+          url: 'ramp-connection',
+          baseUrl: 'ramp-connection',
+          backUrl: 'current-system',
+          nextUrl: 'maximum-tier-height',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'RPA want to fund multi-tier systems that have ramps to reduce the risk of keel bone fractures and benefit birds that have keel bone fractures.'
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if every level of the multi-tier system will be connected to another level by a ramp'
+            }
+          ],
+          answers: [
+            {
+              key: 'ramp-connection-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'ramp-connection-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'rampConnection'
         },
         {
           key: 'score',
