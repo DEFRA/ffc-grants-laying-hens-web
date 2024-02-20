@@ -3216,7 +3216,7 @@ const questionBank = {
           order: 80,
           title:'Will the perches have a design feature that help the {{_poultryType_}} grip the perches?',
           hint: {
-            text: 'For example, easy-grip shape, ridged structure, material or coating features'
+            text: 'For example, sufficient grip size or a comfortable material coating'
           },
           pageTitle: '',
           url: 'easy-grip-perches',
@@ -3227,7 +3227,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to support projects which provide easy-grip perches.`
+                para: `RPA want to support projects which provide perches that are easy to grip to increase bird safety and reduce falls.`
               }]
             }]
           },
