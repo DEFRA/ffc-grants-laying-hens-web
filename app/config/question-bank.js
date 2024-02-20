@@ -3346,6 +3346,75 @@ const questionBank = {
           yarKey: 'naturalLight'
         },
         {
+          key: 'pollution-mitigation',
+          order: 300,
+          title: 'Will the building have any of the following?',
+          pageTitle: '',
+          url: 'pollution-mitigation',
+          baseUrl: 'pollution-mitigation',
+          backUrl: 'housing-biosecurity',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'renewable-energy',
+              elseUrl: 'pullet-veranda-features'
+            }
+          },
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices\''
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if the building will have any of the following'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'pollution-mitigation',
+                answerKey: 'pollution-mitigation-A5'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'pollution-mitigation-A1',
+              value: 'Manure drying'
+            },
+            {
+              key: 'pollution-mitigation-A2',
+              value: 'Air filtration at inlets',
+            },
+            {
+              key: 'pollution-mitigation-A3',
+              value: 'Air filtration at outlets, for example using wet or dry scrubbers',
+            },
+            {
+              key: 'pollution-mitigation-A4',
+              value: 'A tree shelter belt near air outlets'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'pollution-mitigation-A5',
+              value: 'None of the above',
+            }
+          ],
+          yarKey: 'pollutionMitigation'
+        },
+        {
           key: 'score',
           order: 175,
           title: 'Score results',
