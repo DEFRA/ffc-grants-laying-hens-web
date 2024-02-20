@@ -93,7 +93,7 @@ const questionBank = {
           url: 'applicant-type',
           baseUrl: 'applicant-type',
           backUrl: 'project-type',
-          nextUrl: '1000-birds',
+          nextUrl: 'legal-status',
           hint: {
             text: 'Select all that apply'
           },
@@ -180,61 +180,11 @@ const questionBank = {
           yarKey: 'applicantType'
         },
         {
-          key: '1000-birds',
-          order: 240,
-          title: 'Do you have at least 1,000 birds on your farm currently?',
-          hint: {
-            text: 'This can be laying hens, pullets or both'
-          },
-          pageTitle: '',
-          url: '1000-birds',
-          baseUrl: '1000-birds',
-          backUrl: 'applicant-type',
-          nextUrl: 'legal-status',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'You must have at least 1,000 birds (laying hens, pullets, or both) on your farm currently to be eligible for grant funding.'
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: 'You must have at least 1,000 birds on your farm currently.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you currently have at least 1,000 birds on your farm'
-            }
-          ],
-          answers: [
-            {
-              key: '1000-birds-A1',
-              value: 'Yes'
-            },
-            {
-              key: '1000-birds-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'birdNumber'
-        },
-        {
           key: 'legal-status',
           order: 20,
           title: 'What is the legal status of the business?',
           pageTitle: '',
-          backUrl: '1000-birds',
+          backUrl: 'applicant-type',
           nextUrl: 'country',
           url: 'legal-status',
           baseUrl: 'legal-status',
@@ -684,7 +634,7 @@ const questionBank = {
             {
               key: 'poultry-type-A1',
               text: 'Laying hens (over 15 weeks old)',
-              value: 'hen',
+              value: 'laying hen',
               yarKeysReset: ['multiTierSystem']
             },
             {
@@ -702,6 +652,56 @@ const questionBank = {
             }
           ],
           yarKey: 'poultryType'
+        },
+        {
+          key: '1000-birds',
+          order: 240,
+          title: 'Do you keep at least 1,000 {{_poultryType_}} on your farm currently?',
+          hint: {
+            text: 'This can be laying hens, pullets or both'
+          },
+          pageTitle: '',
+          url: '1000-birds',
+          baseUrl: '1000-birds',
+          backUrl: 'poultry-type',
+          nextUrl: 'building-items',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You must have at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'You must keep at least 1,000 {{_poultryType_}} on your farm currently.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you currently have at least 1,000 {{_poultryType_}} on your farm'
+            }
+          ],
+          answers: [
+            {
+              key: '1000-birds-A1',
+              value: 'Yes'
+            },
+            {
+              key: '1000-birds-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'birdNumber'
         },
         {
           key: 'project-type',

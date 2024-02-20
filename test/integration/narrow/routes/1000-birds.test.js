@@ -21,7 +21,7 @@ describe('Page: /1000-birds', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Do you have at least 1,000 birds on your farm currently?')
+    expect(response.payload).toContain('Do you keep at least 1,000 laying hens on your farm currently?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -66,13 +66,13 @@ describe('Page: /1000-birds', () => {
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link - /applicant-type', async () => {
+  it('page loads with correct back link - /poultry-typ', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/1000-birds`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"applicant-type\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"poultry-typ\" class=\"govuk-back-link\">Back</a>')
   })
 })
