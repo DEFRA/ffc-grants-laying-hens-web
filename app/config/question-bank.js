@@ -3110,10 +3110,10 @@ const questionBank = {
         {
           key: 'current-system',
           order: 20,
-          title: 'What type of {{_poultryType_}} housing system do you currently use?',
+          title: 'What type of {{_poultryType_}} housing system do you currently use in the building?',
           pageTitle: '',
           backUrl: 'remaining-costs',
-          nextUrl: 'ramp-connection',
+          nextUrl: 'current-multi-tier-system',
           url: 'current-system',
           baseUrl: 'current-system',
           // preValidationKeys: ['remainingCosts'],
@@ -3127,7 +3127,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to prioritise supporting farmers that are transitioning out of using colony cages, or to high-welfare multi-tier aviary systems.'
+                para: 'RPA want to prioritise supporting farmers that are transitioning out of using colony cages.'
               }]
             }]
           },
@@ -3140,7 +3140,8 @@ const questionBank = {
           answers: [
             {
               key: 'current-system-A1',
-              value: 'Colony cage'
+              value: 'Colony cage',
+              redirectUrl: 'ramp-connection'
             },
             {
               key: 'current-system-A2',
@@ -3148,25 +3149,21 @@ const questionBank = {
             },
             {
               key: 'current-system-A3',
-              value: 'Indoor (floor or flat-deck)'
+              value: 'Barn'
             },
             {
               key: 'current-system-A4',
-              value: 'Outdoor (floor or flat-deck)'
+              value: 'Free range'
             },
             {
-              key: 'current-system-A5',
-              value: 'Indoor (aviary)'
-            },
-            {
-              key: 'legal-status-A6',
-              value: 'Outdoor (aviary)'
+              key: 'legal-status-A5',
+              value: 'Organic'
             },
             {
               value: 'divider'
             },
             {
-              key: 'current-system-A7',
+              key: 'current-system-A6',
               value: 'None of the above',
             }
           ],

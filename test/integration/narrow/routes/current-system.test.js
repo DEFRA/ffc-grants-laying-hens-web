@@ -21,13 +21,12 @@ describe('Page: /current-system', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What type of hen housing system do you currently use?')
+    expect(response.payload).toContain('What type of hen housing system do you currently use in the building?')
     expect(response.payload).toContain('Colony cage')
     expect(response.payload).toContain('Combi-cage')
-    expect(response.payload).toContain('Indoor (floor or flat-deck)')
-    expect(response.payload).toContain('Outdoor (floor or flat-deck)')
-    expect(response.payload).toContain('Indoor (aviary)')
-    expect(response.payload).toContain('Outdoor (aviary)')
+    expect(response.payload).toContain('Barn')
+    expect(response.payload).toContain('Free range')
+    expect(response.payload).toContain('Organic')
     expect(response.payload).toContain('None of the above')
   })
 
@@ -44,7 +43,20 @@ describe('Page: /current-system', () => {
     expect(postResponse.payload).toContain('Select what type of hen housing system you currently use')
   })
 
-  it('user selects eligible option -> store user response and redirect to /ramp-connection', async () => {
+  it('user selects eligible option(Combi cage) -> store user response and redirect to /current-multi-tier-system', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/current-system`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { currentSystem: 'Combi cage',  crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('current-multi-tier-system')
+  })
+
+  it('user selects eligible option except Combi cage -> store user response and redirect to /ramp-connection', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/current-system`,
