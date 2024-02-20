@@ -3180,7 +3180,7 @@ const questionBank = {
           url: 'three-tiers',
           baseUrl: 'three-tiers',
           backUrl: 'maximum-tier-height',
-          nextUrl: 'multi-tier-system',
+          nextUrl: 'multi-tier',
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3291,6 +3291,59 @@ const questionBank = {
             }
           ],
           yarKey: 'maximumTierHeight'
+        },
+        {
+          key: 'natural-light',
+          order: 295,
+          title: 'Will the building have windows that provide natural light to the indoor housing?',
+          pageTitle: '',
+          hint: {
+            html: `
+                  <p>The windows must be:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>fitted with an insulated blind to manage light intensity and housing temperature</li>
+                    <li>equal to at least 3% of size of the bird space footprint</li>
+                  </ul>`
+          },
+          url: 'natural-light',
+          baseUrl: 'natural-light',
+          backUrl: 'multi-tier',
+          nextUrl: 'easy-grip-perches',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to support projects which provide indoor housing with natural light.
+                      
+                       Hens and pullets prefer natural light spectrums.
+                      
+                       Natural light can: 
+                      `,
+                items: ['promote positive, active behaviour', 'improved visibility to help reduce collisions between birds', 'increase range use.']
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the building will have windows that provide natural light to the indoor housing'
+            }
+          ],
+          answers: [
+            {
+              key: 'natural-light-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'natural-light-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'naturalLight'
         },
         {
           key: 'score',
