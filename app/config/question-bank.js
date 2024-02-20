@@ -3185,7 +3185,8 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to fund multi-tier systems that have 3 tiers or fewer.'
+                para: `RPA want to fund multi-tier systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone 
+                fractures from collisions and falls.`
               }]
             }]
           },
