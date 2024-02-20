@@ -634,7 +634,7 @@ const questionBank = {
             {
               key: 'poultry-type-A1',
               text: 'Laying hens (over 15 weeks old)',
-              value: 'laying hen',
+              value: 'hen',
               yarKeysReset: ['multiTierSystem']
             },
             {
