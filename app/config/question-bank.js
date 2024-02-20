@@ -3218,7 +3218,14 @@ const questionBank = {
           pageTitle: '',
           url: 'ramp-connection',
           baseUrl: 'ramp-connection',
-          backUrl: 'current-system',
+          backUrlObject: {
+            dependentQuestionYarKey: 'currentSystem',
+            dependentAnswerKeysArray: ['current-system-A1'],
+            urlOptions: {
+              thenUrl: 'current-system',
+              elseUrl: 'current-multi-tier-system'
+            }
+          },
           nextUrl: 'maximum-tier-height',
           sidebar: {
             values: [{

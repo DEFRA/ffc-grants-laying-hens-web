@@ -1,7 +1,9 @@
 const { crumbToken } = require('./test-helper')
 
-describe('Page: /current-system', () => {
-  let varList = {}
+describe('Page: /ramp-connection', () => {
+  let varList = {
+      currentSystem: 'Colony cage'
+  }
   
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
@@ -50,13 +52,38 @@ describe('Page: /current-system', () => {
     expect(postResponse.headers.location).toBe('maximum-tier-height')
   })
 
-  it('page loads with correct back link - /current-system', async () => {
+  const testBackLink = async (option, destination) => { 
+    varList.currentSystem = option
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/ramp-connection`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"current-system\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain(`<a href=\"${destination}"\ class=\"govuk-back-link\">Back</a>`
+  )}
+
+  it('page loads with correct back link - /current-system', async () => {
+    await testBackLink('Colony cage', 'current-system')
   })
+
+  it('page loads with correct back link - /current-multi-tier-system - Combi-cage is selected', async () => {
+    await testBackLink('Combi-cage', 'current-multi-tier-system')
+  })
+
+  it('page loads with correct back link - /current-multi-tier-system - Barn is selected', async () => {
+    await testBackLink('Barn', 'current-multi-tier-system')
+  })
+
+  it('page loads with correct back link - /current-multi-tier-system - Free-range is selected', async () => {
+    await testBackLink('Free-range', 'current-multi-tier-system')
+  })
+
+  it('page loads with correct back link - /current-multi-tier-system - Organic is selected' , async () => {
+    await testBackLink('Organic', 'current-multi-tier-system')
+  })
+
+  it('page loads with correct back link - /current-multi-tier-system - None of the above is selected', async () => {
+    await testBackLink('None of the above', 'current-multi-tier-system')
+  })  
 })
