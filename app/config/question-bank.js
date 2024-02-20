@@ -3125,7 +3125,7 @@ const questionBank = {
           minAnswerCount: 1,
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               content: [{
                 para: 'RPA want to prioritise supporting farmers that are transitioning out of using colony cages, or to high-welfare multi-tier aviary systems.'
               }]
@@ -3183,7 +3183,7 @@ const questionBank = {
           nextUrl: 'multi-tier-system',
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               content: [{
                 para: 'RPA want to fund multi-tier systems that have 3 tiers or fewer.'
               }]
@@ -3222,7 +3222,7 @@ const questionBank = {
           nextUrl: 'maximum-tier-height',
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               content: [{
                 para: 'RPA want to fund multi-tier systems that have ramps to reduce the risk of keel bone fractures and benefit birds that have keel bone fractures.'
               }]
@@ -3249,6 +3249,48 @@ const questionBank = {
             }
           ],
           yarKey: 'rampConnection'
+        },
+        {
+          key: 'maximum-tier-height',
+          order: 290,
+          title: 'Will the highest tier with direct access to the floor be 2 metres high or less?',
+          pageTitle: '',
+          hint: {
+            text: 'The height of the highest tier in the multi-tier system from the litter floor area to the underside of the manure belt'
+          },
+          url: 'maximum-tier-height',
+          baseUrl: 'maximum-tier-height',
+          backUrl: 'ramp-connection',
+          nextUrl: 'three-tiers',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to fund projects that prevent birds falling from heights of more than 2 metres, to reduce the risk of keel bonefractures.`
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the highest tier with direct access to the floor will be 2 metres high or less'
+            }
+          ],
+          answers: [
+            {
+              key: 'maximum-tier-height-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'maximum-tier-height-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'maximumTierHeight'
         },
         {
           key: 'score',
