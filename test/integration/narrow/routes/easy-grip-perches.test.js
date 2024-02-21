@@ -68,7 +68,7 @@ describe('Page: /easy-grip-perches', () => {
     expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the pullet grip the perches')
   })
 
-  it('user selects eligible option -> store user response and redirect to /housing-biosecurity', async () => {
+  it('user selects eligible option -> store user response and redirect to /building-biosecurity', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/easy-grip-perches`,
@@ -78,7 +78,7 @@ describe('Page: /easy-grip-perches', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('housing-biosecurity')
+    expect(postResponse.headers.location).toBe('building-biosecurity')
   })
 
   it('page loads with correct back link', async () => {
