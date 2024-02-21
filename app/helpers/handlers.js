@@ -97,6 +97,20 @@ const validateErrorCheck = (question, validate, request) => {
   return question
 }
 
+const ineligibleContentCheck = (question, ineligibleContent, request) => {
+  if (question.ineligibleContent?.messageContent.includes('{{_')) {
+    question = {
+      ...question,
+      ineligibleContent: {
+            ...question.ineligibleContent,
+            messageContent: insertYarValue(ineligibleContent.messageContent, request)
+      }
+    }
+  }
+  
+  return question
+}
+
 const scorePageData = async (request, backUrl, url, h) => {
   const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
   const formatAnswersForScoring = desirability(desirabilityAnswers)
@@ -244,7 +258,7 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 }
 
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, yarKey } = question
+  const { url, backUrl, nextUrlObject, type, title, yarKey, ineligibleContent } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
@@ -255,6 +269,7 @@ const getPage = async (question, request, h) => {
   // formatting variables block
   question = titleCheck(question, title, request)
   question = sidebarCheck(question, request)
+  question = ineligibleContentCheck(question, ineligibleContent, request)
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
@@ -341,6 +356,7 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = titleCheck(currentQuestion, title, request)
   currentQuestion = validateErrorCheck(currentQuestion, validate, request)
   currentQuestion = sidebarCheck(currentQuestion, request)
+  currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, request)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
 

@@ -36,7 +36,7 @@ describe('Page: /1000-birds', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if you currently have at least 1,000 birds on your farm')
+    expect(postResponse.payload).toContain('Select yes if you currently have at least 1,000 laying hen on your farm')
   })
 
   it('user selects eligible option -> store user response and redirect to /legal-status', async () => {
