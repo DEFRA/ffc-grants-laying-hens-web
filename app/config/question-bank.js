@@ -3113,11 +3113,11 @@ const questionBank = {
         },
         {
           key: 'current-system',
-          order: 20,
-          title: 'What type of {{_poultryType_}} housing system do you currently use?',
+          order: 180,
+          title: 'What type of {{_poultryType_}} housing system do you currently use in the building?',
           pageTitle: '',
           backUrl: 'remaining-costs',
-          nextUrl: 'ramp-connection',
+          nextUrl: 'current-multi-tier-system',
           url: 'current-system',
           baseUrl: 'current-system',
           // preValidationKeys: ['remainingCosts'],
@@ -3129,9 +3129,9 @@ const questionBank = {
           minAnswerCount: 1,
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to prioritise supporting farmers that are transitioning out of using colony cages, or to high-welfare multi-tier aviary systems.'
+                para: 'RPA want to prioritise supporting farmers that are transitioning out of using colony cages.'
               }]
             }]
           },
@@ -3144,7 +3144,8 @@ const questionBank = {
           answers: [
             {
               key: 'current-system-A1',
-              value: 'Colony cage'
+              value: 'Colony cage',
+              redirectUrl: 'ramp-connection'
             },
             {
               key: 'current-system-A2',
@@ -3152,25 +3153,21 @@ const questionBank = {
             },
             {
               key: 'current-system-A3',
-              value: 'Indoor (floor or flat-deck)'
+              value: 'Barn'
             },
             {
               key: 'current-system-A4',
-              value: 'Outdoor (floor or flat-deck)'
+              value: 'Free range'
             },
             {
-              key: 'current-system-A5',
-              value: 'Indoor (aviary)'
-            },
-            {
-              key: 'legal-status-A6',
-              value: 'Outdoor (aviary)'
+              key: 'legal-status-A5',
+              value: 'Organic'
             },
             {
               value: 'divider'
             },
             {
-              key: 'current-system-A7',
+              key: 'current-system-A6',
               value: 'None of the above',
             }
           ],
@@ -3178,7 +3175,7 @@ const questionBank = {
         },
         {
           key: 'three-tiers',
-          order: 240,
+          order: 190,
           title: 'Will the multi-tier system have 3 tiers or fewer directly above each other?',
           pageTitle: '',
           url: 'three-tiers',
@@ -3187,9 +3184,10 @@ const questionBank = {
           nextUrl: 'multi-tier-system',
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to fund multi-tier systems that have 3 tiers or fewer.'
+                para: `RPA want to fund multi-tier systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone 
+                fractures from collisions and falls.`
               }]
             }]
           },
@@ -3214,6 +3212,107 @@ const questionBank = {
             }
           ],
           yarKey: 'threeTiers'
+        },
+        {
+          key: 'easy-grip-perches',
+          order: 200,
+          title:'Will the perches have a design feature that help the {{_poultryType_}} grip the perches?',
+          hint: {
+            text: 'For example, sufficient grip size or a comfortable material coating'
+          },
+          pageTitle: '',
+          url: 'easy-grip-perches',
+          baseUrl: 'easy-grip-perches',
+          backUrl: 'natural-light',
+          nextUrl: 'housing-biosecurity',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to support projects which provide perches that are easy to grip to increase bird safety and reduce falls.`
+              }]
+            }]
+          },
+          // preValidationKeys: ['naturalLight'],
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the perches will have a design feature that help the {{_poultryType_}} grip the perches'
+            }
+          ],
+          answers: [
+            {
+              key: 'easy-grip-perches-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'easy-grip-perches-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'easyGripPerches'
+        },
+        {
+          key: 'building-biosecurity',
+          order: 210,
+          title: 'Will the building structure include the following?',
+          url: 'building-biosecurity',
+          baseUrl: 'building-biosecurity',
+          backUrl: 'easy-grip-perches',
+          nextUrl: 'pollution-mitigation',
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to support projects that include a high standard of biosecurity measures 
+                which protect against the spread of disease and infection.\n
+                An integrated storage room can provide biosecure storage for items for the building such as litter, 
+                enrichment items and welfare ramps.`
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if the building structure will include the following'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'building-biosecurity',
+                answerKey: 'building-biosecurity-A3'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'building-biosecurity-A1',
+              value: 'Shower-in-facilities in the lobby or changing room area'
+            },
+            {
+              key: 'building-biosecurity-A2',
+              value: 'An externally accessible storage room with a separate air space',
+              hint: {
+                text: `To create a separate air space, the area must have solid 
+                ceiling height walls, providing a secure barrier from the 
+                bird living area`
+              }
+            },
+            {
+              key: 'building-biosecurity-A3',
+              value: 'None of the above',
+            }
+          ],
+          yarKey: 'buildingBiosecurity'
         },
         {
           key: 'score',
