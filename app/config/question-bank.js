@@ -787,59 +787,6 @@ const questionBank = {
           yarKey: 'buildingItems'
         },
         {
-          key: 'capped-inlets-outlets',
-          order: 85,
-          title: 'Will all roof and wall inlets and outlets be capped with mesh that has a spacing of 6 millimetres (mm) or less?',
-          url: 'capped-inlets-outlets',
-          baseUrl: 'capped-inlets-outlets',
-          backUrl: 'building-items',
-          nextUrlObject: {
-            dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
-            urlOptions: {
-              thenUrl: 'replacing-insulation',
-              elseUrl: 'refurbishing-insulation'
-            }
-          },
-          ineligibleContent: {
-            messageContent: 'All roof and wall inlets and outlets must be capped with mesh that has a spacing of 6 millimetres (mm) or less.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The housing must have roof and wall inlets and outlets that are capped with mesh that has a spacing (aperture) of 6mm or less.',
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if all the roof and wall inlets and outlets will be capped'
-            }
-          ],
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          answers: [
-            {
-              key: 'capped-inlets-outlets-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'capped-inlets-outlets-A2',
-              value: 'No',
-              notEligible: true
-            },
-          ],
-          yarKey: 'cappedInletsOutlets'
-        },
-        {
           key: 'refurbishing-insulation',
           order: 90,
           title: 'Will the {{_poultryType_}} housing have full wall and roof insulation?',
@@ -1195,54 +1142,6 @@ const questionBank = {
           yarKey: 'aviaryWelfare'
         },
         {
-          key: 'manure-removal',
-          order: 120,
-          title: 'Will the aviary system automatically remove manure?',
-          pageTitle: '',
-          url: 'manure-removal',
-          baseUrl: 'manure-removal',
-          backUrl: 'aviary-welfare',
-          nextUrl: 'aviary-lighting-system',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'To ensure good air quality, the aviary system must have an integrated automatic manure-removal system.',
-                items: []
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: 'The aviary system must have an integrated automatic manure-removal system to ensure good air quality.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the aviary system will automatically remove manure'
-            }
-          ],
-          answers: [
-            {
-              key: 'manure-removal-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'manure-removal-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'manureRemoval'
-        },
-        {
           key: 'hen-veranda',
           order: 121,
           title: 'Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?',
@@ -1422,58 +1321,6 @@ const questionBank = {
             }
           ],
           yarKey: 'henVerandaBiosecurity'
-        },
-        {
-          key: 'aviary-lighting-system',
-          order: 125,
-          title: 'Will the aviary system have an integrated LED lighting system?',
-          pageTitle: '',
-          url: 'aviary-lighting-system',
-          baseUrl: 'aviary-lighting-system',
-          backUrl: 'manure-removal',
-          nextUrl: 'mechanical-ventilation',
-          hint: {
-            text: 'This provides dimmable non-flicker lighting at each level of the aviary system, including top perches and under the system'
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The lighting system must have:',
-                items: ['non-flicker lighting', 'zonal dimming to provide an automated dawn and dusk.']
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: 'The aviary system must have an integrated LED lighting system.',
-            insertText: { text: 'The lighting system must have non-flicker lighting and zonal dimming to provide an automated dawn and dusk.'},
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the aviary system will have an integrated LED lighting system'
-            }
-          ],
-          answers: [
-            {
-              key: 'aviary-lighting-system-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'aviary-lighting-system-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'aviaryLightingSystem'
         },
         {
           key: 'mechanical-ventilation',
@@ -1700,72 +1547,6 @@ const questionBank = {
             }
           ],
           yarKey: 'ventilationAirQuality'
-        },
-        {
-          key: 'lighting-system',
-          order: 175,
-          title: 'Will the housing lighting system provide non-flicker light from dimmable LEDs?',
-          pageTitle: '',
-          url: 'lighting-system',
-          baseUrl: 'lighting-system',
-          backUrl: 'ventilation-air-quality',
-          nextUrl: 'lighting-features',
-          hint: {
-            text: 'Housing lighting must be ceiling-mounted and cover the whole barn area including the floor litter'
-          },
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'The lighting must be able to provide:',
-                  items: [
-                      'non-flicker light between approximately 3000 Kelvin and 4000 Kelvin colour temperature',
-                      'zonal dimming between 0 lux and 60 lux',
-                  ]
-                }]
-              }
-            ]
-          },
-          ineligibleContent: {
-            messageContent: 'Housing lighting must be ceiling-mounted and cover the whole barn area including the floor litter.',
-            insertText: {
-              html:  
-                  `<div class="govuk-list govuk-list--bullet">
-                      <p>The lighting must be able to provide:</p>
-                      <ul>
-                          <li>non-flicker light between approximately 3000 Kelvin and 4000 Kelvin colour temperature</li>
-                          <li>zonal dimming between 0 lux and 60 lux</li>
-                      </ul>
-                   </div>`
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the lighting system will provide non-flicker light from dimmable LEDs'
-            }
-          ],
-          answers: [
-            {
-              key: 'lighting-system-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'lighting-system-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'lightingSystem'
         },
         {
           key: 'lighting-features',
@@ -2490,7 +2271,7 @@ const questionBank = {
         },
         {
           key: 'bird-number',
-          order: 240,
+          order: 270,
           title: 'Do you have 1,000 or more birds on your farm?',
           pageTitle: '',
           url: 'bird-number',
@@ -3309,6 +3090,223 @@ const questionBank = {
             }
           ],
           yarKey: 'buildingBiosecurity'
+        },
+        {
+          key: 'ramp-connection',
+          order: 285,
+          title: 'Will every level of the multi-tier system be connected to another level by a ramp?',
+          pageTitle: '',
+          url: 'ramp-connection',
+          baseUrl: 'ramp-connection',
+          backUrlObject: {
+            dependentQuestionYarKey: 'currentSystem',
+            dependentAnswerKeysArray: ['current-system-A1'],
+            urlOptions: {
+              thenUrl: 'current-system',
+              elseUrl: 'current-multi-tier-system'
+            }
+          },
+          nextUrl: 'maximum-tier-height',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to fund multi-tier systems that have ramps to reduce the risk of keel bone fractures and benefit birds that have keel bone fractures.'
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if every level of the multi-tier system will be connected to another level by a ramp'
+            }
+          ],
+          answers: [
+            {
+              key: 'ramp-connection-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'ramp-connection-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'rampConnection'
+        },
+        {
+          key: 'maximum-tier-height',
+          order: 290,
+          title: 'Will the highest tier with direct access to the floor be 2 metres high or less?',
+          pageTitle: '',
+          hint: {
+            text: 'The height of the highest tier in the multi-tier system from the litter floor area to the underside of the manure belt'
+          },
+          url: 'maximum-tier-height',
+          baseUrl: 'maximum-tier-height',
+          backUrl: 'ramp-connection',
+          nextUrl: 'three-tiers',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to fund projects that prevent birds falling from heights of more than 2 metres, to reduce the risk of keel bonefractures.`
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the highest tier with direct access to the floor will be 2 metres high or less'
+            }
+          ],
+          answers: [
+            {
+              key: 'maximum-tier-height-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'maximum-tier-height-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'maximumTierHeight'
+        },
+        {
+          key: 'natural-light',
+          order: 295,
+          title: 'Will the building have windows that provide natural light to the indoor housing?',
+          pageTitle: '',
+          hint: {
+            html: `
+                  <p>The windows must be:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>fitted with an insulated blind to manage light intensity and housing temperature</li>
+                    <li>equal to at least 3% of size of the bird space footprint</li>
+                  </ul>`
+          },
+          url: 'natural-light',
+          baseUrl: 'natural-light',
+          nextUrl: 'easy-grip-perches',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-multi-tier',
+              elseUrl: 'pullet-multi-tier'
+            }
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to support projects which provide indoor housing with natural light.
+                      
+                       Hens and pullets prefer natural light spectrums.
+                      
+                       Natural light can: 
+                      `,
+                items: ['promote positive, active behaviour', 'improved visibility to help reduce collisions between birds', 'increase range use.']
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the building will have windows that provide natural light to the indoor housing'
+            }
+          ],
+          answers: [
+            {
+              key: 'natural-light-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'natural-light-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'naturalLight'
+        },
+        {
+          key: 'pollution-mitigation',
+          order: 300,
+          title: 'Will the building have any of the following?',
+          pageTitle: '',
+          url: 'pollution-mitigation',
+          baseUrl: 'pollution-mitigation',
+          backUrl: 'housing-biosecurity',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'renewable-energy',
+              elseUrl: 'pullet-veranda-features'
+            }
+          },
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices\''
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if the building will have any of the following'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'pollution-mitigation',
+                answerKey: 'pollution-mitigation-A5'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'pollution-mitigation-A1',
+              value: 'Manure drying'
+            },
+            {
+              key: 'pollution-mitigation-A2',
+              value: 'Air filtration at inlets',
+            },
+            {
+              key: 'pollution-mitigation-A3',
+              value: 'Air filtration at outlets, for example using wet or dry scrubbers',
+            },
+            {
+              key: 'pollution-mitigation-A4',
+              value: 'A tree shelter belt near air outlets'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'pollution-mitigation-A5',
+              value: 'None of the above',
+            }
+          ],
+          yarKey: 'pollutionMitigation'
         },
         {
           key: 'score',
