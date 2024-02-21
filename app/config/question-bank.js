@@ -4282,7 +4282,6 @@ const questionBank = {
             }
           },
           // preValidationKeys: ['applying'],
-          ineligibleContent: {},
           pageData: {
             businessDetailsLink: 'business-details',
             agentDetailsLink: 'agent-details',
