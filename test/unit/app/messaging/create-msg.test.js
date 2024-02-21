@@ -1,8 +1,16 @@
 describe('create-msg', () => {
-  jest.mock('ffc-grants-common-functionality')
+
+  jest.mock('ffc-grants-common-functionality', () => ({
+    session: {
+      getYarValue: jest.fn((request, key) => key),
+    },
+    regex: {
+      PROJECT_COST_REGEX: /^[1-9]\d*$/
+    }
+  }));
   const { session } = require('ffc-grants-common-functionality')
 
-  const { getDesirabilityAnswers } = require('../../../../app/messaging/create-msg')
+  const { getDesirabilityAnswers, getAllDetails } = require('../../../../app/messaging/create-msg')
 
   test('check getDesirabilityAnswers()', () => {
     let dict
@@ -39,6 +47,17 @@ describe('create-msg', () => {
 
     expect(getDesirabilityAnswers({})).toEqual(null)
 
+
+  })
+
+  test('getAllDetails', () => {
+    const request = {};
+    const confirmationId = '123';
+
+    const result = getAllDetails(request, confirmationId);
+
+
+    expect(result.confirmationId).toEqual('123');
 
   })
 })
