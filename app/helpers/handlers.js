@@ -345,7 +345,6 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
 
 const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, type, validate } = currentQuestion
-  const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
 
   if (baseUrl !== 'score') {
@@ -359,7 +358,7 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, request)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
-
+  const NOT_ELIGIBLE = { ...currentQuestion.ineligibleContent, backUrl: baseUrl }
   let dataObject
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
