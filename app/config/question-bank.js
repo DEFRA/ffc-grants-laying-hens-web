@@ -3944,7 +3944,6 @@ const questionBank = {
           nextUrl: 'applicant-details',
           summaryPageUrl: 'check-details',
           // preValidationKeys: ['applying'],
-          ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
