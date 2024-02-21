@@ -3109,7 +3109,7 @@ const questionBank = {
         },
         {
           key: 'current-system',
-          order: 20,
+          order: 180,
           title: 'What type of {{_poultryType_}} housing system do you currently use in the building?',
           pageTitle: '',
           backUrl: 'remaining-costs',
@@ -3171,7 +3171,7 @@ const questionBank = {
         },
         {
           key: 'three-tiers',
-          order: 240,
+          order: 190,
           title: 'Will the multi-tier system have 3 tiers or fewer directly above each other?',
           pageTitle: '',
           url: 'three-tiers',
@@ -3211,7 +3211,7 @@ const questionBank = {
         },
         {
           key: 'easy-grip-perches',
-          order: 80,
+          order: 200,
           title:'Will the perches have a design feature that help the {{_poultryType_}} grip the perches?',
           hint: {
             text: 'For example, sufficient grip size or a comfortable material coating'
@@ -3251,6 +3251,64 @@ const questionBank = {
             }
           ],
           yarKey: 'easyGripPerches'
+        },
+        {
+          key: 'building-biosecurity',
+          order: 210,
+          title: 'Will the building structure include the following?',
+          url: 'building-biosecurity',
+          baseUrl: 'building-biosecurity',
+          backUrl: 'easy-grip-perches',
+          nextUrl: 'pollution-mitigation',
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to support projects that include a high standard of biosecurity measures 
+                which protect against the spread of disease and infection.\n
+                An integrated storage room can provide biosecure storage for items for the building such as litter, 
+                enrichment items and welfare ramps.`
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if the building structure will include the following'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'building-biosecurity',
+                answerKey: 'building-biosecurity-A3'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'building-biosecurity-A1',
+              value: 'Shower-in-facilities in the lobby or changing room area'
+            },
+            {
+              key: 'building-biosecurity-A2',
+              value: 'An externally accessible storage room with a separate air space',
+              hint: {
+                text: `To create a separate air space, the area must have solid 
+                ceiling height walls, providing a secure barrier from the 
+                bird living area`
+              }
+            },
+            {
+              key: 'building-biosecurity-A3',
+              value: 'None of the above',
+            }
+          ],
+          yarKey: 'buildingBiosecurity'
         },
         {
           key: 'score',
