@@ -2961,13 +2961,19 @@ const questionBank = {
           url: 'three-tiers',
           baseUrl: 'three-tiers',
           backUrl: 'maximum-tier-height',
-          nextUrl: 'multi-tier-system',
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-multi-tier',
+              elseUrl: 'pullet-multi-tier'
+            }
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund multi-tier systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone 
-                fractures from collisions and falls.`
+                para: `RPA want to fund multi-tier systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone fractures from collisions and falls.`
               }]
             }]
           },

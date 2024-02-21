@@ -49,9 +49,8 @@ describe('Page: /three-tiers', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('multi-tier-system')
+    expect(postResponse.headers.location).toBe('hen-multi-tier')
   })
-
 
   it('page loads with correct back link - /maximum-tier-height', async () => {
     const options = {
