@@ -3112,6 +3112,110 @@ const questionBank = {
           yarKey: 'remainingCosts'
         },
         {
+          key: 'current-system',
+          order: 20,
+          title: 'What type of {{_poultryType_}} housing system do you currently use?',
+          pageTitle: '',
+          backUrl: 'remaining-costs',
+          nextUrl: 'ramp-connection',
+          url: 'current-system',
+          baseUrl: 'current-system',
+          // preValidationKeys: ['remainingCosts'],
+          hint: {
+            text: 'The housing system you are replacing or refurbishing for this project'
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'RPA want to prioritise supporting farmers that are transitioning out of using colony cages, or to high-welfare multi-tier aviary systems.'
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what type of {{_poultryType_}} housing system you currently use'
+            }
+          ],
+          answers: [
+            {
+              key: 'current-system-A1',
+              value: 'Colony cage'
+            },
+            {
+              key: 'current-system-A2',
+              value: 'Combi-cage'
+            },
+            {
+              key: 'current-system-A3',
+              value: 'Indoor (floor or flat-deck)'
+            },
+            {
+              key: 'current-system-A4',
+              value: 'Outdoor (floor or flat-deck)'
+            },
+            {
+              key: 'current-system-A5',
+              value: 'Indoor (aviary)'
+            },
+            {
+              key: 'legal-status-A6',
+              value: 'Outdoor (aviary)'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'current-system-A7',
+              value: 'None of the above',
+            }
+          ],
+          yarKey: 'currentSystem'
+        },
+        {
+          key: 'three-tiers',
+          order: 240,
+          title: 'Will the multi-tier system have 3 tiers or fewer directly above each other?',
+          pageTitle: '',
+          url: 'three-tiers',
+          baseUrl: 'three-tiers',
+          backUrl: 'maximum-tier-height',
+          nextUrl: 'multi-tier-system',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'RPA want to fund multi-tier systems that have 3 tiers or fewer.'
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the multi-tier system will have 3 tiers or fewer directly above each other'
+            }
+          ],
+          answers: [
+            {
+              key: 'three-tiers-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'three-tiers-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'threeTiers'
+        },
+        {
           key: 'score',
           order: 175,
           title: 'Score results',
