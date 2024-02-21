@@ -98,7 +98,7 @@ const validateErrorCheck = (question, validate, request) => {
 }
 
 const ineligibleContentCheck = (question, ineligibleContent, request) => {
-  if (question.ineligibleContent?.messageContent.includes('{{_')) {
+  if (question?.ineligibleContent?.messageContent.includes('{{_')) {
     question = {
       ...question,
       ineligibleContent: {

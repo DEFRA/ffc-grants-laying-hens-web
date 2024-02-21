@@ -2,7 +2,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /1000-birds', () => {
   let varList = {
-    poultryType: 'hen',
+    poultryType: 'laying hens',
   }
   
   jest.mock('../../../../app/helpers/session', () => ({
@@ -36,10 +36,10 @@ describe('Page: /1000-birds', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if you currently have at least 1,000 laying hen on your farm')
+    expect(postResponse.payload).toContain('Select yes if you currently have at least 1,000 laying hens on your farm')
   })
 
-  it('user selects eligible option -> store user response and redirect to /legal-status', async () => {
+  it('user selects eligible option -> store user response and redirect to /building-items', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/1000-birds`,
@@ -49,7 +49,7 @@ describe('Page: /1000-birds', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('legal-status')
+    expect(postResponse.headers.location).toBe('building-items')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -62,7 +62,7 @@ describe('Page: /1000-birds', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('You must have at least 1,000 birds on your farm currently.')
+    expect(postResponse.payload).toContain('You must keep at least 1,000 laying hens on your farm currently.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
