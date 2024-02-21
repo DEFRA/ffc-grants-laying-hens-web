@@ -3180,7 +3180,7 @@ const questionBank = {
           url: 'three-tiers',
           baseUrl: 'three-tiers',
           backUrl: 'maximum-tier-height',
-          nextUrl: 'multi-tier',
+          nextUrl: 'multi-tier-system',
           sidebar: {
             values: [{
               heading: 'Funding priorities',

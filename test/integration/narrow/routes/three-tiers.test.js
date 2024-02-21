@@ -39,7 +39,7 @@ describe('Page: /three-tiers', () => {
     expect(postResponse.payload).toContain('Select yes if the multi-tier system will have 3 tiers or fewer directly above each other')
   })
 
-  it('user selects eligible option -> store user response and redirect to /multi-tier', async () => {
+  it('user selects eligible option -> store user response and redirect to /multi-tier-system', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/three-tiers`,
@@ -49,7 +49,7 @@ describe('Page: /three-tiers', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('multi-tier')
+    expect(postResponse.headers.location).toBe('multi-tier-system')
   })
 
 
