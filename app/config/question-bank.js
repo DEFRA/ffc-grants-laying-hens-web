@@ -640,7 +640,7 @@ const questionBank = {
             {
               key: 'poultry-type-A2',
               text: 'Pullets (up to and including 15 weeks old)',
-              value: 'pullets',
+              value: 'pullet',
             },
             {
               value: 'divider'
