@@ -3010,7 +3010,7 @@ const questionBank = {
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
           backUrl: 'natural-light',
-          nextUrl: 'housing-biosecurity',
+          nextUrl: 'building-biosecurity',
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3255,7 +3255,7 @@ const questionBank = {
           pageTitle: '',
           url: 'pollution-mitigation',
           baseUrl: 'pollution-mitigation',
-          backUrl: 'housing-biosecurity',
+          backUrl: 'building-biosecurity',
           nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
