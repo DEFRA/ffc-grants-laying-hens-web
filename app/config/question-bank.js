@@ -2374,9 +2374,12 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
-          key: 'bird-number',
-          order: 270,
-          title: 'Do you have 1,000 or more birds on your farm?',
+          key: '1000-birds',
+          order: 240,
+          title: 'Do you have at least 1,000 birds on your farm currently?',
+          hint: {
+            text: 'This can be laying hens, pullets or both'
+          },
           pageTitle: '',
           url: '1000-birds',
           baseUrl: '1000-birds',
