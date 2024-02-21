@@ -665,6 +665,7 @@ const questionBank = {
           baseUrl: '1000-birds',
           backUrl: 'poultry-type',
           nextUrl: 'building-items',
+            // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -722,7 +723,7 @@ const questionBank = {
           baseUrl: 'building-items',
           backUrl: '1000-birds',
           nextUrl: 'capped-inlets-outlets',
-          // preValidationKeys: ['poultryType'],
+          // preValidationKeys: ['birdNumber'],
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
