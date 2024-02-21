@@ -269,7 +269,6 @@ const getPage = async (question, request, h) => {
   // formatting variables block
   question = titleCheck(question, title, request)
   question = sidebarCheck(question, request)
-  question = ineligibleContentCheck(question, ineligibleContent, request)
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
