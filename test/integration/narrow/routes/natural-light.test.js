@@ -1,7 +1,9 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /natural-light', () => {
-  let varList = {}
+  let varList = {
+    poultryType: 'hen',
+  }
   
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
@@ -53,14 +55,25 @@ describe('Page: /natural-light', () => {
     expect(postResponse.headers.location).toBe('easy-grip-perches')
   })
 
-
-  it('page loads with correct back link - /multi-tier', async () => {
+  it('page loads with correct back link - /hen-multi-tier', async () => {
+    varList.poultryType = 'hen'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/natural-light`,
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"multi-tier\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"hen-multi-tier\" class=\"govuk-back-link\">Back</a>')
+  })
+
+  it('page loads with correct back link - /pullet-multi-tier', async () => {
+    varList.poultryType = 'pullet'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/natural-light`,
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"pullet-multi-tier\" class=\"govuk-back-link\">Back</a>')
   })
 })
