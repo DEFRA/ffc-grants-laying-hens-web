@@ -3314,8 +3314,15 @@ const questionBank = {
           },
           url: 'natural-light',
           baseUrl: 'natural-light',
-          backUrl: 'multi-tier',
           nextUrl: 'easy-grip-perches',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-multi-tier',
+              elseUrl: 'pullet-multi-tier'
+            }
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
