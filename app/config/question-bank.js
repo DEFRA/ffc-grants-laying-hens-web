@@ -787,59 +787,6 @@ const questionBank = {
           yarKey: 'buildingItems'
         },
         {
-          key: 'capped-inlets-outlets',
-          order: 85,
-          title: 'Will all roof and wall inlets and outlets be capped with mesh that has a spacing of 6 millimetres (mm) or less?',
-          url: 'capped-inlets-outlets',
-          baseUrl: 'capped-inlets-outlets',
-          backUrl: 'building-items',
-          nextUrlObject: {
-            dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
-            urlOptions: {
-              thenUrl: 'replacing-insulation',
-              elseUrl: 'refurbishing-insulation'
-            }
-          },
-          ineligibleContent: {
-            messageContent: 'All roof and wall inlets and outlets must be capped with mesh that has a spacing of 6 millimetres (mm) or less.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The housing must have roof and wall inlets and outlets that are capped with mesh that has a spacing (aperture) of 6mm or less.',
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if all the roof and wall inlets and outlets will be capped'
-            }
-          ],
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          answers: [
-            {
-              key: 'capped-inlets-outlets-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'capped-inlets-outlets-A2',
-              value: 'No',
-              notEligible: true
-            },
-          ],
-          yarKey: 'cappedInletsOutlets'
-        },
-        {
           key: 'refurbishing-insulation',
           order: 90,
           title: 'Will the {{_poultryType_}} housing have full wall and roof insulation?',
@@ -1195,54 +1142,6 @@ const questionBank = {
           yarKey: 'aviaryWelfare'
         },
         {
-          key: 'manure-removal',
-          order: 120,
-          title: 'Will the aviary system automatically remove manure?',
-          pageTitle: '',
-          url: 'manure-removal',
-          baseUrl: 'manure-removal',
-          backUrl: 'aviary-welfare',
-          nextUrl: 'aviary-lighting-system',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'To ensure good air quality, the aviary system must have an integrated automatic manure-removal system.',
-                items: []
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: 'The aviary system must have an integrated automatic manure-removal system to ensure good air quality.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the aviary system will automatically remove manure'
-            }
-          ],
-          answers: [
-            {
-              key: 'manure-removal-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'manure-removal-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'manureRemoval'
-        },
-        {
           key: 'hen-veranda',
           order: 121,
           title: 'Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?',
@@ -1422,58 +1321,6 @@ const questionBank = {
             }
           ],
           yarKey: 'henVerandaBiosecurity'
-        },
-        {
-          key: 'aviary-lighting-system',
-          order: 125,
-          title: 'Will the aviary system have an integrated LED lighting system?',
-          pageTitle: '',
-          url: 'aviary-lighting-system',
-          baseUrl: 'aviary-lighting-system',
-          backUrl: 'manure-removal',
-          nextUrl: 'mechanical-ventilation',
-          hint: {
-            text: 'This provides dimmable non-flicker lighting at each level of the aviary system, including top perches and under the system'
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The lighting system must have:',
-                items: ['non-flicker lighting', 'zonal dimming to provide an automated dawn and dusk.']
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: 'The aviary system must have an integrated LED lighting system.',
-            insertText: { text: 'The lighting system must have non-flicker lighting and zonal dimming to provide an automated dawn and dusk.'},
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the aviary system will have an integrated LED lighting system'
-            }
-          ],
-          answers: [
-            {
-              key: 'aviary-lighting-system-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'aviary-lighting-system-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'aviaryLightingSystem'
         },
         {
           key: 'mechanical-ventilation',
@@ -1700,72 +1547,6 @@ const questionBank = {
             }
           ],
           yarKey: 'ventilationAirQuality'
-        },
-        {
-          key: 'lighting-system',
-          order: 175,
-          title: 'Will the housing lighting system provide non-flicker light from dimmable LEDs?',
-          pageTitle: '',
-          url: 'lighting-system',
-          baseUrl: 'lighting-system',
-          backUrl: 'ventilation-air-quality',
-          nextUrl: 'lighting-features',
-          hint: {
-            text: 'Housing lighting must be ceiling-mounted and cover the whole barn area including the floor litter'
-          },
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'The lighting must be able to provide:',
-                  items: [
-                      'non-flicker light between approximately 3000 Kelvin and 4000 Kelvin colour temperature',
-                      'zonal dimming between 0 lux and 60 lux',
-                  ]
-                }]
-              }
-            ]
-          },
-          ineligibleContent: {
-            messageContent: 'Housing lighting must be ceiling-mounted and cover the whole barn area including the floor litter.',
-            insertText: {
-              html:  
-                  `<div class="govuk-list govuk-list--bullet">
-                      <p>The lighting must be able to provide:</p>
-                      <ul>
-                          <li>non-flicker light between approximately 3000 Kelvin and 4000 Kelvin colour temperature</li>
-                          <li>zonal dimming between 0 lux and 60 lux</li>
-                      </ul>
-                   </div>`
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the lighting system will provide non-flicker light from dimmable LEDs'
-            }
-          ],
-          answers: [
-            {
-              key: 'lighting-system-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'lighting-system-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'lightingSystem'
         },
         {
           key: 'lighting-features',
