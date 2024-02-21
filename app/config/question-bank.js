@@ -602,7 +602,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
               thenUrl: 'veranda-only',
-              elseUrl: 'building-items'
+              elseUrl: '1000-birds'
             }
           },
           ineligibleContent: {
@@ -704,6 +704,65 @@ const questionBank = {
           yarKey: 'birdNumber'
         },
         {
+          key: 'building-items',
+          order: 80,
+          title: 'Will the {{_poultryType_}} housing have these items?',
+          hint: {
+            html: `
+                  <p>The building must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a fixed structure with a solid concrete floor</li>
+                    <li>water-tight roof and walls</li>
+                    <li>capped roof and wall inlets and outlets</li>
+                    <li>catch trays under all chimneys and roof-mounted vents.</li>
+                  </ul>`
+          },
+          pageTitle: '',
+          url: 'building-items',
+          baseUrl: 'building-items',
+          backUrl: '1000-birds',
+          nextUrl: 'capped-inlets-outlets',
+          // preValidationKeys: ['poultryType'],
+          ineligibleContent: {
+            messageContent: `
+              <div class="govuk-list govuk-list--bullet">
+                  <p class="govuk-body">The building must have:</p>
+                  <ul class="govuk-list--bullet">
+                      <li>a fixed structure with a solid concrete floor</li>
+                      <li>water-tight roof and walls</li>
+                      <li>capped roof and wall inlets and outlets</li>
+                      <li>catch trays under all chimneys and roof-mounted vents.</li>
+                  </ul>
+              </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have these items'
+            }
+          ],
+          answers: [
+            {
+              key: 'building-items-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'building-items-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'buildingItems'
+        },
+        {
           key: 'project-type',
           order: 70,
           title: 'What is your project?',
@@ -776,65 +835,6 @@ const questionBank = {
             }
           ],
           yarKey: 'projectType'
-        },
-        {
-          key: 'building-items',
-          order: 80,
-          title: 'Will the {{_poultryType_}} housing have these items?',
-          hint: {
-            html: `
-                  <p>The building must have:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a fixed structure with a solid concrete floor</li>
-                    <li>water-tight roof and walls</li>
-                    <li>capped roof and wall inlets and outlets</li>
-                    <li>catch trays under all chimneys and roof-mounted vents.</li>
-                  </ul>`
-          },
-          pageTitle: '',
-          url: 'building-items',
-          baseUrl: 'building-items',
-          backUrl: 'poultry-type',
-          nextUrl: 'capped-inlets-outlets',
-          // preValidationKeys: ['poultryType'],
-          ineligibleContent: {
-            messageContent: `
-              <div class="govuk-list govuk-list--bullet">
-                  <p class="govuk-body">The building must have:</p>
-                  <ul class="govuk-list--bullet">
-                      <li>a fixed structure with a solid concrete floor</li>
-                      <li>water-tight roof and walls</li>
-                      <li>capped roof and wall inlets and outlets</li>
-                      <li>catch trays under all chimneys and roof-mounted vents.</li>
-                  </ul>
-              </div>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have these items'
-            }
-          ],
-          answers: [
-            {
-              key: 'building-items-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'building-items-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'buildingItems'
         },
         {
           key: 'capped-inlets-outlets',
