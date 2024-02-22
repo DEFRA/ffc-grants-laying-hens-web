@@ -2648,7 +2648,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the total estimated total cost of the veranda project'
+              error: 'Enter the total estimated cost of the veranda project'
             },
             {
               type: 'REGEX',
