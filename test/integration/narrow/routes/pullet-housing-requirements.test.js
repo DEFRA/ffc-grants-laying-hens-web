@@ -22,7 +22,7 @@ describe('Page: /pullet-housing-requirements', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Will the inside of the building have these features?')
-    expect(response.payload).toContain('The pullet housing must have:')
+    expect(response.payload).toContain('The building must have:')
     expect(response.payload).toContain('a useable area provided over a range of bird-accessible heights from 10 days of age')
     expect(response.payload).toContain('height adjustable perches at equal to or more than 8cm per pullet')
     expect(response.payload).toContain('a minimum of 50% of the floor area covered in litter')
