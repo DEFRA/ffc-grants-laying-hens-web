@@ -724,14 +724,12 @@ const questionBank = {
           url: 'building-items',
           baseUrl: 'building-items',
           backUrl: 'poultry-type',
-          nextUrl: 'capped-inlets-outlets',
           nextUrlObject: {
-            dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A2'],
             urlOptions: {
-              thenUrl: 'replacing-insulation',
-              elseUrl: 'refurbishing-insulation',
-              nonDependentUrl: 'pullet-housing-requirements'
+              thenUrl: 'pullet-housing-requirements',
+              elseUrl: 'replacing-insulation'
             }
           },
           // preValidationKeys: ['poultryType'],
@@ -3283,9 +3281,9 @@ const questionBank = {
               content: [{
                 para: `RPA want to support projects which provide indoor housing with natural light.
                       
-                       Hens and pullets prefer natural light spectrums.
+                        Hens and pullets prefer natural light spectrums.
                       
-                       Natural light can: 
+                        Natural light can: 
                       `,
                 items: ['promote positive, active behaviour', 'improved visibility to help reduce collisions between birds', 'increase range use.']
               }]

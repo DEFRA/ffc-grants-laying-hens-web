@@ -3,6 +3,7 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /building-items', () => {
   const varList = {
     poultryType: 'hen',
+    projectType: 'Replacing existing housing'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -38,7 +39,7 @@ describe('Page: /building-items', () => {
     expect(postResponse.payload).toContain('Select yes if the building will have these features')
   })
 
-  it('user selects eligible option -> store user response and redirect to /capped-inlets-outlets', async () => {
+  it('user selects eligible option and /Replacing existing housing/ at project-type page  -> store user response and redirect to /replacing-insulation', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-items`,
@@ -48,7 +49,48 @@ describe('Page: /building-items', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('capped-inlets-outlets')
+    expect(postResponse.headers.location).toBe('replacing-insulation')
+  })
+
+  it('user selects eligible option and /Refurbishing existing housing/ at project-type -> store user response and redirect to /refurbishing-insulation', async () => {
+    varList.projectType = 'Refurbishing existing housing'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/building-items`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { buildingItems: 'Yes', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('refurbishing-insulation')
+  })
+  it('user selects eligible option -> store user response and redirect to /capped-inlets-outlets', async () => {
+    varList.projectType = 'pullet'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/building-items`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { buildingItems: 'Yes', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('pullet-housing-requirements')
+  })
+
+  it('user selects eligible option -> store user response and redirect to /capped-inlets-outlets', async () => {
+    varList.poultryType = 'pullet'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/building-items`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { buildingItems: 'Yes', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('pullet-housing-requirements')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {

@@ -1,7 +1,7 @@
 const urlPrefix = require('../config/server').urlPrefix
 const { getYarValue } = require('../helpers/session')
 const { ALL_QUESTIONS } = require('../config/question-bank')
-
+const { getQuestionAnswer } = require('./utils')
 const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
   const scorePath = `${urlPrefix}/score`
   const chekDetailsPath = `${urlPrefix}/check-details`
@@ -12,13 +12,19 @@ const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
   }
 
   const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions, nonDependentAnswerKeysArray = [] } = urlObject
-  const { thenUrl, elseUrl, nonDependentUrl } = urlOptions
+  let { thenUrl, elseUrl, nonDependentUrl } = urlOptions
 
   const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
 
   if (dependentQuestionYarKey === 'SolarPVCost') {
     // if key is not null, show then page, otherwise show else
     return  dependentAnswer != null ? thenUrl : elseUrl
+  }
+
+  if (elseUrl === 'replacing-insulation' && 
+      thenUrl === 'pullet-housing-requirements' && 
+      getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A2')) {
+      elseUrl = 'refurbishing-insulation'
   }
 
   const selectThenUrl = checkAnswerExist([dependentQuestionYarKey].flat(), request, dependentAnswerKeysArray)
