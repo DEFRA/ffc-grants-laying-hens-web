@@ -730,15 +730,17 @@ const questionBank = {
         {
           key: 'building-items',
           order: 80,
-          title: 'Will the {{_poultryType_}} housing have these items?',
+          title: 'Will the building have these features?',
           hint: {
             html: `
                   <p>The building must have:</p>
                   <ul class="govuk-list--bullet">
                     <li>a fixed structure with a solid concrete floor</li>
                     <li>water-tight roof and walls</li>
-                    <li>capped roof and wall inlets and outlets</li>
-                    <li>catch trays under all chimneys and roof-mounted vents.</li>
+                    <li>mesh capping applied to any roof or wall inlets and outlets 
+                    capped with mesh (with a mesh hole size of 25 millimetres or 
+                    less)</li>
+                    <li>catch trays under all chimneys and roof-mounted vents</li>
                   </ul>`
           },
           pageTitle: '',
@@ -746,6 +748,15 @@ const questionBank = {
           baseUrl: 'building-items',
           backUrl: 'poultry-type',
           nextUrl: 'capped-inlets-outlets',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation',
+              nonDependentUrl: 'pullet-housing-requirements'
+            }
+          },
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
@@ -754,7 +765,9 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
-                      <li>capped roof and wall inlets and outlets</li>
+                      <li>mesh capping applied to any roof or wall inlets and outlets 
+                      capped with mesh (with a mesh hole size of 25 millimetres or 
+                      less)</li>
                       <li>catch trays under all chimneys and roof-mounted vents.</li>
                   </ul>
               </div>`,
@@ -767,10 +780,18 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The grant-funded building must have these design features to meet the grant priority of improving biosecurity.'
+              }]
+            }]
+          },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have these items'
+              error: 'Select yes if the building will have these features'
             }
           ],
           answers: [
