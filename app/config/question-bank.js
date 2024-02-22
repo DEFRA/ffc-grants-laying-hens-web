@@ -1968,15 +1968,22 @@ const questionBank = {
         {
           key: 'pullet-housing-requirements',
           order: 205,
-          title: 'Will the pullet housing have these features?',
+          title: 'Will the inside of the building have these features?',
           pageTitle: '',
           url: 'pullet-housing-requirements',
           baseUrl: 'pullet-housing-requirements',
-          backUrl: 'housing-density',
-          nextUrl: 'multi-tier-system',
+          backUrl: 'building-items',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation'
+            }
+          },
           hint: {
             html: `
-                  <p>The pullet housing must have:</p>
+                  <p>The building must have:</p>
                   <ul class="govuk-list--bullet">
                       <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
                       <li>height adjustable perches at equal to or more than 8cm per pullet</li>
