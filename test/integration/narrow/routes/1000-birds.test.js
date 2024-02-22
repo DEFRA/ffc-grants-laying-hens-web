@@ -12,7 +12,6 @@ describe('Page: /1000-birds', () => {
       else return undefined
     }
   }))
-
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -25,7 +24,6 @@ describe('Page: /1000-birds', () => {
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
-
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
