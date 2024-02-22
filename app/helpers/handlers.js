@@ -25,6 +25,7 @@ const { getUserScore } = require('../messaging/application')
 const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
+const { getQuestionAnswer } = require('./utils')
 
 const createModel = (data, backUrl, url) => {
   return {
@@ -40,26 +41,36 @@ const checkYarKeyReset = (thisAnswer, request) => {
   }
 }
 
-const insertYarValue = (field, request) => {
-  field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-    field.includes('£') ? (formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)) : getYarValue(request, additionalYarKeyName)
-  ))
+const insertYarValue = (field, url, request) => {
+  field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
+    let result;
+    if (url === '1000-birds' && getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type','poultry-type-A1')) {
+        result = 'laying hens';
+    } else if (url === '1000-birds' && getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type','poultry-type-A2')) {
+        result = 'pullets';
+    } else if (field.includes('£')) {
+        result = formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0);
+    } else {
+        result = getYarValue(request, additionalYarKeyName);
+    }
+    return result;
+})
 
   return field
 }
 
-const titleCheck = (question, title, request) => {
+const titleCheck = (question, title, url, request) => {
   if (title?.includes('{{_')) {
     question = {
       ...question,
-      title: insertYarValue(title, request)
+      title: insertYarValue(title,url, request)
     }
   }
 
   return question
 }
 
-const sidebarCheck = (question, request) => {
+const sidebarCheck = (question, url, request ) => {
   if (question.sidebar?.values[0]?.content[0]?.para.includes('{{_')) {
     question = {
       ...question,
@@ -68,7 +79,7 @@ const sidebarCheck = (question, request) => {
           {
             ...question.sidebar.values[0],
             content: [{
-              para: insertYarValue(question.sidebar.values[0].content[0].para, request)
+              para: insertYarValue(question.sidebar.values[0].content[0].para, url, request)
             }
             ]
           }
@@ -80,7 +91,7 @@ const sidebarCheck = (question, request) => {
   return question
 }
 
-const validateErrorCheck = (question, validate, request) => {
+const validateErrorCheck = (question, validate, url, request) => {
  // this sonar issue fix actually breaks all tests
   if (question?.validate && question.validate[0].error.includes('{{_')) {
     question = {
@@ -88,12 +99,26 @@ const validateErrorCheck = (question, validate, request) => {
       validate: [
         {
           ...validate[0],
-          error: insertYarValue(question.validate[0].error, request)
+          error: insertYarValue(question.validate[0].error, url, request)
         }
       ]
     }
   }
 
+  return question
+}
+
+const ineligibleContentCheck = (question, ineligibleContent, url,  request) => {
+  if (question?.ineligibleContent?.messageContent.includes('{{_')) {
+    question = {
+      ...question,
+      ineligibleContent: {
+            ...question.ineligibleContent,
+            messageContent: insertYarValue(ineligibleContent.messageContent,url, request)
+      }
+    }
+  }
+  
   return question
 }
 
@@ -244,7 +269,7 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 }
 
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, yarKey } = question
+  const { url, backUrl, nextUrlObject, type, title, yarKey, ineligibleContent } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
@@ -253,8 +278,9 @@ const getPage = async (question, request, h) => {
   }
 
   // formatting variables block
-  question = titleCheck(question, title, request)
-  question = sidebarCheck(question, request)
+  question = titleCheck(question, title, url, request)
+  question = sidebarCheck(question, url, request)
+  question = ineligibleContentCheck(question, ineligibleContent, url, request)
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
@@ -330,7 +356,6 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
 
 const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, type, validate } = currentQuestion
-  const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
 
   if (baseUrl !== 'score') {
@@ -338,12 +363,13 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   // formatting variables block - needed for error validations
-  currentQuestion = titleCheck(currentQuestion, title, request)
-  currentQuestion = validateErrorCheck(currentQuestion, validate, request)
-  currentQuestion = sidebarCheck(currentQuestion, request)
+  currentQuestion = titleCheck(currentQuestion, title, baseUrl, request)
+  currentQuestion = validateErrorCheck(currentQuestion, validate, baseUrl, request)
+  currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
+  currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
-
+  const NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
   let dataObject
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
