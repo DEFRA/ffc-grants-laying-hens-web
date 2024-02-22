@@ -70,6 +70,7 @@ describe('Page: /1000-birds', () => {
   })
 
   it('page loads with correct back link - /poultry-type', async () => {
+    varList.poultryType = 'pullet'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/1000-birds`
