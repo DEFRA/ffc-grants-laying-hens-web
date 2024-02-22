@@ -43,16 +43,19 @@ const checkYarKeyReset = (thisAnswer, request) => {
 
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
+    let result;
     if (url === '1000-birds' && getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type','poultry-type-A1')) {
-        return 'laying hens';
+        result = 'laying hens';
     } else if (url === '1000-birds' && getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type','poultry-type-A2')) {
-        return 'pullets';
+        result = 'pullets';
     } else if (field.includes('£')) {
-        return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0);
+        result = formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0);
     } else {
-        return getYarValue(request, additionalYarKeyName);
+        result = getYarValue(request, additionalYarKeyName);
     }
+    return result;
 })
+
   return field
 }
 
