@@ -2,7 +2,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /1000-birds', () => {
   let varList = {
-    poultryType: 'laying hens',
+    poultryType: 'hen',
   }
   
   jest.mock('ffc-grants-common-functionality', () => ({
@@ -14,7 +14,9 @@ describe('Page: /1000-birds', () => {
       }
     },
     regex: {
-      PROJECT_COST_REGEX: /^[1-9]\d*$/
+      PROJECT_COST_REGEX: /^[1-9]\d*$/,
+      SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig,
+      DELETE_POSTCODE_CHARS_REGEX: /[)(.\s-]*/g
     }
   }))
   it('page loads successfully, with all the options', async () => {

@@ -5,12 +5,19 @@ describe('Page: /pollution-mitigation', () => {
         poultryType: 'hen',
       }
 
-    jest.mock('../../../../app/helpers/session', () => ({
+    jest.mock('ffc-grants-common-functionality', () => ({
+      session: {
         setYarValue: (request, key, value) => null,
         getYarValue: (request, key) => {
           if (varList[key]) return varList[key]
           else return undefined
         }
+      },
+      regex: {
+        PROJECT_COST_REGEX: /^[1-9]\d*$/,
+        SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig,
+        DELETE_POSTCODE_CHARS_REGEX: /[)(.\s-]*/g
+      }
     }))
 
   it('page loads successfully, with all the options', async () => {

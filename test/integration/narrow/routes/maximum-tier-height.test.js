@@ -5,11 +5,16 @@ describe('Page: /maximum-tier-height', () => {
     poultryType: 'hen'
   }
   
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+  jest.mock('ffc-grants-common-functionality', () => ({
+    session: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return undefined
+      }
+    },
+    regex: {
+      PROJECT_COST_REGEX: /^[1-9]\d*$/
     }
   }))
 
