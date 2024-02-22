@@ -3103,6 +3103,55 @@ const questionBank = {
           yarKey: 'henMultiTier'
         },
         {
+          key: 'pullet-multi-tier',
+          order: 315,
+          title: 'Will the pullets in your grant-funded building live in a multi-tier system as hens?',
+          pageTitle: '',
+          hint: {
+            text: 'When they are over 15 weeks old'
+          },
+          url: 'pullet-multi-tier',
+          baseUrl: 'pullet-multi-tier',
+          backUrl: 'three-tiers',
+          nextUrl: 'natural-light',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to fund projects that will house hens in multi-tier aviary systems when they move out of the grant-funded housing.`
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullets in your grant-funded building will live in a multi-tier system as hens'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-multi-tier-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'pullet-multi-tier-A2',
+              value: 'No'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'pullet-multi-tier-A3',
+              value: 'I don\'t know'
+            }
+          ],
+          yarKey: 'pulletMultiTier'
+        },
+        {
           key: 'easy-grip-perches',
           order: 200,
           title:'Will the perches have a design feature that help the {{_poultryType_}} grip the perches?',
