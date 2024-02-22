@@ -65,19 +65,6 @@ describe('Page: /building-items', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('refurbishing-insulation')
   })
-  it('user selects eligible option -> store user response and redirect to /capped-inlets-outlets', async () => {
-    varList.projectType = 'pullet'
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/building-items`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { buildingItems: 'Yes', crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('pullet-housing-requirements')
-  })
 
   it('user selects eligible option -> store user response and redirect to /capped-inlets-outlets', async () => {
     varList.poultryType = 'pullet'
@@ -114,7 +101,7 @@ describe('Page: /building-items', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"1000-birds\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"poultry-type\" class=\"govuk-back-link\">Back</a>')
   })
 
 })
