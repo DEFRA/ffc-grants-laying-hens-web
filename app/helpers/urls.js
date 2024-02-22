@@ -1,5 +1,5 @@
 const urlPrefix = require('../config/server').urlPrefix
-const { session } = require('ffc-grants-common-functionality')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
@@ -14,7 +14,7 @@ const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
   const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions, nonDependentAnswerKeysArray = [] } = urlObject
   const { thenUrl, elseUrl, nonDependentUrl } = urlOptions
 
-  const dependentAnswer = session.getYarValue(request, dependentQuestionYarKey)
+  const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
 
   if (dependentQuestionYarKey === 'SolarPVCost') {
     // if key is not null, show then page, otherwise show else
@@ -31,7 +31,7 @@ const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
 }
 const checkAnswerExist = (dependentQuestionYarKey, request, yarKeysToCheck) => {
   return dependentQuestionYarKey.some(questionYarKey => {
-    const dependentAnswer = session.getYarValue(request, questionYarKey)
+    const dependentAnswer = getYarValue(request, questionYarKey)
     return !!ALL_QUESTIONS.find(thisQuestion => (
       thisQuestion.yarKey === questionYarKey &&
       thisQuestion?.answers.some(answer => (
@@ -44,7 +44,7 @@ const checkAnswerExist = (dependentQuestionYarKey, request, yarKeysToCheck) => {
 }
 
 const checkSelectElseUrl = (request, dependentQuestionYarKey, isNonDependantAnswer) => {
-  return dependentQuestionYarKey.some(questionYarKey => session.getYarValue(request, questionYarKey) && !isNonDependantAnswer
+  return dependentQuestionYarKey.some(questionYarKey => getYarValue(request, questionYarKey) && !isNonDependantAnswer
   )
 }
 

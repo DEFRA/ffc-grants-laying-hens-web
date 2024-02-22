@@ -1,14 +1,14 @@
 const { YAR_KEYS } = require('../config/question-bank')
 const Joi = require('joi')
 const { getDataFromYarValue } = require('./../helpers/pageHelpers')
-const { session } = require('ffc-grants-common-functionality')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 
 const multiAnswer = 'multi-answer'
 
 function getAllDetails (request, confirmationId) {
   return YAR_KEYS.reduce(
     (allDetails, key) => {
-      allDetails[key] = session.getYarValue(request, key)
+      allDetails[key] = getYarValue(request, key)
       return allDetails
     },
     { confirmationId }
@@ -29,8 +29,8 @@ function getDesirabilityAnswers (request) {
   try {
 
     const val = {
-      housing: session.getYarValue(request, 'housing'),
-      calfGroupSize: session.getYarValue(request, 'calfGroupSize'),
+      housing: getYarValue(request, 'housing'),
+      calfGroupSize: getYarValue(request, 'calfGroupSize'),
       moistureControl: getDataFromYarValue(request, 'moistureControl', multiAnswer),
       permanentSickPen: getDataFromYarValue(request, 'permanentSickPen', multiAnswer),
       environmentalImpact: getDataFromYarValue(request, 'environmentalImpact', multiAnswer),

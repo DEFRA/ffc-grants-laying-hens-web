@@ -1,6 +1,6 @@
 const Analytics = require('@defra/hapi-gapi/lib/analytics')
 const gapiService = require('../services/gapi-service')
-const { session } = require('ffc-grants-common-functionality')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 exports.plugin = {
   name: 'Gapi',
   /**
@@ -25,7 +25,7 @@ exports.plugin = {
               params:
                 {
                   page_path: request.route.path,
-                  scoreReached: session.getYarValue(request, 'onScorePage') ? '/laying-hens/score' : '0'
+                  scoreReached: getYarValue(request, 'onScorePage') ? '/laying-hens/score' : '0'
                 }
             })
         }

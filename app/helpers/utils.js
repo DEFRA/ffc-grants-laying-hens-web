@@ -1,5 +1,5 @@
 const { ALL_QUESTIONS } = require('../config/question-bank')
-const { session } = require('ffc-grants-common-functionality')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 
 const notUniqueSelection = (answers, option) => (
   answers?.includes(option) &&
@@ -23,7 +23,7 @@ const getQuestionAnswer = (questionKey, answerKey) => {
 
 const allAnswersSelected = (request, questionKey, answerKeyList) => {
   const { yarKey, answers } = getQuestionByKey(questionKey)
-  const yarValue = session.getYarValue(request, yarKey)
+  const yarValue = getYarValue(request, yarKey)
   return (
     answerKeyList.every(answerKey => (
       answers.some(({ key, value }) => (
@@ -35,7 +35,7 @@ const allAnswersSelected = (request, questionKey, answerKeyList) => {
 
 const someAnswersSelected = (request, questionKey, answerKeyList) => {
   const { yarKey, answers } = getQuestionByKey(questionKey)
-  const yarValue = session.getYarValue(request, yarKey)
+  const yarValue = getYarValue(request, yarKey)
   return (
     answerKeyList.some(answerKey => (
       answers.some(({ value, key }) => (

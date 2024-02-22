@@ -1,5 +1,5 @@
 const appInsights = require('./app-insights')
-const { session } = require('ffc-grants-common-functionality')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 const blockDefaultPageViews = ['login', 'start', 'applying', 'session-timeout']
 
 const isBlockDefaultPageView = url => {
@@ -32,7 +32,7 @@ const sendGAEvent = async (request, metrics) => {
     ...(isEliminationEvent && { elimination_time: timeSinceStart }),
     ...(isEligibilityEvent && { eligibility_time: timeSinceStart }),
     ...(isScoreEvent && { score_time: timeSinceStart }),
-    ...(isConfirmationEvent && { final_score: session.getYarValue(request, 'current-score'), user_type: session.getYarValue(request, 'applying'), confirmation_time: timeSinceStart }),
+    ...(isConfirmationEvent && { final_score: getYarValue(request, 'current-score'), user_type: getYarValue(request, 'applying'), confirmation_time: timeSinceStart }),
     ...(params?.score_presented && { score_presented: params.score_presented }),
     ...(params?.scoreReached && { scoreReached: params.scoreReached }),
     grant_type: grantType,
@@ -51,8 +51,8 @@ const sendGAEvent = async (request, metrics) => {
 }
 
 const getTimeofJourneySinceStart = request => {
-  if (session.getYarValue(request, 'journey-start-time')) {
-    return Math.abs(((new Date()).getTime() - (new Date(session.getYarValue(request, 'journey-start-time'))).getTime()) / 1000)
+  if (getYarValue(request, 'journey-start-time')) {
+    return Math.abs(((new Date()).getTime() - (new Date(getYarValue(request, 'journey-start-time'))).getTime()) / 1000)
   }
   return 0
 }

@@ -23,6 +23,9 @@ describe('Page Guard', () => {
         if (Object.keys(varList).includes(key)) return varList[key]
         else return undefined
       }
+    },
+    regex: {
+      SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig,
     }
   }
   jest.mock('ffc-grants-common-functionality', () => mockSession)
