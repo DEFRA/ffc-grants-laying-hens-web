@@ -19,11 +19,7 @@ describe('Page: /dark-brooders', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the pullet housing have these features?')
-    expect(response.payload).toContain('The pullet housing must have:')
-    expect(response.payload).toContain('a useable area provided over a range of bird-accessible heights from 10 days of age')
-    expect(response.payload).toContain('height adjustable perches at equal to or more than 8cm per pullet')
-    expect(response.payload).toContain('a minimum of 50% of the floor area covered in litter')
+    expect(response.payload).toContain('Will the housing include dark boorders?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
