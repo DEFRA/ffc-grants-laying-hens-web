@@ -602,7 +602,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
               thenUrl: 'veranda-only',
-              elseUrl: 'building-items'
+              elseUrl: '1000-birds'
             }
           },
           ineligibleContent: {
@@ -652,6 +652,116 @@ const questionBank = {
             }
           ],
           yarKey: 'poultryType'
+        },
+        {
+          key: '1000-birds',
+          order: 240,
+          title: 'Do you keep at least 1,000 {{_poultryType_}} on your farm currently?',
+          hint: {
+            text: 'This can be laying hens, pullets or both'
+          },
+          pageTitle: '',
+          url: '1000-birds',
+          baseUrl: '1000-birds',
+          backUrl: 'poultry-type',
+          nextUrl: 'building-items',
+            // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You must have at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'You must keep at least 1,000 {{_poultryType_}} on your farm currently.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you currently have at least 1,000 {{_poultryType_}} on your farm'
+            }
+          ],
+          answers: [
+            {
+              key: '1000-birds-A1',
+              value: 'Yes'
+            },
+            {
+              key: '1000-birds-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'birdNumber'
+        },
+        {
+          key: 'building-items',
+          order: 80,
+          title: 'Will the {{_poultryType_}} housing have these items?',
+          hint: {
+            html: `
+                  <p>The building must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a fixed structure with a solid concrete floor</li>
+                    <li>water-tight roof and walls</li>
+                    <li>capped roof and wall inlets and outlets</li>
+                    <li>catch trays under all chimneys and roof-mounted vents.</li>
+                  </ul>`
+          },
+          pageTitle: '',
+          url: 'building-items',
+          baseUrl: 'building-items',
+          backUrl: '1000-birds',
+          nextUrl: 'capped-inlets-outlets',
+          // preValidationKeys: ['birdNumber'],
+          ineligibleContent: {
+            messageContent: `
+              <div class="govuk-list govuk-list--bullet">
+                  <p class="govuk-body">The building must have:</p>
+                  <ul class="govuk-list--bullet">
+                      <li>a fixed structure with a solid concrete floor</li>
+                      <li>water-tight roof and walls</li>
+                      <li>capped roof and wall inlets and outlets</li>
+                      <li>catch trays under all chimneys and roof-mounted vents.</li>
+                  </ul>
+              </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have these items'
+            }
+          ],
+          answers: [
+            {
+              key: 'building-items-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'building-items-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'buildingItems'
         },
         {
           key: 'project-type',
@@ -728,63 +838,57 @@ const questionBank = {
           yarKey: 'projectType'
         },
         {
-          key: 'building-items',
-          order: 80,
-          title: 'Will the {{_poultryType_}} housing have these items?',
-          hint: {
-            html: `
-                  <p>The building must have:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a fixed structure with a solid concrete floor</li>
-                    <li>water-tight roof and walls</li>
-                    <li>capped roof and wall inlets and outlets</li>
-                    <li>catch trays under all chimneys and roof-mounted vents.</li>
-                  </ul>`
+          key: 'capped-inlets-outlets',
+          order: 85,
+          title: 'Will all roof and wall inlets and outlets be capped with mesh that has a spacing of 6 millimetres (mm) or less?',
+          url: 'capped-inlets-outlets',
+          baseUrl: 'capped-inlets-outlets',
+          backUrl: 'building-items',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation'
+            }
           },
-          pageTitle: '',
-          url: 'building-items',
-          baseUrl: 'building-items',
-          backUrl: 'poultry-type',
-          nextUrl: 'capped-inlets-outlets',
-          // preValidationKeys: ['poultryType'],
           ineligibleContent: {
-            messageContent: `
-              <div class="govuk-list govuk-list--bullet">
-                  <p class="govuk-body">The building must have:</p>
-                  <ul class="govuk-list--bullet">
-                      <li>a fixed structure with a solid concrete floor</li>
-                      <li>water-tight roof and walls</li>
-                      <li>capped roof and wall inlets and outlets</li>
-                      <li>catch trays under all chimneys and roof-mounted vents.</li>
-                  </ul>
-              </div>`,
+            messageContent: 'All roof and wall inlets and outlets must be capped with mesh that has a spacing of 6 millimetres (mm) or less.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The housing must have roof and wall inlets and outlets that are capped with mesh that has a spacing (aperture) of 6mm or less.',
+                items: []
+              }]
+            }]
+          },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have these items'
+              error: 'Select yes if all the roof and wall inlets and outlets will be capped'
             }
           ],
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           answers: [
             {
-              key: 'building-items-A1',
+              key: 'capped-inlets-outlets-A1',
               value: 'Yes'
             },
             {
-              key: 'building-items-A2',
+              key: 'capped-inlets-outlets-A2',
               value: 'No',
               notEligible: true
-            }
+            },
           ],
-          yarKey: 'buildingItems'
+          yarKey: 'cappedInletsOutlets'
         },
         {
           key: 'refurbishing-insulation',
@@ -2268,56 +2372,6 @@ const questionBank = {
             }
           ],
           yarKey: 'externalTaps'
-        },
-        {
-          key: '1000-birds',
-          order: 240,
-          title: 'Do you have at least 1,000 birds on your farm currently?',
-          hint: {
-            text: 'This can be laying hens, pullets or both'
-          },
-          pageTitle: '',
-          url: '1000-birds',
-          baseUrl: '1000-birds',
-          backUrl: 'applicant-type',
-          nextUrl: 'legal-status',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'You must have at least 1,000 birds (laying hens, pullets, or both) on your farm currently to be eligible for grant funding.'
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: 'You must have at least 1,000 birds on your farm currently.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you currently have at least 1,000 birds on your farm'
-            }
-          ],
-          answers: [
-            {
-              key: 'bird-number-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'bird-number-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'birdNumber'
         },
         {
           key: 'veranda-only',
@@ -3896,7 +3950,6 @@ const questionBank = {
           nextUrl: 'applicant-details',
           summaryPageUrl: 'check-details',
           // preValidationKeys: ['applying'],
-          ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
@@ -4229,7 +4282,6 @@ const questionBank = {
             }
           },
           // preValidationKeys: ['applying'],
-          ineligibleContent: {},
           pageData: {
             businessDetailsLink: 'business-details',
             agentDetailsLink: 'agent-details',
