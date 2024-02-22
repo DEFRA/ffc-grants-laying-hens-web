@@ -3470,6 +3470,58 @@ const questionBank = {
           yarKey: 'pollutionMitigation'
         },
         {
+          key: 'pullet-veranda-features',
+          order: 325,
+          title: 'Will the pullet housing have a veranda with these features?',
+          pageTitle: '',
+          hint: {
+            html: `
+                  <p>The veranda must:</p>
+                  <ul class="govuk-list--bullet">
+                      <li>be 4 metres wide or more along the length of the bird housing area, or 30% or more of the size of the indoor bird housing area footprint</li>
+                      <li>have a solid concrete floor and waterproof insulated roof</li>
+                      <li>have a perimeter wall of more than one metre in height</li>
+                      <li>have a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                      <li>have a mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended to make the housing biosecure during housing orders</li>
+                      <li>have closable pop holes in the wall of the main house (unless the veranda forms part of an indoor barn system) that are less than 30cm from the floor level, or access ramps across the entire pop hole</li>
+                      <li>not have perches in front of the pop holes</li>
+                  </ul>`
+          },
+          url: 'pullet-veranda-features',
+          baseUrl: 'pullet-veranda-features',
+          nextUrl: 'dark-brooders',
+          backUrl: 'pollution-mitigation',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to fund pullet housing that includes a veranda which meets the grant funding requirements.',
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullet housing will have a veranda with these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-veranda-features-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'pullet-veranda-features-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'pulletVerandaFeatures'
+        },
+        {
           key: 'score',
           order: 175,
           title: 'Score results',
