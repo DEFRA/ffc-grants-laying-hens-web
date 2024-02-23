@@ -2669,7 +2669,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the total estimated total cost of the veranda project'
+              error: 'Enter the total estimated cost of the veranda project'
             },
             {
               type: 'REGEX',
@@ -3075,6 +3075,104 @@ const questionBank = {
           yarKey: 'threeTiers'
         },
         {
+          key: 'hen-multi-tier',
+          order: 310,
+          title: 'Will the hens in your grant-funded building be reared in a multi-tier system as pullets?',
+          pageTitle: '',
+          hint: {
+            text: 'When they are under 15 weeks old'
+          },
+          url: 'hen-multi-tier',
+          baseUrl: 'hen-multi-tier',
+          backUrl: 'three-tiers',
+          nextUrl: 'natural-light',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to fund projects where pullets are reared in multi-tier aviary systems before they move into the grant-funded aviary housing as layer hens.`
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the hens in your grant-funded building will be reared in a multi-tier system as pullets'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-multi-tier-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-multi-tier-A2',
+              value: 'No'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'hen-multi-tier-A3',
+              value: 'I don\'t know'
+            }
+          ],
+          yarKey: 'henMultiTier'
+        },
+        {
+          key: 'pullet-multi-tier',
+          order: 315,
+          title: 'Will the pullets in your grant-funded building live in a multi-tier system as hens?',
+          pageTitle: '',
+          hint: {
+            text: 'When they are over 15 weeks old'
+          },
+          url: 'pullet-multi-tier',
+          baseUrl: 'pullet-multi-tier',
+          backUrl: 'three-tiers',
+          nextUrl: 'natural-light',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to fund projects that will house hens in multi-tier aviary systems when they move out of the grant-funded housing.`
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullets in your grant-funded building will live in a multi-tier system as hens'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-multi-tier-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'pullet-multi-tier-A2',
+              value: 'No'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'pullet-multi-tier-A3',
+              value: 'I don\'t know'
+            }
+          ],
+          yarKey: 'pulletMultiTier'
+        },
+        {
           key: 'easy-grip-perches',
           order: 200,
           title:'Will the perches have a design feature that help the {{_poultryType_}} grip the perches?',
@@ -3391,6 +3489,97 @@ const questionBank = {
             }
           ],
           yarKey: 'pollutionMitigation'
+        },
+        {
+          key: 'pullet-veranda-features',
+          order: 310,
+          title: 'Will the pullet housing have a veranda with these features?',
+          pageTitle: '',
+          hint: {
+            html: `
+                  <p>The veranda must:</p>
+                  <ul class="govuk-list--bullet">
+                      <li>be 4 metres wide or more along the length of the bird housing area, or 30% or more of the size of the indoor bird housing area footprint</li>
+                      <li>have a solid concrete floor and waterproof insulated roof</li>
+                      <li>have a perimeter wall of more than one metre in height</li>
+                      <li>have a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                      <li>have a mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended to make the housing biosecure during housing orders</li>
+                      <li>have closable pop holes in the wall of the main house (unless the veranda forms part of an indoor barn system) that are less than 30cm from the floor level, or access ramps across the entire pop hole</li>
+                      <li>not have perches in front of the pop holes</li>
+                  </ul>`
+          },
+          url: 'pullet-veranda-features',
+          baseUrl: 'pullet-veranda-features',
+          nextUrl: 'dark-brooders',
+          backUrl: 'pollution-mitigation',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to fund pullet housing that includes a veranda which meets the grant funding requirements.',
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullet housing will have a veranda with these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-veranda-features-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'pullet-veranda-features-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'pulletVerandaFeatures'
+        },
+        {
+          key: 'dark-brooders',
+          order: 320,
+          title: 'Will the housing include dark boorders?',
+          pageTitle: '',
+          url: 'dark-brooders',
+          baseUrl: 'dark-brooders',
+          backUrl: 'pullet-veranda-features',
+          nextUrl: 'renewable-energy',
+          hint: { text: 'A suspended horizontal heat source enclosed by a curtain to exclude light'},
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{ para: 'RPA want to fund pullet housing that has dark brooders.'}]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the housing will include dark brooders'
+            }
+          ],
+          answers: [
+            {
+              key: 'dark-brooders-A1',
+              value: 'Yes',
+            },
+            {
+              key: 'dark-brooders-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'darkBrooders'
         },
         {
           key: 'score',

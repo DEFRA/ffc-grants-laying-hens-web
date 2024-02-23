@@ -68,7 +68,6 @@ describe('Page: /pollution-mitigation', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    // console.log(postResponse, "HELLLOO")
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('pullet-veranda-features')
   })
