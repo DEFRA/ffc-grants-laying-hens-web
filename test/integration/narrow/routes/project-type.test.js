@@ -53,12 +53,12 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
-  it('user selects `Replacing existing housing` -> store user response and redirect to /applicant-type', async () => {
+  it('user selects `Replacing an existing laying hen or pullet with a new building` -> store user response and redirect to /applicant-type', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { projectType: 'Replacing existing housing', crumb: crumbToken }
+      payload: { projectType: 'Replacing an existing laying hen or pullet with a new building', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -66,12 +66,12 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
     expect(postResponse.headers.location).toBe('applicant-type')
   })
 
-  it('user selects `Refurbishing existing housing` -> store user response and redirect to /applicant-type', async () => {
+  it('user selects `Refurbishing an existing laying hen or pullet building` -> store user response and redirect to /applicant-type', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { projectType: 'Replacing existing housing', crumb: crumbToken }
+      payload: { projectType: 'Replacing an existing laying hen or pullet with a new building', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)

@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /building-items', () => {
   const varList = {
     poultryType: 'hen',
-    projectType: 'Replacing existing housing'
+    projectType: 'Replacing an existing laying hen or pullet with a new building'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -39,7 +39,7 @@ describe('Page: /building-items', () => {
     expect(postResponse.payload).toContain('Select yes if the building will have these features')
   })
 
-  it('user selects eligible option and /Replacing existing housing/ at project-type page  -> store user response and redirect to /replacing-insulation', async () => {
+  it('user selects eligible option and /Replacing an existing laying hen or pullet with a new building/ at project-type page  -> store user response and redirect to /replacing-insulation', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-items`,
@@ -52,8 +52,8 @@ describe('Page: /building-items', () => {
     expect(postResponse.headers.location).toBe('replacing-insulation')
   })
 
-  it('user selects eligible option and /Refurbishing existing housing/ at project-type -> store user response and redirect to /refurbishing-insulation', async () => {
-    varList.projectType = 'Refurbishing existing housing'
+  it('user selects eligible option and /Refurbishing an existing laying hen or pullet building/ at project-type -> store user response and redirect to /refurbishing-insulation', async () => {
+    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-items`,
