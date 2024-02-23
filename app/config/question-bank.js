@@ -602,7 +602,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
               thenUrl: 'veranda-only',
-              elseUrl: 'building-items'
+              elseUrl: '1000-birds'
             }
           },
           ineligibleContent: {
@@ -652,6 +652,116 @@ const questionBank = {
             }
           ],
           yarKey: 'poultryType'
+        },
+        {
+          key: '1000-birds',
+          order: 240,
+          title: 'Do you keep at least 1,000 {{_poultryType_}} on your farm currently?',
+          hint: {
+            text: 'This can be laying hens, pullets or both'
+          },
+          pageTitle: '',
+          url: '1000-birds',
+          baseUrl: '1000-birds',
+          backUrl: 'poultry-type',
+          nextUrl: 'building-items',
+            // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You must have at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: 'You must keep at least 1,000 {{_poultryType_}} on your farm currently.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you currently have at least 1,000 {{_poultryType_}} on your farm'
+            }
+          ],
+          answers: [
+            {
+              key: '1000-birds-A1',
+              value: 'Yes'
+            },
+            {
+              key: '1000-birds-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'birdNumber'
+        },
+        {
+          key: 'building-items',
+          order: 80,
+          title: 'Will the {{_poultryType_}} housing have these items?',
+          hint: {
+            html: `
+                  <p>The building must have:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a fixed structure with a solid concrete floor</li>
+                    <li>water-tight roof and walls</li>
+                    <li>capped roof and wall inlets and outlets</li>
+                    <li>catch trays under all chimneys and roof-mounted vents.</li>
+                  </ul>`
+          },
+          pageTitle: '',
+          url: 'building-items',
+          baseUrl: 'building-items',
+          backUrl: '1000-birds',
+          nextUrl: 'capped-inlets-outlets',
+          // preValidationKeys: ['birdNumber'],
+          ineligibleContent: {
+            messageContent: `
+              <div class="govuk-list govuk-list--bullet">
+                  <p class="govuk-body">The building must have:</p>
+                  <ul class="govuk-list--bullet">
+                      <li>a fixed structure with a solid concrete floor</li>
+                      <li>water-tight roof and walls</li>
+                      <li>capped roof and wall inlets and outlets</li>
+                      <li>catch trays under all chimneys and roof-mounted vents.</li>
+                  </ul>
+              </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the {{_poultryType_}} housing will have these items'
+            }
+          ],
+          answers: [
+            {
+              key: 'building-items-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'building-items-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'buildingItems'
         },
         {
           key: 'project-type',
@@ -728,63 +838,57 @@ const questionBank = {
           yarKey: 'projectType'
         },
         {
-          key: 'building-items',
-          order: 80,
-          title: 'Will the {{_poultryType_}} housing have these items?',
-          hint: {
-            html: `
-                  <p>The building must have:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a fixed structure with a solid concrete floor</li>
-                    <li>water-tight roof and walls</li>
-                    <li>capped roof and wall inlets and outlets</li>
-                    <li>catch trays under all chimneys and roof-mounted vents.</li>
-                  </ul>`
+          key: 'capped-inlets-outlets',
+          order: 85,
+          title: 'Will all roof and wall inlets and outlets be capped with mesh that has a spacing of 6 millimetres (mm) or less?',
+          url: 'capped-inlets-outlets',
+          baseUrl: 'capped-inlets-outlets',
+          backUrl: 'building-items',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation'
+            }
           },
-          pageTitle: '',
-          url: 'building-items',
-          baseUrl: 'building-items',
-          backUrl: 'poultry-type',
-          nextUrl: 'capped-inlets-outlets',
-          // preValidationKeys: ['poultryType'],
           ineligibleContent: {
-            messageContent: `
-              <div class="govuk-list govuk-list--bullet">
-                  <p class="govuk-body">The building must have:</p>
-                  <ul class="govuk-list--bullet">
-                      <li>a fixed structure with a solid concrete floor</li>
-                      <li>water-tight roof and walls</li>
-                      <li>capped roof and wall inlets and outlets</li>
-                      <li>catch trays under all chimneys and roof-mounted vents.</li>
-                  </ul>
-              </div>`,
+            messageContent: 'All roof and wall inlets and outlets must be capped with mesh that has a spacing of 6 millimetres (mm) or less.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The housing must have roof and wall inlets and outlets that are capped with mesh that has a spacing (aperture) of 6mm or less.',
+                items: []
+              }]
+            }]
+          },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have these items'
+              error: 'Select yes if all the roof and wall inlets and outlets will be capped'
             }
           ],
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           answers: [
             {
-              key: 'building-items-A1',
+              key: 'capped-inlets-outlets-A1',
               value: 'Yes'
             },
             {
-              key: 'building-items-A2',
+              key: 'capped-inlets-outlets-A2',
               value: 'No',
               notEligible: true
-            }
+            },
           ],
-          yarKey: 'buildingItems'
+          yarKey: 'cappedInletsOutlets'
         },
         {
           key: 'refurbishing-insulation',
@@ -2270,56 +2374,6 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
-          key: '1000-birds',
-          order: 240,
-          title: 'Do you have at least 1,000 birds on your farm currently?',
-          hint: {
-            text: 'This can be laying hens, pullets or both'
-          },
-          pageTitle: '',
-          url: '1000-birds',
-          baseUrl: '1000-birds',
-          backUrl: 'applicant-type',
-          nextUrl: 'legal-status',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'You must have at least 1,000 birds (laying hens, pullets, or both) on your farm currently to be eligible for grant funding.'
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: 'You must have at least 1,000 birds on your farm currently.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you currently have at least 1,000 birds on your farm'
-            }
-          ],
-          answers: [
-            {
-              key: 'bird-number-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'bird-number-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'birdNumber'
-        },
-        {
           key: 'veranda-only',
           order: 245,
           title: 'Will the veranda be at least the same size as 30% of the indoor bird housing area footprint?',
@@ -2594,7 +2648,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the total estimated total cost of the veranda project'
+              error: 'Enter the total estimated cost of the veranda project'
             },
             {
               type: 'REGEX',
@@ -2961,13 +3015,19 @@ const questionBank = {
           url: 'three-tiers',
           baseUrl: 'three-tiers',
           backUrl: 'maximum-tier-height',
-          nextUrl: 'multi-tier-system',
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-multi-tier',
+              elseUrl: 'pullet-multi-tier'
+            }
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund multi-tier systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone 
-                fractures from collisions and falls.`
+                para: `RPA want to fund multi-tier systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone fractures from collisions and falls.`
               }]
             }]
           },
@@ -2994,6 +3054,104 @@ const questionBank = {
           yarKey: 'threeTiers'
         },
         {
+          key: 'hen-multi-tier',
+          order: 310,
+          title: 'Will the hens in your grant-funded building be reared in a multi-tier system as pullets?',
+          pageTitle: '',
+          hint: {
+            text: 'When they are under 15 weeks old'
+          },
+          url: 'hen-multi-tier',
+          baseUrl: 'hen-multi-tier',
+          backUrl: 'three-tiers',
+          nextUrl: 'natural-light',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to fund projects where pullets are reared in multi-tier aviary systems before they move into the grant-funded aviary housing as layer hens.`
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the hens in your grant-funded building will be reared in a multi-tier system as pullets'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-multi-tier-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-multi-tier-A2',
+              value: 'No'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'hen-multi-tier-A3',
+              value: 'I don\'t know'
+            }
+          ],
+          yarKey: 'henMultiTier'
+        },
+        {
+          key: 'pullet-multi-tier',
+          order: 315,
+          title: 'Will the pullets in your grant-funded building live in a multi-tier system as hens?',
+          pageTitle: '',
+          hint: {
+            text: 'When they are over 15 weeks old'
+          },
+          url: 'pullet-multi-tier',
+          baseUrl: 'pullet-multi-tier',
+          backUrl: 'three-tiers',
+          nextUrl: 'natural-light',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: `RPA want to fund projects that will house hens in multi-tier aviary systems when they move out of the grant-funded housing.`
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullets in your grant-funded building will live in a multi-tier system as hens'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-multi-tier-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'pullet-multi-tier-A2',
+              value: 'No'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'pullet-multi-tier-A3',
+              value: 'I don\'t know'
+            }
+          ],
+          yarKey: 'pulletMultiTier'
+        },
+        {
           key: 'easy-grip-perches',
           order: 200,
           title:'Will the perches have a design feature that help the {{_poultryType_}} grip the perches?',
@@ -3004,7 +3162,7 @@ const questionBank = {
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
           backUrl: 'natural-light',
-          nextUrl: 'housing-biosecurity',
+          nextUrl: 'building-biosecurity',
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3249,7 +3407,7 @@ const questionBank = {
           pageTitle: '',
           url: 'pollution-mitigation',
           baseUrl: 'pollution-mitigation',
-          backUrl: 'housing-biosecurity',
+          backUrl: 'building-biosecurity',
           nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
@@ -3310,6 +3468,97 @@ const questionBank = {
             }
           ],
           yarKey: 'pollutionMitigation'
+        },
+        {
+          key: 'pullet-veranda-features',
+          order: 310,
+          title: 'Will the pullet housing have a veranda with these features?',
+          pageTitle: '',
+          hint: {
+            html: `
+                  <p>The veranda must:</p>
+                  <ul class="govuk-list--bullet">
+                      <li>be 4 metres wide or more along the length of the bird housing area, or 30% or more of the size of the indoor bird housing area footprint</li>
+                      <li>have a solid concrete floor and waterproof insulated roof</li>
+                      <li>have a perimeter wall of more than one metre in height</li>
+                      <li>have a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                      <li>have a mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended to make the housing biosecure during housing orders</li>
+                      <li>have closable pop holes in the wall of the main house (unless the veranda forms part of an indoor barn system) that are less than 30cm from the floor level, or access ramps across the entire pop hole</li>
+                      <li>not have perches in front of the pop holes</li>
+                  </ul>`
+          },
+          url: 'pullet-veranda-features',
+          baseUrl: 'pullet-veranda-features',
+          nextUrl: 'dark-brooders',
+          backUrl: 'pollution-mitigation',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to fund pullet housing that includes a veranda which meets the grant funding requirements.',
+              }]
+            }]
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the pullet housing will have a veranda with these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-veranda-features-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'pullet-veranda-features-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'pulletVerandaFeatures'
+        },
+        {
+          key: 'dark-brooders',
+          order: 320,
+          title: 'Will the housing include dark boorders?',
+          pageTitle: '',
+          url: 'dark-brooders',
+          baseUrl: 'dark-brooders',
+          backUrl: 'pullet-veranda-features',
+          nextUrl: 'renewable-energy',
+          hint: { text: 'A suspended horizontal heat source enclosed by a curtain to exclude light'},
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{ para: 'RPA want to fund pullet housing that has dark brooders.'}]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the housing will include dark brooders'
+            }
+          ],
+          answers: [
+            {
+              key: 'dark-brooders-A1',
+              value: 'Yes',
+            },
+            {
+              key: 'dark-brooders-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'darkBrooders'
         },
         {
           key: 'score',
@@ -3890,7 +4139,6 @@ const questionBank = {
           nextUrl: 'applicant-details',
           summaryPageUrl: 'check-details',
           // preValidationKeys: ['applying'],
-          ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
@@ -4223,7 +4471,6 @@ const questionBank = {
             }
           },
           // preValidationKeys: ['applying'],
-          ineligibleContent: {},
           pageData: {
             businessDetailsLink: 'business-details',
             agentDetailsLink: 'agent-details',

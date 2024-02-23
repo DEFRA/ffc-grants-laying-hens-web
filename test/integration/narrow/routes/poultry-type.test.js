@@ -41,7 +41,7 @@ describe('Page: /poultry-type', () => {
     expect(postResponse.payload).toContain('Select what type of poultry the project is for')
   })
 
-  it('user selects eligible option and projectType is `Replacing existing housing` -> store user response and redirect to /building-items', async () => {
+  it('user selects eligible option and projectType is `Replacing existing housing` -> store user response and redirect to /1000-birds', async () => {
     varList.projectType = 'Replacing existing housing'
     const postOptions = {
       method: 'POST',
@@ -52,7 +52,7 @@ describe('Page: /poultry-type', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('building-items')
+    expect(postResponse.headers.location).toBe('1000-birds')
   })
 
   it('user selects eligible option and projectType is `Adding a veranda only to existing housing` -> store user response and redirect to /veranda-only', async () => {
