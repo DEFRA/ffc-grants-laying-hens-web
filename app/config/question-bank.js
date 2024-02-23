@@ -707,23 +707,37 @@ const questionBank = {
         {
           key: 'building-items',
           order: 80,
-          title: 'Will the {{_poultryType_}} housing have these items?',
+          title: 'Will the building have these features?',
           hint: {
             html: `
                   <p>The building must have:</p>
                   <ul class="govuk-list--bullet">
                     <li>a fixed structure with a solid concrete floor</li>
                     <li>water-tight roof and walls</li>
-                    <li>capped roof and wall inlets and outlets</li>
-                    <li>catch trays under all chimneys and roof-mounted vents.</li>
+                    <li>mesh capping applied to any roof or wall inlets and outlets 
+                    capped with mesh (with a mesh hole size of 25 millimetres or 
+                    less)</li>
+                    <li>catch trays under all chimneys and roof-mounted vents</li>
                   </ul>`
           },
           pageTitle: '',
           url: 'building-items',
           baseUrl: 'building-items',
-          backUrl: '1000-birds',
-          nextUrl: 'capped-inlets-outlets',
-          // preValidationKeys: ['birdNumber'],
+          backUrl: 'poultry-type',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A2'],
+            dependentElseUrlYarKey: 'projectType',
+            dependentElseUrlQuestionKey: 'project-type',
+            dependentElseUrlAnswerKey: 'project-type-A2',
+            urlOptions: {
+              thenUrl: 'pullet-housing-requirements',
+              elseUrl: 'replacing-insulation',
+              dependantElseUrl: 'refurbishing-insulation'
+            }
+
+          },
+          // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
@@ -747,7 +761,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have these items'
+              error: 'Select yes if the building will have these features'
             }
           ],
           answers: [
@@ -1963,15 +1977,22 @@ const questionBank = {
         {
           key: 'pullet-housing-requirements',
           order: 205,
-          title: 'Will the pullet housing have these features?',
+          title: 'Will the inside of the building have these features?',
           pageTitle: '',
           url: 'pullet-housing-requirements',
           baseUrl: 'pullet-housing-requirements',
-          backUrl: 'housing-density',
-          nextUrl: 'multi-tier-system',
+          backUrl: 'building-items',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation'
+            }
+          },
           hint: {
             html: `
-                  <p>The pullet housing must have:</p>
+                  <p>The building must have:</p>
                   <ul class="govuk-list--bullet">
                       <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
                       <li>height adjustable perches at equal to or more than 8cm per pullet</li>
@@ -3374,9 +3395,9 @@ const questionBank = {
               content: [{
                 para: `RPA want to support projects which provide indoor housing with natural light.
                       
-                       Hens and pullets prefer natural light spectrums.
+                        Hens and pullets prefer natural light spectrums.
                       
-                       Natural light can: 
+                        Natural light can: 
                       `,
                 items: ['promote positive, active behaviour', 'improved visibility to help reduce collisions between birds', 'increase range use.']
               }]
