@@ -11,9 +11,9 @@ const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
     return secBtn ? secBtnPath : url
   }
 
-  const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions, nonDependentAnswerKeysArray = [] } = urlObject
-  let { thenUrl, elseUrl, nonDependentUrl } = urlOptions
-
+  const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions, dependentElseUrlYarKey,dependentElseUrlQuestionKey, dependentElseUrlAnswerKey, nonDependentAnswerKeysArray = [] } = urlObject
+  let { thenUrl, elseUrl, nonDependentUrl, dependantElseUrl } = urlOptions
+  console.log('dependentQuestionYarKey', dependentElseUrlQuestionKey)
   const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
 
   if (dependentQuestionYarKey === 'SolarPVCost') {
@@ -21,10 +21,9 @@ const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
     return  dependentAnswer != null ? thenUrl : elseUrl
   }
 
-  if (elseUrl === 'replacing-insulation' && 
-      thenUrl === 'pullet-housing-requirements' && 
-      getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A2')) {
-      elseUrl = 'refurbishing-insulation'
+  if (dependantElseUrl &&
+      getYarValue(request, dependentElseUrlYarKey) === getQuestionAnswer(dependentElseUrlQuestionKey, dependentElseUrlAnswerKey)) {
+      elseUrl = dependantElseUrl
   }
 
   const selectThenUrl = checkAnswerExist([dependentQuestionYarKey].flat(), request, dependentAnswerKeysArray)
