@@ -1,6 +1,7 @@
 const { sendGAEvent, isBlockDefaultPageView } = require('./../../../../../app/services/gapi-service')
 
 const appInsights = require('./../../../../../app/services/app-insights'); // replace with actual path
+const { commonFunctionsMock } = require('../../../../session-mock');
 
 jest.mock('./../../../../../app/services/app-insights'); // replace with actual path
 
@@ -10,17 +11,7 @@ const varList = {
   'applying': 'Farmer'
 }
 
-jest.mock('ffc-grants-common-functionality', () => ({
-  session: {
-    getYarValue:  (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
-    }
-  },
-  regex: {
-    PROJECT_COST_REGEX: /^[1-9]\d*$/
-  }
-}));
+commonFunctionsMock(varList, undefined)
 
 describe('isBlockDefaultPageView', () => {
     it('should return true for blocked URLs', () => {

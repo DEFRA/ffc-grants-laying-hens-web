@@ -1,3 +1,4 @@
+const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 xdescribe('Page: /potential-amount-capped', () => {
@@ -7,19 +8,7 @@ xdescribe('Page: /potential-amount-capped', () => {
   }
   const eligiblePageText = `The maximum grant you can apply for is £500,000.`
 
-  jest.mock('ffc-grants-common-functionality', () => ({
-    session: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return undefined
-      }
-    },
-    regex: {
-      PROJECT_COST_REGEX: /^[1-9]\d*$/,
-      SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig
-    }
-  }))
+  commonFunctionsMock(varList, undefined)
 
   it('page loads successfully, with all the Eligible options', async () => {
     const options = {

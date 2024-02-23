@@ -1,3 +1,4 @@
+const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /veranda-remaining-costs', () => {
@@ -7,19 +8,7 @@ describe('Page: /veranda-remaining-costs', () => {
     remainingCost: 740740.20
   }
 
-  jest.mock('ffc-grants-common-functionality', () => ({
-    session: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return undefined
-      }
-    },
-    regex: {
-      PROJECT_COST_REGEX: /^[1-9]\d*$/,
-      SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig
-    }
-  }))
+  commonFunctionsMock(varList, undefined)
 
   it('page loads successfully, with all the options', async () => {
     const options = {

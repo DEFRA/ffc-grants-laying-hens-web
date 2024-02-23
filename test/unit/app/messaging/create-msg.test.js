@@ -8,13 +8,13 @@ describe('create-msg', () => {
       PROJECT_COST_REGEX: /^[1-9]\d*$/
     }
   }));
-  const { session } = require('ffc-grants-common-functionality')
+  const { getYarValue } = require('ffc-grants-common-functionality').session
 
   const { getDesirabilityAnswers, getAllDetails } = require('../../../../app/messaging/create-msg')
 
   test('check getDesirabilityAnswers()', () => {
     let dict
-    session.getYarValue.mockImplementation((req, key) => (dict[key]))
+    getYarValue.mockImplementation((req, key) => (dict[key]))
 
     dict = {
       housing: 'hello',
