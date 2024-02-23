@@ -904,11 +904,18 @@ const questionBank = {
         {
           key: 'refurbishing-insulation',
           order: 90,
-          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation?',
+          title: 'Will the building have full wall and roof insulation?',
           url: 'refurbishing-insulation',
           baseUrl: 'refurbishing-insulation',
-          backUrl: 'capped-inlets-outlets',
-          nextUrl: 'changing-area',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'building-items',
+              elseUrl: 'pullet-housing-requirements'
+            }
+          },
+          nextUrl: 'lighting-features',
           ineligibleContent: {
             messageContent: 'The housing must have full wall and roof insulation.',
             messageLink: {
@@ -922,15 +929,14 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The {{_poultryType_}} housing must have full wall and roof insulation. ',
-                items: []
+                para: 'The building must have full wall and roof insulation.',
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have full wall and roof insulation'
+              error: 'Select yes if the building will have full wall and roof insulation'
             }
           ],
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -963,7 +969,8 @@ const questionBank = {
           },
           nextUrl: 'lighting-features',
           ineligibleContent: {
-            messageContent: 'The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m²/°C.',
+            messageContent: `The building must have full wall and roof insulation.<br/><br/>
+            The new building must have wall and roof insulation with a U-Value of less than 0.3 watts per square metre, per degree Kelvin (0.3W/m²K).`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
