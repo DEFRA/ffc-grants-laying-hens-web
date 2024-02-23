@@ -727,10 +727,15 @@ const questionBank = {
           nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A2'],
+            dependentElseUrlYarKey: 'projectType',
+            dependentElseUrlQuestionKey: 'project-type',
+            dependentElseUrlAnswerKey: 'project-type-A2',
             urlOptions: {
               thenUrl: 'pullet-housing-requirements',
-              elseUrl: 'replacing-insulation'
+              elseUrl: 'replacing-insulation',
+              dependantElseUrl: 'refurbishing-insulation'
             }
+
           },
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
