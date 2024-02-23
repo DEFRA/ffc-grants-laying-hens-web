@@ -1,22 +1,31 @@
-export function validation () {
-  let elements = document.querySelectorAll('input[type="checkbox"]')
+export function validation() {
+  const elements = document.querySelectorAll('input[type="checkbox"]');
+
   if (elements) {
-    elements = Array.from(elements)
-    const noneOfAbove = elements.filter(e => e.value === 'None of the above')
-    if (noneOfAbove && noneOfAbove.length === 1) {
-      noneOfAbove[0].addEventListener('change', function (event) {
-        event.preventDefault()
-        const elementsExpectNonOfAbove = elements.filter(e => e.value !== 'None of the above')
-        elementsExpectNonOfAbove.forEach(function (checkBox) {
-          checkBox.disabled = noneOfAbove[0].checked
-          checkBox.checked = false
-        })
-      })
-      // in case you back to this page
-      if (noneOfAbove[0].checked) {
-        const e = new Event('change')
-        noneOfAbove[0].dispatchEvent(e)
+    elements.forEach(checkbox => {
+      checkbox.addEventListener('change', function (event) {
+        const value = event.target.value;
+        console.log('value', value);
+        
+        if (value === 'None of the above' || value === 'I will not monitor any poultry management data') {
+          const isChecked = event.target.checked;
+
+          elements.forEach(otherCheckbox => {
+            if (otherCheckbox !== event.target) {
+              otherCheckbox.disabled = isChecked;
+              otherCheckbox.checked = false;
+            }
+          });
+        }
+      });
+    });
+
+    // Initial check to handle page reload
+    elements.forEach(checkbox => {
+      if (checkbox.checked) {
+        const changeEvent = new Event('change');
+        checkbox.dispatchEvent(changeEvent);
       }
-    }
+    });
   }
 }

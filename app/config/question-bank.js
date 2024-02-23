@@ -3667,6 +3667,71 @@ const questionBank = {
           yarKey: 'birdDataType'
         },
         {
+          key: 'environmental-data-type',
+          order: 330,
+          title: 'What additional environmental data will you automatically collect and store?',
+          pageTitle: '',
+          url: 'environmental-data-type',
+          baseUrl: 'environmental-data-type',
+          backUrl: 'bird-data-type',
+          nextUrl: 'score',
+          hint: {
+            html: `
+                <p>Using digital systems</p>
+                <p>Select all that apply</p>
+            `
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to fund projects that have digital systems which automatically collect and store additional environmental data.'
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what additional environment data you will automatically collect and store'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'environmental-data-type',
+                answerKey: 'environmental-data-type-A5'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'environmental-data-type-A1',
+              value: 'Ammonia'
+            },
+            {
+              key: 'environmental-data-type-A2',
+              value: 'Carbon monoxide ',
+            },
+            {
+              key: 'environmental-data-type-A3',
+              value: 'Inhalable dust',
+            },
+            {
+              key: 'environmental-data-type-A4',
+              value: 'Other',
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'environmental-data-type-A5',
+              value: 'I will not monitor any poultry management data',
+            }
+          ],
+          yarKey: 'environmentalDataType'
+        },
+        {
           key: 'score',
           order: 175,
           title: 'Score results',
