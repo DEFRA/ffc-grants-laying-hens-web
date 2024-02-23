@@ -1208,7 +1208,7 @@ const questionBank = {
           url: 'aviary-welfare',
           baseUrl: 'aviary-welfare',
           backUrl: 'aviary-system',
-          nextUrl: 'manure-removal',
+          nextUrl: 'aviary-system',
           hint: {
             text: 'The birds must be able to move between levels without flying or jumping more than one metre in height'
           },
