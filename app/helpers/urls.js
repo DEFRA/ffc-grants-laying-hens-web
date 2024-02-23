@@ -1,7 +1,7 @@
 const urlPrefix = require('../config/server').urlPrefix
 const { getYarValue } = require('../helpers/session')
 const { ALL_QUESTIONS } = require('../config/question-bank')
-
+const { getQuestionAnswer } = require('./utils')
 const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
   const scorePath = `${urlPrefix}/score`
   const chekDetailsPath = `${urlPrefix}/check-details`
@@ -11,14 +11,18 @@ const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
     return secBtn ? secBtnPath : url
   }
 
-  const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions, nonDependentAnswerKeysArray = [] } = urlObject
-  const { thenUrl, elseUrl, nonDependentUrl } = urlOptions
-
+  const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions, dependentElseUrlYarKey,dependentElseUrlQuestionKey, dependentElseUrlAnswerKey, nonDependentAnswerKeysArray = [] } = urlObject
+  let { thenUrl, elseUrl, nonDependentUrl, dependantElseUrl } = urlOptions
   const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
 
   if (dependentQuestionYarKey === 'SolarPVCost') {
     // if key is not null, show then page, otherwise show else
     return  dependentAnswer != null ? thenUrl : elseUrl
+  }
+
+  if (dependantElseUrl &&
+      getYarValue(request, dependentElseUrlYarKey) === getQuestionAnswer(dependentElseUrlQuestionKey, dependentElseUrlAnswerKey)) {
+      elseUrl = dependantElseUrl
   }
 
   const selectThenUrl = checkAnswerExist([dependentQuestionYarKey].flat(), request, dependentAnswerKeysArray)
