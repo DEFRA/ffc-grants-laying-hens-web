@@ -3,12 +3,17 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /pullet-veranda-features', () => {
     let varList = {}
 
-    jest.mock('../../../../app/helpers/session', () => ({
+    jest.mock('ffc-grants-common-functionality', () => ({
+      session: {
         setYarValue: (request, key, value) => null,
         getYarValue: (request, key) => {
           if (varList[key]) return varList[key]
           else return undefined
         }
+      },
+      regex: {
+        PROJECT_COST_REGEX: /^[1-9]\d*$/
+      }
     }))
 
   it('page loads successfully, with all the options', async () => {

@@ -1,5 +1,5 @@
 jest.mock('ffc-grants-common-functionality')
-const { session } = require('ffc-grants-common-functionality')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 
 describe('Utils', () => {
   test('notUniqueSelection', () => {
@@ -65,8 +65,8 @@ describe('Utils', () => {
 
     const mockAnswerList = ['applicant-type-A1', 'applicant-type-A2', 'applicant-type-A3']
 
-    session.getYarValue.mockReturnValueOnce([ 'Laying hens (including pullets)', 'Meat chickens' ])
-    session.getYarValue.mockReturnValueOnce([ 'Laying hens (including pullets)', 'Meat chickens', 'Beef (including calf rearing)' ])
+    getYarValue.mockReturnValueOnce([ 'Laying hens (including pullets)', 'Meat chickens' ])
+    getYarValue.mockReturnValueOnce([ 'Laying hens (including pullets)', 'Meat chickens', 'Beef (including calf rearing)' ])
     
     expect(allAnswersSelected([], 'applicant-type', mockAnswerList)).toBe(false)
     expect(allAnswersSelected([], 'applicant-type', mockAnswerList)).toBe(true)
@@ -77,8 +77,8 @@ describe('Utils', () => {
     
     const mockAnswerList = ['applicant-type-A1', 'applicant-type-A2', 'applicant-type-A3']
     
-    session.getYarValue.mockReturnValueOnce([])
-    session.getYarValue.mockReturnValueOnce([ 'Beef (including calf rearing)', 'Dairy (including calf rearing)', 'Pigs' ])
+    getYarValue.mockReturnValueOnce([])
+    getYarValue.mockReturnValueOnce([ 'Beef (including calf rearing)', 'Dairy (including calf rearing)', 'Pigs' ])
 
     expect(someAnswersSelected([], 'applicant-type', mockAnswerList)).toBe(false)
     expect(someAnswersSelected([], 'applicant-type', mockAnswerList)).toBe(true)
