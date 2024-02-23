@@ -657,9 +657,6 @@ const questionBank = {
           key: '1000-birds',
           order: 240,
           title: 'Do you keep at least 1,000 {{_poultryType_}} on your farm currently?',
-          hint: {
-            text: 'This can be laying hens, pullets or both'
-          },
           pageTitle: '',
           url: '1000-birds',
           baseUrl: '1000-birds',
@@ -670,7 +667,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You must have at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
+                para: 'You must keep at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
               }]
             }]
           },
@@ -688,7 +685,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you currently have at least 1,000 {{_poultryType_}} on your farm'
+              error: 'Select yes if you currently keep at least 1,000 {{_poultryType_}} on your farm'
             }
           ],
           answers: [
@@ -3244,6 +3241,9 @@ const questionBank = {
                 ceiling height walls, providing a secure barrier from the 
                 bird living area`
               }
+            },
+            {
+              value: 'divider'
             },
             {
               key: 'building-biosecurity-A3',
