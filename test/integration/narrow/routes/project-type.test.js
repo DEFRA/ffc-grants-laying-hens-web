@@ -22,9 +22,9 @@ describe('Page: /project-type', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('What is your project?')
-    expect(response.payload).toContain('Replacing existing housing')
-    expect(response.payload).toContain('Refurbishing existing housing')
-    expect(response.payload).toContain('Adding a veranda only to existing housing')
+    expect(response.payload).toContain('Refurbishing an existing laying hen or pullet building')
+    expect(response.payload).toContain('Replacing an existing laying hen or pullet with a new building')
+    expect(response.payload).toContain('Adding a veranda only to an existing laying hen or pullet building')
     expect(response.payload).toContain('None of the above')
   })
 
