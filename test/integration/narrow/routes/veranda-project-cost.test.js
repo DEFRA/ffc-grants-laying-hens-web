@@ -43,7 +43,7 @@ jest.mock('ffc-grants-common-functionality', () => ({
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter the total estimated total cost of the veranda project')
+    expect(postResponse.payload).toContain('Enter the total estimated cost of the veranda project')
   })
 
   it('should return an error message if a letter is typed in', async () => {
