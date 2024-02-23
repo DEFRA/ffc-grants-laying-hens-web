@@ -3471,7 +3471,7 @@ const questionBank = {
         },
         {
           key: 'pullet-veranda-features',
-          order: 325,
+          order: 310,
           title: 'Will the pullet housing have a veranda with these features?',
           pageTitle: '',
           hint: {
@@ -3520,6 +3520,45 @@ const questionBank = {
             }
           ],
           yarKey: 'pulletVerandaFeatures'
+        },
+        {
+          key: 'dark-brooders',
+          order: 320,
+          title: 'Will the housing include dark boorders?',
+          pageTitle: '',
+          url: 'dark-brooders',
+          baseUrl: 'dark-brooders',
+          backUrl: 'pullet-veranda-features',
+          nextUrl: 'renewable-energy',
+          hint: { text: 'A suspended horizontal heat source enclosed by a curtain to exclude light'},
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{ para: 'RPA want to fund pullet housing that has dark brooders.'}]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the housing will include dark brooders'
+            }
+          ],
+          answers: [
+            {
+              key: 'dark-brooders-A1',
+              value: 'Yes',
+            },
+            {
+              key: 'dark-brooders-A2',
+              value: 'No',
+              notEligible: true
+            },
+          ],
+          yarKey: 'darkBrooders'
         },
         {
           key: 'score',
