@@ -3444,7 +3444,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices\''
+                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices\'.'
               }]
             }]
           },
