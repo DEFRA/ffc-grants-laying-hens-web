@@ -729,7 +729,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['poultry-type-A2'],
             dependentElseUrlYarKey: 'projectType',
             dependentElseUrlQuestionKey: 'project-type',
-            dependentElseUrlAnswerKey: 'project-type-A2',
+            dependentElseUrlAnswerKey: 'project-type-A1',
             urlOptions: {
               thenUrl: 'pullet-housing-requirements',
               elseUrl: 'replacing-insulation',
@@ -860,7 +860,7 @@ const questionBank = {
           backUrl: 'building-items',
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -1018,7 +1018,7 @@ const questionBank = {
           baseUrl: 'changing-area',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -1980,7 +1980,7 @@ const questionBank = {
           backUrl: 'building-items',
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
