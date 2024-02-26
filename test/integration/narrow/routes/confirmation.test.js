@@ -1,18 +1,12 @@
 const { crumbToken } = require('./test-helper')
 
 const senders = require('../../../../app/messaging/senders')
+const { commonFunctionsMock } = require('../../../session-mock')
 
 describe('confirm page', () => {
   const varList = { farmerDetails: 'someValue', contractorsDetails: 'someValue' }
 
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      console.log(key, 'key')
-      if (varList[key]) return varList[key]
-      else return 'Error'
-    }
-  }))
+  commonFunctionsMock(varList, 'Error')
 
   it('page loads successfully, with all the options', async () => {
     const options = {

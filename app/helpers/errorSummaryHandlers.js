@@ -1,6 +1,6 @@
 const { getModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
-const { getYarValue } = require('../helpers/session')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 
 const { validateAnswerField, checkInputError } = require('../helpers/errorHelpers')
 

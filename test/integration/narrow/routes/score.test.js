@@ -1,16 +1,11 @@
 const scoreData = require('../../../data/score-data')
+const { commonFunctionsMock } = require('../../../session-mock')
 const varList = {
 	'current-score': 'wer',
     introducingInnovation: 'wer'
 }
 
-jest.mock('../../../../app/helpers/session', () => ({
-	setYarValue: (request, key, value) => null,
-	getYarValue: (request, key) => {
-		if (Object.keys(varList).includes(key)) return varList[ key ]
-		else return 'Error'
-	}
-}))
+commonFunctionsMock(varList, 'Error')
 
 describe('Score page', () => {
 	let crumCookie

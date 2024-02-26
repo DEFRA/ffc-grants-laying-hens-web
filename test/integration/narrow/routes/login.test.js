@@ -1,16 +1,11 @@
+const { commonFunctionsMock } = require('../../../session-mock');
 const { crumbToken } = require('./test-helper')
 const bcrypt = require('bcrypt');
 
 describe('login page', () => {
   const varList = { farmerDetails: 'someValue', contractorsDetails: 'someValue' }
 
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return 'Error'
-    }
-  }))
+  commonFunctionsMock(varList, 'Error')
 
   beforeEach(() => {
     bcryptSpy = jest.spyOn(bcrypt, 'compareSync')

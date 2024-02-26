@@ -1,6 +1,6 @@
 const { getHtml } = require('../helpers/conditionalHTML')
 const { setOptionsLabel } = require('../helpers/answer-options')
-const { getYarValue, setYarValue } = require('../helpers/session')
+const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').session
 
 const getConfirmationId = guid => {
   const prefix = 'CH'

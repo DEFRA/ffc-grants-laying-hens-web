@@ -1,15 +1,10 @@
+const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /rearing-aviary-system', () => {
   let varList = {}
   
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
-    }
-  }))
+  commonFunctionsMock(varList, undefined)
 
   it('page loads successfully, with all the options', async () => {
     const options = {

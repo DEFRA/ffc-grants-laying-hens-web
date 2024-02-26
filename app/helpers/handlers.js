@@ -1,9 +1,9 @@
-const { getYarValue, setYarValue } = require('../helpers/session')
 const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
-const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
+const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('ffc-grants-common-functionality').regex
+const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').session
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const senders = require('../messaging/senders')
@@ -43,18 +43,17 @@ const checkYarKeyReset = (thisAnswer, request) => {
 
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
-    let result;
-    if (url === '1000-birds' && getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type','poultry-type-A1')) {
-        result = 'laying hens';
-    } else if (url === '1000-birds' && getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type','poultry-type-A2')) {
-        result = 'pullets';
+    if (url === '1000-birds' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1')) {
+        return 'laying hens';
+    } else if (url === '1000-birds' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A2')) {
+        return 'pullets';
     } else if (field.includes('£')) {
-        result = formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0);
+        return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0);
     } else {
-        result = getYarValue(request, additionalYarKeyName);
+        return getYarValue(request, additionalYarKeyName);
     }
-    return result;
-})
+
+  })
 
   return field
 }
