@@ -726,7 +726,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['poultry-type-A2'],
             dependentElseUrlYarKey: 'projectType',
             dependentElseUrlQuestionKey: 'project-type',
-            dependentElseUrlAnswerKey: 'project-type-A2',
+            dependentElseUrlAnswerKey: 'project-type-A1',
             urlOptions: {
               thenUrl: 'pullet-housing-requirements',
               elseUrl: 'replacing-insulation',
@@ -783,20 +783,18 @@ const questionBank = {
           backUrl: 'start',
           nextUrl: 'applicant-type',
           hint: {
-            html: `If you want to apply for grant funding for multiple hen or 
-                pullet housing projects, you must submit an application for each 
-                project.<br/><br/>
-                If you want to apply for multiple veranda projects you must 
-                submit an application for each project.`
+            html: `You must submit an application for each building or veranda project.<br/><br/>
+                  The maximum total grant amount each business can apply for is £500,000 for building projects, 
+                  or £100,000 for veranda projects.`
           },
           ineligibleContent: {
             messageContent: `
                 <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">This grant is only for:</p>
+                <p class="govuk-body">This grant is for:</p>
                       <ul>
-                        <li>replacing an existing housing for laying hens or pullets</li>
-                        <li>refurbishing existing housing for laying hens or pullets</li>
-                        <li>adding a veranda to existing housing</li>
+                        <li>refurbishing an existing laying hen or pullet building</li>
+                        <li>replacing an existing laying hen or pullet building with a new building</li>
+                        <li>adding a veranda to an existing laying hen or pullet building</li>
                       </ul>
                 </div>`,
             messageLink: {
@@ -810,8 +808,10 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You can apply for grant funding for either a housing project or adding a veranda only to existing housing.',
-                items: []
+                para: `You can apply for grant funding for either building projects or veranda projects.
+                
+                      This grant is for:`,
+                items: ['refurbishing an existing laying hen or pullet building', 'replacing an existing laying hen or pullet building with a new building', 'adding a veranda to an existing laying hen or pullet building']
               }]
             }]
           },
@@ -824,17 +824,17 @@ const questionBank = {
           answers: [
             {
               key: 'project-type-A1',
-              value: 'Replacing existing housing'
+              value: 'Refurbishing an existing laying hen or pullet building'
             },
             {
               key: 'project-type-A2',
-              value: 'Refurbishing existing housing'
+              value: 'Replacing an existing laying hen or pullet with a new building'
             },
             {
               key: 'project-type-A3',
-              value: 'Adding a veranda only to existing housing',
+              value: 'Adding a veranda only to an existing laying hen or pullet building',
               hint: {
-                text: 'The RPA will award the grant funding for adding a veranda only to existing housing on a first-come first-served basis'
+                text: 'The RPA will award the grant funding on a first-come first-served basis'
               },
             },
             {
@@ -857,7 +857,7 @@ const questionBank = {
           backUrl: 'building-items',
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -1026,7 +1026,7 @@ const questionBank = {
           baseUrl: 'changing-area',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -1988,7 +1988,7 @@ const questionBank = {
           backUrl: 'building-items',
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
