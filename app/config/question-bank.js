@@ -729,6 +729,15 @@ const questionBank = {
             }
 
           },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The grant-funded building must have these design features to 
+                meet the grant priority of improving biosecurity.`
+              }]
+            }]
+          },
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
@@ -737,7 +746,8 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
-                      <li>capped roof and wall inlets and outlets</li>
+                      <li>mesh capping applied to any roof or wall inlets and outlets capped with mesh 
+                      (with a mesh hole size of 25 millimetres or less)</li>
                       <li>catch trays under all chimneys and roof-mounted vents.</li>
                   </ul>
               </div>`,
