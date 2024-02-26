@@ -3351,7 +3351,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund projects that prevent birds falling from heights of more than 2 metres, to reduce the risk of keel bonefractures.`
+                para: `RPA want to fund projects that prevent birds falling from heights of more than 2 metres, to reduce the risk of keel bone fractures.`
               }]
             }]
           },
