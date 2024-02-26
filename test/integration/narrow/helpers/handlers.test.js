@@ -52,6 +52,10 @@ describe('Get & Post Handlers', () => {
     },
     counties: {
       LIST_COUNTIES: ['Derbyshire', 'Leicestershire', 'Lincolnshire', 'Northamptonshire', 'Nottinghamshire', 'Rutland']
+    },
+    answerOptions: {
+      getOptions: (data, question, conditionalHTML, request) => null,
+      setOptionsLabel: (data, answers, conditonalHTML) => null
     }
   }))
 

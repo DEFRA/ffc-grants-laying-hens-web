@@ -9,6 +9,10 @@ describe('create-msg', () => {
     },
     counties: {
       LIST_COUNTIES: ['Derbyshire', 'Leicestershire', 'Lincolnshire', 'Northamptonshire', 'Nottinghamshire', 'Rutland']
+    },
+    answerOptions: {
+      getOptions: (data, question, conditionalHTML, request) => null,
+      setOptionsLabel: (data, answers, conditonalHTML) => null
     }
   }));
   const { getYarValue } = require('ffc-grants-common-functionality').session

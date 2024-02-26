@@ -26,6 +26,10 @@ describe('Page Guard', () => {
     },
     regex: {
       SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig,
+    },
+    answerOptions: {
+      getOptions: (data, question, conditionalHTML, request) => null,
+      setOptionsLabel: (data, answers, conditonalHTML) => null
     }
   }
   jest.mock('ffc-grants-common-functionality', () => mockSession)
