@@ -729,6 +729,15 @@ const questionBank = {
             }
 
           },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The grant-funded building must have these design features to 
+                meet the grant priority of improving biosecurity.`
+              }]
+            }]
+          },
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
