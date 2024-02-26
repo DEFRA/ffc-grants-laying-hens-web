@@ -652,9 +652,6 @@ const questionBank = {
           key: '1000-birds',
           order: 240,
           title: 'Do you keep at least 1,000 {{_poultryType_}} on your farm currently?',
-          hint: {
-            text: 'This can be laying hens, pullets or both'
-          },
           pageTitle: '',
           url: '1000-birds',
           baseUrl: '1000-birds',
@@ -665,7 +662,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You must have at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
+                para: 'You must keep at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
               }]
             }]
           },
@@ -683,7 +680,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you currently have at least 1,000 {{_poultryType_}} on your farm'
+              error: 'Select yes if you currently keep at least 1,000 {{_poultryType_}} on your farm'
             }
           ],
           answers: [
@@ -732,6 +729,15 @@ const questionBank = {
             }
 
           },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The grant-funded building must have these design features to 
+                meet the grant priority of improving biosecurity.`
+              }]
+            }]
+          },
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
@@ -740,7 +746,8 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
-                      <li>capped roof and wall inlets and outlets</li>
+                      <li>mesh capping applied to any roof or wall inlets and outlets capped with mesh 
+                      (with a mesh hole size of 25 millimetres or less)</li>
                       <li>catch trays under all chimneys and roof-mounted vents.</li>
                   </ul>
               </div>`,
@@ -902,11 +909,18 @@ const questionBank = {
         {
           key: 'refurbishing-insulation',
           order: 90,
-          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation?',
+          title: 'Will the building have full wall and roof insulation?',
           url: 'refurbishing-insulation',
           baseUrl: 'refurbishing-insulation',
-          backUrl: 'capped-inlets-outlets',
-          nextUrl: 'changing-area',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'building-items',
+              elseUrl: 'pullet-housing-requirements'
+            }
+          },
+          nextUrl: 'lighting-features',
           ineligibleContent: {
             messageContent: 'The housing must have full wall and roof insulation.',
             messageLink: {
@@ -920,15 +934,14 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The {{_poultryType_}} housing must have full wall and roof insulation. ',
-                items: []
+                para: 'The building must have full wall and roof insulation.',
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have full wall and roof insulation'
+              error: 'Select yes if the building will have full wall and roof insulation'
             }
           ],
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -948,13 +961,21 @@ const questionBank = {
         {
           key: 'replacing-insulation',
           order: 95,
-          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation, with a U-Value of less than 0.3W/m²/°C?',
+          title: 'Will the building have full wall and roof insulation?',
           url: 'replacing-insulation',
           baseUrl: 'replacing-insulation',
-          backUrl: 'capped-inlets-outlets',
-          nextUrl: 'changing-area',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'building-items',
+              elseUrl: 'pullet-housing-requirements'
+            }
+          },
+          nextUrl: 'lighting-features',
           ineligibleContent: {
-            messageContent: 'The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m²/°C.',
+            messageContent: `The building must have full wall and roof insulation.<br/><br/>
+            The new building must have wall and roof insulation with a U-Value of less than 0.3 watts per square metre, per degree Kelvin (0.3W/m²K).`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -966,17 +987,14 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The wall and roof insulation of the {{_poultryType_}} housing must have a U- Value of less than 0.3W/m²/°C.
-
-                The U-Value measures the rate of heat transfer from inside a building to outside.`,
-                items: []
+                para: 'The new building must have wall and roof insulation with a U-Value of less than 0.3 watts per square metre, per degree Kelvin (0.3W/m²K).'
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have full wall and roof insulation'
+              error: 'Select yes if the building will have full wall and roof insulation'
             }
           ],
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -3010,7 +3028,7 @@ const questionBank = {
               value: 'Free range'
             },
             {
-              key: 'legal-status-A5',
+              key: 'current-system-A5',
               value: 'Organic'
             },
             {
@@ -3260,6 +3278,9 @@ const questionBank = {
                 ceiling height walls, providing a secure barrier from the 
                 bird living area`
               }
+            },
+            {
+              value: 'divider'
             },
             {
               key: 'building-biosecurity-A3',
