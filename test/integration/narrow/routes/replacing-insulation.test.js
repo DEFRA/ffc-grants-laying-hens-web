@@ -62,7 +62,7 @@ describe('Page: /replacing-insulation', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m²/°C.')
+    expect(postResponse.payload).toContain('The new building must have wall and roof insulation with a U-Value of less than 0.3 watts per square metre, per degree Kelvin (0.3W/m²K).')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
