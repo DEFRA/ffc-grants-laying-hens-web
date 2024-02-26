@@ -2,10 +2,6 @@ export function validation () {
   let elements = document.querySelectorAll('input[type="checkbox"]')
   const nonEligibleOptions = ['None of the above', 'I will not monitor any poultry management data']
 
-  if (!elements) {
-    return
-  }
-
    const elementsArr = Array.from(elements)
    elementsArr.filter(el => nonEligibleOptions.includes(el.value)).forEach((element) => {
     element.addEventListener('change', (event) => {
