@@ -3055,7 +3055,7 @@ const questionBank = {
           // preValidationKeys: ['currentSystem'],
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               content: [{
                 para: 'RPA want to encourage investment in high-welfare {{_poultryType_}}.',
               }]
@@ -3632,8 +3632,7 @@ const questionBank = {
             },
             {
               key: 'dark-brooders-A2',
-              value: 'No',
-              notEligible: true
+              value: 'No'
             },
           ],
           yarKey: 'darkBrooders'
