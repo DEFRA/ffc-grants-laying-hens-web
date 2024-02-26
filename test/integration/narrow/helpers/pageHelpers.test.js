@@ -1,3 +1,5 @@
+const { commonFunctionsMock } = require('../../../session-mock')
+
 describe('Page Helpers', () => {
   const varList = {
     planningPermission: 'some fake value',
@@ -6,13 +8,7 @@ describe('Page Helpers', () => {
     applying: true
   }
 
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return null
-    }
-  }))
+  commonFunctionsMock(varList, null)
 
   const {
     handleConditinalHtmlData,

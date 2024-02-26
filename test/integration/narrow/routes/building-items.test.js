@@ -1,4 +1,6 @@
+const { command } = require('yargs')
 const { crumbToken } = require('./test-helper')
+const { commonFunctionsMock } = require('../../../session-mock')
 
 describe('Page: /building-items', () => {
   const varList = {
@@ -6,13 +8,7 @@ describe('Page: /building-items', () => {
     projectType: 'Replacing an existing laying hen or pullet with a new building'
   }
 
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
-    }
-  }))
+  commonFunctionsMock(varList, undefined)
 
   it('page loads successfully, with all the options - hen', async () => {
     const options = {

@@ -1,5 +1,5 @@
 const { ALL_QUESTIONS } = require('../config/question-bank')
-const { getYarValue } = require('../helpers/session')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 
 const notUniqueSelection = (answers, option) => (
   answers?.includes(option) &&

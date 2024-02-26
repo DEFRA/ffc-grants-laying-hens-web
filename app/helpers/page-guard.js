@@ -1,4 +1,4 @@
-const { getYarValue } = require('../helpers/session')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 const { startPageUrl, serviceEndDate, serviceEndTime } = require('../config/server')
 const { getQuestionAnswer } = require('./utils')
 

@@ -1,22 +1,13 @@
-const {
-  WHOLE_NUMBER_REGEX_ZERO,
-  CURRENCY_FORMAT,
-  CHARS_MAX_10,
-  CHARS_MIN_10,
-  CHARS_MAX_18,
-  CHARS_MAX_100,
-  CHARS_MAX_250,
-  POSTCODE_REGEX,
-  WHOLE_NUMBER_REGEX,
-  NUMBER_REGEX,
+const { 
   PROJECT_COST_REGEX,
-  SBI_REGEX,
+  WHOLE_NUMBER_REGEX_ZERO,
   NAME_ONLY_REGEX,
-  PHONE_REGEX,
   EMAIL_REGEX,
-  ADDRESS_REGEX
-
-} = require('../../../../app/helpers/regex')
+  CHARS_MIN_10,
+  PHONE_REGEX,
+  ADDRESS_REGEX,
+  POSTCODE_REGEX
+ } = require('ffc-grants-common-functionality').regex
 
 const urlPrefix = global.__URLPREFIX__
 

@@ -1,5 +1,5 @@
-jest.mock('../../../../app/helpers/session')
-const { getYarValue } = require('../../../../app/helpers/session')
+jest.mock('ffc-grants-common-functionality')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 
 describe('Utils', () => {
   test('notUniqueSelection', () => {

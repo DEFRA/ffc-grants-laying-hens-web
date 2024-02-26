@@ -14,14 +14,20 @@ const varListTemplate = {
 
 let varList
 const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return undefined
+  session: {
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (Object.keys(varList).includes(key)) return varList[key]
+      else return undefined
+    }
+  },
+  regex: {
+    PROJECT_COST_REGEX: /^[1-9]\d*$/,
+    SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig
   }
 }
 
-jest.mock('../../../../app/helpers/session', () => mockSession)
+jest.mock('ffc-grants-common-functionality', () => mockSession)
 
 xdescribe('Project cost page', () => {
   beforeEach(() => {
