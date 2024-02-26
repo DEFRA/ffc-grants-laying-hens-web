@@ -1,3 +1,4 @@
+const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 xdescribe('Page: /potential-amount', () => {
@@ -8,14 +9,8 @@ xdescribe('Page: /potential-amount', () => {
   }
   const eligiblePageText = 'You may be able to apply for a grant of up to £15,000, based on the estimated cost of £37,500.'
 
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
-    }
-  }))
-
+  commonFunctionsMock(varList, undefined)
+  
   it('page loads successfully, with all the Eligible options', async () => {
     const options = {
       method: 'GET',

@@ -1,12 +1,14 @@
 describe('Get & Post Handlers', () => {
-  jest.mock('../../../../app/helpers/session', () => {
-    const original = jest.requireActual('../../../../app/helpers/session')
+  jest.mock('ffc-grants-common-functionality', () => {
+    const original = jest.requireActual('ffc-grants-common-functionality')
     return {
       ...original,
-      getYarValue: jest.fn()
+      session: {
+        getYarValue: jest.fn()
+      }
     }
   })
-  const { getYarValue } = require('../../../../app/helpers/session')
+  const { session } = require('ffc-grants-common-functionality')
 
   jest.mock('../../../../app/helpers/conditionalHTML')
   const { getHtml } = require('../../../../app/helpers/conditionalHTML')
@@ -22,7 +24,7 @@ describe('Get & Post Handlers', () => {
 
   test('check customiseErrorText()', () => {
     mockH = { view: jest.fn() }
-    getYarValue.mockReturnValue('mock-yar-value')
+    session.getYarValue.mockReturnValue('mock-yar-value')
     getHtml.mockReturnValue('mock-html')
     getModel.mockReturnValue({ items: ['item1', 'item2'] })
 

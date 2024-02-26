@@ -1,7 +1,7 @@
 const { YAR_KEYS } = require('../config/question-bank')
 const Joi = require('joi')
 const { getDataFromYarValue } = require('./../helpers/pageHelpers')
-const { getYarValue } = require('../helpers/session')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 
 const multiAnswer = 'multi-answer'
 

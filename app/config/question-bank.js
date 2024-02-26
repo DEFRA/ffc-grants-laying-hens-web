@@ -1,22 +1,17 @@
-const {
-  CHARS_MIN_10,
-  POSTCODE_REGEX,
+const { 
+  PROJECT_COST_REGEX,
+  NAME_ONLY_REGEX,
   WHOLE_NUMBER_REGEX,
   SBI_REGEX,
-  NAME_ONLY_REGEX,
-  PHONE_REGEX,
-  EMAIL_REGEX,
-  ONLY_TEXT_REGEX,
-  ONLY_DIGITS_REGEX,
-  ADDRESS_REGEX,
-  PROJECT_COST_REGEX,
-  CHARS_MAX_25,
-  STRUCTURE_ELIGIBLITY_REGEX,
-  TWO_DP_NUMBER,
-  ONLY_DIGITS_AND_DECIMAL_REGEX,
   MIN_2_LETTERS_TO_USE_SPECIAL_CHARACTER,
-  MIN_3_LETTERS
-} = require('../helpers/regex')
+  EMAIL_REGEX,
+  CHARS_MIN_10,
+  PHONE_REGEX,
+  ADDRESS_REGEX,
+  MIN_3_LETTERS,
+  ONLY_TEXT_REGEX,
+  POSTCODE_REGEX
+ } = require('ffc-grants-common-functionality').regex
 
 const {
   MIN_GRANT,
@@ -657,9 +652,6 @@ const questionBank = {
           key: '1000-birds',
           order: 240,
           title: 'Do you keep at least 1,000 {{_poultryType_}} on your farm currently?',
-          hint: {
-            text: 'This can be laying hens, pullets or both'
-          },
           pageTitle: '',
           url: '1000-birds',
           baseUrl: '1000-birds',
@@ -670,7 +662,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You must have at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
+                para: 'You must keep at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
               }]
             }]
           },
@@ -688,7 +680,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you currently have at least 1,000 {{_poultryType_}} on your farm'
+              error: 'Select yes if you currently keep at least 1,000 {{_poultryType_}} on your farm'
             }
           ],
           answers: [
@@ -729,13 +721,22 @@ const questionBank = {
             dependentAnswerKeysArray: ['poultry-type-A2'],
             dependentElseUrlYarKey: 'projectType',
             dependentElseUrlQuestionKey: 'project-type',
-            dependentElseUrlAnswerKey: 'project-type-A2',
+            dependentElseUrlAnswerKey: 'project-type-A1',
             urlOptions: {
               thenUrl: 'pullet-housing-requirements',
               elseUrl: 'replacing-insulation',
               dependantElseUrl: 'refurbishing-insulation'
             }
 
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The grant-funded building must have these design features to 
+                meet the grant priority of improving biosecurity.`
+              }]
+            }]
           },
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
@@ -745,7 +746,8 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
-                      <li>capped roof and wall inlets and outlets</li>
+                      <li>mesh capping applied to any roof or wall inlets and outlets capped with mesh 
+                      (with a mesh hole size of 25 millimetres or less)</li>
                       <li>catch trays under all chimneys and roof-mounted vents.</li>
                   </ul>
               </div>`,
@@ -786,20 +788,18 @@ const questionBank = {
           backUrl: 'start',
           nextUrl: 'applicant-type',
           hint: {
-            html: `If you want to apply for grant funding for multiple hen or 
-                pullet housing projects, you must submit an application for each 
-                project.<br/><br/>
-                If you want to apply for multiple veranda projects you must 
-                submit an application for each project.`
+            html: `You must submit an application for each building or veranda project.<br/><br/>
+                  The maximum total grant amount each business can apply for is £500,000 for building projects, 
+                  or £100,000 for veranda projects.`
           },
           ineligibleContent: {
             messageContent: `
                 <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">This grant is only for:</p>
+                <p class="govuk-body">This grant is for:</p>
                       <ul>
-                        <li>replacing an existing housing for laying hens or pullets</li>
-                        <li>refurbishing existing housing for laying hens or pullets</li>
-                        <li>adding a veranda to existing housing</li>
+                        <li>refurbishing an existing laying hen or pullet building</li>
+                        <li>replacing an existing laying hen or pullet building with a new building</li>
+                        <li>adding a veranda to an existing laying hen or pullet building</li>
                       </ul>
                 </div>`,
             messageLink: {
@@ -813,8 +813,10 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You can apply for grant funding for either a housing project or adding a veranda only to existing housing.',
-                items: []
+                para: `You can apply for grant funding for either building projects or veranda projects.
+                
+                      This grant is for:`,
+                items: ['refurbishing an existing laying hen or pullet building', 'replacing an existing laying hen or pullet building with a new building', 'adding a veranda to an existing laying hen or pullet building']
               }]
             }]
           },
@@ -827,17 +829,17 @@ const questionBank = {
           answers: [
             {
               key: 'project-type-A1',
-              value: 'Replacing existing housing'
+              value: 'Refurbishing an existing laying hen or pullet building'
             },
             {
               key: 'project-type-A2',
-              value: 'Refurbishing existing housing'
+              value: 'Replacing an existing laying hen or pullet with a new building'
             },
             {
               key: 'project-type-A3',
-              value: 'Adding a veranda only to existing housing',
+              value: 'Adding a veranda only to an existing laying hen or pullet building',
               hint: {
-                text: 'The RPA will award the grant funding for adding a veranda only to existing housing on a first-come first-served basis'
+                text: 'The RPA will award the grant funding on a first-come first-served basis'
               },
             },
             {
@@ -860,7 +862,7 @@ const questionBank = {
           backUrl: 'building-items',
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -907,11 +909,18 @@ const questionBank = {
         {
           key: 'refurbishing-insulation',
           order: 90,
-          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation?',
+          title: 'Will the building have full wall and roof insulation?',
           url: 'refurbishing-insulation',
           baseUrl: 'refurbishing-insulation',
-          backUrl: 'capped-inlets-outlets',
-          nextUrl: 'changing-area',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'building-items',
+              elseUrl: 'pullet-housing-requirements'
+            }
+          },
+          nextUrl: 'lighting-features',
           ineligibleContent: {
             messageContent: 'The housing must have full wall and roof insulation.',
             messageLink: {
@@ -925,15 +934,14 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The {{_poultryType_}} housing must have full wall and roof insulation. ',
-                items: []
+                para: 'The building must have full wall and roof insulation.',
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have full wall and roof insulation'
+              error: 'Select yes if the building will have full wall and roof insulation'
             }
           ],
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -953,13 +961,21 @@ const questionBank = {
         {
           key: 'replacing-insulation',
           order: 95,
-          title: 'Will the {{_poultryType_}} housing have full wall and roof insulation, with a U-Value of less than 0.3W/m²/°C?',
+          title: 'Will the building have full wall and roof insulation?',
           url: 'replacing-insulation',
           baseUrl: 'replacing-insulation',
-          backUrl: 'capped-inlets-outlets',
-          nextUrl: 'changing-area',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'building-items',
+              elseUrl: 'pullet-housing-requirements'
+            }
+          },
+          nextUrl: 'lighting-features',
           ineligibleContent: {
-            messageContent: 'The wall and roof insulation of the housing must have a U-Value of less than 0.3W/m²/°C.',
+            messageContent: `The building must have full wall and roof insulation.<br/><br/>
+            The new building must have wall and roof insulation with a U-Value of less than 0.3 watts per square metre, per degree Kelvin (0.3W/m²K).`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -971,17 +987,14 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The wall and roof insulation of the {{_poultryType_}} housing must have a U- Value of less than 0.3W/m²/°C.
-
-                The U-Value measures the rate of heat transfer from inside a building to outside.`,
-                items: []
+                para: 'The new building must have wall and roof insulation with a U-Value of less than 0.3 watts per square metre, per degree Kelvin (0.3W/m²K).'
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have full wall and roof insulation'
+              error: 'Select yes if the building will have full wall and roof insulation'
             }
           ],
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -1018,7 +1031,7 @@ const questionBank = {
           baseUrl: 'changing-area',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -1980,7 +1993,7 @@ const questionBank = {
           backUrl: 'building-items',
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -3015,7 +3028,7 @@ const questionBank = {
               value: 'Free range'
             },
             {
-              key: 'legal-status-A5',
+              key: 'current-system-A5',
               value: 'Organic'
             },
             {
@@ -3265,6 +3278,9 @@ const questionBank = {
                 ceiling height walls, providing a secure barrier from the 
                 bird living area`
               }
+            },
+            {
+              value: 'divider'
             },
             {
               key: 'building-biosecurity-A3',

@@ -1,3 +1,4 @@
+const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /poultry-type', () => {
@@ -6,13 +7,7 @@ describe('Page: /poultry-type', () => {
     projectType: ''
   }
 
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
-    }
-  }))
+  commonFunctionsMock(varList, undefined)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -41,8 +36,8 @@ describe('Page: /poultry-type', () => {
     expect(postResponse.payload).toContain('Select what type of poultry the project is for')
   })
 
-  it('user selects eligible option and projectType is `Replacing existing housing` -> store user response and redirect to /1000-birds', async () => {
-    varList.projectType = 'Replacing existing housing'
+  it('user selects eligible option and projectType is `Replacing an existing laying hen or pullet with a new building` -> store user response and redirect to /1000-birds', async () => {
+    varList.projectType = 'Replacing an existing laying hen or pullet with a new building'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/poultry-type`,
@@ -55,8 +50,8 @@ describe('Page: /poultry-type', () => {
     expect(postResponse.headers.location).toBe('1000-birds')
   })
 
-  it('user selects eligible option and projectType is `Adding a veranda only to existing housing` -> store user response and redirect to /veranda-only', async () => {
-    varList.projectType = 'Adding a veranda only to existing housing'
+  it('user selects eligible option and projectType is `Adding a veranda only to an existing laying hen or pullet building` -> store user response and redirect to /veranda-only', async () => {
+    varList.projectType = 'Adding a veranda only to an existing laying hen or pullet building'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/poultry-type`,

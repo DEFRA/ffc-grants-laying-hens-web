@@ -1,17 +1,12 @@
+const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /1000-birds', () => {
   let varList = {
-    poultryType: 'laying hens',
+    poultryType: 'hen',
   }
   
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
-    }
-  }))
+  commonFunctionsMock(varList, undefined)
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -34,7 +29,7 @@ describe('Page: /1000-birds', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if you currently have at least 1,000 laying hens on your farm')
+    expect(postResponse.payload).toContain('Select yes if you currently keep at least 1,000 laying hens on your farm')
   })
   it('user selects ineligible option `No` -> display ineligible page', async () => {
     const postOptions = {
@@ -63,6 +58,7 @@ describe('Page: /1000-birds', () => {
   })
 
   it('page loads with correct back link - /poultry-type', async () => {
+    varList.poultryType = 'pullet'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/1000-birds`
