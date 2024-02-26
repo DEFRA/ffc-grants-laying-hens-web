@@ -22,6 +22,9 @@ const commonFunctionsMock = (varList, returnType) => {
             POSTCODE_REGEX: /^\s*[a-z]{1,2}\d[a-z\d]?\s*\d[a-z]{2}\s*$/i,
             WHOLE_NUMBER_REGEX: /^\d+$/,
             SBI_REGEX: /^(\d{9})$/
+        },
+        counties: {
+          LIST_COUNTIES: ['Derbyshire', 'Leicestershire', 'Lincolnshire', 'Northamptonshire', 'Nottinghamshire', 'Rutland']
         }
       }))
     }

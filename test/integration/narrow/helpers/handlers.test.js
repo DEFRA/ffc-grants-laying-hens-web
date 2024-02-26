@@ -49,6 +49,9 @@ describe('Get & Post Handlers', () => {
     },
     regex: {
       PROJECT_COST_REGEX: /^[1-9]\d*$/
+    },
+    counties: {
+      LIST_COUNTIES: ['Derbyshire', 'Leicestershire', 'Lincolnshire', 'Northamptonshire', 'Nottinghamshire', 'Rutland']
     }
   }))
 
