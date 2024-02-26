@@ -1,5 +1,5 @@
 const { getHtml } = require('../helpers/conditionalHTML')
-// const { setOptionsLabel } = require('../helpers/answer-options')
+
 const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').session
 const { setOptionsLabel } = require('ffc-grants-common-functionality').answerOptions
 
