@@ -8,7 +8,7 @@ describe('Page: /aviary-welfare', () => {
 
   commonFunctionsMock(varList, undefined)
 
-  it('page loads successfully, with all the options', async () => {
+  it('page loads successfully, with all the options, warning text and sidebar', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/aviary-welfare`
@@ -16,9 +16,13 @@ describe('Page: /aviary-welfare', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the aviary system meet the manufacture&#39;s recommendation for high welfare?')
+    expect(response.payload).toContain('Will the building have a high welfare aviary system?')
+    expect(response.payload).toContain('This system must enable the birds to move between levels without flying or jumping more than one metre in height')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
+    expect(response.payload).toContain('You must not install a combi-cage system in your grant-funded housing.')
+    expect(response.payload).toContain('The building must have a high welfare aviary system.')
+    expect(response.payload).toContain('The aviary system must have welfare ramps and platforms if the hens would need to jump or fly more than one metre in height to move between levels.')
   })
 
   it('no option selected -> show error message', async () => {
@@ -31,7 +35,7 @@ describe('Page: /aviary-welfare', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the aviary system will meet the recommendation for high welfare')
+    expect(postResponse.payload).toContain('Select yes if the building will have a high welfare aviary system')
   })
 
   it('user selects eligible option -> store user response and redirect to /manure-removal', async () => {
@@ -57,9 +61,8 @@ describe('Page: /aviary-welfare', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The aviary system must either:')
-    expect(postResponse.payload).toContain('have welfare ramps and platforms in positions that meet the manufacturer\'s recommendation for a high welfare system')
-    expect(postResponse.payload).toContain('be designed for hens to move between levels without ramps and platforms.')
+    expect(postResponse.payload).toContain('The building must have a high welfare laying hen aviary system')
+    expect(postResponse.payload).toContain('You must not install a combi-cage system in your grant-funded housing.')
   })
 
   it('page loads with correct back link', async () => {
