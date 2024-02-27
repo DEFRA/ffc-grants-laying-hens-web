@@ -38,7 +38,7 @@ describe('Page: /aviary-welfare', () => {
     expect(postResponse.payload).toContain('Select yes if the building will have a high welfare aviary system')
   })
 
-  it('user selects eligible option -> store user response and redirect to /manure-removal', async () => {
+  it('user selects eligible option -> store user response and redirect to /aviary-system', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/aviary-welfare`,
@@ -48,7 +48,7 @@ describe('Page: /aviary-welfare', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('manure-removal')
+    expect(postResponse.headers.location).toBe('aviary-system')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
