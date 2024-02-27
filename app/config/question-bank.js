@@ -1221,7 +1221,7 @@ const questionBank = {
           url: 'aviary-welfare',
           baseUrl: 'aviary-welfare',
           backUrl: 'aviary-system',
-          nextUrl: 'manure-removal',
+          nextUrl: 'aviary-system',
           hint: {
             text: 'The birds must be able to move between levels without flying or jumping more than one metre in height'
           },
@@ -3351,7 +3351,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund projects that prevent birds falling from heights of more than 2 metres, to reduce the risk of keel bonefractures.`
+                para: `RPA want to fund projects that prevent birds falling from heights of more than 2 metres, to reduce the risk of keel bone fractures.`
               }]
             }]
           },
@@ -3460,7 +3460,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices\''
+                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices\'.'
               }]
             }]
           },
@@ -3596,6 +3596,156 @@ const questionBank = {
             },
           ],
           yarKey: 'darkBrooders'
+        },
+        {
+          key: 'bird-data-type',
+          order: 325,
+          title: 'What poultry management data will you automatically collect and store?',
+          pageTitle: '',
+          url: 'bird-data-type',
+          baseUrl: 'bird-data-type',
+          backUrl: 'renewable-energy',
+          nextUrl: 'environmental-data-type',
+          hint: {
+            html: `
+                <p>Using digital systems</p>
+                <p>Select all that apply</p>
+            `
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to fund projects that have digital systems which automatically collect and store data for poultry management.'
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what poultry management data you will automatically collect and store'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'bird-data-type',
+                answerKey: 'bird-data-type-A10'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'bird-data-type-A1',
+              value: 'Bird performance data'
+            },
+            {
+              key: 'bird-data-type-A2',
+              value: 'Body weight',
+            },
+            {
+              key: 'bird-data-type-A3',
+              value: 'Disease detection',
+            },
+            {
+              key: 'bird-data-type-A4',
+              value: 'Feed data or conversion ratios',
+            },
+            {
+              key: 'bird-data-type-A5',
+              value: 'Location data'
+            },
+            {
+              key: 'bird-data-type-A6',
+              value: 'Locomotion or movement data'
+            },
+            {
+              key: 'bird-data-type-A7',
+              value: 'Next use'
+            },
+            {
+              key: 'bird-data-type-A8',
+              value: 'Sound analysis'
+            },
+            {
+              key: 'bird-data-type-A9',
+              value: 'Other'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'bird-data-type-A10',
+              value: 'I will not monitor any poultry management data',
+            }
+          ],
+          yarKey: 'birdDataType'
+        },
+        {
+          key: 'environmental-data-type',
+          order: 330,
+          title: 'What additional environmental data will you automatically collect and store?',
+          pageTitle: '',
+          url: 'environmental-data-type',
+          baseUrl: 'environmental-data-type',
+          backUrl: 'bird-data-type',
+          nextUrl: 'score',
+          hint: {
+            html: `
+                <p>Using digital systems</p>
+                <p>Select all that apply</p>
+            `
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to fund projects that have digital systems which automatically collect and store additional environmental data.'
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what additional environment data you will automatically collect and store'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'environmental-data-type',
+                answerKey: 'environmental-data-type-A5'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'environmental-data-type-A1',
+              value: 'Ammonia'
+            },
+            {
+              key: 'environmental-data-type-A2',
+              value: 'Carbon monoxide ',
+            },
+            {
+              key: 'environmental-data-type-A3',
+              value: 'Inhalable dust',
+            },
+            {
+              key: 'environmental-data-type-A4',
+              value: 'Other',
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'environmental-data-type-A5',
+              value: 'I will not monitor any poultry management data',
+            }
+          ],
+          yarKey: 'environmentalDataType'
         },
         {
           key: 'score',
