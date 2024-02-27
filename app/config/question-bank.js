@@ -1215,34 +1215,31 @@ const questionBank = {
         {
           key: 'aviary-welfare',
           order: 115,
-          title: 'Will the aviary system meet the manufacture\'s recommendation for high welfare?',
+          title: 'Will the building have a high welfare aviary system?',
           pageTitle: '',
           url: 'aviary-welfare',
           baseUrl: 'aviary-welfare',
           backUrl: 'aviary-system',
           nextUrl: 'aviary-system',
           hint: {
-            text: 'The birds must be able to move between levels without flying or jumping more than one metre in height'
+            text: 'This system must enable the birds to move between levels without flying or jumping more than one metre in height'
           },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The aviary system must either:',
-                items: [`have welfare ramps and platforms in positions that meet the manufacturer's recommendation for a high welfare system`,
-                  'be designed for hens to move between levels without ramps and platforms']
+                para: `The building must have a high welfare aviary system. 
+                      
+                      The aviary system must have welfare ramps and platforms if the hens would need to jump or fly more than one metre in height to move between levels.`,
+                items: []
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: `
-                <div class="govuk-list govuk-list--bullet">
-                <div class="govuk-body">The aviary system must either:</div>
-                      <ul>
-                        <li>have welfare ramps and platforms in positions that meet the manufacturer's recommendation for a high welfare system</li>
-                        <li>be designed for hens to move between levels without ramps and platforms.</li>
-                      </ul>
-                </div>`,
+            messageContent: 'The building must have a high welfare laying hen aviary system',
+            insertText: {
+              text: 'You must not install a combi-cage system in your grant-funded housing.'
+            },
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1251,11 +1248,14 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
+          warning: {
+            text: 'You must not install a combi-cage system in your grant-funded housing.'
+          },
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the aviary system will meet the recommendation for high welfare'
+              error: 'Select yes if the building will have a high welfare aviary system'
             }
           ],
           answers: [
