@@ -3228,7 +3228,7 @@ const questionBank = {
         {
           key: 'easy-grip-perches',
           order: 200,
-          title:'Will the perches have a design feature that help the {{_poultryType_}} grip the perches?',
+          title:'Will the perches have a design feature that help the {{_poultryType_}}s grip the perches?',
           hint: {
             text: 'For example, sufficient grip size or a comfortable material coating'
           },
@@ -3253,7 +3253,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the perches will have a design feature that help the {{_poultryType_}} grip the perches'
+              error: 'Select yes if the perches will have a design feature that help the {{_poultryType_}}s grip the perches'
             }
           ],
           answers: [
