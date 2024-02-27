@@ -23,10 +23,25 @@ async function setSessionVariables (server, keyValuPairs) {
   const response = await server.inject(options)
   console.log(response.statusCode)
 }
+
+const testNextLink = async (pageUrl, key, option, destination) => { 
+  const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/${pageUrl}`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { [key]: option, crumb: crumbToken },
+    }
+
+  const postResponse = await global.__SERVER__.inject(postOptions)
+  expect(postResponse.statusCode).toBe(302)
+  expect(postResponse.headers.location).toBe(destination)
+ }
+
 module.exports = {
   crumbCookieRegEx,
   getCookieHeader,
   getCrumbCookie,
   setSessionVariables,
-  crumbToken
+  crumbToken,
+  testNextLink
 }
