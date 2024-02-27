@@ -46,18 +46,26 @@ const checkYarKeyReset = (thisAnswer, request) => {
 
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
-    if (url === '1000-birds' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)) {
-        return 'laying hens';
-    } else if (url === '1000-birds' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A2', ALL_QUESTIONS)) {
-        return 'pullets';
-    } else if (url === 'current-multi-tier-system' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1')) {
-      return 'multi-tier aviary system';
-    }  else if (url === 'current-multi-tier-system' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A2')) {
-      return 'multi-tier system';
-    } else if (field.includes('£')) {
-        return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0);
-    } else {
-        return getYarValue(request, additionalYarKeyName);
+
+    switch (url) {
+      case '1000-birds':
+        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)) {
+          return 'laying hens'
+        } else {
+          return 'pullets'
+        }
+      case 'current-multi-tier-system':
+        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)){
+          return 'multi-tier aviary system'
+        } else {
+          return 'multi-tier system'
+        }
+      default:
+        if (field.includes('£')) {
+          return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+        } else {
+          return getYarValue(request, additionalYarKeyName)
+        }
     }
 
   })
