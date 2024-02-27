@@ -1,12 +1,17 @@
 const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
+const utilsList = {
+  'poultry-type-A1': 'hen',
+  'poutlry-type-A2': 'pullet'
+}
+
 describe('Page: /1000-birds', () => {
   let varList = {
     poultryType: 'hen',
   }
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, utilsList)
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',

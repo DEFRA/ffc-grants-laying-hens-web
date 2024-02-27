@@ -56,6 +56,20 @@ describe('Get & Post Handlers', () => {
     answerOptions: {
       getOptions: (data, question, conditionalHTML, request) => null,
       setOptionsLabel: (data, answers, conditonalHTML) => null
+    },
+    utils: {
+      getQuestionByKey: (questionKey, allQuestions) => {
+        return {
+          yarKey: 'testYarKey',
+          answers: [
+            {
+              key: 'testKey',
+              value: 'testValue'
+            }
+          ]
+        }
+      },
+      allAnswersSelected: (questionKey, allQuestions) => null,
     }
   }))
 

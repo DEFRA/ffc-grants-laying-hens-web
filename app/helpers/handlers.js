@@ -4,6 +4,7 @@ const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('ffc-grants-common-functionality').regex
 const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').session
+const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const senders = require('../messaging/senders')
@@ -25,7 +26,9 @@ const { getUserScore } = require('../messaging/application')
 const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
-const { getQuestionAnswer } = require('./utils')
+
+
+const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const createModel = (data, backUrl, url) => {
   return {
@@ -43,9 +46,9 @@ const checkYarKeyReset = (thisAnswer, request) => {
 
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
-    if (url === '1000-birds' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1')) {
+    if (url === '1000-birds' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)) {
         return 'laying hens';
-    } else if (url === '1000-birds' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A2')) {
+    } else if (url === '1000-birds' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A2', ALL_QUESTIONS)) {
         return 'pullets';
     } else if (field.includes('£')) {
         return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0);

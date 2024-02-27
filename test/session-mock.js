@@ -1,4 +1,4 @@
-const commonFunctionsMock = (varList, returnType) => {
+const commonFunctionsMock = (varList, returnType, utilsList = {}) => {
     return jest.mock('ffc-grants-common-functionality', () => ({
         session: {
           setYarValue: (request, key, value) => null,
@@ -301,6 +301,24 @@ const commonFunctionsMock = (varList, returnType) => {
 
             return itemsList
           }
+        },
+        utils: {
+          getQuestionAnswer: (questionKey, answerKey, allQuestions) => {
+            if (Object.keys(utilsList).includes(answerKey)) return utilsList[answerKey]
+            else return null
+          },
+          getQuestionByKey: (questionKey, allQuestions) => {
+            return {
+              yarKey: 'testYarKey',
+              answers: [
+                {
+                  key: 'testKey',
+                  value: 'testValue'
+                }
+              ]
+            }
+          },
+          allAnswersSelected: (questionKey, allQuestions) => null,
         }
       }))
     }

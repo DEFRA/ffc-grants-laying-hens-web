@@ -1,20 +1,4 @@
-jest.mock('../../../../app/helpers/utils', () => {
-  const original = jest.requireActual('../../../../app/helpers/utils')
-  return {
-    ...original,
-    allAnswersSelected: jest.fn(),
-    getQuestionByKey: jest.fn().mockReturnValue({
-      yarKey: 'testYarKey',
-      answers: [
-        {
-          key: 'testKey',
-          value: 'testValue'
-        }
-      ]
-    })
-  }
-})
-const { allAnswersSelected } = require('../../../../app/helpers/utils')
+const { allAnswersSelected, getQuestionByKey } = require('ffc-grants-common-functionality').utils
 
 jest.mock('../../../../app/helpers/urls')
 const { getUrl } = require('../../../../app/helpers/urls')

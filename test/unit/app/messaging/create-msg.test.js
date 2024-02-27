@@ -13,6 +13,9 @@ describe('create-msg', () => {
     answerOptions: {
       getOptions: (data, question, conditionalHTML, request) => null,
       setOptionsLabel: (data, answers, conditonalHTML) => null
+    },
+    utils: {
+      getQuestionAnswer: (questionKey, answerKey, allQuestions) => null,
     }
   }));
   const { getYarValue } = require('ffc-grants-common-functionality').session
