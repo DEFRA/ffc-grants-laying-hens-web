@@ -50,6 +50,10 @@ const insertYarValue = (field, url, request) => {
         return 'laying hens';
     } else if (url === '1000-birds' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A2', ALL_QUESTIONS)) {
         return 'pullets';
+    } else if (url === 'current-multi-tier-system' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1')) {
+      return 'multi-tier aviary system';
+    }  else if (url === 'current-multi-tier-system' && getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A2')) {
+      return 'multi-tier system';
     } else if (field.includes('£')) {
         return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0);
     } else {

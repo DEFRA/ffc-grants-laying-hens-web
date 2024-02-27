@@ -715,7 +715,7 @@ const questionBank = {
           pageTitle: '',
           url: 'building-items',
           baseUrl: 'building-items',
-          backUrl: 'poultry-type',
+          backUrl: '1000-birds',
           nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A2'],
@@ -727,7 +727,6 @@ const questionBank = {
               elseUrl: 'replacing-insulation',
               dependantElseUrl: 'refurbishing-insulation'
             }
-
           },
           sidebar: {
             values: [{
@@ -3042,6 +3041,47 @@ const questionBank = {
           yarKey: 'currentSystem'
         },
         {
+          key: 'current-multi-tier-system',
+          order: 305,
+          title: 'Does your current building include a {{_poultryType_}}?',
+          hint: {
+            text: 'The building you are replacing or refurbishing for this project'
+          },
+          url: 'current-multi-tier-system',
+          baseUrl: 'current-multi-tier-system',
+          nextUrl: 'ramp-connection',
+          backUrl: 'current-system',
+          // preValidationKeys: ['currentSystem'],
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA want to encourage investment in high-welfare {{_poultryType_}}.',
+              }]
+            }]
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if your current building includes a {{_poultryType_}}'
+            }
+          ],
+          answers: [
+            {
+              key: 'current-multi-tier-system-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'current-multi-tier-system-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'currentMultiTierSystem'
+        },
+        {
           key: 'three-tiers',
           order: 190,
           title: 'Will the multi-tier system have 3 tiers or fewer directly above each other?',
@@ -3591,8 +3631,7 @@ const questionBank = {
             },
             {
               key: 'dark-brooders-A2',
-              value: 'No',
-              notEligible: true
+              value: 'No'
             },
           ],
           yarKey: 'darkBrooders'
