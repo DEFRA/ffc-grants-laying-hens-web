@@ -2,13 +2,19 @@ const { command } = require('yargs')
 const { crumbToken } = require('./test-helper')
 const { commonFunctionsMock } = require('../../../session-mock')
 
+const utilsList = {
+  'poultry-type-A1': 'hen',
+  'project-type-A1': 'Refurbishing an existing laying hen or pullet building',
+  'project-type-A2': 'Replacing an existing laying hen or pullet with a new building',
+}
+
 describe('Page: /building-items', () => {
   const varList = {
     poultryType: 'hen',
     projectType: 'Replacing an existing laying hen or pullet with a new building'
   }
 
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, utilsList)
 
   it('page loads successfully, with all the options - hen', async () => {
     const options = {

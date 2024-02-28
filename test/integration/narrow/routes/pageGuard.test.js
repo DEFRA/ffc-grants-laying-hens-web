@@ -9,6 +9,12 @@ const varListTemplate = {
   applicant: 'Farmer'
 }
 let varList
+const utilsList = {
+  'applicant-A1': 'Farmer',
+  'applicant-A2': 'Contractor',
+  'business-location-A1': 'Yes',
+  'legal-status-A12': 'None of the above',
+}
 
 jest.mock('../../../../app/config/question-bank', () => mockQuestionBank)
 
@@ -26,6 +32,16 @@ describe('Page Guard', () => {
     },
     regex: {
       SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig,
+    },
+    answerOptions: {
+      getOptions: (data, question, conditionalHTML, request) => null,
+      setOptionsLabel: (data, answers, conditonalHTML) => null
+    },
+    utils: {
+      getQuestionAnswer: (questionKey, answerKey, allQuestions) => {
+        if (Object.keys(utilsList).includes(answerKey)) return utilsList[answerKey]
+        else return null
+      }
     }
   }
   jest.mock('ffc-grants-common-functionality', () => mockSession)
@@ -91,6 +107,7 @@ describe('Page Guard', () => {
   it('OR - should redirect to start page if no key found', async () => { 
     varList.projectSubject = 'random'
     varList.applicant = 'random'
+
     server = await createServer()
     const getOptions = {
       method: 'GET',

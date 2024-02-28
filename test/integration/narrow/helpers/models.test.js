@@ -1,26 +1,10 @@
-jest.mock('../../../../app/helpers/utils', () => {
-  const original = jest.requireActual('../../../../app/helpers/utils')
-  return {
-    ...original,
-    allAnswersSelected: jest.fn(),
-    getQuestionByKey: jest.fn().mockReturnValue({
-      yarKey: 'testYarKey',
-      answers: [
-        {
-          key: 'testKey',
-          value: 'testValue'
-        }
-      ]
-    })
-  }
-})
-const { allAnswersSelected } = require('../../../../app/helpers/utils')
+const { allAnswersSelected, getQuestionByKey } = require('ffc-grants-common-functionality').utils
 
 jest.mock('../../../../app/helpers/urls')
 const { getUrl } = require('../../../../app/helpers/urls')
 
 jest.mock('ffc-grants-common-functionality')
-const { session } = require('ffc-grants-common-functionality')
+const { getYarValue } = require('ffc-grants-common-functionality').session
 
 describe('Models', () => {
   const question = {
@@ -67,29 +51,7 @@ describe('Models', () => {
       title: undefined,
       backUrl: undefined,
       hint: undefined,
-      items: {
-        classes: 'govuk-fieldset__legend--l',
-        id: undefined,
-        name: undefined,
-        fieldset: {
-          legend: {
-            classes: 'govuk-fieldset__legend--l',
-            isPageHeading: true,
-            text: undefined
-          }
-        },
-        hint: undefined,
-        items: [
-          {
-            checked: false,
-            conditional: undefined,
-            hint: 'hint',
-            selected: false,
-            text: 'answer_text',
-            value: 'mock_answer_value'
-          }
-        ]
-      },
+      items: undefined,
       sideBarText: {
         values: [
           expect.objectContaining({ heading: 'Eligibility' })
@@ -134,10 +96,10 @@ describe('Models', () => {
   })
 
   test('inspect getModel().backUrl', () => { // TODO: Refactor this
-    session.getYarValue.mockReturnValueOnce('mock-value')
-    session.getYarValue.mockReturnValueOnce('mock-value')
-    session.getYarValue.mockReturnValueOnce(undefined)
-    session.getYarValue.mockReturnValueOnce('mock-value')
+    getYarValue.mockReturnValueOnce('mock-value')
+    getYarValue.mockReturnValueOnce('mock-value')
+    getYarValue.mockReturnValueOnce(undefined)
+    getYarValue.mockReturnValueOnce('mock-value')
 
     getUrl.mockReturnValueOnce('remaining-costs')
     getUrl.mockReturnValueOnce('tenancy')
@@ -217,10 +179,10 @@ describe('Models', () => {
       }
     }
 
-    session.getYarValue.mockReturnValueOnce('mock-value')
-    session.getYarValue.mockReturnValueOnce('mock-value')
-    session.getYarValue.mockReturnValueOnce(undefined)
-    session.getYarValue.mockReturnValueOnce(undefined)
+    getYarValue.mockReturnValueOnce('mock-value')
+    getYarValue.mockReturnValueOnce('mock-value')
+    getYarValue.mockReturnValueOnce(undefined)
+    getYarValue.mockReturnValueOnce(undefined)
 
     expect(getModel([], questionForSidebar, {})).toEqual({
       type: 'mock_type',
@@ -228,29 +190,7 @@ describe('Models', () => {
       title: undefined,
       backUrl: undefined,
       hint: undefined,
-      items: {
-        classes: 'govuk-fieldset__legend--l',
-        id: undefined,
-        name: undefined,
-        fieldset: {
-          legend: {
-            classes: 'govuk-fieldset__legend--l',
-            isPageHeading: true,
-            text: undefined
-          }
-        },
-        hint: undefined,
-        items: [
-          {
-            checked: false,
-            conditional: undefined,
-            hint: 'hint',
-            selected: false,
-            text: 'answer_text',
-            value: 'mock_answer_value'
-          }
-        ]
-      },
+      items: undefined,
       sideBarText: {
         dependentQuestionKeys: [
           'storage-type', 'cover-type'

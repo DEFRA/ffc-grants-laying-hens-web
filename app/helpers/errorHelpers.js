@@ -1,4 +1,5 @@
-const { getQuestionAnswer } = require('../helpers/utils')
+const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
+const { ALL_QUESTIONS } = require('./../config/question-bank')
 
 const minMaxCheck = (value, min, max) =>
   value >= min && value <= max
@@ -30,7 +31,7 @@ const validateAnswerField = (value, validationType, details, payload) => {
           answerKey: standaloneAnswerKey
         }
       } = details
-      const standAloneAnswer = getQuestionAnswer(standaloneQuestionKey, standaloneAnswerKey)
+      const standAloneAnswer = getQuestionAnswer(standaloneQuestionKey, standaloneAnswerKey, ALL_QUESTIONS)
 
       if (selectedAnswer.includes(standAloneAnswer)) {
         return selectedAnswer.length === 1
