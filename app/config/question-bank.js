@@ -1100,66 +1100,6 @@ const questionBank = {
           yarKey: 'eggStoreAccess'
         },
         {
-          key: 'aviary-system',
-          order: 110,
-          title: 'Will the housing have a laying hen aviary system?',
-          pageTitle: '',
-          url: 'aviary-system',
-          baseUrl: 'aviary-system',
-          backUrl: 'egg-store-access',
-          nextUrl: 'aviary-welfare',
-          // preValidationKeys: ['poultryType'],
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `The housing must have a laying hen aviary system. 
-                
-                This cannot be a combi-cage aviary system.`,
-                items: []
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: `
-                <p class="govuk-body">
-                The hen housing must have a laying hen aviary system.
-                </p>`,
-            insertText: {
-              html: '<p>You must not install a combi-cage system in your grant-funded housing.</p>'
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          warning: {
-            text: 'You must not install a combi-cage system in your grant-funded housing.'
-          },
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the housing will have a laying hen aviary system'
-            }
-          ],
-          answers: [
-            {
-              key: 'aviary-system-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'aviary-system-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'aviarySystem'
-        },
-        {
           key: 'aviary-welfare',
           order: 115,
           title: 'Will the building have a high welfare aviary system?',
@@ -1217,6 +1157,67 @@ const questionBank = {
             }
           ],
           yarKey: 'aviaryWelfare'
+        },
+        {
+          key: 'aviary-system',
+          order: 110,
+          title: 'Will the aviary system have these features?',
+          url: 'aviary-system',
+          baseUrl: 'aviary-system',
+          backUrl: 'aviary-welfare',
+          nextUrl: 'mechanical-ventilation',
+          hint: {
+            html:`
+                  <p>The aviary system must have integrated:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>automatic manure removal belts</li>
+                    <li>non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk</li>
+                  </ul>`
+          },
+          // preValidationKeys: ['aviaryWelfare'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The aviary system must have an integrated automatic manure-removal belt and non-flicker LED lighting system`
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `
+              <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">The aviary system must have integrated:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>automatic manure removal belts</li>
+                    <li>non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk</li>
+                  </ul>
+              </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the aviary system will have these features'
+            }
+          ],
+          answers: [
+            {
+              key: 'aviary-system-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'aviary-system-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'aviarySystem'
         },
         {
           key: 'hen-veranda',
