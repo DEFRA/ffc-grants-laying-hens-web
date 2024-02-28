@@ -35,7 +35,7 @@ describe('Page: /pullet-housing-requirements', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the pullet housing will have these features')
+    expect(postResponse.payload).toContain('Select yes if the inside of the building will have these features')
   })
 
   it('user selects eligible option and /Replacing an existing laying hen or pullet with a new building/ at project type -> store user response and redirect to /replacing-insulation', async () => {
