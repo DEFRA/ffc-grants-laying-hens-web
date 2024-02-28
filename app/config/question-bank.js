@@ -2030,7 +2030,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the pullet housing will have these features'
+              error: 'Select yes if the inside of the building will have these features'
             }
           ],
           answers: [
