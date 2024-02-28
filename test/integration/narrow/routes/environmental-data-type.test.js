@@ -22,7 +22,7 @@ describe('Page: /environmental-data-type', () => {
     expect(response.payload).toContain('Inhalable dust')
     expect(response.payload).toContain('Other')
     expect(response.payload).toContain('or')
-    expect(response.payload).toContain('I will not monitor any poultry management data')
+    expect(response.payload).toContain('I will not collect and store additional environmental data')
   })
 
   it('no option selected -> show error message', async () => {
