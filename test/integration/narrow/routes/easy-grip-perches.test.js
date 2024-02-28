@@ -16,7 +16,7 @@ describe('Page: /easy-grip-perches', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the perches have a design feature that help the hen grip the perches?')
+    expect(response.payload).toContain('Will the perches have a design feature that help the hens grip the perches?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -30,7 +30,7 @@ describe('Page: /easy-grip-perches', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the perches have a design feature that help the pullet grip the perches?')
+    expect(response.payload).toContain('Will the perches have a design feature that help the pullets grip the perches?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -46,7 +46,7 @@ describe('Page: /easy-grip-perches', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the hen grip the perches')
+    expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the hens grip the perches')
   })
 
   it('no option selected -> show error message - pullet', async () => {
@@ -60,7 +60,7 @@ describe('Page: /easy-grip-perches', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the pullet grip the perches')
+    expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the pullets grip the perches')
   })
 
   it('user selects eligible option -> store user response and redirect to /building-biosecurity', async () => {
