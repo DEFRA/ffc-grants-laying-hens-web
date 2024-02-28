@@ -1,6 +1,6 @@
 export function validation () {
   let elements = document.querySelectorAll('input[type="checkbox"]')
-  const nonEligibleOptions = ['None of the above', 'I will not monitor any poultry management data']
+  const nonEligibleOptions = ['None of the above', 'I will not monitor any poultry management data', 'I will not collect and store additional environmental data']
 
     if (elements) {
       const elementsArr = Array.from(elements)
