@@ -3728,7 +3728,7 @@ const questionBank = {
             },
             {
               key: 'environmental-data-type-A5',
-              value: 'I will not monitor any poultry management data',
+              value: 'I will not collect and store additional environmental data',
             }
           ],
           yarKey: 'environmentalDataType'
