@@ -1589,11 +1589,11 @@ const questionBank = {
           },
           hint: {
             html: `<p>The housing lighting system must have:</p>
-                  <ul >
+                  <ul>
                       <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
                       <li>capacity for zonal dimming between 0 and 60 lux</li>
-                      <li>coverage of the entire floor-litter (scratch) area </li>
-                      <li>a simulated stepped dawn and dusk (HENS)</li>
+                      <li>coverage of the entire floor-litter (scratch) area</li>
+                      <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
                       <li>an option for red light to reduce feather pecking</li>
                   </ul>`
           },
@@ -1602,9 +1602,11 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
                   <p class="govuk-body">The housing lighting system must have:</p>
                   <ul>
-                      <li>the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)</li>
-                      <li>an option for red light</li>
-                      <li>a fail-safe standby device in case of electrical or other failure</li>
+                      <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
+                      <li>capacity for zonal dimming between 0 and 60 lux</li>
+                      <li>coverage of the entire floor-litter (scratch) area</li>
+                      <li>a simulated stepped dawn and dusk {{_poultryType_}}</li>
+                      <li>an option for red light to reduce feather pecking</li>
                   </ul>
                </div>`,
             messageLink: {
@@ -1630,7 +1632,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the housing’s lighting system will have these features'
+              error: 'Select yes if the building lighting system will have these features'
             }
           ],
           answers: [
