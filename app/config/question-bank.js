@@ -1106,8 +1106,8 @@ const questionBank = {
           pageTitle: '',
           url: 'aviary-system',
           baseUrl: 'aviary-system',
-          backUrl: 'egg-store-access',
-          nextUrl: 'aviary-welfare',
+          backUrl: 'aviary-welfare',
+          nextUrl: 'mechanical-ventilation',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
@@ -1166,7 +1166,7 @@ const questionBank = {
           pageTitle: '',
           url: 'aviary-welfare',
           baseUrl: 'aviary-welfare',
-          backUrl: 'aviary-system',
+          backUrl: 'lighting-features',
           nextUrl: 'aviary-system',
           hint: {
             text: 'This system must enable the birds to move between levels without flying or jumping more than one metre in height'
@@ -1426,7 +1426,7 @@ const questionBank = {
               nonDependentUrl: 'aviary-lighting-system'
             }
           },
-          nextUrl: 'ventilation-air-speed',
+          nextUrl: 'hen-ventilation-specification', // temporary url
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
@@ -1567,25 +1567,34 @@ const questionBank = {
         {
           key: 'lighting-features',
           order: 180,
-          title: 'Will the housing\'s lighting system have these features?',
+          title: 'Will the housing lighting system have these features?',
           pageTitle: '',
           url: 'lighting-features',
           baseUrl: 'lighting-features',
-          backUrl: 'lighting-system',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'refurbishing-insulation',
+              elseUrl: 'replacing-insulation'
+            }
+          },
           nextUrlObject: {
             dependentQuestionYarKey: ['poultryType'],
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'hen-veranda',
-              elseUrl: 'concrete-apron'
+              thenUrl: 'aviary-welfare',
+              elseUrl: 'multi-tier-system'
             }
           },
           hint: {
             html: `<p>The housing lighting system must have:</p>
                   <ul >
-                      <li>the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)</li>
-                      <li>an option for red light</li>
-                      <li>a fail-safe standby device in case of electrical or other failures</li>
+                      <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
+                      <li>capacity for zonal dimming between 0 and 60 lux</li>
+                      <li>coverage of the entire floor-litter (scratch) area </li>
+                      <li>a simulated stepped dawn and dusk (HENS)</li>
+                      <li>an option for red light to reduce feather pecking</li>
                   </ul>`
           },
           ineligibleContent: {
@@ -1602,6 +1611,17 @@ const questionBank = {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'The housing lighting system must have these features to promote positive bird behaviour and reduce stress.',
+                  items: [],
+                }]
+              }
+            ]
           },
           fundingPriorities: '',
           type: 'single-answer',
