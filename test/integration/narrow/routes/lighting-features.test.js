@@ -3,11 +3,16 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /lighting-features', () => {
   const varList = {
-    poultryType: '',
+    poultryType: 'pullet',
     projectType: '',
   }
 
-  commonFunctionsMock(varList, undefined)
+  const utilsList = {
+    'poultry-type-A1': 'hen',
+    'poultry-type-A2': 'pullet'
+  }
+  
+  commonFunctionsMock(varList, undefined, utilsList)
 
   it('page loads successfully, with all the options - hens', async () => {
     varList.poultryType = 'hen'
@@ -43,7 +48,7 @@ describe('Page: /lighting-features', () => {
     expect(response.payload).toContain('non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin')
     expect(response.payload).toContain('capacity for zonal dimming between 0 and 60 lux')
     expect(response.payload).toContain('coverage of the entire floor-litter (scratch) area')
-    expect(response.payload).toContain('a simulated stepped dawn and dusk (unless this is  already provided as part of an aviary lighting system)')
+    expect(response.payload).toContain('a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)')
     expect(response.payload).toContain('an option for red light to reduce feather pecking')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
@@ -125,7 +130,7 @@ describe('Page: /lighting-features', () => {
     expect(postResponse.payload).toContain('non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin')
     expect(postResponse.payload).toContain('capacity for zonal dimming between 0 and 60 lux')
     expect(postResponse.payload).toContain('coverage of the entire floor-litter (scratch) area')
-    expect(postResponse.payload).toContain('a simulated stepped dawn and dusk (unless this is  already provided as part of an aviary lighting system)')
+    expect(postResponse.payload).toContain('a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)')
     expect(postResponse.payload).toContain('an option for red light to reduce feather pecking')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })

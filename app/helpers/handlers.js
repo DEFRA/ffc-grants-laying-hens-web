@@ -62,7 +62,7 @@ const insertYarValue = (field, url, request) => {
         }
         case 'lighting-features':
           if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)) {
-            return ' (unless this is  already provided as part of an aviary lighting system)'
+            return ' (unless this is already provided as part of an aviary lighting system)'
           } else {
             return ''
           }

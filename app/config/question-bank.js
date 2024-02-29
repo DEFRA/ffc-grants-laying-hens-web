@@ -1605,7 +1605,7 @@ const questionBank = {
                       <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
                       <li>capacity for zonal dimming between 0 and 60 lux</li>
                       <li>coverage of the entire floor-litter (scratch) area</li>
-                      <li>a simulated stepped dawn and dusk {{_poultryType_}}</li>
+                      <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
                       <li>an option for red light to reduce feather pecking</li>
                   </ul>
                </div>`,
