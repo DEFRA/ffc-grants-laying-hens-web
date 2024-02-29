@@ -1,6 +1,8 @@
 const { getYarValue } = require('ffc-grants-common-functionality').session
 const { startPageUrl, serviceEndDate, serviceEndTime } = require('../config/server')
-const { getQuestionAnswer } = require('./utils')
+const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
+
+const { ALL_QUESTIONS } = require('./../config/question-bank')
 
 function isServiceDecommissioned(request) {
   const currentUrl = request.url.pathname.split('/').pop();
@@ -19,7 +21,7 @@ const guardDataCheck = (guardData, preValidationList, result, inverseResult, req
       // check for all keys (that every key and value pair exists)
 
       preValidationList.forEach(preValidation => {
-        if (preValidation?.values?.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length === 0) {
+        if (preValidation?.values?.filter(answer => getQuestionAnswer(preValidation.url, answer, ALL_QUESTIONS) === getYarValue(request, preValidation.key)).length === 0) {
           result = true
         }
       })
@@ -28,7 +30,7 @@ const guardDataCheck = (guardData, preValidationList, result, inverseResult, req
     case 'OR':
 
       preValidationList.forEach(preValidation => {
-        if (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0) {
+        if (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer, ALL_QUESTIONS) === getYarValue(request, preValidation.key)).length > 0) {
           inverseResult = false
         }
       })
@@ -42,7 +44,7 @@ const guardDataCheck = (guardData, preValidationList, result, inverseResult, req
 
         if (
           (!getYarValue(request, preValidation.key)) ||
-          (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer) === getYarValue(request, preValidation.key)).length > 0)){
+          (preValidation.values.filter(answer => getQuestionAnswer(preValidation.url, answer, ALL_QUESTIONS) === getYarValue(request, preValidation.key)).length > 0)){
           result = true
         }
       })

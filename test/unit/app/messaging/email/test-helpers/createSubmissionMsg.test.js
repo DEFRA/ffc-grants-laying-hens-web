@@ -1,8 +1,14 @@
 const agentSubmission = require('./submission-agent.json')
 const farmerSubmission = require('./submission-farmer.json')
 const desirabilityScore = require('../../../../../../app/helpers/desirability-score.json')
+const { commonFunctionsMock } = require('./../../../../../session-mock')
+
 describe('Create submission message', () => {
   const mockPassword = 'mock-pwd'
+
+  const varList = {}
+  commonFunctionsMock(varList, undefined)
+
 
   jest.mock('../../../../../../app/messaging/email/config/email', () => ({
     notifyTemplate: 'mock-template'

@@ -1,7 +1,8 @@
 const urlPrefix = require('../config/server').urlPrefix
 const { getYarValue } = require('ffc-grants-common-functionality').session
+const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { ALL_QUESTIONS } = require('../config/question-bank')
-const { getQuestionAnswer } = require('./utils')
+
 const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
   const scorePath = `${urlPrefix}/score`
   const chekDetailsPath = `${urlPrefix}/check-details`
@@ -21,7 +22,7 @@ const getUrl = (urlObject, url, request, secBtn, _currentUrl) => {
   }
 
   if (dependantElseUrl &&
-      getYarValue(request, dependentElseUrlYarKey) === getQuestionAnswer(dependentElseUrlQuestionKey, dependentElseUrlAnswerKey)) {
+      getYarValue(request, dependentElseUrlYarKey) === getQuestionAnswer(dependentElseUrlQuestionKey, dependentElseUrlAnswerKey, ALL_QUESTIONS)) {
       elseUrl = dependantElseUrl
   }
 

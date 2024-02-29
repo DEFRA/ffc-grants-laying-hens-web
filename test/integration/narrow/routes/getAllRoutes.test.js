@@ -1,5 +1,6 @@
 const { ALL_QUESTIONS } = require('../../../../app/config/question-bank')
 const scoreData = require('../../../data/score-data')
+const { commonFunctionsMock } = require('../../../session-mock')
 
 let varList
 ALL_QUESTIONS.forEach(question => {
@@ -10,18 +11,7 @@ ALL_QUESTIONS.forEach(question => {
   }
 })
 
-jest.doMock('ffc-grants-common-functionality', () => ({
-  session: {
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
-    }
-  },
-  regex: {
-    PROJECT_COST_REGEX: /^[1-9]\d*$/
-  }
-}))
+commonFunctionsMock(varList, undefined)
 
 const newSender = require('../../../../app/messaging/application')
 const createMsg = require('../../../../app/messaging/create-msg')
