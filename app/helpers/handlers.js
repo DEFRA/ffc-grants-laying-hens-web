@@ -56,9 +56,9 @@ const insertYarValue = (field, url, request) => {
         }
       case 'current-multi-tier-system':
         if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)){
-          return 'multi-tier aviary system'
+          return 'multi-tier aviary systems'
         } else {
-          return 'multi-tier system'
+          return 'multi-tier systems'
         }
       default:
         if (field.includes('£')) {
