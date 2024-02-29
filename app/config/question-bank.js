@@ -2013,12 +2013,12 @@ const questionBank = {
         {
           key: 'rearing-aviary-system',
           order: 215,
-          title: 'Will your rearing aviary system have these features?',
+          title: 'Will the rearing aviary system have these features?',
           pageTitle: '',
           url: 'rearing-aviary-system',
           baseUrl: 'rearing-aviary-system',
           backUrl: 'multi-tier-system',
-          nextUrl: 'mechanical-ventilation',
+          nextUrl: 'housing-density',
           hint: {
             html: `
                 <p>The rearing aviary system must have:</p>
@@ -2054,7 +2054,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if your rearing aviary system will have these features'
+              error: 'Select yes if the your rearing aviary system will have these features'
             }
           ],
           answers: [
