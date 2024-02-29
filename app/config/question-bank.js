@@ -1826,25 +1826,26 @@ const questionBank = {
         {
           key: 'housing-density',
           order: 200,
-          title: 'Will the pullets be housed at a maximum stocking density of 20kg per metres squared (m²) of the total usable area at 16 weeks of age?',
+          title: 'Will the pullets be housed within the maximum stocking density when they are 16 weeks old?',
           pageTitle: '',
           url: 'housing-density',
           baseUrl: 'housing-density',
-          backUrl: 'vaccination-lobby',
-          nextUrl: 'pullet-housing-requirements',
-          hint: {
-            text: 'This must be 33kg per m² at floor level'
+          backUrlObject: {
+            dependentQuestionYarKey: 'multiTierSystem',
+            dependentAnswerKeysArray: ['multi-tier-system-A1'],
+            urlOptions: {
+              thenUrl: 'rearing-aviary-system',
+              elseUrl: 'step-up-system'
+            }
           },
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:',
-                  items: ['20kg per m² of the total usable area', '33kg per m² of the total usable area at floor level'],
-                }]
-              }
-            ]
+          nextUrl: 'mechanical-ventilation',
+          hint: {
+            html: `
+            <p>The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+              <ul class="govuk-list--bullet">
+                <li>20kg per m2 of the total usable area</li>
+                <li>33kg per m2 of the total usable area at floor level</li>
+              </ul>`
           },
           ineligibleContent: {
             messageContent: `
@@ -1867,7 +1868,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the pullets will be housed at a maximum stocking density'
+              error: 'Select yes if the pullets will be housed within the maximum stocking density'
             }
           ],
           answers: [
