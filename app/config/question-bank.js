@@ -2073,7 +2073,7 @@ const questionBank = {
         {
           key: 'step-up-system',
           order: 220,
-          title: 'Will your step-up system have these features?',
+          title: 'Will the step-up system have these features?',
           pageTitle: '',
           url: 'step-up-system',
           baseUrl: 'step-up-system',
@@ -2108,7 +2108,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if your step-up system will have these features'
+              error: 'Select yes if the your step-up system will have these features'
             }
           ],
           answers: [

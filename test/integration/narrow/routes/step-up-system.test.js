@@ -14,7 +14,7 @@ describe('Page: /step-up-system', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will your step-up system have these features?')
+    expect(response.payload).toContain('Will the step-up system have these features?')
     expect(response.payload).toContain('The step-up system must have:')
     expect(response.payload).toContain('height-adjustable tiers that may include food and water at, or before, 10 days')
     expect(response.payload).toContain('welfare ramps')
@@ -32,7 +32,7 @@ describe('Page: /step-up-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if your step-up system will have these features')
+    expect(postResponse.payload).toContain('Select yes if the your step-up system will have these features')
   })
 
   it('user selects eligible option -> store user response and redirect to /mechanical-ventilation', async () => {
