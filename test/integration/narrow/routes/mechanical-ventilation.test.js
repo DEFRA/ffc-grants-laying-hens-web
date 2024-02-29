@@ -70,7 +70,7 @@ describe('Page: /mechanical-ventilation', () => {
     expect(postResponse.payload).toContain('Select yes if the pullet housing will have a mechanical ventilation system with these features')
   })
 
-  it('user selects eligible option -> store user response and redirect to /ventilation-air-speed', async () => {
+  it('user selects eligible option -> store user response and redirect to /hen-ventilation-rate', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/mechanical-ventilation`,
@@ -80,7 +80,7 @@ describe('Page: /mechanical-ventilation', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('ventilation-air-speed')
+    expect(postResponse.headers.location).toBe('hen-ventilation-rate')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
