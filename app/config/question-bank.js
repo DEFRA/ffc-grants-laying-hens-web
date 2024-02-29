@@ -1997,11 +1997,11 @@ const questionBank = {
         {
           key: 'multi-tier-system',
           order: 210,
-          title: 'Which multi-tier system will the pullet housing have?',
+          title: 'Which multi-tier system will have the building have?',
           pageTitle: '',
           url: 'multi-tier-system',
           baseUrl: 'multi-tier-system',
-          backUrl: 'pullet-housing-requirements',
+          backUrl: 'lighting-features',
           sidebar: {
             values: [
               {
@@ -2013,7 +2013,7 @@ const questionBank = {
             ]
           },
           ineligibleContent: {
-            messageContent: 'The pullet housing must have a multi-tier system.',
+            messageContent: 'The building must have a multi-tier system.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -2026,7 +2026,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what multi-tier system the pullet housing will have'
+              error: 'Select what multi-tier system the building will have'
             }
           ],
           answers: [
