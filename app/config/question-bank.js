@@ -13,13 +13,13 @@ const {
   POSTCODE_REGEX
  } = require('ffc-grants-common-functionality').regex
 
+ const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
+
 const {
   MIN_GRANT,
   MAX_GRANT,
   GRANT_PERCENTAGE
 } = require('../helpers/grant-details')
-
-const { LIST_COUNTIES } = require('../helpers/all-counties')
 
 /**
  * ----------------------------------------------------------------

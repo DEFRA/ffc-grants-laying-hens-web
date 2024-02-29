@@ -6,6 +6,16 @@ describe('create-msg', () => {
     },
     regex: {
       PROJECT_COST_REGEX: /^[1-9]\d*$/
+    },
+    counties: {
+      LIST_COUNTIES: ['Derbyshire', 'Leicestershire', 'Lincolnshire', 'Northamptonshire', 'Nottinghamshire', 'Rutland']
+    },
+    answerOptions: {
+      getOptions: (data, question, conditionalHTML, request) => null,
+      setOptionsLabel: (data, answers, conditonalHTML) => null
+    },
+    utils: {
+      getQuestionAnswer: (questionKey, answerKey, allQuestions) => null,
     }
   }));
   const { getYarValue } = require('ffc-grants-common-functionality').session

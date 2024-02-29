@@ -6,7 +6,12 @@ describe('Page: /current-multi-tier-system', () => {
     poultryType: 'hen',
   }
 
-  commonFunctionsMock(varList, undefined)
+  const utilsList = {
+    'poultry-type-A1': 'hen',
+    'poultry-type-A2': 'pullet'
+  }
+
+  commonFunctionsMock(varList, undefined, utilsList)
 
   it('page loads successfully, with all the options - hen', async () => {
     const options = {

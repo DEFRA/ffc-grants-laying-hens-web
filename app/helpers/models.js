@@ -1,12 +1,14 @@
 const { getUrl } = require('../helpers/urls')
-const { getOptions } = require('../helpers/answer-options')
 const { getYarValue } = require('ffc-grants-common-functionality').session
-const { getQuestionByKey, allAnswersSelected } = require('../helpers/utils')
+const { getOptions } = require('ffc-grants-common-functionality').answerOptions
+const { getQuestionByKey, allAnswersSelected } = require('ffc-grants-common-functionality').utils
+const { ALL_QUESTIONS } = require('./../config/question-bank')
+
 
 const getDependentSideBar = (sidebar, request) => {
   const { values, dependentQuestionKeys } = sidebar
   dependentQuestionKeys.forEach((dependentQuestionKey, index) => {
-    const yarKey = getQuestionByKey(dependentQuestionKey).yarKey
+    const yarKey = getQuestionByKey(dependentQuestionKey, ALL_QUESTIONS).yarKey
     const selectedAnswers = getYarValue(request, yarKey)
 
     if (selectedAnswers) {
@@ -63,7 +65,7 @@ const getModel = (data, question, request, conditionalHtml = '') => {
   let warningDetails
   if (warningCondition) {
     const { dependentWarningQuestionKey, dependentWarningAnswerKeysArray } = warningCondition
-    if (allAnswersSelected(request, dependentWarningQuestionKey, dependentWarningAnswerKeysArray)) {
+    if (allAnswersSelected(request, dependentWarningQuestionKey, dependentWarningAnswerKeysArray, ALL_QUESTIONS)) {
       warningDetails = warningCondition.warning
     }
   } else if (warning) {
