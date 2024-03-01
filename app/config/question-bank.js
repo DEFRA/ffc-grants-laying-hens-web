@@ -1483,8 +1483,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['multi-tier-system-A1'],
             urlOptions: {
               thenUrl: 'rearing-aviary-system',
-              elseUrl: 'step-up-system',
-              nonDependentUrl: 'aviary-lighting-system'
+              elseUrl: 'step-up-system'
             }
           },
           nextUrl: 'hen-ventilation-specification', // temporary url
