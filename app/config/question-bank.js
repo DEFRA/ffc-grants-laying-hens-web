@@ -1467,6 +1467,70 @@ const questionBank = {
           yarKey: 'mechanicalVentilation'
         },
         {
+          key: 'pullet-ventilation-specification',
+          order: 124,
+          title: 'Will the ventilation system be fit for purpose in extreme heat?',
+          hint: {
+            html: `
+                <p>In extreme heat, the ventilation system must be able to provide:</p>
+                <ul class="govuk-list--bullet">
+                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>a maximum ventilation rate of 9,000m3 per hour per 1000 birds</li>
+                </ul>`
+          },
+          url: 'pullet-ventilation-specification',
+          baseUrl: 'pullet-ventilation-specification',
+          backUrl: 'mechanical-ventilation',
+          nextUrl: 'pullet-veranda',
+          // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: `The ventilation system must be able prevent the heat that the birds 
+                  generate from increasing the house temperature by more 
+                  than 3°C above the external ambient temperature. `
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: `
+              <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
+                <ul class="govuk-list--bullet">
+                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>a maximum ventilation rate of 9,000m3 per hour per 1000 birds.</li>
+                </ul>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the ventilation system will be fit for purpose in extreme heat'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-ventilation-specification-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'pullet-ventilation-specification-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'pulletVentilationSpecification'
+        },
+        {
           key: 'lighting-features',
           order: 180,
           title: 'Will the housing lighting system have these features?',
@@ -1510,7 +1574,7 @@ const questionBank = {
                       <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
                       <li>an option for red light to reduce feather pecking</li>
                   </ul>
-               </div>`,
+              </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
