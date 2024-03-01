@@ -1106,8 +1106,8 @@ const questionBank = {
           pageTitle: '',
           url: 'aviary-system',
           baseUrl: 'aviary-system',
-          backUrl: 'egg-store-access',
-          nextUrl: 'aviary-welfare',
+          backUrl: 'aviary-welfare',
+          nextUrl: 'mechanical-ventilation',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
@@ -1166,7 +1166,7 @@ const questionBank = {
           pageTitle: '',
           url: 'aviary-welfare',
           baseUrl: 'aviary-welfare',
-          backUrl: 'aviary-system',
+          backUrl: 'lighting-features',
           nextUrl: 'aviary-system',
           hint: {
             text: 'This system must enable the birds to move between levels without flying or jumping more than one metre in height'
@@ -1426,7 +1426,7 @@ const questionBank = {
               nonDependentUrl: 'aviary-lighting-system'
             }
           },
-          nextUrl: 'ventilation-air-speed',
+          nextUrl: 'hen-ventilation-specification', // temporary url
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
@@ -1565,88 +1565,36 @@ const questionBank = {
           yarKey: 'henVentilationRate'
         },
         {
-          key: 'ventilation-air-quality',
-          order: 140,
-          title: 'Will the ventilation maintain the required air quality parameters?',
-          pageTitle: '',
-          url: 'ventilation-air-quality',
-          baseUrl: 'ventilation-air-quality',
-          backUrlObject: {
-            dependentQuestionYarKey: 'poultryType',
-            dependentAnswerKeysArray: ['poultry-type-A1'],
-            urlOptions: {
-              thenUrl: 'hen-ventilation-rate',
-              elseUrl: 'pullet-ventilation-rate'
-            }
-          },
-          nextUrl: 'lighting-system',
-          ineligibleContent: {
-            messageContent: `
-                <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
-                      <ul>
-                        <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
-                        <li>percentage relative humidity (%rH) level of 40% to 70%</li>
-                      </ul>
-                </div>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          hint: {
-            html: `
-                <p>The ventilation must maintain air quality (at bird head height of less than 50cm) at a:</p>
-                <ul class="govuk-list--bullet">
-                    <li>carbon dioxide level of less than 3,000 parts per million (ppm)</li>
-                    <li>percentage relative humidity (%rH) level of 40% to 70%</li>
-                </ul>`
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the ventilation will maintain the required air quality parameters'
-            }
-          ],
-          answers: [
-            {
-              key: 'ventilation-air-quality-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'ventilation-air-quality-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'ventilationAirQuality'
-        },
-        {
           key: 'lighting-features',
           order: 180,
-          title: 'Will the housing\'s lighting system have these features?',
+          title: 'Will the housing lighting system have these features?',
           pageTitle: '',
           url: 'lighting-features',
           baseUrl: 'lighting-features',
-          backUrl: 'lighting-system',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A1'],
+            urlOptions: {
+              thenUrl: 'refurbishing-insulation',
+              elseUrl: 'replacing-insulation'
+            }
+          },
           nextUrlObject: {
             dependentQuestionYarKey: ['poultryType'],
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'hen-veranda',
-              elseUrl: 'concrete-apron'
+              thenUrl: 'aviary-welfare',
+              elseUrl: 'multi-tier-system'
             }
           },
           hint: {
             html: `<p>The housing lighting system must have:</p>
-                  <ul >
-                      <li>the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)</li>
-                      <li>an option for red light</li>
-                      <li>a fail-safe standby device in case of electrical or other failures</li>
+                  <ul>
+                      <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
+                      <li>capacity for zonal dimming between 0 and 60 lux</li>
+                      <li>coverage of the entire floor-litter (scratch) area</li>
+                      <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
+                      <li>an option for red light to reduce feather pecking</li>
                   </ul>`
           },
           ineligibleContent: {
@@ -1654,15 +1602,28 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
                   <p class="govuk-body">The housing lighting system must have:</p>
                   <ul>
-                      <li>the ability to provide an automatic stepped dawn and dusk lighting environment (unless this is already provided as part of an aviary lighting system)</li>
-                      <li>an option for red light</li>
-                      <li>a fail-safe standby device in case of electrical or other failure</li>
+                      <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
+                      <li>capacity for zonal dimming between 0 and 60 lux</li>
+                      <li>coverage of the entire floor-litter (scratch) area</li>
+                      <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
+                      <li>an option for red light to reduce feather pecking</li>
                   </ul>
                </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: 'The housing lighting system must have these features to promote positive bird behaviour and reduce stress.',
+                  items: [],
+                }]
+              }
+            ]
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -1671,7 +1632,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the housing’s lighting system will have these features'
+              error: 'Select yes if the building lighting system will have these features'
             }
           ],
           answers: [

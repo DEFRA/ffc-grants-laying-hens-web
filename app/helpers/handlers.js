@@ -60,6 +60,12 @@ const insertYarValue = (field, url, request) => {
         } else {
           return 'multi-tier systems'
         }
+        case 'lighting-features':
+          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)) {
+            return ' (unless this is already provided as part of an aviary lighting system)'
+          } else {
+            return ''
+          }
       default:
         if (field.includes('£')) {
           return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
@@ -77,10 +83,24 @@ const titleCheck = (question, title, url, request) => {
   if (title?.includes('{{_')) {
     question = {
       ...question,
-      title: insertYarValue(title,url, request)
+      title: insertYarValue(title, url, request)
     }
   }
 
+  return question
+}
+
+const hintTextCheck = (question, hint, url, request) => {
+  if (hint?.html?.includes('{{_')) {
+    question = {
+      ...question,
+      hint: {
+            ...hint,
+            html: insertYarValue(hint.html,url, request)
+      }
+    }
+  }
+  
   return question
 }
 
@@ -283,7 +303,7 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 }
 
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, yarKey, ineligibleContent } = question
+  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
@@ -295,6 +315,7 @@ const getPage = async (question, request, h) => {
   question = titleCheck(question, title, url, request)
   question = sidebarCheck(question, url, request)
   question = ineligibleContentCheck(question, ineligibleContent, url, request)
+  question = hintTextCheck(question, hint, url, request)
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
@@ -369,7 +390,7 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, type, validate } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
 
   if (baseUrl !== 'score') {
@@ -381,6 +402,7 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = validateErrorCheck(currentQuestion, validate, baseUrl, request)
   currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
   currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
+  currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   const NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }

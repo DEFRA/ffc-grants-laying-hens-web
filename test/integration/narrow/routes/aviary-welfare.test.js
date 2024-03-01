@@ -72,7 +72,7 @@ describe('Page: /aviary-welfare', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"aviary-system\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"lighting-features\" class=\"govuk-back-link\">Back</a>')
   })
 
 })
