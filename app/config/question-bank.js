@@ -1528,56 +1528,6 @@ const questionBank = {
           yarKey: 'mechanicalVentilation'
         },
         {
-          key: 'hen-ventilation-rate',
-          order: 135,
-          title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 10,800m³ per hour per 1000 hens?',
-          pageTitle: '',
-          url: 'hen-ventilation-rate',
-          baseUrl: 'hen-ventilation-rate',
-          backUrl: 'mechanical-ventilation',
-          nextUrl: 'ventilation-air-quality',
-          hint: {
-            text: 'For birds up to 2.5kg in body mass'
-          },
-          ineligibleContent: {
-            messageContent: 'The housing ventilation must have a ventilation rate of 10,800m³ per hour per 1000 hens.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The ventilation system must be able to provide a ventilation rate (MXVR) of 10,800m³ per hour per 1000 hens in the case of high heat scenarios.'
-              }]
-            }]
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the ventilation system will meet the ventilation rate'
-            }
-          ],
-          answers: [
-            {
-              key: 'hen-ventilation-rate-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'hen-ventilation-rate-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'henVentilationRate'
-        },
-        {
           key: 'lighting-features',
           order: 180,
           title: 'Will the housing lighting system have these features?',
@@ -2144,55 +2094,6 @@ const questionBank = {
             },
           ],
           yarKey: 'stepUpSystem'
-        },
-        {
-          key: 'pullet-ventilation-rate',
-          order: 225,
-          title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 9,000m³ per hour per 1000 pullets?',
-          url: 'pullet-ventilation-rate',
-          baseUrl: 'pullet-ventilation-rate',
-          backUrl: 'mechanical-ventilation',
-          nextUrl: 'ventilation-air-quality',
-          hint: {
-            text: 'For birds up to 2kg in body mass'
-          },
-          ineligibleContent: {
-            messageContent: 'The housing ventilation must have a ventilation rate of 9,000m³ per hour per 1000 pullets.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The ventilation system must be able to provide a ventilation rate (MXVR) of 9,000m³ per hour per 1000 pullets in the case of high heat scenarios.'
-              }]
-            }]
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the ventilation system will meet the ventilation rate'
-            }
-          ],
-          answers: [
-            {
-              key: 'pullet-ventilation-rate-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'pullet-ventilation-rate-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'pulletVentilationRate'
         },
         {
           key: 'vehicle-washing',
