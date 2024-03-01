@@ -788,7 +788,7 @@ const questionBank = {
           nextUrl: 'applicant-type',
           hint: {
             html: `You must submit an application for each building or veranda project.<br/><br/>
-                  The maximum total grant amount each business can apply for is £500,000 for building projects, 
+                  The maximum grant amount each business can apply for is £500,000 for building projects, 
                   or £100,000 for veranda projects.`
           },
           ineligibleContent: {
