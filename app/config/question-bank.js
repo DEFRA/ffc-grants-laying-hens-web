@@ -732,7 +732,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The grant-funded building must have these design features to 
+                para: `The building must have these design features to 
                 meet the grant priority of improving biosecurity.`
               }]
             }]
