@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 
 const utilsList = {
   'poultry-type-A1': 'hen',
-  'poutlry-type-A2': 'pullet'
+  'poultry-type-A2': 'pullet'
 }
 
 describe('Page: /1000-birds', () => {
