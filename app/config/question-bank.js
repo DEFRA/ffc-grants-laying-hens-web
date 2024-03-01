@@ -1419,7 +1419,7 @@ const questionBank = {
           url: 'hen-veranda-biosecurity',
           baseUrl: 'hen-veranda-biosecurity',
           backUrl: 'hen-veranda-features',
-          nextUrl: 'hen-pop-holes',
+          nextUrl: 'concrete-apron',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
@@ -1610,77 +1610,6 @@ const questionBank = {
             }
           ],
           yarKey: 'lightingFeatures'
-        },
-        {
-          key: 'hen-pop-holes',
-          order: 185,
-          title: 'Will the internal hen housing have lockable pop holes for the hens to enter the veranda through?',
-          pageTitle: '',
-          url: 'hen-pop-holes',
-          baseUrl: 'hen-pop-holes',
-          backUrl: 'hen-veranda-biosecurity',
-          nextUrl: 'concrete-apron',
-          hint: {
-            text: 'You must not put perches in front of the pop holes'
-          },
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'Pop holes must:',
-                  items: [
-                      'be at least 35cm high and 40cm wide',
-                      'extend along the entire length of the building',
-                  ],
-                  additionalPara: `
-                  The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
-
-                  The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.`
-                }]
-              }
-            ]
-          },
-          ineligibleContent: {
-            messageContent: 
-            `<p class="govuk-body">Pop holes must:</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li>be at least 35cm high and 40cm wide</li>
-                    <li>extend along the entire length of the building</li>
-                </ul>
-            <p class="govuk-body">The pop hole openings must add up to a total of 2 metres for every 1,000 hens.</p>`,
-            insertText: {
-              html: `
-                  <p>The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.</p>
-                  <p>You must not put perches in front of the pop holes.</p>`    
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the internal hen housing will have lockable pop holes'
-            }
-          ],
-          answers: [
-            {
-              key: 'hen-pop-holes-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'hen-pop-holes-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'henPopHoles'
         },
         {
           key: 'concrete-apron',
@@ -2391,80 +2320,6 @@ const questionBank = {
             }
           ],
           yarKey: 'verandaBiosecurity'
-        },
-        {
-          key: 'veranda-pop-holes',
-          order: 260,
-          title: 'Will the internal {{_poultryType_}} housing have lockable pop holes for the hens to enter the veranda through?',
-          pageTitle: '',
-          url: 'veranda-pop-holes',
-          baseUrl: 'veranda-pop-holes',
-          backUrl: 'veranda-biosecurity',
-          nextUrl: 'veranda-project-cost',
-          hint: {
-            text: 'You must not put perches in front of the pop holes'
-          },
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'Pop holes must:',
-                  items: [
-                      'be at least 35cm high and 40cm wide',
-                      'extend along the entire length of the building',
-                  ],
-                  additionalPara: `
-                  The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
-
-                  The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.`
-                }]
-              }
-            ]
-          },
-          ineligibleContent: {
-            messageContent: `
-            <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">Pop holes must:</p>
-                <ul>
-                    <li>be at least 35cm high and 40cm wide</li>
-                    <li>extend along the entire length of the building</li>
-                </ul>
-                <p>The pop hole openings must add up to a total of 2 metres for every 1,000 hens.</p>
-            </div>`,
-            insertText: {
-              html: `
-                  <p>The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.</p>
-                  <p>You must not put perches in front of the pop holes.</p>
-              `
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the internal {{_poultryType_}} housing will have lockable pop holes'
-            }
-          ],
-          answers: [
-            {
-              key: 'veranda-pop-holes-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'veranda-pop-holes-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'verandaPopHoles'
         },
         {
           key: 'veranda-project-cost',

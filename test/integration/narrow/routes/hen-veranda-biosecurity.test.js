@@ -36,7 +36,7 @@ describe('Page: /hen-veranda-biosecurity', () => {
     expect(postResponse.payload).toContain('Select yes if the veranda will have the capacity to be made biosecure')
   })
 
-  it('user selects eligible option -> store user response and redirect to /hen-pop-holes', async () => {
+  it('user selects eligible option -> store user response and redirect to /concrete-apron', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-veranda-biosecurity`,
@@ -46,7 +46,7 @@ describe('Page: /hen-veranda-biosecurity', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('hen-pop-holes')
+    expect(postResponse.headers.location).toBe('concrete-apron')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
