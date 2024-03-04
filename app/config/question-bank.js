@@ -2194,29 +2194,23 @@ const questionBank = {
           nextUrl: 'veranda-biosecurity',
           hint: {
             html: `
-                  <p>The veranda of the housing must have:</p>
+                  <p>The veranda must have a:</p>
                   <ul class="govuk-list--bullet">
                     <li>a solid concrete floor</li>
                     <li>a waterproof insulated roof</li>
-                    <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
                     <li>a perimeter wall at least 1 metre high</li>
-                    <li>lockable pop holes within the perimeter wall, unless the veranda forms part of an indoor barn system</li>
-                    <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
                     <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                   </ul>`
           },
           ineligibleContent: {
             messageContent: `
                 <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">The veranda of the housing must have:</p>
+                <p class="govuk-body">The veranda must have a:</p>
                       <ul>
                         <li>a solid concrete floor</li>
                         <li>a waterproof insulated roof</li>
-                        <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
                         <li>a perimeter wall at least 1 metre high</li>
-                        <li>lockable pop holes in the perimeter wall, unless the veranda forms part of an indoor barn system</li>
-                        <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
-                        <li>a dimmable LED lighting system between 0 lux and 60 lux.</li>
+                        <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                       </ul>
                 </div>`,
             messageLink: {
@@ -2224,7 +2218,6 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
