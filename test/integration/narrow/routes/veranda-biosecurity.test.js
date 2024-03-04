@@ -14,8 +14,10 @@ describe('Page: /veranda-biosecurity', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the veranda have the capacity to be made biosecure with mesh that has a spacing of 6mm or less?')
-    expect(response.payload).toContain('This is to stop wild birds and rodents from entering during housing orders')
+    expect(response.payload).toContain('Will the veranda be biosecure?')
+    expect(response.payload).toContain('The veranda must have:')
+    expect(response.payload).toContain('a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended')
+    expect(response.payload).toContain('closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -30,7 +32,7 @@ describe('Page: /veranda-biosecurity', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the veranda will have the capacity to be made biosecure')
+    expect(postResponse.payload).toContain('Select yes if the veranda will be biosecure')
   })
 
   it('user selects eligible option -> store user response and redirect to /veranda-pop-holes', async () => {
@@ -56,7 +58,9 @@ describe('Page: /veranda-biosecurity', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The veranda must be capable of being secured with mesh (with a maximum of 6mm spacing) during housing orders.')
+    expect(postResponse.payload).toContain('The veranda must have:')
+    expect(postResponse.payload).toContain('a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended')
+    expect(postResponse.payload).toContain('closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
