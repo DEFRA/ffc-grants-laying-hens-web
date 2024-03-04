@@ -50,7 +50,7 @@ describe('Page: /poultry-type', () => {
     expect(postResponse.headers.location).toBe('1000-birds')
   })
 
-  it('user selects eligible option and projectType is `Adding a veranda only to an existing laying hen or pullet building` -> store user response and redirect to /veranda-only', async () => {
+  it('user selects eligible option and projectType is `Adding a veranda only to an existing laying hen or pullet building` -> store user response and redirect to /veranda-only-size', async () => {
     varList.projectType = 'Adding a veranda only to an existing laying hen or pullet building'
     const postOptions = {
       method: 'POST',
@@ -61,7 +61,7 @@ describe('Page: /poultry-type', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('veranda-only')
+    expect(postResponse.headers.location).toBe('veranda-only-size')
   })
 
   it('user selects ineligible option `None of the above` -> display ineligible page', async () => {

@@ -596,7 +596,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectType',
             dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
-              thenUrl: 'veranda-only',
+              thenUrl: 'veranda-only-size',
               elseUrl: '1000-birds'
             }
           },
@@ -2117,53 +2117,71 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
-          key: 'veranda-only',
+          key: 'veranda-only-size',
           order: 245,
-          title: 'Will the veranda be at least the same size as 30% of the indoor bird housing area footprint?',
-          pageTitle: '',
-          url: 'veranda-only',
-          baseUrl: 'veranda-only',
+          title: 'How big will the veranda be?',
+          url: 'veranda-only-size',
+          baseUrl: 'veranda-only-size',
           backUrl: 'poultry-type',
           nextUrl: 'veranda-features',
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The veranda must be at least the same size as 30% of the indoor bird housing area footprint. 
-                
-                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`
+                para: `The veranda must be either:`,
+                items: ['4 metres wide or more along the length of the bird housing area', '30% or more of the size of the indoor bird housing area footprint.']
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: 'The veranda must be at least the same size as 30% of the indoor bird housing area footprint in size.',
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">The veranda must be either:</p>
+                <ul class="govuk-list--bullet">
+                    <li>4 metres wide or more along the length of the bird</li>
+                    <li>housing area</li>
+                    <li>30% or more of the size of the indoor bird housing area footprint.</li>
+                </ul>
+            </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          type: 'multi-answer',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the veranda will be at least the same size as 30% of the indoor bird housing area footprint'
+              error: 'Select how big the veranda will be'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'veranda-only-size',
+                answerKey: 'veranda-only-size-A3'
+              }
             }
           ],
           answers: [
             {
-              key: 'veranda-only-A1',
-              value: 'Yes'
+              key: 'veranda-only-size-A1',
+              value: '4 metres wide or more along the length of the bird housing area'
             },
             {
-              key: 'veranda-only-A2',
-              value: 'No',
+              key: 'veranda-only-size-A2',
+              value: '30% or more of the size of the indoor bird housing area footprint'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'veranda-only-size-A3',
+              value: 'None of the above',
               notEligible: true
             }
           ],
-          yarKey: 'verandaOnly'
+          yarKey: 'verandaOnlySize'
         },
         {
           key: 'veranda-features',
@@ -2172,7 +2190,7 @@ const questionBank = {
           pageTitle: '',
           url: 'veranda-features',
           baseUrl: 'veranda-features',
-          backUrl: 'veranda-only',
+          backUrl: 'veranda-only-size',
           nextUrl: 'veranda-biosecurity',
           hint: {
             html: `
