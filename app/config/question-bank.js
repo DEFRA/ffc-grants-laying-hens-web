@@ -1050,19 +1050,27 @@ const questionBank = {
         {
           key: 'egg-store-access',
           order: 105,
-          title: 'Will there be direct external access to the egg store separate to the entrance lobby?',
-          pageTitle: '',
+          title: 'Will there be direct external access from the building to the egg store?',
           url: 'egg-store-access',
           baseUrl: 'egg-store-access',
-          backUrl: 'changing-area',
-          nextUrl: 'aviary-system',
+          nextUrl: 'changing-area',
+          backUrlObject: {
+            dependentQuestionYarKey: 'henVeranda',
+            dependentAnswerKeysArray: ['hen-veranda-A1'],
+            urlOptions: {
+              thenUrl: 'concrete-apron',
+              elseUrl: 'veranda-concrete-apron'
+            }
+          },
           // preValidationKeys: ['poultryType'],
+          hint: {
+            text: 'This must be separate from the main entrance lobby and connected changing area'
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
                 para: 'You must be able to remove eggs and deliver empty egg trays to and from the building\'s egg store without going into the building\'s entrance lobby or connected changing area.',
-                items: []
               }]
             }]
           },
@@ -1083,7 +1091,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if there will be direct external access to the egg store separate to the entrance lobby'
+              error: 'Select yes if there will be a direct external access from the building to the egg store'
             }
           ],
           answers: [
