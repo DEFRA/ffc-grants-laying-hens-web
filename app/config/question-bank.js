@@ -1102,21 +1102,25 @@ const questionBank = {
         {
           key: 'aviary-system',
           order: 110,
-          title: 'Will the housing have a laying hen aviary system?',
-          pageTitle: '',
+          title: 'Will the aviary system have these features?',
           url: 'aviary-system',
           baseUrl: 'aviary-system',
           backUrl: 'aviary-welfare',
           nextUrl: 'mechanical-ventilation',
           // preValidationKeys: ['poultryType'],
+          hint: {
+            html: `
+                  <p>The aviary system must have integrated:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>automatic manure removal belts</li>
+                    <li>non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk</li>
+                  </ul>`
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The housing must have a laying hen aviary system. 
-                
-                This cannot be a combi-cage aviary system.`,
-                items: []
+                para: `The aviary system must have an integrated automatic manure-removal belt and non-flicker LED lighting system.`
               }]
             }]
           },
@@ -1136,14 +1140,11 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          warning: {
-            text: 'You must not install a combi-cage system in your grant-funded housing.'
-          },
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the housing will have a laying hen aviary system'
+              error: 'Select yes if the aviary system will have these features'
             }
           ],
           answers: [
