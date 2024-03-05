@@ -3,9 +3,7 @@ const { getHtml } = require('../helpers/conditionalHTML')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 const { getYarValue } = require('ffc-grants-common-functionality').session
 
-// const { validateAnswerField, checkInputError } = require('../helpers/errorHelpers')
 const { validateAnswerField, checkInputError } = require('ffc-grants-common-functionality').errorHelpers
-// const { validateAnswerField, checkInputError } = require('./../../stuff/lib/index').errorHelpers
 
 // Fix sonarcloud complaint by making this type a constant
 const multi = 'multi-input'
