@@ -16,6 +16,13 @@ describe('create-msg', () => {
     },
     utils: {
       getQuestionAnswer: (questionKey, answerKey, allQuestions) => null,
+    },
+    errorHelpers: {
+      validateAnswerField: (request, key, regex, error) => null,
+      checkInputError: (request, key, error) => null,
+    },
+    pageGuard: {
+      guardPage: (request, h, page, next) => null
     }
   }));
   const { getYarValue } = require('ffc-grants-common-functionality').session

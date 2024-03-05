@@ -1,4 +1,6 @@
-const commonFunctionsMock = (varList, returnType, utilsList = {}) => {
+const { _validateInstrumentationKey } = require("applicationinsights/out/Library/Config")
+
+const commonFunctionsMock = (varList, returnType, utilsList = {}, valList = {}) => {
     return jest.mock('ffc-grants-common-functionality', () => ({
         session: {
           setYarValue: (request, key, value) => null,
@@ -131,7 +133,8 @@ const commonFunctionsMock = (varList, returnType, utilsList = {}) => {
                     break
                   case 'select':
                     fieldItems = {
-                      classes: 'govuk-fieldset__legend--l',                label,
+                      classes: 'govuk-fieldset__legend--l',
+                      label,
                       hint,
                       id: yarKey,
                       name: yarKey,
@@ -319,6 +322,20 @@ const commonFunctionsMock = (varList, returnType, utilsList = {}) => {
             }
           },
           allAnswersSelected: (questionKey, allQuestions) => null,
+        },
+        pageGuard: {
+          guardPage: (request, guardData, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS) => false
+    
+        },
+        errorHelpers: {
+          validateAnswerField: (value, validationType, details, payload, ALL_QUESTIONS) => {
+            if (valList[validationType]) return valList[validationType].return
+            else return null
+          },
+          checkInputError: (validate, isconditionalAnswer, payload, yarKey, ALL_QUESTIONS) => {
+            if (valList[yarKey]) return valList[yarKey]
+            else return null
+          }
         }
       }))
     }

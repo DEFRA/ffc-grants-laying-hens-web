@@ -3,8 +3,9 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /soiled-water-drainage', () => {
   let varList = {}
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -21,6 +22,10 @@ describe('Page: /soiled-water-drainage', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the designated washing and disinfecting area will have a drainage system and storage tanks',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/soiled-water-drainage`,

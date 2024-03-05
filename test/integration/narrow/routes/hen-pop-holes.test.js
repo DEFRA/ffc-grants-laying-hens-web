@@ -4,7 +4,9 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /hen-pop-holes', () => {
   const varList = {}
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -21,6 +23,10 @@ describe('Page: /hen-pop-holes', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the internal hen housing will have lockable pop holes',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-pop-holes`,

@@ -6,7 +6,9 @@ describe('Page: /refurbishing-insulation', () => {
     poultryType: 'hen',
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -22,6 +24,10 @@ describe('Page: /refurbishing-insulation', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.refurbishingInsulation = {
+      error: 'Select yes if the building will have full wall and roof insulation',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/refurbishing-insulation`,
@@ -34,6 +40,7 @@ describe('Page: /refurbishing-insulation', () => {
     expect(postResponse.payload).toContain('Select yes if the building will have full wall and roof insulation')
   })
   it('user selects eligible option -> store user response and redirect to /lighting-features', async () => {
+    valList.refurbishingInsulation = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/refurbishing-insulation`,

@@ -5,8 +5,10 @@ describe('Page: /external-taps', () => {
   let varList = {
     poultryType: 'hen',
   }
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
     varList.poultryType = 'hen'
@@ -38,6 +40,10 @@ describe('Page: /external-taps', () => {
 
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the hen housing will have an external tap at each main pedestrian access point',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/external-taps`,
@@ -52,6 +58,7 @@ describe('Page: /external-taps', () => {
 
   it('no option selected -> show error message - pullet', async () => {
     varList.poultryType = 'pullet'
+    valList['NOT_EMPTY'].error = 'Select yes if the pullet housing will have an external tap at each main pedestrian access point'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/external-taps`,

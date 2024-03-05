@@ -3,8 +3,10 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /multi-tier-system', () => {
   let varList = {}
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -24,6 +26,10 @@ describe('Page: /multi-tier-system', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select what multi-tier system the pullet housing will have',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/multi-tier-system`,

@@ -5,8 +5,9 @@ describe('Page: /ramp-connection', () => {
   let varList = {
       currentSystem: 'Colony cage'
   }
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -22,6 +23,10 @@ describe('Page: /ramp-connection', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if every level of the multi-tier system will be connected to another level by a ramp',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/ramp-connection`,

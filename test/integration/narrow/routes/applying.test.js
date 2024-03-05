@@ -4,7 +4,9 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /applying', () => {
   const varList = { businessDetails: 'randomData' }
 
-  commonFunctionsMock(varList, 'Error')
+  let valList = {}
+
+  commonFunctionsMock(varList, 'Error', {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -20,6 +22,10 @@ describe('Page: /applying', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.applying = {
+      error: 'Select who is applying for this grant',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applying`,
@@ -33,6 +39,7 @@ describe('Page: /applying', () => {
   })
 
   it('user selects \'Applicant\' -> store user response and redirect to /applicant-details', async () => {
+    valList.applying = null
     expect.assertions(2)
     const postOptions = {
       method: 'POST',

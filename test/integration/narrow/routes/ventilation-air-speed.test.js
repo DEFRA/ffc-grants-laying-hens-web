@@ -5,8 +5,10 @@ describe('Page: /ventilation-air-speed', () => {
   let varList = {
     poultryType: ''
   }
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
     varList.poultryType = 'hen'
@@ -38,6 +40,10 @@ describe('Page: /ventilation-air-speed', () => {
 
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the hen housing ventilation will be able to provide an air speed of 1 metre per second over birds',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/ventilation-air-speed`,
@@ -52,6 +58,7 @@ describe('Page: /ventilation-air-speed', () => {
 
   it('no option selected -> show error message - pullet', async () => {
     varList.poultryType = 'pullet'
+    valList['NOT_EMPTY'].error = 'Select yes if the pullet housing ventilation will be able to provide an air speed of 1 metre per second over birds'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/ventilation-air-speed`,

@@ -6,7 +6,9 @@ const varList = {
   projectCost: '12345678'
 }
 
-commonFunctionsMock(varList, undefined)
+let valList = {}
+
+commonFunctionsMock(varList, undefined, {}, valList)
   
   it('should load page successfully', async () => {
     const options = {
@@ -23,6 +25,15 @@ commonFunctionsMock(varList, undefined)
   })
 
   it('should return an error message if no option is selected', async () => {
+    valList.projectCost = {
+      error: 'Enter the total estimated cost of the veranda project',
+      return: false
+    }
+
+    valList['NOT_EMPTY'] = {
+      error: 'Enter the total estimated cost of the veranda project',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-project-cost`,
@@ -36,6 +47,7 @@ commonFunctionsMock(varList, undefined)
   })
 
   it('should return an error message if a letter is typed in', async () => {
+    valList.projectCost.error = 'Enter a whole number with a maximum of 7 digits'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-project-cost`,
@@ -101,6 +113,7 @@ commonFunctionsMock(varList, undefined)
   })
 
   it('should eliminate user if the cost entered is too low', async () => {
+    valList.projectCost = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-project-cost`,

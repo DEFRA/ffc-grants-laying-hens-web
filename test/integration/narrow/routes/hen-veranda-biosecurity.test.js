@@ -7,7 +7,8 @@ describe('Page: /hen-veranda-biosecurity', () => {
     projectType: 'Replacing an existing laying hen or pullet with a new building'
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -24,6 +25,10 @@ describe('Page: /hen-veranda-biosecurity', () => {
 
   it('no option selected -> show error message', async () => {
     varList.poultryType = 'hen'
+    valList.henVerandaBiosecurity = {
+      error: 'Select yes if the veranda will have the capacity to be made biosecure',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-veranda-biosecurity`,
@@ -37,6 +42,7 @@ describe('Page: /hen-veranda-biosecurity', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /hen-pop-holes', async () => {
+    valList.henVerandaBiosecurity = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-veranda-biosecurity`,

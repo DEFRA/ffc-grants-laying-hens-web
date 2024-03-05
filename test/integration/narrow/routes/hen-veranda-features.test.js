@@ -3,8 +3,10 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /hen-veranda-features', () => {
   let varList = {}
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -28,6 +30,10 @@ describe('Page: /hen-veranda-features', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the veranda will have these features',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-veranda-features`,

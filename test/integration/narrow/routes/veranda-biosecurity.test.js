@@ -3,8 +3,9 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /veranda-biosecurity', () => {
   const varList = {}
+  let valList = {}
 
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -21,6 +22,10 @@ describe('Page: /veranda-biosecurity', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.verandaBiosecurity = {
+      error: 'Select yes if the veranda will have the capacity to be made biosecure',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-biosecurity`,
@@ -34,6 +39,7 @@ describe('Page: /veranda-biosecurity', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /veranda-pop-holes', async () => {
+    valList.verandaBiosecurity = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-biosecurity`,

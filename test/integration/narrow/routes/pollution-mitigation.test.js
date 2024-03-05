@@ -2,11 +2,13 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /pollution-mitigation', () => {
-    let varList = {
-        poultryType: 'hen',
-      }
+  let varList = {
+      poultryType: 'hen',
+    }
 
-    commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -27,6 +29,10 @@ describe('Page: /pollution-mitigation', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.pollutionMitigation = {
+      error: 'Select if the building will have any of the following',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pollution-mitigation`,
@@ -41,6 +47,7 @@ describe('Page: /pollution-mitigation', () => {
 
   it('user selects eligible option -> store user response and redirect to /renewable-energy - hen', async () => {
     varList.poultryType = 'hen'
+    valList.pollutionMitigation = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pollution-mitigation`,

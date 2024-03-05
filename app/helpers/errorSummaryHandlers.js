@@ -1,8 +1,11 @@
 const { getModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
+const { ALL_QUESTIONS } = require('../config/question-bank')
 const { getYarValue } = require('ffc-grants-common-functionality').session
 
-const { validateAnswerField, checkInputError } = require('../helpers/errorHelpers')
+// const { validateAnswerField, checkInputError } = require('../helpers/errorHelpers')
+const { validateAnswerField, checkInputError } = require('ffc-grants-common-functionality').errorHelpers
+// const { validateAnswerField, checkInputError } = require('./../../stuff/lib/index').errorHelpers
 
 // Fix sonarcloud complaint by making this type a constant
 const multi = 'multi-input'
@@ -49,7 +52,7 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
 const validateFunction = (validate, isconditionalAnswer, payload, yarKey, errorHrefList, placeholderInputError) => {
 
   if (validate) {
-    placeholderInputError = checkInputError(validate, isconditionalAnswer, payload, yarKey)
+    placeholderInputError = checkInputError(validate, isconditionalAnswer, payload, yarKey, ALL_QUESTIONS)
 
     if (placeholderInputError) {
       errorHrefList.push({
@@ -85,7 +88,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   }
   if (Object.keys(payload).length === 0 && currentQuestion.type) {
     placeholderInputError = validate.find(
-      ({ type, _dependentKey, ...details }) => (validateAnswerField(payload[yarKey], type, details, payload) === false))
+      ({ type, _dependentKey, ...details }) => (validateAnswerField(payload[yarKey], type, details, payload, ALL_QUESTIONS) === false))
 
     errorHrefList.push({
       text: placeholderInputError.error,

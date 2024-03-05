@@ -4,7 +4,9 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /applicant-details', () => {
   const varList = { applying: 'Applicant' }
 
-  commonFunctionsMock(varList, undefined)
+  const valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -32,6 +34,70 @@ describe('Page: /applicant-details', () => {
   })
 
   it('no option selected -> show error message', async () => {
+
+    valList.firstName = {
+      error: 'Enter your first name',
+      
+      return: false
+    }
+
+    valList.lastName = {
+      error: 'Enter your last name',
+      
+      return: false
+    }
+
+    valList.emailAddress = {
+      error: 'Enter your email address',
+      
+      return: false
+    }
+
+    valList.confirmEmailAddress = {
+      error: 'Confirm your email address',
+      
+      return: false
+    }
+
+    valList.mobileNumber = {
+      error: 'Enter a mobile phone number (if you do not have a mobile, enter your landline number)',
+      
+      return: false
+    }
+
+    valList.landlineNumber = {
+      error: 'Enter a landline number (if you do not have a landline, enter your mobile number)',
+      
+      return: false
+    }
+
+    valList.address1 = {
+      error: 'Enter your address line 1',
+      
+      return: false
+    }
+
+    valList.town = {
+      error: 'Enter your town',
+      
+      return: false
+    }
+
+    valList.county = {
+      error: 'Select your county',
+      return: false
+    }
+
+    valList.postcode = {
+      error: 'Enter a business postcode, like AA1 1AA',
+      return: false
+    }
+
+    valList.projectPostcode = {
+      error: 'Enter a project postcode, like AA1 1AA',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -66,6 +132,13 @@ describe('Page: /applicant-details', () => {
 
 
   it('validate first name - no digits', async () => {
+    
+    valList.firstName = {
+      error: 'First name must only include letters, hyphens and apostrophes',
+      
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -82,6 +155,12 @@ describe('Page: /applicant-details', () => {
   })
 
   it('validate last name - no digits', async () => {
+    valList.lastName = {
+      error: 'Last name must include letters',
+      
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -98,6 +177,12 @@ describe('Page: /applicant-details', () => {
   })
 
   it('validate email', async () => {
+    valList.emailAddress = {
+      error: 'Enter an email address in the correct format, like name@example.com',
+      
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -114,6 +199,10 @@ describe('Page: /applicant-details', () => {
   })
 
   it('validate mobile (optional) - at least 10 characters', async () => {
+    valList.mobileNumber = {
+      error: 'Your mobile number must have at least 10 characters',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -130,6 +219,11 @@ describe('Page: /applicant-details', () => {
   })
 
   it('validate mobile (optional) - correct format', async () => {
+    valList.mobileNumber = {
+      error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -146,6 +240,11 @@ describe('Page: /applicant-details', () => {
   })
 
   it('validate landline (optional) - at least 10 characters', async () => {
+    valList.landlineNumber = {
+      error: 'Your landline number must have at least 10 characters',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -162,6 +261,10 @@ describe('Page: /applicant-details', () => {
   })
 
   it('validate town: fail when user adds non text characters (digits or other characters)', async () => {
+    valList.town = {
+      error: 'Town must only include letters',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -178,6 +281,11 @@ describe('Page: /applicant-details', () => {
   })
 
   it('validate landline (optional) - correct format', async () => {
+    valList.landlineNumber = {
+      error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -194,6 +302,11 @@ describe('Page: /applicant-details', () => {
   })
 
   it('if both mobile and landline are missing -> show error message', async () => {
+    valList.landlineNumber = {
+      error: 'Enter a landline number (if you do not have a landline, enter your mobile number)',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -219,6 +332,10 @@ describe('Page: /applicant-details', () => {
   })
 
   it('validate business postcode - valid format', async () => {
+    valList.postcode = {
+      error: 'Enter a business postcode, like AA1 1AA',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -235,6 +352,10 @@ describe('Page: /applicant-details', () => {
   })
 
   it('validate project postcode - valid format', async () => {
+    valList.projectPostcode = {
+      error: 'Enter a project postcode, like AA1 1AA',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -250,34 +371,11 @@ describe('Page: /applicant-details', () => {
     expect(postResponse.payload).toContain('Enter a project postcode, like AA1 1AA')
   })
 
-  it('store user response and redirect to /check-details', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/applicant-details`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: {
-        firstName: 'First Name',
-        lastName: 'Last Name',
-        businessName: 'Business Name',
-        emailAddress: 'my1.email1@my2-domain2.com',
-        confirmEmailAddress: 'my1.email1@my2-domain2.com',
-        mobileNumber: '07700 900 982',
-        address1: 'Address line 1',
-        address2: 'Address 2',
-        town: 'MyTown',
-        county: 'Devon',
-        postcode: 'AA1 1AA',
-        projectPostcode: 'AA1 1AA',
-        crumb: crumbToken
-      }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('check-details')
-  })
-
   it('should validate email - confirmation mismatch', async () => {
+    valList.confirmEmailAddress = {
+      error: 'Enter an email address that matches',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-details`,
@@ -302,6 +400,46 @@ describe('Page: /applicant-details', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Enter an email address that matches')
+  })
+
+  it('store user response and redirect to /check-details', async () => {
+    valList.firstName = null
+    valList.lastName = null
+    valList.emailAddress = null
+    valList.confirmEmailAddress = null
+    valList.mobileNumber = null
+    valList.landlineNumber = null
+    valList.address1 = null
+    valList.address2 = null
+    valList.town = null
+    valList.county = null
+    valList.projectPostcode = null
+    valList.postcode = null
+
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/applicant-details`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: {
+        firstName: 'First Name',
+        lastName: 'Last Name',
+        businessName: 'Business Name',
+        emailAddress: 'my1.email1@my2-domain2.com',
+        confirmEmailAddress: 'my1.email1@my2-domain2.com',
+        mobileNumber: '07700 900 982',
+        address1: 'Address line 1',
+        address2: 'Address 2',
+        town: 'MyTown',
+        county: 'Devon',
+        postcode: 'AA1 1AA',
+        projectPostcode: 'AA1 1AA',
+        crumb: crumbToken
+      }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('check-details')
   })
 
   it('page loads with correct back link', async () => {

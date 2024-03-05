@@ -7,7 +7,9 @@ describe('Page: /planning-permission', () => {
     'current-score': null
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -25,6 +27,10 @@ describe('Page: /planning-permission', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.planningPermission = {
+      error: 'Select if the project has planning permission',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/planning-permission`,
@@ -38,6 +44,7 @@ describe('Page: /planning-permission', () => {
   })
 
   it('user selects eligible option: \'Not needed\' -> store user response and redirect to /project-started', async () => {
+    valList.planningPermission = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/planning-permission`,

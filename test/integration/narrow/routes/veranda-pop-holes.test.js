@@ -6,7 +6,9 @@ describe('Page: /veranda-pop-holes', () => {
     poultryType: 'hen'
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
     varList.poultryType = 'hen'
@@ -40,6 +42,10 @@ describe('Page: /veranda-pop-holes', () => {
 
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the internal hen housing will have lockable pop holes',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-pop-holes`,
@@ -54,6 +60,7 @@ describe('Page: /veranda-pop-holes', () => {
 
   it('no option selected -> show error message - pullet', async () => {
     varList.poultryType = 'pullet'
+    valList['NOT_EMPTY'].error = 'Select yes if the internal pullet housing will have lockable pop holes'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-pop-holes`,

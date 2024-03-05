@@ -4,7 +4,9 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /legal-status', () => {
   const varList = { businessLocation: 'randomData' }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -30,6 +32,10 @@ describe('Page: /legal-status', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.legalStatus = {
+      error: 'Select the legal status of the business',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/legal-status`,
@@ -43,6 +49,7 @@ describe('Page: /legal-status', () => {
   })
 
   it('user selects ineligible option: \'None of the above\' -> display ineligible page', async () => {
+    valList.legalStatus = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/legal-status`,

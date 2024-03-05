@@ -8,7 +8,9 @@ describe('Page: /remaining-costs', () => {
     remainingCost: 740740.20
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -24,6 +26,10 @@ describe('Page: /remaining-costs', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.remainingCosts = {
+      error: 'Select yes if you can pay the remaining costs',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/remaining-costs`,
@@ -37,6 +43,7 @@ describe('Page: /remaining-costs', () => {
   })
 
   it('user selects ineligible option: \'No\' -> display ineligible page', async () => {
+    valList.remainingCosts = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/remaining-costs`,
