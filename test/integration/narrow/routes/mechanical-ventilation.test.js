@@ -26,9 +26,8 @@ describe('Page: /mechanical-ventilation', () => {
     expect(response.payload).toContain('No')
   })
   it('no option selected -> show error message - hen', async () => {
-    varList.poultryType = 'hen'
     valList.mechanicalVentilation = {
-      error: 'Select yes if the hen housing will have a mechanical ventilation system with these features',
+      error: 'Select yes if the building will have a mechanical ventilation system with these features',
       return: false
     }
     const postOptions = {
@@ -41,24 +40,6 @@ describe('Page: /mechanical-ventilation', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select yes if the building will have a mechanical ventilation system with these features')
-  })
-
-  it('no option selected -> show error message - pullet', async () => {
-    varList.poultryType = 'pullet'
-    valList['NOT_EMPTY'] = {
-      error: 'Select yes if the pullet housing will have a mechanical ventilation system with these features',
-      return: false
-    }    
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/mechanical-ventilation`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the pullet housing will have a mechanical ventilation system with these features')
   })
 
   it('user selects eligible option -> store user response and redirect to /hen-ventilation-specification', async () => {
@@ -101,7 +82,7 @@ describe('Page: /mechanical-ventilation', () => {
     expect(postResponse.payload).toContain('The mechanical ventilation system must have:')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
-  it('page loads with correct back link - pullet / Rearing aviary journey', async () => {
+  it('page loads with correct back link - hen / Rearing aviary journey', async () => {
     varList.poultryType = 'hen'
     const options = {
       method: 'GET',
