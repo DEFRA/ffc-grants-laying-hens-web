@@ -25,7 +25,7 @@ describe('Page: /veranda-biosecurity', () => {
 
   it('no option selected -> show error message', async () => {
     valList.verandaBiosecurity = {
-      error: 'Select yes if the veranda will have the capacity to be made biosecure',
+      error: 'Select yes if the veranda will be biosecure',
       return: false
     }
     const postOptions = {
