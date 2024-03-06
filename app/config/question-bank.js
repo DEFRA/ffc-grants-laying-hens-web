@@ -1228,69 +1228,6 @@ const questionBank = {
           yarKey: 'aviaryWelfare'
         },
         {
-          key: 'hen-veranda',
-          order: 121,
-          title: 'Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?',
-          pageTitle: '',
-          url: 'hen-veranda',
-          baseUrl: 'hen-veranda',
-          hint: {
-            text: 'Housing projects that do not have access to an area at least 30% of the size of the indoor housing area are exempt from adding a veranda'
-          },
-          backUrl: 'lighting-features',
-          nextUrl: 'hen-veranda-features',
-          ineligibleContent: {
-            messageContent: 'The housing must have a veranda that is at least the same size as 30% of the indoor bird housing area footprint in size.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-fieldset__legend--l',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You must add a veranda that is at least the same size as 30% of the indoor bird housing area footprint.
-
-                Housing projects that do not have access to an external area of at least 30% of the indoor housing area are exempt.
-                
-                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`,
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint'
-            }
-          ],
-          answers: [
-            {
-              key: 'hen-veranda-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'hen-veranda-A2',
-              value: 'No',
-              notEligible: true
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'hen-veranda-A3',
-              value: 'My project is exempt',
-              redirectUrl: 'concrete-apron'
-            }
-          ],
-          yarKey: 'henVeranda'
-        },
-        {
           key: 'hen-veranda-features',
           order: 122,
           title: 'Will the veranda have these features?',
@@ -1474,6 +1411,132 @@ const questionBank = {
             }
           ],
           yarKey: 'mechanicalVentilation'
+        },
+        {
+          key: 'hen-ventilation-specification',
+          order: 124,
+          title: 'Will the ventilation system be fit for purpose in extreme heat?',
+          hint: {
+            html: `
+                <p>In extreme heat, the ventilation system must be able to provide:</p>
+                <ul class="govuk-list--bullet">
+                  <li>In extreme heat, the ventilation system must be able to provide:</li>
+                  <li>a maximum ventilation rate of 10,800m3 per hour per 1000 birds</li>
+                </ul>
+                `
+          },
+          url: 'hen-ventilation-specification',
+          baseUrl: 'hen-ventilation-specification',
+          backUrl: 'mechanical-ventilation',
+          nextUrl: 'hen-veranda',
+          // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The ventilation system must be able prevent the heat that the birds generate from increasing the house temperature by more 
+                than 3°C above the external ambient temperature.`
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `
+            <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
+              <div class="govuk-list govuk-list--bullet">
+                <ul>
+                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>a maximum ventilation rate of 10,800m3 per hour per 1000 birds.</li>
+                </ul>
+              </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the ventilation system will be fit for purpose in extreme heat'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-ventilation-specification-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-ventilation-specification-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'henVentilationSpecification'
+        },
+        {
+          key: 'hen-veranda',
+          order: 121,
+          title: 'Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?',
+          pageTitle: '',
+          url: 'hen-veranda',
+          baseUrl: 'hen-veranda',
+          hint: {
+            text: 'Housing projects that do not have access to an area at least 30% of the size of the indoor housing area are exempt from adding a veranda'
+          },
+          backUrl: 'lighting-features',
+          nextUrl: 'hen-veranda-features',
+          ineligibleContent: {
+            messageContent: 'The housing must have a veranda that is at least the same size as 30% of the indoor bird housing area footprint in size.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `You must add a veranda that is at least the same size as 30% of the indoor bird housing area footprint.
+
+                Housing projects that do not have access to an external area of at least 30% of the indoor housing area are exempt.
+                
+                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`,
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-veranda-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-veranda-A2',
+              value: 'No',
+              notEligible: true
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'hen-veranda-A3',
+              value: 'My project is exempt',
+              redirectUrl: 'concrete-apron'
+            }
+          ],
+          yarKey: 'henVeranda'
         },
         {
           key: 'pullet-ventilation-specification',
