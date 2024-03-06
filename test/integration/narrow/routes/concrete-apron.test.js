@@ -103,7 +103,7 @@ describe('Page: /concrete-apron', () => {
     expect(response.payload).toContain('<a href=\"lighting-features\" class=\"govuk-back-link\">Back</a>')
   })
 
-  it('page loads with correct back link - /hen-veranda-biosecurity', async () => {
+  it('page loads with correct back link - /hen-pop-holes', async () => {
     varList.poultryType = 'hen'
     varList.henVeranda = 'Yes'
     const options = {
@@ -112,7 +112,7 @@ describe('Page: /concrete-apron', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"hen-veranda-biosecurity\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"hen-pop-holes\" class=\"govuk-back-link\">Back</a>')
   })
 
   it('page loads with correct back link - /hen-veranda', async () => {
