@@ -6,7 +6,9 @@ describe('Page: /easy-grip-perches', () => {
     poultryType: 'hen',
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
     const options = {
@@ -37,6 +39,10 @@ describe('Page: /easy-grip-perches', () => {
 
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
+    valList.easyGripPerches = {
+      error: 'Select yes if the perches will have a design feature that help the hens grip the perches',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/easy-grip-perches`,
@@ -51,6 +57,7 @@ describe('Page: /easy-grip-perches', () => {
 
   it('no option selected -> show error message - pullet', async () => {
     varList.poultryType = 'pullet'
+    valList.easyGripPerches.error = 'Select yes if the perches will have a design feature that help the pullets grip the perches'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/easy-grip-perches`,
@@ -64,6 +71,7 @@ describe('Page: /easy-grip-perches', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /building-biosecurity', async () => {
+    valList.easyGripPerches = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/easy-grip-perches`,

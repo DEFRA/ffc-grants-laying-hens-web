@@ -1,6 +1,13 @@
 const { crumbToken } = require('./test-helper')
+const { commonFunctionsMock } = require('../../../session-mock')
 
 describe('Page: /applicant-type', () => {
+  
+  let varList = {}
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
+
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -22,6 +29,10 @@ describe('Page: /applicant-type', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.applicantType = {
+      error: 'Select what type of farmer you are',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-type`,
@@ -34,6 +45,7 @@ describe('Page: /applicant-type', () => {
     expect(postResponse.payload).toContain('Select what type of farmer you are')
   })
   it('user selects ineligible option: \'None of the above\' -> display ineligible page', async () => {
+    valList.applicantType = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/applicant-type`,

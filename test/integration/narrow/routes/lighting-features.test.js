@@ -11,8 +11,10 @@ describe('Page: /lighting-features', () => {
     'poultry-type-A1': 'hen',
     'poultry-type-A2': 'pullet'
   }
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined, utilsList)
+  commonFunctionsMock(varList, undefined, utilsList, valList)
 
   it('page loads successfully, with all the options - hens', async () => {
     varList.poultryType = 'hen'
@@ -55,6 +57,10 @@ describe('Page: /lighting-features', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the building lighting system will have these features',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/lighting-features`,

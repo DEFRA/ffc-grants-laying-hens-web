@@ -7,7 +7,9 @@ describe('Page: /changing-area', () => {
     projectType: 'Replacing an existing laying hen or pullet with a new building'
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
     const options = {
@@ -38,6 +40,10 @@ describe('Page: /changing-area', () => {
 
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
+    valList.changingArea = {
+      error: 'Select yes if the hen housing will have a biosecure changing area',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/changing-area`,
@@ -51,6 +57,10 @@ describe('Page: /changing-area', () => {
   })
 
   it('no option selected -> show error message - pullet', async () => {
+    valList['NOT_EMPTY'] = { 
+      error: 'Select yes if the pullet housing will have a biosecure changing area',
+      return: false
+    }
     varList.poultryType = 'pullet'
     const postOptions = {
       method: 'POST',
@@ -65,6 +75,7 @@ describe('Page: /changing-area', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /vaccination-lobby', async () => {
+    valList.changingArea = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/changing-area`,

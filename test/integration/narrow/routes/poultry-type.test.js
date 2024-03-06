@@ -7,7 +7,9 @@ describe('Page: /poultry-type', () => {
     projectType: ''
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -24,6 +26,10 @@ describe('Page: /poultry-type', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.poultryType = {
+      error: 'Select what type of poultry the project is for',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/poultry-type`,
@@ -38,6 +44,7 @@ describe('Page: /poultry-type', () => {
 
   it('user selects eligible option and projectType is `Replacing an existing laying hen or pullet with a new building` -> store user response and redirect to /1000-birds', async () => {
     varList.projectType = 'Replacing an existing laying hen or pullet with a new building'
+    valList.poultryType = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/poultry-type`,

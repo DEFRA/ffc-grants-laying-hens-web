@@ -1,3 +1,4 @@
+const { ALL_QUESTIONS } = require('../../../../app/config/question-bank')
 const data = require('../../../../app/helpers/desirability-score.json')
 const scoreData = require('../../../data/score-data')
 
@@ -30,10 +31,6 @@ describe('Get & Post Handlers', () => {
     businessDetails: 'fake business',
     applying: true
   }
-
-  jest.mock('../../../../app/helpers/page-guard', () => ({
-    guardPage: (a, b, c) => false
-  }))
 
   jest.mock('../../../../app/helpers/urls', () => ({
     getUrl: (a, b, c, d) => 'mock-url'
@@ -70,7 +67,17 @@ describe('Get & Post Handlers', () => {
         }
       },
       allAnswersSelected: (questionKey, allQuestions) => null,
+    },
+    // pageGuard mock here (maybe errorHelpers too if needed)
+    pageGuard: {
+      guardPage: (request, guardData, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS) => false
+
+    },
+    errorHelpers: {
+      validateAnswerField: (validate, isconditionalAnswer, payload, yarKey, ALL_QUESTIONS) => null,
+      checkInputError: (validate, isconditionalAnswer, payload, yarKey, ALL_QUESTIONS) => null
     }
+
   }))
 
   let question

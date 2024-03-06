@@ -3,8 +3,9 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /vaccination-lobby', () => {
   let varList = {}
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -21,6 +22,10 @@ describe('Page: /vaccination-lobby', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if there will be a designated vaccination lobby',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/vaccination-lobby`,

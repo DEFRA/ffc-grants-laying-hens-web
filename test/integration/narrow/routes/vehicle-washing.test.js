@@ -5,8 +5,10 @@ describe('Page: /vehicle-washing', () => {
   let varList = {
     poultryType: ''
   }
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
     varList.poultryType = 'hen'
@@ -39,6 +41,10 @@ describe('Page: /vehicle-washing', () => {
 
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the hen housing will have a designated area for washing and disinfecting vehicles',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/vehicle-washing`,
@@ -53,6 +59,7 @@ describe('Page: /vehicle-washing', () => {
 
   it('no option selected -> show error message - pullet', async () => {
     varList.poultryType = 'pullet'
+    valList['NOT_EMPTY'].error = 'Select yes if the pullet housing will have a designated area for washing and disinfecting vehicles' 
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/vehicle-washing`,

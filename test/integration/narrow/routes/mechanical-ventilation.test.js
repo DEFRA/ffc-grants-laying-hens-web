@@ -3,11 +3,12 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /mechanical-ventilation', () => {
   const varList = {
-    poultryType: 'hen',
-    projectType: 'Replacing an existing laying hen or pullet with a new building'
+    poultryType: 'hen'
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
     const options = {
@@ -26,6 +27,10 @@ describe('Page: /mechanical-ventilation', () => {
   })
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
+    valList.mechanicalVentilation = {
+      error: 'Select yes if the hen housing will have a mechanical ventilation system with these features',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/mechanical-ventilation`,
@@ -37,7 +42,27 @@ describe('Page: /mechanical-ventilation', () => {
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select yes if the building will have a mechanical ventilation system with these features')
   })
+
+  it('no option selected -> show error message - pullet', async () => {
+    varList.poultryType = 'pullet'
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the pullet housing will have a mechanical ventilation system with these features',
+      return: false
+    }    
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/mechanical-ventilation`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Select yes if the pullet housing will have a mechanical ventilation system with these features')
+  })
+
   it('user selects eligible option -> store user response and redirect to /hen-ventilation-specification', async () => {
+    valList.mechanicalVentilation = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/mechanical-ventilation`,

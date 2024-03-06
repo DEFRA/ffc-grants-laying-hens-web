@@ -3,8 +3,10 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /dark-brooders', () => {
   let varList = {}
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -20,6 +22,10 @@ describe('Page: /dark-brooders', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the housing will include dark brooders',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/dark-brooders`,

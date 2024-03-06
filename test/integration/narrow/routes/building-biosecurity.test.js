@@ -1,6 +1,12 @@
 const { crumbToken } = require('./test-helper')
+const { commonFunctionsMock } = require('../../../session-mock')
 
 describe('Page: /building-biosecurity', () => {
+  let varList = {}
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
+
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -16,6 +22,10 @@ describe('Page: /building-biosecurity', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.buildingBiosecurity = {
+      error: 'Select if the building structure will include the following',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-biosecurity`,
@@ -29,6 +39,7 @@ describe('Page: /building-biosecurity', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /pollution-mitigation', async () => {
+    valList.buildingBiosecurity = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-biosecurity`,

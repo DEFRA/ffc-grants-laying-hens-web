@@ -1,10 +1,13 @@
 const { crumbToken } = require('./test-helper')
 const { commonFunctionsMock } = require('../../../session-mock')
+
 describe('Page: /egg-store-access', () => {
   const varList = {
     henVeranda: 'Yes'
-  }
-  commonFunctionsMock(varList, 'Error')
+  }  
+  let valList = {}
+  commonFunctionsMock(varList, undefined, {}, valList)
+
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -19,6 +22,10 @@ describe('Page: /egg-store-access', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if there will be a direct external access from the building to the egg store',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/egg-store-access`,

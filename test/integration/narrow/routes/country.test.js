@@ -6,7 +6,9 @@ describe('Page: /country', () => {
     legalStatus: 'randomData'
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -22,6 +24,10 @@ describe('Page: /country', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.inEngland = {
+      error: 'Select yes if the planned project is in England',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/country`,
@@ -35,6 +41,7 @@ describe('Page: /country', () => {
   })
 
   it('user selects ineligible option: \'No\' -> display ineligible page', async () => {
+    valList.inEngland.error = 'You cannot apply for a grant from this scheme'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/country`,
@@ -47,6 +54,7 @@ describe('Page: /country', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /project-started', async () => {
+    valList.inEngland = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/country`,

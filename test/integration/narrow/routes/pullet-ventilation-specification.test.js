@@ -6,9 +6,10 @@ describe('Page: /pullet-ventilation-specification', () => {
     poultryType: 'pullet',
     projectType: 'Replacing an existing laying hen or pullet with a new building'
   }
-
-  commonFunctionsMock(varList, undefined)
-
+  let valList = {}
+  
+  commonFunctionsMock(varList, undefined, {}, valList)
+  
   it('page loads successfully, with all the options - hen', async () => {
     const options = {
       method: 'GET',
@@ -24,6 +25,11 @@ describe('Page: /pullet-ventilation-specification', () => {
 
   it('no option selected -> show error message - pullet', async () => {
     varList.poultryType = 'pullet'
+
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the ventilation system will be fit for purpose in extreme heat',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pullet-ventilation-specification`,

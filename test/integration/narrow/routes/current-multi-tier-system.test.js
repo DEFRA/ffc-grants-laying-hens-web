@@ -11,7 +11,9 @@ describe('Page: /current-multi-tier-system', () => {
     'poultry-type-A2': 'pullet'
   }
 
-  commonFunctionsMock(varList, undefined, utilsList)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, utilsList, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
     const options = {
@@ -42,6 +44,11 @@ describe('Page: /current-multi-tier-system', () => {
 
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
+    valList.currentMultiTierSystem = {
+      error: 'Select yes if your current building includes a multi-tier aviary systems',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/current-multi-tier-system`,
@@ -56,6 +63,11 @@ describe('Page: /current-multi-tier-system', () => {
 
   it('no option selected -> show error message - pullet', async () => {
     varList.poultryType = 'pullet'
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if your current building includes a multi-tier systems',
+      return: false
+    }
+    
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/current-multi-tier-system`,
@@ -69,6 +81,7 @@ describe('Page: /current-multi-tier-system', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /ramp-connection', async () => {
+    valList.currentMultiTierSystem = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/current-multi-tier-system`,

@@ -5,8 +5,10 @@ describe('Page: /three-tiers', () => {
   let varList = {
     poultryType: 'hen',
   }
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -22,6 +24,11 @@ describe('Page: /three-tiers', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the multi-tier system will have 3 tiers or fewer directly above each other',
+      return: false
+    }
+    
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/three-tiers`,

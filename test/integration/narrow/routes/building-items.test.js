@@ -1,4 +1,3 @@
-const { command } = require('yargs')
 const { crumbToken } = require('./test-helper')
 const { commonFunctionsMock } = require('../../../session-mock')
 
@@ -14,7 +13,9 @@ describe('Page: /building-items', () => {
     projectType: 'Replacing an existing laying hen or pullet with a new building'
   }
 
-  commonFunctionsMock(varList, undefined, utilsList)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, utilsList, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
     const options = {
@@ -29,6 +30,12 @@ describe('Page: /building-items', () => {
     expect(response.payload).toContain('No')
   })
   it('no option selected -> show error message - hen', async () => {
+
+    valList.buildingItems = {
+      error: 'Select yes if the building will have these features',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-items`,
@@ -42,6 +49,7 @@ describe('Page: /building-items', () => {
   })
 
   it('user selects eligible option and /Replacing an existing laying hen or pullet with a new building/ at project-type page  -> store user response and redirect to /replacing-insulation', async () => {
+    valList.buildingItems = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-items`,
