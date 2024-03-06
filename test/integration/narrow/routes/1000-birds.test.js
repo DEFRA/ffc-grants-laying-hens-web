@@ -10,8 +10,10 @@ describe('Page: /1000-birds', () => {
   let varList = {
     poultryType: 'hen',
   }
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined, utilsList)
+  commonFunctionsMock(varList, undefined, utilsList, valList)
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -25,6 +27,12 @@ describe('Page: /1000-birds', () => {
     expect(response.payload).toContain('No')
   })
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if you currently keep at least 1,000 laying hens on your farm',
+      href: '',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/1000-birds`,
@@ -37,6 +45,8 @@ describe('Page: /1000-birds', () => {
     expect(postResponse.payload).toContain('Select yes if you currently keep at least 1,000 laying hens on your farm')
   })
   it('user selects ineligible option `No` -> display ineligible page', async () => {
+    valList = {}
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/1000-birds`,
@@ -50,6 +60,8 @@ describe('Page: /1000-birds', () => {
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
   it('user selects eligible option -> store user response and redirect to /building-items', async () => {
+    valList.birdNumber = false
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/1000-birds`,

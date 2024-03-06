@@ -5,8 +5,10 @@ describe('Page: /current-system', () => {
   let varList = {
     poultryType: 'hen',
   }
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -26,6 +28,11 @@ describe('Page: /current-system', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select what type of hen housing system you currently use',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/current-system`,

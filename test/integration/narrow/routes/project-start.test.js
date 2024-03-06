@@ -3,8 +3,9 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /project-started', () => {
   const varList = { planningPermission: 'randomData', inEngland: 'yes' }
+  let valList = {}
 
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -21,6 +22,10 @@ describe('Page: /project-started', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.projectStart = {
+      error: 'Select if you have already started work on the project',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-started`,
@@ -34,6 +39,7 @@ describe('Page: /project-started', () => {
   })
 
   it('user selects ineligible option: \'Yes, we have begun project work\' -> display ineligible page', async () => {
+    valList.projectStart = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-started`,

@@ -4,7 +4,9 @@ const { crumbToken, testNextLink } = require('./test-helper')
 describe('Page: /environmental-data-type', () => {
     let varList = {}
 
-  commonFunctionsMock(varList, undefined)
+    let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -26,6 +28,10 @@ describe('Page: /environmental-data-type', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select what additional environment data you will automatically collect and store',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/environmental-data-type`,

@@ -6,7 +6,9 @@ describe('Page: /aviary-welfare', () => {
     poultryType: '',
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options, warning text and sidebar', async () => {
     const options = {
@@ -26,6 +28,10 @@ describe('Page: /aviary-welfare', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the building will have a high welfare aviary system',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/aviary-welfare`,

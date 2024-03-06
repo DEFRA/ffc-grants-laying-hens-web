@@ -5,8 +5,10 @@ describe('Page: /natural-light', () => {
   let varList = {
     poultryType: 'hen',
   }
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -25,6 +27,10 @@ describe('Page: /natural-light', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the building will have windows that provide natural light to the indoor housing',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/natural-light`,

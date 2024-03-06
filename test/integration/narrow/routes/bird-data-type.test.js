@@ -4,7 +4,9 @@ const { crumbToken, testNextLink } = require('./test-helper')
 describe('Page: /bird-data-type', () => {
     let varList = {}
 
-  commonFunctionsMock(varList, undefined)
+    let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -31,6 +33,10 @@ describe('Page: /bird-data-type', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select what poultry management data you will automatically collect and store',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/bird-data-type`,

@@ -5,8 +5,9 @@ describe('Page: /housing-density', () => {
   let varList = {
     multiTierSystem: 'Rearing aviary',
   }
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -22,6 +23,11 @@ describe('Page: /housing-density', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the pullets will be housed within the maximum stocking density',
+      return: false
+    }
+    
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/housing-density`,

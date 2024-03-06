@@ -5,8 +5,10 @@ describe('Page: /pullet-housing-requirements', () => {
   let varList = {
     projectType: 'Replacing an existing laying hen or pullet with a new building'
   }
+
+  let valList = {}
   
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -26,6 +28,10 @@ describe('Page: /pullet-housing-requirements', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the inside of the building will have these features',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pullet-housing-requirements`,

@@ -3,8 +3,9 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /pullet-veranda-features', () => {
     let varList = {}
+    let valList = {}
 
-    commonFunctionsMock(varList, undefined)
+    commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -28,6 +29,11 @@ describe('Page: /pullet-veranda-features', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.pulletVerandaFeatures = {
+      error: 'Select yes if the pullet housing will have a veranda with these features',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pullet-veranda-features`,
@@ -41,6 +47,7 @@ describe('Page: /pullet-veranda-features', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /dark-brooders', async () => {
+    valList.pulletVerandaFeatures = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pullet-veranda-features`,

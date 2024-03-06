@@ -7,7 +7,9 @@ describe('Page: /hen-veranda', () => {
     projectType: 'Replacing an existing laying hen or pullet with a new building'
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -25,6 +27,10 @@ describe('Page: /hen-veranda', () => {
 
   it('no option selected -> show error message', async () => {
     varList.poultryType = 'hen'
+    valList.henVeranda = {
+      error: 'Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-veranda`,
@@ -38,6 +44,7 @@ describe('Page: /hen-veranda', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /hen-veranda-features', async () => {
+    valList.henVeranda = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-veranda`,

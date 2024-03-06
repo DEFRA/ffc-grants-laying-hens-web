@@ -7,7 +7,9 @@ describe('Page: /project-responsibility', () => {
     tenancy: 'No'
   }
 
-  commonFunctionsMock(varList, null)
+  let valList = {}
+
+  commonFunctionsMock(varList, null, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -23,6 +25,10 @@ describe('Page: /project-responsibility', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.projectResponsibility = {
+      error: 'Select yes if you will take full responsibility for your project',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-responsibility`,
@@ -37,6 +43,7 @@ describe('Page: /project-responsibility', () => {
 
 
   it('page loads with correct back link', async () => {
+    valList.projectResponsibility = null
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-responsibility`

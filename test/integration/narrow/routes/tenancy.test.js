@@ -6,7 +6,9 @@ describe('Page: /tenancy', () => {
     tenancy: 'randomData'
   }
 
-  commonFunctionsMock(varList, undefined)
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -22,6 +24,10 @@ describe('Page: /tenancy', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList.tenancy = {
+      error: 'Select yes if the planned project is on land the business owns',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
@@ -35,6 +41,7 @@ describe('Page: /tenancy', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /poultry-type', async () => {
+    valList.tenancy = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
