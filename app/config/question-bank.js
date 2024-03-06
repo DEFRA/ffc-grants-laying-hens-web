@@ -1348,11 +1348,11 @@ const questionBank = {
         {
           key: 'mechanical-ventilation',
           order: 124,
-          title: 'Will the {{_poultryType_}} housing have a mechanical ventilation system with these features?',
+          title: 'Will the building have a mechanical ventilation system with these features?',
           hint: {
             html: `
               <span>
-                <p>The ventilation must have:</p>
+                <p>The mechanical ventilation system must have:</p>
                 <ul class="govuk-list--bullet">
                   <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
                   <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
@@ -1360,30 +1360,35 @@ const questionBank = {
                 </ul>
             </span>`
           },
-          pageTitle: '',
           url: 'mechanical-ventilation',
           baseUrl: 'mechanical-ventilation',
-          backUrlObject: {
-            dependentQuestionYarKey: ['multiTierSystem'],
-            dependentAnswerKeysArray: ['multi-tier-system-A1'],
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'rearing-aviary-system',
-              elseUrl: 'step-up-system'
+              thenUrl: 'hen-ventilation-specification',
+              elseUrl: 'pullet-ventilation-specification'
             }
           },
-          nextUrl: 'hen-ventilation-specification', // temporary url
+          backUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'aviary-system',
+              elseUrl: 'housing-density'
+            }
+          },
           // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">
-                The ventilation must have:
-                </p>
+                <p class="govuk-body">The mechanical ventilation system must have:</p>
                 <ul>
-                <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
-                <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
-                <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
-                  </ul>`,
+                  <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
+                  <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
+                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
+                </ul>
+                </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1396,7 +1401,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have a mechanical ventilation system with these features'
+              error: 'Select yes if the building will have a mechanical ventilation system with these features'
             }
           ],
           answers: [
