@@ -22,8 +22,8 @@ describe('Page: /veranda-only-size', () => {
   })
 
   it('no option selected -> show error message', async () => {
-    valList.verandaOnly = {
-      error: 'Select yes if the veranda will be at least the same size as 30% of the indoor bird housing area footprint',
+    valList.verandaOnlySize = {
+      error: 'Select how big the veranda will be',
       return: false
     }
     const postOptions = {
@@ -39,7 +39,7 @@ describe('Page: /veranda-only-size', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /veranda-features', async () => {
-    valList.verandaOnly = null
+    valList.verandaOnlySize = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-only-size`,
