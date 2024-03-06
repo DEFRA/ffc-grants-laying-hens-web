@@ -1,7 +1,11 @@
 const { crumbToken } = require('./test-helper')
+const { commonFunctionsMock } = require('../../../session-mock')
 
 describe('Page: /aviary-system', () => {
   const varList = {}
+  let valList = {}
+
+  commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -17,6 +21,10 @@ describe('Page: /aviary-system', () => {
   })
 
   it('no option selected -> show error message', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if the aviary system will have these features',
+      return: false
+    }
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/aviary-system`,

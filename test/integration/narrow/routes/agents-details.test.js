@@ -7,11 +7,6 @@ describe('Page: /agent-details', () => {
   
   const valList = {}
 
-  // beforeEach(() => {
-  //   valList = {}
-  // })
-  
-
   commonFunctionsMock(varList, 'Error', {}, valList)
 
   it('page loads successfully, with all the options', async () => {
