@@ -596,7 +596,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectType',
             dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
-              thenUrl: 'veranda-only',
+              thenUrl: 'veranda-only-size',
               elseUrl: '1000-birds'
             }
           },
@@ -732,7 +732,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The grant-funded building must have these design features to 
+                para: `The building must have these design features to 
                 meet the grant priority of improving biosecurity.`
               }]
             }]
@@ -1050,19 +1050,27 @@ const questionBank = {
         {
           key: 'egg-store-access',
           order: 105,
-          title: 'Will there be direct external access to the egg store separate to the entrance lobby?',
-          pageTitle: '',
+          title: 'Will there be direct external access from the building to the egg store?',
           url: 'egg-store-access',
           baseUrl: 'egg-store-access',
-          backUrl: 'changing-area',
-          nextUrl: 'aviary-system',
+          nextUrl: 'changing-area',
+          backUrlObject: {
+            dependentQuestionYarKey: 'henVeranda',
+            dependentAnswerKeysArray: ['hen-veranda-A1'],
+            urlOptions: {
+              thenUrl: 'concrete-apron',
+              elseUrl: 'veranda-concrete-apron'
+            }
+          },
           // preValidationKeys: ['poultryType'],
+          hint: {
+            text: 'This must be separate from the main entrance lobby and connected changing area'
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
                 para: 'You must be able to remove eggs and deliver empty egg trays to and from the building\'s egg store without going into the building\'s entrance lobby or connected changing area.',
-                items: []
               }]
             }]
           },
@@ -1083,7 +1091,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if there will be direct external access to the egg store separate to the entrance lobby'
+              error: 'Select yes if there will be a direct external access from the building to the egg store'
             }
           ],
           answers: [
@@ -1102,21 +1110,25 @@ const questionBank = {
         {
           key: 'aviary-system',
           order: 110,
-          title: 'Will the housing have a laying hen aviary system?',
-          pageTitle: '',
+          title: 'Will the aviary system have these features?',
           url: 'aviary-system',
           baseUrl: 'aviary-system',
           backUrl: 'aviary-welfare',
           nextUrl: 'mechanical-ventilation',
           // preValidationKeys: ['poultryType'],
+          hint: {
+            html: `
+                  <p>The aviary system must have integrated:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>automatic manure removal belts</li>
+                    <li>non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk</li>
+                  </ul>`
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The housing must have a laying hen aviary system. 
-                
-                This cannot be a combi-cage aviary system.`,
-                items: []
+                para: `The aviary system must have an integrated automatic manure-removal belt and non-flicker LED lighting system.`
               }]
             }]
           },
@@ -1136,14 +1148,11 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          warning: {
-            text: 'You must not install a combi-cage system in your grant-funded housing.'
-          },
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the housing will have a laying hen aviary system'
+              error: 'Select yes if the aviary system will have these features'
             }
           ],
           answers: [
@@ -1217,69 +1226,6 @@ const questionBank = {
             }
           ],
           yarKey: 'aviaryWelfare'
-        },
-        {
-          key: 'hen-veranda',
-          order: 121,
-          title: 'Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?',
-          pageTitle: '',
-          url: 'hen-veranda',
-          baseUrl: 'hen-veranda',
-          hint: {
-            text: 'Housing projects that do not have access to an area at least 30% of the size of the indoor housing area are exempt from adding a veranda'
-          },
-          backUrl: 'lighting-features',
-          nextUrl: 'hen-veranda-features',
-          ineligibleContent: {
-            messageContent: 'The housing must have a veranda that is at least the same size as 30% of the indoor bird housing area footprint in size.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-fieldset__legend--l',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You must add a veranda that is at least the same size as 30% of the indoor bird housing area footprint.
-
-                Housing projects that do not have access to an external area of at least 30% of the indoor housing area are exempt.
-                
-                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`,
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint'
-            }
-          ],
-          answers: [
-            {
-              key: 'hen-veranda-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'hen-veranda-A2',
-              value: 'No',
-              notEligible: true
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'hen-veranda-A3',
-              value: 'My project is exempt',
-              redirectUrl: 'concrete-apron'
-            }
-          ],
-          yarKey: 'henVeranda'
         },
         {
           key: 'hen-veranda-features',
@@ -1358,7 +1304,7 @@ const questionBank = {
           url: 'hen-veranda-biosecurity',
           baseUrl: 'hen-veranda-biosecurity',
           backUrl: 'hen-veranda-features',
-          nextUrl: 'hen-pop-holes',
+          nextUrl: 'concrete-apron',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
@@ -1422,8 +1368,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['multi-tier-system-A1'],
             urlOptions: {
               thenUrl: 'rearing-aviary-system',
-              elseUrl: 'step-up-system',
-              nonDependentUrl: 'aviary-lighting-system'
+              elseUrl: 'step-up-system'
             }
           },
           nextUrl: 'hen-ventilation-specification', // temporary url
@@ -1468,101 +1413,194 @@ const questionBank = {
           yarKey: 'mechanicalVentilation'
         },
         {
-          key: 'ventilation-air-speed',
-          order: 130,
-          title: 'Will the {{_poultryType_}} housing ventilation be able to provide an air speed of 1 metre per second over birds?',
-          pageTitle: '',
-          url: 'ventilation-air-speed',
-          baseUrl: 'ventilation-air-speed',
-          backUrl: 'mechanical-ventilation',
-          // preValidationKeys: ['poultryType'],
-          nextUrlObject: {
-            dependentQuestionYarKey: ['poultryType'],
-            dependentAnswerKeysArray: ['poultry-type-A1'],
-            urlOptions: {
-              thenUrl: 'hen-ventilation-rate',
-              elseUrl: 'pullet-ventilation-rate'
-            }
-          },
-          ineligibleContent: {
-            messageContent: 'The housing ventilation must provide an air speed of 1 metre per second over birds.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing ventilation will be able to provide an air speed of 1 metre per second over birds'
-            }
-          ],
-          answers: [
-            {
-              key: 'ventilation-air-speed-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'ventilation-air-speed-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'ventilationAirSpeed'
-        },
-        {
-          key: 'hen-ventilation-rate',
-          order: 135,
-          title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 10,800m³ per hour per 1000 hens?',
-          pageTitle: '',
-          url: 'hen-ventilation-rate',
-          baseUrl: 'hen-ventilation-rate',
-          backUrl: 'ventilation-air-speed',
-          nextUrl: 'ventilation-air-quality',
+          key: 'hen-ventilation-specification',
+          order: 124,
+          title: 'Will the ventilation system be fit for purpose in extreme heat?',
           hint: {
-            text: 'For birds up to 2.5kg in body mass'
+            html: `
+                <p>In extreme heat, the ventilation system must be able to provide:</p>
+                <ul class="govuk-list--bullet">
+                  <li>In extreme heat, the ventilation system must be able to provide:</li>
+                  <li>a maximum ventilation rate of 10,800m3 per hour per 1000 birds</li>
+                </ul>
+                `
           },
-          ineligibleContent: {
-            messageContent: 'The housing ventilation must have a ventilation rate of 10,800m³ per hour per 1000 hens.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
+          url: 'hen-ventilation-specification',
+          baseUrl: 'hen-ventilation-specification',
+          backUrl: 'mechanical-ventilation',
+          nextUrl: 'hen-veranda',
+          // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The ventilation system must be able to provide a ventilation rate (MXVR) of 10,800m³ per hour per 1000 hens in the case of high heat scenarios.'
+                para: `The ventilation system must be able prevent the heat that the birds generate from increasing the house temperature by more 
+                than 3°C above the external ambient temperature.`
               }]
             }]
           },
-          fundingPriorities: '',
+          ineligibleContent: {
+            messageContent: `
+            <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
+              <div class="govuk-list govuk-list--bullet">
+                <ul>
+                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>a maximum ventilation rate of 10,800m3 per hour per 1000 birds.</li>
+                </ul>
+              </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the ventilation system will meet the ventilation rate'
+              error: 'Select yes if the ventilation system will be fit for purpose in extreme heat'
             }
           ],
           answers: [
             {
-              key: 'hen-ventilation-rate-A1',
+              key: 'hen-ventilation-specification-A1',
               value: 'Yes'
             },
             {
-              key: 'hen-ventilation-rate-A2',
+              key: 'hen-ventilation-specification-A2',
               value: 'No',
               notEligible: true
             }
           ],
-          yarKey: 'henVentilationRate'
+          yarKey: 'henVentilationSpecification'
+        },
+        {
+          key: 'hen-veranda',
+          order: 121,
+          title: 'Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?',
+          pageTitle: '',
+          url: 'hen-veranda',
+          baseUrl: 'hen-veranda',
+          hint: {
+            text: 'Housing projects that do not have access to an area at least 30% of the size of the indoor housing area are exempt from adding a veranda'
+          },
+          backUrl: 'lighting-features',
+          nextUrl: 'hen-veranda-features',
+          ineligibleContent: {
+            messageContent: 'The housing must have a veranda that is at least the same size as 30% of the indoor bird housing area footprint in size.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-fieldset__legend--l',
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `You must add a veranda that is at least the same size as 30% of the indoor bird housing area footprint.
+
+                Housing projects that do not have access to an external area of at least 30% of the indoor housing area are exempt.
+                
+                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`,
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint'
+            }
+          ],
+          answers: [
+            {
+              key: 'hen-veranda-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'hen-veranda-A2',
+              value: 'No',
+              notEligible: true
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'hen-veranda-A3',
+              value: 'My project is exempt',
+              redirectUrl: 'concrete-apron'
+            }
+          ],
+          yarKey: 'henVeranda'
+        },
+        {
+          key: 'pullet-ventilation-specification',
+          order: 124,
+          title: 'Will the ventilation system be fit for purpose in extreme heat?',
+          hint: {
+            html: `
+                <p>In extreme heat, the ventilation system must be able to provide:</p>
+                <ul class="govuk-list--bullet">
+                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>a maximum ventilation rate of 9,000m3 per hour per 1000 birds</li>
+                </ul>`
+          },
+          url: 'pullet-ventilation-specification',
+          baseUrl: 'pullet-ventilation-specification',
+          backUrl: 'mechanical-ventilation',
+          nextUrl: 'pullet-veranda',
+          // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: `The ventilation system must be able prevent the heat that the birds 
+                  generate from increasing the house temperature by more 
+                  than 3°C above the external ambient temperature. `
+                }]
+              }
+            ]
+          },
+          ineligibleContent: {
+            messageContent: `
+              <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
+                <ul class="govuk-list--bullet">
+                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>a maximum ventilation rate of 9,000m3 per hour per 1000 birds.</li>
+                </ul>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the ventilation system will be fit for purpose in extreme heat'
+            }
+          ],
+          answers: [
+            {
+              key: 'pullet-ventilation-specification-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'pullet-ventilation-specification-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'pulletVentilationSpecification'
         },
         {
           key: 'lighting-features',
@@ -1608,7 +1646,7 @@ const questionBank = {
                       <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
                       <li>an option for red light to reduce feather pecking</li>
                   </ul>
-               </div>`,
+              </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1647,77 +1685,6 @@ const questionBank = {
             }
           ],
           yarKey: 'lightingFeatures'
-        },
-        {
-          key: 'hen-pop-holes',
-          order: 185,
-          title: 'Will the internal hen housing have lockable pop holes for the hens to enter the veranda through?',
-          pageTitle: '',
-          url: 'hen-pop-holes',
-          baseUrl: 'hen-pop-holes',
-          backUrl: 'hen-veranda-biosecurity',
-          nextUrl: 'concrete-apron',
-          hint: {
-            text: 'You must not put perches in front of the pop holes'
-          },
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'Pop holes must:',
-                  items: [
-                      'be at least 35cm high and 40cm wide',
-                      'extend along the entire length of the building',
-                  ],
-                  additionalPara: `
-                  The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
-
-                  The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.`
-                }]
-              }
-            ]
-          },
-          ineligibleContent: {
-            messageContent: 
-            `<p class="govuk-body">Pop holes must:</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li>be at least 35cm high and 40cm wide</li>
-                    <li>extend along the entire length of the building</li>
-                </ul>
-            <p class="govuk-body">The pop hole openings must add up to a total of 2 metres for every 1,000 hens.</p>`,
-            insertText: {
-              html: `
-                  <p>The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.</p>
-                  <p>You must not put perches in front of the pop holes.</p>`    
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the internal hen housing will have lockable pop holes'
-            }
-          ],
-          answers: [
-            {
-              key: 'hen-pop-holes-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'hen-pop-holes-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'henPopHoles'
         },
         {
           key: 'concrete-apron',
@@ -1833,25 +1800,26 @@ const questionBank = {
         {
           key: 'housing-density',
           order: 200,
-          title: 'Will the pullets be housed at a maximum stocking density of 20kg per metres squared (m²) of the total usable area at 16 weeks of age?',
+          title: 'Will the pullets be housed within the maximum stocking density when they are 16 weeks old?',
           pageTitle: '',
           url: 'housing-density',
           baseUrl: 'housing-density',
-          backUrl: 'vaccination-lobby',
-          nextUrl: 'pullet-housing-requirements',
-          hint: {
-            text: 'This must be 33kg per m² at floor level'
+          backUrlObject: {
+            dependentQuestionYarKey: 'multiTierSystem',
+            dependentAnswerKeysArray: ['multi-tier-system-A1'],
+            urlOptions: {
+              thenUrl: 'rearing-aviary-system',
+              elseUrl: 'step-up-system'
+            }
           },
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:',
-                  items: ['20kg per m² of the total usable area', '33kg per m² of the total usable area at floor level'],
-                }]
-              }
-            ]
+          nextUrl: 'mechanical-ventilation',
+          hint: {
+            html: `
+            <p>The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+              <ul class="govuk-list--bullet">
+                <li>20kg per m2 of the total usable area</li>
+                <li>33kg per m2 of the total usable area at floor level</li>
+              </ul>`
           },
           ineligibleContent: {
             messageContent: `
@@ -1874,7 +1842,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the pullets will be housed at a maximum stocking density'
+              error: 'Select yes if the pullets will be housed within the maximum stocking density'
             }
           ],
           answers: [
@@ -1957,11 +1925,11 @@ const questionBank = {
         {
           key: 'multi-tier-system',
           order: 210,
-          title: 'Which multi-tier system will the pullet housing have?',
+          title: 'Which multi-tier system will have the building have?',
           pageTitle: '',
           url: 'multi-tier-system',
           baseUrl: 'multi-tier-system',
-          backUrl: 'pullet-housing-requirements',
+          backUrl: 'lighting-features',
           sidebar: {
             values: [
               {
@@ -1973,7 +1941,7 @@ const questionBank = {
             ]
           },
           ineligibleContent: {
-            messageContent: 'The pullet housing must have a multi-tier system.',
+            messageContent: 'The building must have a multi-tier system.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1986,7 +1954,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what multi-tier system the pullet housing will have'
+              error: 'Select what multi-tier system the building will have'
             }
           ],
           answers: [
@@ -2020,12 +1988,12 @@ const questionBank = {
         {
           key: 'rearing-aviary-system',
           order: 215,
-          title: 'Will your rearing aviary system have these features?',
+          title: 'Will the rearing aviary system have these features?',
           pageTitle: '',
           url: 'rearing-aviary-system',
           baseUrl: 'rearing-aviary-system',
           backUrl: 'multi-tier-system',
-          nextUrl: 'mechanical-ventilation',
+          nextUrl: 'housing-density',
           hint: {
             html: `
                 <p>The rearing aviary system must have:</p>
@@ -2061,7 +2029,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if your rearing aviary system will have these features'
+              error: 'Select yes if the your rearing aviary system will have these features'
             }
           ],
           answers: [
@@ -2080,7 +2048,7 @@ const questionBank = {
         {
           key: 'step-up-system',
           order: 220,
-          title: 'Will your step-up system have these features?',
+          title: 'Will the step-up system have these features?',
           pageTitle: '',
           url: 'step-up-system',
           baseUrl: 'step-up-system',
@@ -2115,7 +2083,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if your step-up system will have these features'
+              error: 'Select yes if the your step-up system will have these features'
             }
           ],
           answers: [
@@ -2132,55 +2100,6 @@ const questionBank = {
           yarKey: 'stepUpSystem'
         },
         {
-          key: 'pullet-ventilation-rate',
-          order: 225,
-          title: 'Will the ventilation system be able to provide a ventilation rate (MXVR) of 9,000m³ per hour per 1000 pullets?',
-          url: 'pullet-ventilation-rate',
-          baseUrl: 'pullet-ventilation-rate',
-          backUrl: 'ventilation-air-speed',
-          nextUrl: 'ventilation-air-quality',
-          hint: {
-            text: 'For birds up to 2kg in body mass'
-          },
-          ineligibleContent: {
-            messageContent: 'The housing ventilation must have a ventilation rate of 9,000m³ per hour per 1000 pullets.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'The ventilation system must be able to provide a ventilation rate (MXVR) of 9,000m³ per hour per 1000 pullets in the case of high heat scenarios.'
-              }]
-            }]
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the ventilation system will meet the ventilation rate'
-            }
-          ],
-          answers: [
-            {
-              key: 'pullet-ventilation-rate-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'pullet-ventilation-rate-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'pulletVentilationRate'
-        },
-        {
           key: 'vehicle-washing',
           order: 230,
           title: 'Will the {{_poultryType_}} housing have a designated area for washing and disinfecting vehicles?',
@@ -2188,7 +2107,7 @@ const questionBank = {
           url: 'vehicle-washing',
           baseUrl: 'vehicle-washing',
           backUrl: 'concrete-apron',
-          nextUrl: 'soiled-water-drainage',
+          nextUrl: 'external-taps',
           hint: {
             text: 'This must include an area of concrete parking which is appropriate to the size of the vehicles entering the facility (minimum width of 3 metres)'
           },
@@ -2223,58 +2142,13 @@ const questionBank = {
           yarKey: 'vehicleWashing'
         },
         {
-          key: 'soiled-water-drainage',
-          order: 235,
-          title: 'Will the designated washing and disinfecting area have the drainage system and storage tanks for soiled water?',
-          pageTitle: '',
-          url: 'soiled-water-drainage',
-          baseUrl: 'soiled-water-drainage',
-          backUrl: 'vehicle-washing',
-          nextUrl: 'external-taps',
-          hint: {
-            text: 'This is separate from rainwater drainage'
-          },
-          ineligibleContent: {
-            messageContent: 'The designated washing and disinfecting area must have a drainage system and storage tanks for soiled water.',
-            insertText: {
-              text: 'This is separate from rainwater drainage.'
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the designated washing and disinfecting area will have a drainage system and storage tanks'
-            }
-          ],
-          answers: [
-            {
-              key: 'soiled-water-drainage-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'soiled-water-drainage-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'soiledWaterDrainage'
-        },
-        {
           key: 'external-taps',
           order: 240,
           title: 'Will the {{_poultryType_}} housing have an external tap at each main pedestrian access point?',
           pageTitle: '',
           url: 'external-taps',
           baseUrl: 'external-taps',
-          backUrl: 'soiled-water-drainage',
+          backUrl: 'vehicle-washing',
           nextUrl: 'roof-solar-PV',
           sidebar: {
             values: [{
@@ -2315,53 +2189,71 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
-          key: 'veranda-only',
+          key: 'veranda-only-size',
           order: 245,
-          title: 'Will the veranda be at least the same size as 30% of the indoor bird housing area footprint?',
-          pageTitle: '',
-          url: 'veranda-only',
-          baseUrl: 'veranda-only',
+          title: 'How big will the veranda be?',
+          url: 'veranda-only-size',
+          baseUrl: 'veranda-only-size',
           backUrl: 'poultry-type',
           nextUrl: 'veranda-features',
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The veranda must be at least the same size as 30% of the indoor bird housing area footprint. 
-                
-                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`
+                para: `The veranda must be either:`,
+                items: ['4 metres wide or more along the length of the bird housing area', '30% or more of the size of the indoor bird housing area footprint.']
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: 'The veranda must be at least the same size as 30% of the indoor bird housing area footprint in size.',
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">The veranda must be either:</p>
+                <ul class="govuk-list--bullet">
+                    <li>4 metres wide or more along the length of the bird</li>
+                    <li>housing area</li>
+                    <li>30% or more of the size of the indoor bird housing area footprint.</li>
+                </ul>
+            </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          type: 'multi-answer',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the veranda will be at least the same size as 30% of the indoor bird housing area footprint'
+              error: 'Select how big the veranda will be'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'veranda-only-size',
+                answerKey: 'veranda-only-size-A3'
+              }
             }
           ],
           answers: [
             {
-              key: 'veranda-only-A1',
-              value: 'Yes'
+              key: 'veranda-only-size-A1',
+              value: '4 metres wide or more along the length of the bird housing area'
             },
             {
-              key: 'veranda-only-A2',
-              value: 'No',
+              key: 'veranda-only-size-A2',
+              value: '30% or more of the size of the indoor bird housing area footprint'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'veranda-only-size-A3',
+              value: 'None of the above',
               notEligible: true
             }
           ],
-          yarKey: 'verandaOnly'
+          yarKey: 'verandaOnlySize'
         },
         {
           key: 'veranda-features',
@@ -2370,33 +2262,27 @@ const questionBank = {
           pageTitle: '',
           url: 'veranda-features',
           baseUrl: 'veranda-features',
-          backUrl: 'veranda-only',
+          backUrl: 'veranda-only-size',
           nextUrl: 'veranda-biosecurity',
           hint: {
             html: `
-                  <p>The veranda of the housing must have:</p>
+                  <p>The veranda must have a:</p>
                   <ul class="govuk-list--bullet">
                     <li>a solid concrete floor</li>
                     <li>a waterproof insulated roof</li>
-                    <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
                     <li>a perimeter wall at least 1 metre high</li>
-                    <li>lockable pop holes within the perimeter wall, unless the veranda forms part of an indoor barn system</li>
-                    <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
                     <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                   </ul>`
           },
           ineligibleContent: {
             messageContent: `
                 <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">The veranda of the housing must have:</p>
+                <p class="govuk-body">The veranda must have a:</p>
                       <ul>
                         <li>a solid concrete floor</li>
                         <li>a waterproof insulated roof</li>
-                        <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
                         <li>a perimeter wall at least 1 metre high</li>
-                        <li>lockable pop holes in the perimeter wall, unless the veranda forms part of an indoor barn system</li>
-                        <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
-                        <li>a dimmable LED lighting system between 0 lux and 60 lux.</li>
+                        <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                       </ul>
                 </div>`,
             messageLink: {
@@ -2404,7 +2290,6 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -2435,7 +2320,7 @@ const questionBank = {
           url: 'veranda-biosecurity',
           baseUrl: 'veranda-biosecurity',
           backUrl: 'veranda-features',
-          nextUrl: 'veranda-pop-holes',
+          nextUrl: 'veranda-project-cost',
           hint: {
             html: `
                   <p>The veranda must have:</p>
@@ -2494,87 +2379,13 @@ const questionBank = {
           yarKey: 'verandaBiosecurity'
         },
         {
-          key: 'veranda-pop-holes',
-          order: 260,
-          title: 'Will the internal {{_poultryType_}} housing have lockable pop holes for the hens to enter the veranda through?',
-          pageTitle: '',
-          url: 'veranda-pop-holes',
-          baseUrl: 'veranda-pop-holes',
-          backUrl: 'veranda-biosecurity',
-          nextUrl: 'veranda-project-cost',
-          hint: {
-            text: 'You must not put perches in front of the pop holes'
-          },
-          sidebar: {
-            values: [
-              {
-                heading: 'Eligibility',
-                content: [{
-                  para: 'Pop holes must:',
-                  items: [
-                      'be at least 35cm high and 40cm wide',
-                      'extend along the entire length of the building',
-                  ],
-                  additionalPara: `
-                  The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
-
-                  The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.`
-                }]
-              }
-            ]
-          },
-          ineligibleContent: {
-            messageContent: `
-            <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">Pop holes must:</p>
-                <ul>
-                    <li>be at least 35cm high and 40cm wide</li>
-                    <li>extend along the entire length of the building</li>
-                </ul>
-                <p>The pop hole openings must add up to a total of 2 metres for every 1,000 hens.</p>
-            </div>`,
-            insertText: {
-              html: `
-                  <p>The base of all pop holes must either be less than 30cm from floor level, or have access ramps that are as wide as the pop holes.</p>
-                  <p>You must not put perches in front of the pop holes.</p>
-              `
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the internal {{_poultryType_}} housing will have lockable pop holes'
-            }
-          ],
-          answers: [
-            {
-              key: 'veranda-pop-holes-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'veranda-pop-holes-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'verandaPopHoles'
-        },
-        {
           key: 'veranda-project-cost',
           order: 265,
           pageTitle: '',
           classes: 'govuk-input--width-10',
           url: 'veranda-project-cost',
           baseUrl: 'veranda-project-cost',
-          backUrl: 'veranda-pop-holes',
+          backUrl: 'veranda-biosecurity',
           nextUrl: 'veranda-potential-amount',
           fundingPriorities: '',
           preValidationKeys: [],
@@ -3154,9 +2965,10 @@ const questionBank = {
           order: 200,
           title:'Will the perches have a design feature that help the {{_poultryType_}}s grip the perches?',
           hint: {
-            text: 'For example, sufficient grip size or a comfortable material coating'
+            text: `Additional design features (for example, a ridged surface,
+              comfortable materials or coating) you can add to the circular metal
+              perches that are often standard in aviary system`
           },
-          pageTitle: '',
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
           backUrl: 'natural-light',
@@ -3165,7 +2977,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to support projects which provide perches that are easy to grip to increase bird safety and reduce falls.`
+                para: `RPA want to support projects that ensure perches that are easy to grip to increase bird safety and reduce falls.`
               }]
             }]
           },

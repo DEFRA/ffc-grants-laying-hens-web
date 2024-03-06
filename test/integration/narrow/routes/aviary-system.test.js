@@ -1,21 +1,17 @@
-const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
-describe('Page: /pullet-ventilation-rate', () => {
-  let varList = {}
-  
-  commonFunctionsMock(varList, undefined)
+describe('Page: /aviary-system', () => {
+  const varList = {}
 
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/pullet-ventilation-rate`
+      url: `${global.__URLPREFIX__}/aviary-system`
     }
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the ventilation system be able to provide a ventilation rate (MXVR) of 9,000m³ per hour per 1000 pullets?')
-    expect(response.payload).toContain('For birds up to 2kg in body mass')
+    expect(response.payload).toContain('Will the aviary system have these features?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -23,50 +19,51 @@ describe('Page: /pullet-ventilation-rate', () => {
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/pullet-ventilation-rate`,
+      url: `${global.__URLPREFIX__}/aviary-system`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the ventilation system will meet the ventilation rate')
+    expect(postResponse.payload).toContain('Select yes if the aviary system will have these features')
   })
 
-  it('user selects eligible option -> store user response and redirect to /ventilation-air-quality', async () => {
+  it('user selects eligible option -> store user response and redirect to /mechanical-ventilation', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/pullet-ventilation-rate`,
+      url: `${global.__URLPREFIX__}/aviary-system`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { pulletVentilationRate: 'Yes',  crumb: crumbToken }
+      payload: { aviarySystem: 'Yes', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('ventilation-air-quality')
+    expect(postResponse.headers.location).toBe('mechanical-ventilation')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/pullet-ventilation-rate`,
+      url: `${global.__URLPREFIX__}/aviary-system`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { pulletVentilationRate: 'No', crumb: crumbToken }
+      payload: { aviarySystem: 'No', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The housing ventilation must have a ventilation rate of 9,000m³ per hour per 1000 pullets.')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('The hen housing must have a laying hen aviary system.')
+    expect(postResponse.payload).toContain('You must not install a combi-cage system in your grant-funded housing.')
   })
 
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/pullet-ventilation-rate`
+      url: `${global.__URLPREFIX__}/aviary-system`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"ventilation-air-speed\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"aviary-welfare\" class=\"govuk-back-link\">Back</a>')
   })
+
 })
