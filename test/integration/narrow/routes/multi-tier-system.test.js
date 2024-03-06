@@ -16,7 +16,7 @@ describe('Page: /multi-tier-system', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Which multi-tier system will the pullet housing have?')
+    expect(response.payload).toContain('Which multi-tier system will have the building have?')
     expect(response.payload).toContain('Rearing aviary')
     expect(response.payload).toContain('A system that houses birds within tiers during the first 2 weeks of rearing, that you can open to enable them to access the barn flow after 2 weeks')
     expect(response.payload).toContain('Step-up system')
@@ -39,7 +39,7 @@ describe('Page: /multi-tier-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select what multi-tier system the pullet housing will have')
+    expect(postResponse.payload).toContain('Select what multi-tier system the building will have')
   })
 
   it('user selects eligible option `Rearing aviary` -> store user response and redirect to /rearing-aviary-system', async () => {
@@ -79,17 +79,17 @@ describe('Page: /multi-tier-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The pullet housing must have a multi-tier system.')
+    expect(postResponse.payload).toContain('The building must have a multi-tier system.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link - /pullet-housing-requirements', async () => {
+  it('page loads with correct back link - /lighting-features', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/multi-tier-system`,
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"pullet-housing-requirements\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"lighting-features\" class=\"govuk-back-link\">Back</a>')
   })
 })

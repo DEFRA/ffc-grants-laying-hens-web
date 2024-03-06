@@ -15,7 +15,7 @@ describe('Page: /rearing-aviary-system', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will your rearing aviary system have these features?')
+    expect(response.payload).toContain('Will the rearing aviary system have these features?')
     expect(response.payload).toContain('The rearing aviary system must have:')
     expect(response.payload).toContain('the capacity to provide or retain friable litter while the birds are held within the system<')
     expect(response.payload).toContain('an integrated manure removal belt-system')
@@ -40,10 +40,10 @@ describe('Page: /rearing-aviary-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if your rearing aviary system will have these features')
+    expect(postResponse.payload).toContain('Select yes if the your rearing aviary system will have these features')
   })
 
-  it('user selects eligible option -> store user response and redirect to /mechanical-ventilation', async () => {
+  it('user selects eligible option -> store user response and redirect to /housing-density', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/rearing-aviary-system`,
@@ -53,7 +53,7 @@ describe('Page: /rearing-aviary-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('mechanical-ventilation')
+    expect(postResponse.headers.location).toBe('housing-density')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {

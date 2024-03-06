@@ -98,13 +98,13 @@ describe('Page: /external-taps', () => {
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link - /soiled-water-drainage', async () => {
+  it('page loads with correct back link - /vehicle-washing', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/external-taps`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"soiled-water-drainage\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"vehicle-washing\" class=\"govuk-back-link\">Back</a>')
   })
 })
