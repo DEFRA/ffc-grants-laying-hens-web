@@ -9,8 +9,7 @@ const schema = Joi.object({
   sendEmailToRpa: Joi.bool().default(false),
   protectPassword: Joi.string(),
   rpaEmail: Joi.string().default('FTF@rpa.gov.uk'),
-  uploadEnvironment: Joi.string().required(),
-  port: Joi.string().required()
+  uploadEnvironment: Joi.string().required()
 })
 
 // Build config
