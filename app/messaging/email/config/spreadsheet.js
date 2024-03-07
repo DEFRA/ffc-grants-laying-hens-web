@@ -19,7 +19,8 @@ const config = {
   sendEmailToRpa: process.env.SEND_EMAIL_TO_RPA === 'true',
   protectPassword: process.env.WORKSHEET_PROTECT_PASSWORD,
   rpaEmail: process.env.RPA_EMAIL_ADDRESS,
-  uploadEnvironment: process.env.EXCEL_UPLOAD_ENVIRONMENT
+  uploadEnvironment: process.env.EXCEL_UPLOAD_ENVIRONMENT,
+  grant_percentage: process.env.GRANT_PERCENTAGE
 }
 
 // Validate config
