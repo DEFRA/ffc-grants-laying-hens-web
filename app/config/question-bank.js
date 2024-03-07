@@ -1940,7 +1940,7 @@ const questionBank = {
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: 'The pullet housing must have a multi-tier system to enable the birds to transition between levels without flying or jumping more than 1m in height, horizontally or vertically.',
+                  para: 'The building must have a multi-tier system so the pullets can move between levels without flying or jumping more than one metre in height, horizontally or vertically.',
                 }]
               }
             ]
@@ -2344,7 +2344,7 @@ const questionBank = {
                 
                       The base of all pop holes must either:`,
 
-                items:['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes']
+                items:['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.']
               }]
             }]
           },
@@ -2353,7 +2353,7 @@ const questionBank = {
               <p class="govuk-body">The veranda must have:</p>
               <ul class="govuk-list govuk-list--bullet">
                 <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system</li>
+                <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system.</li>
               </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
