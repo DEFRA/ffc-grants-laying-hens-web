@@ -37,7 +37,7 @@ describe('Page: /step-up-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the your step-up system will have these features')
+    expect(postResponse.payload).toContain('Select yes if the step-up system will have these features')
   })
 
   it('user selects eligible option -> store user response and redirect to /mechanical-ventilation', async () => {
