@@ -2034,7 +2034,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the your rearing aviary system will have these features'
+              error: 'Select yes if the rearing aviary system will have these features'
             }
           ],
           answers: [
@@ -2088,7 +2088,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the your step-up system will have these features'
+              error: 'Select yes if the step-up system will have these features'
             }
           ],
           answers: [
