@@ -30,8 +30,7 @@ describe('spreadsheet.js', () => {
             sendEmailToRpa: SEND_EMAIL_TO_RPA === 'true',
             protectPassword: WORKSHEET_PROTECT_PASSWORD,
             rpaEmail: RPA_EMAIL_ADDRESS,
-            uploadEnvironment: EXCEL_UPLOAD_ENVIRONMENT,
-            grantPercentage: GRANT_PERCENTAGE
+            uploadEnvironment: EXCEL_UPLOAD_ENVIRONMENT
         })
     })
 
