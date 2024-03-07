@@ -9,7 +9,8 @@ const schema = Joi.object({
   sendEmailToRpa: Joi.bool().default(false),
   protectPassword: Joi.string(),
   rpaEmail: Joi.string().default('FTF@rpa.gov.uk'),
-  uploadEnvironment: Joi.string().required()
+  uploadEnvironment: Joi.string().required(),
+  port: Joi.string().required()
 })
 
 // Build config
@@ -20,7 +21,8 @@ const config = {
   protectPassword: process.env.WORKSHEET_PROTECT_PASSWORD,
   rpaEmail: process.env.RPA_EMAIL_ADDRESS,
   uploadEnvironment: process.env.EXCEL_UPLOAD_ENVIRONMENT,
-  grant_percentage: process.env.GRANT_PERCENTAGE
+  grantPercentage: process.env.GRANT_PERCENTAGE
+
 }
 
 // Validate config

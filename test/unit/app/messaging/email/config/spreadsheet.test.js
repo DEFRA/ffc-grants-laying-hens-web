@@ -20,7 +20,8 @@ describe('spreadsheet.js', () => {
             SEND_EMAIL_TO_RPA,
             WORKSHEET_PROTECT_PASSWORD,
             RPA_EMAIL_ADDRESS,
-            EXCEL_UPLOAD_ENVIRONMENT
+            EXCEL_UPLOAD_ENVIRONMENT,
+            GRANT_PERCENTAGE
         } = process.env
 
         expect(value).toEqual({
@@ -29,7 +30,8 @@ describe('spreadsheet.js', () => {
             sendEmailToRpa: SEND_EMAIL_TO_RPA === 'true',
             protectPassword: WORKSHEET_PROTECT_PASSWORD,
             rpaEmail: RPA_EMAIL_ADDRESS,
-            uploadEnvironment: EXCEL_UPLOAD_ENVIRONMENT
+            uploadEnvironment: EXCEL_UPLOAD_ENVIRONMENT,
+            grantPercentage: GRANT_PERCENTAGE
         })
     })
 
