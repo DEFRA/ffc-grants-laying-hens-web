@@ -1426,7 +1426,7 @@ const questionBank = {
                 <p>In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
                   <li>In extreme heat, the ventilation system must be able to provide:</li>
-                  <li>a maximum ventilation rate of 10,800m3 per hour per 1000 birds</li>
+                  <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds</li>
                 </ul>
                 `
           },
@@ -1439,7 +1439,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The ventilation system must be able prevent the heat that the birds generate from increasing the house temperature by more 
+                para: `The ventilation system must be able to prevent the heat that the birds generate from increasing the house temperature by more 
                 than 3°C above the external ambient temperature.`
               }]
             }]
@@ -1450,7 +1450,7 @@ const questionBank = {
               <div class="govuk-list govuk-list--bullet">
                 <ul>
                   <li>an air speed of 1 metre per second over birds</li>
-                  <li>a maximum ventilation rate of 10,800m3 per hour per 1000 birds.</li>
+                  <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds.</li>
                 </ul>
               </div>`,
             messageLink: {
@@ -1552,7 +1552,7 @@ const questionBank = {
                 <p>In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
                   <li>an air speed of 1 metre per second over birds</li>
-                  <li>a maximum ventilation rate of 9,000m3 per hour per 1000 birds</li>
+                  <li>a maximum ventilation rate of 9,000m³ per hour per 1000 birds</li>
                 </ul>`
           },
           url: 'pullet-ventilation-specification',
@@ -1565,7 +1565,7 @@ const questionBank = {
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: `The ventilation system must be able prevent the heat that the birds 
+                  para: `The ventilation system must be able to prevent the heat that the birds 
                   generate from increasing the house temperature by more 
                   than 3°C above the external ambient temperature. `
                 }]
@@ -1578,7 +1578,7 @@ const questionBank = {
                 <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
                   <li>an air speed of 1 metre per second over birds</li>
-                  <li>a maximum ventilation rate of 9,000m3 per hour per 1000 birds.</li>
+                  <li>a maximum ventilation rate of 9,000m³ per hour per 1000 birds.</li>
                 </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
@@ -1822,8 +1822,8 @@ const questionBank = {
             html: `
             <p>The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
               <ul class="govuk-list--bullet">
-                <li>20kg per m2 of the total usable area</li>
-                <li>33kg per m2 of the total usable area at floor level</li>
+                <li>20kg per m² of the total usable area</li>
+                <li>33kg per m² of the total usable area at floor level</li>
               </ul>`
           },
           ineligibleContent: {
