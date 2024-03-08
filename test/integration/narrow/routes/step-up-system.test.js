@@ -40,7 +40,7 @@ describe('Page: /step-up-system', () => {
     expect(postResponse.payload).toContain('Select yes if the step-up system will have these features')
   })
 
-  it('user selects eligible option -> store user response and redirect to /mechanical-ventilation', async () => {
+  it('user selects eligible option -> store user response and redirect to /housing-density', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/step-up-system`,
@@ -50,7 +50,7 @@ describe('Page: /step-up-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('mechanical-ventilation')
+    expect(postResponse.headers.location).toBe('housing-density')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
