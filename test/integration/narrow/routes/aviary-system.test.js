@@ -60,8 +60,9 @@ describe('Page: /aviary-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The hen housing must have a laying hen aviary system.')
-    expect(postResponse.payload).toContain('You must not install a combi-cage system in your grant-funded housing.')
+    expect(postResponse.payload).toContain('The aviary system must have:')
+    expect(postResponse.payload).toContain('manure removal belts')
+    expect(postResponse.payload).toContain('integrated non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk.')
   })
 
   it('page loads with correct back link', async () => {
