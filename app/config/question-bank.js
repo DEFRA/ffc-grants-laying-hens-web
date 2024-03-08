@@ -1356,7 +1356,7 @@ const questionBank = {
                 <ul class="govuk-list--bullet">
                   <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
                   <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
-                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
+                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures.</li>
                 </ul>
             </span>`
           },
@@ -1425,7 +1425,7 @@ const questionBank = {
             html: `
                 <p>In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
-                  <li>In extreme heat, the ventilation system must be able to provide:</li>
+                  <li>an air speed of 1 metre per second over birds</li>
                   <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds</li>
                 </ul>
                 `
@@ -2215,8 +2215,7 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">The veranda must be either:</p>
                 <ul class="govuk-list--bullet">
-                    <li>4 metres wide or more along the length of the bird</li>
-                    <li>housing area</li>
+                    <li>4 metres wide or more along the length of the bird housing area</li>
                     <li>30% or more of the size of the indoor bird housing area footprint.</li>
                 </ul>
             </div>`,
@@ -2225,7 +2224,7 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          type: 'multi-answer',
+          type: 'single-answer',
           validate: [
             {
               type: 'NOT_EMPTY',
