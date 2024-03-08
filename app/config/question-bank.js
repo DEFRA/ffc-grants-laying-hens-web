@@ -2413,7 +2413,7 @@ const questionBank = {
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £5,000 (40% of £12,500). The maximum grant is £100,000.</p>
+                  <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £5,000 (${GRANT_PERCENTAGE}% of £12,500). The maximum grant is £100,000.</p>
                   <p>Do not include VAT</p>
                   <p>Enter amount, for example 50,000</p>
               `
@@ -2436,7 +2436,7 @@ const questionBank = {
             }
           ],
           ineligibleContent: {
-            messageContent: 'The minimum grant you can apply for veranda project costs is £5,000 (40% of £12,500).',
+            messageContent: `The minimum grant you can apply for veranda project costs is £5,000 (${GRANT_PERCENTAGE}% of £12,500).`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -2501,7 +2501,7 @@ const questionBank = {
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £15,000 (40% of £37,500). The maximum grant is £500,000.</p>
+                  <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.</p>
                   <p>Do not include VAT</p>
                   <p>Enter amount, for example 95,000</p>
               `
@@ -2524,7 +2524,7 @@ const questionBank = {
             }
           ],
           ineligibleContent: {
-            messageContent: 'The minimum grant you can apply for the calf housing costs is £15,000 (40% of £37,500). The maximum grant is £500,000.',
+            messageContent: `The minimum grant you can apply for the calf housing costs is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.`,
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
