@@ -1356,7 +1356,7 @@ const questionBank = {
                 <ul class="govuk-list--bullet">
                   <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
                   <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
-                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
+                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures.</li>
                 </ul>
             </span>`
           },
@@ -1425,7 +1425,7 @@ const questionBank = {
             html: `
                 <p>In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
-                  <li>In extreme heat, the ventilation system must be able to provide:</li>
+                  <li>an air speed of 1 metre per second over birds</li>
                   <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds</li>
                 </ul>
                 `
@@ -1940,7 +1940,7 @@ const questionBank = {
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: 'The pullet housing must have a multi-tier system to enable the birds to transition between levels without flying or jumping more than 1m in height, horizontally or vertically.',
+                  para: 'The building must have a multi-tier system so the pullets can move between levels without flying or jumping more than one metre in height, horizontally or vertically.',
                 }]
               }
             ]
@@ -2215,8 +2215,7 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">The veranda must be either:</p>
                 <ul class="govuk-list--bullet">
-                    <li>4 metres wide or more along the length of the bird</li>
-                    <li>housing area</li>
+                    <li>4 metres wide or more along the length of the bird housing area</li>
                     <li>30% or more of the size of the indoor bird housing area footprint.</li>
                 </ul>
             </div>`,
@@ -2225,7 +2224,7 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          type: 'multi-answer',
+          type: 'single-answer',
           validate: [
             {
               type: 'NOT_EMPTY',
@@ -2344,7 +2343,7 @@ const questionBank = {
                 
                       The base of all pop holes must either:`,
 
-                items:['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes']
+                items:['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.']
               }]
             }]
           },
@@ -2353,7 +2352,7 @@ const questionBank = {
               <p class="govuk-body">The veranda must have:</p>
               <ul class="govuk-list govuk-list--bullet">
                 <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system</li>
+                <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system.</li>
               </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',

@@ -66,7 +66,7 @@ describe('Page: /veranda-biosecurity', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('The veranda must have:')
     expect(postResponse.payload).toContain('a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended')
-    expect(postResponse.payload).toContain('closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system')
+    expect(postResponse.payload).toContain('closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
