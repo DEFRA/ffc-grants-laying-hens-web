@@ -27,7 +27,7 @@
           <li>have 1,000 or more laying hens or pullets</li>
         </ul>
         <h2 class="govuk-heading-m">What you can apply for</h2>
-        <p>You can apply for up to 40% of the estimated project costs of either:</p>
+        <p>You can apply for up to {{ grantPercentage }}% of the estimated project costs of either:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>replacing or refurbishing laying hen or pullet housing</li>
           <li>adding a veranda to existing laying hen or pullet housing</li>
@@ -43,8 +43,8 @@
            (including solar PV system costs) or £100,000 for veranda projects. 
            The Rural Payments Agency (RPA) will award the grant funding for verandas on a first come, first served basis.
         </p>
-        <p>For housing projects, the minimum grant is £15,000 (40% of £37,500).
-          <br>For veranda projects, the minimum grant is £5,000 (40% of £12,500).</br>
+        <p>For housing projects, the minimum grant is £15,000 ({{ grantPercentage }}% of £37,500).
+          <br>For veranda projects, the minimum grant is £5,000 ({{ grantPercentage }}%  of £12,500).</br>
         </p>
         {{ govukInsetText({
           text: 'If your project is eligible, you will be able to submit your online application to the RPA.'
