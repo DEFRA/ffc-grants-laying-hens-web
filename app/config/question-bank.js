@@ -2058,7 +2058,7 @@ const questionBank = {
           url: 'step-up-system',
           baseUrl: 'step-up-system',
           backUrl: 'multi-tier-system',
-          nextUrl: 'mechanical-ventilation',
+          nextUrl: 'housing-density',
           hint: {
             html: `
                 <p>The step-up system must have:</p>
