@@ -4,7 +4,7 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /hen-veranda', () => {
   const varList = {
     poultryType: 'hen',
-    projectType: 'Replacing an existing laying hen or pullet with a new building'
+    projectType: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
   }
 
   let valList = {}

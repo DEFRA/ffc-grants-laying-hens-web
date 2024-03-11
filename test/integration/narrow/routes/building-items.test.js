@@ -3,14 +3,14 @@ const { commonFunctionsMock } = require('../../../session-mock')
 
 const utilsList = {
   'poultry-type-A1': 'hen',
-  'project-type-A1': 'Refurbishing an existing laying hen or pullet building',
-  'project-type-A2': 'Replacing an existing laying hen or pullet with a new building',
+  'project-type-A2': 'Refurbishing an existing laying hen or pullet building',
+  'project-type-A3': 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features',
 }
 
 describe('Page: /building-items', () => {
   const varList = {
     poultryType: 'hen',
-    projectType: 'Replacing an existing laying hen or pullet with a new building'
+    projectType: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
   }
 
   let valList = {}
@@ -48,7 +48,7 @@ describe('Page: /building-items', () => {
     expect(postResponse.payload).toContain('Select yes if the building will have these features')
   })
 
-  it('user selects eligible option and /Replacing an existing laying hen or pullet with a new building/ at project-type page  -> store user response and redirect to /replacing-insulation', async () => {
+  it('user selects eligible option and /Replacing the entire laying hen or pullet building with a new building including the grant funding required features/ at project-type page  -> store user response and redirect to /replacing-insulation', async () => {
     valList.buildingItems = null
     const postOptions = {
       method: 'POST',

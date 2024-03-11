@@ -721,7 +721,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['poultry-type-A2'],
             dependentElseUrlYarKey: 'projectType',
             dependentElseUrlQuestionKey: 'project-type',
-            dependentElseUrlAnswerKey: 'project-type-A1',
+            dependentElseUrlAnswerKey: 'project-type-A2',
             urlOptions: {
               thenUrl: 'pullet-housing-requirements',
               elseUrl: 'replacing-insulation',
@@ -786,16 +786,14 @@ const questionBank = {
           backUrl: 'start',
           nextUrl: 'applicant-type',
           hint: {
-            html: `You must submit an application for each building or veranda project.<br/><br/>
-                  The maximum grant amount each business can apply for is £500,000 for building projects, 
-                  or £100,000 for veranda projects.`
+            html: `If you are applying for multiple projects, you must submit a separate application for each one`
           },
           ineligibleContent: {
             messageContent: `
                 <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">This grant is for:</p>
                       <ul>
-                        <li>refurbishing an existing laying hen or pullet building</li>
+                        <li>Adding a veranda only to an existing laying hen or pullet building</li>
                         <li>replacing an existing laying hen or pullet building with a new building</li>
                         <li>adding a veranda to an existing laying hen or pullet building</li>
                       </ul>
@@ -811,34 +809,34 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You can apply for grant funding for either building projects or veranda projects.
-                
-                      This grant is for:`,
-                items: ['refurbishing an existing laying hen or pullet building', 'replacing an existing laying hen or pullet building with a new building', 'adding a veranda to an existing laying hen or pullet building']
+                items: ['You can apply for grant funding for either building projects or veranda-only projects.', 'The maximum grant funding each business can apply for is £500,000 for building projects, or £100,000 for veranda-only projects.']
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what is your project'
+              error: 'Select what work you are doing to this building'
             }
           ],
           answers: [
             {
               key: 'project-type-A1',
-              value: 'Refurbishing an existing laying hen or pullet building'
+              value: 'Adding a veranda only to an existing laying hen or pullet building',
+              hint: {
+                text: 'The RPA will award veranda-only grant funding on a first come, first served basis'
+              },
             },
             {
               key: 'project-type-A2',
-              value: 'Replacing an existing laying hen or pullet with a new building'
+              value: 'Refurbishing an existing laying hen or pullet building',
+              hint: {
+                text: 'Adding features to an existing building (including a mechanical ventilation system, lighting system, aviary or multi-tier system and veranda)'
+              },
             },
             {
               key: 'project-type-A3',
-              value: 'Adding a veranda only to an existing laying hen or pullet building',
-              hint: {
-                text: 'The RPA will award the grant funding on a first-come first-served basis'
-              },
+              value: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
             },
             {
               value: 'divider'
@@ -976,7 +974,7 @@ const questionBank = {
           baseUrl: 'changing-area',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A2'],
+            dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -1614,7 +1612,7 @@ const questionBank = {
           baseUrl: 'lighting-features',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'refurbishing-insulation',
               elseUrl: 'replacing-insulation'
@@ -1871,7 +1869,7 @@ const questionBank = {
           backUrl: 'building-items',
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A2'],
+            dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
