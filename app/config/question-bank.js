@@ -594,7 +594,7 @@ const questionBank = {
           },
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A3'],
+            dependentAnswerKeysArray: ['project-type-A1'],
             urlOptions: {
               thenUrl: 'veranda-only-size',
               elseUrl: '1000-birds'
@@ -3563,7 +3563,7 @@ const questionBank = {
           baseUrl: 'business-details',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A3'],
+            dependentAnswerKeysArray: ['project-type-A1'],
             urlOptions: {
               thenUrl: 'veranda-remaining-costs',
               elseUrl: 'project-type'
@@ -4426,7 +4426,7 @@ const questionBank = {
           backUrl: 'applicant-details',
           nextUrlObject: {
             dependentQuestionYarKey: ['projectType'],
-            dependentAnswerKeysArray: ['project-type-A3'],
+            dependentAnswerKeysArray: ['project-type-A1'],
             urlOptions: {
               thenUrl: 'veranda-confirm',
               elseUrl: 'confirm'
