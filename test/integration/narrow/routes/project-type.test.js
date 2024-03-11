@@ -20,7 +20,7 @@ describe('Page: /project-type', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('What is your project?')
     expect(response.payload).toContain('Adding a veranda only to an existing laying hen or pullet building')
-    expect(response.payload).toContain('Refurbishing an existing laying hen or pullet building ')
+    expect(response.payload).toContain('Refurbishing an existing laying hen or pullet building')
     expect(response.payload).toContain('Replacing the entire laying hen or pullet building with a new building including the grant funding required features')
     expect(response.payload).toContain('None of the above')
   })

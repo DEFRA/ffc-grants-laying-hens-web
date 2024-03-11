@@ -44,7 +44,7 @@ describe('Page: /pullet-housing-requirements', () => {
     expect(postResponse.payload).toContain('Select yes if the inside of the building will have these features')
   })
 
-  it('user selects eligible option and /Refurbishing an existing laying hen or pullet building / at project type -> store user response and redirect to /replacing-insulation', async () => {
+  it('user selects eligible option and /Refurbishing an existing laying hen or pullet building/ at project type -> store user response and redirect to /replacing-insulation', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pullet-housing-requirements`,
