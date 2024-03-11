@@ -111,6 +111,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
+                para: '',
                 items: ['You can apply for grant funding for either building projects or veranda-only projects.', 'The maximum grant funding each business can apply for is £500,000 for building projects, or £100,000 for veranda-only projects.']
               }]
             }]
