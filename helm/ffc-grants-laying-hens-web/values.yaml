@@ -72,6 +72,7 @@ container:
   rpaEmail: FTF@rpa.gov.uk
   worksheetHideEmptyRows: false
   excelUploadEnvironment: dummy
+  grantPercentage: dummy
 
 
 livenessProbe:
