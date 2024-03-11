@@ -732,8 +732,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The building must have these design features to 
-                meet the grant priority of improving biosecurity.`
+                para: `The building must have these design features to meet the grant priority of improving biosecurity.`
               }]
             }]
           },
@@ -1134,12 +1133,11 @@ const questionBank = {
           },
           ineligibleContent: {
             messageContent: `
-                <p class="govuk-body">
-                The hen housing must have a laying hen aviary system.
-                </p>`,
-            insertText: {
-              html: '<p>You must not install a combi-cage system in your grant-funded housing.</p>'
-            },
+              <p class="govuk-body">The aviary system must have:</p>
+              <ul class="govuk-list govuk-list--bullet">
+                <li>manure removal belts</li>
+                <li>integrated non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk.</li>
+              </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
