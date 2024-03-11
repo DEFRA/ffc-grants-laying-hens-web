@@ -80,8 +80,80 @@ const questionBank = {
       title: 'Eligibility',
       questions: [
         {
-          key: 'applicant-type',
+          key: 'project-type',
           order: 10,
+          title: 'What is your project?',
+          url: 'project-type',
+          baseUrl: 'project-type',
+          backUrl: 'start',
+          nextUrl: 'applicant-type',
+          hint: {
+            html: `If you are applying for multiple projects, you must submit a separate application for each one`
+          },
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">This grant is for:</p>
+                      <ul>
+                        <li>adding a veranda only to an existing laying hen or pullet building </li>
+                        <li>refurbishing an existing laying hen or pullet building</li>
+                        <li>replacing an entire laying hen or pullet building with a new building</li>
+                      </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                items: ['You can apply for grant funding for either building projects or veranda-only projects.', 'The maximum grant funding each business can apply for is £500,000 for building projects, or £100,000 for veranda-only projects.']
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what work you are doing to this building'
+            }
+          ],
+          answers: [
+            {
+              key: 'project-type-A1',
+              value: 'Adding a veranda only to an existing laying hen or pullet building',
+              hint: {
+                text: 'The RPA will award veranda-only grant funding on a first come, first served basis'
+              },
+            },
+            {
+              key: 'project-type-A2',
+              value: 'Refurbishing an existing laying hen or pullet building',
+              hint: {
+                text: 'Adding features to an existing building (including a mechanical ventilation system, lighting system, aviary or multi-tier system and veranda)'
+              },
+            },
+            {
+              key: 'project-type-A3',
+              value: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'project-type-A4',
+              value: 'None of the above',
+              notEligible: true
+            }
+          ],
+          yarKey: 'projectType'
+        },
+        {
+          key: 'applicant-type',
+          order: 15,
           title: 'What type of farmer are you?',
           pageTitle: '',
           ga: { journeyStart: true },
@@ -776,78 +848,6 @@ const questionBank = {
             }
           ],
           yarKey: 'buildingItems'
-        },
-        {
-          key: 'project-type',
-          order: 70,
-          title: 'What is your project?',
-          url: 'project-type',
-          baseUrl: 'project-type',
-          backUrl: 'start',
-          nextUrl: 'applicant-type',
-          hint: {
-            html: `If you are applying for multiple projects, you must submit a separate application for each one`
-          },
-          ineligibleContent: {
-            messageContent: `
-                <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">This grant is for:</p>
-                      <ul>
-                        <li>Adding a veranda only to an existing laying hen or pullet building</li>
-                        <li>replacing an existing laying hen or pullet building with a new building</li>
-                        <li>adding a veranda to an existing laying hen or pullet building</li>
-                      </ul>
-                </div>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                items: ['You can apply for grant funding for either building projects or veranda-only projects.', 'The maximum grant funding each business can apply for is £500,000 for building projects, or £100,000 for veranda-only projects.']
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select what work you are doing to this building'
-            }
-          ],
-          answers: [
-            {
-              key: 'project-type-A1',
-              value: 'Adding a veranda only to an existing laying hen or pullet building',
-              hint: {
-                text: 'The RPA will award veranda-only grant funding on a first come, first served basis'
-              },
-            },
-            {
-              key: 'project-type-A2',
-              value: 'Refurbishing an existing laying hen or pullet building',
-              hint: {
-                text: 'Adding features to an existing building (including a mechanical ventilation system, lighting system, aviary or multi-tier system and veranda)'
-              },
-            },
-            {
-              key: 'project-type-A3',
-              value: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'project-type-A4',
-              value: 'None of the above',
-              notEligible: true
-            }
-          ],
-          yarKey: 'projectType'
         },
         {
           key: 'refurbishing-insulation',
