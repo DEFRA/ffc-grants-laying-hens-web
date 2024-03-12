@@ -18,16 +18,16 @@ describe('Page: /project-type', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What is your project?')
-    expect(response.payload).toContain('Refurbishing an existing laying hen or pullet building')
-    expect(response.payload).toContain('Replacing an existing laying hen or pullet with a new building')
+    expect(response.payload).toContain('What work are you doing to this building?')
     expect(response.payload).toContain('Adding a veranda only to an existing laying hen or pullet building')
+    expect(response.payload).toContain('Refurbishing an existing laying hen or pullet building')
+    expect(response.payload).toContain('Replacing the entire laying hen or pullet building with a new building including the grant funding required features')
     expect(response.payload).toContain('None of the above')
   })
 
   it('no option selected -> show error message', async () => {
     valList['NOT_EMPTY'] = {
-      error: 'Select what is your project',
+      error: 'Select what work you are doing to this building',
       return: false
     }
     const postOptions = {
@@ -39,7 +39,7 @@ describe('Page: /project-type', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select what is your project')
+    expect(postResponse.payload).toContain('Select what work you are doing to this building')
   })
 
 it('user selects ineligible option: \'None of the above\' -> display ineligible page', async () => {
@@ -54,12 +54,12 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
-  it('user selects `Replacing an existing laying hen or pullet with a new building` -> store user response and redirect to /applicant-type', async () => {
+  it('user selects `Replacing the entire laying hen or pullet building with a new building including the grant funding required features` -> store user response and redirect to /applicant-type', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { projectType: 'Replacing an existing laying hen or pullet with a new building', crumb: crumbToken }
+      payload: { projectType: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -67,12 +67,12 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
     expect(postResponse.headers.location).toBe('applicant-type')
   })
 
-  it('user selects `Refurbishing an existing laying hen or pullet building` -> store user response and redirect to /applicant-type', async () => {
+  it('user selects `Replacing the entire laying hen or pullet building with a new building including the grant funding required features` -> store user response and redirect to /applicant-type', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { projectType: 'Replacing an existing laying hen or pullet with a new building', crumb: crumbToken }
+      payload: { projectType: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)

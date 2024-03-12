@@ -11,9 +11,9 @@ const {
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
   POSTCODE_REGEX
- } = require('ffc-grants-common-functionality').regex
+} = require('ffc-grants-common-functionality').regex
 
- const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
+const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
 
 const {
   MIN_GRANT,
@@ -80,8 +80,81 @@ const questionBank = {
       title: 'Eligibility',
       questions: [
         {
-          key: 'applicant-type',
+          key: 'project-type',
           order: 10,
+          title: 'What work are you doing to this building?',
+          url: 'project-type',
+          baseUrl: 'project-type',
+          backUrl: 'start',
+          nextUrl: 'applicant-type',
+          hint: {
+            html: `If you are applying for multiple projects, you must submit a separate application for each one`
+          },
+          ineligibleContent: {
+            messageContent: `
+                <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">This grant is for:</p>
+                      <ul>
+                        <li>adding a veranda only to an existing laying hen or pullet building </li>
+                        <li>refurbishing an existing laying hen or pullet building</li>
+                        <li>replacing an entire laying hen or pullet building with a new building</li>
+                      </ul>
+                </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `You can apply for grant funding for either building projects or veranda-only projects.\n
+                The maximum grant funding each business can apply for is £500,000 for building projects, or £100,000 for veranda-only projects.`
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what work you are doing to this building'
+            }
+          ],
+          answers: [
+            {
+              key: 'project-type-A1',
+              value: 'Adding a veranda only to an existing laying hen or pullet building',
+              hint: {
+                text: 'The RPA will award veranda-only grant funding on a first come, first served basis'
+              },
+            },
+            {
+              key: 'project-type-A2',
+              value: 'Refurbishing an existing laying hen or pullet building',
+              hint: {
+                text: 'Adding features to an existing building (including a mechanical ventilation system, lighting system, aviary or multi-tier system and veranda)'
+              },
+            },
+            {
+              key: 'project-type-A3',
+              value: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'project-type-A4',
+              value: 'None of the above',
+              notEligible: true
+            }
+          ],
+          yarKey: 'projectType'
+        },
+        {
+          key: 'applicant-type',
+          order: 15,
           title: 'What type of farmer are you?',
           pageTitle: '',
           ga: { journeyStart: true },
@@ -594,7 +667,7 @@ const questionBank = {
           },
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A3'],
+            dependentAnswerKeysArray: ['project-type-A1'],
             urlOptions: {
               thenUrl: 'veranda-only-size',
               elseUrl: '1000-birds'
@@ -721,7 +794,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['poultry-type-A2'],
             dependentElseUrlYarKey: 'projectType',
             dependentElseUrlQuestionKey: 'project-type',
-            dependentElseUrlAnswerKey: 'project-type-A1',
+            dependentElseUrlAnswerKey: 'project-type-A2',
             urlOptions: {
               thenUrl: 'pullet-housing-requirements',
               elseUrl: 'replacing-insulation',
@@ -776,80 +849,6 @@ const questionBank = {
             }
           ],
           yarKey: 'buildingItems'
-        },
-        {
-          key: 'project-type',
-          order: 70,
-          title: 'What is your project?',
-          url: 'project-type',
-          baseUrl: 'project-type',
-          backUrl: 'start',
-          nextUrl: 'applicant-type',
-          hint: {
-            html: `You must submit an application for each building or veranda project.<br/><br/>
-                  The maximum grant amount each business can apply for is £500,000 for building projects, 
-                  or £100,000 for veranda projects.`
-          },
-          ineligibleContent: {
-            messageContent: `
-                <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">This grant is for:</p>
-                      <ul>
-                        <li>refurbishing an existing laying hen or pullet building</li>
-                        <li>replacing an existing laying hen or pullet building with a new building</li>
-                        <li>adding a veranda to an existing laying hen or pullet building</li>
-                      </ul>
-                </div>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You can apply for grant funding for either building projects or veranda projects.
-                
-                      This grant is for:`,
-                items: ['refurbishing an existing laying hen or pullet building', 'replacing an existing laying hen or pullet building with a new building', 'adding a veranda to an existing laying hen or pullet building']
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select what is your project'
-            }
-          ],
-          answers: [
-            {
-              key: 'project-type-A1',
-              value: 'Refurbishing an existing laying hen or pullet building'
-            },
-            {
-              key: 'project-type-A2',
-              value: 'Replacing an existing laying hen or pullet with a new building'
-            },
-            {
-              key: 'project-type-A3',
-              value: 'Adding a veranda only to an existing laying hen or pullet building',
-              hint: {
-                text: 'The RPA will award the grant funding on a first-come first-served basis'
-              },
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'project-type-A4',
-              value: 'None of the above',
-              notEligible: true
-            }
-          ],
-          yarKey: 'projectType'
         },
         {
           key: 'refurbishing-insulation',
@@ -976,7 +975,7 @@ const questionBank = {
           baseUrl: 'changing-area',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A2'],
+            dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -1437,8 +1436,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The ventilation system must be able to prevent the heat that the birds generate from increasing the house temperature by more 
-                than 3°C above the external ambient temperature.`
+                para: `The ventilation system must be able to prevent the heat that the birds generate from increasing the house temperature by more than 3°C above the external ambient temperature.`
               }]
             }]
           },
@@ -1614,7 +1612,7 @@ const questionBank = {
           baseUrl: 'lighting-features',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentAnswerKeysArray: ['project-type-A2'],
             urlOptions: {
               thenUrl: 'refurbishing-insulation',
               elseUrl: 'replacing-insulation'
@@ -1871,7 +1869,7 @@ const questionBank = {
           backUrl: 'building-items',
           nextUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A2'],
+            dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
               thenUrl: 'replacing-insulation',
               elseUrl: 'refurbishing-insulation'
@@ -3565,7 +3563,7 @@ const questionBank = {
           baseUrl: 'business-details',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A3'],
+            dependentAnswerKeysArray: ['project-type-A1'],
             urlOptions: {
               thenUrl: 'veranda-remaining-costs',
               elseUrl: 'project-type'
@@ -4428,7 +4426,7 @@ const questionBank = {
           backUrl: 'applicant-details',
           nextUrlObject: {
             dependentQuestionYarKey: ['projectType'],
-            dependentAnswerKeysArray: ['project-type-A3'],
+            dependentAnswerKeysArray: ['project-type-A1'],
             urlOptions: {
               thenUrl: 'veranda-confirm',
               elseUrl: 'confirm'

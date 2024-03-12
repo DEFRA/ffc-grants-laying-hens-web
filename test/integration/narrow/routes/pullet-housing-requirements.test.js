@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /pullet-housing-requirements', () => {
   let varList = {
-    projectType: 'Replacing an existing laying hen or pullet with a new building'
+    projectType: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
   }
 
   let valList = {}
@@ -44,7 +44,7 @@ describe('Page: /pullet-housing-requirements', () => {
     expect(postResponse.payload).toContain('Select yes if the inside of the building will have these features')
   })
 
-  it('user selects eligible option and /Replacing an existing laying hen or pullet with a new building/ at project type -> store user response and redirect to /replacing-insulation', async () => {
+  it('user selects eligible option and /Refurbishing an existing laying hen or pullet building/ at project type -> store user response and redirect to /replacing-insulation', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pullet-housing-requirements`,
@@ -57,8 +57,8 @@ describe('Page: /pullet-housing-requirements', () => {
     expect(postResponse.headers.location).toBe('replacing-insulation')
   })
 
-  it('user selects eligible option and  /Refurbishing an existing laying hen or pullet building/ at project type-> store user response and redirect to /refurbishing-insulation', async () => {
-    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+  it('user selects eligible option and  /Adding a veranda only to an existing laying hen or pullet building/ at project type-> store user response and redirect to /refurbishing-insulation', async () => {
+    varList.projectType = 'Adding a veranda only to an existing laying hen or pullet building'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pullet-housing-requirements`,

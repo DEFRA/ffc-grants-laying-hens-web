@@ -152,8 +152,8 @@ describe('Page: /lighting-features', () => {
     expect(response.payload).toContain('<a href=\"refurbishing-insulation\" class=\"govuk-back-link\">Back</a>')
   })
 
-  it('page loads with correct back link - project type is Replacing an existing laying hen or pullet with a new building', async () => {
-    varList.projectType = 'Replacing an existing laying hen or pullet with a new building'
+  it('page loads with correct back link - /replacing-insulation', async () => {
+    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/lighting-features`
