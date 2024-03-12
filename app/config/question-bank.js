@@ -11,9 +11,9 @@ const {
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
   POSTCODE_REGEX
- } = require('ffc-grants-common-functionality').regex
+} = require('ffc-grants-common-functionality').regex
 
- const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
+const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
 
 const {
   MIN_GRANT,
