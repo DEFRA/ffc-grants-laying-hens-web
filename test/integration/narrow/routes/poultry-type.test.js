@@ -19,15 +19,15 @@ describe('Page: /poultry-type', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What type of poultry is the project for?')
-    expect(response.payload).toContain('Laying hens (over 15 weeks old)')
-    expect(response.payload).toContain('Pullets (up to and including 15 weeks old)')
+    expect(response.payload).toContain('What type of poultry will be housed in this building?')
+    expect(response.payload).toContain('Laying hens (over 17 weeks old)')
+    expect(response.payload).toContain('Pullets (up to and including 17 weeks old)')
     expect(response.payload).toContain('None of the above')
   })
 
   it('no option selected -> show error message', async () => {
     valList.poultryType = {
-      error: 'Select what type of poultry the project is for',
+      error: 'Select what type of poultry will be housed in the building',
       return: false
     }
     const postOptions = {
@@ -39,7 +39,7 @@ describe('Page: /poultry-type', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select what type of poultry the project is for')
+    expect(postResponse.payload).toContain('Select what type of poultry will be housed in the building')
   })
 
   it('user selects eligible option and projectType is `Replacing the entire laying hen or pullet building with a new building including the grant funding required features` -> store user response and redirect to /1000-birds', async () => {

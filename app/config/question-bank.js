@@ -653,7 +653,7 @@ const questionBank = {
         {
           key: 'poultry-type',
           order: 80,
-          title: 'What type of poultry is the project for?',
+          title: 'What type of poultry will be housed in this building?',
           pageTitle: '',
           url: 'poultry-type',
           baseUrl: 'poultry-type',
@@ -688,26 +688,26 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'This grant is for replacing or refurbishing existing housing for laying hens or pullets.'
+                para: 'This grant is only for laying hens or pullet projects.'
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what type of poultry the project is for'
+              error: 'Select what type of poultry will be housed in the building'
             }
           ],
           answers: [
             {
               key: 'poultry-type-A1',
-              text: 'Laying hens (over 15 weeks old)',
+              text: 'Laying hens (over 17 weeks old)',
               value: 'hen',
               yarKeysReset: ['multiTierSystem']
             },
             {
               key: 'poultry-type-A2',
-              text: 'Pullets (up to and including 15 weeks old)',
+              text: 'Pullets (up to and including 17 weeks old)',
               value: 'pullet',
             },
             {
@@ -775,7 +775,7 @@ const questionBank = {
           title: 'Will the building have these features?',
           hint: {
             html: `
-                  <p>The building must have:</p>
+                  <p>When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
                     <li>a fixed structure with a solid concrete floor</li>
                     <li>water-tight roof and walls</li>
@@ -805,7 +805,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The building must have these design features to meet the grant priority of improving biosecurity.`
+                para: `When the project is complete, the building must have these design features to meet the grant priority of improving biosecurity.`
               }]
             }]
           },
@@ -813,7 +813,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
-                  <p class="govuk-body">The building must have:</p>
+                  <p class="govuk-body">When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
