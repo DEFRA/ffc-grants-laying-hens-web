@@ -1436,8 +1436,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The ventilation system must be able to prevent the heat that the birds generate from increasing the house temperature by more 
-                than 3°C above the external ambient temperature.`
+                para: `The ventilation system must be able to prevent the heat that the birds generate from increasing the house temperature by more than 3°C above the external ambient temperature.`
               }]
             }]
           },
