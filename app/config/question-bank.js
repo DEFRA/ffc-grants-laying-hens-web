@@ -775,7 +775,7 @@ const questionBank = {
           title: 'Will the building have these features?',
           hint: {
             html: `
-                  <p>The building must have:</p>
+                  <p>When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
                     <li>a fixed structure with a solid concrete floor</li>
                     <li>water-tight roof and walls</li>
@@ -805,7 +805,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The building must have these design features to meet the grant priority of improving biosecurity.`
+                para: `When the project is complete, the building must have these design features to meet the grant priority of improving biosecurity.`
               }]
             }]
           },
@@ -813,7 +813,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
-                  <p class="govuk-body">The building must have:</p>
+                  <p class="govuk-body">When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
