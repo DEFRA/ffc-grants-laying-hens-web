@@ -82,7 +82,7 @@ const questionBank = {
         {
           key: 'project-type',
           order: 10,
-          title: 'What is your project?',
+          title: 'What work are you doing to this building?',
           url: 'project-type',
           baseUrl: 'project-type',
           backUrl: 'start',
@@ -111,8 +111,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: '',
-                items: ['You can apply for grant funding for either building projects or veranda-only projects.', 'The maximum grant funding each business can apply for is £500,000 for building projects, or £100,000 for veranda-only projects.']
+                para: `You can apply for grant funding for either building projects or veranda-only projects.\n
+                The maximum grant funding each business can apply for is £500,000 for building projects, or £100,000 for veranda-only projects.`
               }]
             }]
           },
