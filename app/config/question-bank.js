@@ -866,7 +866,7 @@ const questionBank = {
           },
           nextUrl: 'lighting-features',
           ineligibleContent: {
-            messageContent: 'The housing must have full wall and roof insulation.',
+            messageContent: 'When the project is complete. the building must have full wall and roof insulation.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -878,7 +878,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The building must have full wall and roof insulation.',
+                para: 'When the project is complete, the building must have full wall and roof insulation.',
               }]
             }]
           },
@@ -1383,7 +1383,7 @@ const questionBank = {
                 <ul>
                   <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
                   <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
-                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
+                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures.</li>
                 </ul>
                 </div>`,
             messageLink: {
