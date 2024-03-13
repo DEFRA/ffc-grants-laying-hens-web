@@ -3382,7 +3382,6 @@ const questionBank = {
           nextUrl: 'bird-data-type',
           hint: {
             text: 'Select all that apply'
-           
           },
           sidebar: {
             values: [{
