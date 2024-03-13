@@ -97,7 +97,7 @@ const questionBank = {
                       <ul>
                         <li>adding a veranda only to an existing laying hen or pullet building </li>
                         <li>refurbishing an existing laying hen or pullet building</li>
-                        <li>replacing an entire laying hen or pullet building with a new building</li>
+                        <li>replacing an entire laying hen or pullet building with a new building.</li>
                       </ul>
                 </div>`,
             messageLink: {
