@@ -127,6 +127,22 @@ const sidebarCheck = (question, url, request ) => {
 }
 
 const validateErrorCheck = (question, validate, url, request) => {
+  console.log("questionnn", question)
+  console.log("validatteeeeeee", validate)
+
+validate.forEach(error => {
+  if(error.type === 'DEPENDENT_ANSWERS'){
+    if(getYarValue(request, error.errorYarKey).includes(getQuestionAnswer(error.questionKey, error.dependentAnswerArray[0], ALL_QUESTIONS))){
+      console.log("test is passing")
+    }
+  }
+})
+
+  if(validate.forEach(error => error.type === 'DEPENDENT_ANSWERS' ? getQuestionAnswer('renewable-energy','renewable-energy-A2', ALL_QUESTIONS) : false )){
+    console.log("yar value is",  getYarValue(request, 'renewableEnergy').includes(getQuestionAnswer('renewable-energy','renewable-energy-A2', ALL_QUESTIONS)) && getYarValue(request, 'renewableEnergy').includes(getQuestionAnswer('renewable-energy','renewable-energy-A3', ALL_QUESTIONS)))
+  }
+
+
  // this sonar issue fix actually breaks all tests
   if (question?.validate && question.validate[0].error.includes('{{_')) {
     question = {
