@@ -45,9 +45,8 @@ describe('Page: /1000-birds', () => {
   })
 
   it('no option selected -> show error message - pullets', async () => {
-    valList['NOT_EMPTY'] = {
+    valList.birdNumber = {
       error: 'Select yes if you are the registered keeper of at least 1,000 pullets',
-      href: '',
       return: false
     }
 
@@ -55,7 +54,7 @@ describe('Page: /1000-birds', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/1000-birds`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { crumb: crumbToken }
+      payload: { birdNumber: '', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -64,9 +63,8 @@ describe('Page: /1000-birds', () => {
   })
 
   it('no option selected -> show error message - hens', async () => {
-    valList['NOT_EMPTY'] = {
+    valList.birdNumber = {
       error: 'Select yes if you are the registered keeper of at least 1,000 laying hens',
-      href: '',
       return: false
     }
 
@@ -74,7 +72,7 @@ describe('Page: /1000-birds', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/1000-birds`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { crumb: crumbToken }
+      payload: { birdNumber: '', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -83,7 +81,7 @@ describe('Page: /1000-birds', () => {
   })
 
   it('user selects ineligible option `No` -> display ineligible page - hens', async () => {
-    valList = {}
+    valList.birdNumber = null
     varList.poultryType = 'hen'
     const postOptions = {
       method: 'POST',
@@ -119,7 +117,7 @@ describe('Page: /1000-birds', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /hen-veranda', async () => {
-    valList.birdNumber = false
+    valList = {}
     varList.poultryType = 'hen'
 
     const postOptions = {
