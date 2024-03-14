@@ -1479,23 +1479,34 @@ const questionBank = {
         {
           key: 'hen-veranda',
           order: 121,
-          title: 'Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?',
-          pageTitle: '',
+          title: 'Will the building have a veranda that is the required size?',
           url: 'hen-veranda',
           baseUrl: 'hen-veranda',
           hint: {
-            text: 'Housing projects that do not have access to an area at least 30% of the size of the indoor housing area are exempt from adding a veranda'
+            html: `
+            <p>When the project is complete, the building must have a veranda that is at least either:</p>
+              <ul class="govuk-list--bullet">
+                <li>4 metres wide along the length of the hen housing area</li>
+                <li>30% of the indoor hen housing area footprint</li>
+              </ul>`
           },
-          backUrl: 'lighting-features',
+          backUrl: '1000-birds',
           nextUrl: 'hen-veranda-features',
           ineligibleContent: {
-            messageContent: 'The housing must have a veranda that is at least the same size as 30% of the indoor bird housing area footprint in size.',
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+            <p class="govuk-body">You must add a veranda if you have the required space.</p>
+            <p>The veranda must be at least either:</p>
+                  <ul>
+                    <li>4 metres wide along the length of the hen housing area</li>
+                    <li>30% of the indoor hen housing area footprint.</li>
+                  </ul>
+            </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-fieldset__legend--l',
@@ -1503,11 +1514,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You must add a veranda that is at least the same size as 30% of the indoor bird housing area footprint.
-
-                Housing projects that do not have access to an external area of at least 30% of the indoor housing area are exempt.
-                
-                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`,
+                para: `You must add a veranda if you have the required space.`,
                 items: []
               }]
             }]
@@ -1515,7 +1522,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint'
+              error: 'Select yes if the building will have a veranda that is the required size'
             }
           ],
           answers: [
@@ -1533,8 +1540,8 @@ const questionBank = {
             },
             {
               key: 'hen-veranda-A3',
-              value: 'My project is exempt',
-              redirectUrl: 'concrete-apron'
+              value: 'I do not have the outside space to add a veranda of this size',
+              redirectUrl: 'building-items'
             }
           ],
           yarKey: 'henVeranda'

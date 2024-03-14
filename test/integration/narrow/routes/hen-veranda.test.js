@@ -19,16 +19,16 @@ describe('Page: /hen-veranda', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?')
+    expect(response.payload).toContain('Will the building have a veranda that is the required size?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
-    expect(response.payload).toContain('My project is exempt')
+    expect(response.payload).toContain('I do not have the outside space to add a veranda of this size')
   })
 
   it('no option selected -> show error message', async () => {
     varList.poultryType = 'hen'
     valList.henVeranda = {
-      error: 'Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint',
+      error: 'Select yes if the building will have a veranda that is the required size',
       return: false
     }
     const postOptions = {
@@ -40,7 +40,7 @@ describe('Page: /hen-veranda', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint')
+    expect(postResponse.payload).toContain('Select yes if the building will have a veranda that is the required size')
   })
 
   it('user selects eligible option -> store user response and redirect to /hen-veranda-features', async () => {
@@ -57,17 +57,17 @@ describe('Page: /hen-veranda', () => {
     expect(postResponse.headers.location).toBe('hen-veranda-features')
   })
 
-  it('user selects exempt option -> store user response and redirect to /concrete-apron', async () => {
+  it('user selects last option -> store user response and redirect to /building-items', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-veranda`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { henVeranda: 'My project is exempt', crumb: crumbToken }
+      payload: { henVeranda: 'I do not have the outside space to add a veranda of this size', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('concrete-apron')
+    expect(postResponse.headers.location).toBe('building-items')
   })
 
 
@@ -81,7 +81,7 @@ describe('Page: /hen-veranda', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The housing must have a veranda that is at least the same size as 30% of the indoor bird housing area footprint in size.')
+    expect(postResponse.payload).toContain('You must add a veranda if you have the required space.')
   })
 
   it('page loads with correct back link', async () => {
@@ -91,6 +91,6 @@ describe('Page: /hen-veranda', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"lighting-features\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"1000-birds\" class=\"govuk-back-link\">Back</a>')
   })
 })
