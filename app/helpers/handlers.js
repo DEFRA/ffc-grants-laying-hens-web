@@ -136,7 +136,8 @@ const validateErrorCheck = (question, validate, url, request) => {
         {
           ...validate[0],
           error: insertYarValue(question.validate[0].error, url, request)
-        }
+        },
+        ...validate
       ]
     }
   }
@@ -412,19 +413,6 @@ const showPostPage = (currentQuestion, request, h) => {
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
   }
-
-//   let result = false
-//   validate.forEach(error => {
-//   if(error.type === 'DEPENDENT_ANSWERS'){
-//     if(error.dependentAnswerArray.map(answer => getQuestionAnswer(error.questionKey, answer, ALL_QUESTIONS))
-//     .every(answer => getYarValue(request, error.errorYarKey).includes(answer))){
-//         result = true
-//       }else{
-//         result = false
-//       }
-//       return result
-//   }
-// })
 
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {

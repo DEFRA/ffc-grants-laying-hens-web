@@ -3416,7 +3416,6 @@ const questionBank = {
             type: 'DEPENDENT_ANSWERS',
             error: 'Select one type of heat exchanger',
             questionKey: 'renewable-energy',
-            errorYarKey: 'renewableEnergy',
             dependentAnswerArray: ['renewable-energy-A2', 'renewable-energy-A3']
           }
         ],
