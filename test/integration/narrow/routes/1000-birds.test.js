@@ -14,7 +14,9 @@ describe('Page: /1000-birds', () => {
   let valList = {}
   
   commonFunctionsMock(varList, undefined, utilsList, valList)
-  it('page loads successfully, with all the options', async () => {
+
+  it('page loads successfully, with all the options - hens', async () => {
+    varList.poultryType = 'hen'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/1000-birds`
@@ -22,13 +24,29 @@ describe('Page: /1000-birds', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Do you keep at least 1,000 laying hens on your farm currently?')
+    expect(response.payload).toContain('Are you the registered keeper of at least 1,000 laying hens?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
-  it('no option selected -> show error message', async () => {
+
+
+  it('page loads successfully, with all the options - pullets', async () => {
+    varList.poultryType = 'pullet'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/1000-birds`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Are you the registered keeper of at least 1,000 pullets?')
+    expect(response.payload).toContain('Yes')
+    expect(response.payload).toContain('No')
+  })
+
+  it('no option selected -> show error message - pullets', async () => {
     valList['NOT_EMPTY'] = {
-      error: 'Select yes if you currently keep at least 1,000 laying hens on your farm',
+      error: 'Select yes if you are the registered keeper of at least 1,000 pullets',
       href: '',
       return: false
     }
@@ -42,11 +60,31 @@ describe('Page: /1000-birds', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if you currently keep at least 1,000 laying hens on your farm')
+    expect(postResponse.payload).toContain('Select yes if you are the registered keeper of at least 1,000 pullets')
   })
-  it('user selects ineligible option `No` -> display ineligible page', async () => {
-    valList = {}
 
+  it('no option selected -> show error message - hens', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if you are the registered keeper of at least 1,000 laying hens',
+      href: '',
+      return: false
+    }
+
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/1000-birds`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Select yes if you are the registered keeper of at least 1,000 laying hens')
+  })
+
+  it('user selects ineligible option `No` -> display ineligible page - hens', async () => {
+    valList = {}
+    varList.poultryType = 'hen'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/1000-birds`,
@@ -56,11 +94,49 @@ describe('Page: /1000-birds', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('You must keep at least 1,000 laying hens on your farm currently.')
+    expect(postResponse.payload).toContain('You must:')
+    expect(postResponse.payload).toContain('be the registered keeper of at least 1,000 laying hens')
+    expect(postResponse.payload).toContain('have housed at least 1,000 laying hens on your farm in the last 6 months.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
+
+  it('user selects ineligible option `No` -> display ineligible page - pullets', async () => {
+    valList = {}
+    varList.poultryType = 'pullet'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/1000-birds`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { birdNumber: 'No', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
+    expect(postResponse.payload).toContain('You must:')
+    expect(postResponse.payload).toContain('be the registered keeper of at least 1,000 pullets')
+    expect(postResponse.payload).toContain('have housed at least 1,000 pullets on your farm in the last 6 months.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+  })
+
+  it('user selects eligible option -> store user response and redirect to /hen-veranda', async () => {
+    valList.birdNumber = false
+    varList.poultryType = 'hen'
+
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/1000-birds`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { birdNumber: 'Yes',  crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('hen-veranda')
+  })
+
   it('user selects eligible option -> store user response and redirect to /building-items', async () => {
     valList.birdNumber = false
+    varList.poultryType = 'pullet'
 
     const postOptions = {
       method: 'POST',
