@@ -97,7 +97,7 @@ const questionBank = {
                       <ul>
                         <li>adding a veranda only to an existing laying hen or pullet building </li>
                         <li>refurbishing an existing laying hen or pullet building</li>
-                        <li>replacing an entire laying hen or pullet building with a new building</li>
+                        <li>replacing an entire laying hen or pullet building with a new building.</li>
                       </ul>
                 </div>`,
             messageLink: {
@@ -3371,6 +3371,80 @@ const questionBank = {
             },
           ],
           yarKey: 'darkBrooders'
+        },
+        {
+        key: 'renewable-energy',
+        order: 325,
+        title: 'Will the {{_poultryType_}} housing use renewable energy sources?',
+        url: 'renewable-energy',
+        baseUrl: 'renewable-energy',
+        backUrlObject: {
+          dependentQuestionYarKey: 'poultryType',
+          dependentAnswerKeysArray: ['poultry-type-A1'],
+          urlOptions: {
+            thenUrl: 'pollution-mitigation',
+            elseUrl: 'pullet-veranda-features'
+          }
+        },
+        nextUrl: 'bird-data-type',
+        hint: {
+          text: 'Select all that apply'
+        },
+        sidebar: {
+          values: [{
+            heading: 'Funding priorities',
+            content: [{
+              para: 'RPA want to fund projects that use renewable energy.'
+            }]
+          }]
+        },
+        type: 'multi-answer',
+        validate: [
+          {
+            type: 'NOT_EMPTY',
+            error: 'Select if the {{_poultryType_}} housing will use renewable energy sources'
+          },
+          {
+            type: 'STANDALONE_ANSWER',
+            error: 'You cannot select that combination of options',
+            standaloneObject: {
+              questionKey: 'renewable-energy',
+              answerKey: 'renewable-energy-A5'
+            }
+          },
+          {
+            type: 'DEPENDENT_ANSWERS',
+            error: 'Select one type of heat exchanger',
+            questionKey: 'renewable-energy',
+            dependentAnswerArray: ['renewable-energy-A2', 'renewable-energy-A3']
+          }
+        ],
+        answers: [
+          {
+            key: 'renewable-energy-A1',
+            value: 'Solar PV system'
+          },
+          {
+            key: 'renewable-energy-A2',
+            value: 'A heat exchanger (heating only)',
+          },
+          {
+            key: 'renewable-energy-A3',
+            value: 'A heat exchanger (heating and cooling)',
+          },
+          {
+            key: 'renewable-energy-A4',
+            value: 'Biomass boiler',
+          },
+          {
+            value: 'divider'
+          },
+          {
+            key: 'renewable-energy-A5',
+            value: 'None of the above',
+          }
+        ],
+        yarKey: 'renewableEnergy'
         },
         {
           key: 'bird-data-type',

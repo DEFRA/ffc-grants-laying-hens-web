@@ -127,6 +127,7 @@ const sidebarCheck = (question, url, request ) => {
 }
 
 const validateErrorCheck = (question, validate, url, request) => {
+
  // this sonar issue fix actually breaks all tests
   if (question?.validate && question.validate[0].error.includes('{{_')) {
     question = {
@@ -135,7 +136,8 @@ const validateErrorCheck = (question, validate, url, request) => {
         {
           ...validate[0],
           error: insertYarValue(question.validate[0].error, url, request)
-        }
+        },
+        ...validate
       ]
     }
   }
