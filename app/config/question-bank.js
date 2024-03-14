@@ -788,7 +788,15 @@ const questionBank = {
           pageTitle: '',
           url: 'building-items',
           baseUrl: 'building-items',
-          backUrl: '1000-birds',
+          backUrlObject: {
+            dependentQuestionYarKey: 'henVeranda',
+            dependentAnswerKeysArray: ['hen-veranda-A1'],
+            urlOptions: {
+              thenUrl: 'hen-veranda-features',
+              elseUrl: 'hen-veranda',
+              nonDependentUrl: '1000-birds'
+            }
+          },
           nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A2'],
