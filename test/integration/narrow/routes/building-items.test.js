@@ -104,7 +104,31 @@ describe('Page: /building-items', () => {
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link', async () => {
+  it('page loads with correct back link when hen-veranda page is /Yes/', async () => {
+    varList.henVeranda = 'Yes'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/building-items`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"hen-veranda-features\" class=\"govuk-back-link\">Back</a>')
+  })
+
+  it('page loads with correct back link when hen-veranda page is /I do not have the outside space to add a veranda of this size/ ', async () => {
+    varList.henVeranda = 'I do not have the outside space to add a veranda of this size'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/building-items`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"hen-veranda\" class=\"govuk-back-link\">Back</a>')
+  })
+
+  it('page loads with correct back link when hen-veranda page is not answered ', async () => {
+    varList.henVeranda = null
+    varList.poultryType = 'pullet'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/building-items`
