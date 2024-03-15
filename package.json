@@ -58,7 +58,7 @@
     },
     "semver": "7.5.3",
     "import-in-the-middle": "1.4.2",
-    "follow-redirects": "1.15.4"
+    "follow-redirects": "1.15.6"
   },
   "devDependencies": {
     "@hapi/catbox-memory": "^5.0.1",
