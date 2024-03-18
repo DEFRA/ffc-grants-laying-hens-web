@@ -123,7 +123,7 @@ const sidebarCheck = (question, url, request ) => {
     }
   }
 
-  if (question.sidebar?.values[0]?.content[0]?.items?.[0]?.includes('{{_')) {
+  if (question.sidebar?.values[0]?.content[0]?.items?.some(item => item.includes('{{_'))) {
     question = {
       ...question,
       sidebar: {
@@ -135,6 +135,7 @@ const sidebarCheck = (question, url, request ) => {
                 ...question.sidebar.values[0].content[0],
                 items: question.sidebar.values[0].content[0].items.map(item => 
                   item.includes('{{_') ? insertYarValue(item, url, request) : item
+                
                 )
               }
             ]
