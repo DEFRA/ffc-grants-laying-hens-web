@@ -806,7 +806,15 @@ const questionBank = {
           pageTitle: '',
           url: 'building-items',
           baseUrl: 'building-items',
-          backUrl: '1000-birds',
+          backUrlObject: {
+            dependentQuestionYarKey: 'henVeranda',
+            dependentAnswerKeysArray: ['hen-veranda-A1'],
+            urlOptions: {
+              thenUrl: 'hen-veranda-features',
+              elseUrl: 'hen-veranda',
+              nonDependentUrl: '1000-birds'
+            }
+          },
           nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A2'],
@@ -1248,16 +1256,16 @@ const questionBank = {
           title: 'Will the veranda have these features?',
           hint: {
             html: `
-                  <p>The veranda of the housing must have:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a solid concrete floor</li>
-                    <li>a waterproof insulated roof</li>
-                    <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
-                    <li>a perimeter wall at least 1 metre high</li>
-                    <li>lockable pop holes within the perimeter wall, unless the veranda forms part of an indoor barn system</li>
-                    <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
-                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
-                  </ul>`
+              <p>The veranda must have:</p>
+              <ul class="govuk-list--bullet">
+                <li>a solid concrete floor</li>
+                <li>a waterproof insulated roof</li>
+                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
+                <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down </li>
+              </ul>`
           },
           pageTitle: '',
           url: 'hen-veranda-features',
@@ -1265,20 +1273,32 @@ const questionBank = {
           backUrl: 'hen-veranda',
           nextUrl: 'hen-veranda-biosecurity',
           // preValidationKeys: ['poultryType'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The width of the pop hole openings along the length of the hen house must add up to a total of 2 metres for every 1,000 hens in the building.
+                
+                      The base of all pop holes must either:`,
+                items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.'],
+                additionalPara: 'You must not put perches in front of the pop holes.'
+              }],
+            }]
+          },
           ineligibleContent: {
             messageContent: `
-            <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">The veranda of the housing must have:</p>
+              <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">The veranda must have:</p>
                 <ul class="govuk-list--bullet">
-                    <li>a solid concrete floor</li>
-                    <li>a waterproof insulated roof</li>
-                    <li>guttering and a down-pipe to feed into the drainage system of the main building</li>
-                    <li>a perimeter wall at least 1 metre high</li>
-                    <li>lockable pop holes in the perimeter wall, unless the veranda forms part of an indoor barn system</li>
-                    <li>mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended</li>
-                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
+                  <li>a solid concrete floor</li>
+                  <li>a waterproof insulated roof</li>
+                  <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                  <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                  <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
+                  <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                  <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down </li>
                 </ul>
-            </div>
+              </div>
             `,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
@@ -1497,23 +1517,34 @@ const questionBank = {
         {
           key: 'hen-veranda',
           order: 121,
-          title: 'Will the housing have a veranda that is at least the same size as 30% of the indoor bird housing area footprint?',
-          pageTitle: '',
+          title: 'Will the building have a veranda that is the required size?',
           url: 'hen-veranda',
           baseUrl: 'hen-veranda',
           hint: {
-            text: 'Housing projects that do not have access to an area at least 30% of the size of the indoor housing area are exempt from adding a veranda'
+            html: `
+            <p>When the project is complete, the building must have a veranda that is at least either:</p>
+              <ul class="govuk-list--bullet">
+                <li>4 metres wide along the length of the hen housing area</li>
+                <li>30% of the indoor hen housing area footprint</li>
+              </ul>`
           },
-          backUrl: 'lighting-features',
+          backUrl: '1000-birds',
           nextUrl: 'hen-veranda-features',
           ineligibleContent: {
-            messageContent: 'The housing must have a veranda that is at least the same size as 30% of the indoor bird housing area footprint in size.',
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+            <p class="govuk-body">You must add a veranda if you have the required space.</p>
+            <p>The veranda must be at least either:</p>
+                  <ul>
+                    <li>4 metres wide along the length of the hen housing area</li>
+                    <li>30% of the indoor hen housing area footprint.</li>
+                  </ul>
+            </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-fieldset__legend--l',
@@ -1521,11 +1552,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You must add a veranda that is at least the same size as 30% of the indoor bird housing area footprint.
-
-                Housing projects that do not have access to an external area of at least 30% of the indoor housing area are exempt.
-                
-                You must exclude the veranda's floor area from calculations of stocking density (even if providing 24 hour access).`,
+                para: `You must add a veranda if you have the required space.`,
                 items: []
               }]
             }]
@@ -1533,7 +1560,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if the housing will have a veranda that is at least the same size as 30% of the indoor bird housing area footprint'
+              error: 'Select yes if the building will have a veranda that is the required size'
             }
           ],
           answers: [
@@ -1551,8 +1578,8 @@ const questionBank = {
             },
             {
               key: 'hen-veranda-A3',
-              value: 'My project is exempt',
-              redirectUrl: 'concrete-apron'
+              value: 'I do not have the outside space to add a veranda of this size',
+              redirectUrl: 'building-items'
             }
           ],
           yarKey: 'henVeranda'
