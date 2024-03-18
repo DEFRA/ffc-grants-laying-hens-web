@@ -74,7 +74,7 @@ describe('Page: /changing-area', () => {
     expect(postResponse.payload).toContain('Select yes if the pullet housing will have a biosecure changing area')
   })
 
-  it('user selects eligible option -> store user response and redirect to /vaccination-lobby', async () => {
+  it('user selects eligible option -> store user response and redirect to /external-taps', async () => {
     valList.changingArea = null
     const postOptions = {
       method: 'POST',
@@ -85,7 +85,7 @@ describe('Page: /changing-area', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('vaccination-lobby')
+    expect(postResponse.headers.location).toBe('external-taps')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -102,13 +102,25 @@ describe('Page: /changing-area', () => {
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link', async () => {
+  it('page loads with correct back link when poultry type is hen /egg-store-access', async () => {
+    varList.poultryType = 'hen'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/changing-area`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"replacing-insulation\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"egg-store-access\" class=\"govuk-back-link\">Back</a>')
+  })
+
+  it('page loads with correct back lin when poultry type is pullet /vaccination-lobby', async () => {
+    varList.poultryType = 'pullet'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/changing-area`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"vaccination-lobby\" class=\"govuk-back-link\">Back</a>')
   })
 })

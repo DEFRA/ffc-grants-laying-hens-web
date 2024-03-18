@@ -1000,22 +1000,14 @@ const questionBank = {
           url: 'changing-area',
           baseUrl: 'changing-area',
           backUrlObject: {
-            dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A3'],
-            urlOptions: {
-              thenUrl: 'replacing-insulation',
-              elseUrl: 'refurbishing-insulation'
-              // nonDependentUrl: 'solar-PV-system'
-            }
-          },
-          nextUrlObject: {
-            dependentQuestionYarKey: ['poultryType'],
+            dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
               thenUrl: 'egg-store-access',
               elseUrl: 'vaccination-lobby'
             }
           },
+          nextUrl: 'external-taps',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
@@ -1078,14 +1070,7 @@ const questionBank = {
           url: 'egg-store-access',
           baseUrl: 'egg-store-access',
           nextUrl: 'changing-area',
-          backUrlObject: {
-            dependentQuestionYarKey: 'henVeranda',
-            dependentAnswerKeysArray: ['hen-veranda-A1'],
-            urlOptions: {
-              thenUrl: 'concrete-apron',
-              elseUrl: 'veranda-concrete-apron'
-            }
-          },
+          backUrl: 'concrete-apron',
           // preValidationKeys: ['poultryType'],
           hint: {
             text: 'This must be separate from the main entrance lobby and connected changing area'
@@ -2159,7 +2144,7 @@ const questionBank = {
           url: 'vehicle-washing',
           baseUrl: 'vehicle-washing',
           backUrl: 'concrete-apron',
-          nextUrl: 'external-taps',
+          nextUrl: 'solar-PV-system',
           hint: {
             text: 'This must include an area of concrete parking which is appropriate to the size of the vehicles entering the facility (minimum width of 3 metres)'
           },

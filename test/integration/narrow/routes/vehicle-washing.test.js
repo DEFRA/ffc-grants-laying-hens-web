@@ -72,7 +72,7 @@ describe('Page: /vehicle-washing', () => {
     expect(postResponse.payload).toContain('Select yes if the pullet housing will have a designated area for washing and disinfecting vehicles')
   })
 
-  it('user selects eligible option -> store user response and redirect to /external-taps', async () => {
+  it('user selects eligible option -> store user response and redirect to /solar-PV-system', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/vehicle-washing`,
@@ -82,7 +82,7 @@ describe('Page: /vehicle-washing', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('external-taps')
+    expect(postResponse.headers.location).toBe('solar-PV-system')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
