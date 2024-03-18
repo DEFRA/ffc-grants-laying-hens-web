@@ -1271,7 +1271,7 @@ const questionBank = {
           url: 'hen-veranda-features',
           baseUrl: 'hen-veranda-features',
           backUrl: 'hen-veranda',
-          nextUrl: 'hen-veranda-biosecurity',
+          nextUrl: 'building-items',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
@@ -1739,16 +1739,22 @@ const questionBank = {
           pageTitle: '',
           url: 'concrete-apron',
           baseUrl: 'concrete-apron',
-          backUrlObject: {
-            dependentQuestionYarKey: ['henVeranda'],
-            dependentAnswerKeysArray: ['hen-veranda-A1'],
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'hen-pop-holes',
-              elseUrl: 'hen-veranda',
-              nonDependentUrl: 'lighting-features'
+              thenUrl: 'egg-store-access',
+              elseUrl: 'vaccination-lobby'
             }
           },
-          nextUrl: 'vehicle-washing',
+          backUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-ventilation-specification',
+              elseUrl: 'pullet-veranda'
+            }
+          },
           hint: {
             text: 'This must include any veranda areas if there is no adjacent range, for example barn systems'
           },

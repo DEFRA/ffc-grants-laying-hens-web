@@ -56,7 +56,7 @@ describe('Page: /hen-veranda-features', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('hen-veranda-biosecurity')
+    expect(postResponse.headers.location).toBe('building-items')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {

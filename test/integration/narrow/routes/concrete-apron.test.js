@@ -70,7 +70,8 @@ describe('Page: /concrete-apron', () => {
     expect(postResponse.payload).toContain('Select yes if the pullet housing will have a continuous concrete apron')
   })
 
-  it('user selects eligible option -> store user response and redirect to /vehicle-washing', async () => {
+  it('user selects eligible option -> store user response and redirect to /egg-store-access', async () => {
+    varList.poultryType = 'hen'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/concrete-apron`,
@@ -80,7 +81,20 @@ describe('Page: /concrete-apron', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('vehicle-washing')
+    expect(postResponse.headers.location).toBe('egg-store-access')
+  })
+  it('user selects eligible option -> store user response and redirect to /vaccination-lobby', async () => {
+    varList.poultryType = 'pullet'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/concrete-apron`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { concreteApron: 'Yes',  crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('vaccination-lobby')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -97,7 +111,7 @@ describe('Page: /concrete-apron', () => {
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link - /lighting-features', async () => {
+  it('page loads with correct back link - /pullet-veranda', async () => {
     varList.poultryType = 'pullet'
     const options = {
       method: 'GET',
@@ -105,30 +119,17 @@ describe('Page: /concrete-apron', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"lighting-features\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"pullet-veranda\" class=\"govuk-back-link\">Back</a>')
   })
 
-  it('page loads with correct back link - /hen-pop-holes', async () => {
+  it('page loads with correct back link - /hen-ventilation-specification', async () => {
     varList.poultryType = 'hen'
-    varList.henVeranda = 'Yes'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/concrete-apron`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"hen-pop-holes\" class=\"govuk-back-link\">Back</a>')
-  })
-
-  it('page loads with correct back link - /hen-veranda', async () => {
-    varList.poultryType = 'hen'
-    varList.henVeranda = 'My project is exempt'
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/concrete-apron`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"hen-veranda\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"hen-ventilation-specification\" class=\"govuk-back-link\">Back</a>')
   })
 })
