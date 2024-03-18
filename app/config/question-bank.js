@@ -724,23 +724,41 @@ const questionBank = {
         {
           key: '1000-birds',
           order: 240,
-          title: 'Do you keep at least 1,000 {{_poultryType_}} on your farm currently?',
+          title: 'Are you the registered keeper of at least 1,000 {{_poultryType_}}?',
           pageTitle: '',
           url: '1000-birds',
           baseUrl: '1000-birds',
           backUrl: 'poultry-type',
-          nextUrl: 'building-items',
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'hen-veranda',
+              elseUrl: 'building-items'
+            }
+          },
             // preValidationKeys: ['poultryType'],
+            hint: {
+              html: 'You must have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months'
+            },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You must keep at least 1,000 {{_poultryType_}} on your farm currently to be eligible for grant funding.'
+                para: 'You must:',
+                items: ['be the registered keeper of at least 1,000 {{_poultryType_}}', 'have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months.']
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: 'You must keep at least 1,000 {{_poultryType_}} on your farm currently.',
+            messageContent: `
+            <div class="govuk-list govuk-list--bullet">
+                <p class="govuk-body">You must:</p>
+                <ul class="govuk-list--bullet">
+                    <li>be the registered keeper of at least 1,000 {{_poultryType_}}</li>
+                    <li>have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months.</li>
+                </ul>
+            </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -753,7 +771,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you currently keep at least 1,000 {{_poultryType_}} on your farm'
+              error: 'Select yes if you are the registered keeper of at least 1,000 {{_poultryType_}}'
             }
           ],
           answers: [

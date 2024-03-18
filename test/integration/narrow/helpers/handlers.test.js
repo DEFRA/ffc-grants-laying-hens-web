@@ -119,7 +119,16 @@ describe('Get & Post Handlers', () => {
       question = {
         url: 'score',
         title: 'mock-title',
-        backUrl: 'test-back-link'
+        backUrl: 'test-back-link',
+        sidebar: {
+          values: [{
+            heading: 'Eligibility',
+            content: [{
+              para: 'You must:',
+              items: ['be the registered keeper of at least 1,000', 'have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months.']
+            }]
+          }]
+        },
       }
       mockH = { view: jest.fn() }
 
