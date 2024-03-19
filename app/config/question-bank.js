@@ -709,6 +709,7 @@ const questionBank = {
               key: 'poultry-type-A2',
               text: 'Pullets (up to and including 17 weeks old)',
               value: 'pullet',
+              yarKeysReset: ['henVeranda']
             },
             {
               value: 'divider'
