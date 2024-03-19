@@ -16,26 +16,39 @@ function getAllDetails (request, confirmationId) {
 }
 
 const desirabilityAnswersSchema = Joi.object({
-  housing: Joi.string(),
-  calfGroupSize: Joi.string(),
-  moistureControl: Joi.array().items(Joi.string()),
-  permanentSickPen: Joi.array().items(Joi.string()),
-  environmentalImpact: Joi.array().items(Joi.string()),
-  sustainableMaterials: Joi.array().items(Joi.string()),
-  introducingInnovation: Joi.array().items(Joi.string())
+  poultryType: Joi.string(),
+  currentSystem: Joi.string(),
+  currentMultiTierSystem: Joi.string(),
+  rampConnection: Joi.string(),
+  maximumTierHeight: Joi.string(),
+  threeTiers: Joi.string(),
+  henMultiTier: Joi.string(),
+  naturalLight: Joi.string(),
+  easyGripPerches: Joi.string(),
+  buildingBiosecurity: Joi.array().items(Joi.string()),
+  pollutionMitigation: Joi.array().items(Joi.string()),
+  renewableEnergy: Joi.array().items(Joi.string()),
+  birdDataType: Joi.array().items(Joi.string()),
+  environmentalDataType: Joi.array().items(Joi.string())
 })
 
 function getDesirabilityAnswers (request) {
   try {
-
     const val = {
-      housing: getYarValue(request, 'housing'),
-      calfGroupSize: getYarValue(request, 'calfGroupSize'),
-      moistureControl: getDataFromYarValue(request, 'moistureControl', multiAnswer),
-      permanentSickPen: getDataFromYarValue(request, 'permanentSickPen', multiAnswer),
-      environmentalImpact: getDataFromYarValue(request, 'environmentalImpact', multiAnswer),
-      sustainableMaterials: getDataFromYarValue(request, 'sustainableMaterials', multiAnswer),
-      introducingInnovation: getDataFromYarValue(request, 'introducingInnovation', multiAnswer)
+      poultryType: getYarValue(request, 'poultryType'),
+      currentSystem: getYarValue(request, 'currentSystem'),
+      currentMultiTierSystem: getYarValue(request, 'currentMultiTierSystem'),
+      rampConnection: getYarValue(request, 'rampConnection'),
+      maximumTierHeight: getYarValue(request, 'maximumTierHeight'),
+      threeTiers: getYarValue(request, 'threeTiers'),
+      henMultiTier: getYarValue(request, 'henMultiTier'),
+      naturalLight: getYarValue(request, 'naturalLight'),
+      easyGripPerches: getYarValue(request, 'easyGripPerches'),
+      buildingBiosecurity: getDataFromYarValue(request, 'buildingBiosecurity', multiAnswer),
+      pollutionMitigation: getDataFromYarValue(request, 'pollutionMitigation', multiAnswer),
+      renewableEnergy: getDataFromYarValue(request, 'renewableEnergy', multiAnswer),
+      birdDataType: getDataFromYarValue(request, 'birdDataType', multiAnswer),
+      environmentalDataType: getDataFromYarValue(request, 'environmentalDataType', multiAnswer)
     }
 
     const result = desirabilityAnswersSchema.validate(val, {
