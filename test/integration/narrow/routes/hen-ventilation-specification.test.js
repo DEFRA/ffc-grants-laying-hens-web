@@ -46,7 +46,7 @@ describe('Page: /hen-ventilation-specification', () => {
     expect(postResponse.payload).toContain('Select yes if the ventilation system will be fit for purpose in extreme heat')
   })
 
-  it('user selects eligible option -> store user response and redirect to /hen-veranda', async () => {
+  it('user selects eligible option -> store user response and redirect to /concrete-apron', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-ventilation-specification`,
@@ -56,7 +56,7 @@ describe('Page: /hen-ventilation-specification', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('hen-veranda')
+    expect(postResponse.headers.location).toBe('concrete-apron')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {

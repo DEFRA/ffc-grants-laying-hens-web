@@ -817,15 +817,11 @@ const questionBank = {
             }
           },
           nextUrlObject: {
-            dependentQuestionYarKey: 'poultryType',
-            dependentAnswerKeysArray: ['poultry-type-A2'],
-            dependentElseUrlYarKey: 'projectType',
-            dependentElseUrlQuestionKey: 'project-type',
-            dependentElseUrlAnswerKey: 'project-type-A2',
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
-              thenUrl: 'pullet-housing-requirements',
-              elseUrl: 'replacing-insulation',
-              dependantElseUrl: 'refurbishing-insulation'
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation',
             }
           },
           sidebar: {
@@ -883,15 +879,15 @@ const questionBank = {
           title: 'Will the building have full wall and roof insulation?',
           url: 'refurbishing-insulation',
           baseUrl: 'refurbishing-insulation',
-          backUrlObject: {
+          backUrl: 'building-items',
+          nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'building-items',
+              thenUrl: 'lighting-features',
               elseUrl: 'pullet-housing-requirements'
             }
           },
-          nextUrl: 'lighting-features',
           ineligibleContent: {
             messageContent: 'When the project is complete. the building must have full wall and roof insulation.',
             messageLink: {
@@ -935,15 +931,15 @@ const questionBank = {
           title: 'Will the building have full wall and roof insulation?',
           url: 'replacing-insulation',
           baseUrl: 'replacing-insulation',
-          backUrlObject: {
+          backUrl: 'building-items',
+          nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'building-items',
+              thenUrl: 'lighting-features',
               elseUrl: 'pullet-housing-requirements'
             }
           },
-          nextUrl: 'lighting-features',
           ineligibleContent: {
             messageContent: `The building must have full wall and roof insulation.<br/><br/>
             The new building must have wall and roof insulation with a U-Value of less than 0.3 watts per square metre, per degree Kelvin (0.3W/m²K).`,
@@ -1454,7 +1450,7 @@ const questionBank = {
           url: 'hen-ventilation-specification',
           baseUrl: 'hen-ventilation-specification',
           backUrl: 'mechanical-ventilation',
-          nextUrl: 'hen-veranda',
+          nextUrl: 'concrete-apron',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
