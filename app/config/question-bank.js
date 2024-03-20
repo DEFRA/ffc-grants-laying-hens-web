@@ -1593,7 +1593,7 @@ const questionBank = {
             html: `
                 <p>In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
-                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>an air speed of one metre per second over birds</li>
                   <li>a maximum ventilation rate of 9,000m³ per hour per 1000 birds</li>
                 </ul>`
           },

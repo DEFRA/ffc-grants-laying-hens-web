@@ -65,7 +65,7 @@ describe('Page: /pullet-ventilation-specification', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('an air speed of 1 metre per second over birds')
+    expect(postResponse.payload).toContain('an air speed of one metre per second over birds')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
   it('page loads with correct back link - pullet / mechanical-ventilation', async () => {
