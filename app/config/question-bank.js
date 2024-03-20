@@ -1297,7 +1297,7 @@ const questionBank = {
                   <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
                   <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                   <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
-                  <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down </li>
+                  <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down.</li>
                 </ul>
               </div>
             `,
