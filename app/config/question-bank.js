@@ -1847,7 +1847,7 @@ const questionBank = {
         {
           key: 'housing-density',
           order: 200,
-          title: 'Will the pullets be housed within the maximum stocking density when they are 16 weeks old?',
+          title: 'Will the pullets be housed within this maximum stocking density when they are 16 weeks old?',
           pageTitle: '',
           url: 'housing-density',
           baseUrl: 'housing-density',
@@ -1862,7 +1862,7 @@ const questionBank = {
           nextUrl: 'mechanical-ventilation',
           hint: {
             html: `
-            <p>The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+            <p>To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within: </p>
               <ul class="govuk-list--bullet">
                 <li>20kg per m² of the total usable area</li>
                 <li>33kg per m² of the total usable area at floor level</li>
@@ -1871,7 +1871,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
-            <p class="govuk-body">The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+            <p class="govuk-body">To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within:</p>
                   <ul>
                     <li>20kg per m² of the total usable area</li>
                     <li>33kg per m² of the total usable area at floor level</li>
