@@ -1145,7 +1145,7 @@ const questionBank = {
             html: `
                   <p>The aviary system must have integrated:</p>
                   <ul class="govuk-list--bullet">
-                    <li>automatic manure removal belts</li>
+                    <li>manure removal belts</li>
                     <li>non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk</li>
                   </ul>`
           },
@@ -1153,13 +1153,13 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The aviary system must have an integrated automatic manure-removal belt and non-flicker LED lighting system.`
+                para: `The aviary system must have integrated manure-removal belts and a non-flicker LED lighting system.`
               }]
             }]
           },
           ineligibleContent: {
             messageContent: `
-              <p class="govuk-body">The aviary system must have:</p>
+              <p class="govuk-body">The aviary system must have integrated:</p>
               <ul class="govuk-list govuk-list--bullet">
                 <li>manure removal belts</li>
                 <li>integrated non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk.</li>
