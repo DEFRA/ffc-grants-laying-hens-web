@@ -1788,8 +1788,8 @@ const questionBank = {
           pageTitle: '',
           url: 'vaccination-lobby',
           baseUrl: 'vaccination-lobby',
-          backUrl: 'changing-area',
-          nextUrl: 'housing-density',
+          backUrl: 'concrete-apron',
+          nextUrl: 'changing-area',
           hint: {
             text: 'Internal access from the bird living area and external access from the loading bay'
           },
