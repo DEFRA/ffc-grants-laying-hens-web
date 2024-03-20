@@ -2177,25 +2177,25 @@ const questionBank = {
         {
           key: 'external-taps',
           order: 240,
-          title: 'Will the {{_poultryType_}} housing have an external tap at each main pedestrian access point?',
+          title: 'Will the building have an external tap at the main pedestrian access point?',
           pageTitle: '',
           url: 'external-taps',
           baseUrl: 'external-taps',
-          backUrl: 'vehicle-washing',
-          nextUrl: 'roof-solar-PV',
+          backUrl: 'changing-area',
+          nextUrl: 'vehicle-washing',
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.'
+                para: 'There must be an external tap at the main pedestrian access point to manage external footbaths.'
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.',
+            messageContent: 'There must be an external tap at the main pedestrian access point to manage external footbaths.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -2205,7 +2205,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have an external tap at each main pedestrian access point'
+              error: 'Select yes if the building will have an external tap at the main pedestrian access point'
             }
           ],
           answers: [
