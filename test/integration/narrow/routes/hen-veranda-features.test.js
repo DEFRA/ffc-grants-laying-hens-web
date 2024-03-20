@@ -76,7 +76,7 @@ describe('Page: /hen-veranda-features', () => {
     expect(postResponse.payload).toContain('a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access')
     expect(postResponse.payload).toContain('closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system')
     expect(postResponse.payload).toContain('internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide')
-    expect(postResponse.payload).toContain('a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down')
+    expect(postResponse.payload).toContain('a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down.')
   })
 
   it('page loads with correct back link', async () => {
