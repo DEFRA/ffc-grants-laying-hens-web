@@ -1736,49 +1736,55 @@ const questionBank = {
         {
           key: 'concrete-apron',
           order: 190,
-          title: 'Will the {{_poultryType_}} housing have a continuous concrete apron around its perimeter?',
+          title: 'Will the structure be surrounded by a concrete apron?',
           pageTitle: '',
           url: 'concrete-apron',
           baseUrl: 'concrete-apron',
           backUrlObject: {
-            dependentQuestionYarKey: ['henVeranda'],
-            dependentAnswerKeysArray: ['hen-veranda-A1'],
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'hen-pop-holes',
-              elseUrl: 'hen-veranda',
-              nonDependentUrl: 'lighting-features'
+              thenUrl: 'hen-ventilation-specification',
+              elseUrl: 'pullet-veranda'
             }
           },
-          nextUrl: 'vehicle-washing',
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'egg-store-access',
+              elseUrl: 'vaccination-lobby'
+            }
+          },
           hint: {
-            text: 'This must include any veranda areas if there is no adjacent range, for example barn systems'
+            text: 'This should be continuous, unless there needs to be a gap where birds have direct access to pasture'
           },
           sidebar: {
             values: [
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: 'The {{_poultryType_}} housing and any barn-system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+                  para: 'The building (and veranda if there is one) must be surrounded by a concrete apron.',
                   items: [],
                 }]
               }
             ]
           },
           ineligibleContent: {
-            messageContent: 'The housing and any barn system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+            messageContent: `<p class="govuk-body">The building (and veranda if there is one) must be surrounded by a concrete apron.</p>
+            <p class="govuk-body">This should be continuous, unless there needs to be a gap where birds have direct access to pasture.</p>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have a continuous concrete apron'
+              error: 'Select yes if the structure will be surrounded by a concrete apron'
             }
           ],
           answers: [
