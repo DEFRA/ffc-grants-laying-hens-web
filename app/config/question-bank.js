@@ -1899,8 +1899,8 @@ const questionBank = {
           pageTitle: '',
           url: 'pullet-housing-requirements',
           baseUrl: 'pullet-housing-requirements',
-          backUrl: 'building-items',
-          nextUrlObject: {
+          nextUrl: 'lighting-features',
+          backUrlObject: {
             dependentQuestionYarKey: 'projectType',
             dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
@@ -2182,8 +2182,8 @@ const questionBank = {
           pageTitle: '',
           url: 'external-taps',
           baseUrl: 'external-taps',
-          backUrl: 'vehicle-washing',
-          nextUrl: 'roof-solar-PV',
+          backUrl: 'changing-area',
+          nextUrl: 'vehicle-washing',
           sidebar: {
             values: [{
               heading: 'Eligibility',

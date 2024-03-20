@@ -44,7 +44,7 @@ describe('Page: /pullet-housing-requirements', () => {
     expect(postResponse.payload).toContain('Select yes if the inside of the building will have these features')
   })
 
-  it('user selects eligible option and /Refurbishing an existing laying hen or pullet building/ at project type -> store user response and redirect to /replacing-insulation', async () => {
+  it('user selects eligible option -> store user response and redirect to /lighting-features', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pullet-housing-requirements`,
@@ -54,21 +54,7 @@ describe('Page: /pullet-housing-requirements', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('replacing-insulation')
-  })
-
-  it('user selects eligible option and  /Adding a veranda only to an existing laying hen or pullet building/ at project type-> store user response and redirect to /refurbishing-insulation', async () => {
-    varList.projectType = 'Adding a veranda only to an existing laying hen or pullet building'
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/pullet-housing-requirements`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { pulletHousingRequirements: 'Yes',  crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('refurbishing-insulation')
+    expect(postResponse.headers.location).toBe('lighting-features')
   })
 
 
@@ -89,13 +75,25 @@ describe('Page: /pullet-housing-requirements', () => {
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link - /building-items', async () => {
+  it('page loads with correct back link - /replacing-insulation', async () => {
+    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/pullet-housing-requirements`,
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"building-items\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"replacing-insulation\" class=\"govuk-back-link\">Back</a>')
+  })
+
+  it('page loads with correct back link - /refurbishing-insulation', async () => {
+    varList.projectType = 'Adding features to an existing building (including a mechanical ventilation system, lighting system, aviary or multi-tier system and veranda)'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/pullet-housing-requirements`,
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"refurbishing-insulation\" class=\"govuk-back-link\">Back</a>')
   })
 })
