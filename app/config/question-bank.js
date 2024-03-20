@@ -709,6 +709,7 @@ const questionBank = {
               key: 'poultry-type-A2',
               text: 'Pullets (up to and including 17 weeks old)',
               value: 'pullet',
+              yarKeysReset: ['henVeranda']
             },
             {
               value: 'divider'
@@ -1271,7 +1272,7 @@ const questionBank = {
           url: 'hen-veranda-features',
           baseUrl: 'hen-veranda-features',
           backUrl: 'hen-veranda',
-          nextUrl: 'hen-veranda-biosecurity',
+          nextUrl: 'building-items',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
