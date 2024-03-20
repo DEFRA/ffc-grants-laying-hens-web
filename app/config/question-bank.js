@@ -1079,14 +1079,7 @@ const questionBank = {
           url: 'egg-store-access',
           baseUrl: 'egg-store-access',
           nextUrl: 'changing-area',
-          backUrlObject: {
-            dependentQuestionYarKey: 'henVeranda',
-            dependentAnswerKeysArray: ['hen-veranda-A1'],
-            urlOptions: {
-              thenUrl: 'concrete-apron',
-              elseUrl: 'veranda-concrete-apron'
-            }
-          },
+          backUrl: 'concrete-apron',
           // preValidationKeys: ['poultryType'],
           hint: {
             text: 'This must be separate from the main entrance lobby and connected changing area'
@@ -1095,7 +1088,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You must be able to remove eggs and deliver empty egg trays to and from the building\'s egg store without going into the building\'s entrance lobby or connected changing area.',
+                para: 'You must be able to remove eggs and deliver empty egg trays to and from the building\'s egg store without going into the building\'s main entrance lobby or connected changing area.',
               }]
             }]
           },
