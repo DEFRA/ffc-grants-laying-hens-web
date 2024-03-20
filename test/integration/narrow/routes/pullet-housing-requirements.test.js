@@ -18,18 +18,18 @@ describe('Page: /pullet-housing-requirements', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the inside of the building have these features?')
-    expect(response.payload).toContain('The building must have:')
+    expect(response.payload).toContain('Will the pullet housing have these features?')
+    expect(response.payload).toContain('When the project is complete, the building must have:')
     expect(response.payload).toContain('a useable area provided over a range of bird-accessible heights from 10 days of age')
     expect(response.payload).toContain('height adjustable perches at equal to or more than 8cm per pullet')
-    expect(response.payload).toContain('a minimum of 50% of the floor area covered in litter')
+    expect(response.payload).toContain('a minimum of 50% of the floor area available for litter')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
 
   it('no option selected -> show error message', async () => {
     valList['NOT_EMPTY'] = {
-      error: 'Select yes if the inside of the building will have these features',
+      error: 'Select yes if the pullet housing will have these features',
       return: false
     }
     const postOptions = {
@@ -41,7 +41,7 @@ describe('Page: /pullet-housing-requirements', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the inside of the building will have these features')
+    expect(postResponse.payload).toContain('Select yes if the pullet housing will have these features')
   })
 
   it('user selects eligible option and /Refurbishing an existing laying hen or pullet building/ at project type -> store user response and redirect to /replacing-insulation', async () => {
@@ -85,7 +85,7 @@ describe('Page: /pullet-housing-requirements', () => {
     expect(postResponse.payload).toContain('The pullet housing must have:')
     expect(postResponse.payload).toContain('a useable area provided over a range of bird-accessible heights from 10 days of age')
     expect(postResponse.payload).toContain('height adjustable perches at equal to or more than 8cm per pullet')
-    expect(postResponse.payload).toContain('a minimum of 50% of the floor area covered in litter')
+    expect(postResponse.payload).toContain('a minimum of 50% of the floor area available for litter.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
