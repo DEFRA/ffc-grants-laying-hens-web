@@ -985,15 +985,15 @@ const questionBank = {
         {
           key: 'changing-area',
           order: 100,
-          title: 'Will the {{_poultryType_}} housing have a biosecure changing area at each external pedestrian access point?',
+          title: 'Will the building have a biosecurity changing area at each external pedestrian access point?',
           hint: {
             html: `
               <span>
-                <p>The building must have a biosecure changing area at each external pedestrian point with:</p>
+                <p>Each biosecurity changing area must include:</p>
                 <ul class="govuk-list--bullet">
-                  <li>changing facilities, divided by a floor-mounted physical barrier into a clean area and a dirty area</li>
-                  <li>in the dirty area, handwashing facilities and storage for clothes and boots that you use outside of the housing</li>
-                  <li>in the clean area, a footbath and storage for clothes and boots that you use inside of the shed</li>
+                  <li>changing facilities, with a step-over barrier between the outer and inner areas</li>
+                  <li>in the outer area, handwashing facilities with running water and storage for clothes and boots that you use outside of this building</li>
+                  <li>in the inner area, a footbath and storage for clothes and boots that you use inside of the bird living area</li>
                 </ul>
             </span>`
           },
@@ -1001,30 +1001,22 @@ const questionBank = {
           url: 'changing-area',
           baseUrl: 'changing-area',
           backUrlObject: {
-            dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A3'],
-            urlOptions: {
-              thenUrl: 'replacing-insulation',
-              elseUrl: 'refurbishing-insulation'
-              // nonDependentUrl: 'solar-PV-system'
-            }
-          },
-          nextUrlObject: {
-            dependentQuestionYarKey: ['poultryType'],
+            dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
               thenUrl: 'egg-store-access',
               elseUrl: 'vaccination-lobby'
             }
           },
+          nextUrl: 'external-taps',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The {{_poultryType_}} housing must have an effective hygiene barrier.
+                para: `The building must have a biosecurity changing area at each external pedestrian point. 
 
-                If you're refurbishing an existing building and have limited internal space, you can add a shed onto the main entrance as a biosecure changing area.`,
+                If you're refurbishing an existing building and have limited internal space, you can add a shed onto the main entrance externally as a biosecurity changing area.`,
                 items: []
               }]
             }]
@@ -1033,17 +1025,15 @@ const questionBank = {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">
-                  The housing must have a biosecure changing area at each external pedestrian point with:
+                  The building must have a biosecurity changing area at each external pedestrian point. 
                 </p>
+                <p class="govuk-body">Each biosecurity changing area must include:</p>
                 <ul>
-                  <li>changing facilities, divided by a floor-mounted 
-                  physical barrier into a clean area and a dirty area</li>
-                  <li>in the dirty area, handwashing facilities and storage 
-                  for clothes and boots that you use outside of the 
-                  housing </li>
-                  <li>in the clean area, a footbath and storage for 
-                  clothes and boots that you use inside of the shed.</li>
-                  </ul>`,
+                  <li>changing facilities, with a step-over barrier between the outer and inner areas</li>
+                  <li>in the outer area, handwashing facilities with running water and storage for clothes and boots you use outside this building</li>
+                  <li>in the inner area, a footbath and storage for clothes and boots you use inside the bird living area.</li>
+                </ul>
+              </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1056,7 +1046,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have a biosecure changing area'
+              error: 'Select yes if the building will have a biosecurity changing area'
             }
           ],
           answers: [

@@ -11,7 +11,7 @@ describe('Page: /changing-area', () => {
 
   commonFunctionsMock(varList, undefined, {}, valList)
 
-  it('page loads successfully, with all the options - hen', async () => {
+  it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/changing-area`
@@ -19,29 +19,19 @@ describe('Page: /changing-area', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the hen housing have a biosecure changing area at each external pedestrian access point?')
+    expect(response.payload).toContain('Will the building have a biosecurity changing area at each external pedestrian access point?')
+    expect(response.payload).toContain('Each biosecurity changing area must include:')
+    expect(response.payload).toContain('changing facilities, with a step-over barrier between the outer and inner areas')
+    expect(response.payload).toContain('in the outer area, handwashing facilities with running water and storage for clothes and boots that you use outside of this building')
+    expect(response.payload).toContain('in the inner area, a footbath and storage for clothes and boots that you use inside of the bird living area')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
 
-  it('page loads successfully, with all the options - pullet', async () => {
-    varList.poultryType = 'pullet'
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/changing-area`
-    }
-
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the pullet housing have a biosecure changing area at each external pedestrian access point?')
-    expect(response.payload).toContain('Yes')
-    expect(response.payload).toContain('No')
-  })
-
-  it('no option selected -> show error message - hen', async () => {
+  it('no option selected -> show error message', async () => {
     varList.poultryType = 'hen'
     valList.changingArea = {
-      error: 'Select yes if the hen housing will have a biosecure changing area',
+      error: 'Select yes if the building will have a biosecurity changing area',
       return: false
     }
     const postOptions = {
@@ -53,28 +43,10 @@ describe('Page: /changing-area', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the hen housing will have a biosecure changing area')
+    expect(postResponse.payload).toContain('Select yes if the building will have a biosecurity changing area')
   })
 
-  it('no option selected -> show error message - pullet', async () => {
-    valList['NOT_EMPTY'] = { 
-      error: 'Select yes if the pullet housing will have a biosecure changing area',
-      return: false
-    }
-    varList.poultryType = 'pullet'
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/changing-area`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the pullet housing will have a biosecure changing area')
-  })
-
-  it('user selects eligible option -> store user response and redirect to /vaccination-lobby', async () => {
+  it('user selects eligible option -> store user response and redirect to /external-taps', async () => {
     valList.changingArea = null
     const postOptions = {
       method: 'POST',
@@ -85,7 +57,7 @@ describe('Page: /changing-area', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('vaccination-lobby')
+    expect(postResponse.headers.location).toBe('external-taps')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -98,17 +70,33 @@ describe('Page: /changing-area', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The housing must have a biosecure changing area at each external pedestrian point with:')
+    expect(postResponse.payload).toContain('The building must have a biosecurity changing area at each external pedestrian point.')
+    expect(postResponse.payload).toContain('Each biosecurity changing area must include:')
+    expect(postResponse.payload).toContain('changing facilities, with a step-over barrier between the outer and inner areas')
+    expect(postResponse.payload).toContain('in the outer area, handwashing facilities with running water and storage for clothes and boots you use outside this building')
+    expect(postResponse.payload).toContain('in the inner area, a footbath and storage for clothes and boots you use inside the bird living area.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link', async () => {
+  it('page loads with correct back link - hen', async () => {
+    varList.poultryType = 'hen'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/changing-area`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"replacing-insulation\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"egg-store-access\" class=\"govuk-back-link\">Back</a>')
+  })
+
+  it('page loads with correct back link - pullet', async () => {
+    varList.poultryType = 'pullet'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/changing-area`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"vaccination-lobby\" class=\"govuk-back-link\">Back</a>')
   })
 })
