@@ -1794,8 +1794,8 @@ const questionBank = {
           pageTitle: '',
           url: 'vaccination-lobby',
           baseUrl: 'vaccination-lobby',
-          backUrl: 'changing-area',
-          nextUrl: 'housing-density',
+          backUrl: 'concrete-apron',
+          nextUrl: 'changing-area',
           hint: {
             text: 'Internal access from the bird living area and external access from the loading bay'
           },
@@ -1803,12 +1803,15 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+                para: `The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay. 
+                
+                If you do not vaccinate your pullets currently, you must add a vaccination lobby to allow for future vaccination requirements.
+                `,
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: 'The housing must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+            messageContent: 'The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
