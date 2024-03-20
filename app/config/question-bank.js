@@ -1126,7 +1126,7 @@ const questionBank = {
             html: `
                   <p>The aviary system must have integrated:</p>
                   <ul class="govuk-list--bullet">
-                    <li>automatic manure removal belts</li>
+                    <li>manure removal belts</li>
                     <li>non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk</li>
                   </ul>`
           },
@@ -1134,13 +1134,13 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The aviary system must have an integrated automatic manure-removal belt and non-flicker LED lighting system.`
+                para: `The aviary system must have integrated manure-removal belts and a non-flicker LED lighting system.`
               }]
             }]
           },
           ineligibleContent: {
             messageContent: `
-              <p class="govuk-body">The aviary system must have:</p>
+              <p class="govuk-body">The aviary system must have integrated:</p>
               <ul class="govuk-list govuk-list--bullet">
                 <li>manure removal belts</li>
                 <li>integrated non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk.</li>
@@ -1717,18 +1717,10 @@ const questionBank = {
         {
           key: 'concrete-apron',
           order: 190,
-          title: 'Will the {{_poultryType_}} housing have a continuous concrete apron around its perimeter?',
+          title: 'Will the structure be surrounded by a concrete apron?',
           pageTitle: '',
           url: 'concrete-apron',
           baseUrl: 'concrete-apron',
-          nextUrlObject: {
-            dependentQuestionYarKey: ['poultryType'],
-            dependentAnswerKeysArray: ['poultry-type-A1'],
-            urlOptions: {
-              thenUrl: 'egg-store-access',
-              elseUrl: 'vaccination-lobby'
-            }
-          },
           backUrlObject: {
             dependentQuestionYarKey: ['poultryType'],
             dependentAnswerKeysArray: ['poultry-type-A1'],
@@ -1737,35 +1729,43 @@ const questionBank = {
               elseUrl: 'pullet-veranda'
             }
           },
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'egg-store-access',
+              elseUrl: 'vaccination-lobby'
+            }
+          },
           hint: {
-            text: 'This must include any veranda areas if there is no adjacent range, for example barn systems'
+            text: 'This should be continuous, unless there needs to be a gap where birds have direct access to pasture'
           },
           sidebar: {
             values: [
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: 'The {{_poultryType_}} housing and any barn-system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+                  para: 'The building (and veranda if there is one) must be surrounded by a concrete apron.',
                   items: [],
                 }]
               }
             ]
           },
           ineligibleContent: {
-            messageContent: 'The housing and any barn system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+            messageContent: `<p class="govuk-body">The building (and veranda if there is one) must be surrounded by a concrete apron.</p>
+            <p class="govuk-body">This should be continuous, unless there needs to be a gap where birds have direct access to pasture.</p>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have a continuous concrete apron'
+              error: 'Select yes if the structure will be surrounded by a concrete apron'
             }
           ],
           answers: [
@@ -1834,7 +1834,7 @@ const questionBank = {
         {
           key: 'housing-density',
           order: 200,
-          title: 'Will the pullets be housed within the maximum stocking density when they are 16 weeks old?',
+          title: 'Will the pullets be housed within this maximum stocking density when they are 16 weeks old?',
           pageTitle: '',
           url: 'housing-density',
           baseUrl: 'housing-density',
@@ -1849,7 +1849,7 @@ const questionBank = {
           nextUrl: 'mechanical-ventilation',
           hint: {
             html: `
-            <p>The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+            <p>To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within: </p>
               <ul class="govuk-list--bullet">
                 <li>20kg per m² of the total usable area</li>
                 <li>33kg per m² of the total usable area at floor level</li>
@@ -1858,7 +1858,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
-            <p class="govuk-body">The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+            <p class="govuk-body">To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within:</p>
                   <ul>
                     <li>20kg per m² of the total usable area</li>
                     <li>33kg per m² of the total usable area at floor level</li>

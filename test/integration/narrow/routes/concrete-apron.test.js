@@ -10,8 +10,7 @@ describe('Page: /concrete-apron', () => {
   let valList = {}
   commonFunctionsMock(varList, undefined, {}, valList)
 
-  it('page loads successfully, with all the options - hen', async () => {
-    varList.poultryType = 'hen'
+  it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/concrete-apron`
@@ -19,29 +18,13 @@ describe('Page: /concrete-apron', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the hen housing have a continuous concrete apron around its perimeter?')
+    expect(response.payload).toContain('Will the structure be surrounded by a concrete apron?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
-
-  it('page loads successfully, with all the options - pullet', async () => {
-    varList.poultryType = 'pullet'
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/concrete-apron`
-    }
-
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the pullet housing have a continuous concrete apron around its perimeter?')
-    expect(response.payload).toContain('Yes')
-    expect(response.payload).toContain('No')
-  })
-
-  it('no option selected -> show error message - hen', async () => {
-    varList.poultryType = 'hen'
+  it('no option selected -> show error message', async () => {
     valList['NOT_EMPTY'] = {
-      error: 'Select yes if the hen housing will have a continuous concrete apron',
+      error: 'Select yes if the structure will be surrounded by a concrete apron',
       return: false
     }
     const postOptions = {
@@ -53,21 +36,7 @@ describe('Page: /concrete-apron', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the hen housing will have a continuous concrete apron')
-  })
-
-  it('no option selected -> show error message - pullet', async () => {
-    varList.poultryType = 'pullet'
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/concrete-apron`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the pullet housing will have a continuous concrete apron')
+    expect(postResponse.payload).toContain('Select yes if the structure will be surrounded by a concrete apron')
   })
 
   it('user selects eligible option -> store user response and redirect to /egg-store-access', async () => {
@@ -107,7 +76,7 @@ describe('Page: /concrete-apron', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The housing and any barn system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).')
+    expect(postResponse.payload).toContain('The building (and veranda if there is one) must be surrounded by a concrete apron.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
@@ -122,7 +91,7 @@ describe('Page: /concrete-apron', () => {
     expect(response.payload).toContain('<a href=\"pullet-veranda\" class=\"govuk-back-link\">Back</a>')
   })
 
-  it('page loads with correct back link - /hen-ventilation-specification', async () => {
+  it('page loads with correct back link - /hen-ventilation-specifications', async () => {
     varList.poultryType = 'hen'
     const options = {
       method: 'GET',
