@@ -1581,7 +1581,7 @@ const questionBank = {
           url: 'pullet-ventilation-specification',
           baseUrl: 'pullet-ventilation-specification',
           backUrl: 'mechanical-ventilation',
-          nextUrl: 'pullet-veranda',
+          nextUrl: 'concrete-apron',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [
@@ -1726,7 +1726,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
               thenUrl: 'hen-ventilation-specification',
-              elseUrl: 'pullet-veranda'
+              elseUrl: 'pullet-ventilation-specification'
             }
           },
           nextUrlObject: {
