@@ -981,15 +981,15 @@ const questionBank = {
         {
           key: 'changing-area',
           order: 100,
-          title: 'Will the {{_poultryType_}} housing have a biosecure changing area at each external pedestrian access point?',
+          title: 'Will the building have a biosecurity changing area at each external pedestrian access point?',
           hint: {
             html: `
               <span>
-                <p>The building must have a biosecure changing area at each external pedestrian point with:</p>
+                <p>Each biosecurity changing area must include:</p>
                 <ul class="govuk-list--bullet">
-                  <li>changing facilities, divided by a floor-mounted physical barrier into a clean area and a dirty area</li>
-                  <li>in the dirty area, handwashing facilities and storage for clothes and boots that you use outside of the housing</li>
-                  <li>in the clean area, a footbath and storage for clothes and boots that you use inside of the shed</li>
+                  <li>changing facilities, with a step-over barrier between the outer and inner areas</li>
+                  <li>in the outer area, handwashing facilities with running water and storage for clothes and boots that you use outside of this building</li>
+                  <li>in the inner area, a footbath and storage for clothes and boots that you use inside of the bird living area</li>
                 </ul>
             </span>`
           },
@@ -1010,9 +1010,9 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The {{_poultryType_}} housing must have an effective hygiene barrier.
+                para: `The building must have a biosecurity changing area at each external pedestrian point. 
 
-                If you're refurbishing an existing building and have limited internal space, you can add a shed onto the main entrance as a biosecure changing area.`,
+                If you're refurbishing an existing building and have limited internal space, you can add a shed onto the main entrance externally as a biosecurity changing area.`,
                 items: []
               }]
             }]
@@ -1021,17 +1021,15 @@ const questionBank = {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">
-                  The housing must have a biosecure changing area at each external pedestrian point with:
+                  The building must have a biosecurity changing area at each external pedestrian point. 
                 </p>
+                <p class="govuk-body">Each biosecurity changing area must include:</p>
                 <ul>
-                  <li>changing facilities, divided by a floor-mounted 
-                  physical barrier into a clean area and a dirty area</li>
-                  <li>in the dirty area, handwashing facilities and storage 
-                  for clothes and boots that you use outside of the 
-                  housing </li>
-                  <li>in the clean area, a footbath and storage for 
-                  clothes and boots that you use inside of the shed.</li>
-                  </ul>`,
+                  <li>changing facilities, with a step-over barrier between the outer and inner areas</li>
+                  <li>in the outer area, handwashing facilities with running water and storage for clothes and boots you use outside this building</li>
+                  <li>in the inner area, a footbath and storage for clothes and boots you use inside the bird living area.</li>
+                </ul>
+              </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1044,7 +1042,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have a biosecure changing area'
+              error: 'Select yes if the building will have a biosecurity changing area'
             }
           ],
           answers: [
@@ -1076,7 +1074,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You must be able to remove eggs and deliver empty egg trays to and from the building\'s egg store without going into the building\'s entrance lobby or connected changing area.',
+                para: 'You must be able to remove eggs and deliver empty egg trays to and from the building\'s egg store without going into the building\'s main entrance lobby or connected changing area.',
               }]
             }]
           },
@@ -1797,12 +1795,15 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+                para: `The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay. 
+                
+                If you do not vaccinate your pullets currently, you must add a vaccination lobby to allow for future vaccination requirements.
+                `,
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: 'The housing must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+            messageContent: 'The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -2190,7 +2191,7 @@ const questionBank = {
         {
           key: 'external-taps',
           order: 240,
-          title: 'Will the {{_poultryType_}} housing have an external tap at each main pedestrian access point?',
+          title: 'Will the building have an external tap at the main pedestrian access point?',
           pageTitle: '',
           url: 'external-taps',
           baseUrl: 'external-taps',
@@ -2200,15 +2201,15 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.'
+                para: 'There must be an external tap at the main pedestrian access point to manage external footbaths.'
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.',
+            messageContent: 'There must be an external tap at the main pedestrian access point to manage external footbaths.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -2218,7 +2219,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have an external tap at each main pedestrian access point'
+              error: 'Select yes if the building will have an external tap at the main pedestrian access point'
             }
           ],
           answers: [

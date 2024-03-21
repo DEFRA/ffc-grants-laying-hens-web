@@ -61,7 +61,7 @@ describe('Page: /vaccination-lobby', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The housing must have a dedicated area to perform pullet vaccinations, with access to the loading bay.')
+    expect(postResponse.payload).toContain('The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
