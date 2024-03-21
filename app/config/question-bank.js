@@ -1442,7 +1442,7 @@ const questionBank = {
             html: `
                 <p>In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
-                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>an air speed of one metre per second over birds</li>
                   <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds</li>
                 </ul>
                 `
@@ -1465,7 +1465,7 @@ const questionBank = {
             <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
               <div class="govuk-list govuk-list--bullet">
                 <ul>
-                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>an air speed of one metre per second over birds</li>
                   <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds.</li>
                 </ul>
               </div>`,
@@ -1574,7 +1574,7 @@ const questionBank = {
             html: `
                 <p>In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
-                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>an air speed of one metre per second over birds</li>
                   <li>a maximum ventilation rate of 9,000m³ per hour per 1000 birds</li>
                 </ul>`
           },
@@ -1600,7 +1600,7 @@ const questionBank = {
               <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
-                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>an air speed of one metre per second over birds</li>
                   <li>a maximum ventilation rate of 9,000m³ per hour per 1000 birds.</li>
                 </ul>`,
             messageLink: {
