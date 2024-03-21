@@ -1895,11 +1895,10 @@ const questionBank = {
         {
           key: 'pullet-housing-requirements',
           order: 205,
-          title: 'Will the inside of the building have these features?',
+          title: 'Will the pullet housing have these features?',
           pageTitle: '',
           url: 'pullet-housing-requirements',
           baseUrl: 'pullet-housing-requirements',
-          nextUrl: 'lighting-features',
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
             dependentAnswerKeysArray: ['project-type-A3'],
@@ -1908,13 +1907,14 @@ const questionBank = {
               elseUrl: 'refurbishing-insulation'
             }
           },
+          nextUrl: 'lighting-features',
           hint: {
             html: `
-                  <p>The building must have:</p>
+                  <p>When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
                       <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
                       <li>height adjustable perches at equal to or more than 8cm per pullet</li>
-                      <li>a minimum of 50% of the floor area covered in litter</li>
+                      <li>a minimum of 50% of the floor area available for litter</li>
                   </ul>
                 `
                 },
@@ -1925,7 +1925,7 @@ const questionBank = {
                   <ul>
                     <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
                     <li>height adjustable perches at equal to or more than 8cm per pullet</li>
-                    <li>a minimum of 50% of the floor area covered in litter</li>
+                    <li>a minimum of 50% of the floor area available for litter.</li>
                   </ul>
             </div>`,
             messageLink: {
@@ -1940,7 +1940,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the inside of the building will have these features'
+              error: 'Select yes if the pullet housing will have these features'
             }
           ],
           answers: [
