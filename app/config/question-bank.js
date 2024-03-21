@@ -2136,30 +2136,42 @@ const questionBank = {
         {
           key: 'vehicle-washing',
           order: 230,
-          title: 'Will the {{_poultryType_}} housing have a designated area for washing and disinfecting vehicles?',
+          title: 'Will there be a designated area for washing and disinfecting vehicles?',
           pageTitle: '',
           url: 'vehicle-washing',
           baseUrl: 'vehicle-washing',
-          backUrl: 'concrete-apron',
+          backUrl: 'external-taps',
           nextUrl: 'solar-PV-system',
           hint: {
-            text: 'This must include an area of concrete parking which is appropriate to the size of the vehicles entering the facility (minimum width of 3 metres)'
+            html: `
+                  <p>This must be an area on site that includes:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a concrete surface that is appropriate to the size of the vehicles 
+                    entering the facility (minimum width of 3 metres)</li>
+                    <li>a drainage system and storage tanks for soiled water</li>
+                  </ul>`
           },
           ineligibleContent: {
-            messageContent: 'There must be a designated washing and disinfecting area for vehicles entering the facility.',
+            messageContent: `
+            <p class="govuk-body">There must be a designated washing and disinfecting area on site with:</p>
+            <div class="govuk-list govuk-list--bullet">
+                  <ul>
+                    <li>a concrete surface that is appropriate to the size of the vehicles entering the facility (minimum width of 3 metres)</li>
+                    <li>a drainage system and storage tanks for soiled water.</li>
+                  </ul>
+            </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have a designated area for washing and disinfecting vehicles'
+              error: 'Select yes if there will be a designated area for washing and disinfecting vehicles'
             }
           ],
           answers: [
