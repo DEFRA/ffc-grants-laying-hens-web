@@ -2272,15 +2272,6 @@ const questionBank = {
               type: 'NOT_EMPTY',
               error: 'Select how big the veranda will be'
             },
-            //Do we need this if the answer is a single answer (radio buttons) ? 
-            // {
-            //   type: 'STANDALONE_ANSWER',
-            //   error: 'You cannot select that combination of options',
-            //   standaloneObject: {
-            //     questionKey: 'veranda-only-size',
-            //     answerKey: 'veranda-only-size-A3'
-            //   }
-            // }
           ],
           answers: [
             {
