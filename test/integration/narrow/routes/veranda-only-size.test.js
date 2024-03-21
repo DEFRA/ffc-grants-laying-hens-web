@@ -16,8 +16,8 @@ describe('Page: /veranda-only-size', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('How big will the veranda be?')
-    expect(response.payload).toContain('4 metres wide or more along the length of the bird housing area')
-    expect(response.payload).toContain('30% or more of the size of the indoor bird housing area footprint')
+    expect(response.payload).toContain('4 metres wide along the length of the bird housing area')
+    expect(response.payload).toContain('30% of the size of the indoor bird housing area footprint.')
     expect(response.payload).toContain('None of the above')
   })
 
@@ -62,8 +62,8 @@ describe('Page: /veranda-only-size', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('4 metres wide or more along the length of the bird')
-    expect(postResponse.payload).toContain('30% or more of the size of the indoor bird housing area footprint.')
+    expect(postResponse.payload).toContain('4 metres wide along the length of the bird housing area')
+    expect(postResponse.payload).toContain('30% of the size of the indoor bird housing area footprint.')
   })
 
   it('page loads with correct back link', async () => {

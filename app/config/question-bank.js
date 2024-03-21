@@ -2247,8 +2247,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The veranda must be either:`,
-                items: ['4 metres wide or more along the length of the bird housing area', '30% or more of the size of the indoor bird housing area footprint.']
+                para: 'The veranda must be at least either:',
+                items: ['4 metres wide along the length of the bird housing area', '30% of the size of the indoor bird housing area footprint.']
               }]
             }]
           },
@@ -2257,8 +2257,8 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">The veranda must be either:</p>
                 <ul class="govuk-list--bullet">
-                    <li>4 metres wide or more along the length of the bird housing area</li>
-                    <li>30% or more of the size of the indoor bird housing area footprint.</li>
+                    <li>4 metres wide along the length of the bird housing area</li>
+                    <li>30% of the size of the indoor bird housing area footprint.</li>
                 </ul>
             </div>`,
             messageLink: {
@@ -2272,23 +2272,24 @@ const questionBank = {
               type: 'NOT_EMPTY',
               error: 'Select how big the veranda will be'
             },
-            {
-              type: 'STANDALONE_ANSWER',
-              error: 'You cannot select that combination of options',
-              standaloneObject: {
-                questionKey: 'veranda-only-size',
-                answerKey: 'veranda-only-size-A3'
-              }
-            }
+            //Do we need this if the answer is a single answer (radio buttons) ? 
+            // {
+            //   type: 'STANDALONE_ANSWER',
+            //   error: 'You cannot select that combination of options',
+            //   standaloneObject: {
+            //     questionKey: 'veranda-only-size',
+            //     answerKey: 'veranda-only-size-A3'
+            //   }
+            // }
           ],
           answers: [
             {
               key: 'veranda-only-size-A1',
-              value: '4 metres wide or more along the length of the bird housing area'
+              value: '4 metres wide along the length of the bird housing area'
             },
             {
               key: 'veranda-only-size-A2',
-              value: '30% or more of the size of the indoor bird housing area footprint'
+              value: '30% of the size of the indoor bird housing area footprint'
             },
             {
               value: 'divider'
