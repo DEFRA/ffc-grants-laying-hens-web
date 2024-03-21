@@ -335,6 +335,8 @@ const getPage = async (question, request, h) => {
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }
+console.log("questionnnnn", question)
+console.log("requesttt", request)
 
   // formatting variables block
   question = titleCheck(question, title, url, request)

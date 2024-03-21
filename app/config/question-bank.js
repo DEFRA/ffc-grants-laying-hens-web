@@ -1912,8 +1912,7 @@ const questionBank = {
           pageTitle: '',
           url: 'pullet-housing-requirements',
           baseUrl: 'pullet-housing-requirements',
-          backUrl: 'building-items',
-          nextUrlObject: {
+          backUrlObject: {
             dependentQuestionYarKey: 'projectType',
             dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
@@ -1921,6 +1920,7 @@ const questionBank = {
               elseUrl: 'refurbishing-insulation'
             }
           },
+          nextUrl: 'lighting-features',
           hint: {
             html: `
                   <p>When the project is complete, the building must have:</p>
