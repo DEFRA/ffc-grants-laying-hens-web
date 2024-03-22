@@ -17,7 +17,7 @@ describe('Page: /roof-solar-PV-exemption', () => {
 
   commonFunctionsMock(varList, undefined, utilsList, valList)
 
-  it('page loads successfully, with all the options - hen', async () => {
+  it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/roof-solar-PV-exemption`
@@ -28,26 +28,25 @@ describe('Page: /roof-solar-PV-exemption', () => {
     expect(response.payload).toContain('Which of these statements apply to this project?')
     expect(response.payload).toContain('The building is listed')
     expect(response.payload).toContain('The building is on a World Heritage Site')
-    // expect(response.payload).not.toContain('I am not making changes to this building’s roof');
+    expect(response.payload).toContain('I am not making changes to this building’s roof');
     expect(response.payload).toContain('The roof only faces north')
     expect(response.payload).toContain('The roof is heavily shaded')
     expect(response.payload).toContain('The roof does not have 100m2 of clear roof space')
     expect(response.payload).toContain('None of the above')
 
   })
+  it('page loads with /I am not making changes to this building’s roof/ if project type is /Refurbishing an existing laying hen or pullet building/', async () => {
+    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/roof-solar-PV-exemption`
+    }
 
-  // it('page loads with /I am not making changes to this building’s roof/ if project type is /Refurbishing an existing laying hen or pullet building/', async () => {
-  //   valList.projectType = 'Refurbishing an existing laying hen or pullet building'
-  //   const options = {
-  //     method: 'GET',
-  //     url: `${global.__URLPREFIX__}/roof-solar-PV-exemption`
-  //   }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).not.toContain('I am not making changes to this building’s roof');
 
-  //   const response = await global.__SERVER__.inject(options)
-  //   expect(response.statusCode).toBe(200)
-  //   expect(response.payload).toContain('I am not making changes to this building’s roof');
-
-  // })
+  })
 
   it('no option selected -> show error message', async () => {
 

@@ -2379,7 +2379,10 @@ const questionBank = {
             },
             {
               key: 'roof-solar-PV-exemption-A3',
-              value: 'I am not making changes to this building’s roof'
+              value: 'I am not making changes to this building’s roof',
+              dependantShowHideKey: 'project-type',
+              dependantShowHideAnswerKey: 'project-type-A2',
+              dependantShowHideYarKey: 'projectType',
             },
             {
               key: 'roof-solar-PV-exemption-A4',
