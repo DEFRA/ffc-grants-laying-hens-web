@@ -2236,6 +2236,58 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
+          key: 'roof-support-solar-PV',
+          order: 245,
+          title: 'Will the roof of this building be able to structurally support solar PV panels?',
+          pageTitle: '',
+          url: 'roof-support-solar-PV',
+          baseUrl: 'roof-support-solar-PV',
+          backUrl: 'roof-solar-PV-exemption',
+          nextUrl: 'project-cost',
+          hint: {
+            html: `
+            <p>Even if you are not installing a solar PV system, you must provide confirmation that the roof can support solar PV panels at full application.</p>
+            <p>This confirmation must come from a building expert, contractor or structural engineer</p>`
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The roof must be able to support solar PV panels, allowing for potential use in the future.',
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `The roof of this building must be able to support solar PV panels, allowing for potential use in the future.`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the roof of this building will be able to structurally support solar PV panels'
+            }
+          ],
+          answers: [
+            {
+              key: 'roof-support-solar-PV-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'roof-support-solar-PV-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'roofSupportSolarPV'
+        },
+        {
           key: 'veranda-only-size',
           order: 245,
           title: 'How big will the veranda be?',
