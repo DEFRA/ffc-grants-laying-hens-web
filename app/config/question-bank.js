@@ -2236,6 +2236,52 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
+          key: 'solar-PV-system',
+          order: 250,
+          title: 'Will you buy a solar PV system for this building with this grant?',
+          pageTitle: '',
+          url: 'solar-PV-system',
+          baseUrl: 'solar-PV-system',
+          backUrl: 'vehicle-washing',
+          nextUrl: 'project-cost',
+          hint: {
+            text: 'You have the option to buy and install a solar PV system with the grant. The solar PV panels must be installed on the roof of this building.'
+          },
+          warning: {
+            text: 'You cannot buy a Solar PV system with this grant if the roof of the building only faces north or is heavily shaded. ',
+            iconFallbackText: 'Warning'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You do not have to buy and install a solar PV system to be eligible for this grant.',
+              }]
+            }]
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you will buy a solar PV system for this building with this grant'
+            }
+          ],
+          answers: [
+            {
+              key: 'solar-PV-system-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'solar-PV-system-A2',
+              value: 'No',
+              redirectUrl: 'roof-solar-PV-exemption'
+            }
+          ],
+          yarKey: 'solarPVSystem'
+        },
+        {
           key: 'roof-support-solar-PV',
           order: 245,
           title: 'Will the roof of this building be able to structurally support solar PV panels?',
