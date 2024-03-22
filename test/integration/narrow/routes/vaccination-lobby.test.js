@@ -38,7 +38,7 @@ describe('Page: /vaccination-lobby', () => {
     expect(postResponse.payload).toContain('Select yes if there will be a designated vaccination lobby')
   })
 
-  it('user selects eligible option -> store user response and redirect to /housing-density', async () => {
+  it('user selects eligible option -> store user response and redirect to /changing-area', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/vaccination-lobby`,
@@ -48,7 +48,7 @@ describe('Page: /vaccination-lobby', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('housing-density')
+    expect(postResponse.headers.location).toBe('changing-area')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -61,7 +61,7 @@ describe('Page: /vaccination-lobby', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The housing must have a dedicated area to perform pullet vaccinations, with access to the loading bay.')
+    expect(postResponse.payload).toContain('The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
@@ -72,6 +72,6 @@ describe('Page: /vaccination-lobby', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"changing-area\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"concrete-apron\" class=\"govuk-back-link\">Back</a>')
   })
 })

@@ -76,7 +76,7 @@ describe('Page: /building-items', () => {
     expect(postResponse.headers.location).toBe('refurbishing-insulation')
   })
 
-  it('user selects eligible option -> store user response and redirect to /capped-inlets-outlets', async () => {
+  it('user selects eligible option -> store user response and redirect to /refurbishing-insulation', async () => {
     varList.poultryType = 'pullet'
     const postOptions = {
       method: 'POST',
@@ -87,7 +87,21 @@ describe('Page: /building-items', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('pullet-housing-requirements')
+    expect(postResponse.headers.location).toBe('refurbishing-insulation')
+  })
+
+  it('user selects eligible option -> store user response and redirect to /replacing-insulation', async () => {
+    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/building-items`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { buildingItems: 'Yes', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('refurbishing-insulation')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {

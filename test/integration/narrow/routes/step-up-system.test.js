@@ -72,7 +72,7 @@ describe('Page: /step-up-system', () => {
   it('page loads with correct back link - /multi-tier-system', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/rearing-aviary-system`,
+      url: `${global.__URLPREFIX__}/step-up-system`,
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)

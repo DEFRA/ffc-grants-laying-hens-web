@@ -52,6 +52,19 @@ describe('Page: /replacing-insulation', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('lighting-features')
   })
+  it('user selects eligible option -> store user response and redirect to /pullet-housing-requirements', async () => {
+    varList.poultryType = 'pullet'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/replacing-insulation`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { replacingInsulation: 'Yes', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('pullet-housing-requirements')
+  })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
     const postOptions = {
@@ -85,7 +98,7 @@ describe('Page: /replacing-insulation', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"pullet-housing-requirements\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"building-items\" class=\"govuk-back-link\">Back</a>')
   })
 
 
