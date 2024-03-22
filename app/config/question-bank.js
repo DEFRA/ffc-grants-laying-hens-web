@@ -2356,25 +2356,41 @@ const questionBank = {
           nextUrl: 'veranda-biosecurity',
           hint: {
             html: `
-                  <p>The veranda must have a:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a solid concrete floor</li>
-                    <li>a waterproof insulated roof</li>
-                    <li>a perimeter wall at least 1 metre high</li>
-                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
-                  </ul>`
+              <p>The veranda must have a:</p>
+              <ul class="govuk-list--bullet">
+                <li>a solid concrete floor</li>
+                <li>a waterproof insulated roof</li>
+                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
+                <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
+              </ul>`
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The width of the pop hole openings along the length of the hen house must add up to a total of 2 metres for every 1,000 hens in the building.
+                
+                      The base of all pop holes must either:`,
+                items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.'],
+                additionalPara: 'You must not put perches in front of the pop holes.'
+              }],
+            }]
           },
           ineligibleContent: {
             messageContent: `
-                <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">The veranda must have a:</p>
-                      <ul>
-                        <li>a solid concrete floor</li>
-                        <li>a waterproof insulated roof</li>
-                        <li>a perimeter wall at least 1 metre high</li>
-                        <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
-                      </ul>
-                </div>`,
+              <p>The veranda must have a:</p>
+              <ul class="govuk-list--bullet">
+                <li>a solid concrete floor</li>
+                <li>a waterproof insulated roof</li>
+                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
+                <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
+              </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
