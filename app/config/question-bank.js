@@ -2335,6 +2335,80 @@ const questionBank = {
           yarKey: 'roofSupportSolarPV'
         },
         {
+          key: 'roof-solar-PV-exemption',
+          order: 260,
+          title: 'Which of these statements apply to this project?',
+          url: 'roof-solar-PV-exemption',
+          baseUrl: 'roof-solar-PV-exemption',
+          backUrl: 'solar-PV-system',
+          nextUrl: 'project-cost',
+          preValidationKeys: '',
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The roof must be able to support solar PV panels, allowing for potential use in the future, unless any of these statements apply. `
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select which of these statement apply to this project'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'roof-solar-PV-exemption',
+                answerKey: 'roof-solar-PV-exemption-A7'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'roof-solar-PV-exemption-A1',
+              value: 'The building is listed'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A2',
+              value: 'The building is on a World Heritage Site'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A3',
+              value: 'I am not making changes to this building’s roof',
+              dependantShowHideKey: 'project-type',
+              dependantShowHideAnswerKey: 'project-type-A2',
+              dependantShowHideYarKey: 'projectType',
+            },
+            {
+              key: 'roof-solar-PV-exemption-A4',
+              value: 'The roof only faces north'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A5',
+              value: 'The roof is heavily shaded'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A6',
+              value: 'The roof does not have 100m2 of clear roof space'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A7',
+              value: 'None of the above',
+              redirectUrl: 'roof-support-solar-PV'
+            }
+          ],
+          yarKey: 'roofSolarPVExemption'
+        },
+        {
           key: 'veranda-only-size',
           order: 245,
           title: 'How big will the veranda be?',

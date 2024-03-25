@@ -183,6 +183,21 @@ const ineligibleContentCheck = (question, ineligibleContent, url,  request) => {
   return question
 }
 
+const showHideAnswer = (question, request) => { 
+  if(question?.answers){
+    for(let answer of question.answers) {
+      if(answer.dependantShowHideKey && getYarValue(request, answer.dependantShowHideYarKey) === getQuestionAnswer(answer.dependantShowHideKey, answer.dependantShowHideAnswerKey, ALL_QUESTIONS)){
+        question = {
+          ...question,
+          answers:  question.answers.filter(a =>  a.key !== answer.key)
+        }
+      }
+    }
+  }
+
+  return question
+}
+
 const scorePageData = async (request, backUrl, url, h) => {
   const desirabilityAnswers = createMsg.getDesirabilityAnswers(request)
   const formatAnswersForScoring = desirability(desirabilityAnswers)
@@ -344,6 +359,7 @@ const getPage = async (question, request, h) => {
   question = ineligibleContentCheck(question, ineligibleContent, url, request)
   question = hintTextCheck(question, hint, url, request)
   question = labelTextCheck(question, label, url, request)
+  question =  showHideAnswer(question, request)
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
@@ -432,6 +448,7 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
   currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
   currentQuestion = labelTextCheck(currentQuestion, currentQuestion.label, baseUrl, request)
+  currentQuestion = showHideAnswer(currentQuestion, request)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   const NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
