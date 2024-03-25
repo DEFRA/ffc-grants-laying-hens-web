@@ -55,7 +55,7 @@ const showBackToEvidenceSummaryButton = (key, request) => {
 }
 
 const getModel = (data, question, request, conditionalHtml = '') => {
-  let { type, backUrl, key, backUrlObject, sidebar, title, hint, score, label, warning, warningCondition, nextUrl, nextUrlObject } = question
+  let { type, backUrl, key, backUrlObject, sidebar, details ,title, hint, score, label, warning, warningCondition, nextUrl, nextUrlObject } = question
   const hasScore = !! getYarValue(request, 'current-score')
 
   title = title ?? label?.text
@@ -80,6 +80,7 @@ const getModel = (data, question, request, conditionalHtml = '') => {
     nextUrl: getUrl(nextUrlObject, nextUrl, request),
     items: getOptions(data, question, conditionalHtml, request),
     sideBarText,
+    details,
     ...(warningDetails ? ({ warning: warningDetails }) : {}),
     reachedCheckDetails: showBackToDetailsButton(key, request),
     reachedEvidenceSummary: showBackToEvidenceSummaryButton(key, request),
