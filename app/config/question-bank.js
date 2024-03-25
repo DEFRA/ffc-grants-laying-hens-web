@@ -2237,6 +2237,104 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
+          key: 'solar-PV-system',
+          order: 250,
+          title: 'Will you buy a solar PV system for this building with this grant?',
+          pageTitle: '',
+          url: 'solar-PV-system',
+          baseUrl: 'solar-PV-system',
+          backUrl: 'vehicle-washing',
+          nextUrl: 'project-cost',
+          hint: {
+            text: 'You have the option to buy and install a solar PV system with the grant. The solar PV panels must be installed on the roof of this building.'
+          },
+          warning: {
+            text: 'You cannot buy a Solar PV system with this grant if the roof of the building only faces north or is heavily shaded. ',
+            iconFallbackText: 'Warning'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You do not have to buy and install a solar PV system to be eligible for this grant.',
+              }]
+            }]
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you will buy a solar PV system for this building with this grant'
+            }
+          ],
+          answers: [
+            {
+              key: 'solar-PV-system-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'solar-PV-system-A2',
+              value: 'No',
+              redirectUrl: 'roof-solar-PV-exemption'
+            }
+          ],
+          yarKey: 'solarPVSystem'
+        },
+        {
+          key: 'roof-support-solar-PV',
+          order: 245,
+          title: 'Will the roof of this building be able to structurally support solar PV panels?',
+          pageTitle: '',
+          url: 'roof-support-solar-PV',
+          baseUrl: 'roof-support-solar-PV',
+          backUrl: 'roof-solar-PV-exemption',
+          nextUrl: 'project-cost',
+          hint: {
+            html: `
+            <p>Even if you are not installing a solar PV system, you must provide confirmation that the roof can support solar PV panels at full application.</p>
+            <p>This confirmation must come from a building expert, contractor or structural engineer</p>`
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The roof must be able to support solar PV panels, allowing for potential use in the future.',
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `The roof of this building must be able to support solar PV panels, allowing for potential use in the future.`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the roof of this building will be able to structurally support solar PV panels'
+            }
+          ],
+          answers: [
+            {
+              key: 'roof-support-solar-PV-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'roof-support-solar-PV-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'roofSupportSolarPV'
+        },
+        {
           key: 'veranda-only-size',
           order: 245,
           title: 'How big will the veranda be?',
@@ -2302,28 +2400,44 @@ const questionBank = {
           url: 'veranda-features',
           baseUrl: 'veranda-features',
           backUrl: 'veranda-only-size',
-          nextUrl: 'veranda-biosecurity',
+          nextUrl: 'veranda-project-cost',
           hint: {
             html: `
-                  <p>The veranda must have a:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a solid concrete floor</li>
-                    <li>a waterproof insulated roof</li>
-                    <li>a perimeter wall at least 1 metre high</li>
-                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
-                  </ul>`
+              <p>The veranda must have a:</p>
+              <ul class="govuk-list--bullet">
+                <li>a solid concrete floor</li>
+                <li>a waterproof insulated roof</li>
+                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
+                <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
+              </ul>`
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The width of the pop hole openings along the length of the hen house must add up to a total of 2 metres for every 1,000 hens in the building.
+                
+                      The base of all pop holes must either:`,
+                items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.'],
+                additionalPara: 'You must not put perches in front of the pop holes.'
+              }],
+            }]
           },
           ineligibleContent: {
             messageContent: `
-                <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">The veranda must have a:</p>
-                      <ul>
-                        <li>a solid concrete floor</li>
-                        <li>a waterproof insulated roof</li>
-                        <li>a perimeter wall at least 1 metre high</li>
-                        <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
-                      </ul>
-                </div>`,
+              <p>The veranda must have a:</p>
+              <ul class="govuk-list--bullet">
+                <li>a solid concrete floor</li>
+                <li>a waterproof insulated roof</li>
+                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
+                <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
+              </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -2352,79 +2466,13 @@ const questionBank = {
           yarKey: 'verandaFeatures'
         },
         {
-          key: 'veranda-biosecurity',
-          order: 255,
-          title: 'Will the veranda be biosecure?',
-          pageTitle: '',
-          url: 'veranda-biosecurity',
-          baseUrl: 'veranda-biosecurity',
-          backUrl: 'veranda-features',
-          nextUrl: 'veranda-project-cost',
-          hint: {
-            html: `
-                  <p>The veranda must have:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                    <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system</li>
-                  </ul>`
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You must be able to make the veranda biosecure with mesh during housing orders.
-
-                      The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
-                
-                      The base of all pop holes must either:`,
-
-                items:['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.']
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: `
-              <p class="govuk-body">The veranda must have:</p>
-              <ul class="govuk-list govuk-list--bullet">
-                <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system.</li>
-              </ul>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the veranda will be biosecure'
-            }
-          ],
-          answers: [
-            {
-              key: 'veranda-biosecurity-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'veranda-biosecurity-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'verandaBiosecurity'
-        },
-        {
           key: 'veranda-project-cost',
           order: 265,
           pageTitle: '',
           classes: 'govuk-input--width-10',
           url: 'veranda-project-cost',
           baseUrl: 'veranda-project-cost',
-          backUrl: 'veranda-biosecurity',
+          backUrl: 'veranda-features',
           nextUrl: 'veranda-potential-amount',
           fundingPriorities: '',
           preValidationKeys: [],

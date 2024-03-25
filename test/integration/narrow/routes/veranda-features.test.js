@@ -17,6 +17,14 @@ describe('Page: /veranda-features', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Will the veranda have these features?')
+    expect(response.payload).toContain('The veranda must have a:')
+    expect(response.payload).toContain('a solid concrete floor')
+    expect(response.payload).toContain('a waterproof insulated roof')
+    expect(response.payload).toContain('a dimmable LED lighting system with a range between 0 lux and 60 lux')
+    expect(response.payload).toContain('a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access')
+    expect(response.payload).toContain('closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system')
+    expect(response.payload).toContain('internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide')
+    expect(response.payload).toContain('a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -38,7 +46,7 @@ describe('Page: /veranda-features', () => {
     expect(postResponse.payload).toContain('Select yes if the veranda will have these features')
   })
 
-  it('user selects eligible option -> store user response and redirect to /veranda-biosecurity', async () => {
+  it('user selects eligible option -> store user response and redirect to /veranda-project-cost', async () => {
     valList.verandaFeatures = null
     const postOptions = {
       method: 'POST',
@@ -49,7 +57,7 @@ describe('Page: /veranda-features', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('veranda-biosecurity')
+    expect(postResponse.headers.location).toBe('veranda-project-cost')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -65,8 +73,11 @@ describe('Page: /veranda-features', () => {
     expect(postResponse.payload).toContain('The veranda must have a:')
     expect(postResponse.payload).toContain('a solid concrete floor')
     expect(postResponse.payload).toContain('a waterproof insulated roof')
-    expect(postResponse.payload).toContain('a perimeter wall at least 1 metre high')
-    expect(postResponse.payload).toContain('a dimmable LED lighting system between 0 lux and 60 lux')
+    expect(postResponse.payload).toContain('a dimmable LED lighting system with a range between 0 lux and 60 lux')
+    expect(postResponse.payload).toContain('a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access')
+    expect(postResponse.payload).toContain('closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system')
+    expect(postResponse.payload).toContain('internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide')
+    expect(postResponse.payload).toContain('a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
