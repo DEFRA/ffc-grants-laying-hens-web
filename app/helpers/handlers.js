@@ -27,8 +27,6 @@ const { getUserScore } = require('../messaging/application')
 const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
-
-
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const createModel = (data, backUrl, url) => {
