@@ -2399,7 +2399,7 @@ const questionBank = {
           url: 'veranda-features',
           baseUrl: 'veranda-features',
           backUrl: 'veranda-only-size',
-          nextUrl: 'veranda-biosecurity',
+          nextUrl: 'veranda-project-cost',
           hint: {
             html: `
               <p>The veranda must have a:</p>
@@ -2465,79 +2465,13 @@ const questionBank = {
           yarKey: 'verandaFeatures'
         },
         {
-          key: 'veranda-biosecurity',
-          order: 255,
-          title: 'Will the veranda be biosecure?',
-          pageTitle: '',
-          url: 'veranda-biosecurity',
-          baseUrl: 'veranda-biosecurity',
-          backUrl: 'veranda-features',
-          nextUrl: 'veranda-project-cost',
-          hint: {
-            html: `
-                  <p>The veranda must have:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                    <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system</li>
-                  </ul>`
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You must be able to make the veranda biosecure with mesh during housing orders.
-
-                      The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
-                
-                      The base of all pop holes must either:`,
-
-                items:['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.']
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: `
-              <p class="govuk-body">The veranda must have:</p>
-              <ul class="govuk-list govuk-list--bullet">
-                <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system.</li>
-              </ul>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the veranda will be biosecure'
-            }
-          ],
-          answers: [
-            {
-              key: 'veranda-biosecurity-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'veranda-biosecurity-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'verandaBiosecurity'
-        },
-        {
           key: 'veranda-project-cost',
           order: 265,
           pageTitle: '',
           classes: 'govuk-input--width-10',
           url: 'veranda-project-cost',
           baseUrl: 'veranda-project-cost',
-          backUrl: 'veranda-biosecurity',
+          backUrl: 'veranda-features',
           nextUrl: 'veranda-potential-amount',
           fundingPriorities: '',
           preValidationKeys: [],
