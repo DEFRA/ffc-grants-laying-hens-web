@@ -1,7 +1,6 @@
 module.exports = {
-  desirabilityQuestions: require('./desirability-questions'),
+  desirabilityQuestions: require('./desirability-questions.json'),
   desirabilityInputQuestionMapping: {
-    'poultry-type': 'poultryType',
     'current-system': 'currentSystem',
     'current-multi-tier-system': 'currentMultiTierSystem',
     'ramp-connection': 'rampConnection',
