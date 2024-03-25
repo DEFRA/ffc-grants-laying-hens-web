@@ -2650,7 +2650,7 @@ const questionBank = {
             text: '£'
           },
           label: {
-            text: 'What is the total estimated cost of the calf housing?',
+            text: 'What is the total estimated cost of {{_projectType_}} this building?',
             classes: 'govuk-label--l',
             isPageHeading: true
           },
@@ -2678,6 +2678,16 @@ const questionBank = {
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The minimum grant each business can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500). 
+                
+                The maximum total grant amount each business can apply for is £500,000 (${GRANT_PERCENTAGE}% of £1.25 million).`,
+              }],
+            }]
+          },
           ineligibleContent: {
             messageContent: `The minimum grant you can apply for the calf housing costs is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.`,
             messageLink: {

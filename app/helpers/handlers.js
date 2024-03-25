@@ -48,6 +48,8 @@ const checkYarKeyReset = (thisAnswer, request) => {
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
 
+    // console.log("additionalYarKeyNameee" , additionalYarKeyName)
+
     switch (url) {
       case '1000-birds':
         if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)) {
@@ -61,12 +63,18 @@ const insertYarValue = (field, url, request) => {
         } else {
           return 'multi-tier systems'
         }
-        case 'lighting-features':
-          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)) {
-            return ' (unless this is already provided as part of an aviary lighting system)'
-          } else {
-            return ''
-          }
+      case 'lighting-features':
+        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)) {
+          return ' (unless this is already provided as part of an aviary lighting system)'
+        } else {
+          return ''
+        }
+      case 'project-cost':
+        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('project-type', 'project-type-A2', ALL_QUESTIONS)) {
+          return 'refurbishing'
+        } else {
+          return 'replacing'
+        }   
       default:
         if (field.includes('£')) {
           return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
@@ -80,13 +88,32 @@ const insertYarValue = (field, url, request) => {
   return field
 }
 
+const labelTextCheck = (question, label, url, request) => {
+  if (label?.text?.includes('{{_')) {
+    question = {
+      ...question,
+      label: {
+        ...label,
+        text: insertYarValue(label.text, url, request)
+      }
+    }
+  }
+
+  return question
+}
+
 const titleCheck = (question, title, url, request) => {
   if (title?.includes('{{_')) {
+    // console.log("requesttt", request)
+    // console.log("questionnn", question)
+    // console.log("title 1", question.title)
     question = {
       ...question,
       title: insertYarValue(title, url, request)
     }
   }
+      // console.log("title 2", question.title)
+
 
   return question
 }
@@ -343,8 +370,8 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 }
 
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent } = question
-  const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
+  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
+  const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
   if (isRedirect) {
@@ -356,6 +383,7 @@ const getPage = async (question, request, h) => {
   question = sidebarCheck(question, url, request)
   question = ineligibleContentCheck(question, ineligibleContent, url, request)
   question = hintTextCheck(question, hint, url, request)
+  question = labelTextCheck(question, label, url, request)
   question =  showHideAnswer(question, request)
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
@@ -431,7 +459,7 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate, label } = currentQuestion
   const payload = request.payload
 
   if (baseUrl !== 'score') {
@@ -444,6 +472,7 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
   currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
   currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
+  currentQuestion = labelTextCheck(currentQuestion, label, baseUrl, request)
   currentQuestion = showHideAnswer(currentQuestion, request)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
