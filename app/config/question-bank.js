@@ -1587,8 +1587,7 @@ const questionBank = {
                 heading: 'Eligibility',
                 content: [{
                   para: `The ventilation system must be able to prevent the heat that the birds 
-                  generate from increasing the house temperature by more 
-                  than 3°C above the external ambient temperature. `
+                  generate from increasing the house temperature by more than 3°C above the external ambient temperature.`
                 }]
               }
             ]
@@ -2878,7 +2877,7 @@ const questionBank = {
           order: 180,
           title: 'What type of {{_poultryType_}} housing system do you currently use in the building?',
           pageTitle: '',
-          backUrl: 'remaining-costs',
+          backUrl: 'interruption-scoring',
           nextUrl: 'current-multi-tier-system',
           url: 'current-system',
           baseUrl: 'current-system',
@@ -2911,7 +2910,8 @@ const questionBank = {
             },
             {
               key: 'current-system-A2',
-              value: 'Combi-cage'
+              value: 'Combi-cage',
+              redirectUrl: 'ramp-connection'
             },
             {
               key: 'current-system-A3',
@@ -3234,7 +3234,7 @@ const questionBank = {
           baseUrl: 'ramp-connection',
           backUrlObject: {
             dependentQuestionYarKey: 'currentSystem',
-            dependentAnswerKeysArray: ['current-system-A1'],
+            dependentAnswerKeysArray: ['current-system-A1', 'current-system-A2'],
             urlOptions: {
               thenUrl: 'current-system',
               elseUrl: 'current-multi-tier-system'
