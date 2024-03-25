@@ -3694,9 +3694,6 @@ const questionBank = {
           nextUrl: 'solar-PV-cost',
           fundingPriorities: '',
           type: 'input',
-          prefix: {
-            text: '£'
-          },
           label: {
             text: `How many birds will {{_projectType_}} be able to house?`,
             classes: 'govuk-label--l',
