@@ -68,7 +68,7 @@ const insertYarValue = (field, url, request) => {
             return ''
           }
           case 'bird-number':
-          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('project-type', 'project-type-A3', ALL_QUESTIONS)) {
+          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('project-type', 'project-type-A2', ALL_QUESTIONS)) {
             return 'the refurbished part of this building'
           } else {
             return 'this new building'

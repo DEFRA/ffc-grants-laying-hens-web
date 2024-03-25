@@ -11,7 +11,7 @@ const {
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
   POSTCODE_REGEX,
-  // NUMBERS_AND_COMMA_REGEX
+  CURRENCY_FORMAT
 } = require('ffc-grants-common-functionality').regex
 
 const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
@@ -3670,7 +3670,7 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              // regex: NAME_ONLY_REGEX, TODO change regex
+              regex: CURRENCY_FORMAT,
               error: 'Number of birds should be a whole number, like 600'
             },
           ],

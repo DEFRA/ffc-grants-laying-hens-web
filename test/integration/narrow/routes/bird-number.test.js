@@ -77,7 +77,7 @@ describe('Page: /bird-number', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /solar-PV-cost', async () => {
-    valList = {}
+    valList.birdNumber = false
     varList.projectType = 'Refurbishing an existing laying hen or pullet building'
 
     const postOptions = {
