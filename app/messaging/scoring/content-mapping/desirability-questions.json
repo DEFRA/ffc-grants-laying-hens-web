@@ -1,87 +1,156 @@
 {  
   
-  "housing": [
+  "current-system": [
     {
-      "key": "housing",
-      "title": "Are you moving from individually housing calves over 7 days old to pair or group housing?",
+      "key": "current-system",
+      "title": "What type of hen housing system do you currently use in the building?",
       "answers": {
-        "housing-A1": "Yes",
-        "housing-A2": "No"
+        "current-system-A1": "Colony cage",
+        "current-system-A2": "Combi-cage",
+        "current-system-A3": "Barn",
+        "current-system-A4": "Free range",
+        "current-system-A5": "Organic",
+        "current-system-A6": "None of the above"
       }
     }
   ],
-  "calf-group-size": [
+  "current-multi-tier-system": [
     {
-      "key": "calf-group-size",
-      "title": "What will be the average group size for calves over 7 days old?",
+      "key": "current-multi-tier-system",
+      "title": "Does your current building include a multi-tier aviary systems?",
       "answers": {
-        "calf-group-size-A1": "2 to 3",
-        "calf-group-size-A2": "4 to 8",
-        "calf-group-size-A3": "9 to 12",
-        "calf-group-size-A4": "13 or more"
+        "current-multi-tier-system-A1": "Yes",
+        "current-multi-tier-system-A2": "No"
       }
     }
   ],
-  "moisture-control": [
+  "ramp-connection": [
     {
-      "key": "moisture-control",
-      "title": "How will your building control moisture?",
+      "key": "ramp-connection",
+      "title": "Will every level of the multi-tier system be connected to another level by a ramp?",
       "answers": {
-        "moisture-control-A1": "A drain or drainage channel inside the pen",
-        "moisture-control-A2": "Positioning drinking areas near drainage and away from bedding",
-        "moisture-control-A3": "A separate preparation or washing area",
-        "moisture-control-A4": "None of the above"
+        "ramp-connection-A1": "Yes",
+        "ramp-connection-A2": "No"
       }
     }
   ],
-  "permanent-sick-pen": [
+  "maximum-tier-height": [
     {
-      "key": "permanent-sick-pen",
-      "title": "What type of sick pen will your building have?",
+      "key": "maximum-tier-height",
+      "title": "Will the highest tier with direct access to the floor be 2 metres high or less?",
       "answers": {
-        "permanent-sick-pen-A1": "A permanent sick pen",
-        "permanent-sick-pen-A2": "A separate air space",
-        "permanent-sick-pen-A3": "A permanent heat source (for example heat lamps)",
-        "permanent-sick-pen-A4": "None of the above"
+        "maximum-tier-height-A1": "Yes",
+        "maximum-tier-height-A2": "No"
       }
     }
   ],
-  "environmental-impact": [
+  "three-tiers": [
     {
-      "key": "environmental-impact",
-      "title": "How will the building minimise environmental impact?",
+      "key": "three-tiers",
+      "title": "Will the multi-tier system have 3 tiers or fewer directly above each other?",
       "answers": {
-        "environmental-impact-A1": "Solar PV panels on the roof of the building",
-        "environmental-impact-A2": "Collect and store rainwater",
-        "environmental-impact-A3": "None of the above"
+        "three-tiers-A1": "Yes",
+        "three-tiers-A2": "No"
       }
     }
   ],
-  "sustainable-materials": [
+  "hen-multi-tier": [
     {
-      "key": "sustainable-materials",
-      "title": "Will your building use sustainable materials?",
+      "key": "hen-multi-tier",
+      "title": "Will the hens in your grant-funded building be reared in a multi-tier system as pullets?",
       "answers": {
-        "sustainable-materials-A1": "Low carbon concrete",
-        "sustainable-materials-A2": "Steel replacement products",
-        "sustainable-materials-A3": "Sustainably sourced timber",
-        "sustainable-materials-A4": "Reused materials already on site",
-        "sustainable-materials-A5": "Reused or secondhand materials from elsewhere",
-        "sustainable-materials-A6": "Recycled materials",
-        "sustainable-materials-A7": "Something else",
-        "sustainable-materials-A8": "None of the above"
+        "hen-multi-tier-A1": "Yes",
+        "hen-multi-tier-A2": "No",
+        "hen-multi-tier-A3": "I don’t know"
       }
     }
   ],
-  "introducing-innovation": [
+  "natural-light": [
     {
-      "key": "introducing-innovation",
-      "title": "Is your project introducing innovation?",
+      "key": "natural-light",
+      "title": "Will the building have windows that provide natural light to the indoor housing?",
       "answers": {
-        "introducing-innovation-A1": "Technology",
-        "introducing-innovation-A2": "Collaboration",
-        "introducing-innovation-A3": "Techniques",
-        "introducing-innovation-A4": "None of the above"
+        "natural-light-A1": "Yes",
+        "natural-light-A2": "No"
+      }
+    }
+  ],
+  "easy-grip-perches": [
+    {
+      "key": "easy-grip-perches",
+      "title": "Will the perches have a design feature that help the hens grip the perches?",
+      "answers": {
+        "easy-grip-perches-A1": "Yes",
+        "easy-grip-perches-A2": "No"
+      }
+    }
+  ],
+  "building-biosecurity": [
+    {
+      "key": "building-biosecurity",
+      "title": "Will the building structure include the following?",
+      "answers": {
+        "building-biosecurity-A1": "Shower-in-facilities in the lobby or changing room area",
+        "building-biosecurity-A2": "An externally accessible storage room with a separate air space",
+        "building-biosecurity-A3": "None of the above"
+      }
+    }
+  ],
+  "pollution-mitigation": [
+    {
+      "key": "pollution-mitigation",
+      "title": "Will the building have any of the following?",
+      "answers": {
+        "pollution-mitigation-A1": "Manure drying",
+        "pollution-mitigation-A2": "Air filtration at inlets",
+        "pollution-mitigation-A3": "Air filtration at outlets, for example using wet or dry scrubbers",
+        "pollution-mitigation-A4": "A tree shelter belt near air outlets",
+        "pollution-mitigation-A5": "None of the above"
+      }
+    }
+  ],
+  "renewable-energy": [
+    {
+      "key": "renewable-energy",
+      "title": "IWill the hen housing use renewable energy sources?",
+      "answers": {
+        "renewable-energy-A1": "Solar PV system",
+        "renewable-energy-A2": "A heat exchanger (heating only)",
+        "renewable-energy-A3": "A heat exchanger (heating and cooling)",
+        "renewable-energy-A4": "Biomass boiler",
+        "renewable-energy-A5": "None of the above"
+      }
+    }
+  ],
+  "bird-data-type": [
+    {
+      "key": "bird-data-type",
+      "title": "What poultry management data will you automatically collect and store?",
+      "answers": {
+        "bird-data-type-A1": "Bird performance data",
+        "bird-data-type-A2": "Body weight",
+        "bird-data-type-A3": "Disease detection",
+        "bird-data-type-A4": "Feed data or conversion ratios",
+        "bird-data-type-A5": "Location data",
+        "bird-data-type-A6": "Locomotion or movement data",
+        "bird-data-type-A7": "Next use",
+        "bird-data-type-A8": "Sound analysis",
+        "bird-data-type-A9": "Other",
+        "bird-data-type-A10": "I will not monitor any poultry management data"
+
+      }
+    }
+  ],
+  "environmental-data-type": [
+    {
+      "key": "environmental-data-type",
+      "title": "What additional environmental data will you automatically collect and store?",
+      "answers": {
+        "environmental-data-type-A1": "Ammonia",
+        "environmental-data-type-A2": "Carbon monoxide",
+        "environmental-data-type-A3": "Inhalable dust",
+        "environmental-data-type-A4": "Other",
+        "environmental-data-type-A5": "I will not collect and store additional environmental data"
       }
     }
   ]
