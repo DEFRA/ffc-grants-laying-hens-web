@@ -2537,7 +2537,7 @@ const questionBank = {
           classes: 'govuk-input--width-10',
           url: 'veranda-project-cost',
           baseUrl: 'veranda-project-cost',
-          backUrl: 'veranda-biosecurity',
+          backUrl: 'veranda-features',
           nextUrl: 'veranda-potential-amount',
           fundingPriorities: '',
           preValidationKeys: [],
@@ -2553,22 +2553,35 @@ const questionBank = {
           },
           id: 'projectCost',
           label: {
-            text: 'What is the total estimated cost of the veranda project?',
+            text: 'What is the estimated cost of the veranda?',
             classes: 'govuk-label--l',
             isPageHeading: true,
             for: 'projectCost'
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £5,000 (${GRANT_PERCENTAGE}% of £12,500). The maximum grant is £100,000.</p>
-                  <p>Do not include VAT</p>
-                  <p>Enter amount, for example 50,000</p>
-              `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is 
+              £5,000 (${GRANT_PERCENTAGE}% of £12,500). The maximum grant is £100,000 (${GRANT_PERCENTAGE}% 
+              of £250,000).</p>
+              <details class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am adding verandas to multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of adding this veranda only</p>
+                  <p>You must submit a separate application for each veranda.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 50,000</p>
+            `,
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the total estimated cost of the veranda project'
+              error: 'Enter the estimated cost of the veranda'
             },
             {
               type: 'REGEX',
