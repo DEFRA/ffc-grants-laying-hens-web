@@ -62,11 +62,17 @@ const insertYarValue = (field, url, request) => {
           return 'multi-tier systems'
         }
         case 'lighting-features':
-          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)) {
+          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS)) {
             return ' (unless this is already provided as part of an aviary lighting system)'
           } else {
             return ''
           }
+          case 'bird-number':
+          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('project-type', 'project-type-A3', ALL_QUESTIONS)) {
+            return 'the refurbished part of this building'
+          } else {
+            return 'this new building'
+          } 
       default:
         if (field.includes('£')) {
           return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
@@ -85,6 +91,20 @@ const titleCheck = (question, title, url, request) => {
     question = {
       ...question,
       title: insertYarValue(title, url, request)
+    }
+  }
+
+  return question
+}
+
+const labelTextCheck = (question, label, url, request) => {
+  if (label?.text?.includes('{{_')) {
+    question = {
+      ...question,
+      label: {
+        ...label,
+        text: insertYarValue(label.text, url, request)
+      }
     }
   }
 
@@ -328,7 +348,7 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 }
 
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent } = question
+  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
@@ -341,6 +361,7 @@ const getPage = async (question, request, h) => {
   question = sidebarCheck(question, url, request)
   question = ineligibleContentCheck(question, ineligibleContent, url, request)
   question = hintTextCheck(question, hint, url, request)
+  question = labelTextCheck(question, label, url, request)
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
@@ -428,6 +449,7 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
   currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
   currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
+  currentQuestion = labelTextCheck(currentQuestion, currentQuestion.label, baseUrl, request)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   const NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }

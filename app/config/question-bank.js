@@ -10,7 +10,8 @@ const {
   ADDRESS_REGEX,
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
-  POSTCODE_REGEX
+  POSTCODE_REGEX,
+  // NUMBERS_AND_COMMA_REGEX
 } = require('ffc-grants-common-functionality').regex
 
 const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
@@ -3634,6 +3635,47 @@ const questionBank = {
           ],
           yarKey: 'environmentalDataType'
         },
+        {
+          key: 'bird-number',
+          order: 335,
+          pageTitle: '',
+          classes: 'govuk-input--width-10',
+          url: 'bird-number',
+          baseUrl: 'bird-number',
+          backUrl: 'project-cost',
+          nextUrl: 'solar-PV-cost',
+          fundingPriorities: '',
+          type: 'input',
+          prefix: {
+            text: '£'
+          },
+          label: {
+            text: `How many birds will {{_projectType_}} be able to house?`,
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare 
+                    features (lighting, ventilation system) for the amount of birds in the building.
+                  </p>
+                  <p>The power capacity for grant funding is 5 kilowatts (kW) per 1,000 birds.</p>
+                  <p>Enter estimated amount, for example 8,000</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter how many birds {{_projectType_}} will be able to house'
+            },
+            {
+              type: 'REGEX',
+              // regex: NAME_ONLY_REGEX, TODO change regex
+              error: 'Number of birds should be a whole number, like 600'
+            },
+          ],
+          yarKey: 'birdNumber'
+        },  
         {
           key: 'score',
           order: 175,
