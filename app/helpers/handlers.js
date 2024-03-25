@@ -183,8 +183,7 @@ const ineligibleContentCheck = (question, ineligibleContent, url,  request) => {
 
 const showHideAnswer = (question, request) => { 
   if(question?.answers){
-    for(let i=0; i < question.answers.length; i++) {
-      let answer = question.answers[i]
+    for(let answer of question.answers) {
       if(answer.dependantShowHideKey && getYarValue(request, answer.dependantShowHideYarKey) === getQuestionAnswer(answer.dependantShowHideKey, answer.dependantShowHideAnswerKey, ALL_QUESTIONS)){
         question = {
           ...question,
