@@ -182,16 +182,18 @@ const ineligibleContentCheck = (question, ineligibleContent, url,  request) => {
 }
 
 const showHideAnswer = (question, request) => { 
-
-  for(let i=0; i < question.answers.length; i++) {
-    let answer = question.answers[i]
-    if(answer.dependantShowHideKey && getYarValue(request, answer.dependantShowHideYarKey) === getQuestionAnswer(answer.dependantShowHideKey, answer.dependantShowHideAnswerKey, ALL_QUESTIONS)){
-      question = {
-        ...question,
-        answers:  question.answers.filter(a =>  a.key !== answer.key)
+  if(question?.answers){
+    for(let i=0; i < question.answers.length; i++) {
+      let answer = question.answers[i]
+      if(answer.dependantShowHideKey && getYarValue(request, answer.dependantShowHideYarKey) === getQuestionAnswer(answer.dependantShowHideKey, answer.dependantShowHideAnswerKey, ALL_QUESTIONS)){
+        question = {
+          ...question,
+          answers:  question.answers.filter(a =>  a.key !== answer.key)
+        }
       }
     }
   }
+
   return question
 }
 
