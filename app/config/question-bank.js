@@ -2560,9 +2560,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is 
-              £5,000 (${GRANT_PERCENTAGE}% of £12,500). The maximum grant is £100,000 (${GRANT_PERCENTAGE}% 
-              of £250,000).</p>
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £5,000 (${GRANT_PERCENTAGE}% of £12,500). The maximum grant is £100,000 (${GRANT_PERCENTAGE}% of £250,000).</p>
               <details class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                   <span class="govuk-details__summary-text">
@@ -2597,9 +2595,9 @@ const questionBank = {
           ],
           // TODO  fix the header
           ineligibleContent: {
-            messageHeader: 'The minimum grant you can apply for is £5,000 (40% of £12,500)', // 
+            messageHeader: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}%of £12,500)`, // 
             messageContent: `You can apply for grant funding to add verandas to multiple buildings. You must submit a separate application for each veranda.</br></br>
-            If the total grant funding for your combined veranda projects is more than £5,000 (40% of £12,500), you may still be eligible to apply for grant funding.</br></br>
+            If the total grant funding for your combined veranda projects is more than £5,000 (${GRANT_PERCENTAGE}% of £12,500), you may still be eligible to apply for grant funding.</br></br>
             If you are applying for grant funding for a single veranda, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> see other grants you may be eligible for.</a>`,
             messageLink: {
               url: `veranda-potential-amount`,
