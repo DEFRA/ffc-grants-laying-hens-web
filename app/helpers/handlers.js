@@ -45,45 +45,27 @@ const checkYarKeyReset = (thisAnswer, request) => {
   }
 }
 
+const getReplacementText = (request, key, questionType, questionKey, trueReturn, falseReturn) => {
+  return getYarValue(request, key) === getQuestionAnswer(questionType, questionKey, ALL_QUESTIONS) ? trueReturn : falseReturn;
+}
+
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
-
     switch (url) {
       case '1000-birds':
-        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)) {
-          return 'laying hens'
-        } else {
-          return 'pullets'
-        }
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets');
       case 'current-multi-tier-system':
-        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)){
-          return 'multi-tier aviary systems'
-        } else {
-          return 'multi-tier systems'
-        }
-        case 'lighting-features':
-          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)) {
-            return ' (unless this is already provided as part of an aviary lighting system)'
-          } else {
-            return ''
-          }
-          case 'bird-number':
-          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('project-type', 'project-type-A2', ALL_QUESTIONS)) {
-            return 'the refurbished part of this building'
-          } else {
-            return 'this new building'
-          } 
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'multi-tier aviary systems', 'multi-tier systems');
+      case 'lighting-features':
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ' (unless this is already provided as part of an aviary lighting system)', '');
+      case 'bird-number':
+        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'the refurbished part of this building', 'this new building');
       default:
-        if (field.includes('£')) {
-          return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-        } else {
-          return getYarValue(request, additionalYarKeyName)
-        }
+        return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName);
     }
-
   })
 
-  return field
+  return field;
 }
 
 const titleCheck = (question, title, url, request) => {
