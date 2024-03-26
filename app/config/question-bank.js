@@ -2635,7 +2635,14 @@ const questionBank = {
               nonDependentUrl: 'solar-PV-system'
             }
           },
-          nextUrl: 'potential-amount',
+          nextUrlObject: {
+            dependentQuestionYarKey: [],
+            dependentAnswerKeysArray: [],
+            urlOptions: {
+              thenUrl: '',
+              elseUrl: ''
+            }
+          },
           fundingPriorities: '',
           // preValidationKeys: [],
           grantInfo: {
@@ -2687,14 +2694,10 @@ const questionBank = {
               <p>Enter amount, for example 95,000</p>
             `
           },
-          details: {
-            summaryText: 'I am replacing or refurbishing multiple buildings',
-            text: "test"
-          },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the estimated total cost for the items'
+              error: 'Enter the total estimated total cost of {{_projectType_}} the building'
             },
             {
               type: 'REGEX',
