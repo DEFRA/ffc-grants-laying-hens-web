@@ -3843,6 +3843,7 @@ const questionBank = {
             },
             {
               type: 'REGEX',
+              //  numbers and commas only
               regex:  /^[0-9,]+$/,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
