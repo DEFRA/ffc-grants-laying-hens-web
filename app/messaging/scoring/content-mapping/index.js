@@ -1,21 +1,22 @@
 module.exports = {
   desirabilityQuestions: require('./desirability-questions.json'),
   desirabilityInputQuestionMapping: {
-    currentSystem: 'current-system',
-    currentMultiTierSystem: 'current-multi-tier-system',
-    rampConnection: 'ramp-connection',
-    maximumTierHeight: 'maximum-tier-height',
-    threeTiers: 'three-tiers',
-    henMultiTier: 'hen-multi-tier',
-    pulletMultiTier: 'pullet-multi-tier',
-    naturalLight: 'natural-light',
-    darkBrooders: 'dark-brooders',
-    easyGripPerches: 'easy-grip-perches',
-    buildingBiosecurity: 'building-biosecurity',
-    pollutionMitigation: 'pollution-mitigation',
-    pulletVerandaFeatures: 'pullet-veranda-features',
-    renewableEnergy: 'renewable-energy',
-    birdDataType: 'bird-data-type',
-    environmentalDataType: 'environmental-data-type'
+    'poultry-type': 'poultryType',
+    'current-system': 'currentSystem',
+    'current-multi-tier-system': 'currentMultiTierSystem',
+    'ramp-connection': 'rampConnection',
+    'maximum-tier-height': 'maximumTierHeight',
+    'three-tiers': 'threeTiers',
+    'hen-multi-tier': 'henMultiTier',
+    'pullet-multi-tier': 'pulletMultiTier',
+    'natural-light': 'naturalLight',
+    'dark-brooders': 'darkBrooders',
+    'easy-grip-perches': 'easyGripPerches',
+    'building-biosecurity': 'buildingBiosecurity',
+    'pollution-mitigation': 'pollutionMitigation',
+    'pullet-veranda-features': 'pulletVerandaFeatures',
+    'renewable-energy': 'renewableEnergy',
+    'bird-data-type': 'birdDataType',
+    'environmental-data-type': 'environmentalDataType'
   }
 }
