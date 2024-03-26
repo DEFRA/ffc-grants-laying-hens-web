@@ -126,10 +126,10 @@ commonFunctionsMock(varList, undefined, {}, valList)
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('The minimum grant you can apply for is £5,000 (40%of £12,500)')
+    expect(postResponse.payload).toContain('The minimum grant you can apply for is £15,000 (40% of £37,500)')
     expect(postResponse.payload).toContain('You can apply for grant funding to add verandas to multiple buildings. You must submit a separate application for each veranda.')
     expect(postResponse.payload).toContain('If the total grant funding for your combined veranda projects is more than £5,000 (40% of £12,500), you may still be eligible to apply for grant funding.')
-    expect(postResponse.payload).toContain('If you are applying for grant funding for a single veranda, you can see other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('If you are applying for grant funding for a single veranda, you can <a href=\"https://www.gov.uk/government/organisations/rural-payments-agency\"> see other grants you may be eligible for.</a>')
     expect(postResponse.payload).toContain('I am applying to add verandas to multiple buildings')
   })
 

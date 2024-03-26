@@ -449,7 +449,7 @@ const showPostPage = (currentQuestion, request, h) => {
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request,
       { name: gapiService.eventTypes.ELIMINATION, params: {} })
-      // const NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl, pageTitle: 'The minimum grant you can apply for is £15,000 (40% of £37,500)' }
+  
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 
