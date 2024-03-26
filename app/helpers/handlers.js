@@ -185,6 +185,7 @@ const scorePageData = async (request, backUrl, url, h) => {
 
   try {
     const msgData = await getUserScore(formatAnswersForScoring, request.yar.id)
+    console.log('[THIS IS WHAT WE GOT BACK]', msgData)
 
     setYarValue(request, 'current-score', msgData.desirability.overallRating.band) // do we need this alongside overAllScore? Having both seems redundant
 
@@ -235,7 +236,7 @@ const scorePageData = async (request, backUrl, url, h) => {
       scoreChance: scoreChance
     }, backUrl, url))
   } catch (error) {
-    console.log(error)
+    console.log('[Score ERROR]:',error)
     await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.EXCEPTION, params: { error: error.message } })
     return h.view('500')
   }

@@ -18,9 +18,7 @@ function getUserAnswer (answers, userInput) {
 }
 
 function getDesirabilityDetails(questionKey, userInput) {
-  console.log('HELLLLLOOOO', questionKey,'-----',userInput )
   const content = questionContent[questionKey]
-console.log(content,'CCCCCCCCCCCCCCCCCC')
   return {
     key: questionKey,
     answers: content.map(({ key, title, answers }) => ({
@@ -38,13 +36,14 @@ console.log(content,'CCCCCCCCCCCCCCCCCC')
 
 function desirability (userInput) {
   const isHens = userInput.poultryType === POULTRY_TYPE_HENS
+  const key = isHens ? 'LAYINGHENS01' : 'LAYINGHENS02'
   const validKeys = isHens ? desirabilityQuestionsHen : desirbailityQuestionsPullet
-  console.log(validKeys,'kkkkkkkkeeeeyyyysssss')
+  const grantScheme = grantSchemeConfig.filter(grant => grant.key === key)[0]
 
   return {
     grantScheme: {
-      key: grantSchemeConfig[0].key,
-      name: grantSchemeConfig[0].name
+      key: grantScheme.key,
+      name: grantScheme.name
     },
     desirability: {
       questions: validKeys.map(questionKey => getDesirabilityDetails(questionKey, userInput)),

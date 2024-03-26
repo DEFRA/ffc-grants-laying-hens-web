@@ -68,7 +68,7 @@ const config = {
     ...sharedConfig
   },
   desirabilitySubmittedMsgType: `${msgTypePrefix}.slurry.desirability.notification`,
-  fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.score.request`,
+  fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.layingHens.score.request`,
   eligibilityAnswersMsgType: `${msgTypePrefix}.slurry.eligibility.details`,
   contactDetailsMsgType: `${msgTypePrefix}.slurry.contact.details`,
   msgSrc: 'ffc-grants-laying-hens-web'
