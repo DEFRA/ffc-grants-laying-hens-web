@@ -11,7 +11,8 @@ const {
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
   POSTCODE_REGEX,
-  CURRENCY_FORMAT
+  CURRENCY_FORMAT,
+  ONLY_DIGITS_AND_DECIMAL_REGEX
 } = require('ffc-grants-common-functionality').regex
 
 const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
@@ -3889,14 +3890,14 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              regex:  /^[1-9,]\d*$/,
-              error: 'Enter a whole number with a maximum of 7 digits'
+              regex:  ONLY_DIGITS_AND_DECIMAL_REGEX,
+              error: 'Estimated power capacity must be a number, like 10'
             },
             {
               type: 'MIN_MAX_CHARS',
               min: 1,
-              max: 7,
-              error: 'Enter a whole number with a maximum of 7 digits'
+              max: 2,
+              error: 'Estimated power capacity must be a number up to 2 decimal places'
             }
           ],
           yarKey: 'solarPowerCapacity'
