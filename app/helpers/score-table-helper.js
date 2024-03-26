@@ -207,7 +207,7 @@ const tableOrderPullet = [
     title: 'Veranda requirements',
     pageTitle: 'Veranda requirements',
     url: 'pullet-veranda-features',
-    fundingPriorities: 'Veranda that meet all funding priorities',
+    fundingPriorities: 'Verandas that meet all funding priorities',
     yarKey: 'pulletVerandaFeatures'
   },
   {
