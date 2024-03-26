@@ -2593,9 +2593,7 @@ const questionBank = {
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
-          // TODO  fix the header
           ineligibleContent: {
-            messageHeader: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}%of £12,500)`, // 
             messageContent: `You can apply for grant funding to add verandas to multiple buildings. You must submit a separate application for each veranda.</br></br>
             If the total grant funding for your combined veranda projects is more than £5,000 (${GRANT_PERCENTAGE}% of £12,500), you may still be eligible to apply for grant funding.</br></br>
             If you are applying for grant funding for a single veranda, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> see other grants you may be eligible for.</a>`,
