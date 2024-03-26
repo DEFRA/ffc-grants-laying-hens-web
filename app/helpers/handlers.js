@@ -48,8 +48,6 @@ const checkYarKeyReset = (thisAnswer, request) => {
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
 
-    // console.log("additionalYarKeyNameee" , additionalYarKeyName)
-
     switch (url) {
       case '1000-birds':
         if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)) {

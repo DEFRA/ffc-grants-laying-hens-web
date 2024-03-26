@@ -7,7 +7,6 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
-{% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "./components/macro.njk" import crumbToken,
 multiSideBar,
 conditionalButtons %}
@@ -50,12 +49,6 @@ conditionalButtons %}
 
         {% if type === 'input' %}
           {{ govukInput(items) }}
-          {% if details %}
-            {{ govukDetails({
-              summaryText: details.summaryText,
-              text: details.text
-            })}}
-          {% endif %}  
         {% endif %}
 
         {% if type === 'select' %}
