@@ -24,7 +24,7 @@ const {
 } = require('./pageHelpers')
 
 const { getUserScore } = require('../messaging/application')
-const { tableOrder } = require('../helpers/score-table-helper')
+const { tableOrderHen, tableOrderPullet } = require('./score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
 const { ALL_QUESTIONS } = require('../config/question-bank')
@@ -222,15 +222,9 @@ const scorePageData = async (request, backUrl, url, h) => {
 
     setYarValue(request, 'overAllScore', msgData)
 
+    let tableOrder = getYarValue(request, 'poultry-type') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? tableOrderHen : tableOrderPullet
+
     const questions = msgData.desirability.questions.map(desirabilityQuestion => {
-      if (desirabilityQuestion.key === 'environmental-impact' && getYarValue(request, 'SolarPVCost') === null) {
-        desirabilityQuestion.key = 'rainwater'
-        if (desirabilityQuestion.answers[0].input[0].value === 'None of the above') {
-          desirabilityQuestion.answers[0].input[0].value = 'No'
-        } else {
-          desirabilityQuestion.answers[0].input[0].value = 'Yes'
-        }
-      }
 
       const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
       desirabilityQuestion.title = tableQuestion.title
