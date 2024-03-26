@@ -10,7 +10,8 @@ const {
   ADDRESS_REGEX,
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
-  POSTCODE_REGEX
+  POSTCODE_REGEX,
+  CURRENCY_FORMAT
 } = require('ffc-grants-common-functionality').regex
 
 const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
@@ -1587,8 +1588,7 @@ const questionBank = {
                 heading: 'Eligibility',
                 content: [{
                   para: `The ventilation system must be able to prevent the heat that the birds 
-                  generate from increasing the house temperature by more 
-                  than 3°C above the external ambient temperature. `
+                  generate from increasing the house temperature by more than 3°C above the external ambient temperature.`
                 }]
               }
             ]
@@ -2561,22 +2561,33 @@ const questionBank = {
           },
           id: 'projectCost',
           label: {
-            text: 'What is the total estimated cost of the veranda project?',
+            text: 'What is the estimated cost of the veranda?',
             classes: 'govuk-label--l',
             isPageHeading: true,
             for: 'projectCost'
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £5,000 (${GRANT_PERCENTAGE}% of £12,500). The maximum grant is £100,000.</p>
-                  <p>Do not include VAT</p>
-                  <p>Enter amount, for example 50,000</p>
-              `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £5,000 (${GRANT_PERCENTAGE}% of £12,500). The maximum grant is £100,000 (${GRANT_PERCENTAGE}% of £250,000).</p>
+              <details class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am adding verandas to multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of adding this veranda only</p>
+                  <p>You must submit a separate application for each veranda.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 50,000</p>
+            `,
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the total estimated cost of the veranda project'
+              error: 'Enter the estimated cost of the veranda'
             },
             {
               type: 'REGEX',
@@ -2591,12 +2602,14 @@ const questionBank = {
             }
           ],
           ineligibleContent: {
-            messageContent: `The minimum grant you can apply for veranda project costs is £5,000 (${GRANT_PERCENTAGE}% of £12,500).`,
+            messageContent: `You can apply for grant funding to add verandas to multiple buildings. You must submit a separate application for each veranda.</br></br>
+            If the total grant funding for your combined veranda projects is more than £5,000 (${GRANT_PERCENTAGE}% of £12,500), you may still be eligible to apply for grant funding.</br></br>
+            If you are applying for grant funding for a single veranda, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> see other grants you may be eligible for.</a>`,
             messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
+              url: `veranda-potential-amount`,
+              title: 'I am applying to add verandas to multiple buildings'
+            },
+          },    
           answers: [],
           yarKey: 'projectCost'
         },
@@ -2921,7 +2934,7 @@ const questionBank = {
           order: 180,
           title: 'What type of {{_poultryType_}} housing system do you currently use in the building?',
           pageTitle: '',
-          backUrl: 'remaining-costs',
+          backUrl: 'interruption-scoring',
           nextUrl: 'current-multi-tier-system',
           url: 'current-system',
           baseUrl: 'current-system',
@@ -2954,7 +2967,8 @@ const questionBank = {
             },
             {
               key: 'current-system-A2',
-              value: 'Combi-cage'
+              value: 'Combi-cage',
+              redirectUrl: 'ramp-connection'
             },
             {
               key: 'current-system-A3',
@@ -3277,7 +3291,7 @@ const questionBank = {
           baseUrl: 'ramp-connection',
           backUrlObject: {
             dependentQuestionYarKey: 'currentSystem',
-            dependentAnswerKeysArray: ['current-system-A1'],
+            dependentAnswerKeysArray: ['current-system-A1', 'current-system-A2'],
             urlOptions: {
               thenUrl: 'current-system',
               elseUrl: 'current-multi-tier-system'
@@ -3799,6 +3813,44 @@ const questionBank = {
           ],
           yarKey: 'environmentalDataType'
         },
+        {
+          key: 'bird-number',
+          order: 335,
+          pageTitle: '',
+          classes: 'govuk-input--width-10',
+          url: 'bird-number',
+          baseUrl: 'bird-number',
+          backUrl: 'project-cost',
+          nextUrl: 'solar-PV-cost',
+          fundingPriorities: '',
+          type: 'input',
+          label: {
+            text: `How many birds will {{_projectType_}} be able to house?`,
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare 
+                    features (lighting, ventilation system) for the amount of birds in the building.
+                  </p>
+                  <p>The power capacity for grant funding is 5 kilowatts (kW) per 1,000 birds.</p>
+                  <p>Enter estimated amount, for example 8,000</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter how many birds {{_projectType_}} will be able to house'
+            },
+            {
+              type: 'REGEX',
+              regex: CURRENCY_FORMAT,
+              error: 'Number of birds should be a whole number, like 600'
+            },
+          ],
+          yarKey: 'birdNumber'
+        },  
         {
           key: 'score',
           order: 175,

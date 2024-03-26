@@ -28,9 +28,7 @@ const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
 
-
 const { ALL_QUESTIONS } = require('../config/question-bank')
-const { GRANT_PERCENTAGE } = require('./grant-details')
 
 const createModel = (data, backUrl, url) => {
   return {
@@ -46,45 +44,41 @@ const checkYarKeyReset = (thisAnswer, request) => {
   }
 }
 
+const getReplacementText = (request, key, questionType, questionKey, trueReturn, falseReturn) => {
+  return getYarValue(request, key) === getQuestionAnswer(questionType, questionKey, ALL_QUESTIONS) ? trueReturn : falseReturn;
+}
+
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
 
     switch (url) {
       case '1000-birds':
-        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)) {
-          return 'laying hens'
-        } else {
-          return 'pullets'
-        }
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets');
       case 'current-multi-tier-system':
-        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)){
-          return 'multi-tier aviary systems'
-        } else {
-          return 'multi-tier systems'
-        }
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'multi-tier aviary systems', 'multi-tier systems');
       case 'lighting-features':
-        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)) {
-          return ' (unless this is already provided as part of an aviary lighting system)'
-        } else {
-          return ''
-        }
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ' (unless this is already provided as part of an aviary lighting system)', '');
+      case 'bird-number':
+        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'the refurbished part of this building', 'this new building');
       case 'project-cost':
-        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('project-type', 'project-type-A2', ALL_QUESTIONS)) {
-          return 'refurbishing'
-        } else {
-          return 'replacing'
-        }   
+        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'refurbishing', 'replacing');
       default:
-        if (field.includes('£')) {
-          return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-        } else {
-          return getYarValue(request, additionalYarKeyName)
-        }
+        return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName);
     }
-
   })
 
-  return field
+  return field;
+}
+
+const titleCheck = (question, title, url, request) => {
+  if (title?.includes('{{_')) {
+    question = {
+      ...question,
+      title: insertYarValue(title, url, request)
+    }
+  }
+
+  return question
 }
 
 const labelTextCheck = (question, label, url, request) => {
@@ -95,17 +89,6 @@ const labelTextCheck = (question, label, url, request) => {
         ...label,
         text: insertYarValue(label.text, url, request)
       }
-    }
-  }
-
-  return question
-}
-
-const titleCheck = (question, title, url, request) => {
-  if (title?.includes('{{_')) {
-    question = {
-      ...question,
-      title: insertYarValue(title, url, request)
     }
   }
 
@@ -476,12 +459,17 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
   currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
   currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
-  currentQuestion = labelTextCheck(currentQuestion, label, baseUrl, request)
+  currentQuestion = labelTextCheck(currentQuestion, currentQuestion.label, baseUrl, request)
   currentQuestion = showHideAnswer(currentQuestion, request)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
-  const NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
+  let NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
   let dataObject
+
+  if (baseUrl === 'veranda-project-cost') {
+    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: 'The minimum grant you can apply for is £15,000 (40% of £37,500)' }
+  }
+ 
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
   }
@@ -494,7 +482,6 @@ const showPostPage = (currentQuestion, request, h) => {
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request,
       { name: gapiService.eventTypes.ELIMINATION, params: {} })
-
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 
