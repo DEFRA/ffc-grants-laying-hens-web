@@ -22,7 +22,7 @@ describe('Page: /hen-ventilation-specification', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Will the ventilation system be fit for purpose in extreme heat?')
     expect(response.payload).toContain('In extreme heat, the ventilation system must be able to provide:')
-    expect(response.payload).toContain('an air speed of 1 metre per second over birds')
+    expect(response.payload).toContain('an air speed of one metre per second over birds')
     expect(response.payload).toContain('a maximum ventilation rate of 10,800m³ per hour per 1000 birds')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
@@ -46,7 +46,7 @@ describe('Page: /hen-ventilation-specification', () => {
     expect(postResponse.payload).toContain('Select yes if the ventilation system will be fit for purpose in extreme heat')
   })
 
-  it('user selects eligible option -> store user response and redirect to /hen-veranda', async () => {
+  it('user selects eligible option -> store user response and redirect to /concrete-apron', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-ventilation-specification`,
@@ -56,7 +56,7 @@ describe('Page: /hen-ventilation-specification', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('hen-veranda')
+    expect(postResponse.headers.location).toBe('concrete-apron')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -70,7 +70,7 @@ describe('Page: /hen-ventilation-specification', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('In extreme heat, the ventilation system must be able to provide:')
-    expect(postResponse.payload).toContain('an air speed of 1 metre per second over birds')
+    expect(postResponse.payload).toContain('an air speed of one metre per second over birds')
     expect(postResponse.payload).toContain('a maximum ventilation rate of 10,800m³ per hour per 1000 birds.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })

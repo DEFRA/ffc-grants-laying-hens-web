@@ -10,7 +10,8 @@ const {
   ADDRESS_REGEX,
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
-  POSTCODE_REGEX
+  POSTCODE_REGEX,
+  CURRENCY_FORMAT
 } = require('ffc-grants-common-functionality').regex
 
 const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
@@ -709,6 +710,7 @@ const questionBank = {
               key: 'poultry-type-A2',
               text: 'Pullets (up to and including 17 weeks old)',
               value: 'pullet',
+              yarKeysReset: ['henVeranda']
             },
             {
               value: 'divider'
@@ -816,15 +818,11 @@ const questionBank = {
             }
           },
           nextUrlObject: {
-            dependentQuestionYarKey: 'poultryType',
-            dependentAnswerKeysArray: ['poultry-type-A2'],
-            dependentElseUrlYarKey: 'projectType',
-            dependentElseUrlQuestionKey: 'project-type',
-            dependentElseUrlAnswerKey: 'project-type-A2',
+            dependentQuestionYarKey: 'projectType',
+            dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
-              thenUrl: 'pullet-housing-requirements',
-              elseUrl: 'replacing-insulation',
-              dependantElseUrl: 'refurbishing-insulation'
+              thenUrl: 'replacing-insulation',
+              elseUrl: 'refurbishing-insulation',
             }
           },
           sidebar: {
@@ -882,15 +880,15 @@ const questionBank = {
           title: 'Will the building have full wall and roof insulation?',
           url: 'refurbishing-insulation',
           baseUrl: 'refurbishing-insulation',
-          backUrlObject: {
+          backUrl: 'building-items',
+          nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'building-items',
+              thenUrl: 'lighting-features',
               elseUrl: 'pullet-housing-requirements'
             }
           },
-          nextUrl: 'lighting-features',
           ineligibleContent: {
             messageContent: 'When the project is complete. the building must have full wall and roof insulation.',
             messageLink: {
@@ -934,15 +932,15 @@ const questionBank = {
           title: 'Will the building have full wall and roof insulation?',
           url: 'replacing-insulation',
           baseUrl: 'replacing-insulation',
-          backUrlObject: {
+          backUrl: 'building-items',
+          nextUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'building-items',
+              thenUrl: 'lighting-features',
               elseUrl: 'pullet-housing-requirements'
             }
           },
-          nextUrl: 'lighting-features',
           ineligibleContent: {
             messageContent: `The building must have full wall and roof insulation.<br/><br/>
             The new building must have wall and roof insulation with a U-Value of less than 0.3 watts per square metre, per degree Kelvin (0.3W/m²K).`,
@@ -984,15 +982,15 @@ const questionBank = {
         {
           key: 'changing-area',
           order: 100,
-          title: 'Will the {{_poultryType_}} housing have a biosecure changing area at each external pedestrian access point?',
+          title: 'Will the building have a biosecurity changing area at each external pedestrian access point?',
           hint: {
             html: `
               <span>
-                <p>The building must have a biosecure changing area at each external pedestrian point with:</p>
+                <p>Each biosecurity changing area must include:</p>
                 <ul class="govuk-list--bullet">
-                  <li>changing facilities, divided by a floor-mounted physical barrier into a clean area and a dirty area</li>
-                  <li>in the dirty area, handwashing facilities and storage for clothes and boots that you use outside of the housing</li>
-                  <li>in the clean area, a footbath and storage for clothes and boots that you use inside of the shed</li>
+                  <li>changing facilities, with a step-over barrier between the outer and inner areas</li>
+                  <li>in the outer area, handwashing facilities with running water and storage for clothes and boots that you use outside of this building</li>
+                  <li>in the inner area, a footbath and storage for clothes and boots that you use inside of the bird living area</li>
                 </ul>
             </span>`
           },
@@ -1000,30 +998,22 @@ const questionBank = {
           url: 'changing-area',
           baseUrl: 'changing-area',
           backUrlObject: {
-            dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A3'],
-            urlOptions: {
-              thenUrl: 'replacing-insulation',
-              elseUrl: 'refurbishing-insulation'
-              // nonDependentUrl: 'solar-PV-system'
-            }
-          },
-          nextUrlObject: {
-            dependentQuestionYarKey: ['poultryType'],
+            dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
               thenUrl: 'egg-store-access',
               elseUrl: 'vaccination-lobby'
             }
           },
+          nextUrl: 'external-taps',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The {{_poultryType_}} housing must have an effective hygiene barrier.
+                para: `The building must have a biosecurity changing area at each external pedestrian point. 
 
-                If you're refurbishing an existing building and have limited internal space, you can add a shed onto the main entrance as a biosecure changing area.`,
+                If you're refurbishing an existing building and have limited internal space, you can add a shed onto the main entrance externally as a biosecurity changing area.`,
                 items: []
               }]
             }]
@@ -1032,17 +1022,15 @@ const questionBank = {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">
-                  The housing must have a biosecure changing area at each external pedestrian point with:
+                  The building must have a biosecurity changing area at each external pedestrian point. 
                 </p>
+                <p class="govuk-body">Each biosecurity changing area must include:</p>
                 <ul>
-                  <li>changing facilities, divided by a floor-mounted 
-                  physical barrier into a clean area and a dirty area</li>
-                  <li>in the dirty area, handwashing facilities and storage 
-                  for clothes and boots that you use outside of the 
-                  housing </li>
-                  <li>in the clean area, a footbath and storage for 
-                  clothes and boots that you use inside of the shed.</li>
-                  </ul>`,
+                  <li>changing facilities, with a step-over barrier between the outer and inner areas</li>
+                  <li>in the outer area, handwashing facilities with running water and storage for clothes and boots you use outside this building</li>
+                  <li>in the inner area, a footbath and storage for clothes and boots you use inside the bird living area.</li>
+                </ul>
+              </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1055,7 +1043,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have a biosecure changing area'
+              error: 'Select yes if the building will have a biosecurity changing area'
             }
           ],
           answers: [
@@ -1078,14 +1066,7 @@ const questionBank = {
           url: 'egg-store-access',
           baseUrl: 'egg-store-access',
           nextUrl: 'changing-area',
-          backUrlObject: {
-            dependentQuestionYarKey: 'henVeranda',
-            dependentAnswerKeysArray: ['hen-veranda-A1'],
-            urlOptions: {
-              thenUrl: 'concrete-apron',
-              elseUrl: 'veranda-concrete-apron'
-            }
-          },
+          backUrl: 'concrete-apron',
           // preValidationKeys: ['poultryType'],
           hint: {
             text: 'This must be separate from the main entrance lobby and connected changing area'
@@ -1094,7 +1075,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You must be able to remove eggs and deliver empty egg trays to and from the building\'s egg store without going into the building\'s entrance lobby or connected changing area.',
+                para: 'You must be able to remove eggs and deliver empty egg trays to and from the building\'s egg store without going into the building\'s main entrance lobby or connected changing area.',
               }]
             }]
           },
@@ -1144,7 +1125,7 @@ const questionBank = {
             html: `
                   <p>The aviary system must have integrated:</p>
                   <ul class="govuk-list--bullet">
-                    <li>automatic manure removal belts</li>
+                    <li>manure removal belts</li>
                     <li>non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk</li>
                   </ul>`
           },
@@ -1152,13 +1133,13 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The aviary system must have an integrated automatic manure-removal belt and non-flicker LED lighting system.`
+                para: `The aviary system must have integrated manure-removal belts and a non-flicker LED lighting system.`
               }]
             }]
           },
           ineligibleContent: {
             messageContent: `
-              <p class="govuk-body">The aviary system must have:</p>
+              <p class="govuk-body">The aviary system must have integrated:</p>
               <ul class="govuk-list govuk-list--bullet">
                 <li>manure removal belts</li>
                 <li>integrated non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk.</li>
@@ -1271,7 +1252,7 @@ const questionBank = {
           url: 'hen-veranda-features',
           baseUrl: 'hen-veranda-features',
           backUrl: 'hen-veranda',
-          nextUrl: 'hen-veranda-biosecurity',
+          nextUrl: 'building-items',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
@@ -1296,7 +1277,7 @@ const questionBank = {
                   <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
                   <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                   <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
-                  <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down </li>
+                  <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down.</li>
                 </ul>
               </div>
             `,
@@ -1460,7 +1441,7 @@ const questionBank = {
             html: `
                 <p>In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
-                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>an air speed of one metre per second over birds</li>
                   <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds</li>
                 </ul>
                 `
@@ -1468,7 +1449,7 @@ const questionBank = {
           url: 'hen-ventilation-specification',
           baseUrl: 'hen-ventilation-specification',
           backUrl: 'mechanical-ventilation',
-          nextUrl: 'hen-veranda',
+          nextUrl: 'concrete-apron',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [{
@@ -1483,7 +1464,7 @@ const questionBank = {
             <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
               <div class="govuk-list govuk-list--bullet">
                 <ul>
-                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>an air speed of one metre per second over birds</li>
                   <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds.</li>
                 </ul>
               </div>`,
@@ -1592,14 +1573,14 @@ const questionBank = {
             html: `
                 <p>In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
-                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>an air speed of one metre per second over birds</li>
                   <li>a maximum ventilation rate of 9,000m³ per hour per 1000 birds</li>
                 </ul>`
           },
           url: 'pullet-ventilation-specification',
           baseUrl: 'pullet-ventilation-specification',
           backUrl: 'mechanical-ventilation',
-          nextUrl: 'pullet-veranda',
+          nextUrl: 'concrete-apron',
           // preValidationKeys: ['poultryType'],
           sidebar: {
             values: [
@@ -1607,8 +1588,7 @@ const questionBank = {
                 heading: 'Eligibility',
                 content: [{
                   para: `The ventilation system must be able to prevent the heat that the birds 
-                  generate from increasing the house temperature by more 
-                  than 3°C above the external ambient temperature. `
+                  generate from increasing the house temperature by more than 3°C above the external ambient temperature.`
                 }]
               }
             ]
@@ -1618,7 +1598,7 @@ const questionBank = {
               <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
-                  <li>an air speed of 1 metre per second over birds</li>
+                  <li>an air speed of one metre per second over birds</li>
                   <li>a maximum ventilation rate of 9,000m³ per hour per 1000 birds.</li>
                 </ul>`,
             messageLink: {
@@ -1735,49 +1715,55 @@ const questionBank = {
         {
           key: 'concrete-apron',
           order: 190,
-          title: 'Will the {{_poultryType_}} housing have a continuous concrete apron around its perimeter?',
+          title: 'Will the structure be surrounded by a concrete apron?',
           pageTitle: '',
           url: 'concrete-apron',
           baseUrl: 'concrete-apron',
           backUrlObject: {
-            dependentQuestionYarKey: ['henVeranda'],
-            dependentAnswerKeysArray: ['hen-veranda-A1'],
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
             urlOptions: {
-              thenUrl: 'hen-pop-holes',
-              elseUrl: 'hen-veranda',
-              nonDependentUrl: 'lighting-features'
+              thenUrl: 'hen-ventilation-specification',
+              elseUrl: 'pullet-ventilation-specification'
             }
           },
-          nextUrl: 'vehicle-washing',
+          nextUrlObject: {
+            dependentQuestionYarKey: ['poultryType'],
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'egg-store-access',
+              elseUrl: 'vaccination-lobby'
+            }
+          },
           hint: {
-            text: 'This must include any veranda areas if there is no adjacent range, for example barn systems'
+            text: 'This should be continuous, unless there needs to be a gap where birds have direct access to pasture'
           },
           sidebar: {
             values: [
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: 'The {{_poultryType_}} housing and any barn-system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+                  para: 'The building (and veranda if there is one) must be surrounded by a concrete apron.',
                   items: [],
                 }]
               }
             ]
           },
           ineligibleContent: {
-            messageContent: 'The housing and any barn system veranda areas must be surrounded by a continuous concrete apron (a hardstanding concrete area).',
+            messageContent: `<p class="govuk-body">The building (and veranda if there is one) must be surrounded by a concrete apron.</p>
+            <p class="govuk-body">This should be continuous, unless there needs to be a gap where birds have direct access to pasture.</p>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have a continuous concrete apron'
+              error: 'Select yes if the structure will be surrounded by a concrete apron'
             }
           ],
           answers: [
@@ -1800,8 +1786,8 @@ const questionBank = {
           pageTitle: '',
           url: 'vaccination-lobby',
           baseUrl: 'vaccination-lobby',
-          backUrl: 'changing-area',
-          nextUrl: 'housing-density',
+          backUrl: 'concrete-apron',
+          nextUrl: 'changing-area',
           hint: {
             text: 'Internal access from the bird living area and external access from the loading bay'
           },
@@ -1809,12 +1795,15 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+                para: `The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay. 
+                
+                If you do not vaccinate your pullets currently, you must add a vaccination lobby to allow for future vaccination requirements.
+                `,
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: 'The housing must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
+            messageContent: 'The building must have a dedicated area to perform pullet vaccinations, with access to the loading bay.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1846,7 +1835,7 @@ const questionBank = {
         {
           key: 'housing-density',
           order: 200,
-          title: 'Will the pullets be housed within the maximum stocking density when they are 16 weeks old?',
+          title: 'Will the pullets be housed within this maximum stocking density when they are 16 weeks old?',
           pageTitle: '',
           url: 'housing-density',
           baseUrl: 'housing-density',
@@ -1861,7 +1850,7 @@ const questionBank = {
           nextUrl: 'mechanical-ventilation',
           hint: {
             html: `
-            <p>The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+            <p>To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within: </p>
               <ul class="govuk-list--bullet">
                 <li>20kg per m² of the total usable area</li>
                 <li>33kg per m² of the total usable area at floor level</li>
@@ -1870,7 +1859,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
-            <p class="govuk-body">The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:</p>
+            <p class="govuk-body">To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within:</p>
                   <ul>
                     <li>20kg per m² of the total usable area</li>
                     <li>33kg per m² of the total usable area at floor level</li>
@@ -1907,12 +1896,11 @@ const questionBank = {
         {
           key: 'pullet-housing-requirements',
           order: 205,
-          title: 'Will the inside of the building have these features?',
+          title: 'Will the pullet housing have these features?',
           pageTitle: '',
           url: 'pullet-housing-requirements',
           baseUrl: 'pullet-housing-requirements',
-          backUrl: 'building-items',
-          nextUrlObject: {
+          backUrlObject: {
             dependentQuestionYarKey: 'projectType',
             dependentAnswerKeysArray: ['project-type-A3'],
             urlOptions: {
@@ -1920,13 +1908,14 @@ const questionBank = {
               elseUrl: 'refurbishing-insulation'
             }
           },
+          nextUrl: 'lighting-features',
           hint: {
             html: `
-                  <p>The building must have:</p>
+                  <p>When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
                       <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
                       <li>height adjustable perches at equal to or more than 8cm per pullet</li>
-                      <li>a minimum of 50% of the floor area covered in litter</li>
+                      <li>a minimum of 50% of the floor area available for litter</li>
                   </ul>
                 `
           },
@@ -1937,7 +1926,7 @@ const questionBank = {
                   <ul>
                     <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
                     <li>height adjustable perches at equal to or more than 8cm per pullet</li>
-                    <li>a minimum of 50% of the floor area covered in litter</li>
+                    <li>a minimum of 50% of the floor area available for litter.</li>
                   </ul>
             </div>`,
             messageLink: {
@@ -1952,7 +1941,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the inside of the building will have these features'
+              error: 'Select yes if the pullet housing will have these features'
             }
           ],
           answers: [
@@ -2148,30 +2137,42 @@ const questionBank = {
         {
           key: 'vehicle-washing',
           order: 230,
-          title: 'Will the {{_poultryType_}} housing have a designated area for washing and disinfecting vehicles?',
+          title: 'Will there be a designated area for washing and disinfecting vehicles?',
           pageTitle: '',
           url: 'vehicle-washing',
           baseUrl: 'vehicle-washing',
-          backUrl: 'concrete-apron',
-          nextUrl: 'external-taps',
+          backUrl: 'external-taps',
+          nextUrl: 'solar-PV-system',
           hint: {
-            text: 'This must include an area of concrete parking which is appropriate to the size of the vehicles entering the facility (minimum width of 3 metres)'
+            html: `
+                  <p>This must be an area on site that includes:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>a concrete surface that is appropriate to the size of the vehicles 
+                    entering the facility (minimum width of 3 metres)</li>
+                    <li>a drainage system and storage tanks for soiled water</li>
+                  </ul>`
           },
           ineligibleContent: {
-            messageContent: 'There must be a designated washing and disinfecting area for vehicles entering the facility.',
+            messageContent: `
+            <p class="govuk-body">There must be a designated washing and disinfecting area on site with:</p>
+            <div class="govuk-list govuk-list--bullet">
+                  <ul>
+                    <li>a concrete surface that is appropriate to the size of the vehicles entering the facility (minimum width of 3 metres)</li>
+                    <li>a drainage system and storage tanks for soiled water.</li>
+                  </ul>
+            </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have a designated area for washing and disinfecting vehicles'
+              error: 'Select yes if there will be a designated area for washing and disinfecting vehicles'
             }
           ],
           answers: [
@@ -2190,25 +2191,25 @@ const questionBank = {
         {
           key: 'external-taps',
           order: 240,
-          title: 'Will the {{_poultryType_}} housing have an external tap at each main pedestrian access point?',
+          title: 'Will the building have an external tap at the main pedestrian access point?',
           pageTitle: '',
           url: 'external-taps',
           baseUrl: 'external-taps',
-          backUrl: 'vehicle-washing',
-          nextUrl: 'roof-solar-PV',
+          backUrl: 'changing-area',
+          nextUrl: 'vehicle-washing',
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.'
+                para: 'There must be an external tap at the main pedestrian access point to manage external footbaths.'
               }]
             }]
           },
           ineligibleContent: {
-            messageContent: 'There must be an external tap to manage external footbaths at every pedestrian access point to the housing.',
+            messageContent: 'There must be an external tap at the main pedestrian access point to manage external footbaths.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -2218,7 +2219,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the {{_poultryType_}} housing will have an external tap at each main pedestrian access point'
+              error: 'Select yes if the building will have an external tap at the main pedestrian access point'
             }
           ],
           answers: [
@@ -2235,6 +2236,178 @@ const questionBank = {
           yarKey: 'externalTaps'
         },
         {
+          key: 'solar-PV-system',
+          order: 250,
+          title: 'Will you buy a solar PV system for this building with this grant?',
+          pageTitle: '',
+          url: 'solar-PV-system',
+          baseUrl: 'solar-PV-system',
+          backUrl: 'vehicle-washing',
+          nextUrl: 'project-cost',
+          hint: {
+            text: 'You have the option to buy and install a solar PV system with the grant. The solar PV panels must be installed on the roof of this building.'
+          },
+          warning: {
+            text: 'You cannot buy a Solar PV system with this grant if the roof of the building only faces north or is heavily shaded. ',
+            iconFallbackText: 'Warning'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You do not have to buy and install a solar PV system to be eligible for this grant.',
+              }]
+            }]
+          },
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you will buy a solar PV system for this building with this grant'
+            }
+          ],
+          answers: [
+            {
+              key: 'solar-PV-system-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'solar-PV-system-A2',
+              value: 'No',
+              redirectUrl: 'roof-solar-PV-exemption'
+            }
+          ],
+          yarKey: 'solarPVSystem'
+        },
+        {
+          key: 'roof-support-solar-PV',
+          order: 245,
+          title: 'Will the roof of this building be able to structurally support solar PV panels?',
+          pageTitle: '',
+          url: 'roof-support-solar-PV',
+          baseUrl: 'roof-support-solar-PV',
+          backUrl: 'roof-solar-PV-exemption',
+          nextUrl: 'project-cost',
+          hint: {
+            html: `
+            <p>Even if you are not installing a solar PV system, you must provide confirmation that the roof can support solar PV panels at full application.</p>
+            <p>This confirmation must come from a building expert, contractor or structural engineer</p>`
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The roof must be able to support solar PV panels, allowing for potential use in the future.',
+              }]
+            }]
+          },
+          ineligibleContent: {
+            messageContent: `The roof of this building must be able to support solar PV panels, allowing for potential use in the future.`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the roof of this building will be able to structurally support solar PV panels'
+            }
+          ],
+          answers: [
+            {
+              key: 'roof-support-solar-PV-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'roof-support-solar-PV-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'roofSupportSolarPV'
+        },
+        {
+          key: 'roof-solar-PV-exemption',
+          order: 260,
+          title: 'Which of these statements apply to this project?',
+          url: 'roof-solar-PV-exemption',
+          baseUrl: 'roof-solar-PV-exemption',
+          backUrl: 'solar-PV-system',
+          nextUrl: 'project-cost',
+          preValidationKeys: '',
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The roof must be able to support solar PV panels, allowing for potential use in the future, unless any of these statements apply. `
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select which of these statement apply to this project'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'roof-solar-PV-exemption',
+                answerKey: 'roof-solar-PV-exemption-A7'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'roof-solar-PV-exemption-A1',
+              value: 'The building is listed'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A2',
+              value: 'The building is on a World Heritage Site'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A3',
+              value: 'I am not making changes to this building’s roof',
+              dependantShowHideKey: 'project-type',
+              dependantShowHideAnswerKey: 'project-type-A2',
+              dependantShowHideYarKey: 'projectType',
+            },
+            {
+              key: 'roof-solar-PV-exemption-A4',
+              value: 'The roof only faces north'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A5',
+              value: 'The roof is heavily shaded'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A6',
+              value: 'The roof does not have 100m2 of clear roof space'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A7',
+              value: 'None of the above',
+              redirectUrl: 'roof-support-solar-PV'
+            }
+          ],
+          yarKey: 'roofSolarPVExemption'
+        },
+        {
           key: 'veranda-only-size',
           order: 245,
           title: 'How big will the veranda be?',
@@ -2246,8 +2419,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The veranda must be either:`,
-                items: ['4 metres wide or more along the length of the bird housing area', '30% or more of the size of the indoor bird housing area footprint.']
+                para: 'The veranda must be at least either:',
+                items: ['4 metres wide along the length of the bird housing area', '30% of the size of the indoor bird housing area footprint.']
               }]
             }]
           },
@@ -2256,8 +2429,8 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">The veranda must be either:</p>
                 <ul class="govuk-list--bullet">
-                    <li>4 metres wide or more along the length of the bird housing area</li>
-                    <li>30% or more of the size of the indoor bird housing area footprint.</li>
+                    <li>4 metres wide along the length of the bird housing area</li>
+                    <li>30% of the size of the indoor bird housing area footprint.</li>
                 </ul>
             </div>`,
             messageLink: {
@@ -2271,23 +2444,15 @@ const questionBank = {
               type: 'NOT_EMPTY',
               error: 'Select how big the veranda will be'
             },
-            {
-              type: 'STANDALONE_ANSWER',
-              error: 'You cannot select that combination of options',
-              standaloneObject: {
-                questionKey: 'veranda-only-size',
-                answerKey: 'veranda-only-size-A3'
-              }
-            }
           ],
           answers: [
             {
               key: 'veranda-only-size-A1',
-              value: '4 metres wide or more along the length of the bird housing area'
+              value: '4 metres wide along the length of the bird housing area'
             },
             {
               key: 'veranda-only-size-A2',
-              value: '30% or more of the size of the indoor bird housing area footprint'
+              value: '30% of the size of the indoor bird housing area footprint'
             },
             {
               value: 'divider'
@@ -2308,28 +2473,44 @@ const questionBank = {
           url: 'veranda-features',
           baseUrl: 'veranda-features',
           backUrl: 'veranda-only-size',
-          nextUrl: 'veranda-biosecurity',
+          nextUrl: 'veranda-project-cost',
           hint: {
             html: `
-                  <p>The veranda must have a:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a solid concrete floor</li>
-                    <li>a waterproof insulated roof</li>
-                    <li>a perimeter wall at least 1 metre high</li>
-                    <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
-                  </ul>`
+              <p>The veranda must have a:</p>
+              <ul class="govuk-list--bullet">
+                <li>a solid concrete floor</li>
+                <li>a waterproof insulated roof</li>
+                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
+                <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
+              </ul>`
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The width of the pop hole openings along the length of the hen house must add up to a total of 2 metres for every 1,000 hens in the building.
+                
+                      The base of all pop holes must either:`,
+                items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.'],
+                additionalPara: 'You must not put perches in front of the pop holes.'
+              }],
+            }]
           },
           ineligibleContent: {
             messageContent: `
-                <div class="govuk-list govuk-list--bullet">
-                <p class="govuk-body">The veranda must have a:</p>
-                      <ul>
-                        <li>a solid concrete floor</li>
-                        <li>a waterproof insulated roof</li>
-                        <li>a perimeter wall at least 1 metre high</li>
-                        <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
-                      </ul>
-                </div>`,
+              <p>The veranda must have a:</p>
+              <ul class="govuk-list--bullet">
+                <li>a solid concrete floor</li>
+                <li>a waterproof insulated roof</li>
+                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
+                <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
+              </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -2358,79 +2539,13 @@ const questionBank = {
           yarKey: 'verandaFeatures'
         },
         {
-          key: 'veranda-biosecurity',
-          order: 255,
-          title: 'Will the veranda be biosecure?',
-          pageTitle: '',
-          url: 'veranda-biosecurity',
-          baseUrl: 'veranda-biosecurity',
-          backUrl: 'veranda-features',
-          nextUrl: 'veranda-project-cost',
-          hint: {
-            html: `
-                  <p>The veranda must have:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                    <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system</li>
-                  </ul>`
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You must be able to make the veranda biosecure with mesh during housing orders.
-
-                      The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
-                
-                      The base of all pop holes must either:`,
-
-                items:['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.']
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: `
-              <p class="govuk-body">The veranda must have:</p>
-              <ul class="govuk-list govuk-list--bullet">
-                <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system.</li>
-              </ul>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the veranda will be biosecure'
-            }
-          ],
-          answers: [
-            {
-              key: 'veranda-biosecurity-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'veranda-biosecurity-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'verandaBiosecurity'
-        },
-        {
           key: 'veranda-project-cost',
           order: 265,
           pageTitle: '',
           classes: 'govuk-input--width-10',
           url: 'veranda-project-cost',
           baseUrl: 'veranda-project-cost',
-          backUrl: 'veranda-biosecurity',
+          backUrl: 'veranda-features',
           nextUrl: 'veranda-potential-amount',
           fundingPriorities: '',
           preValidationKeys: [],
@@ -2763,7 +2878,7 @@ const questionBank = {
           order: 180,
           title: 'What type of {{_poultryType_}} housing system do you currently use in the building?',
           pageTitle: '',
-          backUrl: 'remaining-costs',
+          backUrl: 'interruption-scoring',
           nextUrl: 'current-multi-tier-system',
           url: 'current-system',
           baseUrl: 'current-system',
@@ -2796,7 +2911,8 @@ const questionBank = {
             },
             {
               key: 'current-system-A2',
-              value: 'Combi-cage'
+              value: 'Combi-cage',
+              redirectUrl: 'ramp-connection'
             },
             {
               key: 'current-system-A3',
@@ -3119,7 +3235,7 @@ const questionBank = {
           baseUrl: 'ramp-connection',
           backUrlObject: {
             dependentQuestionYarKey: 'currentSystem',
-            dependentAnswerKeysArray: ['current-system-A1'],
+            dependentAnswerKeysArray: ['current-system-A1', 'current-system-A2'],
             urlOptions: {
               thenUrl: 'current-system',
               elseUrl: 'current-multi-tier-system'
@@ -3641,6 +3757,44 @@ const questionBank = {
           ],
           yarKey: 'environmentalDataType'
         },
+        {
+          key: 'bird-number',
+          order: 335,
+          pageTitle: '',
+          classes: 'govuk-input--width-10',
+          url: 'bird-number',
+          baseUrl: 'bird-number',
+          backUrl: 'project-cost',
+          nextUrl: 'solar-PV-cost',
+          fundingPriorities: '',
+          type: 'input',
+          label: {
+            text: `How many birds will {{_projectType_}} be able to house?`,
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare 
+                    features (lighting, ventilation system) for the amount of birds in the building.
+                  </p>
+                  <p>The power capacity for grant funding is 5 kilowatts (kW) per 1,000 birds.</p>
+                  <p>Enter estimated amount, for example 8,000</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter how many birds {{_projectType_}} will be able to house'
+            },
+            {
+              type: 'REGEX',
+              regex: CURRENCY_FORMAT,
+              error: 'Number of birds should be a whole number, like 600'
+            },
+          ],
+          yarKey: 'birdNumber'
+        },  
         {
           key: 'score',
           order: 175,

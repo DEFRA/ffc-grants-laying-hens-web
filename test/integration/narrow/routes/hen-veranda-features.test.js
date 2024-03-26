@@ -46,7 +46,7 @@ describe('Page: /hen-veranda-features', () => {
     expect(postResponse.payload).toContain('Select yes if the veranda will have these features')
   })
 
-  it('user selects eligible option -> store user response and redirect to /hen-veranda-biosecurity', async () => {
+  it('user selects eligible option -> store user response and redirect to /building-items', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/hen-veranda-features`,
@@ -56,7 +56,7 @@ describe('Page: /hen-veranda-features', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('hen-veranda-biosecurity')
+    expect(postResponse.headers.location).toBe('building-items')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -76,7 +76,7 @@ describe('Page: /hen-veranda-features', () => {
     expect(postResponse.payload).toContain('a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access')
     expect(postResponse.payload).toContain('closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system')
     expect(postResponse.payload).toContain('internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide')
-    expect(postResponse.payload).toContain('a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down')
+    expect(postResponse.payload).toContain('a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down.')
   })
 
   it('page loads with correct back link', async () => {

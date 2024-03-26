@@ -45,12 +45,12 @@ describe('Page: /current-system', () => {
     expect(postResponse.payload).toContain('Select what type of hen housing system you currently use')
   })
 
-  it('user selects eligible option(Combi cage) -> store user response and redirect to /current-multi-tier-system', async () => {
+  it('user selects eligible option(Barn) -> store user response and redirect to /current-multi-tier-system', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/current-system`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { currentSystem: 'Combi cage',  crumb: crumbToken }
+      payload: { currentSystem: 'Barn',  crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -58,7 +58,7 @@ describe('Page: /current-system', () => {
     expect(postResponse.headers.location).toBe('current-multi-tier-system')
   })
 
-  it('user selects eligible option except Combi cage -> store user response and redirect to /ramp-connection', async () => {
+  it('user selects eligible option except Colony cage -> store user response and redirect to /ramp-connection', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/current-system`,
@@ -71,13 +71,13 @@ describe('Page: /current-system', () => {
     expect(postResponse.headers.location).toBe('ramp-connection')
   })
 
-  it('page loads with correct back link - /remaining-costs', async () => {
+  it('page loads with correct back link - /interruption-scoring', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/current-system`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"remaining-costs\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"interruption-scoring\" class=\"govuk-back-link\">Back</a>')
   })
 })

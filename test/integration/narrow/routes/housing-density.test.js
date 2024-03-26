@@ -17,7 +17,7 @@ describe('Page: /housing-density', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the pullets be housed within the maximum stocking density when they are 16 weeks old?')
+    expect(response.payload).toContain('Will the pullets be housed within this maximum stocking density when they are 16 weeks old?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -63,7 +63,7 @@ describe('Page: /housing-density', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The maximum stocking density for multi-tier pullet housing at the age of 16 weeks is:')
+    expect(postResponse.payload).toContain('To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within:')
     expect(postResponse.payload).toContain('20kg per m² of the total usable area')
     expect(postResponse.payload).toContain('33kg per m² of the total usable area at floor level')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')

@@ -43,39 +43,27 @@ const checkYarKeyReset = (thisAnswer, request) => {
   }
 }
 
+const getReplacementText = (request, key, questionType, questionKey, trueReturn, falseReturn) => {
+  return getYarValue(request, key) === getQuestionAnswer(questionType, questionKey, ALL_QUESTIONS) ? trueReturn : falseReturn;
+}
+
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
-
     switch (url) {
       case '1000-birds':
-        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)) {
-          return 'laying hens'
-        } else {
-          return 'pullets'
-        }
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets');
       case 'current-multi-tier-system':
-        if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type','poultry-type-A1', ALL_QUESTIONS)){
-          return 'multi-tier aviary systems'
-        } else {
-          return 'multi-tier systems'
-        }
-        case 'lighting-features':
-          if (getYarValue(request, additionalYarKeyName) === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)) {
-            return ' (unless this is already provided as part of an aviary lighting system)'
-          } else {
-            return ''
-          }
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'multi-tier aviary systems', 'multi-tier systems');
+      case 'lighting-features':
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ' (unless this is already provided as part of an aviary lighting system)', '');
+      case 'bird-number':
+        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'the refurbished part of this building', 'this new building');
       default:
-        if (field.includes('£')) {
-          return formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
-        } else {
-          return getYarValue(request, additionalYarKeyName)
-        }
+        return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName);
     }
-
   })
 
-  return field
+  return field;
 }
 
 const titleCheck = (question, title, url, request) => {
@@ -83,6 +71,20 @@ const titleCheck = (question, title, url, request) => {
     question = {
       ...question,
       title: insertYarValue(title, url, request)
+    }
+  }
+
+  return question
+}
+
+const labelTextCheck = (question, label, url, request) => {
+  if (label?.text?.includes('{{_')) {
+    question = {
+      ...question,
+      label: {
+        ...label,
+        text: insertYarValue(label.text, url, request)
+      }
     }
   }
 
@@ -176,6 +178,21 @@ const ineligibleContentCheck = (question, ineligibleContent, url,  request) => {
     }
   }
   
+  return question
+}
+
+const showHideAnswer = (question, request) => { 
+  if(question?.answers){
+    for(let answer of question.answers) {
+      if(answer.dependantShowHideKey && getYarValue(request, answer.dependantShowHideYarKey) === getQuestionAnswer(answer.dependantShowHideKey, answer.dependantShowHideAnswerKey, ALL_QUESTIONS)){
+        question = {
+          ...question,
+          answers:  question.answers.filter(a =>  a.key !== answer.key)
+        }
+      }
+    }
+  }
+
   return question
 }
 
@@ -327,7 +344,7 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 }
 
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent } = question
+  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
@@ -340,6 +357,8 @@ const getPage = async (question, request, h) => {
   question = sidebarCheck(question, url, request)
   question = ineligibleContentCheck(question, ineligibleContent, url, request)
   question = hintTextCheck(question, hint, url, request)
+  question = labelTextCheck(question, label, url, request)
+  question =  showHideAnswer(question, request)
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
@@ -427,6 +446,8 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
   currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
   currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
+  currentQuestion = labelTextCheck(currentQuestion, currentQuestion.label, baseUrl, request)
+  currentQuestion = showHideAnswer(currentQuestion, request)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   const NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
