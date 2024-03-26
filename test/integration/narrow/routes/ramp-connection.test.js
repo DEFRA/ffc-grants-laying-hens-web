@@ -68,7 +68,7 @@ describe('Page: /ramp-connection', () => {
   })
 
   it('page loads with correct back link - /current-multi-tier-system - Combi-cage is selected', async () => {
-    await testBackLink('Combi-cage', 'current-multi-tier-system')
+    await testBackLink('Combi-cage', 'current-system')
   })
 
   it('page loads with correct back link - /current-multi-tier-system - Barn is selected', async () => {
