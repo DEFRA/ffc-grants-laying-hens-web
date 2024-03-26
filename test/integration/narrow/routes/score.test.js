@@ -1,9 +1,13 @@
 const scoreData = require('../../../data/score-data')
+// update to be hen/pullet data. 
+// Test both for correct results pages based on yar/answer
 const { commonFunctionsMock } = require('../../../session-mock')
 const varList = {
 	'current-score': 'wer',
     introducingInnovation: 'wer'
 }
+
+// answerOptionsList needed for poultryType - hens
 
 commonFunctionsMock(varList, 'Error')
 
