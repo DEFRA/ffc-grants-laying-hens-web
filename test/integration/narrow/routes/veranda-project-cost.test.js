@@ -18,20 +18,23 @@ commonFunctionsMock(varList, undefined, {}, valList)
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What is the total estimated cost of the veranda project?')
-    expect(response.payload).toContain('You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £5,000 (40% of £12,500). The maximum grant is £100,000.')
+    expect(response.payload).toContain('What is the estimated cost of the veranda?')
+    expect(response.payload).toContain('You can only apply for a grant of up to 40% of the estimated costs. The minimum grant you can apply for this project is £5,000 (40% of £12,500). The maximum grant is £100,000 (40% of £250,000).')
+    expect(response.payload).toContain('I am adding verandas to multiple buildings')
+    expect(response.payload).toContain('Enter the costs of adding this veranda only')
+    expect(response.payload).toContain('You must submit a separate application for each veranda.')
     expect(response.payload).toContain('Do not include VAT')
     expect(response.payload).toContain('Enter amount, for example 50,000')
   })
 
   it('should return an error message if no option is selected', async () => {
     valList.projectCost = {
-      error: 'Enter the total estimated cost of the veranda project',
+      error: 'Enter the estimated cost of the veranda',
       return: false
     }
 
     valList['NOT_EMPTY'] = {
-      error: 'Enter the total estimated cost of the veranda project',
+      error: 'Enter the estimated cost of the veranda',
       return: false
     }
     const postOptions = {
@@ -43,7 +46,7 @@ commonFunctionsMock(varList, undefined, {}, valList)
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter the total estimated cost of the veranda project')
+    expect(postResponse.payload).toContain('Enter the estimated cost of the veranda')
   })
 
   it('should return an error message if a letter is typed in', async () => {
@@ -123,7 +126,11 @@ commonFunctionsMock(varList, undefined, {}, valList)
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
+    expect(postResponse.payload).toContain('The minimum grant you can apply for is £15,000 (40% of £37,500)')
+    expect(postResponse.payload).toContain('You can apply for grant funding to add verandas to multiple buildings. You must submit a separate application for each veranda.')
+    expect(postResponse.payload).toContain('If the total grant funding for your combined veranda projects is more than £5,000 (40% of £12,500), you may still be eligible to apply for grant funding.')
+    expect(postResponse.payload).toContain('If you are applying for grant funding for a single veranda, you can <a href=\"https://www.gov.uk/government/organisations/rural-payments-agency\"> see other grants you may be eligible for.</a>')
+    expect(postResponse.payload).toContain('I am applying to add verandas to multiple buildings')
   })
 
   it('should store valid user input and redirect to veranda-potential-amount page', async () => {
