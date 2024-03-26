@@ -2561,22 +2561,33 @@ const questionBank = {
           },
           id: 'projectCost',
           label: {
-            text: 'What is the total estimated cost of the veranda project?',
+            text: 'What is the estimated cost of the veranda?',
             classes: 'govuk-label--l',
             isPageHeading: true,
             for: 'projectCost'
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £5,000 (${GRANT_PERCENTAGE}% of £12,500). The maximum grant is £100,000.</p>
-                  <p>Do not include VAT</p>
-                  <p>Enter amount, for example 50,000</p>
-              `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £5,000 (${GRANT_PERCENTAGE}% of £12,500). The maximum grant is £100,000 (${GRANT_PERCENTAGE}% of £250,000).</p>
+              <details class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am adding verandas to multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of adding this veranda only</p>
+                  <p>You must submit a separate application for each veranda.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 50,000</p>
+            `,
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the total estimated cost of the veranda project'
+              error: 'Enter the estimated cost of the veranda'
             },
             {
               type: 'REGEX',
@@ -2591,12 +2602,14 @@ const questionBank = {
             }
           ],
           ineligibleContent: {
-            messageContent: `The minimum grant you can apply for veranda project costs is £5,000 (${GRANT_PERCENTAGE}% of £12,500).`,
+            messageContent: `You can apply for grant funding to add verandas to multiple buildings. You must submit a separate application for each veranda.</br></br>
+            If the total grant funding for your combined veranda projects is more than £5,000 (${GRANT_PERCENTAGE}% of £12,500), you may still be eligible to apply for grant funding.</br></br>
+            If you are applying for grant funding for a single veranda, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> see other grants you may be eligible for.</a>`,
             messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
+              url: `veranda-potential-amount`,
+              title: 'I am applying to add verandas to multiple buildings'
+            },
+          },    
           answers: [],
           yarKey: 'projectCost'
         },
