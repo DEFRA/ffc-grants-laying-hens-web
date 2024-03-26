@@ -3890,13 +3890,14 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              regex:  ONLY_DIGITS_AND_DECIMAL_REGEX,
+              // no special chars, only numbers
+              regex:  /^\d*(\.\d+)?$/,
               error: 'Estimated power capacity must be a number, like 10'
             },
             {
-              type: 'MIN_MAX_CHARS',
-              min: 1,
-              max: 2,
+              type: 'REGEX',
+              // only 2 decimal places
+              regex:  /^(\d{1,2}(\.\d{1,2})?)$/,
               error: 'Estimated power capacity must be a number up to 2 decimal places'
             }
           ],

@@ -61,7 +61,7 @@ describe('Page: /solar-power-capacity', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-power-capacity`,
-      payload: { solarPowerCapacity: '123' , crumb: crumbToken },
+      payload: { solarPowerCapacity: '123.222' , crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
