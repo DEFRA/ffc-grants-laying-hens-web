@@ -4,7 +4,7 @@ module.exports = [{
 }]
 module.exports = [{
   key: 'LAYINGHENS01',
-  name: 'Laying Hens Grant '
+  name: 'Laying Hens Grant'
 }, {
   key: 'LAYINGHENS02',
   name: 'Pullet Grant'
