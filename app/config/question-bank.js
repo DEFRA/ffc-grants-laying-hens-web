@@ -2626,16 +2626,15 @@ const questionBank = {
           classes: 'govuk-input--width-10',
           url: 'project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-type',
-          // backUrlObject: {
-          //   dependentQuestionYarKey: 'heritageSite',
-          //   dependentAnswerKeysArray: ['heritage-site-A2'],
-          //   urlOptions: {
-          //     thenUrl: 'heritage-site',
-          //     elseUrl: 'solar-PV-system',
-          //     nonDependentUrl: 'solar-PV-system'
-          //   }
-          // },
+          backUrlObject: {
+            dependentQuestionYarKey: 'roofSolarPVExemption' ,
+            dependentAnswerKeysArray: ['roof-solar-PV-exemption-A7'],
+            urlOptions: {
+              thenUrl: 'roof-support-solar-PV',
+              elseUrl: 'roof-solar-PV-exemption',
+              nonDependentUrl: 'solar-PV-system'
+            }
+          },
           nextUrl: 'potential-amount',
           fundingPriorities: '',
           // preValidationKeys: [],
@@ -2655,22 +2654,38 @@ const questionBank = {
             isPageHeading: true
           },
           hint: {
-            html: `
-                  <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.</p>
-                  <details class="govuk-details">
-                    <summary class="govuk-details__summary">
-                      <span class="govuk-details__summary-text">
-                        I am replacing or refurbishing multiple buildings
-                      </span>
-                    </summary>
-                    <div class="govuk-details__text">
-                      <p>Enter the costs of {{_projectType_}} this building only.</p>
-                      <p>You must submit a separate application for each building.</p>
-                    </div>
-                  </details>
-                  <p>Do not include VAT</p>
-                  <p>Enter amount, for example 95,000</p>
-              `
+            htmlSolar: `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building. Do not include the solar PV system costs in the estimated building project costs.</p>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am replacing or refurbishing multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of {{_projectType_}} this building only.</p>
+                  <p>You must submit a separate application for each building.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 95,000</p>
+            `,
+            htmlNoSolar: `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building.</p>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am replacing or refurbishing multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of {{_projectType_}} this building only.</p>
+                  <p>You must submit a separate application for each building.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 95,000</p>
+            `
           },
           details: {
             summaryText: 'I am replacing or refurbishing multiple buildings',

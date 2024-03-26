@@ -30,6 +30,7 @@ const { desirability } = require('./../messaging/scoring/create-desirability-msg
 
 
 const { ALL_QUESTIONS } = require('../config/question-bank')
+const { GRANT_PERCENTAGE } = require('./grant-details')
 
 const createModel = (data, backUrl, url) => {
   return {
@@ -102,16 +103,11 @@ const labelTextCheck = (question, label, url, request) => {
 
 const titleCheck = (question, title, url, request) => {
   if (title?.includes('{{_')) {
-    // console.log("requesttt", request)
-    // console.log("questionnn", question)
-    // console.log("title 1", question.title)
     question = {
       ...question,
       title: insertYarValue(title, url, request)
     }
   }
-      // console.log("title 2", question.title)
-
 
   return question
 }
@@ -121,8 +117,8 @@ const hintTextCheck = (question, hint, url, request) => {
     question = {
       ...question,
       hint: {
-            ...hint,
-            html: insertYarValue(hint.html,url, request)
+        ...hint,
+        html: insertYarValue(hint.html, url, request)
       }
     }
   }
@@ -374,6 +370,16 @@ const getPage = async (question, request, h) => {
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
   if (isRedirect) {
     return h.redirect(startPageUrl)
+  }
+
+  if (url === 'project-cost') {
+    if (getYarValue(request, 'solarPVSystem') === 'Yes'){
+      question.hint.html = question.hint.htmlSolar
+      hint.html = question.hint.htmlSolar
+    } else {
+      question.hint.html = question.hint.htmlNoSolar
+      hint.html = question.hint.htmlNoSolar
+    }
   }
 
   // formatting variables block
