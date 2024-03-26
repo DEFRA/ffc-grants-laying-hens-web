@@ -46,7 +46,7 @@ describe('Page: /veranda-features', () => {
     expect(postResponse.payload).toContain('Select yes if the veranda will have these features')
   })
 
-  it('user selects eligible option -> store user response and redirect to /veranda-biosecurity', async () => {
+  it('user selects eligible option -> store user response and redirect to /veranda-project-cost', async () => {
     valList.verandaFeatures = null
     const postOptions = {
       method: 'POST',
@@ -57,7 +57,7 @@ describe('Page: /veranda-features', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('veranda-biosecurity')
+    expect(postResponse.headers.location).toBe('veranda-project-cost')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {

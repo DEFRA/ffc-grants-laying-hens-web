@@ -10,7 +10,8 @@ const {
   ADDRESS_REGEX,
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
-  POSTCODE_REGEX
+  POSTCODE_REGEX,
+  CURRENCY_FORMAT
 } = require('ffc-grants-common-functionality').regex
 
 const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
@@ -1587,8 +1588,7 @@ const questionBank = {
                 heading: 'Eligibility',
                 content: [{
                   para: `The ventilation system must be able to prevent the heat that the birds 
-                  generate from increasing the house temperature by more 
-                  than 3°C above the external ambient temperature. `
+                  generate from increasing the house temperature by more than 3°C above the external ambient temperature.`
                 }]
               }
             ]
@@ -2334,6 +2334,80 @@ const questionBank = {
           yarKey: 'roofSupportSolarPV'
         },
         {
+          key: 'roof-solar-PV-exemption',
+          order: 260,
+          title: 'Which of these statements apply to this project?',
+          url: 'roof-solar-PV-exemption',
+          baseUrl: 'roof-solar-PV-exemption',
+          backUrl: 'solar-PV-system',
+          nextUrl: 'project-cost',
+          preValidationKeys: '',
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The roof must be able to support solar PV panels, allowing for potential use in the future, unless any of these statements apply. `
+              }]
+            }]
+          },
+          type: 'multi-answer',
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select which of these statement apply to this project'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'roof-solar-PV-exemption',
+                answerKey: 'roof-solar-PV-exemption-A7'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'roof-solar-PV-exemption-A1',
+              value: 'The building is listed'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A2',
+              value: 'The building is on a World Heritage Site'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A3',
+              value: 'I am not making changes to this building’s roof',
+              dependantShowHideKey: 'project-type',
+              dependantShowHideAnswerKey: 'project-type-A2',
+              dependantShowHideYarKey: 'projectType',
+            },
+            {
+              key: 'roof-solar-PV-exemption-A4',
+              value: 'The roof only faces north'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A5',
+              value: 'The roof is heavily shaded'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A6',
+              value: 'The roof does not have 100m2 of clear roof space'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'roof-solar-PV-exemption-A7',
+              value: 'None of the above',
+              redirectUrl: 'roof-support-solar-PV'
+            }
+          ],
+          yarKey: 'roofSolarPVExemption'
+        },
+        {
           key: 'veranda-only-size',
           order: 245,
           title: 'How big will the veranda be?',
@@ -2399,7 +2473,7 @@ const questionBank = {
           url: 'veranda-features',
           baseUrl: 'veranda-features',
           backUrl: 'veranda-only-size',
-          nextUrl: 'veranda-biosecurity',
+          nextUrl: 'veranda-project-cost',
           hint: {
             html: `
               <p>The veranda must have a:</p>
@@ -2463,72 +2537,6 @@ const questionBank = {
             }
           ],
           yarKey: 'verandaFeatures'
-        },
-        {
-          key: 'veranda-biosecurity',
-          order: 255,
-          title: 'Will the veranda be biosecure?',
-          pageTitle: '',
-          url: 'veranda-biosecurity',
-          baseUrl: 'veranda-biosecurity',
-          backUrl: 'veranda-features',
-          nextUrl: 'veranda-project-cost',
-          hint: {
-            html: `
-                  <p>The veranda must have:</p>
-                  <ul class="govuk-list--bullet">
-                    <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                    <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system</li>
-                  </ul>`
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You must be able to make the veranda biosecure with mesh during housing orders.
-
-                      The pop hole openings must add up to a total of 2 metres for every 1,000 hens.
-                
-                      The base of all pop holes must either:`,
-
-                items:['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.']
-              }]
-            }]
-          },
-          ineligibleContent: {
-            messageContent: `
-              <p class="govuk-body">The veranda must have:</p>
-              <ul class="govuk-list govuk-list--bullet">
-                <li>a mesh roller screen with a mesh hole size of 6mm or less running underneath the length of the roof, that fits securely against the wall when extended</li>
-                <li>closable pop holes along the length of the building which are at least 35cm high and 40cm wide, unless the veranda is part of an indoor barn system.</li>
-              </ul>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the veranda will be biosecure'
-            }
-          ],
-          answers: [
-            {
-              key: 'veranda-biosecurity-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'veranda-biosecurity-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'verandaBiosecurity'
         },
         {
           key: 'veranda-project-cost',
@@ -2883,7 +2891,7 @@ const questionBank = {
           order: 180,
           title: 'What type of {{_poultryType_}} housing system do you currently use in the building?',
           pageTitle: '',
-          backUrl: 'remaining-costs',
+          backUrl: 'interruption-scoring',
           nextUrl: 'current-multi-tier-system',
           url: 'current-system',
           baseUrl: 'current-system',
@@ -2916,7 +2924,8 @@ const questionBank = {
             },
             {
               key: 'current-system-A2',
-              value: 'Combi-cage'
+              value: 'Combi-cage',
+              redirectUrl: 'ramp-connection'
             },
             {
               key: 'current-system-A3',
@@ -3239,7 +3248,7 @@ const questionBank = {
           baseUrl: 'ramp-connection',
           backUrlObject: {
             dependentQuestionYarKey: 'currentSystem',
-            dependentAnswerKeysArray: ['current-system-A1'],
+            dependentAnswerKeysArray: ['current-system-A1', 'current-system-A2'],
             urlOptions: {
               thenUrl: 'current-system',
               elseUrl: 'current-multi-tier-system'
@@ -3761,6 +3770,44 @@ const questionBank = {
           ],
           yarKey: 'environmentalDataType'
         },
+        {
+          key: 'bird-number',
+          order: 335,
+          pageTitle: '',
+          classes: 'govuk-input--width-10',
+          url: 'bird-number',
+          baseUrl: 'bird-number',
+          backUrl: 'project-cost',
+          nextUrl: 'solar-PV-cost',
+          fundingPriorities: '',
+          type: 'input',
+          label: {
+            text: `How many birds will {{_projectType_}} be able to house?`,
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare 
+                    features (lighting, ventilation system) for the amount of birds in the building.
+                  </p>
+                  <p>The power capacity for grant funding is 5 kilowatts (kW) per 1,000 birds.</p>
+                  <p>Enter estimated amount, for example 8,000</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter how many birds {{_projectType_}} will be able to house'
+            },
+            {
+              type: 'REGEX',
+              regex: CURRENCY_FORMAT,
+              error: 'Number of birds should be a whole number, like 600'
+            },
+          ],
+          yarKey: 'birdNumber'
+        },  
         {
           key: 'score',
           order: 175,
