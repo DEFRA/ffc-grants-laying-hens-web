@@ -2381,7 +2381,7 @@ const questionBank = {
               key: 'roof-solar-PV-exemption-A3',
               value: 'I am not making changes to this building’s roof',
               dependantShowHideKey: 'project-type',
-              dependantShowHideAnswerKey: 'project-type-A2',
+              dependantShowHideAnswerKey: 'project-type-A3',
               dependantShowHideYarKey: 'projectType',
             },
             {
@@ -2394,7 +2394,7 @@ const questionBank = {
             },
             {
               key: 'roof-solar-PV-exemption-A6',
-              value: 'The roof does not have 100m2 of clear roof space'
+              value: 'The roof does not have 100m² of clear roof space'
             },
             {
               value: 'divider'
