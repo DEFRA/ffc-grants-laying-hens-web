@@ -34,32 +34,101 @@ describe('create-msg', () => {
     getYarValue.mockImplementation((req, key) => (dict[key]))
 
     dict = {
-      housing: 'hello',
-      calfGroupSize: 'hello',
-      moistureControl: ['hello'],
-      permanentSickPen: ['hello'],
-      environmentalImpact: ['hello'],
-      sustainableMaterials: ['hello'],
-      introducingInnovation: ['hello']
+      poultryType: 'hello',
+      currentSystem: 'hello',
+      currentMultiTierSystem: 'hello',
+      rampConnection: 'hello',
+      maximumTierHeight: 'hello',
+      threeTiers: 'hello',
+      henMultiTier: 'hello',
+      // pulletMultiTier: 'hello',
+      naturalLight: 'hello',
+      // darkBrooders: 'hello',
+      easyGripPerches: 'hello',
+      buildingBiosecurity: ['hello'],
+      pollutionMitigation: ['hello'],
+      // pulletVerandaFeatures: 'hello'
+      renewableEnergy: ['hello'],
+      birdDataType: ['hello'],
+      environmentalDataType: ['hello']
     }
     expect(getDesirabilityAnswers({})).toEqual({
-      housing: 'hello',
-      calfGroupSize: 'hello',
-      moistureControl: ['hello'],
-      permanentSickPen: ['hello'],
-      environmentalImpact: ['hello'],
-      sustainableMaterials: ['hello'],
-      introducingInnovation: ['hello']
+      poultryType: 'hello',
+      currentSystem: 'hello',
+      currentMultiTierSystem: 'hello',
+      rampConnection: 'hello',
+      maximumTierHeight: 'hello',
+      threeTiers: 'hello',
+      henMultiTier: 'hello',
+      // pulletMultiTier: 'hello',
+      naturalLight: 'hello',
+      // darkBrooders: 'hello',
+      easyGripPerches: 'hello',
+      buildingBiosecurity: ['hello'],
+      pollutionMitigation: ['hello'],
+      // pulletVerandaFeatures: 'hello'
+      renewableEnergy: ['hello'],
+      birdDataType: ['hello'],
+      environmentalDataType: ['hello']
     })
 
     dict = {
-      housing: null,
-      calfGroupSize: null,
-      moistureControl: null,
-      permanentSickPen: null,
-      environmentalImpact: null,
-      sustainableMaterials: null,
-      introducingInnovation: null
+      poultryType: 'hello',
+      currentSystem: 'hello',
+      currentMultiTierSystem: null,
+      rampConnection: 'hello',
+      maximumTierHeight: 'hello',
+      threeTiers: 'hello',
+      henMultiTier: null,
+      // pulletMultiTier: null,
+      naturalLight: 'hello',
+      // darkBrooders: null,
+      easyGripPerches: 'hello',
+      buildingBiosecurity: ['hello'],
+      pollutionMitigation: ['hello'],
+      // pulletVerandaFeatures: null
+      renewableEnergy: ['hello'],
+      birdDataType: ['hello'],
+      environmentalDataType: ['hello']
+    }
+    expect(getDesirabilityAnswers({})).toEqual({
+      poultryType: 'hello',
+      currentSystem: 'hello',
+      currentMultiTierSystem: null,
+      rampConnection: 'hello',
+      maximumTierHeight: 'hello',
+      threeTiers: 'hello',
+      henMultiTier: null,
+      // pulletMultiTier: null,
+      naturalLight: 'hello',
+      // darkBrooders: null,
+      easyGripPerches: 'hello',
+      buildingBiosecurity: ['hello'],
+      pollutionMitigation: ['hello'],
+      // pulletVerandaFeatures: null
+      renewableEnergy: ['hello'],
+      birdDataType: ['hello'],
+      environmentalDataType: ['hello']
+    })
+
+    dict = {
+      poultryType: null,
+      currentSystem: null,
+      currentMultiTierSystem: null,
+      rampConnection: null,
+      maximumTierHeight: null,
+      threeTiers: null,
+      henMultiTier: null,
+      // pulletMultiTier: null,
+      naturalLight: null,
+      // darkBrooders: null,
+      easyGripPerches: null,
+      buildingBiosecurity: null,
+      pollutionMitigation: null,
+      // pulletVerandaFeatures: null
+      renewableEnergy: null,
+      birdDataType: null,
+      environmentalDataType: null
     }
 
     expect(getDesirabilityAnswers({})).toEqual(null)

@@ -67,10 +67,10 @@ const config = {
     type: 'topic',
     ...sharedConfig
   },
-  desirabilitySubmittedMsgType: `${msgTypePrefix}.slurry.desirability.notification`,
-  fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.score.request`,
-  eligibilityAnswersMsgType: `${msgTypePrefix}.slurry.eligibility.details`,
-  contactDetailsMsgType: `${msgTypePrefix}.slurry.contact.details`,
+  desirabilitySubmittedMsgType: `${msgTypePrefix}.layingHens.desirability.notification`,
+  fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.layingHens.score.request`,
+  eligibilityAnswersMsgType: `${msgTypePrefix}.layingHens.eligibility.details`,
+  contactDetailsMsgType: `${msgTypePrefix}.layingHens.contact.details`,
   msgSrc: 'ffc-grants-laying-hens-web'
 }
 

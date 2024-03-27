@@ -1,13 +1,22 @@
 module.exports = {
-  desirabilityQuestions: require('./desirability-questions'),
+  desirabilityQuestions: require('./desirability-questions.json'),
   desirabilityInputQuestionMapping: {
-    housing: 'housing',
-    'calf-group-size': 'calfGroupSize',
-    'moisture-control': 'moistureControl',
-    'permanent-sick-pen': 'permanentSickPen',
-    'environmental-impact': 'environmentalImpact',
-    'sustainable-materials': 'sustainableMaterials',
-    'introducing-innovation': 'introducingInnovation'
-
+    'poultry-type': 'poultryType',
+    'current-system': 'currentSystem',
+    'current-multi-tier-system': 'currentMultiTierSystem',
+    'ramp-connection': 'rampConnection',
+    'maximum-tier-height': 'maximumTierHeight',
+    'three-tiers': 'threeTiers',
+    'hen-multi-tier': 'henMultiTier',
+    'pullet-multi-tier': 'pulletMultiTier',
+    'natural-light': 'naturalLight',
+    'dark-brooders': 'darkBrooders',
+    'easy-grip-perches': 'easyGripPerches',
+    'building-biosecurity': 'buildingBiosecurity',
+    'pollution-mitigation': 'pollutionMitigation',
+    'pullet-veranda-features': 'pulletVerandaFeatures',
+    'renewable-energy': 'renewableEnergy',
+    'bird-data-type': 'birdDataType',
+    'environmental-data-type': 'environmentalDataType'
   }
 }

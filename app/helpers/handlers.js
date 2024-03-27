@@ -24,11 +24,9 @@ const {
 } = require('./pageHelpers')
 
 const { getUserScore } = require('../messaging/application')
-const { tableOrder } = require('../helpers/score-table-helper')
+const { tableOrderHen, tableOrderPullet } = require('./score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
-
-
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const createModel = (data, backUrl, url) => {
@@ -204,6 +202,7 @@ const scorePageData = async (request, backUrl, url, h) => {
 
   try {
     const msgData = await getUserScore(formatAnswersForScoring, request.yar.id)
+    console.log('[THIS IS WHAT WE GOT BACK]', msgData)
 
     setYarValue(request, 'current-score', msgData.desirability.overallRating.band) // do we need this alongside overAllScore? Having both seems redundant
 
@@ -223,15 +222,9 @@ const scorePageData = async (request, backUrl, url, h) => {
 
     setYarValue(request, 'overAllScore', msgData)
 
+    let tableOrder = getYarValue(request, 'poultry-type') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? tableOrderHen : tableOrderPullet
+
     const questions = msgData.desirability.questions.map(desirabilityQuestion => {
-      if (desirabilityQuestion.key === 'environmental-impact' && getYarValue(request, 'SolarPVCost') === null) {
-        desirabilityQuestion.key = 'rainwater'
-        if (desirabilityQuestion.answers[0].input[0].value === 'None of the above') {
-          desirabilityQuestion.answers[0].input[0].value = 'No'
-        } else {
-          desirabilityQuestion.answers[0].input[0].value = 'Yes'
-        }
-      }
 
       const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
       desirabilityQuestion.title = tableQuestion.title
@@ -254,7 +247,7 @@ const scorePageData = async (request, backUrl, url, h) => {
       scoreChance: scoreChance
     }, backUrl, url))
   } catch (error) {
-    console.log(error)
+    console.log('[Score ERROR]:',error)
     await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.EXCEPTION, params: { error: error.message } })
     return h.view('500')
   }
@@ -419,10 +412,6 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
       thisAnswer = answers?.find(answer => (answer.value === value[0]))
     } else {
       thisAnswer = answers?.find(answer => (answer.value === value))
-    }
-
-    if (key === 'henVeranda' && value === 'My project is exempt') {
-      setYarValue(request, 'henPopHoles', null)
     }
 
     if (type !== 'multi-input' && key !== 'secBtn') {
