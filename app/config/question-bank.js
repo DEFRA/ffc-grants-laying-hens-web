@@ -4949,7 +4949,7 @@ const questionBank = {
             <p>2. If you submit an application, RPA will assess it against other projects and value for money. You will not automatically get a grant. The grant is expected to be highly competitive and you are competing against other projects.</p>
             <p>3. If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</p>
             `,
-            warning: {
+            middleWarning: {
               text: 'You must not start the project'
             },
             insertText: { text: '' },
