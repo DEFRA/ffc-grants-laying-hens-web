@@ -1635,7 +1635,18 @@ const questionBank = {
           pageTitle: '',
           url: 'lighting-features',
           baseUrl: 'lighting-features',
-          backUrl: 'pullet-housing-requirements',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A2'],
+            dependentElseUrlYarKey: 'projectType',
+            dependentElseUrlQuestionKey: 'project-type',
+            dependentElseUrlAnswerKey: 'project-type-A2',
+            urlOptions: {
+              thenUrl: 'pullet-housing-requirements',
+              elseUrl: 'replacing-insulation',
+              dependantElseUrl: 'refurbishing-insulation'
+            }
+          },
           nextUrlObject: {
             dependentQuestionYarKey: ['poultryType'],
             dependentAnswerKeysArray: ['poultry-type-A1'],

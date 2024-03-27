@@ -366,23 +366,6 @@ const getPage = async (question, request, h) => {
     return scorePageData(request, backUrl, url, h)
   }
 
-  if (url === 'lighting-features') {
-    const projectType = getYarValue(request, 'projectType');
-    const poultryType = getYarValue(request, 'poultryType');
-  
-    const poultryTypeA1 = getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS);
-    const projectTypeA3 = getQuestionAnswer('project-type','project-type-A3', ALL_QUESTIONS);
-    const projectTypeA2 = getQuestionAnswer('project-type','project-type-A2', ALL_QUESTIONS);
-  
-    if(poultryType === poultryTypeA1 && projectType === projectTypeA3) {
-      question.backUrl = `${urlPrefix}/replacing-insulation`
-    } else if (poultryType === poultryTypeA1 && projectType === projectTypeA2) {
-      question.backUrl = `${urlPrefix}/refurbishing-insulation`
-    } else {
-      question.backUrl = `${urlPrefix}/pullet-housing-requirements`
-    }
-  }
-
   const confirmationId = ''
   await processGA(question, request)
 

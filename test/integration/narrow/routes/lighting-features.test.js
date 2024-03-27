@@ -9,7 +9,9 @@ describe('Page: /lighting-features', () => {
 
   const utilsList = {
     'poultry-type-A1': 'hen',
-    'poultry-type-A2': 'pullet'
+    'poultry-type-A2': 'pullet',
+    'project-type-A2': 'Refurbishing an existing laying hen or pullet building',
+    'project-type-A3': 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
   }
 
   let valList = {}
@@ -148,19 +150,19 @@ describe('Page: /lighting-features', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/laying-hens/refurbishing-insulation\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"refurbishing-insulation\" class=\"govuk-back-link\">Back</a>')
   })
 
   it('page loads with correct back link - /replacing-insulation', async () => {
-    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
     varList.poultryType = 'hen'
+    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/lighting-features`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/laying-hens/replacing-insulation\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"replacing-insulation\" class=\"govuk-back-link\">Back</a>')
   })
 
   it('page loads with correct back link - /pullet-housing-requirements', async () => {
@@ -171,6 +173,6 @@ describe('Page: /lighting-features', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/laying-hens/pullet-housing-requirements\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"pullet-housing-requirements\" class=\"govuk-back-link\">Back</a>')
   })
 })
