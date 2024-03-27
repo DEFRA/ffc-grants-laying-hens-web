@@ -224,7 +224,12 @@ const scorePageData = async (request, backUrl, url, h) => {
 
     let tableOrder = getYarValue(request, 'poultry-type') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? tableOrderHen : tableOrderPullet
 
+    console.log(msgData.desirability.questions[0])
+
     const questions = msgData.desirability.questions.map(desirabilityQuestion => {
+      console.log(desirabilityQuestion, 'AWWWWWWWWW')
+
+      // if currentmultittiersystem, show. else dont show
 
       const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
       desirabilityQuestion.title = tableQuestion.title
