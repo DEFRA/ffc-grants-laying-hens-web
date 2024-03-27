@@ -1633,16 +1633,20 @@ const questionBank = {
         {
           key: 'lighting-features',
           order: 180,
-          title: 'Will the housing lighting system have these features?',
+          title: 'Will the house lighting system have these features?',
           pageTitle: '',
           url: 'lighting-features',
           baseUrl: 'lighting-features',
           backUrlObject: {
-            dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A2'],
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A2'],
+            dependentElseUrlYarKey: 'projectType',
+            dependentElseUrlQuestionKey: 'project-type',
+            dependentElseUrlAnswerKey: 'project-type-A2',
             urlOptions: {
-              thenUrl: 'refurbishing-insulation',
-              elseUrl: 'replacing-insulation'
+              thenUrl: 'pullet-housing-requirements',
+              elseUrl: 'replacing-insulation',
+              dependantElseUrl: 'refurbishing-insulation'
             }
           },
           nextUrlObject: {
@@ -1654,25 +1658,25 @@ const questionBank = {
             }
           },
           hint: {
-            html: `<p>The housing lighting system must have:</p>
+            html: `<p>When the project is complete, the house lighting system must have:</p>
                   <ul>
                       <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
                       <li>capacity for zonal dimming between 0 and 60 lux</li>
-                      <li>coverage of the entire floor-litter (scratch) area</li>
-                      <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
+                      <li>full coverage of the entire floor-litter (scratch) area</li>
+                      <span>{{_poultryType_}}</span>
                       <li>an option for red light to reduce feather pecking</li>
                   </ul>`
           },
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
-                  <p class="govuk-body">The housing lighting system must have:</p>
+                  <p class="govuk-body">When the project is complete, the house lighting system must have:</p>
                   <ul>
                       <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
                       <li>capacity for zonal dimming between 0 and 60 lux</li>
-                      <li>coverage of the entire floor-litter (scratch) area</li>
-                      <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
-                      <li>an option for red light to reduce feather pecking</li>
+                      <li>full coverage of the entire floor-litter (scratch) area</li>
+                      <span>{{_poultryType_}}</span>
+                      <li>an option for red light to reduce feather pecking.</li>
                   </ul>
               </div>`,
             messageLink: {
@@ -1685,7 +1689,7 @@ const questionBank = {
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: 'The housing lighting system must have these features to promote positive bird behaviour and reduce stress.',
+                  para: 'When the project is complete. the house lighting system must have these features to promote positive bird behaviour and reduce stress.',
                   items: [],
                 }]
               }
@@ -1698,7 +1702,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the building lighting system will have these features'
+              error: 'Select yes if the house lighting system will have these features'
             }
           ],
           answers: [
@@ -2503,8 +2507,9 @@ const questionBank = {
           },
           ineligibleContent: {
             messageContent: `
+            <div class="govuk-list govuk-list--bullet">
               <p>The veranda must have a:</p>
-              <ul class="govuk-list--bullet">
+              <ul>
                 <li>a solid concrete floor</li>
                 <li>a waterproof insulated roof</li>
                 <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
@@ -2512,7 +2517,8 @@ const questionBank = {
                 <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                 <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
                 <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
-              </ul>`,
+              </ul>
+              </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -3851,7 +3857,7 @@ const questionBank = {
               error: 'Number of birds should be a whole number, like 600'
             },
           ],
-          yarKey: 'birdNumber'
+          yarKey: 'solarBirdNumber'
         },
         {
           key: 'solar-PV-cost',
