@@ -495,7 +495,7 @@ const showPostPage = (currentQuestion, request, h) => {
   if (baseUrl === 'veranda-project-cost') {
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: 'The minimum grant you can apply for is £15,000 (40% of £37,500)' }
   }
- 
+
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
   }
@@ -510,10 +510,6 @@ const showPostPage = (currentQuestion, request, h) => {
       { name: gapiService.eventTypes.ELIMINATION, params: {} })
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
-
-  // if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
-  //   return h.redirect('/laying-hens/potential-amount-capped')
-  // }
   
   if (yarKey === 'projectCost') {
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)

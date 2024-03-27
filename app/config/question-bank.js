@@ -3953,7 +3953,7 @@ const questionBank = {
             {
               type: 'REGEX',
               // only 2 decimal places
-              regex:  /^(\d{1,2}(\.\d{1,2})?)$/,
+              regex:  /^(\d{1,9}(\.\d{1,2})?)$/,
               error: 'Estimated power capacity must be a number up to 2 decimal places'
             }
           ],
