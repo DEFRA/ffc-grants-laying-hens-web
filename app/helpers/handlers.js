@@ -446,7 +446,7 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate, label } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
 
   if (baseUrl !== 'score') {
