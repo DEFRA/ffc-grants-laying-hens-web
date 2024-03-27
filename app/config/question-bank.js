@@ -3750,15 +3750,15 @@ const questionBank = {
             },
             {
               key: 'environmental-data-type-A2',
-              value: 'Carbon monoxide ',
+              value: 'Carbon monoxide'
             },
             {
               key: 'environmental-data-type-A3',
-              value: 'Inhalable dust',
+              value: 'Inhalable dust'
             },
             {
               key: 'environmental-data-type-A4',
-              value: 'Other',
+              value: 'Other'
             },
             {
               value: 'divider'
