@@ -2856,25 +2856,6 @@ const questionBank = {
           }
         },
         {
-          key: 'potential-amount-capped',
-          order: 165,
-          url: 'potential-amount-capped',
-          baseUrl: 'potential-amount-capped',
-          backUrl: 'project-cost',
-          nextUrl: 'remaining-costs',
-          // preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: `The maximum grant you can apply for is £500,000.
-            You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
-            insertText: { text: '' },
-            warning: {
-              text: 'There’s no guarantee the project will receive a grant.'
-            }
-          }
-        },
-        {
           key: 'remaining-costs',
           order: 170,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
