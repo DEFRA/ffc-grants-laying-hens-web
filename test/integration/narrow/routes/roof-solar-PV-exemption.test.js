@@ -28,10 +28,10 @@ describe('Page: /roof-solar-PV-exemption', () => {
     expect(response.payload).toContain('Which of these statements apply to this project?')
     expect(response.payload).toContain('The building is listed')
     expect(response.payload).toContain('The building is on a World Heritage Site')
-    expect(response.payload).toContain('I am not making changes to this building’s roof');
+    expect(response.payload).not.toContain('I am not making changes to this building’s roof');
     expect(response.payload).toContain('The roof only faces north')
     expect(response.payload).toContain('The roof is heavily shaded')
-    expect(response.payload).toContain('The roof does not have 100m2 of clear roof space')
+    expect(response.payload).toContain('The roof does not have 100m² of clear roof space')
     expect(response.payload).toContain('None of the above')
 
   })
@@ -44,8 +44,7 @@ describe('Page: /roof-solar-PV-exemption', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).not.toContain('I am not making changes to this building’s roof');
-
+    expect(response.payload).toContain('I am not making changes to this building’s roof');
   })
 
   it('no option selected -> show error message', async () => {
