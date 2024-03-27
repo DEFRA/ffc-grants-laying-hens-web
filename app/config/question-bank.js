@@ -3807,7 +3807,102 @@ const questionBank = {
             },
           ],
           yarKey: 'birdNumber'
-        },  
+        },
+        {
+          key: 'solar-PV-cost',
+          order: 340,
+          classes: 'govuk-input--width-10',
+          url: 'solar-PV-cost',
+          baseUrl: 'solar-PV-cost',
+          backUrl: 'bird-number',
+          nextUrl: 'solar-power-capacity',
+          preValidationKeys: [],
+          type: 'input',
+          prefix: {
+            text: '£'
+          },
+          id: 'solarPVCost',
+          label: {
+            text: 'What is the estimated cost of buying and installing the solar PV system?',
+            classes: 'govuk-label--l',
+            isPageHeading: true,
+            for: 'solarPVCost'
+          },
+          hint: {
+            html: `
+                  <p>You can apply for up to 25% of the estimated costs of buying and installing a solar PV system which has a power capacity of up to 5kW in energy output per 1,000 birds.</p>
+                  <p>The maximum grant funding each business can apply for is £500,000 for building and solar PV system costs combined.</p>
+                  <p>Enter estimated amount, for example 200,000</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the estimated cost of buying and installing the solar PV system'
+            },
+            {
+              type: 'REGEX',
+              //  numbers and commas only
+              regex:  /^[0-9,]+$/,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'MIN_MAX_CHARS',
+              min: 1,
+              max: 7,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            }
+          ],
+          yarKey: 'solarPVCost'
+        },
+        {
+          key: 'solar-power-capacity',
+          order: 350,
+          classes: 'govuk-input--width-10',
+          url: 'solar-power-capacity',
+          baseUrl: 'solar-power-capacity',
+          backUrl: 'solar-PV-cost',
+          nextUrl: 'potential-amount-solar',
+          preValidationKeys: [],
+          type: 'input',
+          prefix: {
+            text: 'kW'
+          },
+          id: 'solarPowerCapacity',
+          label: {
+            text: 'What is the power capacity of the solar PV system?',
+            classes: 'govuk-label--l',
+            isPageHeading: true,
+            for: 'solarPowerCapacity'
+          },
+          hint: {
+            html: `
+                  <p>This grant will fund a solar PV system that has a power capacity of up to 5kW per 1,000 birds.</p>
+                  <p>You can install a solar PV system that has a power capacity of more than 5kW of energy per 1,000 birds. You must fund the 
+                  remaining solar PV system costs above the power capacity of 5kw per 1,000 birds. </p>
+                  <p>Enter estimated power capacity, for example 10</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the power capacity of the solar PV system'
+            },
+            {
+              type: 'REGEX',
+              // no special chars, only numbers
+              regex:  /^\d*(\.\d+)?$/,
+              error: 'Estimated power capacity must be a number, like 10'
+            },
+            {
+              type: 'REGEX',
+              // only 2 decimal places
+              regex:  /^(\d{1,2}(\.\d{1,2})?)$/,
+              error: 'Estimated power capacity must be a number up to 2 decimal places'
+            }
+          ],
+          yarKey: 'solarPowerCapacity'
+        },
         {
           key: 'score',
           order: 175,
