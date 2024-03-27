@@ -28,7 +28,6 @@ const { tableOrder } = require('../helpers/score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
 
-
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const createModel = (data, backUrl, url) => {
@@ -51,6 +50,7 @@ const getReplacementText = (request, key, questionType, questionKey, trueReturn,
 
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
+
     switch (url) {
       case '1000-birds':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets');
@@ -60,6 +60,8 @@ const insertYarValue = (field, url, request) => {
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ` <li>a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)</li>`, '');
       case 'bird-number':
         return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'the refurbished part of this building', 'this new building');
+      case 'project-cost':
+        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'refurbishing', 'replacing');
       default:
         return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName);
     }
@@ -98,8 +100,8 @@ const hintTextCheck = (question, hint, url, request) => {
     question = {
       ...question,
       hint: {
-            ...hint,
-            html: insertYarValue(hint.html,url, request)
+        ...hint,
+        html: insertYarValue(hint.html, url, request)
       }
     }
   }
@@ -345,12 +347,22 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 }
 
 const getPage = async (question, request, h) => {
-  let { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
-  const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
+  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
+  const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
   if (isRedirect) {
     return h.redirect(startPageUrl)
+  }
+
+  if (url === 'project-cost') {
+    if (getYarValue(request, 'solarPVSystem') === 'Yes'){
+      question.hint.html = question.hint.htmlSolar
+      hint.html = question.hint.htmlSolar
+    } else {
+      question.hint.html = question.hint.htmlNoSolar
+      hint.html = question.hint.htmlNoSolar
+    }
   }
 
   // formatting variables block
@@ -470,7 +482,6 @@ const showPostPage = (currentQuestion, request, h) => {
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request,
       { name: gapiService.eventTypes.ELIMINATION, params: {} })
-  
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 

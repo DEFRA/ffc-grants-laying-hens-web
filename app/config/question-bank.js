@@ -19,6 +19,8 @@ const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
 const {
   MIN_GRANT,
   MAX_GRANT,
+  VERANDA_MIN_GRANT,
+  VERANDA_MAX_GRANT,
   GRANT_PERCENTAGE
 } = require('../helpers/grant-details')
 
@@ -2385,7 +2387,7 @@ const questionBank = {
               key: 'roof-solar-PV-exemption-A3',
               value: 'I am not making changes to this building’s roof',
               dependantShowHideKey: 'project-type',
-              dependantShowHideAnswerKey: 'project-type-A2',
+              dependantShowHideAnswerKey: 'project-type-A3',
               dependantShowHideYarKey: 'projectType',
             },
             {
@@ -2398,7 +2400,7 @@ const questionBank = {
             },
             {
               key: 'roof-solar-PV-exemption-A6',
-              value: 'The roof does not have 100m2 of clear roof space'
+              value: 'The roof does not have 100m² of clear roof space'
             },
             {
               value: 'divider'
@@ -2556,8 +2558,8 @@ const questionBank = {
           fundingPriorities: '',
           preValidationKeys: [],
           grantInfo: {
-            minGrant: MIN_GRANT,
-            maxGrant: MAX_GRANT,
+            minGrant: VERANDA_MIN_GRANT,
+            maxGrant: VERANDA_MAX_GRANT,
             grantPercentage: GRANT_PERCENTAGE,
             cappedGrant: true
           },
@@ -2645,17 +2647,23 @@ const questionBank = {
           classes: 'govuk-input--width-10',
           url: 'project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-type',
-          // backUrlObject: {
-          //   dependentQuestionYarKey: 'heritageSite',
-          //   dependentAnswerKeysArray: ['heritage-site-A2'],
-          //   urlOptions: {
-          //     thenUrl: 'heritage-site',
-          //     elseUrl: 'solar-PV-system',
-          //     nonDependentUrl: 'solar-PV-system'
-          //   }
-          // },
-          nextUrl: 'potential-amount',
+          backUrlObject: {
+            dependentQuestionYarKey: 'roofSolarPVExemption' ,
+            dependentAnswerKeysArray: ['roof-solar-PV-exemption-A7'],
+            urlOptions: {
+              thenUrl: 'roof-support-solar-PV',
+              elseUrl: 'roof-solar-PV-exemption',
+              nonDependentUrl: 'solar-PV-system'
+            }
+          },
+          nextUrlObject: {
+            dependentQuestionYarKey: ['solarPVSystem'], 
+            dependentAnswerKeysArray: ['solar-PV-system-A2'],
+            urlOptions: {
+              thenUrl: 'potential-amount',
+              elseUrl: 'bird-number'
+            }   
+          },
           fundingPriorities: '',
           // preValidationKeys: [],
           grantInfo: {
@@ -2669,21 +2677,48 @@ const questionBank = {
             text: '£'
           },
           label: {
-            text: 'What is the total estimated cost of the calf housing?',
+            text: 'What is the total estimated cost of {{_projectType_}} this building?',
             classes: 'govuk-label--l',
             isPageHeading: true
           },
           hint: {
-            html: `
-                  <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.</p>
-                  <p>Do not include VAT</p>
-                  <p>Enter amount, for example 95,000</p>
-              `
+            htmlSolar: `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building. Do not include the solar PV system costs in the estimated building project costs.</p>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am replacing or refurbishing multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of {{_projectType_}} this building only.</p>
+                  <p>You must submit a separate application for each building.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 95,000</p>
+            `,
+            htmlNoSolar: `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building.</p>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am replacing or refurbishing multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of {{_projectType_}} this building only.</p>
+                  <p>You must submit a separate application for each building.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 95,000</p>
+            `
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the estimated total cost for the items'
+              error: 'Enter the total estimated cost of {{_projectType_}} the building'
             },
             {
               type: 'REGEX',
@@ -2697,6 +2732,16 @@ const questionBank = {
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The minimum grant each business can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500). 
+                
+                The maximum total grant amount each business can apply for is £500,000 (${GRANT_PERCENTAGE}% of £1.25 million).`,
+              }],
+            }]
+          },
           ineligibleContent: {
             messageContent: `The minimum grant you can apply for the calf housing costs is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.`,
             messageLink: {
@@ -3813,7 +3858,102 @@ const questionBank = {
             },
           ],
           yarKey: 'solarBirdNumber'
-        },  
+        },
+        {
+          key: 'solar-PV-cost',
+          order: 340,
+          classes: 'govuk-input--width-10',
+          url: 'solar-PV-cost',
+          baseUrl: 'solar-PV-cost',
+          backUrl: 'bird-number',
+          nextUrl: 'solar-power-capacity',
+          preValidationKeys: [],
+          type: 'input',
+          prefix: {
+            text: '£'
+          },
+          id: 'solarPVCost',
+          label: {
+            text: 'What is the estimated cost of buying and installing the solar PV system?',
+            classes: 'govuk-label--l',
+            isPageHeading: true,
+            for: 'solarPVCost'
+          },
+          hint: {
+            html: `
+                  <p>You can apply for up to 25% of the estimated costs of buying and installing a solar PV system which has a power capacity of up to 5kW in energy output per 1,000 birds.</p>
+                  <p>The maximum grant funding each business can apply for is £500,000 for building and solar PV system costs combined.</p>
+                  <p>Enter estimated amount, for example 200,000</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the estimated cost of buying and installing the solar PV system'
+            },
+            {
+              type: 'REGEX',
+              //  numbers and commas only
+              regex:  /^[0-9,]+$/,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'MIN_MAX_CHARS',
+              min: 1,
+              max: 7,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            }
+          ],
+          yarKey: 'solarPVCost'
+        },
+        {
+          key: 'solar-power-capacity',
+          order: 350,
+          classes: 'govuk-input--width-10',
+          url: 'solar-power-capacity',
+          baseUrl: 'solar-power-capacity',
+          backUrl: 'solar-PV-cost',
+          nextUrl: 'potential-amount-solar',
+          preValidationKeys: [],
+          type: 'input',
+          prefix: {
+            text: 'kW'
+          },
+          id: 'solarPowerCapacity',
+          label: {
+            text: 'What is the power capacity of the solar PV system?',
+            classes: 'govuk-label--l',
+            isPageHeading: true,
+            for: 'solarPowerCapacity'
+          },
+          hint: {
+            html: `
+                  <p>This grant will fund a solar PV system that has a power capacity of up to 5kW per 1,000 birds.</p>
+                  <p>You can install a solar PV system that has a power capacity of more than 5kW of energy per 1,000 birds. You must fund the 
+                  remaining solar PV system costs above the power capacity of 5kw per 1,000 birds. </p>
+                  <p>Enter estimated power capacity, for example 10</p>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the power capacity of the solar PV system'
+            },
+            {
+              type: 'REGEX',
+              // no special chars, only numbers
+              regex:  /^\d*(\.\d+)?$/,
+              error: 'Estimated power capacity must be a number, like 10'
+            },
+            {
+              type: 'REGEX',
+              // only 2 decimal places
+              regex:  /^(\d{1,2}(\.\d{1,2})?)$/,
+              error: 'Estimated power capacity must be a number up to 2 decimal places'
+            }
+          ],
+          yarKey: 'solarPowerCapacity'
+        },
         {
           key: 'score',
           order: 175,
