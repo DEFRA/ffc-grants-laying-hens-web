@@ -2710,7 +2710,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the total estimated total cost of {{_projectType_}} the building'
+              error: 'Enter the total estimated cost of {{_projectType_}} the building'
             },
             {
               type: 'REGEX',
