@@ -2649,12 +2649,12 @@ const questionBank = {
             }
           },
           nextUrlObject: {
-            dependentQuestionYarKey: [],
-            dependentAnswerKeysArray: [],
+            dependentQuestionYarKey: ['solarPVSystem'], 
+            dependentAnswerKeysArray: ['solar-PV-system-A2'],
             urlOptions: {
-              thenUrl: '',
-              elseUrl: ''
-            }
+              thenUrl: 'potential-amount',
+              elseUrl: 'bird-number'
+            }   
           },
           fundingPriorities: '',
           // preValidationKeys: [],
