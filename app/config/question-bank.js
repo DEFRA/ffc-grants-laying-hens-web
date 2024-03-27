@@ -472,6 +472,7 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 31 December 2025.',
+            insertText: { text: '' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -2629,6 +2630,7 @@ const questionBank = {
             messageHeader: 'Potential grant funding',
             additionalSentence: 'The maximum grant you can apply for is £100,000.',
             messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
+            insertText: { text: '' },
             warning: {
               text: 'There’s no guarantee the project will receive a grant.'
             }
@@ -2840,6 +2842,7 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
             messageContent: 'You have requested the maximum grant amount of £500,000 for calf housing.',
+            insertText: { text: '' },
             warning: {
               text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
             },
@@ -2859,6 +2862,7 @@ const questionBank = {
             messageHeader: 'Potential grant funding',
             messageContent: `The maximum grant you can apply for is £500,000.
             You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
+            insertText: { text: '' },
             warning: {
               text: 'There’s no guarantee the project will receive a grant.'
             }
@@ -3975,7 +3979,8 @@ const questionBank = {
             <h2 class="govuk-heading-m">Next steps</h2>
             <p class="govuk-body">Next, add your business and contact details and submit them to the RPA (you should only do this once).
             <br/><br/>
-            You’ll get an email with your answers and a reference number.</p>`
+            You’ll get an email with your answers and a reference number.</p>`,
+            insertText: { text: '' }
           },
           answers: []
         },
@@ -4886,7 +4891,8 @@ const questionBank = {
             I am aware that the information I submit will be checked by the RPA.</br></br>
             I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.
             <h2 class="govuk-heading-m">Improving our schemes</h2>
-            Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`
+            Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`,
+            insertText: { text: '' }
           },
           answers: [
             {
@@ -4959,6 +4965,7 @@ const questionBank = {
             warning: {
               text: 'You must not start the project'
             },
+            insertText: { text: '' },
             extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
             <p>Before you start the project, you can:</p>
             <ul>
