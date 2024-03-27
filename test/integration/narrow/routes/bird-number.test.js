@@ -41,7 +41,7 @@ describe('Page: /bird-number', () => {
 
   it('no option selected -> show error message - refurbishing', async () => {
     varList.projectType = 'Refurbishing an existing laying hen or pullet building'
-    valList.birdNumber = {
+    valList.solarBirdNumber = {
       error: 'Enter how many birds the refurbished part of this building will be able to house',
       return: false
     }
@@ -50,7 +50,7 @@ describe('Page: /bird-number', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/bird-number`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { birdNumber: '', crumb: crumbToken }
+      payload: { solarBirdNumber: '', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -59,7 +59,8 @@ describe('Page: /bird-number', () => {
   })
 
   it('no option selected -> show error message - replacing', async () => {
-    valList.birdNumber = {
+    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    valList.solarBirdNumber = {
       error: 'Enter how many birds this new building will be able to house',
       return: false
     }
@@ -68,7 +69,7 @@ describe('Page: /bird-number', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/bird-number`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { birdNumber: '', crumb: crumbToken }
+      payload: { solarBirdNumber: '', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -77,7 +78,7 @@ describe('Page: /bird-number', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /solar-PV-cost', async () => {
-    valList.birdNumber = false
+    valList.solarBirdNumber = false
     varList.projectType = 'Refurbishing an existing laying hen or pullet building'
 
     const postOptions = {
