@@ -3750,7 +3750,7 @@ const questionBank = {
             },
             {
               key: 'environmental-data-type-A2',
-              value: 'Carbon monoxide ',
+              value: 'Carbon monoxide',
             },
             {
               key: 'environmental-data-type-A3',
