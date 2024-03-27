@@ -222,25 +222,45 @@ const scorePageData = async (request, backUrl, url, h) => {
 
     setYarValue(request, 'overAllScore', msgData)
 
-    let tableOrder = getYarValue(request, 'poultry-type') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? tableOrderHen : tableOrderPullet
+    let tableOrder = getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? tableOrderHen : tableOrderPullet
 
-    console.log(msgData.desirability.questions[0])
+    if (getYarValue(request, 'currentMultiTierSystem')) {
+      currentMultiTierSystemValue = {
+        key: 'current-multi-tier-system',
+        answers: [
+          {
+            key: 'current-multi-tier-system',
+            title: 'Does your current building include a thing?',
+            input: [
+              {
+                key: getYarValue(request, 'currentMultiTierSystem') === getQuestionAnswer('current-multi-tier-system', 'current-multi-tier-system-A1', ALL_QUESTIONS) ? 'current-multi-tier-system-A1' : 'current-multi-tier-system-A2',
+                value: getYarValue(request, 'currentMultiTierSystem')
+              }
+            ]
+          }
+        ],
+        rating: msgData.desirability.questions[1].rating
+      }
+      msgData.desirability.questions.splice(2, 0, currentMultiTierSystemValue)
+    }
 
     const questions = msgData.desirability.questions.map(desirabilityQuestion => {
-      console.log(desirabilityQuestion, 'AWWWWWWWWW')
 
-      // if currentmultittiersystem, show. else dont show
+      if (desirabilityQuestion.key != 'poultry-type') {
 
-      const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
-      desirabilityQuestion.title = tableQuestion.title
-      desirabilityQuestion.desc = tableQuestion.desc ?? ''
-      desirabilityQuestion.url = `${urlPrefix}/${tableQuestion.url}`
-      desirabilityQuestion.order = tableQuestion.order
-      desirabilityQuestion.unit = tableQuestion?.unit
-      desirabilityQuestion.pageTitle = tableQuestion.pageTitle
-      desirabilityQuestion.fundingPriorities = tableQuestion.fundingPriorities
-      return desirabilityQuestion
+        const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
+        desirabilityQuestion.title = tableQuestion.title
+        desirabilityQuestion.desc = tableQuestion.desc ?? ''
+        desirabilityQuestion.url = `${urlPrefix}/${tableQuestion.url}`
+        desirabilityQuestion.order = tableQuestion.order
+        desirabilityQuestion.unit = tableQuestion?.unit
+        desirabilityQuestion.pageTitle = tableQuestion.pageTitle
+        desirabilityQuestion.fundingPriorities = tableQuestion.fundingPriorities
+        return desirabilityQuestion
+      }
     })
+
+    questions.shift() // first item is undefined as its poultry type
 
     await gapiService.sendGAEvent(request, { name: 'score', params: { score_presented: msgData.desirability.overallRating.band } })
     setYarValue(request, 'onScorePage', true)
@@ -448,6 +468,8 @@ const showPostPage = (currentQuestion, request, h) => {
   let NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
   let dataObject
 
+  checkYarKeyReset(thisAnswer, request)
+
   if (baseUrl === 'veranda-project-cost') {
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: 'The minimum grant you can apply for is £15,000 (40% of £37,500)' }
   }
@@ -482,8 +504,6 @@ const showPostPage = (currentQuestion, request, h) => {
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
-
-  checkYarKeyReset(thisAnswer, request)
 
   return h.redirect(getUrl(nextUrlObject, nextUrl, request, payload.secBtn, currentQuestion.url))
 }
