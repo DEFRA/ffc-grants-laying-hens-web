@@ -2920,12 +2920,14 @@ const questionBank = {
             {
               key: 'current-system-A1',
               value: 'Colony cage',
-              redirectUrl: 'ramp-connection'
+              redirectUrl: 'ramp-connection',
+              yarKeysReset: ['currentMultiTierSystem']
             },
             {
               key: 'current-system-A2',
               value: 'Combi-cage',
-              redirectUrl: 'ramp-connection'
+              redirectUrl: 'ramp-connection',
+              yarKeysReset: ['currentMultiTierSystem']
             },
             {
               key: 'current-system-A3',
