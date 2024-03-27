@@ -1,63 +1,22 @@
+const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
-const varListTemplate = {
-  farmingType: 'some fake crop',
-  legalStatus: 'fale status',
-  inEngland: 'Yes',
-  projectStarted: 'No',
-  landOwnership: 'Yes',
-  projectItemsList: {
-    projectEquipment: ['Boom', 'Trickle']
-  },
-  projectCost: '12345678'
+const utilsList = {
+  'project-type-A2': 'Refurbishing an existing laying hen or pullet building',
+  'project-type-A3': 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features',
+  
 }
 
-let varList
-const mockSession = {
-  session: {
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (Object.keys(varList).includes(key)) return varList[key]
-      else return undefined
-    }
-  },
-  regex: {
-    PROJECT_COST_REGEX: /^[1-9]\d*$/,
-    SELECT_VARIABLE_TO_REPLACE: /{{_(.+?)_}}/ig
+describe('Project cost page', () => {
+  let varList = {
+    projectType: 'Refurbishing an existing laying hen or pullet building'
   }
-}
 
-jest.mock('ffc-grants-common-functionality', () => mockSession)
-
-xdescribe('Project cost page', () => {
-  beforeEach(() => {
-    varList = { ...varListTemplate }
-  })
-
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
-  it('should load page successfully', async () => {
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/project-cost`
-    }
-
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-  })
-
-  it('should load page successfully if no projectCost', async () => {
-    varList = {
-      legalStatus: 'fale status',
-      inEngland: 'Yes',
-      projectStarted: 'No',
-      landOwnership: 'Yes',
-      projectItemsList: {
-        projectEquipment: ['Boom', 'Trickle']
-      },
-      projectCost: undefined
-    }
+  let valList = {}
+  
+  commonFunctionsMock(varList, undefined, utilsList, valList)
+  
+  it('should load page successfully - project type is refurbishing', async () => {
 
     const options = {
       method: 'GET',
@@ -66,36 +25,40 @@ xdescribe('Project cost page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('What is the total estimated cost of refurbishing this building?')
+    expect(response.payload).toContain('You can only apply for a grant of up to 40% of the estimated costs of refurbishing this building.')
+    expect(response.payload).toContain('I am replacing or refurbishing multiple buildings')
+    expect(response.payload).toContain('Enter the costs of refurbishing this building only.')
+    expect(response.payload).toContain('You must submit a separate application for each building.')
+    expect(response.payload).toContain('Do not include VAT')
+    expect(response.payload).toContain('Enter amount, for example 95,000')
   })
 
-  it('should return an error message if no option is selected', async () => {
-    varList['current-score'] = null
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/project-cost`,
-      payload: { crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
+  it('should load page successfully - project type is replacing', async () => {
+    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost`
     }
 
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter the estimated total cost for the items')
-  })
-
-  it('should return an error message if a string is typed in', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/project-cost`,
-      payload: { projectCost: '1234s6', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a whole number with a maximum of 7 digits')
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('What is the total estimated cost of replacing this building?')
+    expect(response.payload).toContain('You can only apply for a grant of up to 40% of the estimated costs of replacing this building.')
+    expect(response.payload).toContain('I am replacing or refurbishing multiple buildings')
+    expect(response.payload).toContain('Enter the costs of replacing this building only.')
+    expect(response.payload).toContain('You must submit a separate application for each building.')
+    expect(response.payload).toContain('Do not include VAT')
+    expect(response.payload).toContain('Enter amount, for example 95,000')
   })
 
   it('should return an error message if number contains a space', async () => {
+     valList.projectCost = {
+      error: 'Enter a whole number with a maximum of 7 digits',
+      return: false
+    }
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-cost`,
@@ -147,7 +110,27 @@ xdescribe('Project cost page', () => {
     expect(postResponse.payload).toContain('Enter a whole number with a maximum of 7 digits')
   })
 
+  it('should return an error message if no value entered', async () => {
+    valList['NOT_EMPTY'] = {
+      error: 'Enter the total estimated cost of replacing the building',
+      return: false
+    }
+
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/project-cost`,
+      payload: { crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Enter the total estimated cost of replacing the building')
+  })
+
   it('should eliminate user if the cost entered is too low', async () => {
+    valList.projectCost = null
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-cost`,
@@ -160,7 +143,9 @@ xdescribe('Project cost page', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
-  it('should redirected to the Potential amount capped page if the cost entered is too high', async () => {
+  it('should redirect to the potential-amount-capped page if the cost entered is too high', async () => {
+    valList.projectCost = false
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-cost`,
@@ -169,12 +154,13 @@ xdescribe('Project cost page', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    console.log('payload: ', postResponse.payload)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('/laying-hens/potential-amount-capped')
   })
 
-  it('should store valid user input and redirect to potential-amount page', async () => {
+  it('solarPVSystem = No -> store valid user input and redirect to potential-amount page', async () => {
+    varList.solarPVSystem = 'No'
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-cost`,
@@ -186,15 +172,55 @@ xdescribe('Project cost page', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('potential-amount')
   })
-  xit('should redirect to housing page if theres score', async () => {
-    varList['current-score'] = true
+
+  it('solarPVSystem = Yes -> store valid user input and redirect to bird-number page', async () => {
+    varList.solarPVSystem = 'Yes'
+
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/project-cost`,
+      payload: { projectCost: '1234567', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('bird-number')
+  })
+
+  it('solarPVSystem = Yes -> page loads with correct back link', async () => {
+    varList.solarPVSystem = 'Yes'
+
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-cost`
     }
-
     const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(302)
-    expect(response.headers.location).toBe(`${global.__URLPREFIX__}/housing`)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"solar-PV-system\" class=\"govuk-back-link\">Back</a>')
+  })
+
+  it('roofSolarPVExemption = None of the above -> page loads with correct back link', async () => {
+    varList.roofSolarPVExemption = 'None of the above'
+
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"roof-support-solar-PV\" class=\"govuk-back-link\">Back</a>')
+  })
+
+  it('roofSolarPVExemption = The building is listed -> page loads with correct back link', async () => {
+    varList.roofSolarPVExemption = 'The building is listed'
+
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"roof-solar-PV-exemption\" class=\"govuk-back-link\">Back</a>')
   })
 })

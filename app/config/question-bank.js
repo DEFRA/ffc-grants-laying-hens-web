@@ -19,6 +19,8 @@ const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
 const {
   MIN_GRANT,
   MAX_GRANT,
+  VERANDA_MIN_GRANT,
+  VERANDA_MAX_GRANT,
   GRANT_PERCENTAGE
 } = require('../helpers/grant-details')
 
@@ -2550,8 +2552,8 @@ const questionBank = {
           fundingPriorities: '',
           preValidationKeys: [],
           grantInfo: {
-            minGrant: MIN_GRANT,
-            maxGrant: MAX_GRANT,
+            minGrant: VERANDA_MIN_GRANT,
+            maxGrant: VERANDA_MAX_GRANT,
             grantPercentage: GRANT_PERCENTAGE,
             cappedGrant: true
           },
@@ -2639,17 +2641,23 @@ const questionBank = {
           classes: 'govuk-input--width-10',
           url: 'project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-type',
-          // backUrlObject: {
-          //   dependentQuestionYarKey: 'heritageSite',
-          //   dependentAnswerKeysArray: ['heritage-site-A2'],
-          //   urlOptions: {
-          //     thenUrl: 'heritage-site',
-          //     elseUrl: 'solar-PV-system',
-          //     nonDependentUrl: 'solar-PV-system'
-          //   }
-          // },
-          nextUrl: 'potential-amount',
+          backUrlObject: {
+            dependentQuestionYarKey: 'roofSolarPVExemption' ,
+            dependentAnswerKeysArray: ['roof-solar-PV-exemption-A7'],
+            urlOptions: {
+              thenUrl: 'roof-support-solar-PV',
+              elseUrl: 'roof-solar-PV-exemption',
+              nonDependentUrl: 'solar-PV-system'
+            }
+          },
+          nextUrlObject: {
+            dependentQuestionYarKey: ['solarPVSystem'], 
+            dependentAnswerKeysArray: ['solar-PV-system-A2'],
+            urlOptions: {
+              thenUrl: 'potential-amount',
+              elseUrl: 'bird-number'
+            }   
+          },
           fundingPriorities: '',
           // preValidationKeys: [],
           grantInfo: {
@@ -2663,21 +2671,48 @@ const questionBank = {
             text: '£'
           },
           label: {
-            text: 'What is the total estimated cost of the calf housing?',
+            text: 'What is the total estimated cost of {{_projectType_}} this building?',
             classes: 'govuk-label--l',
             isPageHeading: true
           },
           hint: {
-            html: `
-                  <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.</p>
-                  <p>Do not include VAT</p>
-                  <p>Enter amount, for example 95,000</p>
-              `
+            htmlSolar: `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building. Do not include the solar PV system costs in the estimated building project costs.</p>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am replacing or refurbishing multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of {{_projectType_}} this building only.</p>
+                  <p>You must submit a separate application for each building.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 95,000</p>
+            `,
+            htmlNoSolar: `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building.</p>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am replacing or refurbishing multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of {{_projectType_}} this building only.</p>
+                  <p>You must submit a separate application for each building.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 95,000</p>
+            `
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the estimated total cost for the items'
+              error: 'Enter the total estimated cost of {{_projectType_}} the building'
             },
             {
               type: 'REGEX',
@@ -2691,6 +2726,16 @@ const questionBank = {
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The minimum grant each business can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500). 
+                
+                The maximum total grant amount each business can apply for is £500,000 (${GRANT_PERCENTAGE}% of £1.25 million).`,
+              }],
+            }]
+          },
           ineligibleContent: {
             messageContent: `The minimum grant you can apply for the calf housing costs is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.`,
             messageLink: {
