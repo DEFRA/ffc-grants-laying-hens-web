@@ -19,6 +19,8 @@ const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
 const {
   MIN_GRANT,
   MAX_GRANT,
+  VERANDA_MIN_GRANT,
+  VERANDA_MAX_GRANT,
   GRANT_PERCENTAGE
 } = require('../helpers/grant-details')
 
@@ -2550,8 +2552,8 @@ const questionBank = {
           fundingPriorities: '',
           preValidationKeys: [],
           grantInfo: {
-            minGrant: MIN_GRANT,
-            maxGrant: MAX_GRANT,
+            minGrant: VERANDA_MIN_GRANT,
+            maxGrant: VERANDA_MAX_GRANT,
             grantPercentage: GRANT_PERCENTAGE,
             cappedGrant: true
           },
