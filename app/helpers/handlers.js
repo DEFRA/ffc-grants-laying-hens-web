@@ -418,6 +418,10 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
       setYarValue(request, 'henPopHoles', null)
     }
 
+    if (key === 'current-system' && (value === 'Colony cage' || value === 'Combi-cage')) {
+      setYarValue(request, 'currentMultiTierSystem', null)
+    }
+
     if (type !== 'multi-input' && key !== 'secBtn') {
       setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
     }
