@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /lighting-features', () => {
   const varList = {
-    poultryType: 'pullet',
+    poultryType: '',
     projectType: '',
   }
 
@@ -25,12 +25,11 @@ describe('Page: /lighting-features', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the housing lighting system have these features?')
-    expect(response.payload).toContain('The housing lighting system must have:')
+    expect(response.payload).toContain('Will the house lighting system have these features?')
+    expect(response.payload).toContain('When the project is complete, the house lighting system must have:')
     expect(response.payload).toContain('non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin')
     expect(response.payload).toContain('capacity for zonal dimming between 0 and 60 lux')
-    expect(response.payload).toContain('coverage of the entire floor-litter (scratch) area')
-    expect(response.payload).toContain('a simulated stepped dawn and dusk')
+    expect(response.payload).toContain('full coverage of the entire floor-litter (scratch) area')
     expect(response.payload).toContain('an option for red light to reduce feather pecking')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
@@ -45,11 +44,11 @@ describe('Page: /lighting-features', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the housing lighting system have these features?')
-    expect(response.payload).toContain('The housing lighting system must have:')
+    expect(response.payload).toContain('Will the house lighting system have these features?')
+    expect(response.payload).toContain('When the project is complete, the house lighting system must have:')
     expect(response.payload).toContain('non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin')
     expect(response.payload).toContain('capacity for zonal dimming between 0 and 60 lux')
-    expect(response.payload).toContain('coverage of the entire floor-litter (scratch) area')
+    expect(response.payload).toContain('full coverage of the entire floor-litter (scratch) area')
     expect(response.payload).toContain('a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)')
     expect(response.payload).toContain('an option for red light to reduce feather pecking')
     expect(response.payload).toContain('Yes')
@@ -58,7 +57,7 @@ describe('Page: /lighting-features', () => {
 
   it('no option selected -> show error message', async () => {
     valList['NOT_EMPTY'] = {
-      error: 'Select yes if the building lighting system will have these features',
+      error: 'Select yes if the house lighting system will have these features',
       return: false
     }
     const postOptions = {
@@ -70,7 +69,7 @@ describe('Page: /lighting-features', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the building lighting system will have these features')
+    expect(postResponse.payload).toContain('Select yes if the house lighting system will have these features')
   })
 
   it('user selects eligible option and poultry type is Laying hens -> store user response and redirect to /aviary-welfare', async () => {
@@ -112,11 +111,10 @@ describe('Page: /lighting-features', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The housing lighting system must have:')
+    expect(postResponse.payload).toContain('When the project is complete, the house lighting system must have:')
     expect(postResponse.payload).toContain('non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin')
     expect(postResponse.payload).toContain('capacity for zonal dimming between 0 and 60 lux')
-    expect(postResponse.payload).toContain('coverage of the entire floor-litter (scratch) area')
-    expect(postResponse.payload).toContain('a simulated stepped dawn and dusk')
+    expect(postResponse.payload).toContain('full coverage of the entire floor-litter (scratch) area')
     expect(postResponse.payload).toContain('an option for red light to reduce feather pecking')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
@@ -132,16 +130,17 @@ describe('Page: /lighting-features', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The housing lighting system must have:')
+    expect(postResponse.payload).toContain('When the project is complete, the house lighting system must have:')
     expect(postResponse.payload).toContain('non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin')
     expect(postResponse.payload).toContain('capacity for zonal dimming between 0 and 60 lux')
-    expect(postResponse.payload).toContain('coverage of the entire floor-litter (scratch) area')
+    expect(postResponse.payload).toContain('full coverage of the entire floor-litter (scratch) area')
     expect(postResponse.payload).toContain('a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)')
     expect(postResponse.payload).toContain('an option for red light to reduce feather pecking')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
 
-  it('page loads with correct back link - project type is Refurbishing an existing laying hen or pullet building', async () => {
+  it('page loads with correct back link - /refurbishing-insulation', async () => {
+    varList.poultryType = 'hen'
     varList.projectType = 'Refurbishing an existing laying hen or pullet building'
     const options = {
       method: 'GET',
@@ -149,18 +148,29 @@ describe('Page: /lighting-features', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"refurbishing-insulation\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/laying-hens/refurbishing-insulation\" class=\"govuk-back-link\">Back</a>')
   })
 
   it('page loads with correct back link - /replacing-insulation', async () => {
     varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    varList.poultryType = 'hen'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/lighting-features`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"replacing-insulation\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/laying-hens/replacing-insulation\" class=\"govuk-back-link\">Back</a>')
   })
 
+  it('page loads with correct back link - /pullet-housing-requirements', async () => {
+    varList.poultryType = 'pullet'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/lighting-features`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"/laying-hens/pullet-housing-requirements\" class=\"govuk-back-link\">Back</a>')
+  })
 })

@@ -57,7 +57,7 @@ const insertYarValue = (field, url, request) => {
       case 'current-multi-tier-system':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'multi-tier aviary systems', 'multi-tier systems');
       case 'lighting-features':
-        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ' (unless this is already provided as part of an aviary lighting system)', '');
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ` <li>a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)</li>`, '');
       case 'bird-number':
         return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'the refurbished part of this building', 'this new building');
       default:
@@ -345,7 +345,7 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 }
 
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
+  let { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
@@ -364,6 +364,23 @@ const getPage = async (question, request, h) => {
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
     return scorePageData(request, backUrl, url, h)
+  }
+
+  if (url === 'lighting-features') {
+    const projectType = getYarValue(request, 'projectType');
+    const poultryType = getYarValue(request, 'poultryType');
+  
+    const poultryTypeA1 = getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS);
+    const projectTypeA3 = getQuestionAnswer('project-type','project-type-A3', ALL_QUESTIONS);
+    const projectTypeA2 = getQuestionAnswer('project-type','project-type-A2', ALL_QUESTIONS);
+  
+    if(poultryType === poultryTypeA1 && projectType === projectTypeA3) {
+      question.backUrl = `${urlPrefix}/replacing-insulation`
+    } else if (poultryType === poultryTypeA1 && projectType === projectTypeA2) {
+      question.backUrl = `${urlPrefix}/refurbishing-insulation`
+    } else {
+      question.backUrl = `${urlPrefix}/pullet-housing-requirements`
+    }
   }
 
   const confirmationId = ''
