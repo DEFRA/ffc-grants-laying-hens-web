@@ -2743,11 +2743,16 @@ const questionBank = {
             }]
           },
           ineligibleContent: {
-            messageContent: `The minimum grant you can apply for the calf housing costs is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.`,
+            messageContent: `You can apply for grant funding for multiple buildings. You must submit an application for each building.</br></br>
+            If the total grant funding for your combined
+            building projects is more than £15,000 (40% of £37,500), you may still be eligible to apply for grant funding.
+           `,
+           insertText: '',
+            additionalPara: `If you are applying for grant funding for a single building, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> see other grants you may be eligible for.</a>`,
             messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
+              url: 'potential-amount',
+              title: 'I am applying for multiple building projects'
+            },
           },
           answers: [],
           yarKey: 'projectCost'
