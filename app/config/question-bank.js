@@ -3928,13 +3928,14 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              // no special chars, only numbers
-              regex:  /^\d*(\.\d+)?$/,
+              // no special chars, only numbers, commas and dots
+              regex:  /^[0-9,.]+$/,
               error: 'Estimated power capacity must be a number, like 10'
             },
             {
+              // number with up to 2 decimal places and commas for thousands
               type: 'REGEX',
-              regex:  TWO_DP_NUMBER,
+              regex:  /^(\d{1,3}(,\d{3})*(\.\d{1,2})?)$/,
               error: 'Estimated power capacity must be a number up to 2 decimal places'
             }
           ],
