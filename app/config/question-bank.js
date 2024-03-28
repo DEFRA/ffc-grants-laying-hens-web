@@ -3948,6 +3948,12 @@ const questionBank = {
               type: 'REGEX',
               regex:  /^[0-9,.]+(\.\d{2})$/,
               error: 'Estimated power capacity must be a number up to 2 decimal places'
+            },
+            {
+              // accepts numbers with correct format
+              type: 'REGEX',
+              regex: /^(\d{1,3}(\,{1}\d{3})*(\.\d{1,2}){0,1})*$/,
+              error: 'Estimated power capacity must be a number, like 10'
             }
           ],
           yarKey: 'solarPowerCapacity'
