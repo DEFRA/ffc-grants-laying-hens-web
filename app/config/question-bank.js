@@ -1247,7 +1247,7 @@ const questionBank = {
               <ul class="govuk-list--bullet">
                 <li>a solid concrete floor</li>
                 <li>a waterproof insulated roof</li>
-                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                 <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
                 <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                 <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
@@ -1264,9 +1264,9 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The width of the pop hole openings along the length of the hen house must add up to a total of 2 metres for every 1,000 hens in the building.
+                para: `The width of the pop hole openings along the length of the internal hen house wall must add up to a total of 2 metres for every 1,000 hens in the building.
                 
-                      The base of all pop holes must either:`,
+                  The base of all pop holes must either:`,
                 items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.'],
                 additionalPara: 'You must not put perches in front of the pop holes.'
               }],
@@ -1279,7 +1279,7 @@ const questionBank = {
                 <ul class="govuk-list--bullet">
                   <li>a solid concrete floor</li>
                   <li>a waterproof insulated roof</li>
-                  <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                  <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                   <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
                   <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                   <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
