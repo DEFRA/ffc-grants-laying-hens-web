@@ -91,7 +91,7 @@ const questionBank = {
           backUrl: 'start',
           nextUrl: 'applicant-type',
           hint: {
-            html: `If you are applying for multiple projects, you must submit a separate application for each one`
+            html: `If you are applying for grant funding for multiple buildings, you must submit a separate application for each one`
           },
           ineligibleContent: {
             messageContent: `
@@ -114,8 +114,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You can apply for grant funding for either building projects or veranda-only projects.\n
-                The maximum grant funding each business can apply for is £500,000 for building projects, or £100,000 for veranda-only projects.`
+                para: `This grant is only for laying hen or pullet projects.\n
+                The maximum grant funding each business can apply for is £500,000 for comprehensive projects, or £100,000 for veranda-only projects.`
               }]
             }]
           },
@@ -128,21 +128,24 @@ const questionBank = {
           answers: [
             {
               key: 'project-type-A1',
-              value: 'Adding a veranda only to an existing laying hen or pullet building',
+              value: 'Adding a veranda only to the existing building',
               hint: {
                 text: 'The RPA will award veranda-only grant funding on a first come, first served basis'
               },
             },
             {
               key: 'project-type-A2',
-              value: 'Refurbishing an existing laying hen or pullet building',
+              value: 'Refurbishing the existing building',
               hint: {
-                text: 'Adding features to an existing building (including a mechanical ventilation system, lighting system, aviary or multi-tier system and veranda)'
+                text: 'A comprehensive project to upgrading an existing building by adding a mechanical ventilation, LED lighting and an aviary or multi-tier system where they do not have exist already'
               },
             },
             {
               key: 'project-type-A3',
-              value: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+              value: 'Replacing the entire building with a new building',
+              hint: {
+                text: 'A comprehensive project to include mechanical ventilation, LED lighting and an aviary or multi-tier system'
+              },
             },
             {
               value: 'divider'

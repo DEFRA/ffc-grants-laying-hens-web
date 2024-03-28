@@ -2,14 +2,14 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 const utilsList = {
-  'project-type-A2': 'Refurbishing an existing laying hen or pullet building',
-  'project-type-A3': 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features',
+  'project-type-A2': 'Refurbishing the existing building',
+  'project-type-A3': 'Replacing the entire building with a new building',
   
 }
 
 describe('Project cost page', () => {
   let varList = {
-    projectType: 'Refurbishing an existing laying hen or pullet building'
+    projectType: 'Refurbishing the existing building'
   }
 
   let valList = {}
@@ -35,7 +35,7 @@ describe('Project cost page', () => {
   })
 
   it('should load page successfully - project type is replacing', async () => {
-    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    varList.projectType = 'Replacing the entire building with a new building'
 
     const options = {
       method: 'GET',
