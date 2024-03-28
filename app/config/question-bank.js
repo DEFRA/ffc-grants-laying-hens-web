@@ -3946,7 +3946,7 @@ const questionBank = {
             {
               // accepts numbers and commas with up to 2 decimal places
               type: 'REGEX',
-              regex:  /^[0-9,.]+(\.\d{2})$/,
+              regex:  /^[0-9,]+(\.\d{1,2}){0,1}$/,
               error: 'Estimated power capacity must be a number up to 2 decimal places'
             },
             {
