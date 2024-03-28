@@ -268,6 +268,22 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   maybeEligibleContent.title = question.title
   let consentOptionalData
 
+  if(url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
+    maybeEligibleContent = {
+      ...maybeEligibleContent,
+      messageContent: 'The maximum grant you can apply for is £500,000.',
+      insertText: { text:'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.' },
+    }
+  }else if(url === 'potential-amount' &&  getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
+    maybeEligibleContent = {
+      ...maybeEligibleContent,
+      messageContent: 'The maximum grant you can apply for is £500,000.',
+      insertText: { text:'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for building project costs.' },
+      extraMessageContent: 'You can continue to check your eligibility for grant funding to replace or refurbish a {{_poultryType_}} house.'
+    }
+  }
+
+
   if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') > 250000) {
     question.maybeEligibleContent.potentialAmountConditional = true
   } else {
@@ -299,14 +315,24 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     }
     request.yar.reset()
   }
-
+  
   maybeEligibleContent = {
     ...maybeEligibleContent,
+    insertText: maybeEligibleContent.insertText.text ?  { text: maybeEligibleContent.insertText.text.replace(
+      SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+      )
+    )} : '',
     messageContent: maybeEligibleContent.messageContent.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       )
-    )
+    ),
+    extraMessageContent: maybeEligibleContent.extraMessageContent ?  maybeEligibleContent.extraMessageContent.replace(
+      SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+      getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
+      )
+    ) : ''
   }
 
   if (url === 'confirm' || url === 'veranda-confirm') {
@@ -494,11 +520,11 @@ const showPostPage = (currentQuestion, request, h) => {
       { name: gapiService.eventTypes.ELIMINATION, params: {} })
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
-
-  if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
-    return h.redirect('/laying-hens/potential-amount-capped')
-  }
   
+  if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
+    return h.redirect('/laying-hens/potential-amount')
+  }
+
   if (yarKey === 'projectCost') {
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
     setYarValue(request, 'calculatedGrant', calculatedGrant)

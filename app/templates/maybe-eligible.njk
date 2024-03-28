@@ -55,16 +55,20 @@
 
       <p class="govuk-body">{{ messageContent | safe}}</p>
 
-      {% if warning %} 
-        {{ govukWarningText(warning) }}
+      {% if insertText  %} 
+        {{ govukInsetText(insertText) }}
       {% endif %}
 
-      {% if insertText %} 
-        {{ govukInsetText(insertText) }}
+      {% if middleWarning %} 
+      {{ govukWarningText(middleWarning) }}
       {% endif %}
 
       {% if extraMessageContent %}
         <p class="govuk-body">{{ extraMessageContent | safe}}</p>
+      {% endif %}
+
+      {% if warning %} 
+      {{ govukWarningText(warning) }}
       {% endif %}
 
       {% if not consentOptionalData and not reference %}

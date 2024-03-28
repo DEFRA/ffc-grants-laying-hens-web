@@ -142,22 +142,6 @@ describe('Project cost page', () => {
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
-
-  it('should redirect to the potential-amount-capped page if the cost entered is too high', async () => {
-    valList.projectCost = false
-
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/project-cost`,
-      payload: { projectCost: '1350000', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/laying-hens/potential-amount-capped')
-  })
-
   it('solarPVSystem = No -> store valid user input and redirect to potential-amount page', async () => {
     varList.solarPVSystem = 'No'
 
@@ -188,9 +172,20 @@ describe('Project cost page', () => {
     expect(postResponse.headers.location).toBe('bird-number')
   })
 
-  it('solarPVSystem = Yes -> page loads with correct back link', async () => {
-    varList.solarPVSystem = 'Yes'
+  it('solarPVSystem = Yes -> store valid user input and redirect to potential-amount page', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/project-cost`,
+      payload: { projectCost: '1260000', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
 
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('/laying-hens/potential-amount')
+  })
+
+  it('solarPVSystem = Yes -> page loads with correct back link', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-cost`
