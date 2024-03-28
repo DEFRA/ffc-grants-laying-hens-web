@@ -7,6 +7,7 @@ const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { guardPage } = require('ffc-grants-common-functionality').pageGuard
 const { getUrl } = require('../helpers/urls')
+const { GRANT_PERCENTAGE } = require('./grant-details')
 const senders = require('../messaging/senders')
 
 const { startPageUrl, urlPrefix, serviceEndDate, serviceEndTime } = require('./../config/server')
@@ -475,16 +476,16 @@ const showPostPage = (currentQuestion, request, h) => {
     return errors
   }
   if (baseUrl === 'veranda-project-cost'){
-    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: 'The minimum grant you can apply for is £5,000 (40% of £12,500)' }
+    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
   }
   else if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem')  === 'Yes') {
-    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: 'The minimum grant you can apply for is £15,000 (40% of £37,500)', 
+    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, 
     insertText: { 
       text: 'You cannot apply for funding for solar PV system if you have not requested the minimum grant funding amount for a building.' 
     }
   }
   } else if(baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem')  === 'No') {
-    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: 'The minimum grant you can apply for is £15,000 (40% of £37,500)', insertText:'' }
+    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, insertText:'' }
   }
 
 
