@@ -39,7 +39,7 @@ const createModel = (data, backUrl, url) => {
 
 const checkYarKeyReset = (thisAnswer, request) => {
   if (thisAnswer?.yarKeysReset) {
-    thisAnswer.yarKeysReset.forEach(yarKey => setYarValue(request, yarKey, ''))
+    thisAnswer.yarKeysReset.forEach(yarKey => setYarValue(request, yarKey, null))
   }
 }
 

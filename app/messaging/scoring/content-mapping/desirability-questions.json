@@ -121,7 +121,7 @@
   "renewable-energy": [
     {
       "key": "renewable-energy",
-      "title": "IWill the hen housing use renewable energy sources?",
+      "title": "Will the hen housing use renewable energy sources?",
       "answers": {
         "renewable-energy-A1": "Solar PV system",
         "renewable-energy-A2": "A heat exchanger (heating only)",
