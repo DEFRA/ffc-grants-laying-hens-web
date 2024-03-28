@@ -43,9 +43,9 @@
       {% if warning %} 
         {{ govukWarningText(warning) }}
       {% endif %}
-      
+
       {% if additionalPara %}
-          <p class="govuk-body">{{ additionalPara  | striptags(true) | escape | nl2br }}</p>
+        <p class="govuk-body">{{ additionalPara | safe }}</p>
       {% endif %}
       
       {% if messageLink %}
