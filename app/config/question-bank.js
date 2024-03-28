@@ -11,7 +11,8 @@ const {
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
   POSTCODE_REGEX,
-  CURRENCY_FORMAT
+  CURRENCY_FORMAT,
+  TWO_DP_NUMBER
 } = require('ffc-grants-common-functionality').regex
 
 const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
@@ -3933,8 +3934,7 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              // only 2 decimal places
-              regex:  /^(\d{1,9}(\.\d{1,2})?)$/,
+              regex:  TWO_DP_NUMBER,
               error: 'Estimated power capacity must be a number up to 2 decimal places'
             }
           ],
