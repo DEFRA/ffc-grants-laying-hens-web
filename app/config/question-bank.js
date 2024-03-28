@@ -11,8 +11,7 @@ const {
   MIN_3_LETTERS,
   ONLY_TEXT_REGEX,
   POSTCODE_REGEX,
-  CURRENCY_FORMAT,
-  TWO_DP_NUMBER
+  CURRENCY_FORMAT
 } = require('ffc-grants-common-functionality').regex
 
 const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
