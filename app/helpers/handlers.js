@@ -492,6 +492,7 @@ const showPostPage = (currentQuestion, request, h) => {
   let NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
   let dataObject
 
+
   if (baseUrl === 'veranda-project-cost') {
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: 'The minimum grant you can apply for is £15,000 (40% of £37,500)' }
   }
@@ -511,6 +512,10 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
   
+  if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
+    return h.redirect('/laying-hens/potential-amount')
+  }
+
   if (yarKey === 'projectCost') {
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
     setYarValue(request, 'calculatedGrant', calculatedGrant)

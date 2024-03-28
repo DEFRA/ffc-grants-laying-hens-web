@@ -172,9 +172,20 @@ describe('Project cost page', () => {
     expect(postResponse.headers.location).toBe('bird-number')
   })
 
-  it('solarPVSystem = Yes -> page loads with correct back link', async () => {
-    varList.solarPVSystem = 'Yes'
+  it('solarPVSystem = Yes -> store valid user input and redirect to potential-amount page', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/project-cost`,
+      payload: { projectCost: '1260000', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
 
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('/laying-hens/potential-amount')
+  })
+
+  it('solarPVSystem = Yes -> page loads with correct back link', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-cost`

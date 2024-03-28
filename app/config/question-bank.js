@@ -2279,7 +2279,8 @@ const questionBank = {
           answers: [
             {
               key: 'solar-PV-system-A1',
-              value: 'Yes'
+              value: 'Yes',
+              yarKeysReset: ['roofSupportSolarPV', 'roofSolarPVExemption']
             },
             {
               key: 'solar-PV-system-A2',
@@ -2379,11 +2380,13 @@ const questionBank = {
           answers: [
             {
               key: 'roof-solar-PV-exemption-A1',
-              value: 'The building is listed'
+              value: 'The building is listed',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A2',
-              value: 'The building is on a World Heritage Site'
+              value: 'The building is on a World Heritage Site',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A3',
@@ -2391,18 +2394,22 @@ const questionBank = {
               dependantShowHideKey: 'project-type',
               dependantShowHideAnswerKey: 'project-type-A3',
               dependantShowHideYarKey: 'projectType',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A4',
-              value: 'The roof only faces north'
+              value: 'The roof only faces north',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A5',
-              value: 'The roof is heavily shaded'
+              value: 'The roof is heavily shaded',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A6',
-              value: 'The roof does not have 100m² of clear roof space'
+              value: 'The roof does not have 100m² of clear roof space',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               value: 'divider'
