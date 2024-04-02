@@ -3851,14 +3851,14 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              regex: /^[1-9]\d*(,\d{3})*$/, // numbers with commas, cannot start with 0
-              error: 'Number of birds should be a number greater than 0'
+              regex: CURRENCY_FORMAT,
+              error: 'Number of birds should be a whole number, like 600'
             },
             {
               type: 'REGEX',
-              regex: CURRENCY_FORMAT,
-              error: 'Number of birds should be a whole number, like 600'
-            }  
+              regex: /^(0*[1-9][0-9]*(,\d{3})*)$/,
+              error: 'Number of birds should be a number greater than 0'
+            },
           ],
           yarKey: 'solarBirdNumber'
         },
@@ -3895,15 +3895,15 @@ const questionBank = {
               error: 'Enter the estimated cost of buying and installing the solar PV system'
             },
             {
+              // accepts numbers with correct format
               type: 'REGEX',
-              //  numbers and commas only
-              regex:  /^[0-9,]+$/,
+              regex: /^(\d{1,3}(\,{1}\d{3})*)*$/,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
-              type: 'MIN_MAX_CHARS',
+              type: 'MIN_MAX',
               min: 1,
-              max: 7,
+              max: 9999999,
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
