@@ -3851,9 +3851,14 @@ const questionBank = {
             },
             {
               type: 'REGEX',
+              regex: /^[1-9]\d*(,\d{3})*$/, // numbers with commas, cannot start with 0
+              error: 'Number of birds should be a number greater than 0'
+            },
+            {
+              type: 'REGEX',
               regex: CURRENCY_FORMAT,
               error: 'Number of birds should be a whole number, like 600'
-            },
+            }  
           ],
           yarKey: 'solarBirdNumber'
         },
