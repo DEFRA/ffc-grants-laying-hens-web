@@ -74,6 +74,17 @@
       }
     }
   ],
+  "pullet-multi-tier": [
+    {
+      "key": "pullet-multi-tier",
+      "title": "Will the pullets in your grant-funded building be reared in a multi-tier system as pullets?",
+      "answers": {
+        "pullet-multi-tier-A1": "Yes",
+        "pullet-multi-tier-A2": "No",
+        "pullet-multi-tier-A3": "I don’t know"
+      }
+    }
+  ],
   "natural-light": [
     {
       "key": "natural-light",
@@ -81,6 +92,16 @@
       "answers": {
         "natural-light-A1": "Yes",
         "natural-light-A2": "No"
+      }
+    }
+  ],
+  "dark-brooders": [
+    {
+      "key": "dark-brooders",
+      "title": "Will the housing include dark boorders?",
+      "answers": {
+        "dark-brooders-A1": "Yes",
+        "dark-brooders-A2": "No"
       }
     }
   ],
@@ -115,6 +136,16 @@
         "pollution-mitigation-A3": "Air filtration at outlets, for example using wet or dry scrubbers",
         "pollution-mitigation-A4": "A tree shelter belt near air outlets",
         "pollution-mitigation-A5": "None of the above"
+      }
+    }
+  ],
+  "pullet-veranda-features": [
+    {
+      "key": "pullet-veranda-features",
+      "title": "Will the pullet housing have a veranda with these features?",
+      "answers": {
+        "pullet-veranda-features-A1": "Yes",
+        "pullet-veranda-features-A2": "No"
       }
     }
   ],

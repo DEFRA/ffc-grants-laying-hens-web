@@ -18,6 +18,7 @@ function getUserAnswer (answers, userInput) {
 }
 
 function getDesirabilityDetails(questionKey, userInput) {
+  console.log(questionContent, 'value')
   const content = questionContent[questionKey]
   return {
     key: questionKey,

@@ -3082,7 +3082,7 @@ const questionBank = {
             },
             {
               key: 'hen-multi-tier-A3',
-              value: 'I don\'t know'
+              value: 'I don’t know'
             }
           ],
           yarKey: 'henMultiTier'
@@ -3131,7 +3131,7 @@ const questionBank = {
             },
             {
               key: 'pullet-multi-tier-A3',
-              value: 'I don\'t know'
+              value: 'I don’t know'
             }
           ],
           yarKey: 'pulletMultiTier'
