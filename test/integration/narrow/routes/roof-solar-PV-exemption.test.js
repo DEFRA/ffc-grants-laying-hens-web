@@ -3,14 +3,14 @@ const { commonFunctionsMock } = require('../../../session-mock')
 
 const utilsList = {
   'poultry-type-A1': 'hen',
-  'project-type-A2': 'Refurbishing an existing laying hen or pullet building',
-  'project-type-A3': 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features',
+  'project-type-A2': 'Refurbishing the existing building',
+  'project-type-A3': 'Replacing the entire building with a new building',
 }
 
 describe('Page: /roof-solar-PV-exemption', () => {
   const varList = {
     poultryType: 'hen',
-    projectType: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    projectType: 'Replacing the entire building with a new building'
   }
 
   let valList = {}
@@ -35,8 +35,8 @@ describe('Page: /roof-solar-PV-exemption', () => {
     expect(response.payload).toContain('None of the above')
 
   })
-  it('page loads with /I am not making changes to this building’s roof/ if project type is /Refurbishing an existing laying hen or pullet building/', async () => {
-    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+  it('page loads with /I am not making changes to this building’s roof/ if project type is /Refurbishing the existing building/', async () => {
+    varList.projectType = 'Refurbishing the existing building'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/roof-solar-PV-exemption`

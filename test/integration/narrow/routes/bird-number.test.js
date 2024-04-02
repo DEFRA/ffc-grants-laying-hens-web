@@ -2,13 +2,13 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 const utilsList = {
-  'project-type-A2': 'Refurbishing an existing laying hen or pullet building',
-  'poultry-type-A3': 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+  'project-type-A2': 'Refurbishing the existing building',
+  'poultry-type-A3': 'Replacing the entire building with a new building'
 }
 
 describe('Page: /bird-number', () => {
   let varList = {
-    projectType: 'Refurbishing an existing laying hen or pullet building',
+    projectType: 'Refurbishing the existing building',
   }
 
   let valList = {}
@@ -16,7 +16,7 @@ describe('Page: /bird-number', () => {
   commonFunctionsMock(varList, undefined, utilsList, valList)
 
   it('page loads successfully, with all the options - refurbishing', async () => {
-    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+    varList.projectType = 'Refurbishing the existing building'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/bird-number`
@@ -28,7 +28,7 @@ describe('Page: /bird-number', () => {
   })
 
   it('page loads successfully, with all the options - replacing', async () => {
-    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    varList.projectType = 'Replacing the entire building with a new building'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/bird-number`
@@ -40,7 +40,7 @@ describe('Page: /bird-number', () => {
   })
 
   it('no option selected -> show error message - refurbishing', async () => {
-    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+    varList.projectType = 'Refurbishing the existing building'
     valList.solarBirdNumber = {
       error: 'Enter how many birds the refurbished part of this building will be able to house',
       return: false
@@ -59,7 +59,7 @@ describe('Page: /bird-number', () => {
   })
 
   it('no option selected -> show error message - replacing', async () => {
-    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    varList.projectType = 'Replacing the entire building with a new building'
     valList.solarBirdNumber = {
       error: 'Enter how many birds this new building will be able to house',
       return: false
@@ -79,7 +79,7 @@ describe('Page: /bird-number', () => {
 
   it('user selects eligible option -> store user response and redirect to /solar-PV-cost', async () => {
     valList.solarBirdNumber = false
-    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+    varList.projectType = 'Refurbishing the existing building'
 
     const postOptions = {
       method: 'POST',
