@@ -19,6 +19,8 @@ const { LIST_COUNTIES } = require('ffc-grants-common-functionality').counties
 const {
   MIN_GRANT,
   MAX_GRANT,
+  VERANDA_MIN_GRANT,
+  VERANDA_MAX_GRANT,
   GRANT_PERCENTAGE
 } = require('../helpers/grant-details')
 
@@ -470,6 +472,7 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 31 December 2025.',
+            insertText: { text: '' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -1631,16 +1634,20 @@ const questionBank = {
         {
           key: 'lighting-features',
           order: 180,
-          title: 'Will the housing lighting system have these features?',
+          title: 'Will the house lighting system have these features?',
           pageTitle: '',
           url: 'lighting-features',
           baseUrl: 'lighting-features',
           backUrlObject: {
-            dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A2'],
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A2'],
+            dependentElseUrlYarKey: 'projectType',
+            dependentElseUrlQuestionKey: 'project-type',
+            dependentElseUrlAnswerKey: 'project-type-A2',
             urlOptions: {
-              thenUrl: 'refurbishing-insulation',
-              elseUrl: 'replacing-insulation'
+              thenUrl: 'pullet-housing-requirements',
+              elseUrl: 'replacing-insulation',
+              dependantElseUrl: 'refurbishing-insulation'
             }
           },
           nextUrlObject: {
@@ -1652,25 +1659,25 @@ const questionBank = {
             }
           },
           hint: {
-            html: `<p>The housing lighting system must have:</p>
+            html: `<p>When the project is complete, the house lighting system must have:</p>
                   <ul>
                       <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
                       <li>capacity for zonal dimming between 0 and 60 lux</li>
-                      <li>coverage of the entire floor-litter (scratch) area</li>
-                      <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
+                      <li>full coverage of the entire floor-litter (scratch) area</li>
+                      <span>{{_poultryType_}}</span>
                       <li>an option for red light to reduce feather pecking</li>
                   </ul>`
           },
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
-                  <p class="govuk-body">The housing lighting system must have:</p>
+                  <p class="govuk-body">When the project is complete, the house lighting system must have:</p>
                   <ul>
                       <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
                       <li>capacity for zonal dimming between 0 and 60 lux</li>
-                      <li>coverage of the entire floor-litter (scratch) area</li>
-                      <li>a simulated stepped dawn and dusk{{_poultryType_}}</li>
-                      <li>an option for red light to reduce feather pecking</li>
+                      <li>full coverage of the entire floor-litter (scratch) area</li>
+                      <span>{{_poultryType_}}</span>
+                      <li>an option for red light to reduce feather pecking.</li>
                   </ul>
               </div>`,
             messageLink: {
@@ -1683,7 +1690,7 @@ const questionBank = {
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: 'The housing lighting system must have these features to promote positive bird behaviour and reduce stress.',
+                  para: 'When the project is complete. the house lighting system must have these features to promote positive bird behaviour and reduce stress.',
                   items: [],
                 }]
               }
@@ -1696,7 +1703,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the building lighting system will have these features'
+              error: 'Select yes if the house lighting system will have these features'
             }
           ],
           answers: [
@@ -2271,7 +2278,8 @@ const questionBank = {
           answers: [
             {
               key: 'solar-PV-system-A1',
-              value: 'Yes'
+              value: 'Yes',
+              yarKeysReset: ['roofSupportSolarPV', 'roofSolarPVExemption']
             },
             {
               key: 'solar-PV-system-A2',
@@ -2371,11 +2379,13 @@ const questionBank = {
           answers: [
             {
               key: 'roof-solar-PV-exemption-A1',
-              value: 'The building is listed'
+              value: 'The building is listed',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A2',
-              value: 'The building is on a World Heritage Site'
+              value: 'The building is on a World Heritage Site',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A3',
@@ -2383,18 +2393,22 @@ const questionBank = {
               dependantShowHideKey: 'project-type',
               dependantShowHideAnswerKey: 'project-type-A3',
               dependantShowHideYarKey: 'projectType',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A4',
-              value: 'The roof only faces north'
+              value: 'The roof only faces north',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A5',
-              value: 'The roof is heavily shaded'
+              value: 'The roof is heavily shaded',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               key: 'roof-solar-PV-exemption-A6',
-              value: 'The roof does not have 100m² of clear roof space'
+              value: 'The roof does not have 100m² of clear roof space',
+              yarKeysReset: ['roofSupportSolarPV']
             },
             {
               value: 'divider'
@@ -2501,8 +2515,9 @@ const questionBank = {
           },
           ineligibleContent: {
             messageContent: `
+            <div class="govuk-list govuk-list--bullet">
               <p>The veranda must have a:</p>
-              <ul class="govuk-list--bullet">
+              <ul>
                 <li>a solid concrete floor</li>
                 <li>a waterproof insulated roof</li>
                 <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
@@ -2510,7 +2525,8 @@ const questionBank = {
                 <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                 <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
                 <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
-              </ul>`,
+              </ul>
+              </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -2550,8 +2566,8 @@ const questionBank = {
           fundingPriorities: '',
           preValidationKeys: [],
           grantInfo: {
-            minGrant: MIN_GRANT,
-            maxGrant: MAX_GRANT,
+            minGrant: VERANDA_MIN_GRANT,
+            maxGrant: VERANDA_MAX_GRANT,
             grantPercentage: GRANT_PERCENTAGE,
             cappedGrant: true
           },
@@ -2627,6 +2643,7 @@ const questionBank = {
             messageHeader: 'Potential grant funding',
             additionalSentence: 'The maximum grant you can apply for is £100,000.',
             messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
+            insertText: { text: '' },
             warning: {
               text: 'There’s no guarantee the project will receive a grant.'
             }
@@ -2639,17 +2656,23 @@ const questionBank = {
           classes: 'govuk-input--width-10',
           url: 'project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-type',
-          // backUrlObject: {
-          //   dependentQuestionYarKey: 'heritageSite',
-          //   dependentAnswerKeysArray: ['heritage-site-A2'],
-          //   urlOptions: {
-          //     thenUrl: 'heritage-site',
-          //     elseUrl: 'solar-PV-system',
-          //     nonDependentUrl: 'solar-PV-system'
-          //   }
-          // },
-          nextUrl: 'potential-amount',
+          backUrlObject: {
+            dependentQuestionYarKey: 'roofSolarPVExemption' ,
+            dependentAnswerKeysArray: ['roof-solar-PV-exemption-A7'],
+            urlOptions: {
+              thenUrl: 'roof-support-solar-PV',
+              elseUrl: 'roof-solar-PV-exemption',
+              nonDependentUrl: 'solar-PV-system'
+            }
+          },
+          nextUrlObject: {
+            dependentQuestionYarKey: ['solarPVSystem'], 
+            dependentAnswerKeysArray: ['solar-PV-system-A2'],
+            urlOptions: {
+              thenUrl: 'potential-amount',
+              elseUrl: 'bird-number'
+            }   
+          },
           fundingPriorities: '',
           // preValidationKeys: [],
           grantInfo: {
@@ -2663,21 +2686,48 @@ const questionBank = {
             text: '£'
           },
           label: {
-            text: 'What is the total estimated cost of the calf housing?',
+            text: 'What is the total estimated cost of {{_projectType_}} this building?',
             classes: 'govuk-label--l',
             isPageHeading: true
           },
           hint: {
-            html: `
-                  <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs. The minimum grant you can apply for this project is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.</p>
-                  <p>Do not include VAT</p>
-                  <p>Enter amount, for example 95,000</p>
-              `
+            htmlSolar: `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building. Do not include the solar PV system costs in the estimated building project costs.</p>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am replacing or refurbishing multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of {{_projectType_}} this building only.</p>
+                  <p>You must submit a separate application for each building.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 95,000</p>
+            `,
+            htmlNoSolar: `
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building.</p>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    I am replacing or refurbishing multiple buildings
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>Enter the costs of {{_projectType_}} this building only.</p>
+                  <p>You must submit a separate application for each building.</p>
+                </div>
+              </details>
+              <p>Do not include VAT</p>
+              <p>Enter amount, for example 95,000</p>
+            `
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the estimated total cost for the items'
+              error: 'Enter the total estimated cost of {{_projectType_}} the building'
             },
             {
               type: 'REGEX',
@@ -2691,12 +2741,27 @@ const questionBank = {
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `The minimum grant each business can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500). 
+                
+                The maximum total grant amount each business can apply for is £500,000 (${GRANT_PERCENTAGE}% of £1.25 million).`,
+              }],
+            }]
+          },
           ineligibleContent: {
-            messageContent: `The minimum grant you can apply for the calf housing costs is £15,000 (${GRANT_PERCENTAGE}% of £37,500). The maximum grant is £500,000.`,
+            messageContent: `You can apply for grant funding for multiple buildings. You must submit an application for each building.</br></br>
+            If the total grant funding for your combined
+            building projects is more than £15,000 (40% of £37,500), you may still be eligible to apply for grant funding.
+           `,
+           insertText: '',
+            additionalPara: `If you are applying for grant funding for a single building, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> see other grants you may be eligible for.</a>`,
             messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
+              url: 'potential-amount',
+              title: 'I am applying for multiple building projects'
+            },
           },
           answers: [],
           yarKey: 'projectCost'
@@ -2777,6 +2842,7 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
             messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
+            insertText: { text: '' },
             warning: {
               text: 'There’s no guarantee the project will receive a grant.'
             }
@@ -2794,28 +2860,11 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
             messageContent: 'You have requested the maximum grant amount of £500,000 for calf housing.',
+            insertText: { text: '' },
             warning: {
               text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
             },
             extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.</p>'
-          }
-        },
-        {
-          key: 'potential-amount-capped',
-          order: 165,
-          url: 'potential-amount-capped',
-          baseUrl: 'potential-amount-capped',
-          backUrl: 'project-cost',
-          nextUrl: 'remaining-costs',
-          // preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: `The maximum grant you can apply for is £500,000.
-            You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
-            warning: {
-              text: 'There’s no guarantee the project will receive a grant.'
-            }
           }
         },
         {
@@ -3808,7 +3857,7 @@ const questionBank = {
               error: 'Number of birds should be a whole number, like 600'
             },
           ],
-          yarKey: 'birdNumber'
+          yarKey: 'solarBirdNumber'
         },
         {
           key: 'solar-PV-cost',
@@ -3892,15 +3941,21 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              // no special chars, only numbers
-              regex:  /^\d*(\.\d+)?$/,
+              // no special chars, only numbers, commas and dots
+              regex:  /^[0-9,.]+$/,
               error: 'Estimated power capacity must be a number, like 10'
             },
             {
+              // accepts numbers and commas with up to 2 decimal places
               type: 'REGEX',
-              // only 2 decimal places
-              regex:  /^(\d{1,2}(\.\d{1,2})?)$/,
+              regex:  /^[0-9,]+(\.\d{1,2}){0,1}$/,
               error: 'Estimated power capacity must be a number up to 2 decimal places'
+            },
+            {
+              // accepts numbers with correct format
+              type: 'REGEX',
+              regex: /^(\d{1,3}(\,{1}\d{3})*(\.\d{1,2}){0,1})*$/,
+              error: 'Estimated power capacity must be a number, like 10'
             }
           ],
           yarKey: 'solarPowerCapacity'
@@ -3931,7 +3986,8 @@ const questionBank = {
             <h2 class="govuk-heading-m">Next steps</h2>
             <p class="govuk-body">Next, add your business and contact details and submit them to the RPA (you should only do this once).
             <br/><br/>
-            You’ll get an email with your answers and a reference number.</p>`
+            You’ll get an email with your answers and a reference number.</p>`,
+            insertText: { text: '' }
           },
           answers: []
         },
@@ -4842,7 +4898,8 @@ const questionBank = {
             I am aware that the information I submit will be checked by the RPA.</br></br>
             I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.
             <h2 class="govuk-heading-m">Improving our schemes</h2>
-            Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`
+            Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`,
+            insertText: { text: '' }
           },
           answers: [
             {
@@ -4912,9 +4969,10 @@ const questionBank = {
             <p>2. If you submit an application, RPA will assess it against other projects and value for money. You will not automatically get a grant. The grant is expected to be highly competitive and you are competing against other projects.</p>
             <p>3. If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</p>
             `,
-            warning: {
+            middleWarning: {
               text: 'You must not start the project'
             },
+            insertText: { text: '' },
             extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
             <p>Before you start the project, you can:</p>
             <ul>

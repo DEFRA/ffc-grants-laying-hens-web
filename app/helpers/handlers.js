@@ -7,6 +7,7 @@ const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { guardPage } = require('ffc-grants-common-functionality').pageGuard
 const { getUrl } = require('../helpers/urls')
+const { GRANT_PERCENTAGE } = require('./grant-details')
 const senders = require('../messaging/senders')
 
 const { startPageUrl, urlPrefix, serviceEndDate, serviceEndTime } = require('./../config/server')
@@ -49,15 +50,18 @@ const getReplacementText = (request, key, questionType, questionKey, trueReturn,
 
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
+
     switch (url) {
       case '1000-birds':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets');
       case 'current-multi-tier-system':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'multi-tier aviary systems', 'multi-tier systems');
       case 'lighting-features':
-        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ' (unless this is already provided as part of an aviary lighting system)', '');
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ` <li>a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)</li>`, '');
       case 'bird-number':
         return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'the refurbished part of this building', 'this new building');
+      case 'project-cost':
+        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'refurbishing', 'replacing');
       default:
         return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName);
     }
@@ -96,8 +100,8 @@ const hintTextCheck = (question, hint, url, request) => {
     question = {
       ...question,
       hint: {
-            ...hint,
-            html: insertYarValue(hint.html,url, request)
+        ...hint,
+        html: insertYarValue(hint.html, url, request)
       }
     }
   }
@@ -283,6 +287,22 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   maybeEligibleContent.title = question.title
   let consentOptionalData
 
+  if(url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
+    maybeEligibleContent = {
+      ...maybeEligibleContent,
+      messageContent: 'The maximum grant you can apply for is £500,000.',
+      insertText: { text:'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.' },
+    }
+  }else if(url === 'potential-amount' &&  getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
+    maybeEligibleContent = {
+      ...maybeEligibleContent,
+      messageContent: 'The maximum grant you can apply for is £500,000.',
+      insertText: { text:'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for building project costs.' },
+      extraMessageContent: 'You can continue to check your eligibility for grant funding to replace or refurbish a {{_poultryType_}} house.'
+    }
+  }
+
+
   if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') > 250000) {
     question.maybeEligibleContent.potentialAmountConditional = true
   } else {
@@ -314,14 +334,24 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     }
     request.yar.reset()
   }
-
+  
   maybeEligibleContent = {
     ...maybeEligibleContent,
+    insertText: maybeEligibleContent.insertText.text ?  { text: maybeEligibleContent.insertText.text.replace(
+      SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+      )
+    )} : '',
     messageContent: maybeEligibleContent.messageContent.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       )
-    )
+    ),
+    extraMessageContent: maybeEligibleContent.extraMessageContent ?  maybeEligibleContent.extraMessageContent.replace(
+      SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+      getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
+      )
+    ) : ''
   }
 
   if (url === 'confirm' || url === 'veranda-confirm') {
@@ -364,11 +394,21 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 
 const getPage = async (question, request, h) => {
   const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
-  const preValidationObject = question.preValidationObject ?? question.preValidationKeys //
+  const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
   if (isRedirect) {
     return h.redirect(startPageUrl)
+  }
+
+  if (url === 'project-cost') {
+    if (getYarValue(request, 'solarPVSystem') === 'Yes'){
+      question.hint.html = question.hint.htmlSolar
+      hint.html = question.hint.htmlSolar
+    } else {
+      question.hint.html = question.hint.htmlNoSolar
+      hint.html = question.hint.htmlNoSolar
+    }
   }
 
   // formatting variables block
@@ -469,10 +509,6 @@ const showPostPage = (currentQuestion, request, h) => {
   let dataObject
 
   checkYarKeyReset(thisAnswer, request)
-
-  if (baseUrl === 'veranda-project-cost') {
-    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: 'The minimum grant you can apply for is £15,000 (40% of £37,500)' }
-  }
  
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
@@ -482,18 +518,30 @@ const showPostPage = (currentQuestion, request, h) => {
   if (errors) {
     return errors
   }
+  if (baseUrl === 'veranda-project-cost'){
+    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
+  }
+  else if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem')  === 'Yes') {
+    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, 
+    insertText: { 
+      text: 'You cannot apply for funding for solar PV system if you have not requested the minimum grant funding amount for a building.' 
+    }
+  }
+  } else if(baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem')  === 'No') {
+    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, insertText:'' }
+  }
+
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request,
       { name: gapiService.eventTypes.ELIMINATION, params: {} })
-  
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
-
-  if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
-    return h.redirect('/laying-hens/potential-amount-capped')
-  }
   
+  if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
+    return h.redirect('/laying-hens/potential-amount')
+  }
+
   if (yarKey === 'projectCost') {
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
     setYarValue(request, 'calculatedGrant', calculatedGrant)
