@@ -111,7 +111,7 @@ describe('Page: /solar-power-capacity', () => {
     expect(postResponse.headers.location).toBe('potential-amount-solar')
   })
  // scenario 3 cost more than 1250000 and bird number * 0.005 less than power capacity
-  it('user selects eligible option -> store user response and redirect to /potential-amount-solar-details', async () => {
+  it('user selects eligible option -> store user response and redirect to /potential-amount-solar-calculation', async () => {
     valList.solarPowerCapacity = false
     varList.projectCost = '1250000'
     varList.solarPVCost = '500000'
@@ -126,7 +126,7 @@ describe('Page: /solar-power-capacity', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('potential-amount-solar-details')
+    expect(postResponse.headers.location).toBe('potential-amount-solar-calculation')
   })
 
   it('page loads with correct back link - /solar-PV-cost', async () => {

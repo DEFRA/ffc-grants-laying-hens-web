@@ -515,7 +515,7 @@ const showPostPage = (currentQuestion, request, h) => {
     // scenario 3 cost more than 1250000 and bird number * 0.005 less than power capacity
     else if(getYarValue(request, 'projectCost') + getYarValue(request, 'solarPVCost') > 1250000 
     && getYarValue(request, 'solarBirdNumber') * 0.005 > getYarValue(request, 'solarPowerCapacity') ){
-      nextUrl = 'potential-amount-solar-details'
+      nextUrl = 'potential-amount-solar-calculation'
     }
   }
 
