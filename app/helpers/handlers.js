@@ -473,7 +473,7 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
+  let { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
 
   if (baseUrl !== 'score') {
@@ -492,7 +492,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   let NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
   let dataObject
- 
+
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
   }
@@ -501,6 +501,24 @@ const showPostPage = (currentQuestion, request, h) => {
   if (errors) {
     return errors
   }
+
+  if (baseUrl === 'solar-power-capacity'){
+    // scenario 1 cost less than 1250000 and bird number * 0.005 less than power capacity
+    if(getYarValue(request, 'projectCost') + getYarValue(request, 'solarPVCost') <= 1250000 && 
+    (getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber') <= 0.005) ){
+      nextUrl = 'potential-amount-solar'
+    // scenario 2 cost more than 1250000 and bird number * 0.005 more than power capacity
+    }else if(getYarValue(request, 'projectCost') + getYarValue(request, 'solarPVCost') > 1250000 
+    && (getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber') > 0.005) ){
+      nextUrl = 'potential-amount-solar'
+    }
+    // scenario 3 cost more than 1250000 and bird number * 0.005 less than power capacity
+    else if(getYarValue(request, 'projectCost') + getYarValue(request, 'solarPVCost') > 1250000 
+    && getYarValue(request, 'solarBirdNumber') * 0.005 > getYarValue(request, 'solarPowerCapacity') ){
+      nextUrl = 'potential-amount-solar-details'
+    }
+  }
+
   if (baseUrl === 'veranda-project-cost'){
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
   }

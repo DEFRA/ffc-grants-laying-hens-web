@@ -2,7 +2,11 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /solar-power-capacity', () => {
-  let varList = {}
+  let varList = {
+    projectCost: '10000',
+    solarPVCost: '10000',
+    solarBirdNumber: '1000'
+  }
   let valList = {}
   
   commonFunctionsMock(varList, undefined, {}, valList)
@@ -70,19 +74,59 @@ describe('Page: /solar-power-capacity', () => {
     expect(postResponse.payload).toContain('Estimated power capacity must be a number up to 2 decimal places')
   })
 
+  // scenario 1 cost less than 1250000 and bird number * 0.005 less than power capacity
   it('user selects eligible option -> store user response and redirect to /potential-amount-solar', async () => {
     valList.solarPowerCapacity = false
-
+    varList.projectCost = '10000'
+    varList.solarPVCost = '500000'
+    varList.solarBirdNumber = '1000'
+    varList.solarPowerCapacity = '5'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-power-capacity`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarPowerCapacity: '600',  crumb: crumbToken }
+      payload: { solarPowerCapacity: '5',  crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('potential-amount-solar')
+  })
+
+  // scenario 2 cost more than 1250000 and bird number * 0.005 more than power capacity
+  it('user selects eligible option -> store user response and redirect to /potential-amount-solar', async () => {
+    valList.solarPowerCapacity = false
+    varList.projectCost = '1250000'
+    varList.solarPVCost = '500000'
+    varList.solarBirdNumber = '700'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/solar-power-capacity`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { solarPowerCapacity: '5',  crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('potential-amount-solar')
+  })
+ // scenario 3 cost more than 1250000 and bird number * 0.005 less than power capacity
+  it('user selects eligible option -> store user response and redirect to /potential-amount-solar-details', async () => {
+    valList.solarPowerCapacity = false
+    varList.projectCost = '1250000'
+    varList.solarPVCost = '500000'
+    varList.solarBirdNumber = '1000'
+    varList.solarPowerCapacity = '1'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/solar-power-capacity`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { solarPowerCapacity: '1',  crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('potential-amount-solar-details')
   })
 
   it('page loads with correct back link - /solar-PV-cost', async () => {
