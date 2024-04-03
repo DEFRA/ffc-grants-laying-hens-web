@@ -2652,7 +2652,7 @@ const questionBank = {
                 </div>
               </details>
               <p>Do not include VAT</p>
-              <p>Enter amount, for example 95,000</p>
+              <p>Enter amount, for example 595,000</p>
             `,
             htmlNoSolar: `
               <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building.</p>
@@ -2668,7 +2668,7 @@ const questionBank = {
                 </div>
               </details>
               <p>Do not include VAT</p>
-              <p>Enter amount, for example 95,000</p>
+              <p>Enter amount, for example 595,000</p>
             `
           },
           validate: [
