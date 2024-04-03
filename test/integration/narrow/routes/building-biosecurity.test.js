@@ -16,8 +16,8 @@ describe('Page: /building-biosecurity', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Will the building structure include the following?')
-    expect(response.payload).toContain('Shower-in-facilities in the lobby or changing room area')
-    expect(response.payload).toContain('An externally accessible storage room with a separate air space')
+    expect(response.payload).toContain('Shower facilities in the biosecurity changing area')
+    expect(response.payload).toContain('An integrated externally accessible storage room with a separate air space')
     expect(response.payload).toContain('None of the above')
   })
 

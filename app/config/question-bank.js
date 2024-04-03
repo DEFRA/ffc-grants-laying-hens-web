@@ -3267,11 +3267,11 @@ const questionBank = {
           answers: [
             {
               key: 'building-biosecurity-A1',
-              value: 'Shower-in-facilities in the lobby or changing room area'
+              value: 'Shower facilities in the biosecurity changing area'
             },
             {
               key: 'building-biosecurity-A2',
-              value: 'An externally accessible storage room with a separate air space',
+              value: 'An integrated externally accessible storage room with a separate air space',
               hint: {
                 text: `To create a separate air space, the area must have solid 
                 ceiling height walls, providing a secure barrier from the 
@@ -3459,7 +3459,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices\'.'
+                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices.'
               }]
             }]
           },
@@ -3493,7 +3493,10 @@ const questionBank = {
             },
             {
               key: 'pollution-mitigation-A4',
-              value: 'A tree shelter belt near air outlets'
+              value: 'A tree shelter belt near air outlets',
+              hint: {
+                text: 'Planted specifically to reduce ammonia output'
+              }
             },
             {
               value: 'divider'
