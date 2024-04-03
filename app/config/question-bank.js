@@ -3897,7 +3897,7 @@ const questionBank = {
             {
               // accepts numbers with correct format
               type: 'REGEX',
-              regex: /^(\d{1,3}(\,{1}\d{3})*)*$/,
+              regex: /^\d{1,7}(,\d{3})*$/,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
