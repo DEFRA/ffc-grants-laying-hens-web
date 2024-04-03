@@ -3870,6 +3870,12 @@ const questionBank = {
           prefix: {
             text: '£'
           },
+          grantInfo: {
+            minGrant: 0,
+            maxGrant: 500000,
+            grantPercentage: 25,
+            cappedGrant: true
+          },
           id: 'solarPVCost',
           label: {
             text: 'What is the estimated cost of buying and installing the solar PV system?',

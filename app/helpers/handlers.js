@@ -503,19 +503,18 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   if (baseUrl === 'solar-power-capacity'){
-    // scenario 1 cost less than 1250000 and bird number * 0.005 less than power capacity
-     // scenario 2 cost more than 1250000 and bird number * 0.005 more than power capacity
-    if((getYarValue(request, 'projectCost') + getYarValue(request, 'solarPVCost') <= 1250000 && 
-      0.005 * getYarValue(request, 'solarBirdNumber') >= getYarValue(request, 'solarPowerCapacity')) || 
-      (getYarValue(request, 'projectCost') + getYarValue(request, 'solarPVCost') > 1250000 
-      && 0.005 * getYarValue(request, 'solarBirdNumber') < getYarValue(request, 'solarPowerCapacity'))){
-      nextUrl = 'potential-amount-solar'
+    if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
+      console.log(getYarValue(request, 'calculatedGrant'), 'calculatedGrant')
+      console.log(getYarValue(request, 'solarCalculatedGrant'), 'solarCalculatedGrant')
+      // capped version of page.
+        nextUrl = 'potential-amount-solar-capped'
+    }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
+      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
+        nextUrl = 'potential-amount-solar'
+    }else{
+        nextUrl = 'potential-amount-solar-calculation'
     }
-    // scenario 3 cost more than 1250000 and bird number * 0.005 less than power capacity
-    else if(getYarValue(request, 'projectCost') + getYarValue(request, 'solarPVCost') > 1250000 
-    && getYarValue(request, 'solarBirdNumber') * 0.005 > getYarValue(request, 'solarPowerCapacity') ){
-      nextUrl = 'potential-amount-solar-calculation'
-    }
+  }
   }
 
   if (baseUrl === 'veranda-project-cost'){
@@ -547,6 +546,13 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
     setYarValue(request, 'projectCost', projectCost)
+  }
+
+  if (yarKey === 'solarPVCost') {
+    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+    setYarValue(request, 'solarCalculatedGrant', calculatedGrant)
+    setYarValue(request, 'solarRemainingCost', remainingCost)
+    setYarValue(request, 'solarProjectCost', projectCost)
   }
 
   if (thisAnswer?.redirectUrl) {
