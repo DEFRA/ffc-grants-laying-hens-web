@@ -3092,7 +3092,7 @@ const questionBank = {
         {
           key: 'hen-multi-tier',
           order: 310,
-          title: 'Will the hens in your grant-funded building be reared in a multi-tier system as pullets?',
+          title: 'Will the hens in this building be reared in a multi-tier system as pullets?',
           pageTitle: '',
           hint: {
             text: 'When they are under 15 weeks old'
@@ -3105,7 +3105,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund projects where pullets are reared in multi-tier aviary systems before they move into the grant-funded aviary housing as layer hens.`
+                para: `RPA want to fund projects that encourage a consistent housing type for birds between rearing and laying. `
               }]
             }]
           },
@@ -3116,7 +3116,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the hens in your grant-funded building will be reared in a multi-tier system as pullets'
+              error: 'Select yes if the hens in this building will be reared in a multi-tier system as pullets'
             }
           ],
           answers: [
@@ -3141,7 +3141,7 @@ const questionBank = {
         {
           key: 'pullet-multi-tier',
           order: 315,
-          title: 'Will the pullets in your grant-funded building live in a multi-tier system as hens?',
+          title: 'Will the pullets reared in this building be housed in an aviary system as adults?',
           pageTitle: '',
           hint: {
             text: 'When they are over 15 weeks old'
@@ -3154,7 +3154,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund projects that will house hens in multi-tier aviary systems when they move out of the grant-funded housing.`
+                para: `RPA want to fund projects that encourage a consistent housing type for birds between rearing and laying. `
               }]
             }]
           },
@@ -3165,7 +3165,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the pullets in your grant-funded building will live in a multi-tier system as hens'
+              error: 'Select yes if the pullets reared in this building will be housed in an aviary system as adults'
             }
           ],
           answers: [
