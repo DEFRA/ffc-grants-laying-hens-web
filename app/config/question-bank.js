@@ -3194,7 +3194,14 @@ const questionBank = {
           },
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
-          backUrl: 'natural-light',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'natural-light',
+              elseUrl: 'dark-brooders'
+            }
+          },
           nextUrl: 'building-biosecurity',
           sidebar: {
             values: [{
@@ -3391,7 +3398,14 @@ const questionBank = {
           },
           url: 'natural-light',
           baseUrl: 'natural-light',
-          nextUrl: 'easy-grip-perches',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'easy-grip-perches',
+              elseUrl: 'dark-brooders'
+            }
+          },
           backUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
@@ -3525,7 +3539,7 @@ const questionBank = {
           },
           url: 'pullet-veranda-features',
           baseUrl: 'pullet-veranda-features',
-          nextUrl: 'dark-brooders',
+          nextUrl: 'renewable-energy',
           backUrl: 'pollution-mitigation',
           sidebar: {
             values: [{

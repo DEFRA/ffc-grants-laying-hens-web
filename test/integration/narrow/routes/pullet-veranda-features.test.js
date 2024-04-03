@@ -46,7 +46,7 @@ describe('Page: /pullet-veranda-features', () => {
     expect(postResponse.payload).toContain('Select yes if the pullet housing will have a veranda with these features')
   })
 
-  it('user selects eligible option -> store user response and redirect to /dark-brooders', async () => {
+  it('user selects eligible option -> store user response and redirect to /renewable-energy', async () => {
     valList.pulletVerandaFeatures = null
     const postOptions = {
       method: 'POST',
@@ -57,7 +57,7 @@ describe('Page: /pullet-veranda-features', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('dark-brooders')
+    expect(postResponse.headers.location).toBe('renewable-energy')
   })
 
   it('page loads with correct back link', async () => {
