@@ -3895,9 +3895,13 @@ const questionBank = {
               error: 'Enter the estimated cost of buying and installing the solar PV system'
             },
             {
-              // accepts numbers with correct format
               type: 'REGEX',
-              regex: /^\d{1,7}(,\d{3})*$/,
+              regex: /^[0-9,]+$/,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'REGEX',
+              regex: /^(0*[1-9][0-9]*(,\d{3})*)$/,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
