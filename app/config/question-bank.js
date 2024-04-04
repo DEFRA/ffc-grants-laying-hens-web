@@ -3197,7 +3197,14 @@ const questionBank = {
           },
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
-          backUrl: 'natural-light',
+          backUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'natural-light',
+              elseUrl: 'dark-brooders'
+            }
+          },
           nextUrl: 'building-biosecurity',
           sidebar: {
             values: [{
@@ -3394,7 +3401,14 @@ const questionBank = {
           },
           url: 'natural-light',
           baseUrl: 'natural-light',
-          nextUrl: 'easy-grip-perches',
+          nextUrlObject: {
+            dependentQuestionYarKey: 'poultryType',
+            dependentAnswerKeysArray: ['poultry-type-A1'],
+            urlOptions: {
+              thenUrl: 'easy-grip-perches',
+              elseUrl: 'dark-brooders'
+            }
+          },
           backUrlObject: {
             dependentQuestionYarKey: 'poultryType',
             dependentAnswerKeysArray: ['poultry-type-A1'],
@@ -3528,7 +3542,7 @@ const questionBank = {
           },
           url: 'pullet-veranda-features',
           baseUrl: 'pullet-veranda-features',
-          nextUrl: 'dark-brooders',
+          nextUrl: 'renewable-energy',
           backUrl: 'pollution-mitigation',
           sidebar: {
             values: [{
@@ -3857,6 +3871,11 @@ const questionBank = {
               regex: CURRENCY_FORMAT,
               error: 'Number of birds should be a whole number, like 600'
             },
+            {
+              type: 'REGEX',
+              regex: /^(0*[1-9][0-9]*(,\d{3})*)$/,
+              error: 'Number of birds should be a number greater than 0'
+            },
           ],
           yarKey: 'solarBirdNumber'
         },
@@ -3894,14 +3913,18 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              //  numbers and commas only
-              regex:  /^[0-9,]+$/,
+              regex: /^[0-9,]+$/,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
-              type: 'MIN_MAX_CHARS',
+              type: 'REGEX',
+              regex: /^(0*[1-9][0-9]*(,\d{3})*)$/,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'MIN_MAX',
               min: 1,
-              max: 7,
+              max: 9999999,
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],

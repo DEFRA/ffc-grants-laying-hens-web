@@ -43,7 +43,8 @@ describe('Page: /natural-light', () => {
     expect(postResponse.payload).toContain('Select yes if the building will have windows that provide natural light to the indoor housing')
   })
 
-  it('user selects eligible option -> store user response and redirect to easy-grip-perches', async () => {
+  it('user selects eligible option -> store user response and redirect to /easy-grip-perches - hen', async () => {
+    varList.poultryType = 'hen'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/natural-light`,
@@ -56,6 +57,20 @@ describe('Page: /natural-light', () => {
     expect(postResponse.headers.location).toBe('easy-grip-perches')
   })
 
+  it('user selects eligible option -> store user response and redirect to /dark-brooders - pullet', async () => {
+    varList.poultryType = 'pullet'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/natural-light`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { naturalLight: 'Yes',  crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('dark-brooders')
+  })
+  
   it('page loads with correct back link - /hen-multi-tier', async () => {
     varList.poultryType = 'hen'
     const options = {
