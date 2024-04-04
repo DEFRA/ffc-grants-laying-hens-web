@@ -522,25 +522,12 @@ const formatVariablesBlock = (currentQuestion, title, baseUrl, request, validate
 const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
   if (baseUrl === 'solar-power-capacity'){
     if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
-      currentQuestion = {
-        ...currentQuestion,
-        nextUrl: 'potential-amount-solar-capped'
-      }
-      return currentQuestion
+      return currentQuestion.nextUrl = 'potential-amount-solar-capped'
     }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
       if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
-        currentQuestion = {
-          ...currentQuestion,
-          nextUrl: 'potential-amount-solar'
-        }
-        return currentQuestion
-      
+        return currentQuestion.nextUrl = 'potential-amount-solar'
     }else{
-      currentQuestion = {
-        ...currentQuestion,
-        nextUrl: 'potential-amount-solar-calculation'
-      }
-      return currentQuestion
+      return currentQuestion.nextUrl = 'potential-amount-solar-calculation'
     }
   }
 }
@@ -571,8 +558,6 @@ const showPostPage = (currentQuestion, request, h) => {
     return errors
   }
 
-  handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
-
   const solarPVSystem = getYarValue(request, 'solarPVSystem');
 
   if (baseUrl === 'veranda-project-cost'){
@@ -593,6 +578,8 @@ const showPostPage = (currentQuestion, request, h) => {
       { name: gapiService.eventTypes.ELIMINATION, params: {} })
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
+
+  handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
 
   if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount')
