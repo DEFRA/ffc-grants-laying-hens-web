@@ -10,8 +10,8 @@ describe('Page: /lighting-features', () => {
   const utilsList = {
     'poultry-type-A1': 'hen',
     'poultry-type-A2': 'pullet',
-    'project-type-A2': 'Refurbishing an existing laying hen or pullet building',
-    'project-type-A3': 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    'project-type-A2': 'Refurbishing the existing building',
+    'project-type-A3': 'Replacing the entire building with a new building'
   }
 
   let valList = {}
@@ -143,7 +143,7 @@ describe('Page: /lighting-features', () => {
 
   it('page loads with correct back link - /refurbishing-insulation', async () => {
     varList.poultryType = 'hen'
-    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+    varList.projectType = 'Refurbishing the existing building'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/lighting-features`
@@ -155,7 +155,7 @@ describe('Page: /lighting-features', () => {
 
   it('page loads with correct back link - /replacing-insulation', async () => {
     varList.poultryType = 'hen'
-    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    varList.projectType = 'Replacing the entire building with a new building'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/lighting-features`

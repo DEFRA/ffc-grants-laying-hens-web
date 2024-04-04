@@ -3,14 +3,14 @@ const { commonFunctionsMock } = require('../../../session-mock')
 
 const utilsList = {
   'poultry-type-A1': 'hen',
-  'project-type-A2': 'Refurbishing an existing laying hen or pullet building',
-  'project-type-A3': 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features',
+  'project-type-A2': 'Refurbishing the existing building',
+  'project-type-A3': 'Replacing the entire building with a new building',
 }
 
 describe('Page: /building-items', () => {
   const varList = {
     poultryType: 'hen',
-    projectType: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    projectType: 'Replacing the entire building with a new building'
   }
 
   let valList = {}
@@ -48,7 +48,7 @@ describe('Page: /building-items', () => {
     expect(postResponse.payload).toContain('Select yes if the building will have these features')
   })
 
-  it('user selects eligible option and /Replacing the entire laying hen or pullet building with a new building including the grant funding required features/ at project-type page  -> store user response and redirect to /replacing-insulation', async () => {
+  it('user selects eligible option and /Replacing the entire building with a new building/ at project-type page  -> store user response and redirect to /replacing-insulation', async () => {
     valList.buildingItems = null
     const postOptions = {
       method: 'POST',
@@ -62,8 +62,8 @@ describe('Page: /building-items', () => {
     expect(postResponse.headers.location).toBe('replacing-insulation')
   })
 
-  it('user selects eligible option and /Refurbishing an existing laying hen or pullet building/ at project-type -> store user response and redirect to /refurbishing-insulation', async () => {
-    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+  it('user selects eligible option and /Refurbishing the existing building/ at project-type -> store user response and redirect to /refurbishing-insulation', async () => {
+    varList.projectType = 'Refurbishing the existing building'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-items`,
@@ -91,7 +91,7 @@ describe('Page: /building-items', () => {
   })
 
   it('user selects eligible option -> store user response and redirect to /replacing-insulation', async () => {
-    varList.projectType = 'Refurbishing an existing laying hen or pullet building'
+    varList.projectType = 'Refurbishing the existing building'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/building-items`,

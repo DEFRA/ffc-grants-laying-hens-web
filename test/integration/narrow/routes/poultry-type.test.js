@@ -42,8 +42,8 @@ describe('Page: /poultry-type', () => {
     expect(postResponse.payload).toContain('Select what type of poultry will be housed in the building')
   })
 
-  it('user selects eligible option and projectType is `Replacing the entire laying hen or pullet building with a new building including the grant funding required features` -> store user response and redirect to /1000-birds', async () => {
-    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+  it('user selects eligible option and projectType is `Replacing the entire building with a new building` -> store user response and redirect to /1000-birds', async () => {
+    varList.projectType = 'Replacing the entire building with a new building'
     valList.poultryType = null
     const postOptions = {
       method: 'POST',
@@ -57,8 +57,8 @@ describe('Page: /poultry-type', () => {
     expect(postResponse.headers.location).toBe('1000-birds')
   })
 
-  it('user selects eligible option and projectType is `Adding a veranda only to an existing laying hen or pullet building` -> store user response and redirect to /veranda-only-size', async () => {
-    varList.projectType = 'Adding a veranda only to an existing laying hen or pullet building'
+  it('user selects eligible option and projectType is `Adding a veranda only to the existing building` -> store user response and redirect to /veranda-only-size', async () => {
+    varList.projectType = 'Adding a veranda only to the existing building'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/poultry-type`,
