@@ -473,7 +473,7 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
+  let { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
 
   if (baseUrl !== 'score') {
@@ -492,7 +492,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   let NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
   let dataObject
- 
+
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
   }
@@ -501,6 +501,22 @@ const showPostPage = (currentQuestion, request, h) => {
   if (errors) {
     return errors
   }
+
+  if (baseUrl === 'solar-power-capacity'){
+    if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
+      console.log(getYarValue(request, 'calculatedGrant'), 'calculatedGrant')
+      console.log(getYarValue(request, 'solarCalculatedGrant'), 'solarCalculatedGrant')
+      // capped version of page.
+        nextUrl = 'potential-amount-solar-capped'
+    }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
+      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
+        nextUrl = 'potential-amount-solar'
+    }else{
+        nextUrl = 'potential-amount-solar-calculation'
+    }
+  }
+  }
+
   if (baseUrl === 'veranda-project-cost'){
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
   }
@@ -530,6 +546,13 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
     setYarValue(request, 'projectCost', projectCost)
+  }
+
+  if (yarKey === 'solarPVCost') {
+    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+    setYarValue(request, 'solarCalculatedGrant', calculatedGrant)
+    setYarValue(request, 'solarRemainingCost', remainingCost)
+    setYarValue(request, 'solarProjectCost', projectCost)
   }
 
   if (thisAnswer?.redirectUrl) {
