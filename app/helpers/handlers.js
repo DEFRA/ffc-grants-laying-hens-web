@@ -508,26 +508,53 @@ const handleYarKey = (yarKey, request, payload, currentQuestion) => {
 }
 
 // formatting variables block - needed for error validations
-const formatVariablesBlock = (currentQuestion, title, baseUrl, request, validate, ineligibleContent, hint, label) => {
+const formatVariablesBlock = (currentQuestion, title, baseUrl, request, validate, ineligibleContent, hint) => {
   currentQuestion = titleCheck(currentQuestion, title, baseUrl, request)
   currentQuestion = validateErrorCheck(currentQuestion, validate, baseUrl, request)
   currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
   currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
   currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
-  currentQuestion = labelTextCheck(currentQuestion, label, baseUrl, request)
+  currentQuestion = labelTextCheck(currentQuestion, currentQuestion.label, baseUrl, request)
   currentQuestion = showHideAnswer(currentQuestion, request)
   return currentQuestion
 }
 
+const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
+  if (baseUrl === 'solar-power-capacity'){
+    if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
+      currentQuestion = {
+        ...currentQuestion,
+        nextUrl: 'potential-amount-solar-capped'
+      }
+      return currentQuestion
+    }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
+      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
+        currentQuestion = {
+          ...currentQuestion,
+          nextUrl: 'potential-amount-solar'
+        }
+        return currentQuestion
+      
+    }else{
+      currentQuestion = {
+        ...currentQuestion,
+        nextUrl: 'potential-amount-solar-calculation'
+      }
+      return currentQuestion
+    }
+  }
+}
+}
+
 const showPostPage = (currentQuestion, request, h) => {
-  let { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate, label } = currentQuestion
+  let { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
 
   if (baseUrl !== 'score') {
     setYarValue(request, 'onScorePage', false)
   }
 
-  currentQuestion = formatVariablesBlock(currentQuestion, title, baseUrl, request, validate, ineligibleContent, hint, label)
+  currentQuestion = formatVariablesBlock(currentQuestion, title, baseUrl, request, validate, ineligibleContent, hint)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   let NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
@@ -544,19 +571,10 @@ const showPostPage = (currentQuestion, request, h) => {
     return errors
   }
 
-  if (baseUrl === 'solar-power-capacity'){
-    if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
-        nextUrl = 'potential-amount-solar-capped'
-    }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
-      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
-        nextUrl = 'potential-amount-solar'
-    }else{
-        nextUrl = 'potential-amount-solar-calculation'
-    }
-  } 
-}
+  handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
 
   const solarPVSystem = getYarValue(request, 'solarPVSystem');
+
   if (baseUrl === 'veranda-project-cost'){
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
   }else if (baseUrl === 'project-cost') {
