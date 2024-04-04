@@ -25,10 +25,9 @@ const {
 } = require('./pageHelpers')
 
 const { getUserScore } = require('../messaging/application')
-const { tableOrder } = require('../helpers/score-table-helper')
+const { tableOrderHen, tableOrderPullet } = require('./score-table-helper')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
-
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const createModel = (data, backUrl, url) => {
@@ -41,7 +40,7 @@ const createModel = (data, backUrl, url) => {
 
 const checkYarKeyReset = (thisAnswer, request) => {
   if (thisAnswer?.yarKeysReset) {
-    thisAnswer.yarKeysReset.forEach(yarKey => setYarValue(request, yarKey, ''))
+    thisAnswer.yarKeysReset.forEach(yarKey => setYarValue(request, yarKey, null))
   }
 }
 
@@ -207,6 +206,7 @@ const scorePageData = async (request, backUrl, url, h) => {
 
   try {
     const msgData = await getUserScore(formatAnswersForScoring, request.yar.id)
+    console.log('[THIS IS WHAT WE GOT BACK]', msgData)
 
     setYarValue(request, 'current-score', msgData.desirability.overallRating.band) // do we need this alongside overAllScore? Having both seems redundant
 
@@ -226,26 +226,45 @@ const scorePageData = async (request, backUrl, url, h) => {
 
     setYarValue(request, 'overAllScore', msgData)
 
-    const questions = msgData.desirability.questions.map(desirabilityQuestion => {
-      if (desirabilityQuestion.key === 'environmental-impact' && getYarValue(request, 'SolarPVCost') === null) {
-        desirabilityQuestion.key = 'rainwater'
-        if (desirabilityQuestion.answers[0].input[0].value === 'None of the above') {
-          desirabilityQuestion.answers[0].input[0].value = 'No'
-        } else {
-          desirabilityQuestion.answers[0].input[0].value = 'Yes'
-        }
-      }
+    let tableOrder = getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? tableOrderHen : tableOrderPullet
 
-      const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
-      desirabilityQuestion.title = tableQuestion.title
-      desirabilityQuestion.desc = tableQuestion.desc ?? ''
-      desirabilityQuestion.url = `${urlPrefix}/${tableQuestion.url}`
-      desirabilityQuestion.order = tableQuestion.order
-      desirabilityQuestion.unit = tableQuestion?.unit
-      desirabilityQuestion.pageTitle = tableQuestion.pageTitle
-      desirabilityQuestion.fundingPriorities = tableQuestion.fundingPriorities
-      return desirabilityQuestion
+    if (getYarValue(request, 'currentMultiTierSystem')) {
+      let currentMultiTierSystemValue = {
+        key: 'current-multi-tier-system',
+        answers: [
+          {
+            key: 'current-multi-tier-system',
+            title: 'Does your current building include a thing?',
+            input: [
+              {
+                key: getYarValue(request, 'currentMultiTierSystem') === getQuestionAnswer('current-multi-tier-system', 'current-multi-tier-system-A1', ALL_QUESTIONS) ? 'current-multi-tier-system-A1' : 'current-multi-tier-system-A2',
+                value: getYarValue(request, 'currentMultiTierSystem')
+              }
+            ]
+          }
+        ],
+        rating: msgData.desirability.questions[1].rating
+      }
+      msgData.desirability.questions.splice(2, 0, currentMultiTierSystemValue)
+    }
+
+    const questions = msgData.desirability.questions.map(desirabilityQuestion => {
+
+      if (desirabilityQuestion.key != 'poultry-type') {
+
+        const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
+        desirabilityQuestion.title = tableQuestion.title
+        desirabilityQuestion.desc = tableQuestion.desc ?? ''
+        desirabilityQuestion.url = `${urlPrefix}/${tableQuestion.url}`
+        desirabilityQuestion.order = tableQuestion.order
+        desirabilityQuestion.unit = tableQuestion?.unit
+        desirabilityQuestion.pageTitle = tableQuestion.pageTitle
+        desirabilityQuestion.fundingPriorities = tableQuestion.fundingPriorities
+        return desirabilityQuestion
+      }
     })
+
+    questions.shift() // first item is undefined as its poultry type
 
     await gapiService.sendGAEvent(request, { name: 'score', params: { score_presented: msgData.desirability.overallRating.band } })
     setYarValue(request, 'onScorePage', true)
@@ -257,7 +276,7 @@ const scorePageData = async (request, backUrl, url, h) => {
       scoreChance: scoreChance
     }, backUrl, url))
   } catch (error) {
-    console.log(error)
+    console.log('[Score ERROR]:',error)
     await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.EXCEPTION, params: { error: error.message } })
     return h.view('500')
   }
@@ -460,10 +479,6 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
       thisAnswer = answers?.find(answer => (answer.value === value))
     }
 
-    if (key === 'henVeranda' && value === 'My project is exempt') {
-      setYarValue(request, 'henPopHoles', null)
-    }
-
     if (type !== 'multi-input' && key !== 'secBtn') {
       setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
     }
@@ -492,6 +507,8 @@ const showPostPage = (currentQuestion, request, h) => {
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   let NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
   let dataObject
+
+  checkYarKeyReset(thisAnswer, request)
 
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
@@ -550,8 +567,6 @@ switch (yarKey) {
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
-
-  checkYarKeyReset(thisAnswer, request)
 
   return h.redirect(getUrl(nextUrlObject, nextUrl, request, payload.secBtn, currentQuestion.url))
 }

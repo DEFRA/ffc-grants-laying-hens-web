@@ -19,7 +19,7 @@ describe('Page: /pullet-multi-tier', () => {
     expect(response.payload).toContain('When they are over 15 weeks old')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
-    expect(response.payload).toContain('I don&#39;t know')
+    expect(response.payload).toContain('I don’t know')
   })
 
   it('no option selected -> show error message', async () => {

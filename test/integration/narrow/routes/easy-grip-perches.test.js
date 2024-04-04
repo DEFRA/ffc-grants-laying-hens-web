@@ -84,7 +84,8 @@ describe('Page: /easy-grip-perches', () => {
     expect(postResponse.headers.location).toBe('building-biosecurity')
   })
 
-  it('page loads with correct back link', async () => {
+  it('page loads with correct back link - hen', async () => {
+    varList.poultryType = 'hen'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/easy-grip-perches`
@@ -93,5 +94,17 @@ describe('Page: /easy-grip-perches', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"natural-light\" class=\"govuk-back-link\">Back</a>')
   })
+
+  it('page loads with correct back link - pullet', async () => {
+    varList.poultryType = 'pullet'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/easy-grip-perches`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"dark-brooders\" class=\"govuk-back-link\">Back</a>')
+  })
+
 
 })
