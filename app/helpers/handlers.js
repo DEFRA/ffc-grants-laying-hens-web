@@ -533,19 +533,19 @@ const grantSum = getYarValue(request, 'calculatedGrant') + getYarValue(request, 
     return h.redirect('/laying-hens/potential-amount')
   }
 
-  if (yarKey === 'projectCost') {
-    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
-    setYarValue(request, 'projectCost', projectCost)
-  }
-
-  if (yarKey === 'solarPVCost') {
-    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-    setYarValue(request, 'solarCalculatedGrant', calculatedGrant)
-    setYarValue(request, 'solarRemainingCost', remainingCost)
-    setYarValue(request, 'solarProjectCost', projectCost)
-  }
+yarKey === 'solarPVCost' || yarKey === 'projectCost' ? { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo) : ''
+switch (yarKey) {
+  case 'projectCost':
+    setYarValue(request, 'calculatedGrant', calculatedGrant);
+    setYarValue(request, 'remainingCost', remainingCost);
+    setYarValue(request, 'projectCost', projectCost);
+    break
+  case 'solarPVCost':
+    setYarValue(request, 'solarCalculatedGrant', calculatedGrant);
+    setYarValue(request, 'solarRemainingCost', remainingCost);
+    setYarValue(request, 'solarProjectCost', projectCost);
+    break
+}
 
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
