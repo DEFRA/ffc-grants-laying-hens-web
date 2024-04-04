@@ -1,11 +1,31 @@
 
 const msgData = {
   "grantScheme": { 
-    "key": "LAYINGHENS01", 
-    "name": "Laying Hens Grant" 
+    "key": "LAYINGHENS02", 
+    "name": "Pullet Grant" 
   }, 
   "desirability": { 
     "questions": [
+      { 
+        "key": "poultry-type", 
+        "answers": [
+          { 
+            "key": "poultry-type", 
+            "title": "What type of poultry will be housed in this building?", 
+            "input": [
+              { 
+                "key": "poultry-type-A2", 
+                "value": "pullet" 
+              }
+            ] 
+          }
+          ], 
+          "rating": { 
+            "score": 0, 
+            "band": "Average", 
+            "importance": null 
+          } 
+        }, 
       { 
         "key": "current-system", 
         "answers": [
@@ -87,14 +107,14 @@ const msgData = {
           } 
         }, 
         { 
-          "key": "hen-multi-tier", 
+          "key": "pullet-multi-tier", 
           "answers": [
             { 
-              "key": "hen-multi-tier", 
+              "key": "pullet-multi-tier", 
               "title": "Will the hens in your grant-funded building be reared in a multi-tier system as pullets?", 
               "input": [
                 { 
-                  "key": "hen-multi-tier-A1", 
+                  "key": "pullet-multi-tier-A1", 
                   "value": "Yes" 
                 }
               ] 

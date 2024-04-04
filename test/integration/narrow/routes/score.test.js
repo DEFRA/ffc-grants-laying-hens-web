@@ -1,15 +1,21 @@
-const scoreData = require('../../../data/score-data')
+const scoreDataHen = require('../../../data/score-data-hen')
 // update to be hen/pullet data. 
 // Test both for correct results pages based on yar/answer
 const { commonFunctionsMock } = require('../../../session-mock')
 const varList = {
 	'current-score': 'wer',
-    introducingInnovation: 'wer'
+    introducingInnovation: 'wer',
+	poultryType: 'hen'
+}
+
+const utilsList = {
+	'poultry-type-A1': 'hen',
+	'poultry-type-A2': 'pullet'
 }
 
 // answerOptionsList needed for poultryType - hens
 
-commonFunctionsMock(varList, 'Error')
+commonFunctionsMock(varList, 'Error', utilsList)
 
 describe('Score page', () => {
 	let crumCookie
@@ -27,7 +33,7 @@ describe('Score page', () => {
 		}
 	})
 	const getUserScoreSpy = jest.spyOn(newSender, 'getUserScore').mockImplementation(() => {
-		Promise.resolve(scoreData)
+		Promise.resolve(scoreDataHen)
 	})
 
 	beforeEach(async () => {
@@ -112,8 +118,8 @@ describe('Score page', () => {
 		}
 
 		jest.spyOn(newSender, 'getUserScore').mockImplementationOnce(() => {
-			console.log('Spy: STRONG', JSON.stringify(scoreData));
-			return scoreData;
+			console.log('Spy: STRONG', JSON.stringify(scoreDataHen));
+			return scoreDataHen;
 		})
 
 		const response = await global.__SERVER__.inject(options)
@@ -122,7 +128,7 @@ describe('Score page', () => {
 		expect(header.length).toBe(2)
 		crumCookie = getCrumbCookie(response)
 		expect(response.result).toContain(crumCookie[ 1 ])
-		const responseScoreMessage = 'This means your project is likely to be successful.'
+		const responseScoreMessage = 'This means your project is unlikely to be successful.'
 		expect(response.payload).toContain(responseScoreMessage)
 		expect(getDesirabilityAnswersSpy).toHaveBeenCalledTimes(1)
 		expect(getUserScoreSpy).toHaveBeenCalledTimes(1)
@@ -132,11 +138,11 @@ describe('Score page', () => {
 			method: 'GET',
 			url: `${global.__URLPREFIX__}/score`
 		}
-		scoreData.desirability.overallRating.band = 'Average'
+		scoreDataHen.desirability.overallRating.band = 'Average'
 
 		jest.spyOn(newSender, 'getUserScore').mockImplementationOnce(() => {
-			// console.log('Spy: Average', JSON.stringify(scoreData));
-			return scoreData;
+			// console.log('Spy: Average', JSON.stringify(scoreDataHen));
+			return scoreDataHen;
 		})
 
 		const response = await global.__SERVER__.inject(options)
@@ -155,11 +161,11 @@ describe('Score page', () => {
 			method: 'GET',
 			url: `${global.__URLPREFIX__}/score`
 		}
-		scoreData.desirability.overallRating.band = 'Weak'
+		scoreDataHen.desirability.overallRating.band = 'Weak'
 
 		jest.spyOn(newSender, 'getUserScore').mockImplementationOnce(() => {
-			// console.log('Spy: WEAK', JSON.stringify(scoreData));
-			return scoreData;
+			// console.log('Spy: WEAK', JSON.stringify(scoreDataHen));
+			return scoreDataHen;
 		})
 		const response = await global.__SERVER__.inject(options)
 		expect(response.statusCode).toBe(200)
@@ -178,7 +184,7 @@ describe('Score page', () => {
 			method: 'GET',
 			url: `${global.__URLPREFIX__}/score`
 		}
-		scoreData.desirability.overallRating.band = 'Weak'
+		scoreDataHen.desirability.overallRating.band = 'Weak'
 
 		jest.spyOn(newSender, 'getUserScore').mockImplementationOnce(() => { throw new Error('error') })
 
@@ -192,7 +198,7 @@ describe('Score page', () => {
 			method: 'GET',
 			url: `${global.__URLPREFIX__}/score`
 		}
-		scoreData.desirability.overallRating.band = 'Weak'
+		scoreDataHen.desirability.overallRating.band = 'Weak'
 
 		jest.spyOn(newSender, 'getUserScore').mockImplementationOnce(() => { return null })
 
