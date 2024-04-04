@@ -25,7 +25,8 @@ const {
 } = require('./pageHelpers')
 
 const { getUserScore } = require('../messaging/application')
-const { tableOrderHen, tableOrderPullet } = require('./score-table-helper')
+const { tableOrderHen } = require('./score-table-helper-hen')
+const { tableOrderPullet } = require('./score-table-helper-pullet')
 const createMsg = require('../messaging/create-msg')
 const { desirability } = require('./../messaging/scoring/create-desirability-msg')
 const { ALL_QUESTIONS } = require('../config/question-bank')
