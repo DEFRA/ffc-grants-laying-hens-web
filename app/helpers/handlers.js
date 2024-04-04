@@ -229,7 +229,7 @@ const scorePageData = async (request, backUrl, url, h) => {
     let tableOrder = getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? tableOrderHen : tableOrderPullet
 
     if (getYarValue(request, 'currentMultiTierSystem')) {
-      currentMultiTierSystemValue = {
+      let currentMultiTierSystemValue = {
         key: 'current-multi-tier-system',
         answers: [
           {
