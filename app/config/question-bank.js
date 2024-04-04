@@ -91,7 +91,7 @@ const questionBank = {
           backUrl: 'start',
           nextUrl: 'applicant-type',
           hint: {
-            html: `If you are applying for multiple projects, you must submit a separate application for each one`
+            html: `If you are applying for grant funding for multiple buildings, you must submit a separate application for each one`
           },
           ineligibleContent: {
             messageContent: `
@@ -114,8 +114,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You can apply for grant funding for either building projects or veranda-only projects.\n
-                The maximum grant funding each business can apply for is £500,000 for building projects, or £100,000 for veranda-only projects.`
+                para: `This grant is only for laying hen or pullet projects.\n
+                The maximum grant funding each business can apply for is £500,000 for comprehensive projects, or £100,000 for veranda-only projects.`
               }]
             }]
           },
@@ -128,21 +128,24 @@ const questionBank = {
           answers: [
             {
               key: 'project-type-A1',
-              value: 'Adding a veranda only to an existing laying hen or pullet building',
+              value: 'Adding a veranda only to the existing building',
               hint: {
                 text: 'The RPA will award veranda-only grant funding on a first come, first served basis'
               },
             },
             {
               key: 'project-type-A2',
-              value: 'Refurbishing an existing laying hen or pullet building',
+              value: 'Refurbishing the existing building',
               hint: {
-                text: 'Adding features to an existing building (including a mechanical ventilation system, lighting system, aviary or multi-tier system and veranda)'
+                text: 'A comprehensive project to upgrading an existing building by adding a mechanical ventilation, LED lighting and an aviary or multi-tier system where they do not have exist already'
               },
             },
             {
               key: 'project-type-A3',
-              value: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+              value: 'Replacing the entire building with a new building',
+              hint: {
+                text: 'A comprehensive project to include mechanical ventilation, LED lighting and an aviary or multi-tier system'
+              },
             },
             {
               value: 'divider'
@@ -1244,7 +1247,7 @@ const questionBank = {
               <ul class="govuk-list--bullet">
                 <li>a solid concrete floor</li>
                 <li>a waterproof insulated roof</li>
-                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                 <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
                 <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                 <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
@@ -1261,9 +1264,9 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The width of the pop hole openings along the length of the hen house must add up to a total of 2 metres for every 1,000 hens in the building.
+                para: `The width of the pop hole openings along the length of the internal hen house wall must add up to a total of 2 metres for every 1,000 hens in the building.
                 
-                      The base of all pop holes must either:`,
+                  The base of all pop holes must either:`,
                 items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.'],
                 additionalPara: 'You must not put perches in front of the pop holes.'
               }],
@@ -1276,7 +1279,7 @@ const questionBank = {
                 <ul class="govuk-list--bullet">
                   <li>a solid concrete floor</li>
                   <li>a waterproof insulated roof</li>
-                  <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                  <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                   <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
                   <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                   <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
