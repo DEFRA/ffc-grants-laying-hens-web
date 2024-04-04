@@ -501,21 +501,13 @@ const showPostPage = (currentQuestion, request, h) => {
   if (errors) {
     return errors
   }
-
-  if (baseUrl === 'solar-power-capacity'){
-    if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
-      console.log(getYarValue(request, 'calculatedGrant'), 'calculatedGrant')
-      console.log(getYarValue(request, 'solarCalculatedGrant'), 'solarCalculatedGrant')
-      // capped version of page.
-        nextUrl = 'potential-amount-solar-capped'
-    }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
-      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
-        nextUrl = 'potential-amount-solar'
-    }else{
-        nextUrl = 'potential-amount-solar-calculation'
-    }
-  }
-  }
+  
+const grantSum = getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant');
+  if (baseUrl === 'solar-power-capacity') {
+    nextUrl = grantSum > 500000 ? 'potential-amount-solar-capped' : 
+              (0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')) ? 
+              'potential-amount-solar' : 'potential-amount-solar-calculation';
+}
 
   if (baseUrl === 'veranda-project-cost'){
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
