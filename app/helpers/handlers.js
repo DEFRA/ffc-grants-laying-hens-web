@@ -486,23 +486,48 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
 
   return thisAnswer
 }
+const handleYarKey = (yarKey, request, payload, currentQuestion) => {
+  let calculatedGrant, remainingCost, projectCost;
+
+  if (yarKey === 'solarPVCost' || yarKey === 'projectCost') {
+      ({ calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo));
+  }
+
+  switch (yarKey) {
+    case 'projectCost':
+      setYarValue(request, 'calculatedGrant', calculatedGrant);
+      setYarValue(request, 'remainingCost', remainingCost);
+      setYarValue(request, 'projectCost', projectCost);
+      break
+    case 'solarPVCost':
+      setYarValue(request, 'solarCalculatedGrant', calculatedGrant);
+      setYarValue(request, 'solarRemainingCost', remainingCost);
+      setYarValue(request, 'solarProjectCost', projectCost);
+      break
+  }
+}
+
+// formatting variables block - needed for error validations
+const formatVariablesBlock = (currentQuestion, title, baseUrl, request, validate, ineligibleContent, hint, label) => {
+  currentQuestion = titleCheck(currentQuestion, title, baseUrl, request)
+  currentQuestion = validateErrorCheck(currentQuestion, validate, baseUrl, request)
+  currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
+  currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
+  currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
+  currentQuestion = labelTextCheck(currentQuestion, label, baseUrl, request)
+  currentQuestion = showHideAnswer(currentQuestion, request)
+  return currentQuestion
+}
 
 const showPostPage = (currentQuestion, request, h) => {
-  let { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
+  let { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate, label } = currentQuestion
   const payload = request.payload
 
   if (baseUrl !== 'score') {
     setYarValue(request, 'onScorePage', false)
   }
 
-  // formatting variables block - needed for error validations
-  currentQuestion = titleCheck(currentQuestion, title, baseUrl, request)
-  currentQuestion = validateErrorCheck(currentQuestion, validate, baseUrl, request)
-  currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
-  currentQuestion = ineligibleContentCheck(currentQuestion, ineligibleContent, baseUrl, request)
-  currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
-  currentQuestion = labelTextCheck(currentQuestion, currentQuestion.label, baseUrl, request)
-  currentQuestion = showHideAnswer(currentQuestion, request)
+  currentQuestion = formatVariablesBlock(currentQuestion, title, baseUrl, request, validate, ineligibleContent, hint, label)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   let NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
@@ -518,52 +543,45 @@ const showPostPage = (currentQuestion, request, h) => {
   if (errors) {
     return errors
   }
-  
-const grantSum = getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant');
-  if (baseUrl === 'solar-power-capacity') {
-    nextUrl = grantSum > 500000 ? 'potential-amount-solar-capped' : 
-              (0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')) ? 
-              'potential-amount-solar' : 'potential-amount-solar-calculation'
+
+  if (baseUrl === 'solar-power-capacity'){
+    if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
+        nextUrl = 'potential-amount-solar-capped'
+    }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
+      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
+        nextUrl = 'potential-amount-solar'
+    }else{
+        nextUrl = 'potential-amount-solar-calculation'
+    }
+  } 
 }
 
+  const solarPVSystem = getYarValue(request, 'solarPVSystem');
   if (baseUrl === 'veranda-project-cost'){
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
-  }
-  else if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem')  === 'Yes') {
-    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, 
-    insertText: { 
-      text: 'You cannot apply for funding for solar PV system if you have not requested the minimum grant funding amount for a building.' 
+  }else if (baseUrl === 'project-cost') {
+    const insertText = solarPVSystem === 'Yes' ? { 
+        text: 'You cannot apply for funding for solar PV system if you have not requested the minimum grant funding amount for a building.' 
+    } : ''
+    NOT_ELIGIBLE = { 
+        ...NOT_ELIGIBLE, 
+        specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, 
+        insertText
     }
   }
-  } else if(baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem')  === 'No') {
-    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, insertText:'' }
-  }
-
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request,
       { name: gapiService.eventTypes.ELIMINATION, params: {} })
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
-  
+
   if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount')
   }
-
-yarKey === 'solarPVCost' || yarKey === 'projectCost' ? { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo) : ''
-switch (yarKey) {
-  case 'projectCost':
-    setYarValue(request, 'calculatedGrant', calculatedGrant);
-    setYarValue(request, 'remainingCost', remainingCost);
-    setYarValue(request, 'projectCost', projectCost);
-    break
-  case 'solarPVCost':
-    setYarValue(request, 'solarCalculatedGrant', calculatedGrant);
-    setYarValue(request, 'solarRemainingCost', remainingCost);
-    setYarValue(request, 'solarProjectCost', projectCost);
-    break
-}
-
+  
+  handleYarKey(yarKey, request, payload, currentQuestion)
+  
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
