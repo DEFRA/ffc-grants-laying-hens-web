@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /pullet-housing-requirements', () => {
   let varList = {
-    projectType: 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    projectType: 'Replacing the entire building with a new building'
   }
 
   let valList = {}
@@ -76,7 +76,7 @@ describe('Page: /pullet-housing-requirements', () => {
   })
 
   it('page loads with correct back link - /replacing-insulation', async () => {
-    varList.projectType = 'Replacing the entire laying hen or pullet building with a new building including the grant funding required features'
+    varList.projectType = 'Replacing the entire building with a new building'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/pullet-housing-requirements`,
