@@ -506,7 +506,7 @@ const grantSum = getYarValue(request, 'calculatedGrant') + getYarValue(request, 
   if (baseUrl === 'solar-power-capacity') {
     nextUrl = grantSum > 500000 ? 'potential-amount-solar-capped' : 
               (0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')) ? 
-              'potential-amount-solar' : 'potential-amount-solar-calculation';
+              'potential-amount-solar' : 'potential-amount-solar-calculation'
 }
 
   if (baseUrl === 'veranda-project-cost'){
