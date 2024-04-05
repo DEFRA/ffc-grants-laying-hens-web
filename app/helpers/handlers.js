@@ -1,6 +1,7 @@
 const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
+const { getGrantValuesSolar } = require('../helpers/grants-info-solar')
 const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('ffc-grants-common-functionality').regex
 const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').session
@@ -411,6 +412,19 @@ const getPage = async (question, request, h) => {
     }
   }
 
+  if (url === 'potential-amount-solar' && getYarValue(request, 'solarPVCost')) {
+    const projectCost = getYarValue(request, 'projectCost')
+    const calculatedGrant = getYarValue(request, 'calculatedGrant')
+    const projectCostSolar = getYarValue(request, 'projectCostSolar')
+    const calculatedGrantSolar = getYarValue(request, 'calculatedGrantSolar')
+
+    const projectCostCombined = projectCost + projectCostSolar
+    const calculatedGrantCombined = calculatedGrant + calculatedGrantSolar
+
+    setYarValue(request, 'projectCostCombined', projectCostCombined)
+    setYarValue(request, 'calculatedGrantCombined', calculatedGrantCombined)
+  }
+
   // formatting variables block
   question = titleCheck(question, title, url, request)
   question = sidebarCheck(question, url, request)
@@ -547,6 +561,13 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
     setYarValue(request, 'projectCost', projectCost)
+  }
+
+  if (baseUrl === 'solar-PV-cost' && getYarValue(request, 'solarPVSystem') === 'Yes') {
+    const { calculatedGrantSolar , projectCostSolar } = getGrantValuesSolar(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+  
+    setYarValue(request, 'projectCostSolar', projectCostSolar)
+    setYarValue(request, 'calculatedGrantSolar', calculatedGrantSolar)
   }
 
   if (thisAnswer?.redirectUrl) {

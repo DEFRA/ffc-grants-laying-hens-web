@@ -21,7 +21,8 @@ const {
   MAX_GRANT,
   VERANDA_MIN_GRANT,
   VERANDA_MAX_GRANT,
-  GRANT_PERCENTAGE
+  GRANT_PERCENTAGE, 
+  GRANT_PERCENTAGE_SOLAR
 } = require('../helpers/grant-details')
 
 /**
@@ -2871,6 +2872,31 @@ const questionBank = {
           }
         },
         {
+          key: 'potential-amount-solar',
+          order: 165,
+          url: 'potential-amount-solar',
+          baseUrl: 'potential-amount-solar',
+          backUrl: 'solar-power-capacity',
+          nextUrl: 'remaining-costs',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: `You may be able to apply for a grant of up to £{{_calculatedGrantCombined_}}, based on the total estimated cost of £{{_projectCostCombined_}}.
+              <div class="govuk-list">
+                <p class="govuk-body">This grant amount combines:</p>
+                <ul class="govuk-list--bullet">
+                  <li>£{{_calculatedGrant_}} for building costs (${GRANT_PERCENTAGE}% of £{{_projectCost_}})</li>
+                  <li>£{{_calculatedGrantSolar_}} for solar PV system costs (${GRANT_PERCENTAGE_SOLAR}% of £{{_projectCostSolar_}})</li>
+                </ul>
+              </div>
+            `,
+            insertText: { text: '' },
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
+        {
           key: 'remaining-costs',
           order: 170,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
@@ -3890,6 +3916,9 @@ const questionBank = {
           backUrl: 'bird-number',
           nextUrl: 'solar-power-capacity',
           preValidationKeys: [],
+          grantInfo: {
+            grantPercentage: GRANT_PERCENTAGE_SOLAR,
+          },
           type: 'input',
           prefix: {
             text: '£'

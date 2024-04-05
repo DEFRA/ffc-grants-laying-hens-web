@@ -27,6 +27,7 @@ services:
       REDIS_HOSTNAME: redis
       REDIS_PORT: 6379
       GRANT_PERCENTAGE: 40
+      GRANT_PERCENTAGE_SOLAR: 25
       REDIS_PARTITION: ffc-grants-laying-hens-web
       REDIS_PASSWORD: ""
       SESSION_CACHE_TTL: 1200000
