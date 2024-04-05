@@ -1,6 +1,8 @@
 const urlPrefix = require('../config/server').urlPrefix
 const { getYarValue } = require('ffc-grants-common-functionality').session 
 const { grantSolarPercentage, GRANT_PERCENTAGE } = require('../helpers/grant-details')
+const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
+const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const viewTemplate = 'potential-amount-solar-calculation'
 const currentPath = `${urlPrefix}/${viewTemplate}`
@@ -13,7 +15,7 @@ function createModel (data, request) {
         backLink: previousPath,
         formActionPage: currentPath,
         ...data
-      }
+    }
 }
 
 module.exports = [{
@@ -29,7 +31,7 @@ module.exports = [{
         // store all as variables
         // call load page with all values
 
-        const numberOfBirds = getYarValue(request, 'numberOfBirds')
+        const numberOfBirds = getYarValue(request, 'solarBirdNumber')
         const projectCost = getYarValue(request, 'projectCost')
         const calculatedGrant = getYarValue(request, 'calculatedGrant')
         const energyRating = getYarValue(request, 'solarPowerCapacity')
@@ -38,13 +40,14 @@ module.exports = [{
 
         const powerLimit = 0.005
 
-        const solarCap = solarCost / energyRating
+        const solarCap = (solarCost / energyRating).toFixed(2)
         const powerCap = numberOfBirds * powerLimit
         const cost = solarCap * powerCap
         const grantFunding = Number(grantSolarPercentage * (cost / 100)).toFixed(2)
 
         const totalCalculatedGrant = calculatedGrant + grantFunding
-
+        const projectTypeTableText = getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A2', ALL_QUESTIONS) ? 
+        'Number of birds the refurbished part of the building will house': 'Number of birds the new building will house'
         return h.view(viewTemplate, createModel({
             totalCalculatedGrant,
             totalProjectCost,
@@ -58,7 +61,8 @@ module.exports = [{
             solarCost,
             energyRating,
             solarCap,
-            cost
+            cost,
+            projectTypeTableText
         }, request))
     }
     
