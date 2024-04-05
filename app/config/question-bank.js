@@ -806,7 +806,7 @@ const questionBank = {
                     <li>a fixed structure with a solid concrete floor</li>
                     <li>water-tight roof and walls</li>
                     <li>mesh capping applied to any roof or wall inlets and outlets 
-                    capped with mesh (with a mesh hole size of 25 millimetres or 
+                    capped with mesh (using a mesh hole size of 25 millimetres or 
                     less)</li>
                     <li>catch trays under all chimneys and roof-mounted vents</li>
                   </ul>`
@@ -835,7 +835,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `When the project is complete, the building must have these design features to meet the grant priority of improving biosecurity.`
+                para: `When the project is complete, the building must have these biosecurity features.`
               }]
             }]
           },
@@ -847,8 +847,9 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
-                      <li>mesh capping applied to any roof or wall inlets and outlets capped with mesh 
-                      (with a mesh hole size of 25 millimetres or less)</li>
+                      <li>mesh capping applied to any roof or wall inlets 
+                      and outlets capped with mesh (using a mesh hole 
+                      size of 25 millimetres or less)</li>
                       <li>catch trays under all chimneys and roof-mounted vents.</li>
                   </ul>
               </div>`,
@@ -1068,7 +1069,7 @@ const questionBank = {
         {
           key: 'egg-store-access',
           order: 105,
-          title: 'Will there be direct external access from the building to the egg store?',
+          title: 'Will there be direct external access to the building’s egg store?',
           url: 'egg-store-access',
           baseUrl: 'egg-store-access',
           nextUrl: 'changing-area',
@@ -1102,7 +1103,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if there will be a direct external access from the building to the egg store'
+              error: 'Select yes if there will be direct external access to the building’s to egg store'
             }
           ],
           answers: [
@@ -1139,7 +1140,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The aviary system must have integrated manure-removal belts and a non-flicker LED lighting system.`
+                para: `The aviary system must have integrated manure removal belts and a non-flicker LED lighting system to optimise the housing environment for the birds. `
               }]
             }]
           },
@@ -1746,14 +1747,14 @@ const questionBank = {
             }
           },
           hint: {
-            text: 'This should be continuous, unless there needs to be a gap where birds have direct access to pasture'
+            text: 'This should be continuous, unless there needs to be a gap where birds have direct access to a range'
           },
           sidebar: {
             values: [
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: 'The building (and veranda if there is one) must be surrounded by a concrete apron.',
+                  para: 'The building (and veranda if there is one) must have a concrete apron to help keep the area around the building clean and discourage nesting wildlife.',
                   items: [],
                 }]
               }
@@ -1761,7 +1762,7 @@ const questionBank = {
           },
           ineligibleContent: {
             messageContent: `<p class="govuk-body">The building (and veranda if there is one) must be surrounded by a concrete apron.</p>
-            <p class="govuk-body">This should be continuous, unless there needs to be a gap where birds have direct access to pasture.</p>`,
+            <p class="govuk-body">This should be continuous, unless there needs to be a gap where birds have direct access to range.</p>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for.'
@@ -1870,7 +1871,7 @@ const questionBank = {
             html: `
                   <p>When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
-                      <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
+                      <li>a useable area at multiple bird-accessible heights from 10 days of age</li>
                       <li>height adjustable perches at equal to or more than 8cm per pullet</li>
                       <li>a minimum of 50% of the floor area available for litter</li>
                   </ul>
@@ -1881,7 +1882,7 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
             <p class="govuk-body">The pullet housing must have:</p>
                   <ul>
-                    <li>a useable area provided over a range of bird-accessible heights from 10 days of age</li>
+                    <li>a useable area at multiple bird-accessible heights from 10 days of age</li>
                     <li>height adjustable perches at equal to or more than 8cm per pullet</li>
                     <li>a minimum of 50% of the floor area available for litter.</li>
                   </ul>
@@ -2050,7 +2051,7 @@ const questionBank = {
             html: `
                 <p>The step-up system must have:</p>
                 <ul>
-                    <li>height-adjustable tiers that may include food and water at, or before, 10 days</li>
+                    <li>height-adjustable tiers with food and water that birds can access after 10 days</li>
                     <li>welfare ramps</li>
                 </ul>`
           },
@@ -2202,10 +2203,10 @@ const questionBank = {
           backUrl: 'vehicle-washing',
           nextUrl: 'project-cost',
           hint: {
-            text: 'You have the option to buy and install a solar PV system with the grant. The solar PV panels must be installed on the roof of this building.'
+            text: 'You have the option to buy and install a solar PV system with the grant. The solar PV panels must be installed on the roof of this building (or veranda if there is one)'
           },
           warning: {
-            text: 'You cannot buy a Solar PV system with this grant if the roof of the building only faces north or is heavily shaded. ',
+            text: 'You cannot buy a Solar PV system with this grant if the roof of the building only faces north or is heavily shaded.',
             iconFallbackText: 'Warning'
           },
           sidebar: {
@@ -3040,7 +3041,7 @@ const questionBank = {
         {
           key: 'hen-multi-tier',
           order: 310,
-          title: 'Will the hens in your grant-funded building be reared in a multi-tier system as pullets?',
+          title: 'Will the hens in this building be reared in a multi-tier system as pullets?',
           pageTitle: '',
           hint: {
             text: 'When they are under 15 weeks old'
@@ -3053,7 +3054,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund projects where pullets are reared in multi-tier aviary systems before they move into the grant-funded aviary housing as layer hens.`
+                para: `RPA want to fund projects that encourage a consistent housing type for birds between rearing and laying. `
               }]
             }]
           },
@@ -3064,7 +3065,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the hens in your grant-funded building will be reared in a multi-tier system as pullets'
+              error: 'Select yes if the hens in this building will be reared in a multi-tier system as pullets'
             }
           ],
           answers: [
@@ -3089,7 +3090,7 @@ const questionBank = {
         {
           key: 'pullet-multi-tier',
           order: 315,
-          title: 'Will the pullets in your grant-funded building live in a multi-tier system as hens?',
+          title: 'Will the pullets reared in this building be housed in an aviary system as adults?',
           pageTitle: '',
           hint: {
             text: 'When they are over 15 weeks old'
@@ -3102,7 +3103,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund projects that will house hens in multi-tier aviary systems when they move out of the grant-funded housing.`
+                para: `RPA want to fund projects that encourage a consistent housing type for birds between rearing and laying. `
               }]
             }]
           },
@@ -3113,7 +3114,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the pullets in your grant-funded building will live in a multi-tier system as hens'
+              error: 'Select yes if the pullets reared in this building will be housed in an aviary system as adults'
             }
           ],
           answers: [
@@ -3226,11 +3227,11 @@ const questionBank = {
           answers: [
             {
               key: 'building-biosecurity-A1',
-              value: 'Shower-in-facilities in the lobby or changing room area'
+              value: 'Shower facilities in the biosecurity changing area'
             },
             {
               key: 'building-biosecurity-A2',
-              value: 'An externally accessible storage room with a separate air space',
+              value: 'An integrated externally accessible storage room with a separate air space',
               hint: {
                 text: `To create a separate air space, the area must have solid 
                 ceiling height walls, providing a secure barrier from the 
@@ -3425,7 +3426,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices\'.'
+                para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices.'
               }]
             }]
           },
@@ -3459,7 +3460,10 @@ const questionBank = {
             },
             {
               key: 'pollution-mitigation-A4',
-              value: 'A tree shelter belt near air outlets'
+              value: 'A tree shelter belt near air outlets',
+              hint: {
+                text: 'Planted specifically to reduce ammonia output'
+              }
             },
             {
               value: 'divider'
@@ -3840,6 +3844,12 @@ const questionBank = {
           type: 'input',
           prefix: {
             text: '£'
+          },
+          grantInfo: {
+            minGrant: 0,
+            maxGrant: 500000,
+            grantPercentage: 25,
+            cappedGrant: true
           },
           id: 'solarPVCost',
           label: {

@@ -2,7 +2,11 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /solar-power-capacity', () => {
-  let varList = {}
+  let varList = {
+    calculatedGrant: '10000',
+    solarCalculatedGrant: '10000',
+    solarBirdNumber: '1000'
+  }
   let valList = {}
   
   commonFunctionsMock(varList, undefined, {}, valList)
@@ -72,17 +76,51 @@ describe('Page: /solar-power-capacity', () => {
 
   it('user selects eligible option -> store user response and redirect to /potential-amount-solar', async () => {
     valList.solarPowerCapacity = false
-
+    varList.calculatedGrant = 10000
+    varList.solarCalculatedGrant = 1000
+    varList.solarBirdNumber = 1000
+    varList.solarPowerCapacity = 5
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-power-capacity`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarPowerCapacity: '600',  crumb: crumbToken }
+      payload: { solarPowerCapacity: '5',  crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('potential-amount-solar')
+  })
+  it('user selects eligible option -> store user response and redirect to /potential-amount-solar-calculation', async () => {
+    varList.calculatedGrant = 5000
+    varList.solarCalculatedGrant = 50000
+    varList.solarBirdNumber = 700
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/solar-power-capacity`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { solarPowerCapacity: '5',  crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('potential-amount-solar-calculation')
+  })
+  it('user selects eligible option -> store user response and redirect to /potential-amount-solar-capped', async () => {
+    varList.calculatedGrant = 1250000
+    varList.solarCalculatedGrant = 500000
+    varList.solarBirdNumber = 1000
+    varList.solarPowerCapacity = 1
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/solar-power-capacity`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { solarPowerCapacity: '1',  crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('potential-amount-solar-capped')
   })
 
   it('page loads with correct back link - /solar-PV-cost', async () => {
