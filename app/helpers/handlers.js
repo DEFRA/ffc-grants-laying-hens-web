@@ -411,6 +411,19 @@ const getPage = async (question, request, h) => {
     }
   }
 
+  if (url === 'potential-amount-solar' && getYarValue(request, 'solarPVCost')) {
+    const projectCost = getYarValue(request, 'projectCost')
+    const calculatedGrant = getYarValue(request, 'calculatedGrant')
+    const solarProjectCost = getYarValue(request, 'solarProjectCost')
+    const solarCalculatedGrant = getYarValue(request, 'solarCalculatedGrant')
+
+    const totalProjectCost = projectCost + solarProjectCost
+    const totalCalculatedGrant = calculatedGrant + Number(solarCalculatedGrant)
+
+    setYarValue(request, 'totalProjectCost', totalProjectCost)
+    setYarValue(request, 'totalCalculatedGrant', totalCalculatedGrant)
+  }
+
   // formatting variables block
   question = titleCheck(question, title, url, request)
   question = sidebarCheck(question, url, request)
