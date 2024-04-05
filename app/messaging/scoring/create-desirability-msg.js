@@ -1,6 +1,13 @@
 const grantSchemeConfig = require('./config/grant-scheme')
+const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
+const { ALL_QUESTIONS } = require('../../config/question-bank')
+
 const { desirabilityInputQuestionMapping, desirabilityQuestions: questionContent } = require('./content-mapping')
-const desirabilityQuestions = ['housing', 'calf-group-size', 'moisture-control', 'permanent-sick-pen', 'environmental-impact', 'sustainable-materials', 'introducing-innovation']
+const desirabilityQuestionsHen = ['poultry-type', 'current-system', 'current-multi-tier-system', 'ramp-connection', 'maximum-tier-height', 'three-tiers', 'hen-multi-tier', 'natural-light', 'easy-grip-perches', 'building-biosecurity', 'pollution-mitigation', 'renewable-energy', 'bird-data-type', 'environmental-data-type']
+const desirbailityQuestionsPullet = ['poultry-type', 'current-system', 'current-multi-tier-system', 'ramp-connection', 'maximum-tier-height', 'three-tiers', 'pullet-multi-tier', 'natural-light', 'dark-brooders', 'easy-grip-perches', 'building-biosecurity', 'pollution-mitigation', 'pullet-veranda-features', 'renewable-energy', 'bird-data-type', 'environmental-data-type']
+
+const POULTRY_TYPE_HENS = getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS)
+
 function getUserAnswer (answers, userInput) {
   if (answers) {
     return [userInput].flat().map(answer =>
@@ -10,9 +17,8 @@ function getUserAnswer (answers, userInput) {
   return {}
 }
 
-function getDesirabilityDetails (questionKey, userInput) {
+function getDesirabilityDetails(questionKey, userInput) {
   const content = questionContent[questionKey]
-
   return {
     key: questionKey,
     answers: content.map(({ key, title, answers }) => ({
@@ -29,13 +35,18 @@ function getDesirabilityDetails (questionKey, userInput) {
 }
 
 function desirability (userInput) {
+  const isHens = userInput.poultryType === POULTRY_TYPE_HENS
+  const key = isHens ? 'LAYINGHENS01' : 'LAYINGHENS02'
+  const validKeys = isHens ? desirabilityQuestionsHen : desirbailityQuestionsPullet
+  const grantScheme = grantSchemeConfig.filter(grant => grant.key === key)[0]
+
   return {
     grantScheme: {
-      key: grantSchemeConfig[0].key,
-      name: grantSchemeConfig[0].name
+      key: grantScheme.key,
+      name: grantScheme.name
     },
     desirability: {
-      questions: desirabilityQuestions.map(questionKey => getDesirabilityDetails(questionKey, userInput)),
+      questions: validKeys.map(questionKey => getDesirabilityDetails(questionKey, userInput)),
       overallRating: {
         score: null,
         band: null
