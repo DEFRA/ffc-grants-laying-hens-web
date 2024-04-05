@@ -504,6 +504,8 @@ const handleYarKey = (yarKey, request, payload, currentQuestion) => {
       setYarValue(request, 'solarRemainingCost', remainingCost);
       setYarValue(request, 'solarProjectCost', projectCost);
       break
+    default:
+      break
   }
 }
 
@@ -522,14 +524,16 @@ const formatVariablesBlock = (currentQuestion, title, baseUrl, request, validate
 const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
   if (baseUrl === 'solar-power-capacity'){
     if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
-      return currentQuestion.nextUrl = 'potential-amount-solar-capped'
+      return 'potential-amount-solar-capped'
     }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
       if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
-        return currentQuestion.nextUrl = 'potential-amount-solar'
+        return 'potential-amount-solar'
     }else{
-      return currentQuestion.nextUrl = 'potential-amount-solar-calculation'
+      return 'potential-amount-solar-calculation'
     }
   }
+}else {
+  return currentQuestion.nextUrl
 }
 }
 
@@ -579,7 +583,7 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 
-  handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
+  nextUrl = handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
 
   if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount')
