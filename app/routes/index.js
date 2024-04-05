@@ -24,4 +24,5 @@ const drawSectionPostRequests = section => {
 
 let pages = questionBank.sections.map(section => drawSectionGetRequests(section))
 pages = [...pages, ...questionBank.sections.map(section => drawSectionPostRequests(section))]
+pages.push('./potential-amount-solar-calculation')
 module.exports = pages
