@@ -419,7 +419,7 @@ const getPage = async (question, request, h) => {
     const calculatedGrantSolar = getYarValue(request, 'calculatedGrantSolar')
 
     const projectCostCombined = projectCost + projectCostSolar
-    const calculatedGrantCombined = calculatedGrant + calculatedGrantSolar
+    const calculatedGrantCombined = calculatedGrant + Number(calculatedGrantSolar)
 
     setYarValue(request, 'projectCostCombined', projectCostCombined)
     setYarValue(request, 'calculatedGrantCombined', calculatedGrantCombined)
@@ -564,10 +564,10 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   if (baseUrl === 'solar-PV-cost' && getYarValue(request, 'solarPVSystem') === 'Yes') {
-    const { calculatedGrantSolar , projectCostSolar } = getGrantValuesSolar(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+    const { calculatedGrant , projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
   
-    setYarValue(request, 'projectCostSolar', projectCostSolar)
-    setYarValue(request, 'calculatedGrantSolar', calculatedGrantSolar)
+    setYarValue(request, 'projectCostSolar', projectCost)
+    setYarValue(request, 'calculatedGrantSolar', calculatedGrant)
   }
 
   if (thisAnswer?.redirectUrl) {
