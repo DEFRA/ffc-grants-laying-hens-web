@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="govuk-heading-xl">Potential grant funding</h1>
+    <h1 class="govuk-heading-l">Potential grant funding</h1>
     <div class="govuk-body">
         You may be able to apply for a grant of up to £{{totalCalculatedGrant}}, based on the estimated cost of £{{totalProjectCost}}
 
@@ -39,7 +39,7 @@
             <div class="govuk-details__text">
                 {# breakdown of costs text format #}
                 <p>The solar PV system you plan to buy and install has a higher power capacity than 5kW of power per 1,000 birds. </p>
-                <p>Based on the building's bird capacity ( {{numberOfBirds}} birds), you can apply 25% of the costs of a solar PV system with a power capacity of up to {{powerCap}}kW.</p>
+                <p>Based on the building's bird capacity ({{numberOfBirds}} birds), you can apply 25% of the costs of a solar PV system with a power capacity of up to {{powerCap}}kW.</p>
                 <p>This is based on the solar PV system costs ({{solarCost}}) divided by the solar PV system's power capacity ({{energyRating}}kW). With these figures, the cost of the solar PV system is equal to £{{solarCap}} per kW.</p>
                 <p>You can apply for grant funding of £{{grantFunding}} for solar PV system costs. This is 25% of £{{cost}} , the amount based on your solar PV system costing £{{solarCap}} per kW, multiplied by the power rating of {{powerCap}}kW.</p>
                 <p>You must pay the remaining solar PV system costs over £{{grantFunding}}.</p>
