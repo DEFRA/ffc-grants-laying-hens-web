@@ -17,7 +17,7 @@ describe('Page: /step-up-system', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Will the step-up system have these features?')
     expect(response.payload).toContain('The step-up system must have:')
-    expect(response.payload).toContain('height-adjustable tiers that may include food and water at, or before, 10 days')
+    expect(response.payload).toContain('height-adjustable tiers with food and water that birds can access after 10 days')
     expect(response.payload).toContain('welfare ramps')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')

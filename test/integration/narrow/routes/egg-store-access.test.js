@@ -16,7 +16,7 @@ describe('Page: /egg-store-access', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will there be direct external access from the building to the egg store?')
+    expect(response.payload).toContain('Will there be direct external access to the building’s egg store?')
     expect(response.payload).toContain('This must be separate from the main entrance lobby and connected changing area')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
@@ -24,7 +24,7 @@ describe('Page: /egg-store-access', () => {
 
   it('no option selected -> show error message', async () => {
     valList['NOT_EMPTY'] = {
-      error: 'Select yes if there will be a direct external access from the building to the egg store',
+      error: 'Select yes if there will be direct external access to the building’s to egg store',
       return: false
     }
     const postOptions = {
@@ -36,7 +36,7 @@ describe('Page: /egg-store-access', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if there will be a direct external access from the building to the egg store')
+    expect(postResponse.payload).toContain('Select yes if there will be direct external access to the building’s to egg store')
   })
 
   it('user selects eligible option -> store user response and redirect to /changing-area', async () => {

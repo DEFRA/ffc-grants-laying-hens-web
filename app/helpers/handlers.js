@@ -1,7 +1,6 @@
 const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
-const { getGrantValuesSolar } = require('../helpers/grants-info-solar')
 const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('ffc-grants-common-functionality').regex
 const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').session
@@ -415,14 +414,14 @@ const getPage = async (question, request, h) => {
   if (url === 'potential-amount-solar' && getYarValue(request, 'solarPVCost')) {
     const projectCost = getYarValue(request, 'projectCost')
     const calculatedGrant = getYarValue(request, 'calculatedGrant')
-    const projectCostSolar = getYarValue(request, 'projectCostSolar')
-    const calculatedGrantSolar = getYarValue(request, 'calculatedGrantSolar')
+    const solarProjectCost = getYarValue(request, 'solarProjectCost')
+    const solarCalculatedGrant = getYarValue(request, 'solarCalculatedGrant')
 
-    const projectCostCombined = projectCost + projectCostSolar
-    const calculatedGrantCombined = calculatedGrant + Number(calculatedGrantSolar)
+    const totalProjectCost = projectCost + solarProjectCost
+    const totalCalculatedGrant = calculatedGrant + Number(solarCalculatedGrant)
 
-    setYarValue(request, 'projectCostCombined', projectCostCombined)
-    setYarValue(request, 'calculatedGrantCombined', calculatedGrantCombined)
+    setYarValue(request, 'totalProjectCost', totalProjectCost)
+    setYarValue(request, 'totalCalculatedGrant', totalCalculatedGrant)
   }
 
   // formatting variables block
@@ -500,16 +499,31 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
 
   return thisAnswer
 }
+const handleYarKey = (yarKey, request, payload, currentQuestion) => {
+  let calculatedGrant, remainingCost, projectCost;
 
-const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
-  const payload = request.payload
-
-  if (baseUrl !== 'score') {
-    setYarValue(request, 'onScorePage', false)
+  if (yarKey === 'solarPVCost' || yarKey === 'projectCost') {
+      ({ calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo));
   }
 
-  // formatting variables block - needed for error validations
+  switch (yarKey) {
+    case 'projectCost':
+      setYarValue(request, 'calculatedGrant', calculatedGrant);
+      setYarValue(request, 'remainingCost', remainingCost);
+      setYarValue(request, 'projectCost', projectCost);
+      break
+    case 'solarPVCost':
+      setYarValue(request, 'solarCalculatedGrant', calculatedGrant);
+      setYarValue(request, 'solarRemainingCost', remainingCost);
+      setYarValue(request, 'solarProjectCost', projectCost);
+      break
+    default:
+      break
+  }
+}
+
+// formatting variables block - needed for error validations
+const formatVariablesBlock = (currentQuestion, title, baseUrl, request, validate, ineligibleContent, hint) => {
   currentQuestion = titleCheck(currentQuestion, title, baseUrl, request)
   currentQuestion = validateErrorCheck(currentQuestion, validate, baseUrl, request)
   currentQuestion = sidebarCheck(currentQuestion, baseUrl, request)
@@ -517,13 +531,41 @@ const showPostPage = (currentQuestion, request, h) => {
   currentQuestion = hintTextCheck(currentQuestion, hint, baseUrl, request)
   currentQuestion = labelTextCheck(currentQuestion, currentQuestion.label, baseUrl, request)
   currentQuestion = showHideAnswer(currentQuestion, request)
+  return currentQuestion
+}
+
+const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
+  if (baseUrl === 'solar-power-capacity'){
+    if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
+      return 'potential-amount-solar-capped'
+    }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
+      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
+        return 'potential-amount-solar'
+    }else{
+      return 'potential-amount-solar-calculation'
+    }
+  }
+}else {
+  return currentQuestion.nextUrl
+}
+}
+
+const showPostPage = (currentQuestion, request, h) => {
+  let { yarKey, answers, baseUrl, ineligibleContent, nextUrlObject, title, hint, type, validate } = currentQuestion
+  const payload = request.payload
+
+  if (baseUrl !== 'score') {
+    setYarValue(request, 'onScorePage', false)
+  }
+
+  currentQuestion = formatVariablesBlock(currentQuestion, title, baseUrl, request, validate, ineligibleContent, hint)
 
   const thisAnswer = multiInputForLoop(payload, answers, type, yarKey, request)
   let NOT_ELIGIBLE = { ...currentQuestion?.ineligibleContent, backUrl: baseUrl }
   let dataObject
 
   checkYarKeyReset(thisAnswer, request)
- 
+
   if (type === 'multi-input') {
     multiInputPostHandler(currentQuestion, request, dataObject, payload, yarKey)
   }
@@ -532,44 +574,36 @@ const showPostPage = (currentQuestion, request, h) => {
   if (errors) {
     return errors
   }
+
+  const solarPVSystem = getYarValue(request, 'solarPVSystem');
+
   if (baseUrl === 'veranda-project-cost'){
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
-  }
-  else if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem')  === 'Yes') {
-    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, 
-    insertText: { 
-      text: 'You cannot apply for funding for solar PV system if you have not requested the minimum grant funding amount for a building.' 
+  }else if (baseUrl === 'project-cost') {
+    const insertText = solarPVSystem === 'Yes' ? { 
+        text: 'You cannot apply for funding for solar PV system if you have not requested the minimum grant funding amount for a building.' 
+    } : ''
+    NOT_ELIGIBLE = { 
+        ...NOT_ELIGIBLE, 
+        specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, 
+        insertText
     }
   }
-  } else if(baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem')  === 'No') {
-    NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, insertText:'' }
-  }
-
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
     gapiService.sendGAEvent(request,
       { name: gapiService.eventTypes.ELIMINATION, params: {} })
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
-  
+
+  let nextUrl = handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
+
   if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount')
   }
-
-  if (yarKey === 'projectCost') {
-    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
-    setYarValue(request, 'projectCost', projectCost)
-  }
-
-  if (baseUrl === 'solar-PV-cost' && getYarValue(request, 'solarPVSystem') === 'Yes') {
-    const { calculatedGrant , projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
   
-    setYarValue(request, 'projectCostSolar', projectCost)
-    setYarValue(request, 'calculatedGrantSolar', calculatedGrant)
-  }
-
+  handleYarKey(yarKey, request, payload, currentQuestion)
+  
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }

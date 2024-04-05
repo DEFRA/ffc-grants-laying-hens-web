@@ -4,12 +4,12 @@ const { GRANT_PERCENTAGE, GRANT_PERCENTAGE_SOLAR } = require('../../../../app/he
 
 describe('Page: /potential-amount-solar', () => {
   const varList = {
-    calculatedGrantCombined: 66000,
-    projectCostCombined: 240000,
+    totalCalculatedGrant: 66000,
+    totalProjectCost: 240000,
     calculatedGrant: 16000,
     projectCost: 40000,
-    calculatedGrantSolar: 50000,
-    projectCostSolar: 200000
+    solarCalculatedGrant: 50000,
+    solarProjectCost: 200000
   }
 
   commonFunctionsMock(varList, undefined)
