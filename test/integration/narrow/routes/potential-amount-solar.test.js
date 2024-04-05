@@ -9,7 +9,8 @@ describe('Page: /potential-amount-solar', () => {
     calculatedGrant: 16000,
     projectCost: 40000,
     solarCalculatedGrant: 50000,
-    solarProjectCost: 200000
+    solarProjectCost: 200000,
+    solarPVCost: 200000
   }
 
   commonFunctionsMock(varList, undefined)
