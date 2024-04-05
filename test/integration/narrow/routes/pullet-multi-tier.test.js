@@ -15,7 +15,7 @@ describe('Page: /pullet-multi-tier', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the pullets in your grant-funded building live in a multi-tier system as hens?')
+    expect(response.payload).toContain('Will the pullets reared in this building be housed in an aviary system as adults?')
     expect(response.payload).toContain('When they are over 15 weeks old')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
@@ -24,7 +24,7 @@ describe('Page: /pullet-multi-tier', () => {
 
   it('no option selected -> show error message', async () => {
     valList['NOT_EMPTY'] = {
-      error: 'Select yes if the pullets in your grant-funded building will live in a multi-tier system as hens',
+      error: 'Select yes if the pullets reared in this building will be housed in an aviary system as adults',
       return: false
     }
     const postOptions = {
@@ -36,7 +36,7 @@ describe('Page: /pullet-multi-tier', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the pullets in your grant-funded building will live in a multi-tier system as hens')
+    expect(postResponse.payload).toContain('Select yes if the pullets reared in this building will be housed in an aviary system as adults')
   })
 
   it('user selects eligible option -> store user response and redirect to /natural-light', async () => {
