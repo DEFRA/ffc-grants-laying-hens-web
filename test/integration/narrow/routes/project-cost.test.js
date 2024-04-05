@@ -31,7 +31,7 @@ describe('Project cost page', () => {
     expect(response.payload).toContain('Enter the costs of refurbishing this building only.')
     expect(response.payload).toContain('You must submit a separate application for each building.')
     expect(response.payload).toContain('Do not include VAT')
-    expect(response.payload).toContain('Enter amount, for example 95,000')
+    expect(response.payload).toContain('Enter amount, for example 595,000')
   })
 
   it('should load page successfully - project type is replacing', async () => {
@@ -50,7 +50,7 @@ describe('Project cost page', () => {
     expect(response.payload).toContain('Enter the costs of replacing this building only.')
     expect(response.payload).toContain('You must submit a separate application for each building.')
     expect(response.payload).toContain('Do not include VAT')
-    expect(response.payload).toContain('Enter amount, for example 95,000')
+    expect(response.payload).toContain('Enter amount, for example 595,000')
   })
 
   it('should return an error message if number contains a space', async () => {
