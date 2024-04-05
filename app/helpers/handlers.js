@@ -538,7 +538,7 @@ const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  let { yarKey, answers, baseUrl, ineligibleContent, nextUrl, nextUrlObject, title, hint, type, validate } = currentQuestion
+  let { yarKey, answers, baseUrl, ineligibleContent, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
 
   if (baseUrl !== 'score') {
@@ -583,7 +583,7 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.view('not-eligible', NOT_ELIGIBLE)
   }
 
-  nextUrl = handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
+  let nextUrl = handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
 
   if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount')
