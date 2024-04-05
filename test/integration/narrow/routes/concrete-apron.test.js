@@ -52,7 +52,7 @@ describe('Page: /concrete-apron', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('egg-store-access')
   })
-  it('user selects eligible option -> store user response and redirect to /vaccination-lobby', async () => {
+  it('user selects eligible option -> store user response and redirect to /changing-area', async () => {
     varList.poultryType = 'pullet'
     const postOptions = {
       method: 'POST',
@@ -63,7 +63,7 @@ describe('Page: /concrete-apron', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('vaccination-lobby')
+    expect(postResponse.headers.location).toBe('changing-area')
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
