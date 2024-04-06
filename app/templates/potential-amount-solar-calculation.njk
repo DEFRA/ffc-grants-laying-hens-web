@@ -38,12 +38,11 @@
             </summary>
             <div class="govuk-details__text">
                 {# breakdown of costs text format #}
-                <p>The solar PV system you plan to buy and install has a higher power capacity than 5kW of power per 1,000 birds. </p>
+                <p>The solar PV system you plan to buy and install has a higher power capacity than 5kW of power per 1,000 birds.</p>
                 <p>Based on the building's bird capacity ({{numberOfBirdsFormat}} birds), you can apply {{grantSolarPercentage}}% of the costs of a solar PV system with a power capacity of up to {{powerCap}}kW.</p>
-                <p>This is based on the solar PV system costs (£{{solarCostFormat}}) divided by the solar PV system's power capacity ({{energyRating}}kW). With these figures, the cost of the solar PV system is equal to £{{solarCap}} per kW.</p>
+                <p>This is based on the solar PV system costs (£{{solarCostFormat}}) divided by the solar PV system’s power capacity ({{energyRating}}kW). With these figures, the cost of the solar PV system is equal to £{{solarCap}} per kW.</p>
                 <p>You can apply for grant funding of £{{solarGrantFundingFormat}} for solar PV system costs. This is {{grantSolarPercentage}}% of £{{costFormat}} , the amount based on your solar PV system costing £{{solarCap}} per kW, multiplied by the power rating of {{powerCap}}kW.</p>
                 <p>You must pay the remaining solar PV system costs over £{{solarGrantFundingFormat}}.</p>
-                <h1></h1>
                 <table class="govuk-table">
                 <caption class="govuk-table__caption govuk-table__caption--l">Solar PV system funding calculation</caption>
                 <tbody class="govuk-table__body">
@@ -91,7 +90,6 @@
                     </tr>
                 </tbody>
                 </table>
-                {# table view with hint text, links etc #}
             </div>
         </details>
 
@@ -99,7 +97,7 @@
 
 <div class="govuk-grid-row">
     {{ govukWarningText({ 
-        text: 'There is no guarantee you will receive a grant',
+        text: 'There’s no guarantee the project will receive a grant.',
         iconFallbackText: 'Warning'
     }) }}
 

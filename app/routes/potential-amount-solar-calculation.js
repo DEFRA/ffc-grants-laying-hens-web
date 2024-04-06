@@ -27,10 +27,6 @@ module.exports = [{
         }
     },
     handler: async (request, h) => {
-        // calculate all values
-        // store all as variables
-        // call load page with all values
-
         const numberOfBirds = getYarValue(request, 'solarBirdNumber')
         const numberOfBirdsFormat = formatUKCurrency(getYarValue(request, 'solarBirdNumber'))
         const projectCost = getYarValue(request, 'projectCost')
@@ -56,7 +52,6 @@ module.exports = [{
         const projectTypeTableText = getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A2', ALL_QUESTIONS) ? 
         'Number of birds the refurbished part of the building will house': 'Number of birds the new building will house'
 
-        console.log(solarGrantFunding, 'solarGrandFunding')
         return h.view(viewTemplate, createModel({
             totalCalculatedGrantFormat,
             totalProjectCost,
