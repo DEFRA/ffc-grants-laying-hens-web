@@ -2,9 +2,14 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 const { GRANT_PERCENTAGE, GRANT_PERCENTAGE_SOLAR } = require('../../../../app/helpers/grant-details')
 const { formatUKCurrency } = require('../../../../app/helpers/data-formats')
+const utilsList = {
+  'project-type-A2': 'Refurbishing the existing building',
+  'poultry-type-A3': 'Replacing the entire building with a new building'
+}
+
 describe('Page: /potential-amount-solar-calculation', () => {
   const varList = {
-    projectType: 'Replacing the entire building with a new building',
+    projectType: 'Refurbishing the existing building',
     solarPVSystem: 'Yes',
     projectCost: 90000,
     projectCostFormat: formatUKCurrency(90000),
@@ -21,7 +26,7 @@ describe('Page: /potential-amount-solar-calculation', () => {
     solarGrantFundingFormat: formatUKCurrency(3750),
     grantPercentage: GRANT_PERCENTAGE,
     grantSolarPercentage: GRANT_PERCENTAGE_SOLAR,
-    projectTypeTableText: 'Number of birds the new building will house',
+    projectTypeTableText: 'Number of birds the refurbished part of the building will house' ,
     numberOfBirds: 30000,
     numberOfBirdsFormat : formatUKCurrency(30000),
     powerCap: 150,
@@ -33,10 +38,10 @@ describe('Page: /potential-amount-solar-calculation', () => {
     costFormat: formatUKCurrency(15000)
 
   }
+  let valList = {}
 
-  commonFunctionsMock(varList, undefined)
+  commonFunctionsMock(varList, undefined, utilsList, valList)
   
-console.log(`This is based on the solar PV system costs (£${varList.solarCostFormat}) divided by the solar PV system’s power capacity (${varList.energyRating}kW). With these figures, the cost of the solar PV system is equal to £${varList.solarcap}} per kW.`, 'YUNUS')
   it('page loads successfully, with all the Eligible options', async () => {
     const options = {
       method: 'GET',
@@ -56,9 +61,23 @@ console.log(`This is based on the solar PV system costs (£${varList.solarCostFo
     expect(response.payload).toContain(`You must pay the remaining solar PV system costs over £${varList.solarGrantFundingFormat}.`)
     expect(response.payload).toContain(varList.numberOfBirdsFormat)
     expect(response.payload).toContain(varList.projectTypeTableText)
-
     expect(response.payload).toContain('There’s no guarantee the project will receive a grant.')
   })
+
+  it('page loads successfully, with all the Eligible options', async () => {
+    varList.projectType = 'Replacing the entire building with a new building'
+    varList.projectTypeTableText = 'Number of birds the new building will house'
+    varList.solarcap = 112
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/potential-amount-solar-calculation`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain(varList.projectTypeTableText)
+  })
+
 
   it('should redirect to /remaining-costs when user press continue', async () => {
     const postOptions = {

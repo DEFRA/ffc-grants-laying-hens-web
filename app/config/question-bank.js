@@ -1133,7 +1133,7 @@ const questionBank = {
             html: `
                   <p>The aviary system must have integrated:</p>
                   <ul class="govuk-list--bullet">
-                    <li>manure removal belts</li>
+                    <li>automatic manure removal belts</li>
                     <li>non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk</li>
                   </ul>`
           },
