@@ -411,7 +411,7 @@ const getPage = async (question, request, h) => {
     }
   }
 
-  if (url === 'potential-amount-solar' && getYarValue(request, 'solarPVCost')) {
+  if ((url === 'potential-amount-solar-capped' || url === 'potential-amount-solar') && getYarValue(request, 'solarPVCost')) {
     const projectCost = getYarValue(request, 'projectCost')
     const calculatedGrant = getYarValue(request, 'calculatedGrant')
     const solarProjectCost = getYarValue(request, 'solarProjectCost')
@@ -419,9 +419,11 @@ const getPage = async (question, request, h) => {
 
     const totalProjectCost = projectCost + solarProjectCost
     const totalCalculatedGrant = calculatedGrant + Number(solarCalculatedGrant)
+    const cappedSolarProjectCost = 500000 - calculatedGrant
 
     setYarValue(request, 'totalProjectCost', totalProjectCost)
     setYarValue(request, 'totalCalculatedGrant', totalCalculatedGrant)
+    setYarValue(request, 'cappedSolarProjectCost', cappedSolarProjectCost)
   }
 
   // formatting variables block

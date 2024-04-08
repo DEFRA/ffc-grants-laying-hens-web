@@ -2,9 +2,9 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken, testNextLink } = require('./test-helper')
 
 describe('Page: /environmental-data-type', () => {
-    let varList = {}
+  let varList = {}
 
-    let valList = {}
+  let valList = {}
 
   commonFunctionsMock(varList, undefined, {}, valList)
 
@@ -24,7 +24,7 @@ describe('Page: /environmental-data-type', () => {
     expect(response.payload).toContain('Inhalable dust')
     expect(response.payload).toContain('Other')
     expect(response.payload).toContain('or')
-    expect(response.payload).toContain('I will not collect and store additional environmental data')
+    expect(response.payload).toContain('None of the above')
   })
 
   it('no option selected -> show error message', async () => {
@@ -44,7 +44,7 @@ describe('Page: /environmental-data-type', () => {
     expect(postResponse.payload).toContain('Select what additional environment data you will automatically collect and store')
   })
 
-  for(let option of ['Ammonia', 'Carbon monoxide', 'Inhalable dust', 'Other', 'I will not collect and store additional environmental data']) {
+  for(let option of ['Ammonia', 'Carbon monoxide', 'Inhalable dust', 'Other', 'None of the above']) {
     it(`user selects eligible option - ${option} -> store user response and redirect to /score`, async () => {
       await testNextLink('environmental-data-type', 'environmentalDataType', option, 'score')
     })
