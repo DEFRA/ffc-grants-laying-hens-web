@@ -22,14 +22,12 @@
     <h1 class="govuk-heading-l">Potential grant funding</h1>
     <div class="govuk-body">
         You may be able to apply for a grant of up to £{{totalCalculatedGrantFormat}}, based on the estimated cost of £{{totalProjectCostFormat}}
-
         <div class="govuk-list govuk-list--bullet">
             <ul>
                 <li>£{{housingGrantFundingFormat}} for building project costs ({{grantPercentage}}% of £{{projectCostFormat}})</li>
                 <li>£{{solarGrantFundingFormat}} for solar PV system costs</li>
             </ul>
         </div>
-
         <details class="govuk-details">
             <summary class="govuk-details__summary">
                 <span class="govuk-details__summary-text">
@@ -44,49 +42,49 @@
                 <p>You can apply for grant funding of £{{solarGrantFundingFormat}} for solar PV system costs. This is {{grantSolarPercentage}}% of £{{costFormat}} , the amount based on your solar PV system costing £{{solarCap}} per kW, multiplied by the power rating of {{powerCap}}kW.</p>
                 <p>You must pay the remaining solar PV system costs over £{{solarGrantFundingFormat}}.</p>
                 <table class="govuk-table">
-                <caption class="govuk-table__caption govuk-table__caption--l">Solar PV system funding calculation</caption>
+                <caption class="govuk-table__caption govuk-table__caption--s">Solar PV system funding calculation</caption>
                 <tbody class="govuk-table__body">
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell">{{projectTypeTableText}} <br>
-                        <span class = 'govuk-hint'>You told us this <a href='./bird-number'>change the number of birds</a></span>
+                        <span class = 'govuk-body-s'>You told us this <a href='./bird-number' class="govuk-link govuk-link--no-visited-state">change the number of birds</a></span>
                     </td>
-                    <td class="govuk-table__cell">{{numberOfBirdsFormat}}</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">{{numberOfBirdsFormat}}</td>
                     </tr>
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell">Solar PV system cost<br>
-                        <span class = 'govuk-hint'>You told us this <a href='./solar-PV-cost'>change the solar PV system cost</a></span>
+                        <span class = 'govuk-body-s'>You told us this <a href='./solar-PV-cost' class="govuk-link govuk-link--no-visited-state">change the solar PV system cost</a></span>
                     </td>
-                    <td class="govuk-table__cell">£{{solarCostFormat}}</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{solarCostFormat}}</td>
                     </tr>
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell">This project’s solar PV system power capacity<br>
-                        <span class = 'govuk-hint'>You told us this <a href='./solar-power-capacity'>change the solar PV system rating</a></span>
+                        <span class = 'govuk-body-s'>You told us this <a href='./solar-power-capacity' class="govuk-link govuk-link--no-visited-state">change the solar PV system rating</a></span>
                     </td>
-                    <td class="govuk-table__cell">{{energyRating}}kW</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">{{energyRating}}kW</td>
                     </tr>
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell">Solar PV system cost per kW <br>
-                        <span class = 'govuk-hint'>£{{solarCostFormat}} divided by {{energyRating}}kW</span>
+                        <span class = 'govuk-body-s'>£{{solarCostFormat}} divided by {{energyRating}}kW</span>
                     </td>
-                    <td class="govuk-table__cell">£{{solarCap}}</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{solarCap}}</td>
                     </tr>
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell">Maximum grant-funded solar PV system rating <br>
-                        <span class = 'govuk-hint'>5kW for every thousand birds</span>
+                        <span class = 'govuk-body-s'>5kW for every thousand birds</span>
                     </td>
-                    <td class="govuk-table__cell">{{powerCap}}kW</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">{{powerCap}}kW</td>
                     </tr>
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell">Solar PV system costs that grant funding applies to<br>
-                        <span class = 'govuk-hint'>£{{solarCap}} multiplied by {{powerCap}}kW</span>
+                        <span class = 'govuk-body-s'>£{{solarCap}} multiplied by {{powerCap}}kW</span>
                     </td>
-                    <td class="govuk-table__cell">£{{costFormat}}</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{costFormat}}</td>
                     </tr>
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell">Potential grant funding for solar PV system <br>
-                        <span class = 'govuk-hint'>%{{grantSolarPercentage}} of {{costFormat}}</span>
+                        <span class = 'govuk-body-s'>%{{grantSolarPercentage}} of {{costFormat}}</span>
                     </td>
-                    <td class="govuk-table__cell">£{{solarGrantFundingFormat}}</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{solarGrantFundingFormat}}</td>
                     </tr>
                 </tbody>
                 </table>
