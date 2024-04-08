@@ -1,0 +1,111 @@
+{% extends '.layout.njk' %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "./components/macro.njk" import crumbToken %}
+
+{% block pageTitle %}
+    Potential grant funding - {{siteTitle}}
+{% endblock %}
+
+{% block beforeContent %}
+    {{ govukBackLink({
+        text: "Back",
+        href: backLink,
+        attributes: {id: 'linkBack'}
+    })}}
+
+{% endblock %}
+
+{% block content %}
+    <h1 class="govuk-heading-l">Potential grant funding</h1>
+    <div class="govuk-body">
+        You may be able to apply for a grant of up to £{{totalCalculatedGrantFormat}}, based on the estimated cost of £{{totalProjectCostFormat}}
+        <div class="govuk-list govuk-list--bullet">
+            <ul>
+                <li>£{{housingGrantFundingFormat}} for building project costs ({{grantPercentage}}% of £{{projectCostFormat}})</li>
+                <li>£{{solarGrantFundingFormat}} for solar PV system costs</li>
+            </ul>
+        </div>
+        <details class="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    How is the solar PV system grant funding calculated?
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+                {# breakdown of costs text format #}
+                <p>The solar PV system you plan to buy and install has a higher power capacity than 5kW of power per 1,000 birds.</p>
+                <p>Based on the building's bird capacity ({{numberOfBirdsFormat}} birds), you can apply {{grantSolarPercentage}}% of the costs of a solar PV system with a power capacity of up to {{powerCap}}kW.</p>
+                <p>This is based on the solar PV system costs (£{{solarCostFormat}}) divided by the solar PV system’s power capacity ({{energyRating}}kW). With these figures, the cost of the solar PV system is equal to £{{solarCap}} per kW.</p>
+                <p>You can apply for grant funding of £{{solarGrantFundingFormat}} for solar PV system costs. This is {{grantSolarPercentage}}% of £{{costFormat}} , the amount based on your solar PV system costing £{{solarCap}} per kW, multiplied by the power rating of {{powerCap}}kW.</p>
+                <p>You must pay the remaining solar PV system costs over £{{solarGrantFundingFormat}}.</p>
+                <table class="govuk-table">
+                <caption class="govuk-table__caption govuk-table__caption--s">Solar PV system funding calculation</caption>
+                <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">{{projectTypeTableText}} <br>
+                        <span class = 'govuk-body-s' style="color: #505a5f">You told us this <a href='./bird-number' class="govuk-link govuk-link--no-visited-state">change the number of birds</a></span>
+                    </td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">{{numberOfBirdsFormat}}</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Solar PV system cost<br>
+                        <span class = 'govuk-body-s' style="color: #505a5f">You told us this <a href='./solar-PV-cost' class="govuk-link govuk-link--no-visited-state">change the solar PV system cost</a></span>
+                    </td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{solarCostFormat}}</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">This project’s solar PV system power capacity<br>
+                        <span class = 'govuk-body-s' style="color: #505a5f">You told us this <a href='./solar-power-capacity' class="govuk-link govuk-link--no-visited-state">change the solar PV system rating</a></span>
+                    </td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">{{energyRating}}kW</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Solar PV system cost per kW <br>
+                        <span class = 'govuk-body-s' style="color: #505a5f">£{{solarCostFormat}} divided by {{energyRating}}kW</span>
+                    </td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{solarCap}}</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Maximum grant-funded solar PV system rating <br>
+                        <span class = 'govuk-body-s' style="color: #505a5f">5kW for every thousand birds</span>
+                    </td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">{{powerCap}}kW</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Solar PV system costs that grant funding applies to<br>
+                        <span class = 'govuk-body-s' style="color: #505a5f">£{{solarCap}} multiplied by {{powerCap}}kW</span>
+                    </td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{costFormat}}</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Potential grant funding for solar PV system <br>
+                        <span class = 'govuk-body-s' style="color: #505a5f">%{{grantSolarPercentage}} of {{costFormat}}</span>
+                    </td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{solarGrantFundingFormat}}</td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </details>
+
+    </div>
+
+<div class="govuk-grid-row">
+    {{ govukWarningText({ 
+        text: 'There’s no guarantee the project will receive a grant.',
+        iconFallbackText: 'Warning'
+    }) }}
+
+<br/><br/>
+    <form method="POST" action="{{ formActionPage }}" autocomplete="off" novalidate>
+        {{ crumbToken(crumb)}}
+        {{ govukButton({
+            text: "Continue",
+            attributes: {id: "btnContinue"}
+        }) }}
+    </form>
+</div>
+{% endblock %}
