@@ -3068,10 +3068,6 @@ const questionBank = {
           key: 'hen-multi-tier',
           order: 310,
           title: 'Will the hens in this building be reared in a multi-tier system as pullets?',
-          pageTitle: '',
-          hint: {
-            text: 'When they are under 15 weeks old'
-          },
           url: 'hen-multi-tier',
           baseUrl: 'hen-multi-tier',
           backUrl: 'three-tiers',
@@ -3117,10 +3113,6 @@ const questionBank = {
           key: 'pullet-multi-tier',
           order: 315,
           title: 'Will the pullets reared in this building be housed in an aviary system as adults?',
-          pageTitle: '',
-          hint: {
-            text: 'When they are over 15 weeks old'
-          },
           url: 'pullet-multi-tier',
           baseUrl: 'pullet-multi-tier',
           backUrl: 'three-tiers',
