@@ -41,7 +41,7 @@ describe('Page: /maximum-tier-height', () => {
     expect(postResponse.payload).toContain('Select yes if the highest tier with direct access to the floor will be 2 metres high or less')
   })
 
-  it('user selects eligible option -> store user response and redirect to /three-tiers', async () => {
+  it('user selects eligible option -> store user response and redirect to /tier-number', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/maximum-tier-height`,
@@ -51,7 +51,7 @@ describe('Page: /maximum-tier-height', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('three-tiers')
+    expect(postResponse.headers.location).toBe('tier-number')
   })
 
   it('page loads with correct back link - /ramp-connection', async () => {

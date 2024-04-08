@@ -3019,12 +3019,12 @@ const questionBank = {
           yarKey: 'currentMultiTierSystem'
         },
         {
-          key: 'three-tiers',
+          key: 'tier-number',
           order: 190,
-          title: 'Will the multi-tier system have 3 tiers or fewer directly above each other?',
+          title: 'How many tiers will be positioned directly above each other in the {{_poultryType_}} system?',
           pageTitle: '',
-          url: 'three-tiers',
-          baseUrl: 'three-tiers',
+          url: 'tier-number',
+          baseUrl: 'tier-number',
           backUrl: 'maximum-tier-height',
           nextUrlObject: {
             dependentQuestionYarKey: ['poultryType'],
@@ -3033,6 +3033,9 @@ const questionBank = {
               thenUrl: 'hen-multi-tier',
               elseUrl: 'pullet-multi-tier'
             }
+          },
+          hint: {
+            html: `The floor and the perches at the top of the {{_poultryType_}} system are not counted as tiers`
           },
           sidebar: {
             values: [{
@@ -3049,20 +3052,20 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the multi-tier system will have 3 tiers or fewer directly above each other'
+              error: 'Select how many tiers will be positioned directly above each other in the {{_poultryType_}} system'
             }
           ],
           answers: [
             {
-              key: 'three-tiers-A1',
-              value: 'Yes'
+              key: 'tier-number-A1',
+              value: '3 tiers or fewer'
             },
             {
-              key: 'three-tiers-A2',
-              value: 'No'
+              key: 'tier-number-A2',
+              value: '4 tiers or more'
             }
           ],
-          yarKey: 'threeTiers'
+          yarKey: 'tierNumber'
         },
         {
           key: 'hen-multi-tier',
@@ -3074,7 +3077,7 @@ const questionBank = {
           },
           url: 'hen-multi-tier',
           baseUrl: 'hen-multi-tier',
-          backUrl: 'three-tiers',
+          backUrl: 'tier-number',
           nextUrl: 'natural-light',
           sidebar: {
             values: [{
@@ -3123,7 +3126,7 @@ const questionBank = {
           },
           url: 'pullet-multi-tier',
           baseUrl: 'pullet-multi-tier',
-          backUrl: 'three-tiers',
+          backUrl: 'tier-number',
           nextUrl: 'natural-light',
           sidebar: {
             values: [{
@@ -3331,7 +3334,7 @@ const questionBank = {
           url: 'maximum-tier-height',
           baseUrl: 'maximum-tier-height',
           backUrl: 'ramp-connection',
-          nextUrl: 'three-tiers',
+          nextUrl: 'tier-number',
           sidebar: {
             values: [{
               heading: 'Funding priorities',
