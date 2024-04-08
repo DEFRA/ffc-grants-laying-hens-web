@@ -2980,7 +2980,7 @@ const questionBank = {
         {
           key: 'current-multi-tier-system',
           order: 305,
-          title: 'Does your current building include a {{_poultryType_}}?',
+          title: 'Does your building currently include [[_article_]] {{_poultryType_}}?',
           hint: {
             text: 'The building you are replacing or refurbishing for this project'
           },
@@ -2993,7 +2993,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to encourage investment in high-welfare {{_poultryType_}}.',
+                para: 'RPA want to encourage investment in high welfare {{_poultryType_}}s.',
               }]
             }]
           },
@@ -3003,7 +3003,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if your current building includes a {{_poultryType_}}'
+              error: 'Select yes if your building currently includes [[_article_]] {{_poultryType_}}'
             }
           ],
           answers: [
@@ -3828,14 +3828,13 @@ const questionBank = {
           fundingPriorities: '',
           type: 'input',
           label: {
-            text: `How many birds will {{_projectType_}} be able to house?`,
+            text: `How many birds will {{_projectType_}} be able to house[[_extraClause_]]?`,
             classes: 'govuk-label--l',
             isPageHeading: true
           },
           hint: {
             html: `
-                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare 
-                    features (lighting, ventilation system) for the amount of birds in the building.
+                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare features (lighting, ventilation system) for the amount of birds in the building.
                   </p>
                   <p>The power capacity for grant funding is 5 kilowatts (kW) per 1,000 birds.</p>
                   <p>Enter estimated amount, for example 8,000</p>
@@ -3844,7 +3843,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter how many birds {{_projectType_}} will be able to house'
+              error: 'Enter how many birds {{_projectType_}} will be able to house[[_extraClause_]]'
             },
             {
               type: 'REGEX',
