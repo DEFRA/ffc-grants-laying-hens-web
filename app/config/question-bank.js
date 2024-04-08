@@ -2980,7 +2980,7 @@ const questionBank = {
         {
           key: 'current-multi-tier-system',
           order: 305,
-          title: 'Does your building currently include [[_article_]] {{_poultryType_}}?',
+          title: 'Does your building currently include [[_article_]] {{_poultryType_}} system?',
           hint: {
             text: 'The building you are replacing or refurbishing for this project'
           },
@@ -2993,7 +2993,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to encourage investment in high welfare {{_poultryType_}}s.',
+                para: 'RPA want to encourage investment in high welfare {{_poultryType_}} systems.',
               }]
             }]
           },
@@ -3003,7 +3003,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if your building currently includes [[_article_]] {{_poultryType_}}'
+              error: 'Select yes if your building currently includes [[_article_]] {{_poultryType_}} system'
             }
           ],
           answers: [
@@ -3170,7 +3170,7 @@ const questionBank = {
           order: 200,
           title:'Will the perches have a design feature that helps the birds grip the perches?',
           hint: {
-            html: `You can replace a{{_poultryType_}} standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`
+            html: `You can replace {{_poultryType_}} standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`
           },
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
