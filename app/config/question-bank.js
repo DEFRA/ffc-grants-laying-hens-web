@@ -3168,11 +3168,9 @@ const questionBank = {
         {
           key: 'easy-grip-perches',
           order: 200,
-          title:'Will the perches have a design feature that help the {{_poultryType_}}s grip the perches?',
+          title:'Will the perches have a design feature that helps the birds grip the perches?',
           hint: {
-            text: `Additional design features (for example, a ridged surface,
-              comfortable materials or coating) you can add to the circular metal
-              perches that are often standard in aviary system`
+            html: `You can replace a{{_poultryType_}} standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`
           },
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
@@ -3189,7 +3187,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to support projects that ensure perches that are easy to grip to increase bird safety and reduce falls.`
+                para: `RPA want to support projects that ensure perches are easy to grip to increase bird safety and reduce falls.`
               }]
             }]
           },
@@ -3201,7 +3199,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the perches will have a design feature that help the {{_poultryType_}}s grip the perches'
+              error: 'Select yes if the perches will have a design feature that help the birds grip the perches'
             }
           ],
           answers: [

@@ -64,6 +64,8 @@ const insertYarValue = (field, url, request) => {
         return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'refurbishing', 'replacing');
         case 'ramp-connection':
           return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier');
+          case 'easy-grip-perches':
+            return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'n aviary\'s', ' multi-tier system\'s');
           case 'tier-number':
             return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier');
       default:

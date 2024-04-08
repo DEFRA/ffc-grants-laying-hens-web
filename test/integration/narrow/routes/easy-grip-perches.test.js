@@ -8,9 +8,15 @@ describe('Page: /easy-grip-perches', () => {
 
   let valList = {}
 
-  commonFunctionsMock(varList, undefined, {}, valList)
+  const utilsList = {
+    'poultry-type-A1': 'hen',
+    'poultry-type-A2': 'pullet'
+  }
+  
+  commonFunctionsMock(varList, undefined, utilsList, valList)
 
   it('page loads successfully, with all the options - hen', async () => {
+    varList.poultryType = 'hen'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/easy-grip-perches`
@@ -18,7 +24,8 @@ describe('Page: /easy-grip-perches', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the perches have a design feature that help the hens grip the perches?')
+    expect(response.payload).toContain('Will the perches have a design feature that helps the birds grip the perches?')
+    expect(response.payload).toContain(`You can replace an aviary's standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`)
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -32,7 +39,8 @@ describe('Page: /easy-grip-perches', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the perches have a design feature that help the pullets grip the perches?')
+    expect(response.payload).toContain('Will the perches have a design feature that helps the birds grip the perches?')
+    expect(response.payload).toContain(`You can replace a multi-tier system's standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`)
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -40,7 +48,7 @@ describe('Page: /easy-grip-perches', () => {
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
     valList.easyGripPerches = {
-      error: 'Select yes if the perches will have a design feature that help the hens grip the perches',
+      error: 'Select yes if the perches will have a design feature that help the birds grip the perches',
       return: false
     }
     const postOptions = {
@@ -52,22 +60,7 @@ describe('Page: /easy-grip-perches', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the hens grip the perches')
-  })
-
-  it('no option selected -> show error message - pullet', async () => {
-    varList.poultryType = 'pullet'
-    valList.easyGripPerches.error = 'Select yes if the perches will have a design feature that help the pullets grip the perches'
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/easy-grip-perches`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { easyGripPerches: '', crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the pullets grip the perches')
+    expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the birds grip the perches')
   })
 
   it('user selects eligible option -> store user response and redirect to /building-biosecurity', async () => {
