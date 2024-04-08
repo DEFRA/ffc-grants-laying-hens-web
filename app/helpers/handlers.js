@@ -63,11 +63,10 @@ const insertYarValue = (field, url, request) => {
       case 'project-cost':
         return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'refurbishing', 'replacing');
       case 'ramp-connection':
+      case 'tier-number':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier');
       case 'easy-grip-perches':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'n aviary\'s', ' multi-tier system\'s');
-      case 'tier-number':
-        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier');
       default:
         return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName);
     }
