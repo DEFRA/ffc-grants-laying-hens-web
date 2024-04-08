@@ -19,6 +19,7 @@ describe('Page: /maximum-tier-height', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Will the highest tier with direct access to the floor be 2 metres high or less?')
+    expect(response.payload).toContain('Measured from the litter floor area to the underside of the manure belt')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })

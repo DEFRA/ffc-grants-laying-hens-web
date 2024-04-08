@@ -3277,7 +3277,7 @@ const questionBank = {
         {
           key: 'ramp-connection',
           order: 285,
-          title: 'Will every level of the multi-tier system be connected to another level by a ramp?',
+          title: 'When the project is complete, will every level of the {{_poultryType_}} system be connected to another level by a ramp?',
           pageTitle: '',
           url: 'ramp-connection',
           baseUrl: 'ramp-connection',
@@ -3294,7 +3294,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to fund multi-tier systems that have ramps to reduce the risk of keel bone fractures and benefit birds that have keel bone fractures.'
+                para: `RPA want to fund {{_poultryType_}} systems that have ramps to reduce the risk of keel bone fractures and benefit birds that have keel bone fractures.`
               }]
             }]
           },
@@ -3305,7 +3305,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if every level of the multi-tier system will be connected to another level by a ramp'
+              error: 'Select yes if every level of the {{_poultryType_}} system will be connected to another level by a ramp'
             }
           ],
           answers: [
@@ -3326,7 +3326,7 @@ const questionBank = {
           title: 'Will the highest tier with direct access to the floor be 2 metres high or less?',
           pageTitle: '',
           hint: {
-            text: 'The height of the highest tier in the multi-tier system from the litter floor area to the underside of the manure belt'
+            text: 'Measured from the litter floor area to the underside of the manure belt'
           },
           url: 'maximum-tier-height',
           baseUrl: 'maximum-tier-height',
