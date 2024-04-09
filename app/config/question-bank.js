@@ -2845,6 +2845,32 @@ const questionBank = {
           }
         },
         {
+          key: 'potential-amount-solar-capped',
+          order: 165,
+          url: 'potential-amount-solar-capped',
+          baseUrl: 'potential-amount-solar-capped',
+          backUrl: 'solar-power-capacity',
+          nextUrl: 'remaining-costs',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: `You may be able to apply for a grant of up to £500,000, based on the total estimated cost of £{{_totalProjectCost_}}.
+              <div class="govuk-list">
+                <p class="govuk-body">This grant amount combines:</p>
+                <ul class="govuk-list--bullet">
+                  <li>£{{_calculatedGrant_}} for building costs (${GRANT_PERCENTAGE}% of £{{_projectCost_}})</li>
+                  <li>£{{_cappedSolarProjectCost_}} for solar PV system costs</li>
+                </ul>
+              </div>
+              <p class="govuk-body"> As building project costs take grant funding priority, you may be able to apply for a grant of up to £{{_cappedSolarProjectCost_}} for a solar PV system. The maximum grant is £500,000.<p/>
+            `,
+            insertText: { text: '' },
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
+        {
           key: 'remaining-costs',
           order: 170,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
@@ -3505,25 +3531,30 @@ const questionBank = {
         {
           key: 'pullet-veranda-features',
           order: 310,
-          title: 'Will the pullet housing have a veranda with these features?',
+          title: 'Will the building have a veranda with these features?',
           pageTitle: '',
-          hint: {
-            html: `
-                  <p>The veranda must:</p>
-                  <ul class="govuk-list--bullet">
-                      <li>be 4 metres wide or more along the length of the bird housing area, or 30% or more of the size of the indoor bird housing area footprint</li>
-                      <li>have a solid concrete floor and waterproof insulated roof</li>
-                      <li>have a perimeter wall of more than one metre in height</li>
-                      <li>have a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
-                      <li>have a mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended to make the housing biosecure during housing orders</li>
-                      <li>have closable pop holes in the wall of the main house (unless the veranda forms part of an indoor barn system) that are less than 30cm from the floor level, or access ramps across the entire pop hole</li>
-                      <li>not have perches in front of the pop holes</li>
-                  </ul>`
-          },
           url: 'pullet-veranda-features',
           baseUrl: 'pullet-veranda-features',
           nextUrl: 'renewable-energy',
           backUrl: 'pollution-mitigation',
+          hint: {
+            html: `
+              <div>
+                <p>If you add a veranda to your building, it must:</p>
+                <ul class="govuk-list--bullet">
+                  <li>be at least 4 metres wide along the length of the pullet housing area, or equal to at least 30% of the indoor pullet housing area footprint</li>
+                  <li>have a dimmable LED lighting system between 0 lux and 60 lux</li>
+                  <li>have a solid concrete floor and waterproof insulated roof</li>
+                  <li>have a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                  <li>have closable pop holes in the perimeter wall, unless the veranda forms part of an indoor barn system</li>
+                  <li>have internal access along the length of the wall of the pullet house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                  <li>have a total of 2 metres of pop hole openings along the length of the pullet house for every 1,000 pullets in the building</li>
+                  <li>have all pop holes less than 10cm from the floor level and have access ramps as wide as the pop holes that are higher than 10cm from the floor level</li>
+                  <li>not have perches in front of the pop holes</li>
+                  <li>have a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
+                </ul>
+              </div>`
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3539,7 +3570,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the pullet housing will have a veranda with these features'
+              error: 'Select yes if the building will have a veranda with these features'
             }
           ],
           answers: [
@@ -3707,31 +3738,37 @@ const questionBank = {
           answers: [
             {
               key: 'bird-data-type-A1',
-              value: 'Bird performance data'
+              value: 'Bird location'
             },
             {
               key: 'bird-data-type-A2',
-              value: 'Body weight',
+              value: 'Egg production parameters',
+              dependantShowHideKey: 'poultry-type',
+              dependantShowHideAnswerKey: 'poultry-type-A2',
+              dependantShowHideYarKey: 'poultryType',
             },
             {
               key: 'bird-data-type-A3',
-              value: 'Disease detection',
+              value: 'Body weight',
             },
             {
               key: 'bird-data-type-A4',
-              value: 'Feed data or conversion ratios',
+              value: 'Disease detection',
             },
             {
               key: 'bird-data-type-A5',
-              value: 'Location data'
+              value: 'Feed date or conversion ratios'
             },
             {
               key: 'bird-data-type-A6',
-              value: 'Locomotion or movement data'
+              value: 'Locomotion or movement'
             },
             {
               key: 'bird-data-type-A7',
-              value: 'Next use'
+              value: 'Nest use',
+              dependantShowHideKey: 'poultry-type',
+              dependantShowHideAnswerKey: 'poultry-type-A2',
+              dependantShowHideYarKey: 'poultryType',
             },
             {
               key: 'bird-data-type-A8',
@@ -3746,7 +3783,7 @@ const questionBank = {
             },
             {
               key: 'bird-data-type-A10',
-              value: 'I will not monitor any poultry management data',
+              value: 'None of the above',
             }
           ],
           yarKey: 'birdDataType'
@@ -3811,7 +3848,7 @@ const questionBank = {
             },
             {
               key: 'environmental-data-type-A5',
-              value: 'I will not collect and store additional environmental data',
+              value: 'None of the above',
             }
           ],
           yarKey: 'environmentalDataType'
