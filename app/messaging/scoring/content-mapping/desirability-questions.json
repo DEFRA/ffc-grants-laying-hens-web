@@ -53,13 +53,13 @@
       }
     }
   ],
-  "three-tiers": [
+  "tier-number": [
     {
-      "key": "three-tiers",
+      "key": "tier-number",
       "title": "Will the multi-tier system have 3 tiers or fewer directly above each other?",
       "answers": {
-        "three-tiers-A1": "Yes",
-        "three-tiers-A2": "No"
+        "tier-number-A1": "3 tiers or fewer",
+        "tier-number-A2": "4 tiers or more"
       }
     }
   ],

@@ -27,13 +27,13 @@ const commonPages = [
     yarKey: 'maximumTierHeight'
   },
   {
-    key: 'three-tiers',
+    key: 'tier-number',
     order: 5,
     title: '3 tiers or fewer',
     pageTitle: '3 tiers or fewer',
-    url: 'three-tiers',
+    url: 'tier-number',
     fundingPriorities: 'Aviary systems that have 3 tiers or fewer',
-    yarKey: 'threeTiers'
+    yarKey: 'tierNumber'
   },
   {
     key: 'natural-light',
