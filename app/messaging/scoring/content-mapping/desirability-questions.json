@@ -120,8 +120,8 @@
       "key": "building-biosecurity",
       "title": "Will the building structure include the following?",
       "answers": {
-        "building-biosecurity-A1": "Shower-in-facilities in the lobby or changing room area",
-        "building-biosecurity-A2": "An externally accessible storage room with a separate air space",
+        "building-biosecurity-A1": "Shower facilities in the biosecurity changing area",
+        "building-biosecurity-A2": "An integrated externally accessible storage room with a separate air space",
         "building-biosecurity-A3": "None of the above"
       }
     }
