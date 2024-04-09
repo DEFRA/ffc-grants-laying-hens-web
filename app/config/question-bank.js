@@ -29,7 +29,7 @@ const {
  * ----------------------------------------------------------------
  * list of yarKeys not bound to an answer, calculated separately
  * -  calculatedGrant
- * -  remainingCost
+ * -  totalRemainingCost
  *
  * Mainly to replace the value of a previously stored input
  * Format: {{_VALUE_}}
@@ -2236,7 +2236,8 @@ const questionBank = {
             {
               key: 'solar-PV-system-A2',
               value: 'No',
-              redirectUrl: 'roof-solar-PV-exemption'
+              redirectUrl: 'roof-solar-PV-exemption',
+              yarKeysReset: ['solarPowerCapacity', 'solarPVCost', 'solarBirdNumber', 'solarCalculatedGrant']
             }
           ],
           yarKey: 'solarPVSystem'
@@ -2721,7 +2722,7 @@ const questionBank = {
         {
           key: 'veranda-remaining-costs',
           order: 150,
-          title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
+          title: 'Can you pay the remaining costs of £{{_totalRemainingCost_}}?',
           pageTitle: '',
           url: 'veranda-remaining-costs',
           baseUrl: 'veranda-remaining-costs',
@@ -2847,12 +2848,12 @@ const questionBank = {
         {
           key: 'remaining-costs',
           order: 170,
-          title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
+          title: 'Can you pay the remaining costs of £{{_totalRemainingCost_}}?',
           pageTitle: '',
           url: 'remaining-costs',
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
-          nextUrl: 'housing',
+          nextUrl: 'interruption-scoring',
           // preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
@@ -5003,7 +5004,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(item => ALL_URLS.push(item.url))
 
-const YAR_KEYS = ['itemsTotalValue', 'remainingCost', 'calculatedGrant', 'remainingCostCalf', 'calculatedGrantCalf', 'calfHousingCost']
+const YAR_KEYS = ['totalRemainingCost', 'calculatedGrant']
 ALL_QUESTIONS.forEach(item => YAR_KEYS.push(item.yarKey))
 module.exports = {
   questionBank,

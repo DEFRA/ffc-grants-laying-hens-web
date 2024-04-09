@@ -4,6 +4,7 @@ const { GRANT_PERCENTAGE_SOLAR, GRANT_PERCENTAGE } = require('../helpers/grant-d
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { formatUKCurrency } = require('../helpers/data-formats')
 const { ALL_QUESTIONS } = require('../config/question-bank')
+const { setYarValue } = require('ffc-grants-common-functionality/lib/session')
 const viewTemplate = 'potential-amount-solar-calculation'
 const currentPath = `${urlPrefix}/${viewTemplate}`
 const nextPath = `${urlPrefix}/remaining-costs`
@@ -48,11 +49,14 @@ module.exports = [{
         const housingGrantFundingFormat = formatUKCurrency(Number(GRANT_PERCENTAGE * (projectCost / 100).toFixed(2)))
         const solarGrantFunding = Number(GRANT_PERCENTAGE_SOLAR * (cost / 100).toFixed(2))
         const housingGrantFunding = Number(GRANT_PERCENTAGE * (projectCost / 100).toFixed(2))
+        const totalCalculatedGrant = housingGrantFunding + solarGrantFunding
+        setYarValue(request, 'totalRemainingCost', totalProjectCost - totalCalculatedGrant)
         const totalCalculatedGrantFormat = formatUKCurrency(housingGrantFunding + solarGrantFunding)
         const projectTypeTableText = getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A2', ALL_QUESTIONS) ? 
         'Number of birds the refurbished part of the building will house': 'Number of birds the new building will house'
 
         return h.view(viewTemplate, createModel({
+            totalCalculatedGrant,
             totalCalculatedGrantFormat,
             totalProjectCost,
             calculatedGrant,
