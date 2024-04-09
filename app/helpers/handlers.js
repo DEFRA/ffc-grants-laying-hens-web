@@ -532,6 +532,9 @@ const handleYarKey = (yarKey, request, payload, currentQuestion) => {
       setYarValue(request, 'calculatedGrant', calculatedGrant);
       setYarValue(request, 'remainingCost', remainingCost);
       setYarValue(request, 'projectCost', projectCost);
+      if(getYarValue(request, 'solarPVSystem') === 'No'){
+        setYarValue(request, 'totalRemainingCost', getYarValue(request, 'remainingCost'))
+      }
       break
     case 'solarPVCost':
       setYarValue(request, 'solarCalculatedGrant', calculatedGrant);
@@ -569,7 +572,6 @@ const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
     }
   }
 }else {
-  setYarValue(request, 'totalRemainingCost', getYarValue(request, 'remainingCost'))
   return currentQuestion.nextUrl
 }
 }

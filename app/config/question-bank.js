@@ -2231,13 +2231,15 @@ const questionBank = {
             {
               key: 'solar-PV-system-A1',
               value: 'Yes',
-              yarKeysReset: ['roofSupportSolarPV', 'roofSolarPVExemption']
+              yarKeysReset: ['roofSupportSolarPV', 'roofSolarPVExemption', 'solarPVCost', 'solarBirdNumber', 
+                              'solarCalculatedGrant', 'projectCost', 'totalRemainingCost']
             },
             {
               key: 'solar-PV-system-A2',
               value: 'No',
               redirectUrl: 'roof-solar-PV-exemption',
-              yarKeysReset: ['solarPowerCapacity', 'solarPVCost', 'solarBirdNumber', 'solarCalculatedGrant']
+              yarKeysReset: ['solarPowerCapacity', 'solarPVCost', 'solarBirdNumber', 'solarCalculatedGrant', 
+                              'projectCost', 'totalRemainingCost']
             }
           ],
           yarKey: 'solarPVSystem'
