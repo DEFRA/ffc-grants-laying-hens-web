@@ -395,23 +395,23 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 const handleBackUrlRemainingCosts = (request, url, question) => {
   if (url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'Yes'){
     if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
-        return question.backUrl = 'potential-amount-solar-capped'
+        return  'potential-amount-solar-capped'
     }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
       if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
-        return  question.backUrl = 'potential-amount-solar'
+        return  'potential-amount-solar'
     }else{
-        return question.backUrl =  'potential-amount-solar-calculation'
+        return  'potential-amount-solar-calculation'
     }
   }
   }else if(url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'No'){
-      return question.backUrl =  'potential-amount'
+      return  'potential-amount'
   }else {
-      return question.backUrl
+      return  question.backUrl
   }
 }
 
 const getPage = async (question, request, h) => {
-  let { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
+  let { url, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
@@ -451,7 +451,8 @@ const getPage = async (question, request, h) => {
   question =  showHideAnswer(question, request)
 
   // handling back url -> remaining-costs
-  backUrl = handleBackUrlRemainingCosts(request, url, question)
+  let backUrl = handleBackUrlRemainingCosts(request, url, question)
+  question.backUrl = backUrl
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
