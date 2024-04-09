@@ -3250,8 +3250,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to support projects that include a high standard of biosecurity measures 
-                which protect against the spread of disease and infection.\n
+                para: `RPA want to support projects that include a high standard of biosecurity measures which protect against the spread of disease and infection.\n
                 An integrated storage room can provide biosecure storage for items for the building such as litter, 
                 enrichment items and welfare ramps.`
               }]
@@ -4210,7 +4209,7 @@ const questionBank = {
           // preValidationKeys: ['businessDetails'],
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          classes: 'govuk-radios govuk-fieldset__legend--l',
           minAnswerCount: 1,
           validate: [
             {
