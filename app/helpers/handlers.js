@@ -407,8 +407,26 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
   }
 }
 
+const handleBackUrlRemainingCosts = (request, url, question) => {
+  if (url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'Yes'){
+    if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
+        return  'potential-amount-solar-capped'
+    }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
+      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
+        return  'potential-amount-solar'
+    }else{
+        return  'potential-amount-solar-calculation'
+    }
+  }
+  }else if(url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'No'){
+      return  'potential-amount'
+  }else {
+      return  question.backUrl
+  }
+}
+
 const getPage = async (question, request, h) => {
-  const { url, backUrl, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
+  let { url, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
@@ -448,6 +466,10 @@ const getPage = async (question, request, h) => {
   question = hintTextCheck(question, hint, url, request)
   question = labelTextCheck(question, label, url, request)
   question =  showHideAnswer(question, request)
+
+  // handling back url -> remaining-costs
+  let backUrl = handleBackUrlRemainingCosts(request, url, question)
+  question.backUrl = backUrl
 
   // score contains maybe eligible, so can't be included in getUrlSwitchFunction
   if (url === 'score') {
@@ -528,6 +550,9 @@ const handleYarKey = (yarKey, request, payload, currentQuestion) => {
       setYarValue(request, 'calculatedGrant', calculatedGrant);
       setYarValue(request, 'remainingCost', remainingCost);
       setYarValue(request, 'projectCost', projectCost);
+      if(getYarValue(request, 'solarPVSystem') === 'No'){
+        setYarValue(request, 'totalRemainingCost', getYarValue(request, 'remainingCost'))
+      }
       break
     case 'solarPVCost':
       setYarValue(request, 'solarCalculatedGrant', calculatedGrant);
@@ -554,9 +579,11 @@ const formatVariablesBlock = (currentQuestion, title, baseUrl, request, validate
 const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
   if (baseUrl === 'solar-power-capacity'){
     if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
+      setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'projectCost')) + Number(getYarValue(request, 'solarProjectCost')) - 500000)
       return 'potential-amount-solar-capped'
     }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
       if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
+        setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'remainingCost')) + Number(getYarValue(request, 'solarRemainingCost')))
         return 'potential-amount-solar'
     }else{
       return 'potential-amount-solar-calculation'

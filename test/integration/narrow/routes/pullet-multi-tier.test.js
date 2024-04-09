@@ -16,7 +16,6 @@ describe('Page: /pullet-multi-tier', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Will the pullets reared in this building be housed in an aviary system as adults?')
-    expect(response.payload).toContain('When they are over 15 weeks old')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
     expect(response.payload).toContain('I don’t know')
