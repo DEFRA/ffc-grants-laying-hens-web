@@ -2848,6 +2848,32 @@ const questionBank = {
           }
         },
         {
+          key: 'potential-amount-solar-capped',
+          order: 165,
+          url: 'potential-amount-solar-capped',
+          baseUrl: 'potential-amount-solar-capped',
+          backUrl: 'solar-power-capacity',
+          nextUrl: 'remaining-costs',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: `You may be able to apply for a grant of up to £500,000, based on the total estimated cost of £{{_totalProjectCost_}}.
+              <div class="govuk-list">
+                <p class="govuk-body">This grant amount combines:</p>
+                <ul class="govuk-list--bullet">
+                  <li>£{{_calculatedGrant_}} for building costs (${GRANT_PERCENTAGE}% of £{{_projectCost_}})</li>
+                  <li>£{{_cappedSolarProjectCost_}} for solar PV system costs</li>
+                </ul>
+              </div>
+              <p class="govuk-body"> As building project costs take grant funding priority, you may be able to apply for a grant of up to £{{_cappedSolarProjectCost_}} for a solar PV system. The maximum grant is £500,000.<p/>
+            `,
+            insertText: { text: '' },
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
+        {
           key: 'remaining-costs',
           order: 170,
           title: 'Can you pay the remaining costs of £{{_totalRemainingCost_}}?',
@@ -2983,7 +3009,7 @@ const questionBank = {
         {
           key: 'current-multi-tier-system',
           order: 305,
-          title: 'Does your current building include a {{_poultryType_}}?',
+          title: 'Does your building currently include [[_article_]] {{_poultryType_}} system?',
           hint: {
             text: 'The building you are replacing or refurbishing for this project'
           },
@@ -2996,7 +3022,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to encourage investment in high-welfare {{_poultryType_}}.',
+                para: 'RPA want to encourage investment in high welfare {{_poultryType_}} systems.',
               }]
             }]
           },
@@ -3006,7 +3032,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if your current building includes a {{_poultryType_}}'
+              error: 'Select yes if your building currently includes [[_article_]] {{_poultryType_}} system'
             }
           ],
           answers: [
@@ -3022,12 +3048,12 @@ const questionBank = {
           yarKey: 'currentMultiTierSystem'
         },
         {
-          key: 'three-tiers',
+          key: 'tier-number',
           order: 190,
-          title: 'Will the multi-tier system have 3 tiers or fewer directly above each other?',
+          title: 'How many tiers will be positioned directly above each other in the {{_poultryType_}} system?',
           pageTitle: '',
-          url: 'three-tiers',
-          baseUrl: 'three-tiers',
+          url: 'tier-number',
+          baseUrl: 'tier-number',
           backUrl: 'maximum-tier-height',
           nextUrlObject: {
             dependentQuestionYarKey: ['poultryType'],
@@ -3036,6 +3062,9 @@ const questionBank = {
               thenUrl: 'hen-multi-tier',
               elseUrl: 'pullet-multi-tier'
             }
+          },
+          hint: {
+            html: `The floor and the perches at the top of the {{_poultryType_}} system are not counted as tiers`
           },
           sidebar: {
             values: [{
@@ -3048,24 +3077,24 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          classes: 'govuk-radios govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the multi-tier system will have 3 tiers or fewer directly above each other'
+              error: 'Select how many tiers will be positioned directly above each other in the {{_poultryType_}} system'
             }
           ],
           answers: [
             {
-              key: 'three-tiers-A1',
-              value: 'Yes'
+              key: 'tier-number-A1',
+              value: '3 tiers or fewer'
             },
             {
-              key: 'three-tiers-A2',
-              value: 'No'
+              key: 'tier-number-A2',
+              value: '4 tiers or more'
             }
           ],
-          yarKey: 'threeTiers'
+          yarKey: 'tierNumber'
         },
         {
           key: 'hen-multi-tier',
@@ -3073,7 +3102,7 @@ const questionBank = {
           title: 'Will the hens in this building be reared in a multi-tier system as pullets?',
           url: 'hen-multi-tier',
           baseUrl: 'hen-multi-tier',
-          backUrl: 'three-tiers',
+          backUrl: 'tier-number',
           nextUrl: 'natural-light',
           sidebar: {
             values: [{
@@ -3118,7 +3147,7 @@ const questionBank = {
           title: 'Will the pullets reared in this building be housed in an aviary system as adults?',
           url: 'pullet-multi-tier',
           baseUrl: 'pullet-multi-tier',
-          backUrl: 'three-tiers',
+          backUrl: 'tier-number',
           nextUrl: 'natural-light',
           sidebar: {
             values: [{
@@ -3160,11 +3189,9 @@ const questionBank = {
         {
           key: 'easy-grip-perches',
           order: 200,
-          title:'Will the perches have a design feature that help the {{_poultryType_}}s grip the perches?',
+          title:'Will the perches have a design feature that helps the birds grip the perches?',
           hint: {
-            text: `Additional design features (for example, a ridged surface,
-              comfortable materials or coating) you can add to the circular metal
-              perches that are often standard in aviary system`
+            html: `You can replace {{_poultryType_}} standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`
           },
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
@@ -3181,7 +3208,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to support projects that ensure perches that are easy to grip to increase bird safety and reduce falls.`
+                para: `RPA want to support projects that ensure perches are easy to grip to increase bird safety and reduce falls.`
               }]
             }]
           },
@@ -3193,7 +3220,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the perches will have a design feature that help the {{_poultryType_}}s grip the perches'
+              error: 'Select yes if the perches will have a design feature that help the birds grip the perches'
             }
           ],
           answers: [
@@ -3272,7 +3299,7 @@ const questionBank = {
         {
           key: 'ramp-connection',
           order: 285,
-          title: 'Will every level of the multi-tier system be connected to another level by a ramp?',
+          title: 'When the project is complete, will every level of the {{_poultryType_}} system be connected to another level by a ramp?',
           pageTitle: '',
           url: 'ramp-connection',
           baseUrl: 'ramp-connection',
@@ -3289,7 +3316,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to fund multi-tier systems that have ramps to reduce the risk of keel bone fractures and benefit birds that have keel bone fractures.'
+                para: `RPA want to fund {{_poultryType_}} systems that have ramps to reduce the risk of keel bone fractures and benefit birds that have keel bone fractures.`
               }]
             }]
           },
@@ -3300,7 +3327,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if every level of the multi-tier system will be connected to another level by a ramp'
+              error: 'Select yes if every level of the {{_poultryType_}} system will be connected to another level by a ramp'
             }
           ],
           answers: [
@@ -3321,12 +3348,12 @@ const questionBank = {
           title: 'Will the highest tier with direct access to the floor be 2 metres high or less?',
           pageTitle: '',
           hint: {
-            text: 'The height of the highest tier in the multi-tier system from the litter floor area to the underside of the manure belt'
+            text: 'Measured from the litter floor area to the underside of the manure belt'
           },
           url: 'maximum-tier-height',
           baseUrl: 'maximum-tier-height',
           backUrl: 'ramp-connection',
-          nextUrl: 'three-tiers',
+          nextUrl: 'tier-number',
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3499,25 +3526,30 @@ const questionBank = {
         {
           key: 'pullet-veranda-features',
           order: 310,
-          title: 'Will the pullet housing have a veranda with these features?',
+          title: 'Will the building have a veranda with these features?',
           pageTitle: '',
-          hint: {
-            html: `
-                  <p>The veranda must:</p>
-                  <ul class="govuk-list--bullet">
-                      <li>be 4 metres wide or more along the length of the bird housing area, or 30% or more of the size of the indoor bird housing area footprint</li>
-                      <li>have a solid concrete floor and waterproof insulated roof</li>
-                      <li>have a perimeter wall of more than one metre in height</li>
-                      <li>have a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
-                      <li>have a mesh roller-screen system running underneath the length of the roof, that fits securely against the wall when extended to make the housing biosecure during housing orders</li>
-                      <li>have closable pop holes in the wall of the main house (unless the veranda forms part of an indoor barn system) that are less than 30cm from the floor level, or access ramps across the entire pop hole</li>
-                      <li>not have perches in front of the pop holes</li>
-                  </ul>`
-          },
           url: 'pullet-veranda-features',
           baseUrl: 'pullet-veranda-features',
           nextUrl: 'renewable-energy',
           backUrl: 'pollution-mitigation',
+          hint: {
+            html: `
+              <div>
+                <p>If you add a veranda to your building, it must:</p>
+                <ul class="govuk-list--bullet">
+                  <li>be at least 4 metres wide along the length of the pullet housing area, or equal to at least 30% of the indoor pullet housing area footprint</li>
+                  <li>have a dimmable LED lighting system between 0 lux and 60 lux</li>
+                  <li>have a solid concrete floor and waterproof insulated roof</li>
+                  <li>have a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
+                  <li>have closable pop holes in the perimeter wall, unless the veranda forms part of an indoor barn system</li>
+                  <li>have internal access along the length of the wall of the pullet house through closable pop holes that are at least 35cm high and 40cm wide</li>
+                  <li>have a total of 2 metres of pop hole openings along the length of the pullet house for every 1,000 pullets in the building</li>
+                  <li>have all pop holes less than 10cm from the floor level and have access ramps as wide as the pop holes that are higher than 10cm from the floor level</li>
+                  <li>not have perches in front of the pop holes</li>
+                  <li>have a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
+                </ul>
+              </div>`
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3533,7 +3565,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the pullet housing will have a veranda with these features'
+              error: 'Select yes if the building will have a veranda with these features'
             }
           ],
           answers: [
@@ -3701,31 +3733,37 @@ const questionBank = {
           answers: [
             {
               key: 'bird-data-type-A1',
-              value: 'Bird performance data'
+              value: 'Bird location'
             },
             {
               key: 'bird-data-type-A2',
-              value: 'Body weight',
+              value: 'Egg production parameters',
+              dependantShowHideKey: 'poultry-type',
+              dependantShowHideAnswerKey: 'poultry-type-A2',
+              dependantShowHideYarKey: 'poultryType',
             },
             {
               key: 'bird-data-type-A3',
-              value: 'Disease detection',
+              value: 'Body weight',
             },
             {
               key: 'bird-data-type-A4',
-              value: 'Feed data or conversion ratios',
+              value: 'Disease detection',
             },
             {
               key: 'bird-data-type-A5',
-              value: 'Location data'
+              value: 'Feed date or conversion ratios'
             },
             {
               key: 'bird-data-type-A6',
-              value: 'Locomotion or movement data'
+              value: 'Locomotion or movement'
             },
             {
               key: 'bird-data-type-A7',
-              value: 'Next use'
+              value: 'Nest use',
+              dependantShowHideKey: 'poultry-type',
+              dependantShowHideAnswerKey: 'poultry-type-A2',
+              dependantShowHideYarKey: 'poultryType',
             },
             {
               key: 'bird-data-type-A8',
@@ -3740,7 +3778,7 @@ const questionBank = {
             },
             {
               key: 'bird-data-type-A10',
-              value: 'I will not monitor any poultry management data',
+              value: 'None of the above',
             }
           ],
           yarKey: 'birdDataType'
@@ -3805,7 +3843,7 @@ const questionBank = {
             },
             {
               key: 'environmental-data-type-A5',
-              value: 'I will not collect and store additional environmental data',
+              value: 'None of the above',
             }
           ],
           yarKey: 'environmentalDataType'
@@ -3822,14 +3860,13 @@ const questionBank = {
           fundingPriorities: '',
           type: 'input',
           label: {
-            text: `How many birds will {{_projectType_}} be able to house?`,
+            text: `How many birds will {{_projectType_}} be able to house[[_extraClause_]]?`,
             classes: 'govuk-label--l',
             isPageHeading: true
           },
           hint: {
             html: `
-                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare 
-                    features (lighting, ventilation system) for the amount of birds in the building.
+                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare features (lighting, ventilation system) for the amount of birds in the building.
                   </p>
                   <p>The power capacity for grant funding is 5 kilowatts (kW) per 1,000 birds.</p>
                   <p>Enter estimated amount, for example 8,000</p>
@@ -3838,7 +3875,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter how many birds {{_projectType_}} will be able to house'
+              error: 'Enter how many birds {{_projectType_}} will be able to house[[_extraClause_]]'
             },
             {
               type: 'REGEX',

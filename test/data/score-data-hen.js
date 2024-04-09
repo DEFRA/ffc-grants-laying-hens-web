@@ -86,16 +86,17 @@ const msgData = {
             "importance": null 
           } 
         }, 
+        //TODO not sure if the second anwer needs to be added here too
         { 
-          "key": "three-tiers", 
+          "key": "tier-number", 
           "answers": [
             { 
-              "key": "three-tiers", 
-              "title": "Will the multi-tier system have 3 tiers or fewer directly above each other?", 
+              "key": "tier-number", 
+              "title": "How many tiers will be positioned directly above each other in the aviary system?", 
               "input": [
                 { 
-                  "key": "three-tiers-A1", 
-                  "value": "Yes" 
+                  "key": "tier-number-A1", 
+                  "value": "3 tiers or fewer" 
                 }
               ] 
             }

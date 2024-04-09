@@ -6,7 +6,7 @@ module.exports = {
     'current-multi-tier-system': 'currentMultiTierSystem',
     'ramp-connection': 'rampConnection',
     'maximum-tier-height': 'maximumTierHeight',
-    'three-tiers': 'threeTiers',
+    'tier-number': 'tierNumber',
     'hen-multi-tier': 'henMultiTier',
     'pullet-multi-tier': 'pulletMultiTier',
     'natural-light': 'naturalLight',

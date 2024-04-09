@@ -77,13 +77,13 @@ describe('Page: /pullet-multi-tier', () => {
     expect(postResponse.headers.location).toBe('natural-light')
   })
 
-  it('page loads with correct back link - /three-tiers', async () => {
+  it('page loads with correct back link - /tier-number', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/pullet-multi-tier`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"three-tiers\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"tier-number\" class=\"govuk-back-link\">Back</a>')
   })
 })

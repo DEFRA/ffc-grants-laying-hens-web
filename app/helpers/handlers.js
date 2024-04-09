@@ -54,18 +54,33 @@ const insertYarValue = (field, url, request) => {
     switch (url) {
       case '1000-birds':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets');
-      case 'current-multi-tier-system':
-        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'multi-tier aviary systems', 'multi-tier systems');
       case 'lighting-features':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ` <li>a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)</li>`, '');
       case 'bird-number':
         return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'the refurbished part of this building', 'this new building');
       case 'project-cost':
         return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'refurbishing', 'replacing');
+      case 'ramp-connection':
+      case 'tier-number':
+      case 'current-multi-tier-system': 
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier');
+      case 'easy-grip-perches':
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'an aviary\'s', 'a multi-tier system\'s');
       default:
         return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName);
     }
   })
+
+  if (url === 'bird-number') {
+    const replacement =  getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A3', ALL_QUESTIONS) ? ' when it is complete' : '';
+    field = field.replace('[[_extraClause_]]', replacement);
+  }
+
+
+  if (url === 'current-multi-tier-system') {
+    const replacement =  getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? 'an' : 'a';
+    field = field.replace('[[_article_]]', replacement);
+  }
 
   return field;
 }
@@ -429,7 +444,7 @@ const getPage = async (question, request, h) => {
     }
   }
 
-  if (url === 'potential-amount-solar' && getYarValue(request, 'solarPVCost')) {
+  if ((url === 'potential-amount-solar-capped' || url === 'potential-amount-solar') && getYarValue(request, 'solarPVCost')) {
     const projectCost = getYarValue(request, 'projectCost')
     const calculatedGrant = getYarValue(request, 'calculatedGrant')
     const solarProjectCost = getYarValue(request, 'solarProjectCost')
@@ -437,9 +452,11 @@ const getPage = async (question, request, h) => {
 
     const totalProjectCost = projectCost + solarProjectCost
     const totalCalculatedGrant = calculatedGrant + Number(solarCalculatedGrant)
+    const cappedSolarProjectCost = 500000 - calculatedGrant
 
     setYarValue(request, 'totalProjectCost', totalProjectCost)
     setYarValue(request, 'totalCalculatedGrant', totalCalculatedGrant)
+    setYarValue(request, 'cappedSolarProjectCost', cappedSolarProjectCost)
   }
 
   // formatting variables block

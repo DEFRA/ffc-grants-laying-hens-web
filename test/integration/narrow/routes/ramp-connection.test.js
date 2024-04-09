@@ -3,13 +3,20 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /ramp-connection', () => {
   let varList = {
-      currentSystem: 'Colony cage'
+      currentSystem: 'Colony cage',
+      poultryType: 'hen'
   }
   let valList = {}
-  
-  commonFunctionsMock(varList, undefined, {}, valList)
 
-  it('page loads successfully, with all the options', async () => {
+  const utilsList = {
+    'poultry-type-A1': 'hen',
+    'poultry-type-A2': 'pullet'
+  }
+
+  commonFunctionsMock(varList, undefined, utilsList, valList)
+
+  it('page loads successfully, with all the options - hens', async () => {
+    varList.poultryType = 'hen'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/ramp-connection`
@@ -17,12 +24,45 @@ describe('Page: /ramp-connection', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will every level of the multi-tier system be connected to another level by a ramp?')
+    expect(response.payload).toContain('When the project is complete, will every level of the aviary system be connected to another level by a ramp? ')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
 
-  it('no option selected -> show error message', async () => {
+  it('page loads successfully, with all the options - pullets', async () => {
+    varList.poultryType = 'pullet'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/ramp-connection`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('When the project is complete, will every level of the multi-tier system be connected to another level by a ramp?')
+    expect(response.payload).toContain('Yes')
+    expect(response.payload).toContain('No')
+  })
+
+  it('no option selected -> show error message - hens', async () => {
+    varList.poultryType = 'hen'
+    valList['NOT_EMPTY'] = {
+      error: 'Select yes if every level of the aviary system will be connected to another level by a ramp',
+      return: false
+    }
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/ramp-connection`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Select yes if every level of the aviary system will be connected to another level by a ramp')
+  })
+
+  it('no option selected -> show error message - pullet', async () => {
+    varList.poultryType = 'pullet'
     valList['NOT_EMPTY'] = {
       error: 'Select yes if every level of the multi-tier system will be connected to another level by a ramp',
       return: false
