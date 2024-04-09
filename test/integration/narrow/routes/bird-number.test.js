@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 
 const utilsList = {
   'project-type-A2': 'Refurbishing the existing building',
-  'poultry-type-A3': 'Replacing the entire building with a new building'
+  'project-type-A3': 'Replacing the entire building with a new building',
 }
 
 describe('Page: /bird-number', () => {
@@ -36,7 +36,7 @@ describe('Page: /bird-number', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('How many birds will this new building be able to house?')
+    expect(response.payload).toContain('How many birds will this new building be able to house when it is complete?')
   })
 
   it('no option selected -> show error message - refurbishing', async () => {
@@ -61,7 +61,7 @@ describe('Page: /bird-number', () => {
   it('no option selected -> show error message - replacing', async () => {
     varList.projectType = 'Replacing the entire building with a new building'
     valList.solarBirdNumber = {
-      error: 'Enter how many birds this new building will be able to house',
+      error: 'Enter how many birds this new building will be able to house when it is complete',
       return: false
     }
 
@@ -74,7 +74,7 @@ describe('Page: /bird-number', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter how many birds this new building will be able to house')
+    expect(postResponse.payload).toContain('Enter how many birds this new building will be able to house when it is complete')
   })
 
   it('user selects eligible option -> store user response and redirect to /solar-PV-cost', async () => {

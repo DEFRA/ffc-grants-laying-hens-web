@@ -2980,7 +2980,7 @@ const questionBank = {
         {
           key: 'current-multi-tier-system',
           order: 305,
-          title: 'Does your current building include a {{_poultryType_}}?',
+          title: 'Does your building currently include [[_article_]] {{_poultryType_}} system?',
           hint: {
             text: 'The building you are replacing or refurbishing for this project'
           },
@@ -2993,7 +2993,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to encourage investment in high-welfare {{_poultryType_}}.',
+                para: 'RPA want to encourage investment in high welfare {{_poultryType_}} systems.',
               }]
             }]
           },
@@ -3003,7 +3003,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if your current building includes a {{_poultryType_}}'
+              error: 'Select yes if your building currently includes [[_article_]] {{_poultryType_}} system'
             }
           ],
           answers: [
@@ -3019,12 +3019,12 @@ const questionBank = {
           yarKey: 'currentMultiTierSystem'
         },
         {
-          key: 'three-tiers',
+          key: 'tier-number',
           order: 190,
-          title: 'Will the multi-tier system have 3 tiers or fewer directly above each other?',
+          title: 'How many tiers will be positioned directly above each other in the {{_poultryType_}} system?',
           pageTitle: '',
-          url: 'three-tiers',
-          baseUrl: 'three-tiers',
+          url: 'tier-number',
+          baseUrl: 'tier-number',
           backUrl: 'maximum-tier-height',
           nextUrlObject: {
             dependentQuestionYarKey: ['poultryType'],
@@ -3033,6 +3033,9 @@ const questionBank = {
               thenUrl: 'hen-multi-tier',
               elseUrl: 'pullet-multi-tier'
             }
+          },
+          hint: {
+            html: `The floor and the perches at the top of the {{_poultryType_}} system are not counted as tiers`
           },
           sidebar: {
             values: [{
@@ -3045,24 +3048,24 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          classes: 'govuk-radios govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the multi-tier system will have 3 tiers or fewer directly above each other'
+              error: 'Select how many tiers will be positioned directly above each other in the {{_poultryType_}} system'
             }
           ],
           answers: [
             {
-              key: 'three-tiers-A1',
-              value: 'Yes'
+              key: 'tier-number-A1',
+              value: '3 tiers or fewer'
             },
             {
-              key: 'three-tiers-A2',
-              value: 'No'
+              key: 'tier-number-A2',
+              value: '4 tiers or more'
             }
           ],
-          yarKey: 'threeTiers'
+          yarKey: 'tierNumber'
         },
         {
           key: 'hen-multi-tier',
@@ -3074,7 +3077,7 @@ const questionBank = {
           },
           url: 'hen-multi-tier',
           baseUrl: 'hen-multi-tier',
-          backUrl: 'three-tiers',
+          backUrl: 'tier-number',
           nextUrl: 'natural-light',
           sidebar: {
             values: [{
@@ -3123,7 +3126,7 @@ const questionBank = {
           },
           url: 'pullet-multi-tier',
           baseUrl: 'pullet-multi-tier',
-          backUrl: 'three-tiers',
+          backUrl: 'tier-number',
           nextUrl: 'natural-light',
           sidebar: {
             values: [{
@@ -3165,11 +3168,9 @@ const questionBank = {
         {
           key: 'easy-grip-perches',
           order: 200,
-          title:'Will the perches have a design feature that help the {{_poultryType_}}s grip the perches?',
+          title:'Will the perches have a design feature that helps the birds grip the perches?',
           hint: {
-            text: `Additional design features (for example, a ridged surface,
-              comfortable materials or coating) you can add to the circular metal
-              perches that are often standard in aviary system`
+            html: `You can replace {{_poultryType_}} standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`
           },
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
@@ -3186,7 +3187,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to support projects that ensure perches that are easy to grip to increase bird safety and reduce falls.`
+                para: `RPA want to support projects that ensure perches are easy to grip to increase bird safety and reduce falls.`
               }]
             }]
           },
@@ -3198,7 +3199,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the perches will have a design feature that help the {{_poultryType_}}s grip the perches'
+              error: 'Select yes if the perches will have a design feature that help the birds grip the perches'
             }
           ],
           answers: [
@@ -3277,7 +3278,7 @@ const questionBank = {
         {
           key: 'ramp-connection',
           order: 285,
-          title: 'Will every level of the multi-tier system be connected to another level by a ramp?',
+          title: 'When the project is complete, will every level of the {{_poultryType_}} system be connected to another level by a ramp?',
           pageTitle: '',
           url: 'ramp-connection',
           baseUrl: 'ramp-connection',
@@ -3294,7 +3295,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA want to fund multi-tier systems that have ramps to reduce the risk of keel bone fractures and benefit birds that have keel bone fractures.'
+                para: `RPA want to fund {{_poultryType_}} systems that have ramps to reduce the risk of keel bone fractures and benefit birds that have keel bone fractures.`
               }]
             }]
           },
@@ -3305,7 +3306,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if every level of the multi-tier system will be connected to another level by a ramp'
+              error: 'Select yes if every level of the {{_poultryType_}} system will be connected to another level by a ramp'
             }
           ],
           answers: [
@@ -3326,12 +3327,12 @@ const questionBank = {
           title: 'Will the highest tier with direct access to the floor be 2 metres high or less?',
           pageTitle: '',
           hint: {
-            text: 'The height of the highest tier in the multi-tier system from the litter floor area to the underside of the manure belt'
+            text: 'Measured from the litter floor area to the underside of the manure belt'
           },
           url: 'maximum-tier-height',
           baseUrl: 'maximum-tier-height',
           backUrl: 'ramp-connection',
-          nextUrl: 'three-tiers',
+          nextUrl: 'tier-number',
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3827,14 +3828,13 @@ const questionBank = {
           fundingPriorities: '',
           type: 'input',
           label: {
-            text: `How many birds will {{_projectType_}} be able to house?`,
+            text: `How many birds will {{_projectType_}} be able to house[[_extraClause_]]?`,
             classes: 'govuk-label--l',
             isPageHeading: true
           },
           hint: {
             html: `
-                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare 
-                    features (lighting, ventilation system) for the amount of birds in the building.
+                  <p>The RPA want to fund a solar PV system with a power capacity that can support the building's high welfare features (lighting, ventilation system) for the amount of birds in the building.
                   </p>
                   <p>The power capacity for grant funding is 5 kilowatts (kW) per 1,000 birds.</p>
                   <p>Enter estimated amount, for example 8,000</p>
@@ -3843,7 +3843,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter how many birds {{_projectType_}} will be able to house'
+              error: 'Enter how many birds {{_projectType_}} will be able to house[[_extraClause_]]'
             },
             {
               type: 'REGEX',

@@ -23,7 +23,7 @@ describe('Page: /current-multi-tier-system', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Does your current building include a multi-tier aviary systems? ')
+    expect(response.payload).toContain('Does your building currently include an aviary system?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -37,7 +37,7 @@ describe('Page: /current-multi-tier-system', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Does your current building include a multi-tier systems? ')
+    expect(response.payload).toContain('Does your building currently include a multi-tier system?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -45,7 +45,7 @@ describe('Page: /current-multi-tier-system', () => {
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
     valList.currentMultiTierSystem = {
-      error: 'Select yes if your current building includes a multi-tier aviary systems',
+      error: 'Select yes if your building currently includes an aviary system',
       return: false
     }
 
@@ -58,13 +58,13 @@ describe('Page: /current-multi-tier-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if your current building includes a multi-tier aviary systems')
+    expect(postResponse.payload).toContain('Select yes if your building currently includes an aviary system')
   })
 
   it('no option selected -> show error message - pullet', async () => {
     varList.poultryType = 'pullet'
     valList['NOT_EMPTY'] = {
-      error: 'Select yes if your current building includes a multi-tier systems',
+      error: 'Select yes if your building currently includes a multi-tier system',
       return: false
     }
     
@@ -77,7 +77,7 @@ describe('Page: /current-multi-tier-system', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if your current building includes a multi-tier systems')
+    expect(postResponse.payload).toContain('Select yes if your building currently includes a multi-tier system')
   })
 
   it('user selects eligible option -> store user response and redirect to /ramp-connection', async () => {
