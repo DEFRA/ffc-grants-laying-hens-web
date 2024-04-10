@@ -806,9 +806,7 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                     <li>a fixed structure with a solid concrete floor</li>
                     <li>water-tight roof and walls</li>
-                    <li>mesh capping applied to any roof or wall inlets and outlets 
-                    capped with mesh (using a mesh hole size of 25 millimetres or 
-                    less)</li>
+                    <li>mesh capping applied to any roof or wall inlets and outlets (using a mesh hole size of 25 millimetres or less)</li>
                     <li>catch trays under all chimneys and roof-mounted vents</li>
                   </ul>`
           },
@@ -848,9 +846,7 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
-                      <li>mesh capping applied to any roof or wall inlets 
-                      and outlets capped with mesh (using a mesh hole 
-                      size of 25 millimetres or less)</li>
+                      <li>mesh capping applied to any roof or wall inlets and outlets (using a mesh hole size of 25 millimetres or less)</li>
                       <li>catch trays under all chimneys and roof-mounted vents.</li>
                   </ul>
               </div>`,
