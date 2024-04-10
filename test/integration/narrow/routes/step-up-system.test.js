@@ -64,7 +64,7 @@ describe('Page: /step-up-system', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('The step-up system must have:')
-    expect(postResponse.payload).toContain('height-adjustable tiers that may include food and water at, or before, 10 days')
+    expect(postResponse.payload).toContain('height-adjustable tiers with food and water that birds can access after 10 days')
     expect(postResponse.payload).toContain('welfare ramps')
     expect(postResponse.payload).toContain('See other grants you may be eligible for.')
   })
