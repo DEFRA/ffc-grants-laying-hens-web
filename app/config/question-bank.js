@@ -2061,7 +2061,7 @@ const questionBank = {
                 <div class="govuk-list govuk-list--bullet">
                     <p>The step-up system must have:</p>
                     <ul>
-                        <li>height-adjustable tiers that may include food and water at, or before, 10 days</li>
+                        <li>height-adjustable tiers with food and water that birds can access after 10 days</li>
                         <li>welfare ramps</li>
                     </ul>
                 </div>`,
@@ -2449,7 +2449,7 @@ const questionBank = {
               <ul class="govuk-list--bullet">
                 <li>a solid concrete floor</li>
                 <li>a waterproof insulated roof</li>
-                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                 <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
                 <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                 <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
