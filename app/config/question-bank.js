@@ -1868,7 +1868,7 @@ const questionBank = {
             html: `
                   <p>When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
-                      <li>a useable area at multiple bird-accessible heights from 10 days of age</li>
+                      <li>a useable area provided at multiple bird-accessible heights from 10 days of age</li>
                       <li>height adjustable perches at equal to or more than 8cm per pullet</li>
                       <li>a minimum of 50% of the floor area available for litter</li>
                   </ul>
@@ -1879,7 +1879,7 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
             <p class="govuk-body">The pullet housing must have:</p>
                   <ul>
-                    <li>a useable area at multiple bird-accessible heights from 10 days of age</li>
+                    <li>a useable area provided at multiple bird-accessible accessible heights from 10 days of age</li>
                     <li>height adjustable perches at equal to or more than 8cm per pullet</li>
                     <li>a minimum of 50% of the floor area available for litter.</li>
                   </ul>
