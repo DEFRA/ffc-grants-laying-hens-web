@@ -1,5 +1,6 @@
 const emailConfig = require('./config/email')
 const { GRANT_PERCENTAGE, GRANT_PERCENTAGE_SOLAR } = require('../../helpers/grant-details')
+const { ALL_QUESTIONS } = require('../../config/question-bank')
 const spreadsheetConfig = require('./config/spreadsheet')
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { microTurnover, smallTurnover, mediumTurnover, microEmployeesNum, smallEmployeesNum, mediumEmployeesNum } = require('./business-size-constants')
@@ -249,8 +250,8 @@ function getScoreChance(rating) {
 
 function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
   const email = isAgentEmail ? submission.agentsDetails.emailAddress : submission.farmerDetails.emailAddress
-  const henJourney = submission.poultryType === getQuestionAnswer('poultryType', 'poultry-type-A1')
-  const pulletJourney = submission.poultryType === getQuestionAnswer('poultryType', 'poultry-type-A2')
+  const henJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS)
+  const pulletJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: rpaEmail || email,
@@ -268,7 +269,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       planningPermission: submission.planningPermission,
       projectStart: submission.projectStart,
       tenancy: submission.tenancy,
-      isNotTenancy: submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2'),
+      isNotTenancy: submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2', ALL_QUESTIONS),
       projectResponsibility: submission.projectResponsibility ?? '',
 
       // Hen and pullet questions email variable
@@ -297,8 +298,8 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       changingArea: submission.changingArea,
       externalTaps: submission.externalTaps,
       solarPVSystem: submission.solarPVSystem,
-      isSolarPVSystemYes: submission.solarPVSystem === getQuestionAnswer('solarPVSystem', 'solar-PV-system-A1'),
-      isSolarPVSystemNo: submission.solarPVSystem === getQuestionAnswer('solarPVSystem', 'solar-PV-system-A2'),
+      isSolarPVSystemYes: submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS),
+      isSolarPVSystemNo: submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS),
       roofSupportSolarPV: submission.roofSupportSolarPV ?? '',
       roofSolarPVExemption: submission.roofSolarPVExemption ? [submission.roofSolarPVExemption].flat().join(', ') : '',
       projectCost: getCurrencyFormat(submission.projectCost),
@@ -315,7 +316,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       currentSystem: submission.currentSystem,
       currentSystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system'),
       currentMultiTierSystem: submission.currentMultiTierSystem ?? '',
-      currentMultiTierSystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-multi-tier-system') ?? '',
+      currentMultiTierSystemScore: submission.currentMultiTierSystem ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
       aviarySystem: submission.aviarySystem,
       aviarySystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'aviary-system'),
       rampConnection: submission.rampConnection,

@@ -49,7 +49,7 @@ describe('Create submission message', () => {
       protectPassword: mockPassword
     }))
 
-    farmerSubmission.applicantType = ['Beef (including calf rearing)', 'Dairy (including calf rearing)']
+    farmerSubmission.applicantType = ['Laying hens (including pullets)']
 
     const msg = createMsg(farmerSubmission, desirabilityScore)
     expect(msg).toHaveProperty('agentEmail')
@@ -61,7 +61,7 @@ describe('Create submission message', () => {
     expect(msg.agentEmail).toBe(null)
   })
   test('Email part of message should have correct properties', () => {
-    farmerSubmission.applicantType = 'Dairy (including calf rearing)'
+    farmerSubmission.applicantType = 'Laying hens (including pullets)'
     
     const msg = createMsg(farmerSubmission, desirabilityScore)
 
