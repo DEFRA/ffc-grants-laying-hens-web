@@ -4557,9 +4557,6 @@ const questionBank = {
           key: 'agent-details',
           order: 390,
           title: 'Agent’s details',
-          hint: {
-            text: 'Enter the agent and agent business details'
-          },
           pageTitle: '',
           url: 'agent-details',
           baseUrl: 'agent-details',
@@ -4572,10 +4569,6 @@ const questionBank = {
           minAnswerCount: '',
           maxAnswerCount: '',
           allFields: [
-            {
-              type: 'sub-heading',
-              text: 'Name'
-            },
             {
               yarKey: 'firstName',
               type: 'text',
@@ -4659,11 +4652,7 @@ const questionBank = {
                   error: 'Name must be 30 characters or fewer'
                 }
               ]
-            },
-            {
-              type: 'sub-heading',
-              text: 'Contact details'
-            },
+          },
             {
               yarKey: 'emailAddress',
               type: 'email',
