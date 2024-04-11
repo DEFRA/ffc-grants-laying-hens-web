@@ -2445,7 +2445,7 @@ const questionBank = {
           nextUrl: 'veranda-project-cost',
           hint: {
             html: `
-              <p>The veranda must have a:</p>
+              <p>The veranda must have:</p>
               <ul class="govuk-list--bullet">
                 <li>a solid concrete floor</li>
                 <li>a waterproof insulated roof</li>

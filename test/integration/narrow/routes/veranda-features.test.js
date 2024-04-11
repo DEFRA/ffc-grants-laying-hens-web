@@ -17,7 +17,7 @@ describe('Page: /veranda-features', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Will the veranda have these features?')
-    expect(response.payload).toContain('The veranda must have a:')
+    expect(response.payload).toContain('The veranda must have:')
     expect(response.payload).toContain('a solid concrete floor')
     expect(response.payload).toContain('a waterproof insulated roof')
     expect(response.payload).toContain('a dimmable LED lighting system between 0 lux and 60 lux')
