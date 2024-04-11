@@ -38,7 +38,7 @@ describe('Page: /dark-brooders', () => {
     expect(postResponse.payload).toContain('Select yes if the housing will include dark brooders')
   })
 
-  it('user selects eligible option -> store user response and redirect to /renewable-energy', async () => {
+  it('user selects eligible option -> store user response and redirect to /easy-grip-perches', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/dark-brooders`,
@@ -48,16 +48,16 @@ describe('Page: /dark-brooders', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('renewable-energy')
+    expect(postResponse.headers.location).toBe('easy-grip-perches')
   })
 
-  it('page loads with correct back link - /pullet-veranda-features', async () => {
+  it('page loads with correct back link - /natural-light', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/dark-brooders`,
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"pullet-veranda-features\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"natural-light\" class=\"govuk-back-link\">Back</a>')
   })
 })
