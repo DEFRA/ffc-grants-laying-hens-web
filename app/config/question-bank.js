@@ -4247,14 +4247,7 @@ const questionBank = {
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
-          hint: {
-            text: 'Enter the farmer and farm business details'
-          },
           allFields: [
-            {
-              type: 'sub-heading',
-              text: 'Name'
-            },
             {
               yarKey: 'firstName',
               type: 'text',
@@ -4317,10 +4310,6 @@ const questionBank = {
                   error: 'Last name must include letters'
                 }
               ]
-            },
-            {
-              type: 'sub-heading',
-              text: 'Contact details'
             },
             {
               yarKey: 'emailAddress',
