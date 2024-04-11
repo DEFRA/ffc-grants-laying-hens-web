@@ -250,7 +250,7 @@ function getScoreChance(rating) {
 function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
   const email = isAgentEmail ? submission.agentsDetails.emailAddress : submission.farmerDetails.emailAddress
   const henJourney = submission.poultryType === getQuestionAnswer('poultryType', 'poultry-type-A1')
-  const PulletJourney = submission.poultryType === getQuestionAnswer('poultryType', 'poultry-type-A2')
+  const pulletJourney = submission.poultryType === getQuestionAnswer('poultryType', 'poultry-type-A2')
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: rpaEmail || email,
@@ -274,7 +274,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       // Hen and pullet questions email variable
       poultryType: submission.poultryType,
       poultryTypeHen: henJourney,
-      poultryTypePullet: PulletJourney,
+      poultryTypePullet: pulletJourney,
       birdNumber: submission.birdNumber,
       henVeranda: submission.henVeranda ?? '',
       henVerandaFeatures: submission.henVerandaFeatures ?? '',
@@ -327,16 +327,16 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       consistentHousingScore: henJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'hen-multi-tier') : getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-multi-tier'),
       naturalLight: submission.naturalLight,
       naturalLightScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'natural-light'),
-      darkBrooders: PulletJourney ? submission.darkBrooders : '',
-      darkBroodersScore:  PulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'dark-brooders') : '',
+      darkBrooders: pulletJourney ? submission.darkBrooders : '',
+      darkBroodersScore:  pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'dark-brooders') : '',
       easyGripPerches: submission.easyGripPerches,
       easyGripPerchesScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'easy-grip-perches'),
       buildingBiosecurity: submission.buildingBiosecurity,
       buildingBiosecurityScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'building-biosecurity'),
       pollutionMitigation: submission.pollutionMitigation,
       pollutionMitigationScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'pollution-mitigation'),
-      pulletVerandaFeatures:  PulletJourney ? submission.pulletVerandaFeatures : '',
-      pulletVerandaFeaturesScore: PulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-veranda-features') : '',
+      pulletVerandaFeatures:  pulletJourney ? submission.pulletVerandaFeatures : '',
+      pulletVerandaFeaturesScore: pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-veranda-features') : '',
       renewableEnergy: submission.renewableEnergy,
       renewableEnergyScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'renewable-energy'),
       birdDataType: submission.birdDataType,
