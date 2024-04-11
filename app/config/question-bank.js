@@ -806,9 +806,7 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                     <li>a fixed structure with a solid concrete floor</li>
                     <li>water-tight roof and walls</li>
-                    <li>mesh capping applied to any roof or wall inlets and outlets 
-                    capped with mesh (using a mesh hole size of 25 millimetres or 
-                    less)</li>
+                    <li>mesh capping applied to any roof or wall inlets and outlets (using a mesh hole size of 25 millimetres or less)</li>
                     <li>catch trays under all chimneys and roof-mounted vents</li>
                   </ul>`
           },
@@ -848,9 +846,7 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
-                      <li>mesh capping applied to any roof or wall inlets 
-                      and outlets capped with mesh (using a mesh hole 
-                      size of 25 millimetres or less)</li>
+                      <li>mesh capping applied to any roof or wall inlets and outlets (using a mesh hole size of 25 millimetres or less)</li>
                       <li>catch trays under all chimneys and roof-mounted vents.</li>
                   </ul>
               </div>`,
@@ -1463,7 +1459,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The ventilation system must be able to prevent the heat that the birds generate from increasing the house temperature by more than 3°C above the external ambient temperature.`
+                para: `The ventilation system must be able to stop the house temperature from increasing by more than 3°C above the outdoor temperature.`
               }]
             }]
           },
@@ -1595,8 +1591,7 @@ const questionBank = {
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: `The ventilation system must be able to prevent the heat that the birds 
-                  generate from increasing the house temperature by more than 3°C above the external ambient temperature.`
+                  para: `The ventilation system must be able to stop the house temperature from increasing by more than 3°C above the outdoor temperature.`
                 }]
               }
             ]
@@ -1872,7 +1867,7 @@ const questionBank = {
             html: `
                   <p>When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
-                      <li>a useable area at multiple bird-accessible heights from 10 days of age</li>
+                      <li>a useable area provided at multiple bird-accessible heights from 10 days of age</li>
                       <li>height adjustable perches at equal to or more than 8cm per pullet</li>
                       <li>a minimum of 50% of the floor area available for litter</li>
                   </ul>
@@ -1883,7 +1878,7 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
             <p class="govuk-body">The pullet housing must have:</p>
                   <ul>
-                    <li>a useable area at multiple bird-accessible heights from 10 days of age</li>
+                    <li>a useable area provided at multiple bird-accessible accessible heights from 10 days of age</li>
                     <li>height adjustable perches at equal to or more than 8cm per pullet</li>
                     <li>a minimum of 50% of the floor area available for litter.</li>
                   </ul>
