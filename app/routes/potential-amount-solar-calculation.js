@@ -46,6 +46,7 @@ module.exports = [{
         const powerLimit = 0.005
 
         const solarCap = Number.isInteger(solarCost / energyRating) ? (solarCost / energyRating) : (solarCost / energyRating).toFixed(2)
+        const solarCapFormat = formatUKCurrency(solarCap)
         const powerCap = numberOfBirds * powerLimit
         const cost = solarCap * powerCap
         const costFormat = formatUKCurrency(solarCap * powerCap)
@@ -74,6 +75,7 @@ module.exports = [{
             energyRating,
             energyRatingFormat,
             solarCap,
+            solarCapFormat,
             cost,
             projectTypeTableText,
             housingGrantFunding,
