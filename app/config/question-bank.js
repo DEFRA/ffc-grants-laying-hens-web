@@ -3194,9 +3194,9 @@ const questionBank = {
         {
           key: 'easy-grip-perches',
           order: 200,
-          title:'Will the perches have a design feature that helps the birds grip the perches?',
+          title:'Will the perches have a design feature that helps the birds grip?',
           hint: {
-            html: `You can replace {{_poultryType_}} standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`
+            html: `You can replace {{_poultryType_}} standard circular metal perches with perches that have design features to help birds grip them (for example, an easy grip shape, a ridged surface, comfortable material or coating)`
           },
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
@@ -3225,7 +3225,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the perches will have a design feature that help the birds grip the perches'
+              error: 'Select yes if the perches will have a design feature that help the birds grip'
             }
           ],
           answers: [
@@ -3429,7 +3429,7 @@ const questionBank = {
                       
                         Natural light can: 
                       `,
-                items: ['promote positive, active behaviour', 'improved visibility to help reduce collisions between birds', 'increase range use.']
+                items: ['promote positive, active behaviour', 'improve visibility to help reduce collisions between birds', 'increase range use.']
               }]
             }]
           },
