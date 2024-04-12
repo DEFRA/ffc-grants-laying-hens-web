@@ -4984,7 +4984,7 @@ const questionBank = {
             <h2 class="govuk-heading-m">What happens next</h2>
             <ol class="govuk-list govuk-list--number">
             <li>The RPA will contact you when the full application period opens. They will tell you if your project scored well enough to get the full application form.</li>
-            <li>If you submit an application, the RPA will assess it against other projects and value for money. You will not automatically get a grant. The grant is expected to be highly competitive and you are competing against other projects. </li>
+            <li>If you submit an application, the RPA will assess it against other projects and value for money. You will not automatically get a grant. The grant is expected to be highly competitive and you are competing against other projects.</li>
             <li>If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</li>
             </ol>
             `,
