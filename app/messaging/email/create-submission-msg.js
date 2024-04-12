@@ -252,6 +252,8 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
   const email = isAgentEmail ? submission.agentsDetails.emailAddress : submission.farmerDetails.emailAddress
   const henJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS)
   const pulletJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)
+  const isSolarPVSystemYes = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS)
+  const isSolarPVSystemNo = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS)
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: rpaEmail || email,
@@ -298,16 +300,16 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       changingArea: submission.changingArea,
       externalTaps: submission.externalTaps,
       solarPVSystem: submission.solarPVSystem,
-      isSolarPVSystemYes: submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS),
-      isSolarPVSystemNo: submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS),
+      isSolarPVSystemYes: isSolarPVSystemYes,
+      isSolarPVSystemNo: isSolarPVSystemNo,
       roofSupportSolarPV: submission.roofSupportSolarPV ?? '',
       roofSolarPVExemption: submission.roofSolarPVExemption ? [submission.roofSolarPVExemption].flat().join(', ') : '',
       projectCost: getCurrencyFormat(submission.projectCost),
       grantRate: `Up to ${GRANT_PERCENTAGE}%`,
-      solarGrantRate: `Up to ${GRANT_PERCENTAGE_SOLAR}%`,
-      solarBirdNumber: submission.solarBirdNumber,
-      solarPVCost: getCurrencyFormat(submission.solarPVCost),
-      solarPowerCapacity: submission.solarPowerCapacity,
+      solarGrantRate: isSolarPVSystemYes ? `Up to ${GRANT_PERCENTAGE_SOLAR}%` : '',
+      solarBirdNumber: isSolarPVSystemYes ? submission.solarBirdNumber : '',
+      solarPVCost: isSolarPVSystemYes ? getCurrencyFormat(submission.solarPVCost) : '',
+      solarPowerCapacity: isSolarPVSystemYes ? submission.solarPowerCapacity : '',
       vehicleWashing: submission.vehicleWashing,
       potentialFunding: getCurrencyFormat(submission.calculatedGrant),
       remainingCost: submission.remainingCosts,
