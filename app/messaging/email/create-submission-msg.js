@@ -257,6 +257,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
   const rearingAviarySystemTrue = submission.rearingAviarySystem === getQuestionAnswer('rearing-aviary-system', 'rearing-aviary-system-A1', ALL_QUESTIONS)
   const stepUpSystemTrue = submission.stepUpSystem === getQuestionAnswer('step-up-system', 'step-up-system-A1', ALL_QUESTIONS)
   const verandaJourney = submission.projectType === getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)
+  const isCurrentMultiTierSystemTrue = submission.currentSystem !== getQuestionAnswer('current-system', 'current-system-A1', ALL_QUESTIONS) || submission.currentSystem !== getQuestionAnswer('current-system', 'current-system-A2', ALL_QUESTIONS) 
   return {
     notifyTemplate: verandaJourney ? emailConfig.notifyTemplateVeranda : emailConfig.notifyTemplate,
     emailAddress: rpaEmail || email,
@@ -325,8 +326,10 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       // Scoring Questions
       currentSystem: submission.currentSystem,
       currentSystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system'),
-      currentMultiTierSystem: submission.currentMultiTierSystem ?? '',
-      currentMultiTierSystemScore: submission.currentMultiTierSystem ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
+      isCurrentMultiTierSystemTrue: isCurrentMultiTierSystemTrue,
+      CurrentMultiTierSystemText: (isCurrentMultiTierSystemTrue && henJourney ) ? 'Aviary system: ' : (isCurrentMultiTierSystemTrue && pulletJourney )? 'Multi-tier system: ' : '',
+      currentMultiTierSystem: isCurrentMultiTierSystemTrue ? submission.currentMultiTierSystem : '',
+      currentMultiTierSystemScore: isCurrentMultiTierSystemTrue ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
       aviarySystem: submission.aviarySystem ?? '',
       aviarySystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'aviary-system') ?? '',
       rampConnection: submission.rampConnection,
