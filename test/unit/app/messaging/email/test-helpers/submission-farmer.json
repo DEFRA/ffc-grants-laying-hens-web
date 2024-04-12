@@ -27,9 +27,7 @@
         "businessName": "My Farm",
         "numberEmployees": "30",
         "businessTurnover": "5000000",
-        "sbi": "",
-        "calvingSystem":"Year round",
-        "calvesNumber":30
+        "sbi": ""
     },
     "applicantType": "Laying hens (including pullets)",
     "projectType": "Refurbishing the existing building",

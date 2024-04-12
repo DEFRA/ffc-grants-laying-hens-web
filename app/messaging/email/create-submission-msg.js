@@ -256,8 +256,9 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
   const isSolarPVSystemNo = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS)
   const rearingAviarySystemTrue = submission.rearingAviarySystem === getQuestionAnswer('rearing-aviary-system', 'rearing-aviary-system-A1', ALL_QUESTIONS)
   const stepUpSystemTrue = submission.stepUpSystem === getQuestionAnswer('step-up-system', 'step-up-system-A1', ALL_QUESTIONS)
+  const verandaJourney = getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS) === getYarValue(request, 'projectType');
   return {
-    notifyTemplate: emailConfig.notifyTemplate,
+    notifyTemplate: verandaJourney? emailConfig.notifyTemplateVeranda: emailConfig.notifyTemplate,
     emailAddress: rpaEmail || email,
     details: {
       firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
@@ -295,7 +296,6 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       stepUpSystemTrue: stepUpSystemTrue,
       housingDensity: submission.housingDensity ?? '',
       aviaryWelfare: submission.aviaryWelfare ?? '',
-      aviarySystem: submission.aviarySystem ?? '',
       mechanicalVentilation: submission.mechanicalVentilation,
       henVentilationSpecification: submission.henVentilationSpecification ?? '',
       pulletVentilationSpecification: submission.pulletVentilationSpecification ?? '',
@@ -317,6 +317,10 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       vehicleWashing: submission.vehicleWashing,
       potentialFunding: getCurrencyFormat(submission.calculatedGrant),
       remainingCost: submission.remainingCosts,
+
+      // veranda Questions
+      verandaOnlySize: submission.verandaOnlySize ?? '',
+      verandaFeatures: submission.verandaFeatures ?? '',
 
       // Scoring Questions
       currentSystem: submission.currentSystem,
