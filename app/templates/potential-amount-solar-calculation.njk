@@ -38,8 +38,8 @@
                 {# breakdown of costs text format #}
                 <p>The solar PV system you plan to buy and install has a higher power capacity than 5kW of power per 1,000 birds.</p>
                 <p>Based on the building's bird capacity ({{numberOfBirdsFormat}} birds), you can apply {{grantSolarPercentage}}% of the costs of a solar PV system with a power capacity of up to {{powerCap}}kW.</p>
-                <p>This is based on the solar PV system costs (£{{solarCostFormat}}) divided by the solar PV system’s power capacity ({{energyRating}}kW). With these figures, the cost of the solar PV system is equal to £{{solarCap}} per kW.</p>
-                <p>You can apply for grant funding of £{{solarGrantFundingFormat}} for solar PV system costs. This is {{grantSolarPercentage}}% of £{{costFormat}} , the amount based on your solar PV system costing £{{solarCap}} per kW, multiplied by the power rating of {{powerCap}}kW.</p>
+                <p>This is based on the solar PV system costs (£{{solarCostFormat}}) divided by the solar PV system’s power capacity ({{energyRatingFormat}}kW). With these figures, the cost of the solar PV system is equal to £{{solarCapFormat}} per kW.</p>
+                <p>You can apply for grant funding of £{{solarGrantFundingFormat}} for solar PV system costs. This is {{grantSolarPercentage}}% of £{{costFormat}} , the amount based on your solar PV system costing £{{solarCapFormat}} per kW, multiplied by the power rating of {{powerCap}}kW.</p>
                 <p>You must pay the remaining solar PV system costs over £{{solarGrantFundingFormat}}.</p>
                 <table class="govuk-table">
                 <caption class="govuk-table__caption govuk-table__caption--s">Solar PV system funding calculation</caption>
@@ -60,13 +60,13 @@
                     <td class="govuk-table__cell">This project’s solar PV system power capacity<br>
                         <span class = 'govuk-body-s' style="color: #505a5f">You told us this <a href='./solar-power-capacity' class="govuk-link govuk-link--no-visited-state">change the solar PV system rating</a></span>
                     </td>
-                    <td class="govuk-table__cell govuk-table__cell--numeric">{{energyRating}}kW</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">{{energyRatingFormat}}kW</td>
                     </tr>
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell">Solar PV system cost per kW <br>
-                        <span class = 'govuk-body-s' style="color: #505a5f">£{{solarCostFormat}} divided by {{energyRating}}kW</span>
+                        <span class = 'govuk-body-s' style="color: #505a5f">£{{solarCostFormat}} divided by {{energyRatingFormat}}kW</span>
                     </td>
-                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{solarCap}}</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">£{{solarCapFormat}}</td>
                     </tr>
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell">Maximum grant-funded solar PV system rating <br>
