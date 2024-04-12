@@ -265,6 +265,31 @@ const scorePageData = async (request, backUrl, url, h) => {
 
     const questions = msgData.desirability.questions.map(desirabilityQuestion => {
 
+      if (desirabilityQuestion.key === 'hen-multi-tier') {
+        switch (desirabilityQuestion.answers[0].input[0].value) {
+          case 'Yes':
+            desirabilityQuestion.answers[0].input[0].value = 'Yes, the hens will be reared in a multi-tier system as pullets'
+            break
+          case 'No':
+            desirabilityQuestion.answers[0].input[0].value = 'No, the hens will not be reared in a multi-tier system as pullets'
+            break
+          default:
+            break
+        }
+        
+      } else if (desirabilityQuestion.key === 'pullet-multi-tier') {
+        switch (desirabilityQuestion.answers[0].input[0].value) {
+          case 'Yes':
+            desirabilityQuestion.answers[0].input[0].value = 'Yes, the pullets will be housed in an aviary system as adults'
+            break
+          case 'No':
+            desirabilityQuestion.answers[0].input[0].value = 'No, the pullets will not be housed in an aviary system as hens'
+            break
+          default:
+            break
+        } 
+      }
+
       if (desirabilityQuestion.key != 'poultry-type') {
 
         const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]

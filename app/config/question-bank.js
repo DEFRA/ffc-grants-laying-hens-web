@@ -2440,7 +2440,7 @@ const questionBank = {
           nextUrl: 'veranda-project-cost',
           hint: {
             html: `
-              <p>The veranda must have a:</p>
+              <p>The veranda must have:</p>
               <ul class="govuk-list--bullet">
                 <li>a solid concrete floor</li>
                 <li>a waterproof insulated roof</li>
@@ -2705,8 +2705,8 @@ const questionBank = {
             messageContent: `You can apply for grant funding for multiple buildings. You must submit an application for each building.</br></br>
             If the total grant funding for your combined
             building projects is more than £15,000 (40% of £37,500), you may still be eligible to apply for grant funding.
-           `,
-           insertText: '',
+            `,
+            insertText: '',
             additionalPara: `If you are applying for grant funding for a single building, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> see other grants you may be eligible for.</a>`,
             messageLink: {
               url: 'potential-amount',
@@ -2719,7 +2719,7 @@ const questionBank = {
         {
           key: 'veranda-remaining-costs',
           order: 150,
-          title: 'Can you pay the remaining costs of £{{_totalRemainingCost_}}?',
+          title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
           url: 'veranda-remaining-costs',
           baseUrl: 'veranda-remaining-costs',
@@ -2949,6 +2949,10 @@ const questionBank = {
           hint: {
             text: 'The housing system you are replacing or refurbishing for this project'
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3013,6 +3017,10 @@ const questionBank = {
           nextUrl: 'ramp-connection',
           backUrl: 'current-system',
           // preValidationKeys: ['currentSystem'],
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3061,6 +3069,10 @@ const questionBank = {
           hint: {
             html: `The floor and the perches at the top of the {{_poultryType_}} system are not counted as tiers`
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3107,6 +3119,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3151,6 +3167,10 @@ const questionBank = {
                 para: `RPA want to fund projects that encourage a consistent housing type for birds between rearing and laying. `
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -3207,6 +3227,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           // preValidationKeys: ['naturalLight'],
           fundingPriorities: '',
           type: 'single-answer',
@@ -3250,6 +3274,10 @@ const questionBank = {
                 enrichment items and welfare ramps.`
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [
@@ -3314,6 +3342,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3348,6 +3380,10 @@ const questionBank = {
           baseUrl: 'maximum-tier-height',
           backUrl: 'ramp-connection',
           nextUrl: 'tier-number',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3423,6 +3459,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3471,6 +3511,10 @@ const questionBank = {
                 para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices.'
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [
@@ -3552,6 +3596,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3581,8 +3629,8 @@ const questionBank = {
           pageTitle: '',
           url: 'dark-brooders',
           baseUrl: 'dark-brooders',
-          backUrl: 'pullet-veranda-features',
-          nextUrl: 'renewable-energy',
+          backUrl: 'natural-light',
+          nextUrl: 'easy-grip-perches',
           hint: { text: 'A suspended horizontal heat source enclosed by a curtain to exclude light'},
           fundingPriorities: '',
           type: 'single-answer',
@@ -3593,6 +3641,10 @@ const questionBank = {
               heading: 'Funding priorities',
               content: [{ para: 'RPA want to fund pullet housing that has dark brooders.'}]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           validate: [
             {
@@ -3637,6 +3689,10 @@ const questionBank = {
                 para: 'RPA want to fund projects that use renewable energy.'
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [
@@ -3708,6 +3764,10 @@ const questionBank = {
                 para: 'RPA want to fund projects that have digital systems which automatically collect and store data for poultry management.'
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [
@@ -3799,6 +3859,10 @@ const questionBank = {
                 para: 'RPA want to fund projects that have digital systems which automatically collect and store additional environmental data.'
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [

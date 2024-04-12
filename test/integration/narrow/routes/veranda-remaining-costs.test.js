@@ -5,8 +5,7 @@ describe('Page: /veranda-remaining-costs', () => {
   const varList = {
     projectCost: '1234567',
     calculatedGrant: '312000',
-    remainingCost: 740740.20,
-    totalRemainingCost: 740740.20
+    remainingCost: 740740.20
   }
 
   let valList = {}
