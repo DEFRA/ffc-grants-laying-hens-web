@@ -1,11 +1,15 @@
-const { getHtml } = require('../helpers/conditionalHTML')
+const { getQuestionAnswer } = require('ffc-grants-common-functionality/lib/utils');
+const { getHtml } = require('../helpers/conditionalHTML');
+const { ALL_QUESTIONS } = require('../config/question-bank');
 
 const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').session
 const { setOptionsLabel } = require('ffc-grants-common-functionality').answerOptions
 
-const getConfirmationId = guid => {
-  const prefix = 'LH'
-  return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
+const getConfirmationId = (guid, request) => {
+  const projectType = getYarValue(request, 'projectType');
+  const projectTypeAnswer = getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)
+  const prefix = projectType === projectTypeAnswer ? 'VO' : 'LH';
+  return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase();
 }
 
 const handleConditinalHtmlData = (type, labelData, yarKey, request) => {

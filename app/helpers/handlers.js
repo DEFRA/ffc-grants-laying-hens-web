@@ -328,14 +328,14 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
       return h.redirect(startPageUrl)
     }
 
-    if(url === 'confirmation' && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
+    if((url === 'confirmation' || url === 'veranda-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
       maybeEligibleContent = {
         ...maybeEligibleContent,
           addText: true,
       }
     }
 
-    confirmationId = getConfirmationId(request.yar.id)
+    confirmationId = getConfirmationId(request.yar.id, request)
     // try {
     //   const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
     //   await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
