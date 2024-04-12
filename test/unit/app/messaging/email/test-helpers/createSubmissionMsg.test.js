@@ -66,13 +66,15 @@ describe('Create submission message', () => {
     const msg = createMsg(farmerSubmission, desirabilityScore)
 
     expect(msg.applicantEmail).toHaveProperty('notifyTemplate')
+    expect(msg.applicantEmail).toHaveProperty('notifyTemplateVeranda')
     expect(msg.applicantEmail).toHaveProperty('emailAddress')
     expect(msg.applicantEmail).toHaveProperty('details')
     expect(msg.applicantEmail.details).toHaveProperty(
-      'firstName', 'lastName', 'referenceNumber', 'overallRating', 'legalStatus',
+      'projectType', 'inEngland', 'applicantType', 'legalStatus', 'planningPermission',
+      'firstName', 'lastName', 'referenceNumber', 'overallRating',
       'location', 'landOwnership', 'tenancyAgreement', 'project',
       'technology', 'itemsCost', 'potentialFunding', 'remainingCost',
-      'projectStarted', 'planningPermission', 'projectName', 'businessName',
+      'projectStarted', 'projectName', 'businessName',
       'farmerName', 'farmerSurname', 'agentName', 'agentSurname', 'farmerEmail', 'agentEmail',
       'contactConsent', 'scoreDate', 'projectCost'
     )

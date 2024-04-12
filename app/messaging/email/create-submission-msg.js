@@ -258,7 +258,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
   const stepUpSystemTrue = submission.stepUpSystem === getQuestionAnswer('step-up-system', 'step-up-system-A1', ALL_QUESTIONS)
   const verandaJourney = getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS) === getYarValue(request, 'projectType');
   return {
-    notifyTemplate: verandaJourney? emailConfig.notifyTemplateVeranda: emailConfig.notifyTemplate,
+    notifyTemplate: verandaJourney ? emailConfig.notifyTemplateVeranda : emailConfig.notifyTemplate,
     emailAddress: rpaEmail || email,
     details: {
       firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
