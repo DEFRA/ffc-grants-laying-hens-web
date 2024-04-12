@@ -1,6 +1,7 @@
 const agentSubmission = require('./submission-agent.json')
 const farmerSubmission = require('./submission-farmer.json')
-const desirabilityScore = require('../../../../../../app/helpers/desirability-score.json')
+const desirabilityScoreHen = require('../../../../app/messaging/scoring/desirability-score-hen.json')
+const desirabilityScorePullet = require('../../../../app/messaging/scoring/desirability-score-pullet.json')
 const { commonFunctionsMock } = require('./../../../../../session-mock')
 
 describe('Create submission message', () => {
@@ -30,7 +31,7 @@ describe('Create submission message', () => {
   })
 
   test('Farmer submission generates correct message payload', () => {
-    const msg = createMsg(farmerSubmission, desirabilityScore)
+    const msg = createMsg(farmerSubmission, desirabilityScoreHen)
 
     expect(msg).toHaveProperty('agentEmail')
     expect(msg).toHaveProperty('applicantEmail')
@@ -51,7 +52,7 @@ describe('Create submission message', () => {
 
     farmerSubmission.applicantType = ['Laying hens (including pullets)']
 
-    const msg = createMsg(farmerSubmission, desirabilityScore)
+    const msg = createMsg(farmerSubmission, desirabilityScoreHen)
     expect(msg).toHaveProperty('agentEmail')
     expect(msg).toHaveProperty('applicantEmail')
     expect(msg).toHaveProperty('rpaEmail')
@@ -63,10 +64,9 @@ describe('Create submission message', () => {
   test('Email part of message should have correct properties', () => {
     farmerSubmission.applicantType = 'Laying hens (including pullets)'
     
-    const msg = createMsg(farmerSubmission, desirabilityScore)
+    const msg = createMsg(farmerSubmission, desirabilityScoreHen)
 
     expect(msg.applicantEmail).toHaveProperty('notifyTemplate')
-    expect(msg.applicantEmail).toHaveProperty('notifyTemplateVeranda')
     expect(msg.applicantEmail).toHaveProperty('emailAddress')
     expect(msg.applicantEmail).toHaveProperty('details')
     expect(msg.applicantEmail.details).toHaveProperty(
@@ -76,13 +76,15 @@ describe('Create submission message', () => {
       'technology', 'itemsCost', 'potentialFunding', 'remainingCost',
       'projectStarted', 'projectName', 'businessName',
       'farmerName', 'farmerSurname', 'agentName', 'agentSurname', 'farmerEmail', 'agentEmail',
-      'contactConsent', 'scoreDate', 'projectCost'
+      'contactConsent', 'scoreDate', 'projectCost', 'scoreDate', 'environmentalDataType', 'birdDataType',
+      'renewableEnergy', 'pollutionMitigation', 'buildingBiosecurity', 'easyGripPerches', 'naturalLighting',
+      'consistentHousing'
     )
   })
   test('Under 10 employees results in micro business definition', () => {
     farmerSubmission.businessDetails.numberEmployees = 1
     farmerSubmission.businessDetails.businessTurnover = 1
-    const msg = createMsg(farmerSubmission, desirabilityScore)
+    const msg = createMsg(farmerSubmission, desirabilityScoreHen)
 
     expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Micro')
   })
@@ -90,7 +92,7 @@ describe('Create submission message', () => {
   test('Under 50 employees results in small business definition', () => {
     farmerSubmission.businessDetails.numberEmployees = 10
     farmerSubmission.businessDetails.businessTurnover = 1
-    const msg = createMsg(farmerSubmission, desirabilityScore)
+    const msg = createMsg(farmerSubmission, desirabilityScoreHen)
 
     expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Small')
   })
@@ -98,7 +100,7 @@ describe('Create submission message', () => {
   test('Under 250 employees results in medium business definition', () => {
     farmerSubmission.businessDetails.numberEmployees = 50
     farmerSubmission.businessDetails.businessTurnover = 1
-    const msg = createMsg(farmerSubmission, desirabilityScore)
+    const msg = createMsg(farmerSubmission, desirabilityScoreHen)
 
     expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Medium')
   })
@@ -106,7 +108,7 @@ describe('Create submission message', () => {
   test('Over 250 employees results in large business definition', () => {
     farmerSubmission.businessDetails.numberEmployees = 250
     farmerSubmission.businessDetails.businessTurnover = 1
-    const msg = createMsg(farmerSubmission, desirabilityScore)
+    const msg = createMsg(farmerSubmission, desirabilityScoreHen)
 
     expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Large')
   })
@@ -118,7 +120,7 @@ describe('Create submission message', () => {
       sendEmailToRpa: true,
       protectPassword: mockPassword
     }))
-    const msg = createMsg(agentSubmission, desirabilityScore)
+    const msg = createMsg(agentSubmission, desirabilityScorePullet)
 
     expect(msg).toHaveProperty('agentEmail')
     expect(msg).toHaveProperty('applicantEmail')
@@ -131,7 +133,7 @@ describe('Create submission message', () => {
 
   test('Spreadsheet part of message should have correct properties', () => {
     agentSubmission.environmentalImpact = 'None of the above'
-    const msg = createMsg(agentSubmission, desirabilityScore)
+    const msg = createMsg(agentSubmission, desirabilityScorePullet)
 
     expect(msg.spreadsheet).toHaveProperty('filename')
     expect(msg.spreadsheet).toHaveProperty('uploadLocation')
@@ -153,15 +155,15 @@ describe('Create submission message', () => {
       protectPassword: mockPassword
     }))
     const createSubmissionMsg = require('../../../../../../app/messaging/email/create-submission-msg')
-    const msg = createSubmissionMsg(agentSubmission, desirabilityScore)
+    const msg = createSubmissionMsg(agentSubmission, desirabilityScorePullet)
     expect(msg.spreadsheet.worksheets[0]).not.toHaveProperty('protectPassword')
   })
 
   test('getscorechance function', () => {
-    let msg = createMsg(farmerSubmission, desirabilityScore, 'strong')
+    let msg = createMsg(farmerSubmission, desirabilityScoreHen, 'strong')
     expect(msg.getScoreChance).toBe('seems likely to')
 
-    msg = createMsg(farmerSubmission, desirabilityScore)
+    msg = createMsg(farmerSubmission, desirabilityScoreHen)
     expect(msg.getScoreChance).toBe('seems unlikely to')
   })
 })
