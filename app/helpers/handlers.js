@@ -322,35 +322,36 @@ const scorePageData = async (request, backUrl, url, h) => {
   }
 }
 
-const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl, backUrl, h) => {
-  let { maybeEligibleContent } = question
-  maybeEligibleContent.title = question.title
-  let consentOptionalData
-
-  if(url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
-    maybeEligibleContent = {
+const handlePotentialAmount = (request, maybeEligibleContent) => {
+  if(getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
+    return {
       ...maybeEligibleContent,
       messageContent: 'The maximum grant you can apply for is £500,000.',
       insertText: { text:'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.' },
     }
-  }else if(url === 'potential-amount' &&  getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
-    maybeEligibleContent = {
+  } else if(getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
+    return {
       ...maybeEligibleContent,
       messageContent: 'The maximum grant you can apply for is £500,000.',
       insertText: { text:'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for building project costs.' },
       extraMessageContent: 'You can continue to check your eligibility for grant funding to replace or refurbish a {{_poultryType_}} house.'
     }
   }
+  return maybeEligibleContent;
+}
 
-  if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') > 250000) {
-    question.maybeEligibleContent.potentialAmountConditional = true
+const handleVerandaPotentialAmount = (request, question) => {
+  if (getYarValue(request, 'projectCost') > 250000) {
+    question.maybeEligibleContent.potentialAmountConditional = true;
   } else {
-    question.maybeEligibleContent.potentialAmountConditional = false
+    question.maybeEligibleContent.potentialAmountConditional = false;
   }
+}
 
+const handleConfirmation = async (url, request, confirmationId, maybeEligibleContent) => {
   if (maybeEligibleContent.reference) {
     if (!getYarValue(request, 'consentMain')) {
-      return h.redirect(startPageUrl)
+      return h.redirect(startPageUrl);
     }
 
     if((url === 'confirmation' || url === 'veranda-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
@@ -360,13 +361,13 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
       }
     }
 
-    confirmationId = getConfirmationId(request.yar.id, request)
+    confirmationId = getConfirmationId(request.yar.id, request);
     try {
-      const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
-      await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
-      console.log('[CONFIRMATION EVENT SENT]')
+      const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id);
+      await senders.sendDesirabilitySubmitted(emailData, request.yar.id);
+      console.log('[CONFIRMATION EVENT SENT]');
     } catch (err) {
-      console.log('ERROR: ', err)
+      console.log('ERROR: ', err);
     }
     maybeEligibleContent = {
       ...maybeEligibleContent,
@@ -379,8 +380,21 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
         )
       }
     }
-    request.yar.reset()
+    request.yar.reset();
   }
+  return maybeEligibleContent;
+}
+
+
+const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl, backUrl, h) => {
+  let { maybeEligibleContent } = question
+  maybeEligibleContent.title = question.title
+  let consentOptionalData
+
+  maybeEligibleContent = handlePotentialAmount(request, maybeEligibleContent)
+  handleVerandaPotentialAmount(request, question)
+  maybeEligibleContent = await handleConfirmation(url, request, confirmationId, maybeEligibleContent);
+  
   
   maybeEligibleContent = {
     ...maybeEligibleContent,

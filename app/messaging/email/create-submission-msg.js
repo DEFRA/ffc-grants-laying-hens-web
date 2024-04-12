@@ -247,8 +247,7 @@ function getScoreChance(rating) {
       return 'seems unlikely to'
   }
 }
-
-function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
+const getDetails = (submission, isAgentEmail) => {
   const email = isAgentEmail ? submission.agentsDetails.emailAddress : submission.farmerDetails.emailAddress
   const henJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS)
   const pulletJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)
@@ -258,6 +257,42 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
   const stepUpSystemTrue = submission.stepUpSystem === getQuestionAnswer('step-up-system', 'step-up-system-A1', ALL_QUESTIONS)
   const verandaJourney = submission.projectType === getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)
   const isCurrentMultiTierSystemTrue = submission.currentSystem !== getQuestionAnswer('current-system', 'current-system-A1', ALL_QUESTIONS) || submission.currentSystem !== getQuestionAnswer('current-system', 'current-system-A2', ALL_QUESTIONS) 
+  let CurrentMultiTierSystemText = '';
+
+  if (isCurrentMultiTierSystemTrue && henJourney) {
+    CurrentMultiTierSystemText = 'Aviary system: ';
+  } else if (isCurrentMultiTierSystemTrue && pulletJourney) {
+    CurrentMultiTierSystemText = 'Multi-tier system: ';
+  }
+
+  return {
+    email,
+    henJourney,
+    pulletJourney,
+    isSolarPVSystemYes,
+    isSolarPVSystemNo,
+    rearingAviarySystemTrue,
+    stepUpSystemTrue,
+    verandaJourney,
+    isCurrentMultiTierSystemTrue,
+    CurrentMultiTierSystemText
+  }
+}
+
+function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
+  const {
+    email,
+    henJourney,
+    pulletJourney,
+    isSolarPVSystemYes,
+    isSolarPVSystemNo,
+    rearingAviarySystemTrue,
+    stepUpSystemTrue,
+    verandaJourney,
+    isCurrentMultiTierSystemTrue,
+    CurrentMultiTierSystemText
+  } = getDetails(submission, isAgentEmail);
+  
   return {
     notifyTemplate: verandaJourney ? emailConfig.notifyTemplateVeranda : emailConfig.notifyTemplate,
     emailAddress: rpaEmail || email,
@@ -327,7 +362,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       currentSystem: submission.currentSystem,
       currentSystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system'),
       isCurrentMultiTierSystemTrue: isCurrentMultiTierSystemTrue,
-      CurrentMultiTierSystemText: (isCurrentMultiTierSystemTrue && henJourney ) ? 'Aviary system: ' : (isCurrentMultiTierSystemTrue && pulletJourney )? 'Multi-tier system: ' : '',
+      CurrentMultiTierSystemText: CurrentMultiTierSystemText,
       currentMultiTierSystem: isCurrentMultiTierSystemTrue ? submission.currentMultiTierSystem : '',
       currentMultiTierSystemScore: isCurrentMultiTierSystemTrue ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
       aviarySystem: submission.aviarySystem ?? '',
