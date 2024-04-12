@@ -72,5 +72,13 @@
     "birdDataType": ["Bird location", "Egg production parameters"],
     "environmentalDataType": ["Ammonia", "Carbon monoxide"],
     "scoreDate": "12 April 2024",
-    "darkBrooders": null
+    "darkBrooders": null,
+    "stepUpSystem": null,
+    "multiTierSystem": null,
+    "pulletHousingRequirements": null,
+    "housingDensity": null,
+    "pulletVerandaFeatures": null,
+    "pulletVentilationSpecification": null,
+    "rearingAviarySystem": null
+
 }

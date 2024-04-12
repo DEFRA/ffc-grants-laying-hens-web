@@ -348,7 +348,7 @@ const handleVerandaPotentialAmount = (request, question) => {
   }
 }
 
-const handleConfirmation = async (url, request, confirmationId, maybeEligibleContent) => {
+const handleConfirmation = async (url, request, confirmationId, maybeEligibleContent, h) => {
   if (maybeEligibleContent.reference) {
     if (!getYarValue(request, 'consentMain')) {
       return h.redirect(startPageUrl);
@@ -393,8 +393,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
 
   maybeEligibleContent = handlePotentialAmount(request, maybeEligibleContent)
   handleVerandaPotentialAmount(request, question)
-  maybeEligibleContent = await handleConfirmation(url, request, confirmationId, maybeEligibleContent);
-  
+  maybeEligibleContent = await handleConfirmation(url, request, confirmationId, maybeEligibleContent, h);
   
   maybeEligibleContent = {
     ...maybeEligibleContent,
@@ -403,12 +402,12 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       )
     )} : '',
-    messageContent: maybeEligibleContent.messageContent.replace(
+    messageContent: maybeEligibleContent?.messageContent.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       )
     ),
-    extraMessageContent: maybeEligibleContent.extraMessageContent ?  maybeEligibleContent.extraMessageContent.replace(
+    extraMessageContent: maybeEligibleContent?.extraMessageContent ?  maybeEligibleContent.extraMessageContent.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
       getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
       )

@@ -97,5 +97,11 @@
     "renewableEnergy": ["Solar PV system", "A heat exchanger (heating only"],
     "birdDataType": ["Bird location", "Egg production parameters"],
     "environmentalDataType": ["Ammonia", "Carbon monoxide"],
-    "scoreDate": "12 April 2024"
+    "scoreDate": "12 April 2024",
+    "henVeranda": null,
+    "henVerandaFeatures": null,
+    "henVentilationSpecification": null,
+    "aviaryWelfare": null,
+    "aviarySystem": null,
+    "eggStoreAccess": null
 }
