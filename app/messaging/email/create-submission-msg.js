@@ -254,6 +254,8 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
   const pulletJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)
   const isSolarPVSystemYes = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS)
   const isSolarPVSystemNo = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS)
+  const rearingAviarySystemTrue = submission.rearingAviarySystem === getQuestionAnswer('rearing-aviary-system', 'rearing-aviary-system-A1', ALL_QUESTIONS)
+  const stepUpSystemTrue = submission.stepUpSystem === getQuestionAnswer('step-up-system', 'step-up-system-A1', ALL_QUESTIONS)
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: rpaEmail || email,
@@ -287,8 +289,10 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       replacingOrRefurbishingInsulation: submission.replacingInsulation || submission.refurbishingInsulation,
       lightingFeatures: submission.lightingFeatures,
       multiTierSystem: submission.multiTierSystem ?? '',
-      rearingAviarySystem: submission.rearingAviarySystem ?? '',
-      stepUpSystem: submission.stepUpSystem ?? '',
+      rearingAviarySystem: rearingAviarySystemTrue ? submission.rearingAviarySystem : '',
+      rearingAviarySystemTrue: rearingAviarySystemTrue,
+      stepUpSystem: stepUpSystemTrue ? submission.stepUpSystem : '',
+      stepUpSystemTrue: stepUpSystemTrue,
       housingDensity: submission.housingDensity ?? '',
       aviaryWelfare: submission.aviaryWelfare ?? '',
       aviarySystem: submission.aviarySystem ?? '',
@@ -296,7 +300,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       henVentilationSpecification: submission.henVentilationSpecification ?? '',
       pulletVentilationSpecification: submission.pulletVentilationSpecification ?? '',
       concreteApron: submission.concreteApron,
-      eggStoreAccess: submission.eggStoreAccess,
+      eggStoreAccess: submission.eggStoreAccess ?? '',
       changingArea: submission.changingArea,
       externalTaps: submission.externalTaps,
       solarPVSystem: submission.solarPVSystem,
@@ -319,8 +323,8 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       currentSystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system'),
       currentMultiTierSystem: submission.currentMultiTierSystem ?? '',
       currentMultiTierSystemScore: submission.currentMultiTierSystem ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
-      aviarySystem: submission.aviarySystem,
-      aviarySystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'aviary-system'),
+      aviarySystem: submission.aviarySystem ?? '',
+      aviarySystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'aviary-system') ?? '',
       rampConnection: submission.rampConnection,
       rampConnectionScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'ramp-connection'),
       maximumTierHeight: submission.maximumTierHeight,
