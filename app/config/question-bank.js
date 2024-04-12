@@ -4004,6 +4004,12 @@ const questionBank = {
               type: 'REGEX',
               regex: /^(\d{1,3}(\,{1}\d{3})*(\.\d{1,2}){0,1})*$/,
               error: 'Estimated power capacity must be a number, like 10'
+            },
+            {
+              type: 'MIN_MAX',
+              min: 0.01,
+              max: Infinity,
+              error: 'Estimated power capacity must be a number greater than 0'
             }
           ],
           yarKey: 'solarPowerCapacity'
