@@ -1,6 +1,5 @@
 const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
-const { GRANT_PERCENTAGE, GRANT_PERCENTAGE_SOLAR } = require('../../../../app/helpers/grant-details')
 const { formatUKCurrency } = require('../../../../app/helpers/data-formats')
 const utilsList = {
   'project-type-A2': 'Refurbishing the existing building',
@@ -8,6 +7,8 @@ const utilsList = {
 }
 
 describe('Page: /potential-amount-solar-calculation', () => {
+  process.env.GRANT_PERCENTAGE = 40
+  process.env.GRANT_PERCENTAGE_SOLAR = 25
   const varList = {
     projectType: 'Refurbishing the existing building',
     solarPVSystem: 'Yes',
@@ -16,6 +17,7 @@ describe('Page: /potential-amount-solar-calculation', () => {
     solarBirdNumber: 30000,
     solarProjectCost: 50000,
     solarPowerCapacity: 500,
+    solarPowerCapacityFormat: formatUKCurrency(500),
     totalCalculatedGrant: 39750,
     totalCalculatedGrantFormat: formatUKCurrency(39750),
     totalProjectCost: 140000,
@@ -24,8 +26,8 @@ describe('Page: /potential-amount-solar-calculation', () => {
     housingGrantFundingFormat: formatUKCurrency(36000),
     solarGrantFunding: 3750,
     solarGrantFundingFormat: formatUKCurrency(3750),
-    grantPercentage: GRANT_PERCENTAGE,
-    grantSolarPercentage: GRANT_PERCENTAGE_SOLAR,
+    grantPercentage: 40,
+    grantSolarPercentage: 25,
     projectTypeTableText: 'Number of birds the refurbished part of the building will house' ,
     numberOfBirds: 30000,
     numberOfBirdsFormat : formatUKCurrency(30000),
@@ -35,14 +37,15 @@ describe('Page: /potential-amount-solar-calculation', () => {
     energyRating: 500,
     solarcap: 100,
     cost: 15000,
-    costFormat: formatUKCurrency(15000)
+    costFormat: formatUKCurrency(15000),
+    calculatedGrant: 39750
 
   }
   let valList = {}
 
   commonFunctionsMock(varList, undefined, utilsList, valList)
   
-  it('page loads successfully, with all the Eligible options', async () => {
+  it('page loads successfully, with all the Eligible options - refurb', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/potential-amount-solar-calculation`
@@ -64,7 +67,7 @@ describe('Page: /potential-amount-solar-calculation', () => {
     expect(response.payload).toContain('There’s no guarantee the project will receive a grant.')
   })
 
-  it('page loads successfully, with all the Eligible options', async () => {
+  it('page loads successfully, with all the Eligible options - replace', async () => {
     varList.projectType = 'Replacing the entire building with a new building'
     varList.projectTypeTableText = 'Number of birds the new building will house'
     varList.solarcap = 112

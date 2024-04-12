@@ -2681,13 +2681,18 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              regex: PROJECT_COST_REGEX,
+              regex: /^[0-9,]+$/,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
-              type: 'MIN_MAX_CHARS',
+              type: 'REGEX',
+              regex: /^(0*[1-9][0-9]*(,\d{3})*)$/,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'MIN_MAX',
               min: 1,
-              max: 7,
+              max: 9999999,
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
@@ -4058,6 +4063,12 @@ const questionBank = {
               type: 'REGEX',
               regex: /^(\d{1,3}(\,{1}\d{3})*(\.\d{1,2}){0,1})*$/,
               error: 'Estimated power capacity must be a number, like 10'
+            },
+            {
+              type: 'MIN_MAX',
+              min: 0.01,
+              max: Infinity,
+              error: 'Estimated power capacity must be a number greater than 0'
             }
           ],
           yarKey: 'solarPowerCapacity'
