@@ -28,8 +28,8 @@ module.exports = [{
         }
     },
     handler: async (request, h) => {
-        setYarValue(request, 'solarPowerCapacity', Number(getYarValue(request, 'solarPowerCapacity').replace(/,/g,'')))
-        setYarValue(request, 'solarBirdNumber', Number(getYarValue(request, 'solarBirdNumber').replace(/,/g,'')))
+        setYarValue(request, 'solarPowerCapacity', Number(getYarValue(request, 'solarPowerCapacity').toString().replace(/,/g, '')))
+        setYarValue(request, 'solarBirdNumber', Number(getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, '')))
 
         const numberOfBirds = getYarValue(request, 'solarBirdNumber')
         const numberOfBirdsFormat = formatUKCurrency(getYarValue(request, 'solarBirdNumber'))
