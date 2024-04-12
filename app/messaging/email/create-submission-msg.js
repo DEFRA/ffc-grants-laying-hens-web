@@ -287,7 +287,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       multiTierSystem: submission.multiTierSystem ?? '',
       rearingAviarySystem: submission.rearingAviarySystem ?? '',
       stepUpSystem: submission.stepUpSystem ?? '',
-      housingDensity: submission.housingDensity,
+      housingDensity: submission.housingDensity ?? '',
       aviaryWelfare: submission.aviaryWelfare ?? '',
       aviarySystem: submission.aviarySystem ?? '',
       mechanicalVentilation: submission.mechanicalVentilation,

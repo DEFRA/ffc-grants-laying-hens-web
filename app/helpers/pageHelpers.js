@@ -4,7 +4,7 @@ const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').
 const { setOptionsLabel } = require('ffc-grants-common-functionality').answerOptions
 
 const getConfirmationId = guid => {
-  const prefix = 'CH'
+  const prefix = 'LH'
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
 
