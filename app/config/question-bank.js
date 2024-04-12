@@ -2949,6 +2949,10 @@ const questionBank = {
           hint: {
             text: 'The housing system you are replacing or refurbishing for this project'
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3013,6 +3017,10 @@ const questionBank = {
           nextUrl: 'ramp-connection',
           backUrl: 'current-system',
           // preValidationKeys: ['currentSystem'],
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3061,6 +3069,10 @@ const questionBank = {
           hint: {
             html: `The floor and the perches at the top of the {{_poultryType_}} system are not counted as tiers`
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3107,6 +3119,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3151,6 +3167,10 @@ const questionBank = {
                 para: `RPA want to fund projects that encourage a consistent housing type for birds between rearing and laying. `
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -3207,6 +3227,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           // preValidationKeys: ['naturalLight'],
           fundingPriorities: '',
           type: 'single-answer',
@@ -3250,6 +3274,10 @@ const questionBank = {
                 enrichment items and welfare ramps.`
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [
@@ -3314,6 +3342,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3348,6 +3380,10 @@ const questionBank = {
           baseUrl: 'maximum-tier-height',
           backUrl: 'ramp-connection',
           nextUrl: 'tier-number',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3423,6 +3459,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3471,6 +3511,10 @@ const questionBank = {
                 para: 'RPA want to fund projects that improve biosecurity and use pollution mitigation practices.'
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [
@@ -3552,6 +3596,10 @@ const questionBank = {
               }]
             }]
           },
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3593,6 +3641,10 @@ const questionBank = {
               heading: 'Funding priorities',
               content: [{ para: 'RPA want to fund pullet housing that has dark brooders.'}]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           validate: [
             {
@@ -3637,6 +3689,10 @@ const questionBank = {
                 para: 'RPA want to fund projects that use renewable energy.'
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [
@@ -3708,6 +3764,10 @@ const questionBank = {
                 para: 'RPA want to fund projects that have digital systems which automatically collect and store data for poultry management.'
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [
@@ -3799,6 +3859,10 @@ const questionBank = {
                 para: 'RPA want to fund projects that have digital systems which automatically collect and store additional environmental data.'
               }]
             }]
+          },
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           type: 'multi-answer',
           validate: [
