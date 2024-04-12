@@ -163,6 +163,7 @@ describe('Get & Post Handlers', () => {
 
     test('Strong score - hen', async () => {
       scoreDataHen.desirability.overallRating.band = 'Strong'
+      scoreDataHen.desirability.questions[5].answers[0].input[0].value = 'No'
       question = {
         url: 'score',
         title: 'mock-title',
@@ -263,6 +264,8 @@ describe('Get & Post Handlers', () => {
 
     test('Strong score - pullet', async () => {
       scoreDataPullet.desirability.overallRating.band = 'Strong'
+      scoreDataPullet.desirability.questions[5].answers[0].input[0].value = 'No'
+
       question = {
         url: 'score',
         title: 'mock-title',
