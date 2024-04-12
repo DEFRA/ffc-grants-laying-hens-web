@@ -342,7 +342,6 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     }
   }
 
-
   if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') > 250000) {
     question.maybeEligibleContent.potentialAmountConditional = true
   } else {
@@ -353,7 +352,15 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     if (!getYarValue(request, 'consentMain')) {
       return h.redirect(startPageUrl)
     }
-    confirmationId = getConfirmationId(request.yar.id)
+
+    if((url === 'confirmation' || url === 'veranda-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
+      maybeEligibleContent = {
+        ...maybeEligibleContent,
+          addText: true,
+      }
+    }
+
+    confirmationId = getConfirmationId(request.yar.id, request)
     try {
       const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
       await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
@@ -377,7 +384,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   
   maybeEligibleContent = {
     ...maybeEligibleContent,
-    insertText: maybeEligibleContent.insertText.text ?  { text: maybeEligibleContent.insertText.text.replace(
+    insertText: maybeEligibleContent?.insertText?.text ?  { text: maybeEligibleContent.insertText.text.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       )
@@ -391,7 +398,12 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
       getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
       )
-    ) : ''
+    ) : '',
+    surveyLink: maybeEligibleContent?.surveyLink ? maybeEligibleContent.surveyLink.replace(
+      SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+      )
+    ) : '',
   }
 
   if (url === 'confirm' || url === 'veranda-confirm') {

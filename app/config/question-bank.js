@@ -2681,13 +2681,18 @@ const questionBank = {
             },
             {
               type: 'REGEX',
-              regex: PROJECT_COST_REGEX,
+              regex: /^[0-9,]+$/,
               error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
-              type: 'MIN_MAX_CHARS',
+              type: 'REGEX',
+              regex: /^(0*[1-9][0-9]*(,\d{3})*)$/,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'MIN_MAX',
               min: 1,
-              max: 7,
+              max: 9999999,
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
@@ -3098,7 +3103,7 @@ const questionBank = {
             },
             {
               key: 'tier-number-A2',
-              value: '4 tiers or more'
+              value: '4 tiers'
             }
           ],
           yarKey: 'tierNumber'
@@ -4058,6 +4063,12 @@ const questionBank = {
               type: 'REGEX',
               regex: /^(\d{1,3}(\,{1}\d{3})*(\.\d{1,2}){0,1})*$/,
               error: 'Estimated power capacity must be a number, like 10'
+            },
+            {
+              type: 'MIN_MAX',
+              min: 0.01,
+              max: Infinity,
+              error: 'Estimated power capacity must be a number greater than 0'
             }
           ],
           yarKey: 'solarPowerCapacity'
@@ -4311,14 +4322,7 @@ const questionBank = {
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
-          hint: {
-            text: 'Enter the farmer and farm business details'
-          },
           allFields: [
-            {
-              type: 'sub-heading',
-              text: 'Name'
-            },
             {
               yarKey: 'firstName',
               type: 'text',
@@ -4381,10 +4385,6 @@ const questionBank = {
                   error: 'Last name must include letters'
                 }
               ]
-            },
-            {
-              type: 'sub-heading',
-              text: 'Contact details'
             },
             {
               yarKey: 'emailAddress',
@@ -4632,9 +4632,6 @@ const questionBank = {
           key: 'agent-details',
           order: 390,
           title: 'Agent’s details',
-          hint: {
-            text: 'Enter the agent and agent business details'
-          },
           pageTitle: '',
           url: 'agent-details',
           baseUrl: 'agent-details',
@@ -4647,10 +4644,6 @@ const questionBank = {
           minAnswerCount: '',
           maxAnswerCount: '',
           allFields: [
-            {
-              type: 'sub-heading',
-              text: 'Name'
-            },
             {
               yarKey: 'firstName',
               type: 'text',
@@ -4734,11 +4727,7 @@ const questionBank = {
                   error: 'Name must be 30 characters or fewer'
                 }
               ]
-            },
-            {
-              type: 'sub-heading',
-              text: 'Contact details'
-            },
+          },
             {
               yarKey: 'emailAddress',
               type: 'email',
@@ -5059,32 +5048,91 @@ const questionBank = {
               surveyLink: process.env.SURVEY_LINK
             },
             messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
-            If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Transformation Fund scheme:<br/>
+            If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Investment Fund.<br/><br/>
+            You can <a class="govuk-link" href="start">check if you can apply</a> for another building. The maximum total grant amount each business can apply for is £500,000 for omprehensive projects. 
             <h2 class="govuk-heading-m">RPA helpline</h2>
             <h3 class="govuk-heading-s">Telephone</h3>
             Telephone: 0300 0200 301<br/>
             Monday to Friday, 9am to 5pm (except public holidays)<br/>
-            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges</a></p>
+            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
             <h3 class="govuk-heading-s">Email</h3>
             <a class="govuk-link" title="Send email to RPA" target="_blank" rel="noopener noreferrer" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a><br/><br/>
             
             <h2 class="govuk-heading-m">What happens next</h2>
-            <p>1. RPA will be in touch when the full application period opens to tell you if your project is invited to submit a full application. This will include an initial assessment of the ambient environment.</p>
-            <p>2. If you submit an application, RPA will assess it against other projects and value for money. You will not automatically get a grant. The grant is expected to be highly competitive and you are competing against other projects.</p>
-            <p>3. If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</p>
+            <ol class="govuk-list govuk-list--number">
+            <li>The RPA will contact you when the full application period opens. They will tell you if your project scored well enough to get the full application form.</li>
+            <li>If you submit an application, the RPA will assess it against other projects and value for money. You will not automatically get a grant. The grant is expected to be highly competitive and you are competing against other projects.</li>
+            <li>If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</li>
+            </ol>
             `,
             middleWarning: {
               text: 'You must not start the project'
             },
-            insertText: { text: '' },
             extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
             <p>Before you start the project, you can:</p>
             <ul>
               <li>get quotes from suppliers</li>
               <li>apply for planning permission</li>
             </ul>
-            <p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service?</a></p>
-            `
+            `,
+          addText: false,
+          conditionalInsertText: { 
+            text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
+          },
+          surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
+          },
+          fundingPriorities: '',
+          type: '',
+          minAnswerCount: 1,
+          answers: []
+        },
+        {
+          key: 'veranda-confirmation',
+          order: 425,
+          title: 'Details submitted',
+          pageTitle: '',
+          url: 'veranda-confirmation',
+          baseUrl: 'veranda-confirmation',
+          ga: { name: 'veranda-confirmation', params: {} },
+          maybeEligible: true,
+          maybeEligibleContent: {
+            reference: {
+              titleText: 'Details submitted',
+              html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
+              surveyLink: process.env.SURVEY_LINK
+            },
+            messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
+              If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Investment Fund scheme.<br/><br/>
+              You can <a class="govuk-link" href="start">check if you can apply</a> for another veranda. The maximum total grant amount each business can apply for is £100,000 for veranda-only projects. 
+              <h2 class="govuk-heading-m">RPA helpline</h2>
+              <h3 class="govuk-heading-s">Telephone</h3>
+              Telephone: 0300 0200 301<br/>
+              Monday to Friday, 9am to 5pm (except public holidays)<br/>
+              <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
+              <h3 class="govuk-heading-s">Email</h3>
+              <a class="govuk-link" title="Send email to RPA" target="_blank" rel="noopener noreferrer" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a><br/><br/>
+            
+              <h2 class="govuk-heading-m">What happens next</h2>
+              <ol class="govuk-list govuk-list--number">
+                <li>The RPA will contact you to invite you to submit a full application.</li>
+                <li>If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</li>
+              </ol>
+            `,
+            middleWarning: {
+              text: 'You must not start the project'
+            },
+            extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
+            <p>Before you start the project, you can:</p>
+            <ul>
+              <li>get quotes from suppliers</li>
+              <li>apply for planning permission</li>
+            </ul>
+            `,
+          addText: false,
+          conditionalInsertText: { 
+            text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
+          },
+          surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
           },
           fundingPriorities: '',
           type: '',
