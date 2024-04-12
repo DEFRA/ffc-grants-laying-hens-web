@@ -23,16 +23,16 @@ const commonPages = [
     title: 'Maximum height of highest tier',
     pageTitle: 'Maximum height of highest tier',
     url: 'maximum-tier-height',
-    fundingPriorities: 'Prevent birds falling from heights of more than 2 metres',
+    fundingPriorities: 'Reduce the risk of keel bone fractures',
     yarKey: 'maximumTierHeight'
   },
   {
     key: 'tier-number',
     order: 5,
-    title: '3 tiers or fewer',
-    pageTitle: '3 tiers or fewer',
+    title: 'Tiers directly above each other',
+    pageTitle: 'Tiers directly above each other',
     url: 'tier-number',
-    fundingPriorities: 'Aviary systems that have 3 tiers or fewer',
+    fundingPriorities: 'Reduce the risk of keel bone fractures',
     yarKey: 'tierNumber'
   },
   {
@@ -86,7 +86,7 @@ const commonPages = [
     title: 'Poultry management data',
     pageTitle: 'Poultry management data',
     url: 'bird-data-type',
-    fundingPriorities: 'Collecting and storing poultry management data',
+    fundingPriorities: 'Support projects that use innovative systems',
     yarKey: 'birdDataType'
   },
   {
@@ -95,7 +95,7 @@ const commonPages = [
     title: 'Additional environmental data',
     pageTitle: 'Additional environmental data',
     url: 'environmental-data-type',
-    fundingPriorities: 'Collecting and storing additional environmental data',
+    fundingPriorities: 'Support projects that use innovative systems',
     yarKey: 'environmentalDataType'
   }
 ]
@@ -158,7 +158,7 @@ const tableOrderPullet = [
     title: 'Veranda requirements',
     pageTitle: 'Veranda requirements',
     url: 'pullet-veranda-features',
-    fundingPriorities: 'Verandas that meet all funding priorities',
+    fundingPriorities: 'Verandas that meet all funding requirements',
     yarKey: 'pulletVerandaFeatures'
   }
 ]
