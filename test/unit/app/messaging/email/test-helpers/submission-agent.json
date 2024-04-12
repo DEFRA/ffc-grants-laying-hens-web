@@ -30,13 +30,13 @@
     },
     "confirmationId": "12345678",
     "applicantType": [
+        "Laying hens (including pullets)",
+        "Meat chickens",
+        "Beef (including calf rearing)",
         "Dairy (including calf rearing)",
         "Pigs",
         "Sheep",
-        "Laying hens",
-        "Meat chickens",
         "Aquaculture",
-        "Arable",
         "Horticulture"
     ],
     "legalStatus": "Sole trader",

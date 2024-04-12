@@ -4989,7 +4989,8 @@ const questionBank = {
             I am aware that the information I submit will be checked by the RPA.</br></br>
             I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.
             <h2 class="govuk-heading-m">Improving our schemes</h2>
-            Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`,
+            As we develop new services we get feedback from farmers and agents.</br></br>
+            You may be contacted by us or a third party that we work with.`,
             insertText: { text: '' }
           },
           answers: [
@@ -5016,10 +5017,11 @@ const questionBank = {
             I am aware that the information I submit will be checked by the RPA.</br></br>
             I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.`,
             insertText: {
-              text: 'I understand that the RPA will award the grant funding for adding a veranda only to existing housing on a first-come first-served basis.'
+              text: 'I understand that the RPA will award the veranda-only grant funding on a first come, first served basis'
             },
             extraMessageContent: `<h2 class="govuk-heading-m">Improving our schemes</h2>
-            Defra may wish to contact you to understand your experience of applying for the scheme. Please confirm if you are happy for us to contact you to take part in optional research activities to help us improve our programmes and delivery.`
+            As we develop new services we get feedback from farmers and agents.</br></br>
+            You may be contacted by us or a third party that we work with`
           },
           answers: [
             {
@@ -5149,7 +5151,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(item => ALL_URLS.push(item.url))
 
-const YAR_KEYS = ['totalRemainingCost', 'calculatedGrant']
+const YAR_KEYS = ['remainingCost', 'totalRemainingCost', 'totalProjectCost', 'calculatedGrant', 'totalCalculatedGrant','solarCalculatedGrant',  'solarProjectCost', 'cappedSolarProjectCost', 'solarRemainingCost']
 ALL_QUESTIONS.forEach(item => YAR_KEYS.push(item.yarKey))
 module.exports = {
   questionBank,
