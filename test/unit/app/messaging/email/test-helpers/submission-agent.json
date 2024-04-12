@@ -71,6 +71,8 @@
     "externalTaps" : "Yes",
     "vehicleWashing": "Yes",
     "solarPVSystem": "No",
+    "solarGrantRate": null,
+    "isSolarPVSystemYes": false,
     "roofSolarPVExemption": [
         "The roof is not suitable for solar PV",
         "Dummy"
@@ -79,7 +81,8 @@
         "The roof is not suitable for solar PV",
         "Dummy"
     ],
-    "currentSystem": "Yes",
+    "currentSystem": "Barn",
+    "isCurrentMultiTierSystemTrue": true,
     "currentMultiTierSystem": "Yes",
     "darkBrooders": "Yes",
     "pulletVerandaFeatures": "Yes",
