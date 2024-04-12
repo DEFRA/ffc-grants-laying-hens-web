@@ -28,12 +28,16 @@ module.exports = [{
         }
     },
     handler: async (request, h) => {
+        setYarValue(request, 'solarPowerCapacity', Number(getYarValue(request, 'solarPowerCapacity').replace(/,/g,'')))
+        setYarValue(request, 'solarBirdNumber', Number(getYarValue(request, 'solarBirdNumber').replace(/,/g,'')))
+
         const numberOfBirds = getYarValue(request, 'solarBirdNumber')
         const numberOfBirdsFormat = formatUKCurrency(getYarValue(request, 'solarBirdNumber'))
         const projectCost = getYarValue(request, 'projectCost')
         const projectCostFormat = formatUKCurrency(getYarValue(request, 'projectCost'))
         const calculatedGrant = getYarValue(request, 'calculatedGrant')
         const energyRating = getYarValue(request, 'solarPowerCapacity')
+        const energyRatingFormat = formatUKCurrency(getYarValue(request, 'solarPowerCapacity')).replace(/£/g, '')
         const solarCost = getYarValue(request, 'solarProjectCost')
         const solarCostFormat = formatUKCurrency(getYarValue(request, 'solarProjectCost'))
         const totalProjectCost = projectCost + solarCost
@@ -68,6 +72,7 @@ module.exports = [{
             powerCap,
             solarCost,
             energyRating,
+            energyRatingFormat,
             solarCap,
             cost,
             projectTypeTableText,
