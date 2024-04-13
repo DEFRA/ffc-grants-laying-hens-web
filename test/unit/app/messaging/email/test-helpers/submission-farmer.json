@@ -86,7 +86,7 @@
     "multiTierSystem": null,
     "pulletHousingRequirements": null,
     "housingDensity": null,
-    "pulletVerandaFeatures": null,
+    "pulletVerandaFeatures": "",
     "pulletVentilationSpecification": null,
     "rearingAviarySystem": null
 
