@@ -322,7 +322,7 @@ const scoringQuestions = (submission, desirabilityScore) => {
 const commonQuestions = (submission) => {
   const { henJourney, pulletJourney, isSolarPVSystemYes, isSolarPVSystemNo } = getDetails(submission)
   return {
-    poultryType: submission.poultryType,
+    poultryType: henJourney ? 'Laying hens (over 17 weeks old)' : 'Pullets (up to and including 17 weeks old)',
     poultryTypeHen: henJourney,
     poultryTypePullet: pulletJourney,
     birdNumber: submission.birdNumber,
