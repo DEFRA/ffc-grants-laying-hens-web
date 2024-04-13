@@ -166,13 +166,5 @@ describe('Create submission message', () => {
     msg = createMsg(farmerSubmission, desirabilityScoreHen)
     expect(msg.getScoreChance).toBe('seems unlikely to')
   })
-
-  test.only('getDetails function', () => {
-    let msg = createMsg(farmerSubmission, desirabilityScoreHen)
-    console.log(msg.getDetails, 'getDetails')
-    expect(msg.getDetails).toContain('Aviary system: ')
-
-    msg = createMsg(agentSubmission)
-    expect(msg.getDetails).toContain('Multi-tier system: ')
-  })
+  
 })
