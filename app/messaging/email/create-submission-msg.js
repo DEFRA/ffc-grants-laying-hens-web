@@ -255,12 +255,12 @@ const getDetails = (submission) => {
   const rearingAviarySystemTrue = submission.rearingAviarySystem === getQuestionAnswer('rearing-aviary-system', 'rearing-aviary-system-A1', ALL_QUESTIONS)
   const stepUpSystemTrue = submission.stepUpSystem === getQuestionAnswer('step-up-system', 'step-up-system-A1', ALL_QUESTIONS)
   const verandaJourney = submission.projectType === getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)
-  const isCurrentMultiTierSystemTrue = submission.currentSystem !== getQuestionAnswer('current-system', 'current-system-A1', ALL_QUESTIONS) || submission.currentSystem !== getQuestionAnswer('current-system', 'current-system-A2', ALL_QUESTIONS) 
+  const isCurrentMultiTierSystemTrue = submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A1', ALL_QUESTIONS) || submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A2', ALL_QUESTIONS) 
   let currentMultiTierSystemText = '';
 
-  if (isCurrentMultiTierSystemTrue && henJourney) {
+  if (!isCurrentMultiTierSystemTrue && henJourney) {
     currentMultiTierSystemText = 'Aviary system: ';
-  } else if (isCurrentMultiTierSystemTrue && pulletJourney) {
+  } else if (!isCurrentMultiTierSystemTrue && pulletJourney) {
     currentMultiTierSystemText = 'Multi-tier system: ';
   }
 
@@ -284,10 +284,10 @@ const scoringQuestions = (submission, desirabilityScore) => {
     // Scoring Questions
     currentSystem: submission.currentSystem,
     currentSystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system'),
-    isCurrentMultiTierSystemTrue: isCurrentMultiTierSystemTrue,
+    isCurrentMultiTierSystemTrue: !isCurrentMultiTierSystemTrue,
     currentMultiTierSystemText: currentMultiTierSystemText,
-    currentMultiTierSystem: isCurrentMultiTierSystemTrue ? submission.currentMultiTierSystem : '',
-    currentMultiTierSystemScore: isCurrentMultiTierSystemTrue ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
+    currentMultiTierSystem: !isCurrentMultiTierSystemTrue ? submission.currentMultiTierSystem : '',
+    currentMultiTierSystemScore: !isCurrentMultiTierSystemTrue ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
     aviarySystem: submission.aviarySystem ?? '',
     aviarySystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'aviary-system') ?? '',
     rampConnection: submission.rampConnection,

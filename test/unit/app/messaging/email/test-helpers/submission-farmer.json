@@ -61,7 +61,7 @@
     "potentialFunding": "60000.00",
     "remainingCost": "Yes",
     "currentSystem": "Colony cage",
-    "isCurrentMultiTierSystemTrue": true,
+    "isCurrentMultiTierSystemTrue": false,
     "currentMultiTierSystemText": "",
     "pulletJourney": false,
     "henJourney": true,
