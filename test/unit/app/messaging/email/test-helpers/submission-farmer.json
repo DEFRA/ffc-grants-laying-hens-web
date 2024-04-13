@@ -58,6 +58,8 @@
     "remainingCost": "Yes",
     "currentSystem": "Colony cage",
     "isCurrentMultiTierSystemTrue": false,
+    "pulletJourney": false,
+    "henJourney": true,
     "currentMultiTierSystem": "Yes",
     "rampConnection":   "Yes",
     "rampConnectionScore": "Yes",
