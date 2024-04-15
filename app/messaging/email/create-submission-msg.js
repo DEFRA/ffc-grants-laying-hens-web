@@ -321,6 +321,10 @@ const commonQuestionsForPulletAndHen = (submission) => {
   const { henJourney, pulletJourney, isSolarPVSystemYes, isSolarPVSystemNo } = getDetails(submission)
   return {
     ...commonQuestionsForAllJourney(submission),
+    birdNumber: submission.birdNumber,
+    buildingItems: submission.buildingItems,
+    replacingOrRefurbishingInsulation: submission.replacingInsulation || submission.refurbishingInsulation,
+    lightingFeatures: submission.lightingFeatures,
     poultryTypeHen: henJourney,
     poultryTypePullet: pulletJourney,
     housingDensity: submission.housingDensity ?? '',
