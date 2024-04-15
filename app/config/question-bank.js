@@ -3212,9 +3212,9 @@ const questionBank = {
         {
           key: 'easy-grip-perches',
           order: 200,
-          title:'Will the perches have a design feature that helps the birds grip the perches?',
+          title:'Will the perches have a design feature that helps the birds grip?',
           hint: {
-            html: `You can replace {{_poultryType_}} standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`
+            html: `You can replace {{_poultryType_}} standard circular metal perches with perches that have design features to help birds grip them (for example, an easy grip shape, a ridged surface, comfortable material or coating)`
           },
           url: 'easy-grip-perches',
           baseUrl: 'easy-grip-perches',
@@ -3247,7 +3247,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the perches will have a design feature that help the birds grip the perches'
+              error: 'Select yes if the perches will have a design feature that help the birds grip'
             }
           ],
           answers: [
@@ -3463,7 +3463,7 @@ const questionBank = {
                       
                         Natural light can: 
                       `,
-                items: ['promote positive, active behaviour', 'improved visibility to help reduce collisions between birds', 'increase range use.']
+                items: ['promote positive, active behaviour', 'improve visibility to help reduce collisions between birds', 'increase range use.']
               }]
             }]
           },
@@ -4227,18 +4227,18 @@ const questionBank = {
                 text: '£'
               },
               label: {
-                text: 'Business turnover (£)',
+                text: 'Annual business turnover (£)',
                 classes: 'govuk-label'
               },
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter the business turnover'
+                  error: 'Enter your annual business turnover'
                 },
                 {
                   type: 'REGEX',
                   regex: WHOLE_NUMBER_REGEX,
-                  error: 'Business turnover must be a whole number, like 100000'
+                  error: 'Annual business turnover must be a whole number, like 100000'
                 },
                 {
                   type: 'MIN_MAX',
@@ -4265,6 +4265,30 @@ const questionBank = {
                   type: 'REGEX',
                   regex: SBI_REGEX,
                   error: 'SBI number must have 9 characters, like 011115678'
+                }
+              ]
+            },
+            {
+              yarKey: 'cph',
+              type: 'text',
+              title: 'County parish holding (CPH) number',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'County parish holding (CPH) number',
+                classes: 'govuk-label'
+              },
+              hint: {
+                html: 'For example, 12/345/6789'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your Country parish holding (CPH) number'
+                },
+                {
+                  type: 'REGEX',
+                  regex: /^(\d{2}\s?)([\/\.\\\-]?)(\s?\d{3}\s?)\2(\s?\d{4})$/,
+                  error: 'Enter your Country parish holding CPH number, like 12/345/6789'
                 }
               ]
             },
