@@ -278,49 +278,47 @@ const getDetails = (submission) => {
 }
 
 const scoringQuestions = (submission, desirabilityScore) => {
-    const { isCurrentMultiTierSystemTrue, currentMultiTierSystemText, pulletJourney, henJourney } = getDetails(submission);
-
-  return {
-    // Scoring Questions
-    currentSystem: submission.currentSystem,
-    currentSystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system'),
-    isCurrentMultiTierSystemTrue: !isCurrentMultiTierSystemTrue,
-    currentMultiTierSystemText: currentMultiTierSystemText,
-    currentMultiTierSystem: !isCurrentMultiTierSystemTrue ? submission.currentMultiTierSystem : '',
-    currentMultiTierSystemScore: !isCurrentMultiTierSystemTrue ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
-    rampConnection: submission.rampConnection,
-    rampConnectionScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'ramp-connection'),
-    maximumTierHeight: submission.maximumTierHeight,
-    maximumTierHeightScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'maximum-tier-height'),
-    tierNumber: submission.tierNumber,
-    tierNumberScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'tier-number'),
-    consistentHousing: henJourney ? submission.henMultiTier : submission.pulletMultiTier,
-    consistentHousingScore: henJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'hen-multi-tier') : getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-multi-tier'),
-    naturalLight: submission.naturalLight,
-    naturalLightScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'natural-light'),
-    darkBrooders: pulletJourney ? submission.darkBrooders : '',
-    darkBroodersScore:  pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'dark-brooders') : '',
-    easyGripPerches: submission.easyGripPerches,
-    easyGripPerchesScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'easy-grip-perches'),
-    buildingBiosecurity: [submission.buildingBiosecurity].flat().join(', '),
-    buildingBiosecurityScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'building-biosecurity'),
-    pollutionMitigation: [submission.pollutionMitigation].flat().join(', '),
-    pollutionMitigationScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'pollution-mitigation'),
-    pulletVerandaFeatures:  pulletJourney ? submission.pulletVerandaFeatures : '',
-    pulletVerandaFeaturesScore: pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-veranda-features') : '',
-    renewableEnergy: [submission.renewableEnergy].flat().join(', '),
-    renewableEnergyScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'renewable-energy'),
-    birdDataType: [submission.birdDataType].flat().join(', '),
-    birdDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'bird-data-type'),
-    environmentalDataType: [submission.environmentalDataType].flat().join(', '),
-    environmentalDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'environmental-data-type'),
-    scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band)
-  }
+  const { isCurrentMultiTierSystemTrue, currentMultiTierSystemText, pulletJourney, henJourney } = getDetails(submission)
+    return {
+      // Scoring Questions
+      currentSystem: submission.currentSystem,
+      currentSystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system'),
+      isCurrentMultiTierSystemTrue: !isCurrentMultiTierSystemTrue,
+      currentMultiTierSystemText: currentMultiTierSystemText,
+      currentMultiTierSystem: !isCurrentMultiTierSystemTrue ? submission.currentMultiTierSystem : '',
+      currentMultiTierSystemScore: !isCurrentMultiTierSystemTrue ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
+      rampConnection: submission.rampConnection,
+      rampConnectionScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'ramp-connection'),
+      maximumTierHeight: submission.maximumTierHeight,
+      maximumTierHeightScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'maximum-tier-height'),
+      tierNumber: submission.tierNumber,
+      tierNumberScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'tier-number'),
+      consistentHousing: henJourney ? submission.henMultiTier : submission.pulletMultiTier,
+      consistentHousingScore: henJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'hen-multi-tier') : getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-multi-tier'),
+      naturalLight: submission.naturalLight,
+      naturalLightScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'natural-light'),
+      darkBrooders: pulletJourney ? submission.darkBrooders : '',
+      darkBroodersScore:  pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'dark-brooders') : '',
+      easyGripPerches: submission.easyGripPerches,
+      easyGripPerchesScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'easy-grip-perches'),
+      buildingBiosecurity: [submission.buildingBiosecurity].flat().join(', '),
+      buildingBiosecurityScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'building-biosecurity'),
+      pollutionMitigation: [submission.pollutionMitigation].flat().join(', '),
+      pollutionMitigationScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'pollution-mitigation'),
+      pulletVerandaFeatures:  pulletJourney ? submission.pulletVerandaFeatures : '',
+      pulletVerandaFeaturesScore: pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-veranda-features') : '',
+      renewableEnergy: [submission.renewableEnergy].flat().join(', '),
+      renewableEnergyScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'renewable-energy'),
+      birdDataType: [submission.birdDataType].flat().join(', '),
+      birdDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'bird-data-type'),
+      environmentalDataType: [submission.environmentalDataType].flat().join(', '),
+      environmentalDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'environmental-data-type'),
+      scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band)
+    }
 }
 
 const commonQuestionsForPulletAndHen = (submission) => {
   const { henJourney, pulletJourney, isSolarPVSystemYes, isSolarPVSystemNo } = getDetails(submission)
-  
   return {
     ...commonQuestionsForAllJourney(submission),
     birdNumber: submission.birdNumber,
@@ -350,7 +348,6 @@ const commonQuestionsForPulletAndHen = (submission) => {
 
 const commonQuestionsForAllJourney = (submission) => {
   const { henJourney } = getDetails(submission)
-
   return {
     poultryType: henJourney ? 'Laying hens (over 17 weeks old)' : 'Pullets (up to and including 17 weeks old)',
     projectCost: getCurrencyFormat(submission.projectCost),
@@ -360,7 +357,6 @@ const commonQuestionsForAllJourney = (submission) => {
 }
 
 const henQuestions = (submission) => {
-
     return {
       henVeranda: submission.henVeranda ?? '',
       henVerandaFeatures: submission.henVerandaFeatures ?? '',
@@ -373,7 +369,6 @@ const henQuestions = (submission) => {
 
 const pulletQuestions = (submission) => {
   const { rearingAviarySystemTrue, stepUpSystemTrue } = getDetails(submission)
-
     return {
       pulletHousingRequirements: submission.pulletHousingRequirements ?? '',
       pulletVeranda: submission.pulletVeranda ?? '',
@@ -388,7 +383,6 @@ const pulletQuestions = (submission) => {
 }
 
 const verandaQuestions = (submission) => {
-
   return {
     verandaOnlySize: submission.verandaOnlySize,
     verandaFeatures: submission.verandaFeatures ?? ''
@@ -397,7 +391,6 @@ const verandaQuestions = (submission) => {
 }
 
 const commonBusinessQuestions = (submission) => { 
-
   return {
     projectName: submission.businessDetails.projectName,
     businessName: submission.businessDetails.businessName,
@@ -413,7 +406,6 @@ const commonBusinessQuestions = (submission) => {
     scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }),
     businessType: submission.applicantBusiness
   }
-
 }
 
 const commonEligibilityQuestions = (submission) => {
@@ -474,7 +466,6 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
         ...commonBusinessQuestions(submission)
       }
     }
-
   }
 }
 
