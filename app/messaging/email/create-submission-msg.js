@@ -314,6 +314,7 @@ const scoringQuestions = (submission, desirabilityScore) => {
     birdDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'bird-data-type'),
     environmentalDataType: [submission.environmentalDataType].flat().join(', '),
     environmentalDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'environmental-data-type'),
+    scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band)
   }
 }
 
@@ -342,8 +343,7 @@ const commonQuestionsForPulletAndHen = (submission) => {
     solarBirdNumber: isSolarPVSystemYes ? submission.solarBirdNumber : '',
     solarPVCost: isSolarPVSystemYes ? getCurrencyFormat(submission.solarPVCost) : '',
     solarPowerCapacity: isSolarPVSystemYes ? submission.solarPowerCapacity : '',
-    vehicleWashing: submission.vehicleWashing,
-    scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
+    vehicleWashing: submission.vehicleWashing
   }
 }
 
