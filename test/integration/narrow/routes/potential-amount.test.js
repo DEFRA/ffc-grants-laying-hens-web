@@ -18,7 +18,7 @@ describe('Page: /potential-amount', () => {
 
   commonFunctionsMock(varList, undefined, utilsList, {})
   
-  it('page loads successfully, with all the Eligible options', async () => {
+  it('page loads successfully, with all the Eligible options when project cost < 1250000', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/potential-amount`
@@ -30,7 +30,7 @@ describe('Page: /potential-amount', () => {
     expect(response.payload).toContain(eligiblePageText)
   })
 
-  it('page loads successfully, with all the Eligible options', async () => {
+  it('page loads successfully, with all the Eligible options when project cost > 1250000', async () => {
     varList.projectCost= 1260000
     varList.calculatedGrant= 500000
     const options = {
@@ -41,11 +41,11 @@ describe('Page: /potential-amount', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Potential grant funding')
-    expect(response.payload).toContain('The maximum grant you can apply for is £500,000.')
     expect(response.payload).toContain('You may be able to apply for a grant of up to £500,000, based on the estimated cost of £1,260,000.')
+    expect(response.payload).toContain('The maximum grant you can apply for is £500,000.')
   })
 
-  it('page loads successfully, with all the Eligible options', async () => {
+  it('page loads successfully, with all the Eligible options when project cost > 1250000 & solar pv system = yes', async () => {
     varList.projectCost= 1260000
     varList.calculatedGrant= 500000
     varList.solarPVSystem = 'Yes'
@@ -58,6 +58,7 @@ describe('Page: /potential-amount', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Potential grant funding')
+    expect(response.payload).toContain('You may be able to apply for a grant of up to £500,000, based on the estimated cost of £1,260,000.')
     expect(response.payload).toContain('The maximum grant you can apply for is £500,000.')
     expect(response.payload).toContain('You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for building project costs.')
     expect(response.payload).toContain('You can continue to check your eligibility for grant funding to replace or refurbish a laying hens house.')
