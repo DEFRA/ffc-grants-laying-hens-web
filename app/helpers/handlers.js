@@ -12,7 +12,7 @@ const senders = require('../messaging/senders')
 
 const { startPageUrl, urlPrefix, serviceEndDate, serviceEndTime } = require('./../config/server')
 
-// const emailFormatting = require('./../messaging/email/process-submission')
+const emailFormatting = require('./../messaging/email/process-submission')
 const gapiService = require('../services/gapi-service')
 
 const {
@@ -265,6 +265,31 @@ const scorePageData = async (request, backUrl, url, h) => {
 
     const questions = msgData.desirability.questions.map(desirabilityQuestion => {
 
+      if (desirabilityQuestion.key === 'hen-multi-tier') {
+        switch (desirabilityQuestion.answers[0].input[0].value) {
+          case 'Yes':
+            desirabilityQuestion.answers[0].input[0].value = 'Yes, the hens will be reared in a multi-tier system as pullets'
+            break
+          case 'No':
+            desirabilityQuestion.answers[0].input[0].value = 'No, the hens will not be reared in a multi-tier system as pullets'
+            break
+          default:
+            break
+        }
+        
+      } else if (desirabilityQuestion.key === 'pullet-multi-tier') {
+        switch (desirabilityQuestion.answers[0].input[0].value) {
+          case 'Yes':
+            desirabilityQuestion.answers[0].input[0].value = 'Yes, the pullets will be housed in an aviary system as adults'
+            break
+          case 'No':
+            desirabilityQuestion.answers[0].input[0].value = 'No, the pullets will not be housed in an aviary system as hens'
+            break
+          default:
+            break
+        } 
+      }
+
       if (desirabilityQuestion.key != 'poultry-type') {
 
         const tableQuestion = tableOrder.filter(tableQuestionD => tableQuestionD.key === desirabilityQuestion.key)[0]
@@ -297,45 +322,55 @@ const scorePageData = async (request, backUrl, url, h) => {
   }
 }
 
-const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl, backUrl, h) => {
-  let { maybeEligibleContent } = question
-  maybeEligibleContent.title = question.title
-  let consentOptionalData
-
-  if(url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
-    maybeEligibleContent = {
+const handlePotentialAmount = (request, maybeEligibleContent, url) => {
+  if (url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
+    return {
       ...maybeEligibleContent,
       messageContent: 'The maximum grant you can apply for is £500,000.',
       insertText: { text:'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.' },
     }
-  }else if(url === 'potential-amount' &&  getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
-    maybeEligibleContent = {
+  } else if (url === 'potential-amount' && getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
+    return {
       ...maybeEligibleContent,
       messageContent: 'The maximum grant you can apply for is £500,000.',
       insertText: { text:'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for building project costs.' },
       extraMessageContent: 'You can continue to check your eligibility for grant funding to replace or refurbish a {{_poultryType_}} house.'
     }
+  } else if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') > 250000) {
+    return {
+      ...maybeEligibleContent,
+      potentialAmountConditional: true
+    }
+  } else if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') <= 250000) {
+    return {
+      ...maybeEligibleContent,
+      potentialAmountConditional: false
+    }
   }
+  return maybeEligibleContent;
+}
 
-
-  if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') > 250000) {
-    question.maybeEligibleContent.potentialAmountConditional = true
-  } else {
-    question.maybeEligibleContent.potentialAmountConditional = false
-  }
-
+const handleConfirmation = async (url, request, confirmationId, maybeEligibleContent, h) => {
   if (maybeEligibleContent.reference) {
     if (!getYarValue(request, 'consentMain')) {
-      return h.redirect(startPageUrl)
+      return h.redirect(startPageUrl);
     }
-    confirmationId = getConfirmationId(request.yar.id)
-    // try {
-    //   const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
-    //   await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
-    //   console.log('[CONFIRMATION EVENT SENT]')
-    // } catch (err) {
-    //   console.log('ERROR: ', err)
-    // }
+
+    if((url === 'confirmation' || url === 'veranda-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
+      maybeEligibleContent = {
+        ...maybeEligibleContent,
+          addText: true,
+      }
+    }
+
+    confirmationId = getConfirmationId(request.yar.id, request);
+    try {
+      const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id);
+      await senders.sendDesirabilitySubmitted(emailData, request.yar.id);
+      console.log('[CONFIRMATION EVENT SENT]');
+    } catch (err) {
+      console.log('ERROR: ', err);
+    }
     maybeEligibleContent = {
       ...maybeEligibleContent,
       reference: {
@@ -347,32 +382,49 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
         )
       }
     }
-    request.yar.reset()
+    request.yar.reset();
   }
+  return maybeEligibleContent;
+}
+
+
+const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl, backUrl, h) => {
+  let { maybeEligibleContent } = question
+  maybeEligibleContent.title = question.title
+  let consentOptionalData
+
+  maybeEligibleContent = handlePotentialAmount(request, maybeEligibleContent, url)
   
   maybeEligibleContent = {
     ...maybeEligibleContent,
-    insertText: maybeEligibleContent.insertText.text ?  { text: maybeEligibleContent.insertText.text.replace(
+    insertText: maybeEligibleContent?.insertText?.text ?  { text: maybeEligibleContent.insertText.text.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       )
     )} : '',
-    messageContent: maybeEligibleContent.messageContent.replace(
+    messageContent: maybeEligibleContent?.messageContent.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       )
     ),
-    extraMessageContent: maybeEligibleContent.extraMessageContent ?  maybeEligibleContent.extraMessageContent.replace(
+    extraMessageContent: maybeEligibleContent?.extraMessageContent ?  maybeEligibleContent.extraMessageContent.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
       getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
       )
-    ) : ''
+    ) : '',
+    surveyLink: maybeEligibleContent?.surveyLink ? maybeEligibleContent.surveyLink.replace(
+      SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+      )
+    ) : '',
   }
 
   if (url === 'confirm' || url === 'veranda-confirm') {
     const consentOptional = getYarValue(request, 'consentOptional')
     consentOptionalData = getConsentOptionalData(consentOptional)
   }
+
+  maybeEligibleContent = await handleConfirmation(url, request, confirmationId, maybeEligibleContent, h);
 
   const MAYBE_ELIGIBLE = { ...maybeEligibleContent, consentOptionalData, url, nextUrl, backUrl }
   return h.view('maybe-eligible', MAYBE_ELIGIBLE)

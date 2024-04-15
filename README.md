@@ -68,6 +68,7 @@ AUTH_USERNAME | The username needed for the login screen (Optional, only needed 
 AUTH_PASSWORD_HASH | The password needed for the login screen (Optional, only needed if LOGIN_REQUIRED is true) | grants
 --- | --- | ---
 NOTIFY_EMAIL_TEMPLATE | The email template needed for the application | N/A
+NOTIFY_EMAIL_VERANDA_TEMPLATE | The email template needed if veranda journey is selected for the application | N/A
 WORKSHEET_HIDE_EMPTY_ROWS | A true/false value to determine if empty rows in the DORA excel sheet should be hidden (defaults to true) | true
 WORKSHEET_PROTECT_ENABLED | A true/false value to determine if the DORA excel sheet should be protected (defaults to false) | false
 SEND_EMAIL_TO_RPA |A true/false value to determine if the generated email should be sent to RPA (default to false) | false

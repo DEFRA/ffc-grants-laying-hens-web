@@ -66,6 +66,7 @@ container:
   scoreResponseQueueAddress: ffc-grants-desirability-scoring-res
   desirabilitySubmittedTopicAddress: desirability-submitted
   notifyEmailTemplate: dummy-template
+  notifyEmailVerandaTemplate: dummy-template
   worksheetProtectPassword:
   worksheetProtectEnabled: false
   sendEmailToRpa: false
