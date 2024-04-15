@@ -407,7 +407,7 @@ const commonBusinessQuestions = (submission) => {
   }
 }
 
-const commonEligibilityQuestions = (submission) => {
+const commonEligibilityQuestions = (submission, isAgentEmail) => {
   return {
     firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
     lastName: isAgentEmail ? submission.agentsDetails.lastName : submission.farmerDetails.lastName,
@@ -437,7 +437,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
         //  All common questions
         ...commonQuestionsForAllJourney(submission),
          // Common Eligibility Questions
-        ...commonEligibilityQuestions(submission),
+        ...commonEligibilityQuestions(submission, isAgentEmail),
          // veranda Questions
         ...verandaQuestions(submission),
           // Farmer and Agent details
@@ -450,7 +450,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       emailAddress: rpaEmail || email,
       details: {
         // Common Eligibility Questions
-        ...commonEligibilityQuestions(submission),
+        ...commonEligibilityQuestions(submission, isAgentEmail),
         // Scoring Questions
         ...scoringQuestions(submission, desirabilityScore),
   
