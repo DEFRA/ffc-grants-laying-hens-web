@@ -313,7 +313,8 @@ const scoringQuestions = (submission, desirabilityScore) => {
       birdDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'bird-data-type'),
       environmentalDataType: [submission.environmentalDataType].flat().join(', '),
       environmentalDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'environmental-data-type'),
-      scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band)
+      scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
+      overallRating: desirabilityScore.desirability.overallRating.band,
     }
 }
 
@@ -411,7 +412,6 @@ const commonEligibilityQuestions = (submission) => {
     firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
     lastName: isAgentEmail ? submission.agentsDetails.lastName : submission.farmerDetails.lastName,
     referenceNumber: submission.confirmationId,
-    overallRating: desirabilityScore.desirability.overallRating.band,
     projectType: submission.projectType,
     farmertype: [submission.applicantType].flat().join(', '),
     legalStatus: submission.legalStatus,
