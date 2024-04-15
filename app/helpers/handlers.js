@@ -322,30 +322,32 @@ const scorePageData = async (request, backUrl, url, h) => {
   }
 }
 
-const handlePotentialAmount = (request, maybeEligibleContent) => {
-  if(getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
+const handlePotentialAmount = (request, maybeEligibleContent, url) => {
+  if (url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
     return {
       ...maybeEligibleContent,
       messageContent: 'The maximum grant you can apply for is £500,000.',
       insertText: { text:'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.' },
     }
-  } else if(getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
+  } else if (url === 'potential-amount' && getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
     return {
       ...maybeEligibleContent,
       messageContent: 'The maximum grant you can apply for is £500,000.',
       insertText: { text:'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for building project costs.' },
       extraMessageContent: 'You can continue to check your eligibility for grant funding to replace or refurbish a {{_poultryType_}} house.'
     }
+  } else if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') > 250000) {
+    return {
+      ...maybeEligibleContent,
+      potentialAmountConditional: true
+    }
+  } else if (url === 'veranda-potential-amount' && getYarValue(request, 'projectCost') <= 250000) {
+    return {
+      ...maybeEligibleContent,
+      potentialAmountConditional: false
+    }
   }
   return maybeEligibleContent;
-}
-
-const handleVerandaPotentialAmount = (request, question) => {
-  if (getYarValue(request, 'projectCost') > 250000) {
-    question.maybeEligibleContent.potentialAmountConditional = true;
-  } else {
-    question.maybeEligibleContent.potentialAmountConditional = false;
-  }
 }
 
 const handleConfirmation = async (url, request, confirmationId, maybeEligibleContent, h) => {
@@ -391,9 +393,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
   maybeEligibleContent.title = question.title
   let consentOptionalData
 
-  maybeEligibleContent = handlePotentialAmount(request, maybeEligibleContent)
-  handleVerandaPotentialAmount(request, question)
-  maybeEligibleContent = await handleConfirmation(url, request, confirmationId, maybeEligibleContent, h);
+  maybeEligibleContent = handlePotentialAmount(request, maybeEligibleContent, url)
   
   maybeEligibleContent = {
     ...maybeEligibleContent,
@@ -423,6 +423,8 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     const consentOptional = getYarValue(request, 'consentOptional')
     consentOptionalData = getConsentOptionalData(consentOptional)
   }
+
+  maybeEligibleContent = await handleConfirmation(url, request, confirmationId, maybeEligibleContent, h);
 
   const MAYBE_ELIGIBLE = { ...maybeEligibleContent, consentOptionalData, url, nextUrl, backUrl }
   return h.view('maybe-eligible', MAYBE_ELIGIBLE)
