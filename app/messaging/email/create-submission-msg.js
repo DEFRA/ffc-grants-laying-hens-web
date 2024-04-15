@@ -379,7 +379,6 @@ const pulletQuestions = (submission) => {
       stepUpSystem: stepUpSystemTrue ? submission.stepUpSystem : '',
       stepUpSystemTrue: stepUpSystemTrue
     }
-
 }
 
 const verandaQuestions = (submission) => {
@@ -387,7 +386,6 @@ const verandaQuestions = (submission) => {
     verandaOnlySize: submission.verandaOnlySize,
     verandaFeatures: submission.verandaFeatures ?? ''
   }
-
 }
 
 const commonBusinessQuestions = (submission) => { 
