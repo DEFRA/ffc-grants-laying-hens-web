@@ -4159,13 +4159,13 @@ const questionBank = {
                 text: '£'
               },
               label: {
-                text: 'Business turnover (£)',
+                text: 'Annual business turnover (£)',
                 classes: 'govuk-label'
               },
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter the business turnover'
+                  error: 'Enter your annual business turnover'
                 },
                 {
                   type: 'REGEX',
@@ -4197,6 +4197,30 @@ const questionBank = {
                   type: 'REGEX',
                   regex: SBI_REGEX,
                   error: 'SBI number must have 9 characters, like 011115678'
+                }
+              ]
+            },
+            {
+              yarKey: 'cph',
+              type: 'text',
+              title: 'County parish holding (CPH) number',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'County parish holding (CPH) number',
+                classes: 'govuk-label'
+              },
+              hint: {
+                html: 'For example, 12/345/6789'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your Country parish holding (CPH) number'
+                },
+                {
+                  type: 'REGEX',
+                  regex: /^(\d{2}\s?)([\/\.\\\-]?)(\s?\d{3}\s?)\2(\s?\d{4})$/,
+                  error: 'Enter your Country parish holding CPH number, like 12/345/6789'
                 }
               ]
             },
