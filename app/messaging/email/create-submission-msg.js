@@ -385,7 +385,7 @@ const pulletQuestions = (submission) => {
 const verandaQuestions = (submission) => {
   return {
     verandaOnlySize: submission.verandaOnlySize,
-    verandaFeatures: submission.verandaFeatures ?? ''
+    verandaFeatures: submission.verandaFeatures
   }
 }
 
