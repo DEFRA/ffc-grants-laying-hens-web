@@ -409,7 +409,6 @@ const commonBusinessQuestions = (submission) => {
 }
 
 const commonEligibilityQuestions = (submission) => {
-
   return {
     firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
     lastName: isAgentEmail ? submission.agentsDetails.lastName : submission.farmerDetails.lastName,
