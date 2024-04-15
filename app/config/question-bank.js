@@ -711,13 +711,14 @@ const questionBank = {
               key: 'poultry-type-A1',
               text: 'Laying hens (over 17 weeks old)',
               value: 'hen',
-              yarKeysReset: ['multiTierSystem']
+              yarKeysReset: ['multiTierSystem', 'pulletHousingRequirements', 'housingDensity', 'darkBrooders',
+                              'rearingAviarySystem', 'stepUpSystem', 'pulletVentilationSpecification', 'pulletVerandaFeatures']
             },
             {
               key: 'poultry-type-A2',
               text: 'Pullets (up to and including 17 weeks old)',
               value: 'pullet',
-              yarKeysReset: ['henVeranda']
+              yarKeysReset: ['henVeranda', 'henVerandaFeatures', 'henVentilationSpecification', 'aviaryWelfare', 'aviarySystem', 'eggStoreAccess']
             },
             {
               value: 'divider'
@@ -1951,6 +1952,7 @@ const questionBank = {
               key: 'multi-tier-system-A1',
               value: 'Rearing aviary',
               redirectUrl: 'rearing-aviary-system',
+              yarKeysReset: ['stepUpSystem'],
               hint: {
                 text: 'A system that houses birds within tiers during the first 2 weeks of rearing, that you can open to enable them to access the barn flow after 2 weeks'
               }
@@ -1959,6 +1961,7 @@ const questionBank = {
               key: 'multi-tier-system-A2',
               value: 'Step-up system',
               redirectUrl: 'step-up-system',
+              yarKeysReset: ['rearingAviarySystem'],
               hint: {
                 text: 'A floor system that can change to match a rearing aviary post-brooding, with adjustable elevated tiers you can add and gradually raise as the birds grow'
               }

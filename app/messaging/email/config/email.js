@@ -4,12 +4,14 @@ require('dotenv').config()
 
 // Define config schema
 const schema = Joi.object({
-  notifyTemplate: Joi.string().required()
+  notifyTemplate: Joi.string().required(),
+  notifyTemplateVeranda: Joi.string().required()
 })
 
 // Build config
 const config = {
-  notifyTemplate: process.env.NOTIFY_EMAIL_TEMPLATE
+  notifyTemplate: process.env.NOTIFY_EMAIL_TEMPLATE,
+  notifyTemplateVeranda: process.env.NOTIFY_EMAIL_VERANDA_TEMPLATE
 }
 
 // Validate config

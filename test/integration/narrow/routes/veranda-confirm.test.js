@@ -2,7 +2,11 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('confirm page', () => {
-  const varList = { farmerDetails: 'someValue', contractorsDetails: 'someValue' }
+  const varList = { 
+    farmerDetails: 'someValue', 
+    contractorsDetails: 'someValue',
+    projectType: 'Adding a veranda only to the existing building'
+  }
 
   commonFunctionsMock(varList, undefined)
   it('page loads successfully, with all the options', async () => {
