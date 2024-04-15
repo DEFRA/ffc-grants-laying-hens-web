@@ -320,6 +320,7 @@ const scoringQuestions = (submission, desirabilityScore) => {
 
 const commonQuestionsForPulletAndHen = (submission) => {
   const { henJourney, pulletJourney, isSolarPVSystemYes, isSolarPVSystemNo } = getDetails(submission)
+  
   return {
     ...commonQuestionsForAllJourney(submission),
     birdNumber: submission.birdNumber,
@@ -349,6 +350,7 @@ const commonQuestionsForPulletAndHen = (submission) => {
 
 const commonQuestionsForAllJourney = (submission) => {
   const { henJourney } = getDetails(submission)
+
   return {
     poultryType: henJourney ? 'Laying hens (over 17 weeks old)' : 'Pullets (up to and including 17 weeks old)',
     projectCost: getCurrencyFormat(submission.projectCost),
@@ -358,6 +360,7 @@ const commonQuestionsForAllJourney = (submission) => {
 }
 
 const henQuestions = (submission) => {
+
     return {
       henVeranda: submission.henVeranda ?? '',
       henVerandaFeatures: submission.henVerandaFeatures ?? '',
@@ -366,7 +369,6 @@ const henQuestions = (submission) => {
       eggStoreAccess: submission.eggStoreAccess ?? '',
       aviarySystem: submission.aviarySystem ?? '',
     }
-
 }
 
 const pulletQuestions = (submission) => {
@@ -386,6 +388,7 @@ const pulletQuestions = (submission) => {
 }
 
 const verandaQuestions = (submission) => {
+
   return {
     verandaOnlySize: submission.verandaOnlySize,
     verandaFeatures: submission.verandaFeatures ?? ''
@@ -413,7 +416,7 @@ const commonBusinessQuestions = (submission) => {
 
 }
 
-const commonEligibilityQuestions = (submission) =>{
+const commonEligibilityQuestions = (submission) => {
 
   return {
     firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
