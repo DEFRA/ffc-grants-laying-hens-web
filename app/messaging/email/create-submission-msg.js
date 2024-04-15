@@ -389,8 +389,11 @@ const verandaQuestions = (submission) => {
   }
 }
 
-const commonBusinessQuestions = (submission) => { 
+const commonBusinessQuestions = (submission, isAgentEmail) => { 
   return {
+    firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
+    lastName: isAgentEmail ? submission.agentsDetails.lastName : submission.farmerDetails.lastName,
+    referenceNumber: submission.confirmationId,
     projectName: submission.businessDetails.projectName,
     businessName: submission.businessDetails.businessName,
     projectPostcode: submission.farmerDetails.projectPostcode,
@@ -407,11 +410,8 @@ const commonBusinessQuestions = (submission) => {
   }
 }
 
-const commonEligibilityQuestions = (submission, isAgentEmail) => {
+const commonEligibilityQuestions = (submission) => {
   return {
-    firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
-    lastName: isAgentEmail ? submission.agentsDetails.lastName : submission.farmerDetails.lastName,
-    referenceNumber: submission.confirmationId,
     projectType: submission.projectType,
     farmertype: [submission.applicantType].flat().join(', '),
     legalStatus: submission.legalStatus,
@@ -437,11 +437,11 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
         //  All common questions
         ...commonQuestionsForAllJourney(submission),
          // Common Eligibility Questions
-        ...commonEligibilityQuestions(submission, isAgentEmail),
+        ...commonEligibilityQuestions(submission),
          // veranda Questions
         ...verandaQuestions(submission),
           // Farmer and Agent details
-        ...commonBusinessQuestions(submission)
+        ...commonBusinessQuestions(submission, isAgentEmail)
       }
     }
   }else{
@@ -460,7 +460,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
         ...commonQuestionsForPulletAndHen(submission),
 
         // Farmer and Agent details
-        ...commonBusinessQuestions(submission)
+        ...commonBusinessQuestions(submission, isAgentEmail)
       }
     }
   }
