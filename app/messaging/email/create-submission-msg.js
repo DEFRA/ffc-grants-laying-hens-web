@@ -450,7 +450,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       emailAddress: rpaEmail || email,
       details: {
         // Common Eligibility Questions
-        ...commonEligibilityQuestions(submission, isAgentEmail),
+        ...commonEligibilityQuestions(submission),
         // Scoring Questions
         ...scoringQuestions(submission, desirabilityScore),
   
