@@ -180,7 +180,7 @@ describe('Page: /business-details', () => {
 
   it('should validate business turnover - only digits', async () => {
     valList.businessTurnover = {
-      error: 'Business turnover must be a whole number, like 100000',
+      error: 'Annual business turnover must be a whole number, like 100000',
       return: false
     }
     const postOptions = {
@@ -195,7 +195,7 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Business turnover must be a whole number, like 100000')
+    expect(postResponse.payload).toContain('Annual business turnover must be a whole number, like 100000')
   })
 
   it('should validate business turnover - no spaces', async () => {
@@ -211,7 +211,7 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Business turnover must be a whole number, like 100000')
+    expect(postResponse.payload).toContain('Annual business turnover must be a whole number, like 100000')
   })
 
   it('should validate business turnover - maximum value is 999999999', async () => {

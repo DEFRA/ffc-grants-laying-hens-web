@@ -4170,7 +4170,7 @@ const questionBank = {
                 {
                   type: 'REGEX',
                   regex: WHOLE_NUMBER_REGEX,
-                  error: 'Business turnover must be a whole number, like 100000'
+                  error: 'Annual business turnover must be a whole number, like 100000'
                 },
                 {
                   type: 'MIN_MAX',
