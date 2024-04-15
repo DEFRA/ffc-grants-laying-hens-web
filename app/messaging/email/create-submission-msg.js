@@ -288,8 +288,6 @@ const scoringQuestions = (submission, desirabilityScore) => {
     currentMultiTierSystemText: currentMultiTierSystemText,
     currentMultiTierSystem: !isCurrentMultiTierSystemTrue ? submission.currentMultiTierSystem : '',
     currentMultiTierSystemScore: !isCurrentMultiTierSystemTrue ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
-    aviarySystem: submission.aviarySystem ?? '',
-    aviarySystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'aviary-system') ?? '',
     rampConnection: submission.rampConnection,
     rampConnectionScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'ramp-connection'),
     maximumTierHeight: submission.maximumTierHeight,
@@ -304,17 +302,17 @@ const scoringQuestions = (submission, desirabilityScore) => {
     darkBroodersScore:  pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'dark-brooders') : '',
     easyGripPerches: submission.easyGripPerches,
     easyGripPerchesScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'easy-grip-perches'),
-    buildingBiosecurity: submission.buildingBiosecurity ? [submission.buildingBiosecurity].flat().join(', ') : '' ,
+    buildingBiosecurity: [submission.buildingBiosecurity].flat().join(', '),
     buildingBiosecurityScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'building-biosecurity'),
-    pollutionMitigation: submission.pollutionMitigation ? [submission.pollutionMitigation].flat().join(', ') : '' ,
+    pollutionMitigation: [submission.pollutionMitigation].flat().join(', '),
     pollutionMitigationScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'pollution-mitigation'),
     pulletVerandaFeatures:  pulletJourney ? submission.pulletVerandaFeatures : '',
     pulletVerandaFeaturesScore: pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-veranda-features') : '',
-    renewableEnergy: submission.renewableEnergy ? [submission.renewableEnergy].flat().join(', ') : '' ,
+    renewableEnergy: [submission.renewableEnergy].flat().join(', '),
     renewableEnergyScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'renewable-energy'),
-    birdDataType: submission.birdDataType ? [submission.birdDataType].flat().join(', ') : '' ,
+    birdDataType: [submission.birdDataType].flat().join(', '),
     birdDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'bird-data-type'),
-    environmentalDataType: submission.environmentalDataType ? [submission.environmentalDataType].flat().join(', ') : '',
+    environmentalDataType: [submission.environmentalDataType].flat().join(', '),
     environmentalDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'environmental-data-type'),
   }
 }
@@ -357,7 +355,8 @@ const henQuestions = (submission) => {
       henVerandaFeatures: submission.henVerandaFeatures ?? '',
       henVentilationSpecification: submission.henVentilationSpecification ?? '',
       aviaryWelfare: submission.aviaryWelfare ?? '',
-      eggStoreAccess: submission.eggStoreAccess ?? ''
+      eggStoreAccess: submission.eggStoreAccess ?? '',
+      aviarySystem: submission.aviarySystem ?? '',
     }
 
 }
@@ -393,7 +392,7 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
       scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
 
       projectType: submission.projectType,
-      farmertype: submission.applicantType ? [submission.applicantType].flat().join(', ') : ' ',
+      farmertype: [submission.applicantType].flat().join(', '),
       legalStatus: submission.legalStatus,
       businessLocation: submission.inEngland,
       planningPermission: submission.planningPermission,
