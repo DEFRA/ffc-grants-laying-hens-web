@@ -130,6 +130,7 @@ const questionBank = {
             {
               key: 'project-type-A1',
               value: 'Adding a veranda only to the existing building',
+              yarKeysReset: ['poultryType', 'projectCost', 'remainingCost', 'totalRemainingCost', 'calculatedGrant'],
               hint: {
                 text: 'The RPA will award veranda-only grant funding on a first come, first served basis'
               }
