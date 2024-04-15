@@ -8,7 +8,18 @@ describe('Create submission message', () => {
   const mockPassword = 'mock-pwd'
 
   const varList = {}
-  commonFunctionsMock(varList, undefined)
+  const utilsList = {
+    'poultry-type-A1': 'hen',
+    'poultry-type-A2': 'pullet',
+    'project-type-A1': 'Adding a veranda only to the existing building',
+    'solar-PV-system-A1': 'Yes',
+    'solar-PV-system-A2': 'No',
+    'rearing-aviary-system-A1': 'Yes',
+    'step-up-system-A1': 'Yes',
+    'current-system-A1': 'Colony cage',
+    'current-system-A2': 'Combi-cage',
+  }
+  commonFunctionsMock(varList, undefined, utilsList, undefined)
 
 
   jest.mock('../../../../../../app/messaging/email/config/email', () => ({
