@@ -180,13 +180,14 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(54, 'Electronic OA received date ', todayStr),
     generateRow(370, 'Status', 'Pending RPA review'),
     generateRow(85, 'Full Application Submission Date', '30/04/2025'),
-    generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
-    generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
+    // generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
+    // generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
     ...addAgentDetails(submission.agentsDetails)
   ]
 }
 
 function getSpreadsheetDetails(submission, desirabilityScore) {
+  console.log('GET SPREADSHEET DETAILS')
   const today = new Date()
   const todayStr = today.toLocaleDateString('en-GB')
   // const schemeName = 'Laying Hens for Health and Welfare'
@@ -338,7 +339,6 @@ const commonQuestionsForPulletAndHen = (submission) => {
     isSolarPVSystemNo: isSolarPVSystemNo,
     roofSupportSolarPV: submission.roofSupportSolarPV ?? '',
     roofSolarPVExemption: submission.roofSolarPVExemption ? [submission.roofSolarPVExemption].flat().join(', ') : '',
-    grantRate: `Up to ${GRANT_PERCENTAGE}%`,
     solarGrantRate: isSolarPVSystemYes ? `Up to ${GRANT_PERCENTAGE_SOLAR}%` : '',
     solarBirdNumber: isSolarPVSystemYes ? submission.solarBirdNumber : '',
     solarPVCost: isSolarPVSystemYes ? getCurrencyFormat(submission.solarPVCost) : '',
@@ -353,7 +353,8 @@ const commonQuestionsForAllJourney = (submission) => {
     poultryType: henJourney ? 'Laying hens (over 17 weeks old)' : 'Pullets (up to and including 17 weeks old)',
     projectCost: getCurrencyFormat(submission.projectCost),
     potentialFunding: getCurrencyFormat(submission.calculatedGrant),
-    remainingCost: submission.remainingCosts
+    remainingCost: submission.remainingCosts,
+    grantRate: `Up to ${GRANT_PERCENTAGE}%`,
   }
 }
 
@@ -427,7 +428,6 @@ const commonEligibilityQuestions = (submission) => {
 function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
   const { verandaJourney } = getDetails(submission);
   const email = isAgentEmail ? submission.agentsDetails.emailAddress : submission.farmerDetails.emailAddress
-  
   if(verandaJourney) {
     return {
       notifyTemplate: emailConfig.notifyTemplateVeranda,
