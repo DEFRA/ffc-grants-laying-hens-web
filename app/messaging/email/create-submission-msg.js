@@ -397,6 +397,7 @@ const commonBusinessQuestions = (submission, isAgentEmail) => {
     referenceNumber: submission.confirmationId,
     projectName: submission.businessDetails.projectName,
     businessName: submission.businessDetails.businessName,
+    cphNumber: submission.businessDetails.cph,
     projectPostcode: submission.farmerDetails.projectPostcode,
     farmerName: submission.farmerDetails.firstName,
     farmerSurname: submission.farmerDetails.lastName,
