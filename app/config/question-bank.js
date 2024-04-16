@@ -3662,12 +3662,12 @@ const questionBank = {
                 answerKey: 'renewable-energy-A5'
               }
             },
-            // {
-            //   type: 'DEPENDENT_ANSWERS',
-            //   error: 'Select one type of heat exchanger',
-            //   questionKey: 'renewable-energy',
-            //   dependentAnswerArray: ['renewable-energy-A2', 'renewable-energy-A3']
-            // }
+            {
+              type: 'DEPENDENT_ANSWERS',
+              error: 'Select one type of heat exchanger',
+              questionKey: 'renewable-energy',
+              dependentAnswerArray: ['renewable-energy-A2', 'renewable-energy-A3']
+            }
           ],
           answers: [
             {
