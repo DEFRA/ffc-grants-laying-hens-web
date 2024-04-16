@@ -5173,14 +5173,14 @@ const questionBank = {
           pageTitle: '',
           url: 'veranda-waitlist-confirmation',
           baseUrl: 'veranda-waitlist-confirmation',
-          // ga: { name: 'veranda-waitlist-confirmation', params: {} },
+          ga: { name: 'veranda-waitlist-confirmation', params: {} },
           maybeEligible: true,
           maybeEligibleContent: {
-            // reference: {
-            //   titleText: 'Details submitted',
-            //   html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
-            //   surveyLink: process.env.SURVEY_LINK
-            // },
+            reference: {
+              titleText: 'Details submitted',
+              html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
+              surveyLink: process.env.SURVEY_LINK
+            },
             messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
               If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Investment Fund.<br/><br/>
               <h2 class="govuk-heading-m">RPA helpline</h2>
