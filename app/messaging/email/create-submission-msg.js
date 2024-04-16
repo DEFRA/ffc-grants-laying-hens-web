@@ -257,12 +257,12 @@ const getDetails = (submission) => {
   const stepUpSystemTrue = submission.stepUpSystem === getQuestionAnswer('step-up-system', 'step-up-system-A1', ALL_QUESTIONS)
   const verandaJourney = submission.projectType === getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)
   const isCurrentMultiTierSystemTrue = submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A1', ALL_QUESTIONS) || submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A2', ALL_QUESTIONS) 
-  let currentMultiTierSystemText = '';
+  let currentMultiTierSystemText = ''
 
   if (!isCurrentMultiTierSystemTrue && henJourney) {
-    currentMultiTierSystemText = 'Aviary system: ';
+    currentMultiTierSystemText = 'Aviary system: '
   } else if (!isCurrentMultiTierSystemTrue && pulletJourney) {
-    currentMultiTierSystemText = 'Multi-tier system: ';
+    currentMultiTierSystemText = 'Multi-tier system: '
   }
 
   return {
@@ -426,8 +426,9 @@ const commonEligibilityQuestions = (submission) => {
 
 
 function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
-  const { verandaJourney } = getDetails(submission);
+  const { verandaJourney } = getDetails(submission)
   const email = isAgentEmail ? submission.agentsDetails.emailAddress : submission.farmerDetails.emailAddress
+
   if(verandaJourney) {
     return {
       notifyTemplate: emailConfig.notifyTemplateVeranda,
