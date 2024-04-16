@@ -405,8 +405,7 @@ const commonBusinessQuestions = (submission, isAgentEmail) => {
     agentBusinessName: submission.agentsDetails?.businessName ?? 'N/A',
     agentEmail: submission.agentsDetails?.emailAddress ?? 'N/A',
     contactConsent: submission.consentOptional ? 'Yes' : 'No',
-    scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }),
-    businessType: submission.applicantBusiness
+    scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
   }
 }
 
