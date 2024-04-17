@@ -47,7 +47,7 @@
   },
   "overrides": {
     "semver": "7.5.3",
-    "axios": "^1.6.2",
+    "axios": "^1.6.4",
     "chromedriver": "^119.0.1"
   },
   "devDependencies": {
