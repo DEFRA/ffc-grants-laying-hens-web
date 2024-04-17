@@ -133,7 +133,8 @@ const questionBank = {
               yarKeysReset: ['poultryType', 'projectCost', 'remainingCost', 'totalRemainingCost', 'calculatedGrant'],
               hint: {
                 text: 'The RPA will award veranda-only grant funding on a first come, first served basis'
-              }
+              },
+              redirectUrl: ''
             },
             {
               key: 'project-type-A2',

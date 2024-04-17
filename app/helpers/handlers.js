@@ -483,6 +483,7 @@ const getPage = async (question, request, h) => {
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
+  setYarValue(request, 'verandaFundingCap', false)
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }
@@ -650,6 +651,12 @@ const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
 const showPostPage = (currentQuestion, request, h) => {
   let { yarKey, answers, baseUrl, ineligibleContent, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
+
+  if(baseUrl === 'project-type' && getYarValue(request, 'verandaFundingCap')){
+    currentQuestion.answers[0].redirectUrl = 'veranda-funding-cap'
+  }else{
+    currentQuestion.answers[0].redirectUrl = ''
+  }
 
   if (baseUrl !== 'score') {
     setYarValue(request, 'onScorePage', false)
