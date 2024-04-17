@@ -355,7 +355,8 @@ const handleConfirmation = async (url, request, confirmationId, maybeEligibleCon
     if (!getYarValue(request, 'consentMain')) {
       return h.redirect(startPageUrl);
     }
-    if((url === 'confirmation' || url === 'veranda-confirmation' || url === 'veranda-waitlist-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
+
+    if((url === 'confirmation' || url === 'veranda-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
       maybeEligibleContent = {
         ...maybeEligibleContent,
           addText: true,
