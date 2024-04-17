@@ -8,7 +8,7 @@ const { setOptionsLabel } = require('ffc-grants-common-functionality').answerOpt
 const getConfirmationId = (guid, request) => {
   const projectType = getYarValue(request, 'projectType');
   const projectTypeAnswer = getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)
-  const prefix = projectType === projectTypeAnswer ? 'VO' : 'LH';
+  const prefix = getYarValue(request, 'verandaFundingCap') ? 'VI' : projectType === projectTypeAnswer ? 'VO' : 'LH';
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase();
 }
 
