@@ -5213,7 +5213,7 @@ const questionBank = {
           url: 'veranda-funding-cap',
           backUrl: 'project-type',
           nextUrl: '',
-          // preValidationKeys: ['farmerDetails'],
+          // preValidationKeys: ['projectType'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'We have reached the limit of applications for veranda grant funding',
