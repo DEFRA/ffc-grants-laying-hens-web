@@ -130,6 +130,7 @@ const questionBank = {
             {
               key: 'project-type-A1',
               value: 'Adding a veranda only to the existing building',
+              yarKeysReset: ['poultryType', 'projectCost', 'remainingCost', 'totalRemainingCost', 'calculatedGrant'],
               hint: {
                 text: 'The RPA will award veranda-only grant funding on a first come, first served basis'
               }
@@ -673,14 +674,7 @@ const questionBank = {
               elseUrl: 'project-responsibility'
             }
           },
-          nextUrlObject: {
-            dependentQuestionYarKey: 'projectType',
-            dependentAnswerKeysArray: ['project-type-A1'],
-            urlOptions: {
-              thenUrl: 'veranda-only-size',
-              elseUrl: '1000-birds'
-            }
-          },
+          nextUrl: '1000-birds',
           ineligibleContent: {
             messageContent: 'This grant is only for laying hen or pullet projects.',
             messageLink: {
@@ -740,11 +734,15 @@ const questionBank = {
           baseUrl: '1000-birds',
           backUrl: 'poultry-type',
           nextUrlObject: {
-            dependentQuestionYarKey: ['poultryType'],
-            dependentAnswerKeysArray: ['poultry-type-A1'],
+            dependentQuestionYarKey: ['projectType'],
+            dependentAnswerKeysArray: ['project-type-A1'],
+            dependentElseUrlYarKey: 'poultryType',
+            dependentElseUrlQuestionKey: 'poultry-type',
+            dependentElseUrlAnswerKey: 'poultry-type-A1',
             urlOptions: {
-              thenUrl: 'hen-veranda',
-              elseUrl: 'building-items'
+              thenUrl: 'veranda-only-size',
+              elseUrl: 'building-items',
+              dependantElseUrl: 'hen-veranda'
             }
           },
           // preValidationKeys: ['poultryType'],
@@ -2380,7 +2378,7 @@ const questionBank = {
           title: 'How big will the veranda be?',
           url: 'veranda-only-size',
           baseUrl: 'veranda-only-size',
-          backUrl: 'poultry-type',
+          backUrl: '1000-birds',
           nextUrl: 'veranda-features',
           sidebar: {
             values: [{
