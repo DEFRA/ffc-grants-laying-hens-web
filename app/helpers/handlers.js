@@ -654,7 +654,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
   if(baseUrl === 'project-type' && getYarValue(request, 'verandaFundingCap')){
     currentQuestion.answers[0].redirectUrl = 'veranda-funding-cap'
-  }else{
+  }else if(baseUrl === 'project-type' && !getYarValue(request, 'verandaFundingCap')){
     currentQuestion.answers[0].redirectUrl = ''
   }
 
