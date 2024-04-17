@@ -5205,6 +5205,31 @@ const questionBank = {
           },
           surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
           }
+        },
+        {
+          key: 'veranda-funding-cap',
+          title: 'veranda funding cap',
+          order: 430,
+          url: 'veranda-funding-cap',
+          backUrl: 'project-type',
+          nextUrl: '',
+          // preValidationKeys: ['farmerDetails'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'We have reached the limit of applications for veranda grant funding',
+            messageContent: `The veranda grant funding is awarded on a first come, first served basis. We are not currently accepting applications for veranda-only grant funding.<br/><br/>
+            You can check your eligibility and provide your business details to <a class="govuk-link" href="./applicant-type" rel="noopener noreferrer">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.<br/><br/>
+            Alternatively, you can check if you are eligible comprehensive grant funding to refurbish or replace laying hen or pullet housing.`,
+            insertText: {
+              text: ''
+            },
+            messageLink: {
+              url: './start',
+              title: 'Check if you are eligible for comprehensive grant funding'
+            },
+            verandaFundingCap: true
+          },
+          yarKey: 'verandaFundingCap'
         }
       ]
     }
