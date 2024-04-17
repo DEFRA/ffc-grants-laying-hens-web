@@ -326,13 +326,14 @@ const handlePotentialAmount = (request, maybeEligibleContent, url) => {
   if (url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
     return {
       ...maybeEligibleContent,
-      messageContent: 'The maximum grant you can apply for is £500,000.',
-      insertText: { text:'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.' },
+      messageContent: 'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.',
+      extraMessageContent: 'The maximum grant you can apply for is £500,000.'
     }
-  } else if (url === 'potential-amount' && getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
+  } else if (url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'Yes'){
     return {
       ...maybeEligibleContent,
-      messageContent: 'The maximum grant you can apply for is £500,000.',
+      messageContent: `You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.</br></br>
+      The maximum grant you can apply for is £500,000.`,
       insertText: { text:'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for building project costs.' },
       extraMessageContent: 'You can continue to check your eligibility for grant funding to replace or refurbish a {{_poultryType_}} house.'
     }

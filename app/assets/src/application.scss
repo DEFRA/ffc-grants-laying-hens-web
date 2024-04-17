@@ -6,6 +6,24 @@ $govuk-assets-path: "~govuk-frontend/govuk/assets/";
   border: 1px solid #1d70b8;
 }
 
+.interruption-scoring-main {
+  @include govuk-responsive-padding(4, "left");
+  background-color: govuk-colour("blue");
+  
+  div {
+    h1, p {
+      color:  govuk-colour("white");
+    }
+  }
+
+  a {
+    &, &:visited, &:hover {
+      background-color: govuk-colour("white");
+      color: govuk-colour("blue");
+    }
+  }
+}
+
 .scoring-block {
   background: #F8F8F8;
   border: 1px solid #b1b4b6;
