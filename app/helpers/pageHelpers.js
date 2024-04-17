@@ -12,13 +12,13 @@ const getConfirmationId = (guid, request) => {
   let prefix =''
   if(projectType === projectTypeAnswer){
     if(getYarValue(request, 'verandaFundingCap')){
-      console.log('HELOOOOO')
       prefix = 'VI'
     }else{
+      console.log('VOOOOO I am here!!!!!!')
       prefix = 'VO'
     }
   }else{
-    prefix = 'LH'
+      prefix = 'LH'
   }
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase();
 }

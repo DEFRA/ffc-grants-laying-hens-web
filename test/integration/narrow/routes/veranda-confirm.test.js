@@ -8,8 +8,13 @@ describe('confirm page', () => {
     projectType: 'Adding a veranda only to the existing building',
     verandaFundingCap: false
   }
+  let valList = {}
+  const utilsList = {
+    'project-type-A1': 'Adding a veranda only to the existing building'
+  }
 
-  commonFunctionsMock(varList, undefined)
+
+  commonFunctionsMock(varList, 'Error', utilsList, valList)
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -34,6 +39,7 @@ describe('confirm page', () => {
   })
 
   it('store user response and redirect to /veranda-confirmation', async () => {
+    varList.verandaFundingCap = false
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-confirm`,
