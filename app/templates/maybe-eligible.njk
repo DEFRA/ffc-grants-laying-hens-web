@@ -83,7 +83,7 @@
         <p class="govuk-body"><a href="{{messageLink.url}}" class="govuk-link">{{messageLink.title}}</a></p>
       {% endif %}
 
-      {% if not consentOptionalData and not reference and not verandaFundingCap %}
+      {% if not consentOptionalData and not reference and not NoBtnVerandaFundingCap %}
         {% if customButtonText %}
           {% set buttonText = customButtonText %}
         {% else %}

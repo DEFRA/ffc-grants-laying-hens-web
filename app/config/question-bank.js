@@ -5228,6 +5228,7 @@ const questionBank = {
               url: './start',
               title: 'Check if you are eligible for comprehensive grant funding'
             },
+            NoBtnVerandaFundingCap: true
           }
         }
       ]
