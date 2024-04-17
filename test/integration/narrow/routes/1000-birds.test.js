@@ -9,6 +9,7 @@ const utilsList = {
 describe('Page: /1000-birds', () => {
   let varList = {
     poultryType: 'hen',
+    projectType: 'Refurbishing the existing building'
   }
 
   let valList = {}
@@ -146,6 +147,20 @@ describe('Page: /1000-birds', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('building-items')
+  })
+
+  it('user selects eligible option and projectType is `Adding a veranda only to the existing building` -> store user response and redirect to /veranda-only-size', async () => {
+    varList.projectType = 'Adding a veranda only to the existing building'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/1000-birds`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { birdNumber: 'Yes', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('veranda-only-size')
   })
 
   it('page loads with correct back link - /poultry-type', async () => {

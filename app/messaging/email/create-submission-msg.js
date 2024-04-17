@@ -323,7 +323,6 @@ const commonQuestionsForPulletAndHen = (submission) => {
   const { henJourney, pulletJourney, isSolarPVSystemYes, isSolarPVSystemNo } = getDetails(submission)
   return {
     ...commonQuestionsForAllJourney(submission),
-    birdNumber: submission.birdNumber,
     buildingItems: submission.buildingItems,
     replacingOrRefurbishingInsulation: submission.replacingInsulation || submission.refurbishingInsulation,
     lightingFeatures: submission.lightingFeatures,
@@ -351,6 +350,7 @@ const commonQuestionsForAllJourney = (submission) => {
   const { henJourney } = getDetails(submission)
   return {
     poultryType: henJourney ? 'Laying hens (over 17 weeks old)' : 'Pullets (up to and including 17 weeks old)',
+    birdNumber: submission.birdNumber,
     projectCost: getCurrencyFormat(submission.projectCost),
     potentialFunding: getCurrencyFormat(submission.calculatedGrant),
     remainingCost: submission.remainingCosts,
