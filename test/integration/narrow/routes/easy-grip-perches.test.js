@@ -24,8 +24,8 @@ describe('Page: /easy-grip-perches', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the perches have a design feature that helps the birds grip the perches?')
-    expect(response.payload).toContain(`You can replace an aviary's standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`)
+    expect(response.payload).toContain('Will the perches have a design feature that helps the birds grip?')
+    expect(response.payload).toContain(`You can replace an aviary's standard circular metal perches with perches that have design features to help birds grip them (for example, an easy grip shape, a ridged surface, comfortable material or coating)`)
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -39,8 +39,8 @@ describe('Page: /easy-grip-perches', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the perches have a design feature that helps the birds grip the perches?')
-    expect(response.payload).toContain(`You can replace a multi-tier system's standard circular metal perches with perches that have design features to help birds grip them (for example, a ridged surface, comfortable material or coating)`)
+    expect(response.payload).toContain('Will the perches have a design feature that helps the birds grip?')
+    expect(response.payload).toContain(`You can replace a multi-tier system's standard circular metal perches with perches that have design features to help birds grip them (for example, an easy grip shape, a ridged surface, comfortable material or coating)`)
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -48,7 +48,7 @@ describe('Page: /easy-grip-perches', () => {
   it('no option selected -> show error message - hen', async () => {
     varList.poultryType = 'hen'
     valList.easyGripPerches = {
-      error: 'Select yes if the perches will have a design feature that help the birds grip the perches',
+      error: 'Select yes if the perches will have a design feature that help the birds grip',
       return: false
     }
     const postOptions = {
@@ -60,7 +60,7 @@ describe('Page: /easy-grip-perches', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the birds grip the perches')
+    expect(postResponse.payload).toContain('Select yes if the perches will have a design feature that help the birds grip')
   })
 
   it('user selects eligible option -> store user response and redirect to /building-biosecurity', async () => {

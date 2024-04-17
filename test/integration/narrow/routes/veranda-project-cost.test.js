@@ -6,6 +6,8 @@ const varList = {
   projectCost: '12345678'
 }
 
+process.env.GRANT_PERCENTAGE = 40
+
 let valList = {}
 
 commonFunctionsMock(varList, undefined, {}, valList)

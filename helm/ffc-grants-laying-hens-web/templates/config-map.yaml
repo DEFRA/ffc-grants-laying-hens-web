@@ -27,6 +27,7 @@ data:
   SCORE_RESPONSE_QUEUE_ADDRESS: {{ .Values.container.scoreResponseQueueAddress | quote }}
   DESIRABILITY_SUBMITTED_TOPIC_ADDRESS: {{ quote .Values.container.desirabilitySubmittedTopicAddress }}
   NOTIFY_EMAIL_TEMPLATE: {{ .Values.container.notifyEmailTemplate | quote }}
+  NOTIFY_EMAIL_VERANDA_TEMPLATE: {{ .Values.container.notifyEmailVerandaTemplate | quote }}
   WORKSHEET_HIDE_EMPTY_ROWS: {{ .Values.container.worksheetHideEmptyRows | quote }}
   WORKSHEET_PROTECT_ENABLED: {{ .Values.container.worksheetProtectEnabled | quote }}
   SEND_EMAIL_TO_RPA: {{ .Values.container.sendEmailToRpa | quote }}

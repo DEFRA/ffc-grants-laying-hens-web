@@ -1,6 +1,8 @@
 const emailConfig = require('./config/email')
-const { GRANT_PERCENTAGE } = require('../../helpers/grant-details')
+const { GRANT_PERCENTAGE, GRANT_PERCENTAGE_SOLAR } = require('../../helpers/grant-details')
+const { ALL_QUESTIONS } = require('../../config/question-bank')
 const spreadsheetConfig = require('./config/spreadsheet')
+const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { microTurnover, smallTurnover, mediumTurnover, microEmployeesNum, smallEmployeesNum, mediumEmployeesNum } = require('./business-size-constants')
 
 function getQuestionScoreBand(questions, questionKey) {
@@ -178,13 +180,14 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(54, 'Electronic OA received date ', todayStr),
     generateRow(370, 'Status', 'Pending RPA review'),
     generateRow(85, 'Full Application Submission Date', '30/04/2025'),
-    generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
-    generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
+    // generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
+    // generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
     ...addAgentDetails(submission.agentsDetails)
   ]
 }
 
 function getSpreadsheetDetails(submission, desirabilityScore) {
+  console.log('GET SPREADSHEET DETAILS')
   const today = new Date()
   const todayStr = today.toLocaleDateString('en-GB')
   // const schemeName = 'Laying Hens for Health and Welfare'
@@ -245,44 +248,221 @@ function getScoreChance(rating) {
       return 'seems unlikely to'
   }
 }
+const getDetails = (submission) => {
+  const henJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS)
+  const pulletJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)
+  const isSolarPVSystemYes = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS)
+  const isSolarPVSystemNo = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS)
+  const rearingAviarySystemTrue = submission.rearingAviarySystem === getQuestionAnswer('rearing-aviary-system', 'rearing-aviary-system-A1', ALL_QUESTIONS)
+  const stepUpSystemTrue = submission.stepUpSystem === getQuestionAnswer('step-up-system', 'step-up-system-A1', ALL_QUESTIONS)
+  const verandaJourney = submission.projectType === getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)
+  const isCurrentMultiTierSystemTrue = submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A1', ALL_QUESTIONS) || submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A2', ALL_QUESTIONS) 
+  let currentMultiTierSystemText = ''
+
+  if (!isCurrentMultiTierSystemTrue && henJourney) {
+    currentMultiTierSystemText = 'Aviary system: '
+  } else if (!isCurrentMultiTierSystemTrue && pulletJourney) {
+    currentMultiTierSystemText = 'Multi-tier system: '
+  }
+
+  return {
+    henJourney,
+    pulletJourney,
+    isSolarPVSystemYes,
+    isSolarPVSystemNo,
+    rearingAviarySystemTrue,
+    stepUpSystemTrue,
+    verandaJourney,
+    isCurrentMultiTierSystemTrue,
+    currentMultiTierSystemText
+  }
+}
+
+const scoringQuestions = (submission, desirabilityScore) => {
+  const { isCurrentMultiTierSystemTrue, currentMultiTierSystemText, pulletJourney, henJourney } = getDetails(submission)
+    return {
+      // Scoring Questions
+      currentSystem: submission.currentSystem,
+      currentSystemScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system'),
+      isCurrentMultiTierSystemTrue: !isCurrentMultiTierSystemTrue,
+      currentMultiTierSystemText: currentMultiTierSystemText,
+      currentMultiTierSystem: !isCurrentMultiTierSystemTrue ? submission.currentMultiTierSystem : '',
+      currentMultiTierSystemScore: !isCurrentMultiTierSystemTrue ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'current-system') : '',
+      rampConnection: submission.rampConnection,
+      rampConnectionScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'ramp-connection'),
+      maximumTierHeight: submission.maximumTierHeight,
+      maximumTierHeightScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'maximum-tier-height'),
+      tierNumber: submission.tierNumber,
+      tierNumberScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'tier-number'),
+      consistentHousing: henJourney ? submission.henMultiTier : submission.pulletMultiTier,
+      consistentHousingScore: henJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'hen-multi-tier') : getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-multi-tier'),
+      naturalLight: submission.naturalLight,
+      naturalLightScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'natural-light'),
+      darkBrooders: pulletJourney ? submission.darkBrooders : '',
+      darkBroodersScore:  pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'dark-brooders') : '',
+      easyGripPerches: submission.easyGripPerches,
+      easyGripPerchesScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'easy-grip-perches'),
+      buildingBiosecurity: [submission.buildingBiosecurity].flat().join(', '),
+      buildingBiosecurityScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'building-biosecurity'),
+      pollutionMitigation: [submission.pollutionMitigation].flat().join(', '),
+      pollutionMitigationScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'pollution-mitigation'),
+      pulletVerandaFeatures:  pulletJourney ? submission.pulletVerandaFeatures : '',
+      pulletVerandaFeaturesScore: pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-veranda-features') : '',
+      renewableEnergy: [submission.renewableEnergy].flat().join(', '),
+      renewableEnergyScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'renewable-energy'),
+      birdDataType: [submission.birdDataType].flat().join(', '),
+      birdDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'bird-data-type'),
+      environmentalDataType: [submission.environmentalDataType].flat().join(', '),
+      environmentalDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'environmental-data-type'),
+      scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
+      overallRating: desirabilityScore.desirability.overallRating.band,
+    }
+}
+
+const commonQuestionsForPulletAndHen = (submission) => {
+  const { henJourney, pulletJourney, isSolarPVSystemYes, isSolarPVSystemNo } = getDetails(submission)
+  return {
+    ...commonQuestionsForAllJourney(submission),
+    buildingItems: submission.buildingItems,
+    replacingOrRefurbishingInsulation: submission.replacingInsulation || submission.refurbishingInsulation,
+    lightingFeatures: submission.lightingFeatures,
+    poultryTypeHen: henJourney,
+    poultryTypePullet: pulletJourney,
+    housingDensity: submission.housingDensity ?? '',
+    mechanicalVentilation: submission.mechanicalVentilation,
+    concreteApron: submission.concreteApron,
+    changingArea: submission.changingArea,
+    externalTaps: submission.externalTaps,
+    solarPVSystem: submission.solarPVSystem,
+    isSolarPVSystemYes: isSolarPVSystemYes,
+    isSolarPVSystemNo: isSolarPVSystemNo,
+    roofSupportSolarPV: submission.roofSupportSolarPV ?? '',
+    roofSolarPVExemption: submission.roofSolarPVExemption ? [submission.roofSolarPVExemption].flat().join(', ') : '',
+    solarGrantRate: isSolarPVSystemYes ? `Up to ${GRANT_PERCENTAGE_SOLAR}%` : '',
+    solarBirdNumber: isSolarPVSystemYes ? submission.solarBirdNumber : '',
+    solarPVCost: isSolarPVSystemYes ? getCurrencyFormat(submission.solarPVCost) : '',
+    solarPowerCapacity: isSolarPVSystemYes ? submission.solarPowerCapacity : '',
+    vehicleWashing: submission.vehicleWashing
+  }
+}
+
+const commonQuestionsForAllJourney = (submission) => {
+  const { henJourney } = getDetails(submission)
+  return {
+    poultryType: henJourney ? 'Laying hens (over 17 weeks old)' : 'Pullets (up to and including 17 weeks old)',
+    birdNumber: submission.birdNumber,
+    projectCost: getCurrencyFormat(submission.projectCost),
+    potentialFunding: getCurrencyFormat(submission.calculatedGrant),
+    remainingCost: submission.remainingCosts,
+    grantRate: `Up to ${GRANT_PERCENTAGE}%`,
+  }
+}
+
+const henQuestions = (submission) => {
+    return {
+      henVeranda: submission.henVeranda ?? '',
+      henVerandaFeatures: submission.henVerandaFeatures ?? '',
+      henVentilationSpecification: submission.henVentilationSpecification ?? '',
+      aviaryWelfare: submission.aviaryWelfare ?? '',
+      eggStoreAccess: submission.eggStoreAccess ?? '',
+      aviarySystem: submission.aviarySystem ?? '',
+    }
+}
+
+const pulletQuestions = (submission) => {
+  const { rearingAviarySystemTrue, stepUpSystemTrue } = getDetails(submission)
+    return {
+      pulletHousingRequirements: submission.pulletHousingRequirements ?? '',
+      pulletVeranda: submission.pulletVeranda ?? '',
+      pulletVentilationSpecification: submission.pulletVentilationSpecification ?? '',
+      multiTierSystem: submission.multiTierSystem ?? '',
+      rearingAviarySystem: rearingAviarySystemTrue ? submission.rearingAviarySystem : '',
+      rearingAviarySystemTrue: rearingAviarySystemTrue,
+      stepUpSystem: stepUpSystemTrue ? submission.stepUpSystem : '',
+      stepUpSystemTrue: stepUpSystemTrue
+    }
+}
+
+const verandaQuestions = (submission) => {
+  return {
+    verandaOnlySize: submission.verandaOnlySize,
+    verandaFeatures: submission.verandaFeatures
+  }
+}
+
+const commonBusinessQuestions = (submission, isAgentEmail) => { 
+  return {
+    firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
+    lastName: isAgentEmail ? submission.agentsDetails.lastName : submission.farmerDetails.lastName,
+    referenceNumber: submission.confirmationId,
+    projectName: submission.businessDetails.projectName,
+    businessName: submission.businessDetails.businessName,
+    cphNumber: submission.businessDetails.cph,
+    projectPostcode: submission.farmerDetails.projectPostcode,
+    farmerName: submission.farmerDetails.firstName,
+    farmerSurname: submission.farmerDetails.lastName,
+    farmerEmail: submission.farmerDetails.emailAddress,
+    agentName: submission.agentsDetails?.firstName ?? 'N/A',
+    agentSurname: submission.agentsDetails?.lastName ?? ' ',
+    agentBusinessName: submission.agentsDetails?.businessName ?? 'N/A',
+    agentEmail: submission.agentsDetails?.emailAddress ?? 'N/A',
+    contactConsent: submission.consentOptional ? 'Yes' : 'No',
+    scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
+  }
+}
+
+const commonEligibilityQuestions = (submission) => {
+  return {
+    projectType: submission.projectType,
+    farmertype: [submission.applicantType].flat().join(', '),
+    legalStatus: submission.legalStatus,
+    businessLocation: submission.inEngland,
+    planningPermission: submission.planningPermission,
+    projectStart: submission.projectStart,
+    tenancy: submission.tenancy,
+    isNotTenancy: submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2', ALL_QUESTIONS),
+    projectResponsibility: submission.projectResponsibility ?? '',
+  }
+}
+
 
 function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
+  const { verandaJourney } = getDetails(submission)
   const email = isAgentEmail ? submission.agentsDetails.emailAddress : submission.farmerDetails.emailAddress
-  return {
-    notifyTemplate: emailConfig.notifyTemplate,
-    emailAddress: rpaEmail || email,
-    details: {
-      firstName: isAgentEmail ? submission.agentsDetails.firstName : submission.farmerDetails.firstName,
-      lastName: isAgentEmail ? submission.agentsDetails.lastName : submission.farmerDetails.lastName,
-      referenceNumber: submission.confirmationId,
-      overallRating: desirabilityScore.desirability.overallRating.band,
-      scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
-      legalStatus: submission.legalStatus,
-      applicantType: submission.applicantType ? [submission.applicantType].flat().join(', ') : ' ',
-      location: submission.inEngland,
-      planningPermission: submission.planningPermission,
-      projectPostcode: submission.farmerDetails.projectPostcode,
-      projectStart: submission.projectStart,
-      tenancy: submission.tenancy,
-      tenancyAgreement: submission.tenancyLength ?? 'N/A',
-      project: submission.project,
-      projectCost: getCurrencyFormat(submission.projectCost),
-      potentialFunding: getCurrencyFormat(submission.calculatedGrant),
-      remainingCost: submission.remainingCosts,
 
-      projectName: submission.businessDetails.projectName,
-      projectType: submission.projectType,
-      businessName: submission.businessDetails.businessName,
-      farmerName: submission.farmerDetails.firstName,
-      farmerSurname: submission.farmerDetails.lastName,
-      farmerEmail: submission.farmerDetails.emailAddress,
-      agentName: submission.agentsDetails?.firstName ?? 'N/A',
-      agentSurname: submission.agentsDetails?.lastName ?? ' ',
-      agentBusinessName: submission.agentsDetails?.businessName ?? 'N/A',
-      agentEmail: submission.agentsDetails?.emailAddress ?? 'N/A',
-      contactConsent: submission.consentOptional ? 'Yes' : 'No',
-      scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }),
-      businessType: submission.applicantBusiness
+  if(verandaJourney) {
+    return {
+      notifyTemplate: emailConfig.notifyTemplateVeranda,
+      emailAddress: rpaEmail || email,
+      details: {
+        //  All common questions
+        ...commonQuestionsForAllJourney(submission),
+         // Common Eligibility Questions
+        ...commonEligibilityQuestions(submission),
+         // veranda Questions
+        ...verandaQuestions(submission),
+          // Farmer and Agent details
+        ...commonBusinessQuestions(submission, isAgentEmail)
+      }
+    }
+  }else{
+    return {
+      notifyTemplate: emailConfig.notifyTemplate,
+      emailAddress: rpaEmail || email,
+      details: {
+        // Common Eligibility Questions
+        ...commonEligibilityQuestions(submission),
+        // Scoring Questions
+        ...scoringQuestions(submission, desirabilityScore),
+  
+        // Hen and pullet questions email variable
+        ...henQuestions(submission),
+        ...pulletQuestions(submission),
+        ...commonQuestionsForPulletAndHen(submission),
+
+        // Farmer and Agent details
+        ...commonBusinessQuestions(submission, isAgentEmail)
+      }
     }
   }
 }

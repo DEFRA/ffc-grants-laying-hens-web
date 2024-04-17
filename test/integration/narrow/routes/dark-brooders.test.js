@@ -51,7 +51,7 @@ describe('Page: /dark-brooders', () => {
     expect(postResponse.headers.location).toBe('easy-grip-perches')
   })
 
-  it('page loads with correct back link - /pullet-veranda-features', async () => {
+  it('page loads with correct back link - /natural-light', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/dark-brooders`,

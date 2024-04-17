@@ -26,7 +26,7 @@ describe('Page: /tier-number', () => {
     expect(response.payload).toContain('How many tiers will be positioned directly above each other in the aviary system?')
     expect(response.payload).toContain('The floor and the perches at the top of the aviary system are not counted as tiers')
     expect(response.payload).toContain('3 tiers or fewer')
-    expect(response.payload).toContain('4 tiers or more')
+    expect(response.payload).toContain('4 tiers')
   })
 
   it('page loads successfully, with all the options - pullet', async () => {
@@ -41,7 +41,7 @@ describe('Page: /tier-number', () => {
     expect(response.payload).toContain('How many tiers will be positioned directly above each other in the multi-tier system?')
     expect(response.payload).toContain('The floor and the perches at the top of the multi-tier system are not counted as tiers')
     expect(response.payload).toContain('3 tiers or fewer')
-    expect(response.payload).toContain('4 tiers or more')
+    expect(response.payload).toContain('4 tiers')
   })
 
   it('no option selected -> show error message - hen', async () => {

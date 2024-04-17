@@ -12,6 +12,9 @@ describe('Project cost page', () => {
     projectType: 'Refurbishing the existing building'
   }
 
+  process.env.GRANT_PERCENTAGE = 40
+  process.env.GRANT_PERCENTAGE_SOLAR = 25
+
   let valList = {}
   
   commonFunctionsMock(varList, undefined, utilsList, valList)

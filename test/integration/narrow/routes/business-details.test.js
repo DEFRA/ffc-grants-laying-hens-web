@@ -20,8 +20,9 @@ describe('Page: /business-details', () => {
     expect(response.payload).toContain('Project name')
     expect(response.payload).toContain('Business name')
     expect(response.payload).toContain('Number of employees')
-    expect(response.payload).toContain('Business turnover (£)')
+    expect(response.payload).toContain('Annual business turnover (£)')
     expect(response.payload).toContain('Single Business Identifier')
+    expect(response.payload).toContain('County parish holding (CPH) number')
   })
 
   it('no option selected -> show error message', async () => {
@@ -41,7 +42,12 @@ describe('Page: /business-details', () => {
     }
 
     valList.businessTurnover = {
-      error: 'Enter the business turnover',
+      error: 'Enter your annual business turnover',
+      return: false
+    }
+
+     valList.cph = {
+      error: 'Enter your Country parish holding (CPH) number',
       return: false
     }
 
@@ -57,7 +63,8 @@ describe('Page: /business-details', () => {
     expect(postResponse.payload).toContain('Enter a project name')
     expect(postResponse.payload).toContain('Enter a business name')
     expect(postResponse.payload).toContain('Enter the number of employees')
-    expect(postResponse.payload).toContain('Enter the business turnover')
+    expect(postResponse.payload).toContain('Enter your annual business turnover')
+    expect(postResponse.payload).toContain('Enter your Country parish holding (CPH) number')
   })
 
   it('user came from \'CHECK DETAILS\' page -> display <Back to details> button', async () => {
@@ -173,7 +180,7 @@ describe('Page: /business-details', () => {
 
   it('should validate business turnover - only digits', async () => {
     valList.businessTurnover = {
-      error: 'Business turnover must be a whole number, like 100000',
+      error: 'Annual business turnover must be a whole number, like 100000',
       return: false
     }
     const postOptions = {
@@ -188,7 +195,7 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Business turnover must be a whole number, like 100000')
+    expect(postResponse.payload).toContain('Annual business turnover must be a whole number, like 100000')
   })
 
   it('should validate business turnover - no spaces', async () => {
@@ -204,7 +211,7 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Business turnover must be a whole number, like 100000')
+    expect(postResponse.payload).toContain('Annual business turnover must be a whole number, like 100000')
   })
 
   it('should validate business turnover - maximum value is 999999999', async () => {
@@ -327,6 +334,114 @@ describe('Page: /business-details', () => {
     expect(postResponse.payload).toContain('SBI number must have 9 characters, like 011115678')
   })
 
+  it('should validate CPH - only digits', async () => {
+    valList.cph = {
+      error: 'Enter your Country parish holding CPH number, like 12/345/6789',
+      return: false
+    }
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/business-details`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: {
+        projectName: 'Project Name',
+        businessName: 'Business Name',
+        numberEmployees: '1234',
+        businessTurnover: '5678',
+        sbi: '123456789',
+        cph: 'ab/345/6789',
+        crumb: crumbToken
+      }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Enter your Country parish holding CPH number, like 12/345/6789')
+  })
+
+  it('should validate CPH - digits must not be more than 9', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/business-details`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: {
+        projectName: 'Project Name',
+        businessName: 'Business Name',
+        numberEmployees: '1234',
+        businessTurnover: '5678',
+        sbi: '123456789',
+        cph: '12/345/6789',
+        crumb: crumbToken
+      }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Enter your Country parish holding CPH number, like 12/345/6789')
+  })
+
+  it('should validate CPH - digits must not be less than 9', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/business-details`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: {
+        projectName: 'Project Name',
+        businessName: 'Business Name',
+        numberEmployees: '1234',
+        businessTurnover: '5678',
+        sbi: '123456789',
+        cph: '12/345/678',
+        crumb: crumbToken
+      }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Enter your Country parish holding CPH number, like 12/345/6789')
+  })
+
+  it('should validate CPH - characters between numbers must not be different', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/business-details`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: {
+        projectName: 'Project Name',
+        businessName: 'Business Name',
+        numberEmployees: '1234',
+        businessTurnover: '5678',
+        sbi: '123456789',
+        cph: '12/345-6789',
+        crumb: crumbToken
+      }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Enter your Country parish holding CPH number, like 12/345/6789')
+  })
+
+  it('should validate CPH - characters between numbers must be spaces, hyphens, full stops and slashes only', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/business-details`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: {
+        projectName: 'Project Name',
+        businessName: 'Business Name',
+        numberEmployees: '1234',
+        businessTurnover: '5678',
+        sbi: '123456789',
+        cph: '12*345*6789',
+        crumb: crumbToken
+      }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Enter your Country parish holding CPH number, like 12/345/6789')
+  })
 
   it('store user response and redirect to applicant page: /applying, sbi is optional', async () => {
     valList.projectName = null
@@ -334,6 +449,7 @@ describe('Page: /business-details', () => {
     valList.numberEmployees = null
     valList.businessTurnover = null
     valList.sbi = null
+    valList.cph = null
 
     const postOptions = {
       method: 'POST',
@@ -344,6 +460,7 @@ describe('Page: /business-details', () => {
         businessName: 'Business Name',
         numberEmployees: '1234',
         businessTurnover: '5678',
+        cph: '12/345/6789',
         calvingSystem: 'Other',
         calvesNumber: '123',
         crumb: crumbToken
@@ -366,6 +483,7 @@ describe('Page: /business-details', () => {
         numberEmployees: '1234',
         businessTurnover: '5678',
         sbi: '012345678',
+        cph: '12/345/6789',
         calvingSystem: 'Other',
         calvesNumber: '123',
         crumb: crumbToken
