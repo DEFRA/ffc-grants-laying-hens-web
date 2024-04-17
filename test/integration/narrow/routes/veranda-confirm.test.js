@@ -5,7 +5,8 @@ describe('confirm page', () => {
   const varList = { 
     farmerDetails: 'someValue', 
     contractorsDetails: 'someValue',
-    projectType: 'Adding a veranda only to the existing building'
+    projectType: 'Adding a veranda only to the existing building',
+    verandaFundingCap: false
   }
 
   commonFunctionsMock(varList, undefined)
@@ -32,7 +33,7 @@ describe('confirm page', () => {
     expect(response.payload).toContain('Confirm and send')
   })
 
-  it('store user response and redirect to /confirmation', async () => {
+  it('store user response and redirect to /veranda-confirmation', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-confirm`,
@@ -42,7 +43,21 @@ describe('confirm page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('confirmation')
+    expect(postResponse.headers.location).toBe('veranda-confirmation')
+  })
+
+  it('store user response and redirect to /veranda-waitlist-confirmation', async () => {
+    varList.verandaFundingCap = true
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/veranda-confirm`,
+      payload: { consentOptional: 'some conscent', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('veranda-waitlist-confirmation')
   })
 
   it('page loads with correct back link', async () => {

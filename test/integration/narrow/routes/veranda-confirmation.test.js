@@ -13,6 +13,7 @@ describe('varanda confirm page', () => {
   
     const utilsList = {
       'project-responsibility-A2': 'No, I plan to ask my landlord to take full responsibility for my project',
+      'project-type-A1': 'Adding a veranda only to the existing building'
     }
   
     commonFunctionsMock(varList, 'Error', utilsList, valList)

@@ -8,7 +8,18 @@ const { setOptionsLabel } = require('ffc-grants-common-functionality').answerOpt
 const getConfirmationId = (guid, request) => {
   const projectType = getYarValue(request, 'projectType');
   const projectTypeAnswer = getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)
-  const prefix = getYarValue(request, 'verandaFundingCap') ? 'VI' : projectType === projectTypeAnswer ? 'VO' : 'LH';
+
+  let prefix =''
+  if(projectType === projectTypeAnswer){
+    if(getYarValue(request, 'verandaFundingCap')){
+      console.log('HELOOOOO')
+      prefix = 'VI'
+    }else{
+      prefix = 'VO'
+    }
+  }else{
+    prefix = 'LH'
+  }
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase();
 }
 

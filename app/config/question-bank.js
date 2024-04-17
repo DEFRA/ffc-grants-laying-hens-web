@@ -162,6 +162,31 @@ const questionBank = {
           yarKey: 'projectType'
         },
         {
+          key: 'veranda-funding-cap',
+          title: 'veranda funding cap',
+          order: 12,
+          url: 'veranda-funding-cap',
+          backUrl: 'project-type',
+          id: 'veranda-funding-cap',
+          nextUrl: '',
+          // preValidationKeys: ['projectType'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'We have reached the limit of applications for veranda grant funding',
+            messageContent: `The veranda grant funding is awarded on a first come, first served basis. We are not currently accepting applications for veranda-only grant funding.<br/><br/>
+            You can check your eligibility and provide your business details to <a class="govuk-link" href="./applicant-type" title="remove-item?item={{yunus}}" rel="noopener noreferrer">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.<br/><br/>
+            Alternatively, you can check if you are eligible comprehensive grant funding to refurbish or replace laying hen or pullet housing.`,
+            insertText: {
+              text: ''
+            },
+            messageLink: {
+              url: './start',
+              title: 'Check if you are eligible for comprehensive grant funding'
+            },
+            NoBtnVerandaFundingCap: true
+          }
+        },
+        {
           key: 'applicant-type',
           order: 15,
           title: 'What type of farmer are you?',
@@ -4988,7 +5013,7 @@ const questionBank = {
               elseUrl: 'confirm'
             }
           },
-          // preValidationKeys: ['applying'],
+          preValidationKeys: ['applying'],
           pageData: {
             businessDetailsLink: 'business-details',
             agentDetailsLink: 'agent-details',
@@ -5006,7 +5031,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails'],
+          preValidationKeys: ['applying'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -5033,8 +5058,8 @@ const questionBank = {
           order: 410,
           url: 'veranda-confirm',
           backUrl: 'check-details',
-          nextUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails'],
+          nextUrl: 'veranda-confirmation',
+          preValidationKeys: ['applying'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -5058,13 +5083,13 @@ const questionBank = {
           yarKey: 'consentOptional'
         },
         {
-          key: 'reference-number',
+          key: 'confirmation',
           order: 420,
           title: 'Details submitted',
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails'],
+          preValidationKeys: ['applying', 'consentOptional'],
           ga: { name: 'confirmation', params: {} },
           maybeEligible: true,
           maybeEligibleContent: {
@@ -5116,6 +5141,7 @@ const questionBank = {
           url: 'veranda-confirmation',
           baseUrl: 'veranda-confirmation',
           ga: { name: 'veranda-confirmation', params: {} },
+          preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
             reference: {
@@ -5165,6 +5191,7 @@ const questionBank = {
           url: 'veranda-waitlist-confirmation',
           baseUrl: 'veranda-waitlist-confirmation',
           ga: { name: 'veranda-waitlist-confirmation', params: {} },
+          preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
             reference: {
@@ -5206,30 +5233,6 @@ const questionBank = {
           },
           surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
           }
-        },
-        {
-          key: 'veranda-funding-cap',
-          title: 'veranda funding cap',
-          order: 430,
-          url: 'veranda-funding-cap',
-          backUrl: 'project-type',
-          nextUrl: '',
-          // preValidationKeys: ['projectType'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'We have reached the limit of applications for veranda grant funding',
-            messageContent: `The veranda grant funding is awarded on a first come, first served basis. We are not currently accepting applications for veranda-only grant funding.<br/><br/>
-            You can check your eligibility and provide your business details to <a class="govuk-link" href="./applicant-type" rel="noopener noreferrer">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.<br/><br/>
-            Alternatively, you can check if you are eligible comprehensive grant funding to refurbish or replace laying hen or pullet housing.`,
-            insertText: {
-              text: ''
-            },
-            messageLink: {
-              url: './start',
-              title: 'Check if you are eligible for comprehensive grant funding'
-            },
-            NoBtnVerandaFundingCap: true
-          }
         }
       ]
     }
@@ -5243,7 +5246,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(item => ALL_URLS.push(item.url))
 
-const YAR_KEYS = ['remainingCost', 'totalRemainingCost', 'totalProjectCost', 'calculatedGrant', 'totalCalculatedGrant','solarCalculatedGrant',  'solarProjectCost', 'cappedSolarProjectCost', 'solarRemainingCost']
+const YAR_KEYS = ['remainingCost', 'totalRemainingCost', 'totalProjectCost', 'calculatedGrant', 'totalCalculatedGrant','solarCalculatedGrant',  'solarProjectCost', 'cappedSolarProjectCost', 'solarRemainingCost', 'verandaFundingCap']
 ALL_QUESTIONS.forEach(item => YAR_KEYS.push(item.yarKey))
 module.exports = {
   questionBank,
