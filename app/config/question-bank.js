@@ -170,6 +170,12 @@ const questionBank = {
           baseUrl: 'applicant-type',
           backUrl: 'project-type',
           nextUrl: 'legal-status',
+          preValidationObject: {
+            preValidationKeys: ['projectType'],
+            preValidationAnswer: ['project-type-A4'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['project-type']
+          },
           hint: {
             text: 'Select all that apply'
           },
@@ -264,7 +270,13 @@ const questionBank = {
           nextUrl: 'country',
           url: 'legal-status',
           baseUrl: 'legal-status',
-          // preValidationKeys: ['applicantType'],
+          //Adjustment needed
+          // preValidationObject: {
+          //   preValidationKeys: ['applicantType'],
+          //   preValidationAnswer: ['applicant-type-A1'],
+          //   preValidationRule: 'OR',
+          //   preValidationUrls: ['applicant-type']
+          // },
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -367,7 +379,12 @@ const questionBank = {
           nextUrl: 'planning-permission',
           url: 'country',
           baseUrl: 'country',
-          // preValidationKeys: ['legalStatus'],
+          preValidationObject: {
+            preValidationKeys: ['legalStatus'],
+            preValidationAnswer: ['legal-status-A12'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['legal-status']
+          },
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
@@ -417,7 +434,12 @@ const questionBank = {
           baseUrl: 'planning-permission',
           backUrl: 'country',
           nextUrl: 'project-started',
-          // preValidationKeys: ['inEngland'],
+          preValidationObject: {
+            preValidationKeys: ['inEngland'],
+            preValidationAnswer: ['country-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['country']
+          },
           ineligibleContent: {
             messageContent: 'You must have secured planning permission before you submit a full application.',
             messageLink: {
@@ -473,7 +495,12 @@ const questionBank = {
           backUrl: 'planning-permission',
           nextUrl: 'project-started',
           maybeEligible: true,
-          // preValidationKeys: ['planningPermission'],
+          preValidationObject: {
+            preValidationKeys: ['planningPermission'],
+            preValidationAnswer: ['planning-permission-A3'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['planning-permission']
+          },
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 31 December 2025.',
@@ -502,7 +529,12 @@ const questionBank = {
               elseUrl: 'planning-permission-condition'
             }
           },
-          // preValidationKeys: ['inEngland'],
+          preValidationObject: {
+            preValidationKeys: ['planningPermission'],
+            preValidationAnswer: ['planning-permission-A1', 'planning-permission-A2', 'planning-permission-A3'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['planning-permission']
+          },
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
