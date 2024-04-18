@@ -6,7 +6,8 @@ const { commonFunctionsMock } = require('../../../session-mock')
 describe('varanda confirm page', () => {
   const varList = { 
     farmerDetails: 'someValue', 
-    projectType: 'Adding a veranda only to the existing building'
+    projectType: 'Adding a veranda only to the existing building',
+    projectResponsibility: ''
     }
     let valList = {}
   
