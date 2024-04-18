@@ -1,10 +1,9 @@
 const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
-
+process.env.VERANDA_FUNDING_CAP = 'false'
 describe('Page: /project-type', () => {
   const varList = {
-    poultryType: 'Laying hens',
-    verandaFundingCap: false
+    poultryType: 'Laying hens'
   }
 
   let valList = {}
@@ -82,7 +81,7 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
   })
 
   it('user selects `Adding a veranda only to the existing building` -> store user response and redirect to /veranda-funding-cap', async () => {
-    varList.verandaFundingCap = true
+    process.env.VERANDA_FUNDING_CAP = 'true'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,

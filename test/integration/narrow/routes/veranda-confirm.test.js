@@ -1,12 +1,11 @@
 const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
-
+process.env.VERANDA_FUNDING_CAP = 'false'
 describe('confirm page', () => {
   const varList = { 
     farmerDetails: 'someValue', 
     contractorsDetails: 'someValue',
-    projectType: 'Adding a veranda only to the existing building',
-    verandaFundingCap: false
+    projectType: 'Adding a veranda only to the existing building'
   }
   let valList = {}
   const utilsList = {
@@ -39,7 +38,6 @@ describe('confirm page', () => {
   })
 
   it('store user response and redirect to /veranda-confirmation', async () => {
-    varList.verandaFundingCap = false
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-confirm`,
@@ -53,7 +51,7 @@ describe('confirm page', () => {
   })
 
   it('store user response and redirect to /veranda-waitlist-confirmation', async () => {
-    varList.verandaFundingCap = true
+    process.env.VERANDA_FUNDING_CAP = 'true'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-confirm`,

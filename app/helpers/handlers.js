@@ -7,7 +7,7 @@ const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { guardPage } = require('ffc-grants-common-functionality').pageGuard
 const { getUrl } = require('../helpers/urls')
-const { GRANT_PERCENTAGE } = require('./grant-details')
+const { GRANT_PERCENTAGE, VERANDA_FUNDING_CAP } = require('./grant-details')
 const senders = require('../messaging/senders')
 
 const { startPageUrl, urlPrefix, serviceEndDate, serviceEndTime } = require('./../config/server')
@@ -483,14 +483,14 @@ const getPage = async (question, request, h) => {
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
-
-  setYarValue(request, 'verandaFundingCap', false)
+  
+  console.log(VERANDA_FUNDING_CAP, 'VERANDA_FUNDING_CAP')
 
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }
 
-  if(url === 'veranda-confirm' && getYarValue(request, 'verandaFundingCap')){
+  if(url === 'veranda-confirm' && VERANDA_FUNDING_CAP){
     question.nextUrl = 'veranda-waitlist-confirmation'
   }
 
@@ -658,9 +658,9 @@ const showPostPage = (currentQuestion, request, h) => {
   let { yarKey, answers, baseUrl, ineligibleContent, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
 
-  if(baseUrl === 'project-type' && getYarValue(request, 'verandaFundingCap')){
+  if(baseUrl === 'project-type' && VERANDA_FUNDING_CAP){
     currentQuestion.answers[0].redirectUrl = 'veranda-funding-cap'
-  }else if(baseUrl === 'project-type' && !getYarValue(request, 'verandaFundingCap')){
+  }else if(baseUrl === 'project-type' && !VERANDA_FUNDING_CAP){
     currentQuestion.answers[0].redirectUrl = ''
   }
 

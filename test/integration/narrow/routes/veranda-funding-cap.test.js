@@ -17,7 +17,7 @@ describe('Page: /veranda-funding-cap', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('We have reached the limit of applications for veranda grant funding')
     expect(response.payload).toContain('The veranda grant funding is awarded on a first come, first served basis. We are not currently accepting applications for veranda-only grant funding.')
-    expect(response.payload).toContain(' You can check your eligibility and provide your business details to <a class=\"govuk-link\" href=\"./applicant-type\" rel=\"noopener noreferrer\">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.')
+    expect(response.payload).toContain('You can check your eligibility and provide your business details to <a class=\"govuk-link\" href=\"./applicant-type\" rel=\"noopener noreferrer\">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.')
     expect(response.payload).toContain('Alternatively, you can check if you are eligible comprehensive grant funding to refurbish or replace laying hen or pullet housing.')
   })
 
