@@ -6,9 +6,7 @@ const { commonFunctionsMock } = require('../../../session-mock')
 describe('varanda confirm page', () => {
   const varList = { 
     farmerDetails: 'someValue', 
-    projectType: 'Adding a veranda only to the existing building',
-    projectResponsibility: '',
-    verandaFundingCap: false
+    projectType: 'Adding a veranda only to the existing building'
     }
     let valList = {}
   
@@ -20,7 +18,6 @@ describe('varanda confirm page', () => {
     commonFunctionsMock(varList, 'Error', utilsList, valList)
 
   it('page loads successfully, with all the options', async () => {
-    varList.verandaFundingCap = false
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/veranda-confirmation`,

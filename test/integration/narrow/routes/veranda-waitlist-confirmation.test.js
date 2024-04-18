@@ -6,9 +6,9 @@ process.env.VERANDA_FUNDING_CAP = 'true'
 describe('varanda confirm page', () => {
   const varList = { 
     farmerDetails: 'someValue', 
-    projectType: 'Adding a veranda only to the existing building',
-    projectResponsibility: ''
+    projectType: 'Adding a veranda only to the existing building'
     }
+    
     let valList = {}
   
     const utilsList = {
