@@ -174,7 +174,7 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'We have reached the limit of applications for veranda grant funding',
             messageContent: `The veranda grant funding is awarded on a first come, first served basis. We are not currently accepting applications for veranda-only grant funding.<br/><br/>
-            You can check your eligibility and provide your business details to <a class="govuk-link" href="./applicant-type" title="remove-item?item={{yunus}}" rel="noopener noreferrer">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.<br/><br/>
+            You can check your eligibility and provide your business details to <a class="govuk-link" href="./applicant-type" rel="noopener noreferrer">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.<br/><br/>
             Alternatively, you can check if you are eligible comprehensive grant funding to refurbish or replace laying hen or pullet housing.`,
             insertText: {
               text: ''
@@ -1901,7 +1901,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
-            <p class="govuk-body">The pullet housing must have:</p>
+            <p class="govuk-body">When the project is complete, the building must have:</p>
                   <ul>
                     <li>a useable area provided at multiple bird-accessible accessible heights from 10 days of age</li>
                     <li>height adjustable perches at equal to or more than 8cm per pullet</li>

@@ -14,7 +14,6 @@ const getConfirmationId = (guid, request) => {
     if(VERANDA_FUNDING_CAP){
       prefix = 'VI'
     }else{
-      console.log('VOOOOO I am here!!!!!!')
       prefix = 'VO'
     }
   }else{

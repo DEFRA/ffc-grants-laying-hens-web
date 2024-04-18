@@ -1,7 +1,16 @@
 const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
-process.env.VERANDA_FUNDING_CAP = 'false'
 describe('Page: /project-type', () => {
+  const OLD_ENV = process.env
+
+  beforeEach(() => {
+      jest.resetModules()
+      process.env = { ...OLD_ENV }
+  })
+
+  afterAll(() => {
+      process.env = OLD_ENV
+  })
   const varList = {
     poultryType: 'Laying hens'
   }

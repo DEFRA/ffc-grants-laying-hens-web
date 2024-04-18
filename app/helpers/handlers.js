@@ -484,11 +484,21 @@ const getPage = async (question, request, h) => {
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
   
-  console.log(VERANDA_FUNDING_CAP, 'VERANDA_FUNDING_CAP')
-
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }
+
+  if(url === 'project-type' && VERANDA_FUNDING_CAP){
+    question.answers[0].redirectUrl = 'veranda-funding-cap'
+  }else if(url === 'project-type' && !VERANDA_FUNDING_CAP){
+    question.answers[0].redirectUrl = ''
+  }
+
+  // if(baseUrl === 'project-type' && VERANDA_FUNDING_CAP){
+  //   currentQuestion.answers[0].redirectUrl = 'veranda-funding-cap'
+  // }else if(baseUrl === 'project-type' && !VERANDA_FUNDING_CAP){
+  //   currentQuestion.answers[0].redirectUrl = ''
+  // }
 
   if(url === 'veranda-confirm' && VERANDA_FUNDING_CAP){
     question.nextUrl = 'veranda-waitlist-confirmation'
@@ -658,11 +668,7 @@ const showPostPage = (currentQuestion, request, h) => {
   let { yarKey, answers, baseUrl, ineligibleContent, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
 
-  if(baseUrl === 'project-type' && VERANDA_FUNDING_CAP){
-    currentQuestion.answers[0].redirectUrl = 'veranda-funding-cap'
-  }else if(baseUrl === 'project-type' && !VERANDA_FUNDING_CAP){
-    currentQuestion.answers[0].redirectUrl = ''
-  }
+
 
   if (baseUrl !== 'score') {
     setYarValue(request, 'onScorePage', false)
