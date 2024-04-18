@@ -488,22 +488,6 @@ const getPage = async (question, request, h) => {
     return h.redirect(startPageUrl)
   }
 
-  if(url === 'project-type' && VERANDA_FUNDING_CAP){
-    question.answers[0].redirectUrl = 'veranda-funding-cap'
-  }else if(url === 'project-type' && !VERANDA_FUNDING_CAP){
-    question.answers[0].redirectUrl = ''
-  }
-
-  // if(baseUrl === 'project-type' && VERANDA_FUNDING_CAP){
-  //   currentQuestion.answers[0].redirectUrl = 'veranda-funding-cap'
-  // }else if(baseUrl === 'project-type' && !VERANDA_FUNDING_CAP){
-  //   currentQuestion.answers[0].redirectUrl = ''
-  // }
-
-  if(url === 'veranda-confirm' && VERANDA_FUNDING_CAP){
-    question.nextUrl = 'veranda-waitlist-confirmation'
-  }
-
   if (url === 'project-cost') {
     if (getYarValue(request, 'solarPVSystem') === 'Yes'){
       question.hint.html = question.hint.htmlSolar
@@ -668,8 +652,6 @@ const showPostPage = (currentQuestion, request, h) => {
   let { yarKey, answers, baseUrl, ineligibleContent, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
 
-
-
   if (baseUrl !== 'score') {
     setYarValue(request, 'onScorePage', false)
   }
@@ -716,6 +698,10 @@ const showPostPage = (currentQuestion, request, h) => {
 
   if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
     return h.redirect('/laying-hens/potential-amount')
+  } else if (baseUrl === 'project-type' && VERANDA_FUNDING_CAP){
+    return h.redirect('/laying-hens/veranda-funding-cap')
+  } else if (baseUrl === 'veranda-confirm' && VERANDA_FUNDING_CAP){
+    return h.redirect('/laying-hens/veranda-waitlist-confirmation')
   }
   
   handleYarKey(yarKey, request, payload, currentQuestion)

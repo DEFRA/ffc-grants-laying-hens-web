@@ -5057,6 +5057,7 @@ const questionBank = {
           title: 'Confirm and send',
           order: 410,
           url: 'veranda-confirm',
+          baseUrl: 'veranda-confirm',
           backUrl: 'check-details',
           nextUrl: 'veranda-confirmation',
           preValidationKeys: ['applying'],

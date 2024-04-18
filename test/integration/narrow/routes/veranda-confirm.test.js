@@ -19,9 +19,11 @@ describe('confirm page', () => {
     contractorsDetails: 'someValue',
     projectType: 'Adding a veranda only to the existing building'
   }
+  
   let valList = {}
   const utilsList = {
-    'project-type-A1': 'Adding a veranda only to the existing building'
+    'project-type-A1': 'Adding a veranda only to the existing building',
+    'project-responsibility-A2': 'No, I plan to ask my landlord to take full responsibility for my project'
   }
 
 
@@ -50,6 +52,8 @@ describe('confirm page', () => {
   })
 
   it('store user response and redirect to /veranda-confirmation', async () => {
+    process.env.VERANDA_FUNDING_CAP = 'true'
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-confirm`,
@@ -63,7 +67,6 @@ describe('confirm page', () => {
   })
 
   it('store user response and redirect to /veranda-waitlist-confirmation', async () => {
-    process.env.VERANDA_FUNDING_CAP = 'true'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-confirm`,
@@ -73,7 +76,7 @@ describe('confirm page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('veranda-waitlist-confirmation')
+    expect(postResponse.headers.location).toBe('/laying-hens/veranda-waitlist-confirmation')
   })
 
   it('page loads with correct back link', async () => {
