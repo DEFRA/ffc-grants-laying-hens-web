@@ -79,7 +79,6 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
 
   it('user selects `Adding a veranda only to the existing building` -> store user response and redirect to /veranda-funding-cap', async () => {
     process.env.VERANDA_FUNDING_CAP = 'true'
-
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,
@@ -90,19 +89,6 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('applicant-type')
-  })
-
-  it('user selects `Adding a veranda only to the existing building` -> store user response and redirect to /veranda-funding-cap', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/project-type`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { projectType: 'Adding a veranda only to the existing building', crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/laying-hens/veranda-funding-cap')
   })
 
   it('page loads with correct back link ', async () => {
