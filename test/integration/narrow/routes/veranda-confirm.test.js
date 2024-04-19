@@ -2,13 +2,32 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('confirm page', () => {
+
+  const OLD_ENV = process.env
+
+  beforeEach(() => {
+      jest.resetModules()
+      process.env = { ...OLD_ENV }
+  })
+
+  afterAll(() => {
+      process.env = OLD_ENV
+  })
+
   const varList = { 
     farmerDetails: 'someValue', 
     contractorsDetails: 'someValue',
     projectType: 'Adding a veranda only to the existing building'
   }
+  
+  let valList = {}
+  const utilsList = {
+    'project-type-A1': 'Adding a veranda only to the existing building',
+    'project-responsibility-A2': 'No, I plan to ask my landlord to take full responsibility for my project'
+  }
 
-  commonFunctionsMock(varList, undefined)
+
+  commonFunctionsMock(varList, 'Error', utilsList, valList)
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -32,7 +51,9 @@ describe('confirm page', () => {
     expect(response.payload).toContain('Confirm and send')
   })
 
-  it('store user response and redirect to /confirmation', async () => {
+  it('store user response and redirect to /veranda-confirmation', async () => {
+    process.env.VERANDA_FUNDING_CAP = 'true'
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/veranda-confirm`,
@@ -42,7 +63,20 @@ describe('confirm page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('confirmation')
+    expect(postResponse.headers.location).toBe('veranda-confirmation')
+  })
+
+  it('store user response and redirect to /veranda-waitlist-confirmation', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/veranda-confirm`,
+      payload: { consentOptional: 'some conscent', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('/laying-hens/veranda-waitlist-confirmation')
   })
 
   it('page loads with correct back link', async () => {

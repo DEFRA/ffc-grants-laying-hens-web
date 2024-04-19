@@ -161,6 +161,31 @@ const questionBank = {
           yarKey: 'projectType'
         },
         {
+          key: 'veranda-funding-cap',
+          title: 'veranda funding cap',
+          order: 12,
+          url: 'veranda-funding-cap',
+          backUrl: 'project-type',
+          id: 'veranda-funding-cap',
+          nextUrl: '',
+          // preValidationKeys: ['projectType'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'We have reached the limit of applications for veranda grant funding',
+            messageContent: `The veranda grant funding is awarded on a first come, first served basis. We are not currently accepting applications for veranda-only grant funding.<br/><br/>
+            You can check your eligibility and provide your business details to <a class="govuk-link" href="./applicant-type" rel="noopener noreferrer">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.<br/><br/>
+            Alternatively, you can check if you are eligible comprehensive grant funding to refurbish or replace laying hen or pullet housing.`,
+            insertText: {
+              text: ''
+            },
+            messageLink: {
+              url: './start',
+              title: 'Check if you are eligible for comprehensive grant funding'
+            },
+            NoBtnVerandaFundingCap: true
+          }
+        },
+        {
           key: 'applicant-type',
           order: 15,
           title: 'What type of farmer are you?',
@@ -1875,7 +1900,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
-            <p class="govuk-body">The pullet housing must have:</p>
+            <p class="govuk-body">When the project is complete, the building must have:</p>
                   <ul>
                     <li>a useable area provided at multiple bird-accessible accessible heights from 10 days of age</li>
                     <li>height adjustable perches at equal to or more than 8cm per pullet</li>
@@ -4987,7 +5012,7 @@ const questionBank = {
               elseUrl: 'confirm'
             }
           },
-          // preValidationKeys: ['applying'],
+          preValidationKeys: ['applying'],
           pageData: {
             businessDetailsLink: 'business-details',
             agentDetailsLink: 'agent-details',
@@ -5005,7 +5030,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails'],
+          preValidationKeys: ['applying'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -5031,9 +5056,10 @@ const questionBank = {
           title: 'Confirm and send',
           order: 410,
           url: 'veranda-confirm',
+          baseUrl: 'veranda-confirm',
           backUrl: 'check-details',
-          nextUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails'],
+          nextUrl: 'veranda-confirmation',
+          preValidationKeys: ['applying'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -5057,13 +5083,13 @@ const questionBank = {
           yarKey: 'consentOptional'
         },
         {
-          key: 'reference-number',
+          key: 'confirmation',
           order: 420,
           title: 'Details submitted',
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails'],
+          preValidationKeys: ['applying', 'consentOptional'],
           ga: { name: 'confirmation', params: {} },
           maybeEligible: true,
           maybeEligibleContent: {
@@ -5105,11 +5131,7 @@ const questionBank = {
             text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
           },
           surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
-          },
-          fundingPriorities: '',
-          type: '',
-          minAnswerCount: 1,
-          answers: []
+          }
         },
         {
           key: 'veranda-confirmation',
@@ -5119,6 +5141,7 @@ const questionBank = {
           url: 'veranda-confirmation',
           baseUrl: 'veranda-confirmation',
           ga: { name: 'veranda-confirmation', params: {} },
+          preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
             reference: {
@@ -5158,11 +5181,58 @@ const questionBank = {
             text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
           },
           surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
+          }
+        },
+        {
+          key: 'veranda-waitlist-confirmation',
+          order: 425,
+          title: 'Details submitted',
+          pageTitle: '',
+          url: 'veranda-waitlist-confirmation',
+          baseUrl: 'veranda-waitlist-confirmation',
+          ga: { name: 'veranda-waitlist-confirmation', params: {} },
+          preValidationKeys: ['applying', 'consentOptional'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            reference: {
+              titleText: 'Details submitted',
+              html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
+              surveyLink: process.env.SURVEY_LINK
+            },
+            messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
+              If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Investment Fund.<br/><br/>
+              <h2 class="govuk-heading-m">RPA helpline</h2>
+              <h3 class="govuk-heading-s">Telephone</h3>
+              <p>Telephone: 0300 0200 301</p>
+              <p>Monday to Friday, 9am to 5pm (except public holidays)</p>
+              <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
+              <h3 class="govuk-heading-s">Email</h3>
+              <a class="govuk-link" title="Send email to RPA" target="_blank" rel="noopener noreferrer" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a><br/><br/>
+            
+              <h2 class="govuk-heading-m">What happens next</h2>
+              <ol class="govuk-list govuk-list--number">
+                <li>If there is grant funding available, the RPA will contact you to invite you to 
+                submit a full application. If there is no grant funding available, 
+                the RPA will contact you to tell you by [INSERT DATE].</li>
+                <li>If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</li>
+              </ol>
+            `,
+            middleWarning: {
+              text: 'You must not start the project'
+            },
+            extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
+            <p>Before you start the project, you can:</p>
+            <ul>
+              <li>get quotes from suppliers</li>
+              <li>apply for planning permission</li>
+            </ul>
+            `,
+          addText: false,
+          conditionalInsertText: { 
+            text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
           },
-          fundingPriorities: '',
-          type: '',
-          minAnswerCount: 1,
-          answers: []
+          surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
+          }
         }
       ]
     }
