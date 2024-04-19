@@ -83,7 +83,7 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
   })
 
   it('user selects `Adding a veranda only to the existing building` -> store user response and redirect to /applicant-type', async () => {
-    process.env.VERANDA_FUNCING_CAP_REACHED = 'true'
+    process.env.VERANDA_FUNDING_CAP_REACHED = 'true'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,

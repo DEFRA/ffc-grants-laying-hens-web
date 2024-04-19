@@ -20,7 +20,7 @@ data:
   ANALYTICS_TAG_KEY: {{ .Values.container.analyticsTagKey | quote }}
   START_PAGE_URL: {{ .Values.container.startPageUrl | quote }}
   GRANT_PERCENTAGE: {{ .Values.container.grantPercentage | quote }}
-  VERANDA_FUNCING_CAP_REACHED: {{ .Values.container.verandaFundingCapReached | quote }}
+  VERANDA_FUNDING_CAP_REACHED: {{ .Values.container.verandaFundingCapReached | quote }}
   SERVICE_END_DATE : {{ .Values.container.serviceEndDate | quote }}
   SERVICE_END_TIME : {{ .Values.container.serviceEndTime | quote }}
   SURVEY_LINK: {{ .Values.container.surveyLink | quote }}

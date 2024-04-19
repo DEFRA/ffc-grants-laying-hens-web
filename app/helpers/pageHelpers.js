@@ -1,7 +1,7 @@
 const { getQuestionAnswer } = require('ffc-grants-common-functionality/lib/utils');
 const { getHtml } = require('../helpers/conditionalHTML');
 const { ALL_QUESTIONS } = require('../config/question-bank');
-const { VERANDA_FUNCING_CAP_REACHED } = require('../helpers/grant-details');
+const { VERANDA_FUNDING_CAP_REACHED } = require('../helpers/grant-details');
 const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').session
 const { setOptionsLabel } = require('ffc-grants-common-functionality').answerOptions
 
@@ -11,7 +11,7 @@ const getConfirmationId = (guid, request) => {
 
   let prefix =''
   if(projectType === projectTypeAnswer){
-    if(VERANDA_FUNCING_CAP_REACHED){
+    if(VERANDA_FUNDING_CAP_REACHED){
       prefix = 'VI'
     }else{
       prefix = 'VO'

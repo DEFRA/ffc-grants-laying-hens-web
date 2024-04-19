@@ -7,7 +7,7 @@ const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { guardPage } = require('ffc-grants-common-functionality').pageGuard
 const { getUrl } = require('../helpers/urls')
-const { GRANT_PERCENTAGE, VERANDA_FUNCING_CAP_REACHED } = require('./grant-details')
+const { GRANT_PERCENTAGE, VERANDA_FUNDING_CAP_REACHED } = require('./grant-details')
 const senders = require('../messaging/senders')
 
 const { startPageUrl, urlPrefix, serviceEndDate, serviceEndTime } = require('./../config/server')
@@ -652,9 +652,9 @@ const handleRedirects = (baseUrl, request, payload) => {
   if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
     setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'projectCost')) - 500000)
     return '/laying-hens/potential-amount'
-  } else if (baseUrl === 'project-type' && VERANDA_FUNCING_CAP_REACHED && getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS)){
+  } else if (baseUrl === 'project-type' && VERANDA_FUNDING_CAP_REACHED && getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS)){
     return '/laying-hens/veranda-funding-cap'
-  } else if (baseUrl === 'veranda-confirm' && VERANDA_FUNCING_CAP_REACHED){
+  } else if (baseUrl === 'veranda-confirm' && VERANDA_FUNDING_CAP_REACHED){
     return '/laying-hens/veranda-waitlist-confirmation'
   }
   return null
