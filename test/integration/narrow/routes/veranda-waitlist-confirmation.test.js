@@ -2,7 +2,7 @@ const { crumbToken } = require('./test-helper')
 
 const senders = require('../../../../app/messaging/senders')
 const { commonFunctionsMock } = require('../../../session-mock')
-process.env.VERANDA_FUNDING_CAP = 'true'
+process.env.VERANDA_FUNDING_CAP_REACHED = 'true'
 describe('varanda confirm page', () => {
   const varList = { 
     farmerDetails: 'someValue', 

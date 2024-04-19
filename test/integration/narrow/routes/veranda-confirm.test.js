@@ -52,7 +52,7 @@ describe('confirm page', () => {
   })
 
   it('store user response and redirect to /veranda-confirmation', async () => {
-    process.env.VERANDA_FUNDING_CAP = 'true'
+    process.env.VERANDA_FUNDING_CAP_REACHED = 'true'
 
     const postOptions = {
       method: 'POST',
