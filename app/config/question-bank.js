@@ -1938,7 +1938,7 @@ const questionBank = {
         {
           key: 'multi-tier-system',
           order: 210,
-          title: 'Which multi-tier system will have the building have?',
+          title: 'Which multi-tier system will the building have?',
           pageTitle: '',
           url: 'multi-tier-system',
           baseUrl: 'multi-tier-system',
