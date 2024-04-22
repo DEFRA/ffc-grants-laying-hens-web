@@ -5100,7 +5100,7 @@ const questionBank = {
             },
             messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
             If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Investment Fund.<br/><br/>
-            You can <a class="govuk-link" href="start">check if you can apply</a> for another building. The maximum total grant amount each business can apply for is £500,000 for omprehensive projects. 
+            You can <a class="govuk-link" href="start">check if you can apply</a> for another building. The maximum total grant amount each business can apply for is £500,000 for comprehensive projects. 
             <h2 class="govuk-heading-m">RPA helpline</h2>
             <h3 class="govuk-heading-s">Telephone</h3>
             Telephone: 0300 0200 301<br/>
