@@ -4105,7 +4105,7 @@ const questionBank = {
           title: 'Score results',
           url: 'score',
           baseUrl: 'score',
-          backUrl: 'introducing-innovation',
+          backUrl: 'environmental-data-type',
           nextUrl: 'business-details',
           // preValidationKeys: ['introducingInnovation'],
           maybeEligible: true,

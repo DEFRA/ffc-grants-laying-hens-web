@@ -410,7 +410,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     ),
     extraMessageContent: maybeEligibleContent?.extraMessageContent ?  maybeEligibleContent.extraMessageContent.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-      getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
+      getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet')
       )
     ) : '',
     surveyLink: maybeEligibleContent?.surveyLink ? maybeEligibleContent.surveyLink.replace(
