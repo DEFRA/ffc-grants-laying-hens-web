@@ -49,26 +49,26 @@ function addAgentDetails(agentsDetails) {
     generateRow(26, 'Agent Surname', agentsDetails?.lastName ?? ''),
     generateRow(27, 'Agent Forename', agentsDetails?.firstName ?? ''),
     ...addAgentDetailsAddress(agentsDetails),
-    generateRow(35, 'Agent Landline Phone', agentsDetails?.landlineNumber ?? ''),
-    generateRow(36, 'Agent Mobile Phone', agentsDetails?.mobileNumber ?? ''),
+    generateRow(35, 'Agent Landline Number', agentsDetails?.landlineNumber ?? ''),
+    generateRow(36, 'Agent Mobile Number', agentsDetails?.mobileNumber ?? ''),
     generateRow(37, 'Agent Email', agentsDetails?.emailAddress ?? ''),
     generateRow(28, 'Agent Business Name', agentsDetails?.businessName ?? '')
   ]
 }
 
-// function addFarmerTypeBlock(beef, horticulture, businessTypeArray) {
-//   return [
-//     // If chosen say yes, else be blank
-//     generateRow(431, beef, businessTypeArray.includes(beef) ? 'Yes' : ''),
-//     generateRow(432, 'Farmer with Dairy (including calf rearing)', businessTypeArray.includes('Farmer with Dairy (including calf rearing)') ? 'Yes' : ''),
-//     generateRow(433, 'Farmer with Pigs', businessTypeArray.includes('Farmer with Pigs') ? 'Yes' : ''),
-//     generateRow(434, 'Farmer with Sheep', businessTypeArray.includes('Farmer with Sheep') ? 'Yes' : ''),
-//     generateRow(435, 'Farmer with Laying Hens', businessTypeArray.includes('Farmer with Laying Hens') ? 'Yes' : ''),
-//     generateRow(436, 'Farmer with Meat Chickens', businessTypeArray.includes('Farmer with Meat Chickens') ? 'Yes' : ''),
-//     generateRow(437, 'Farmer with Aquaculture', businessTypeArray.includes('Farmer with Aquaculture') ? 'Yes' : ''), // replace with arable and shift up
-//     generateRow(439, horticulture, businessTypeArray.includes(horticulture) ? 'Yes' : ''),
-//   ]
-// }
+function addFarmerTypeBlock(beef, horticulture, businessTypeArray) {
+  return [
+    // If chosen say yes, else be blank
+    generateRow(431, beef, businessTypeArray.includes(beef) ? 'Yes' : ''),
+    generateRow(432, 'Farmer with Dairy (including calf rearing)', businessTypeArray.includes('Farmer with Dairy (including calf rearing)') ? 'Yes' : ''),
+    generateRow(433, 'Farmer with Pigs', businessTypeArray.includes('Farmer with Pigs') ? 'Yes' : ''),
+    generateRow(434, 'Farmer with Sheep', businessTypeArray.includes('Farmer with Sheep') ? 'Yes' : ''),
+    generateRow(435, 'Farmer with Laying Hens', businessTypeArray.includes('Farmer with Laying Hens') ? 'Yes' : ''),
+    generateRow(436, 'Farmer with Meat Chickens', businessTypeArray.includes('Farmer with Meat Chickens') ? 'Yes' : ''),
+    generateRow(437, 'Farmer with Aquaculture', businessTypeArray.includes('Farmer with Aquaculture') ? 'Yes' : ''), // replace with arable and shift up
+    generateRow(439, horticulture, businessTypeArray.includes(horticulture) ? 'Yes' : ''),
+  ]
+}
 
 function generateExcelFilename(scheme, projectName, businessName, referenceNumber, today) {
   const dateTime = new Intl.DateTimeFormat('en-GB', {
@@ -84,7 +84,7 @@ function formatBusinessTypeC53(businessType) {
   const returnArray = []
   for (const type in businessType) {
     // set up for capitalising where necessary
-    if (businessType[type] === 'Laying hens') {
+    if (businessType[type] === 'Laying hens (including pullets)') {
       businessType[type] = 'Laying Hens'
     } else if (businessType[type] === 'Meat chickens') {
       businessType[type] = 'Meat Chickens'
@@ -140,7 +140,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
 
     generateRow(44, 'Description of Project', projectDescriptionString),
 
-    // ...addFarmerTypeBlock(beef, horticulture, businessTypeArray),
+    ...addFarmerTypeBlock(beef, horticulture, businessTypeArray),
 
     generateRow(45, 'Location of project (postcode)', submission.farmerDetails.projectPostcode),
     generateRow(376, 'Project Started', submission.projectStart),
@@ -175,12 +175,12 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(482, 'Number of Birds', submission.solarBirdNumber ?? ''),
     generateRow(483, 'Solar Power Capacity', submission.solarPowerCapacity ?? ''),
 
-    generateRow(55, 'Total project expenditure', String(Number(submission.projectCost).toFixed(2))),
+    generateRow(55, 'Total project expenditure', String(Number(submission.projectCost).toFixed(2))), // total cost
     generateRow(57, 'Grant rate', GRANT_PERCENTAGE), // switch between 3 rates
-    generateRow(56, 'Grant amount requested', submission.calculatedGrant),
+    generateRow(56, 'Grant amount requested', submission.calculatedGrant), // total grant
     generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
-    generateRow(445, 'Solar cost', submission.solarProjectCost ?? ''),
-    generateRow(446, 'Solar grant amount', submission.solarCalculatedGrant ?? ''),
+    generateRow(445, 'Solar cost', submission.solarProjectCost ?? ''), // user entered solar cost
+    generateRow(446, 'Solar grant amount', submission.solarCalculatedGrant ?? ''), // calculated solar cost
     // 484 and 485 - hen cost / hen grant amount
 
     generateRow(486, 'Current System', submission.currentSystem),
@@ -216,8 +216,8 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(11, 'Address line 4 (town)', submission.farmerDetails.town),
     generateRow(12, 'Address line 5 (county)', submission.farmerDetails.county),
     generateRow(13, 'Postcode (use capitals)', submission.farmerDetails.postcode),
-    generateRow(16, 'Landline phone', submission.farmerDetails.landlineNumber ?? ''),
-    generateRow(17, 'Mobile phone', submission.farmerDetails.mobileNumber ?? ''),
+    generateRow(16, 'Landline Number', submission.farmerDetails.landlineNumber ?? ''),
+    generateRow(17, 'Mobile Number', submission.farmerDetails.mobileNumber ?? ''),
     generateRow(18, 'Email', submission.farmerDetails.emailAddress),
     generateRow(89,
       'Customer Marketing Indicator: So that we can continue to improve our services and schemes, we may wish to contact you in the future.',
@@ -259,19 +259,21 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
   }
 
   let projectDescriptionString = ''
-  // projectDescriptionString = 
+  projectDescriptionString = submission.poultryType + ' ~ ' + submission.projectType
 
-  // veranda journey
-  // if yes on veranda required size, Veranda
-  // if then do not have space, I do not have the outside space to add a veranda of this size
+  if (submission.projectType != getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS)) {
+    if (submission.henVeranda === getQuestionAnswer('hen-veranda', 'hen-veranda-A3', ALL_QUESTIONS) || submission.pulletVerandaFeatures === getQuestionAnswer('pullet-veranda-features', 'pullet-veranda-features-A2', ALL_QUESTIONS)) {
+      projectDescriptionString += ' ~ No veranda'
+    } else {
+      projectDescriptionString += ' ~ Veranda'
+    }
 
-  // pullet journey
-  // If yes on will building have veranda, Veranda
-  // if no on will building have veranda, No veranda
-
-  // solar
-  // if yes in buy solar PV system, Solar
-  // if no, Solar exempt
+    if (submission?.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS)) {
+      projectDescriptionString += ' ~ Solar'
+    } else {
+      projectDescriptionString += ' ~ Solar exempt'
+    }
+  }
 
   return {
     filename: generateExcelFilename(
