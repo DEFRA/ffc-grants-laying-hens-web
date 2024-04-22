@@ -49,8 +49,8 @@ function addAgentDetails(agentsDetails) {
     generateRow(26, 'Agent Surname', agentsDetails?.lastName ?? ''),
     generateRow(27, 'Agent Forename', agentsDetails?.firstName ?? ''),
     ...addAgentDetailsAddress(agentsDetails),
-    generateRow(35, 'Agent Landline Number', agentsDetails?.landlineNumber ?? ''),
-    generateRow(36, 'Agent Mobile Number', agentsDetails?.mobileNumber ?? ''),
+    generateRow(35, 'Agent Landline number', agentsDetails?.landlineNumber ?? ''),
+    generateRow(36, 'Agent Mobile number', agentsDetails?.mobileNumber ?? ''),
     generateRow(37, 'Agent Email', agentsDetails?.emailAddress ?? ''),
     generateRow(28, 'Agent Business Name', agentsDetails?.businessName ?? '')
   ]
@@ -216,8 +216,8 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(11, 'Address line 4 (town)', submission.farmerDetails.town),
     generateRow(12, 'Address line 5 (county)', submission.farmerDetails.county),
     generateRow(13, 'Postcode (use capitals)', submission.farmerDetails.postcode),
-    generateRow(16, 'Landline Number', submission.farmerDetails.landlineNumber ?? ''),
-    generateRow(17, 'Mobile Number', submission.farmerDetails.mobileNumber ?? ''),
+    generateRow(16, 'Landline number', submission.farmerDetails.landlineNumber ?? ''),
+    generateRow(17, 'Mobile number', submission.farmerDetails.mobileNumber ?? ''),
     generateRow(18, 'Email', submission.farmerDetails.emailAddress),
     generateRow(89,
       'Customer Marketing Indicator: So that we can continue to improve our services and schemes, we may wish to contact you in the future.',
