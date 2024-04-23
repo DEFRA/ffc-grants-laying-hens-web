@@ -106,11 +106,12 @@ function getSolarAndFinanceFields(submission) {
     generateRow(483, 'Solar Power Capacity', submission.solarPowerCapacity ?? ''),
 
     generateRow(55, 'Total project expenditure', submission.solarPVCost ? String(Number(submission.totalProjectCost).toFixed(2)) : String(Number(submission.projectCost).toFixed(2))), // total cost, solar is totalProjectCost
-    generateRow(57, 'Grant rate', GRANT_PERCENTAGE), // switch between 3 rates? checking now
+    generateRow(57, 'Grant rate', submission.solarPVCost ? Number((totalCalculatedGrant / totalProjectCost) * 100).toFixed(2) : GRANT_PERCENTAGE), // if no soalr, 40. If solar, calculated grant / total cost * 100
     generateRow(56, 'Grant amount requested', submission.solarPVCost ? submission.totalCalculatedGrant : submission.calculatedGrant), // total grant, solar is totalCalculatedGrant
     generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
     generateRow(445, 'Solar cost', submission.solarProjectCost ?? ''), // user entered solar cost
     generateRow(446, 'Solar grant amount', submission.solarCalculatedGrant ?? ''), // calculated solar cost
+
     // hen amounts, only used if solar too
     generateRow(484, 'Laying Hen Cost', submission.solarPVCost ? submission.projectCost : ''),
     generateRow(485, 'Laying Hen Grant Amount', submission.solarPVCost ? submission.calculatedGrant : '')
@@ -184,7 +185,7 @@ const getPlanningPermissionDoraValue = planningPermission => {
   }
 }
 
-const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore) => {
+const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore, dateTimeToday) => {
   const horticulture = 'Farmer with Horticulture'
   const beef = 'Farmer with Beef (including calf rearing)'
 
@@ -217,7 +218,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(346, 'Planning Permission Status', getPlanningPermissionDoraValue(submission.planningPermission)),
     generateRow(366, 'Date of OA decision', ''), // confirm
     generateRow(42, 'Project name', submission.businessDetails.projectName),
-    generateRow(4, 'Single business identifier (SBI)', submission.businessDetails.sbi || '000000000'), // sbi is '' if not set so use || instead of ??
+    generateRow(4, 'Single business identifier (SBI)', submission.businessDetails.sbi || '000000000'),
     generateRow(501, 'CPH Number', submission.businessDetails.cph),
     generateRow(7, 'Business name', submission.businessDetails.businessName),
     generateRow(367, 'Annual Turnover', submission.businessDetails.businessTurnover),
