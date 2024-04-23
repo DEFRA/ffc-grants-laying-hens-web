@@ -97,15 +97,11 @@ function formatBusinessTypeC53(businessType) {
 }
 
 // formats for business type dora field (single answer accepted)
-function getBusinessTypeC53(businessTypeArray, horticulture, beef) {
+function getBusinessTypeC53(businessTypeArray, horticulture) {
   if (businessTypeArray.includes(horticulture) || businessTypeArray.includes('Farmer with Arable')) {
     return 'Mixed farming'
-  } else if (businessTypeArray.length > 1) {
-    return 'Farmer with livestock'
-  } else if (businessTypeArray[0] === beef) {
-    return 'Beef Farmer'
   } else {
-    return 'Dairy farmer'
+    return 'Farmer with livestock'
   }
 }
 
@@ -133,7 +129,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(43, 'Theme', subTheme),
     generateRow(90, 'Sub-Theme / Project type', submission.project === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS) ? 'Veranda-only' : 'Comprehensive'),
     generateRow(41, 'Owner', 'RD'),
-    generateRow(53, 'Business type', getBusinessTypeC53(businessTypeArray, horticulture, beef)), // design action
+    generateRow(53, 'Business type', getBusinessTypeC53(businessTypeArray, horticulture)), // design action
     generateRow(341, 'Grant Launch Date', '19/06/2024'),
     generateRow(23, 'Business Form Classification (Status of Applicant)', submission.legalStatus),
     generateRow(405, 'Project Type', submission.project),
@@ -267,8 +263,8 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
     } else {
       projectDescriptionString += ' ~ Veranda'
     }
-
-    if (submission?.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS)) {
+  
+    if (submission?.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS) && submission?.solarPVCost) {
       projectDescriptionString += ' ~ Solar'
     } else {
       projectDescriptionString += ' ~ Solar exempt'
