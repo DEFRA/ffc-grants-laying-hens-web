@@ -61,7 +61,7 @@ describe('Page: /potential-amount', () => {
     expect(response.payload).toContain('You may be able to apply for a grant of up to £500,000, based on the estimated cost of £1,260,000.')
     expect(response.payload).toContain('The maximum grant you can apply for is £500,000.')
     expect(response.payload).toContain('You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for building project costs.')
-    expect(response.payload).toContain('You can continue to check your eligibility for grant funding to replace or refurbish a laying hens house.')
+    expect(response.payload).toContain('You can continue to check your eligibility for grant funding to replace or refurbish a hen house.')
   })
 
   it('should redirect to /remaining-costs when user press continue', async () => {

@@ -33,7 +33,7 @@ describe('varanda confirm page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Details submitted')
-    expect(response.payload).toContain('VI')
+    expect(response.payload).toContain('VO')
     expect(response.payload).toContain('We have sent you a confirmation email with a record of your answers.')
     expect(response.payload).toContain('If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Investment Fund scheme.')
     expect(response.payload).toContain('What happens next')
