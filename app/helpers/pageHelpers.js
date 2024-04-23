@@ -10,15 +10,7 @@ const getConfirmationId = (guid, request) => {
   const projectTypeAnswer = getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)
 
   let prefix =''
-  if(projectType === projectTypeAnswer){
-    if(VERANDA_FUNDING_CAP_REACHED){
-      prefix = 'VI'
-    }else{
-      prefix = 'VO'
-    }
-  }else{
-      prefix = 'LH'
-  }
+  projectType === projectTypeAnswer ? prefix = 'VO' : prefix = 'LH'
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase();
 }
 
