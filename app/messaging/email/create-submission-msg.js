@@ -197,7 +197,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(90, 'Sub-Theme / Project type', submission.project === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS) ? 'Veranda-only' : 'Comprehensive'),
     generateRow(41, 'Owner', 'RD'),
     generateRow(53, 'Business type', getBusinessTypeC53(businessTypeArray, horticulture)),
-    generateRow(341, 'Grant Launch Date', '19/06/2024'),
+    generateRow(341, 'Grant Launch Date', '26/06/2024'),
     generateRow(23, 'Business Form Classification (Status of Applicant)', submission.legalStatus),
     generateRow(405, 'Project Type', submission.project),
 
@@ -246,7 +246,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(54, 'Electronic OA received date ', todayStr),
     generateRow(502, 'Date and Time of OA Receipt', todayStr), // format as DD/MM/YYYY hh:mm
     generateRow(370, 'Status', 'Pending RPA review'),
-    generateRow(85, 'Full Application Submission Date', '31/10/2025'),
+    generateRow(85, 'Full Application Submission Date', '30/01/2026'),
     generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
     generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
     ...addAgentDetails(submission.agentsDetails)
