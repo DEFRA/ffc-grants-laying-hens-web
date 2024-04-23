@@ -106,7 +106,7 @@ function getSolarAndFinanceFields(submission) {
     generateRow(483, 'Solar Power Capacity', submission.solarPowerCapacity ?? ''),
 
     generateRow(55, 'Total project expenditure', submission.solarPVCost ? String(Number(submission.totalProjectCost).toFixed(2)) : String(Number(submission.projectCost).toFixed(2))), // total cost, solar is totalProjectCost
-    generateRow(57, 'Grant rate', submission.solarPVCost ? Number((totalCalculatedGrant / totalProjectCost) * 100).toFixed(2) : GRANT_PERCENTAGE), // if no soalr, 40. If solar, calculated grant / total cost * 100
+    generateRow(57, 'Grant rate', submission.solarPVCost ? Number((submission.totalCalculatedGrant / submission.totalProjectCost) * 100).toFixed(2) : GRANT_PERCENTAGE), // if no soalr, 40. If solar, calculated grant / total cost * 100
     generateRow(56, 'Grant amount requested', submission.solarPVCost ? submission.totalCalculatedGrant : submission.calculatedGrant), // total grant, solar is totalCalculatedGrant
     generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
     generateRow(445, 'Solar cost', submission.solarProjectCost ?? ''), // user entered solar cost
