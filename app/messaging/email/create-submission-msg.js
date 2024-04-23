@@ -163,7 +163,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(474, 'Ventilation Features', submission.mechanicalVentilation),
     generateRow(475, 'Ventilation Specification', submission.henVentilationSpecification ?? submission.pulletVentilationSpecification),
     generateRow(476, 'Concrete Apron', submission.concreteApron),
-    generateRow(477, 'Egg Store Access', submisison.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.eggStoreAccess : ''),
+    generateRow(477, 'Egg Store Access', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.eggStoreAccess : ''),
     generateRow(478, 'Changing Area', submission.changingArea),
     generateRow(479, 'External Taps', submission.externalTaps),
     generateRow(480, 'Vehicle Washing Area', submission.vehicleWashing),
