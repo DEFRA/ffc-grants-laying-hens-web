@@ -270,7 +270,7 @@ const questionBank = {
           nextUrl: 'country',
           url: 'legal-status',
           baseUrl: 'legal-status',
-          //Adjustment needed
+          //Adjustment needed:
           // preValidationObject: {
           //   preValidationKeys: ['applicantType'],
           //   preValidationAnswer: ['applicant-type-A1'],
@@ -606,6 +606,12 @@ const questionBank = {
           backUrl: 'project-started',
           nextUrl: 'poultry-type',
           // preValidationKeys: ['projectStart'],
+          preValidationObject: {
+            preValidationKeys: ['projectStart'],
+            preValidationAnswer: ['project-started-A1', 'project-started-A3'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['project-started']
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -650,13 +656,12 @@ const questionBank = {
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
           nextUrl: 'poultry-type', 
-          // routing TBC 
-          // preValidationObject: {
-          //   preValidationKeys: ['tenancy'],
-          //   preValidationAnswer: ['tenancy-A2'],
-          //   preValidationRule: 'AND',
-          //   preValidationUrls: ['tenancy']
-          // },
+          preValidationObject: {
+            preValidationKeys: ['tenancy'],
+            preValidationAnswer: ['tenancy-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['tenancy']
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswercount: 1,
@@ -707,6 +712,12 @@ const questionBank = {
             }
           },
           nextUrl: '1000-birds',
+          preValidationObject: {
+            preValidationKeys: ['tenancy', 'projectResponsibility'],
+            preValidationAnswer: ['tenancy-A1', 'project-responsibility-A1', 'project-responsibility-A2'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['tenancy', 'project-responsibility']
+          },
           ineligibleContent: {
             messageContent: 'This grant is only for laying hen or pullet projects.',
             messageLink: {
@@ -777,7 +788,12 @@ const questionBank = {
               dependantElseUrl: 'hen-veranda'
             }
           },
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['poultryType'],
+            preValidationAnswer: ['poultry-type-A3'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['poultry-type']
+          },
           hint: {
             html: 'You must have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months'
           },
@@ -861,6 +877,13 @@ const questionBank = {
               elseUrl: 'refurbishing-insulation',
             }
           },
+          //Adjustment needed: adding optional answers for 'hen-veranda-A3' and 'hen-veranda-features-A1' while the other two are required (AND) 
+          // preValidationObject: {
+          //   preValidationKeys: ['poultryType', 'birdNumber'],
+          //   preValidationAnswer: ['poultry-type-A2', '1000-birds-A1'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['poultry-type', '1000-birds']
+          // },
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -869,7 +892,6 @@ const questionBank = {
               }]
             }]
           },
-          // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
@@ -924,6 +946,12 @@ const questionBank = {
               elseUrl: 'pullet-housing-requirements'
             }
           },
+          preValidationObject: {
+            preValidationKeys: ['buildingItems', 'projectType'],
+            preValidationAnswer: ['building-items-A1', 'project-type-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['building-items', 'project-type']
+          },
           ineligibleContent: {
             messageContent: 'When the project is complete. the building must have full wall and roof insulation.',
             messageLink: {
@@ -975,6 +1003,12 @@ const questionBank = {
               thenUrl: 'lighting-features',
               elseUrl: 'pullet-housing-requirements'
             }
+          },
+          preValidationObject: {
+            preValidationKeys: ['buildingItems', 'projectType'],
+            preValidationAnswer: ['building-items-A1', 'project-type-A3'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['building-items', 'project-type']
           },
           ineligibleContent: {
             messageContent: `The building must have full wall and roof insulation.<br/><br/>
@@ -1155,7 +1189,12 @@ const questionBank = {
           baseUrl: 'aviary-system',
           backUrl: 'aviary-welfare',
           nextUrl: 'mechanical-ventilation',
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['aviaryWelfare'],
+            preValidationAnswer: ['aviary-welfare-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['aviary-welfare']
+          },
           hint: {
             html: `
                   <p>The aviary system must have integrated:</p>
@@ -1216,6 +1255,12 @@ const questionBank = {
           baseUrl: 'aviary-welfare',
           backUrl: 'lighting-features',
           nextUrl: 'aviary-system',
+          preValidationObject: {
+            preValidationKeys: ['lightingFeatures', 'poultryType'],
+            preValidationAnswer: ['lighting-features-A1', 'poultry-type-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['lighting-features', 'poultry-type']
+          },
           hint: {
             text: 'This system must enable the birds to move between levels without flying or jumping more than one metre in height'
           },
@@ -1288,7 +1333,12 @@ const questionBank = {
           baseUrl: 'hen-veranda-features',
           backUrl: 'hen-veranda',
           nextUrl: 'building-items',
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['henVeranda'],
+            preValidationAnswer: ['hen-veranda-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['hen-veranda',]
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -1429,7 +1479,12 @@ const questionBank = {
               elseUrl: 'housing-density'
             }
           },
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['aviarySystem', 'housingDensity'],
+            preValidationAnswer: ['aviary-system-A1', 'housing-density-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['aviary-system' ,'housing-density']
+          },
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
@@ -1536,6 +1591,14 @@ const questionBank = {
           title: 'Will the building have a veranda that is the required size?',
           url: 'hen-veranda',
           baseUrl: 'hen-veranda',
+          backUrl: '1000-birds',
+          nextUrl: 'hen-veranda-features',
+          preValidationObject: {
+            preValidationKeys: ['poultryType', 'birdNumber'],
+            preValidationAnswer: ['poultry-type-A1', '1000-birds-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['poultry-type', '1000-birds']
+          },
           hint: {
             html: `
             <p>When the project is complete, the building must have a veranda that is at least either:</p>
@@ -1544,8 +1607,6 @@ const questionBank = {
                 <li>30% of the indoor hen housing area footprint</li>
               </ul>`
           },
-          backUrl: '1000-birds',
-          nextUrl: 'hen-veranda-features',
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
@@ -1688,6 +1749,14 @@ const questionBank = {
               thenUrl: 'aviary-welfare',
               elseUrl: 'multi-tier-system'
             }
+          },
+          //Adjustment needed: make first two answers optional (OR), but when on 'pullet-housing-requirements' page it is required to 
+          //answer either 'refurbishingInsulation'/'replacingInsulation' and pulletHousingRequirements
+          preValidationObject: {
+            preValidationKeys: ['refurbishingInsulation', 'replacingInsulation', 'pulletHousingRequirements'],
+            preValidationAnswer: ['refurbishing-insulation-A1', 'replacing-insulation-A1', 'pullet-housing-requirements-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['refurbishing-insulation', 'replacing-insulation', 'pullet-housing-requirements']
           },
           hint: {
             html: `<p>When the project is complete, the house lighting system must have:</p>
@@ -1833,6 +1902,12 @@ const questionBank = {
             }
           },
           nextUrl: 'mechanical-ventilation',
+          preValidationObject: {
+            preValidationKeys: ['rearingAviarySystem', 'stepUpSystem'],
+            preValidationAnswer: ['rearing-aviary-system-A1', 'step-up-system-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['rearing-aviary-system', 'step-up-system']
+          },
           hint: {
             html: `
             <p>To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within: </p>
@@ -1894,6 +1969,12 @@ const questionBank = {
             }
           },
           nextUrl: 'lighting-features',
+          preValidationObject: {
+            preValidationKeys: ['refurbishingInsulation', 'replacingInsulation'],
+            preValidationAnswer: ['refurbishing-insulation-A1', 'replacing-insulation-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['refurbishing-insulation', 'replacing-insulation']
+          },
           hint: {
             html: `
                   <p>When the project is complete, the building must have:</p>
@@ -1950,6 +2031,12 @@ const questionBank = {
           url: 'multi-tier-system',
           baseUrl: 'multi-tier-system',
           backUrl: 'lighting-features',
+          preValidationObject: {
+            preValidationKeys: ['lightingFeatures', 'poultryType'],
+            preValidationAnswer: ['lighting-features-A1', 'poultry-type-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['lighting-features', 'poultry-type']
+          },
           sidebar: {
             values: [
               {
@@ -2016,6 +2103,12 @@ const questionBank = {
           baseUrl: 'rearing-aviary-system',
           backUrl: 'multi-tier-system',
           nextUrl: 'housing-density',
+          preValidationObject: {
+            preValidationKeys: ['multiTierSystem'],
+            preValidationAnswer: ['multi-tier-system-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['multi-tier-system']
+          },
           hint: {
             html: `
                 <p>The rearing aviary system must have:</p>
@@ -2076,6 +2169,12 @@ const questionBank = {
           baseUrl: 'step-up-system',
           backUrl: 'multi-tier-system',
           nextUrl: 'housing-density',
+          preValidationObject: {
+            preValidationKeys: ['multiTierSystem'],
+            preValidationAnswer: ['multi-tier-system-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['multi-tier-system']
+          },
           hint: {
             html: `
                 <p>The step-up system must have:</p>
