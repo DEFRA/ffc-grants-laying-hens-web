@@ -16,7 +16,7 @@ describe('Page: /multi-tier-system', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Which multi-tier system will have the building have?')
+    expect(response.payload).toContain('Which multi-tier system will the building have?')
     expect(response.payload).toContain('Rearing aviary')
     expect(response.payload).toContain('A system that houses birds within tiers during the first 2 weeks of rearing, that you can open to enable them to access the barn flow after 2 weeks')
     expect(response.payload).toContain('Step-up system')
