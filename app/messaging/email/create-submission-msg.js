@@ -185,7 +185,7 @@ const getPlanningPermissionDoraValue = planningPermission => {
   }
 }
 
-const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore, dateTimeToday) => {
+const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore) => {
   const horticulture = 'Farmer with Horticulture'
   const beef = 'Farmer with Beef (including calf rearing)'
 
@@ -245,7 +245,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(92, 'RAG rating', 'Green'),
     generateRow(93, 'RAG date reviewed ', todayStr),
     generateRow(54, 'Electronic OA received date ', todayStr),
-    generateRow(502, 'Date and Time of OA Receipt', dateTimeToday),
+    generateRow(502, 'Date and Time of OA Receipt', submission.dateTimeToday),
     generateRow(370, 'Status', 'Pending RPA review'),
     generateRow(85, 'Full Application Submission Date', '30/01/2026'),
     generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
@@ -267,7 +267,7 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
   const hh = String(today.getHours()).padStart(2, '0')
   const mm = String(today.getMinutes()).padStart(2, '0')
 
-  const dateTimeToday = `${DD}/${MM}/${YYYY} ${hh}:${mm}`
+  submission.dateTimeToday = `${DD}/${MM}/${YYYY} ${hh}:${mm}`
 
   // format array for applicantType field and individual fields
   let businessTypeArray
@@ -314,7 +314,7 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
         ...(spreadsheetConfig.protectEnabled ? { protectPassword: spreadsheetConfig.protectPassword } : {}),
         hideEmptyRows: spreadsheetConfig.hideEmptyRows,
         defaultColumnWidth: 30,
-        rows: generateDoraRows(submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore, dateTimeToday)
+        rows: generateDoraRows(submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore)
       }
     ]
   }
