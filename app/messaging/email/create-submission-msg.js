@@ -244,7 +244,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(92, 'RAG rating', 'Green'),
     generateRow(93, 'RAG date reviewed ', todayStr),
     generateRow(54, 'Electronic OA received date ', todayStr),
-    generateRow(502, 'Date and Time of OA Receipt', todayStr), // format as DD/MM/YYYY hh:mm
+    generateRow(502, 'Date and Time of OA Receipt', dateTimeToday),
     generateRow(370, 'Status', 'Pending RPA review'),
     generateRow(85, 'Full Application Submission Date', '30/01/2026'),
     generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
@@ -259,6 +259,14 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
   const todayStr = today.toLocaleDateString('en-GB')
   const subScheme = 'FTF-AHW-Laying Hens'
   const subTheme = 'Laying hens'
+
+  const DD = String(today.getDate()).padStart(2, '0')
+  const MM = String(today.getMonth() + 1).padStart(2, '0')
+  const YYYY = today.getFullYear()
+  const hh = String(today.getHours()).padStart(2, '0')
+  const mm = String(today.getMinutes()).padStart(2, '0')
+
+  const dateTimeToday = `${DD}/${MM}/${YYYY} ${hh}:${mm}`
 
   // format array for applicantType field and individual fields
   let businessTypeArray
@@ -305,7 +313,7 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
         ...(spreadsheetConfig.protectEnabled ? { protectPassword: spreadsheetConfig.protectPassword } : {}),
         hideEmptyRows: spreadsheetConfig.hideEmptyRows,
         defaultColumnWidth: 30,
-        rows: generateDoraRows(submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore)
+        rows: generateDoraRows(submission, subScheme, subTheme, businessTypeArray, projectDescriptionString, todayStr, desirabilityScore, dateTimeToday)
       }
     ]
   }
