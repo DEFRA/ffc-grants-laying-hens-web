@@ -426,7 +426,7 @@ const commonQuestionsForPulletAndHen = (submission) => {
     roofSolarPVExemption: submission.roofSolarPVExemption ? [submission.roofSolarPVExemption].flat().join(', ') : '',
     solarGrantRate: isSolarPVSystemYes ? `Up to ${GRANT_PERCENTAGE_SOLAR}%` : '',
     solarBirdNumber: isSolarPVSystemYes ? submission.solarBirdNumber : '',
-    solarPVCost: isSolarPVSystemYes ? getCurrencyFormat(submission.solarPVCost) : '',
+    solarPVCost: isSolarPVSystemYes ? getCurrencyFormat(Number(submission.solarPVCost.toString().replace(/,/g, ''))) : '',
     solarPowerCapacity: isSolarPVSystemYes ? submission.solarPowerCapacity : '',
     vehicleWashing: submission.vehicleWashing
   }
