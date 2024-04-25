@@ -467,11 +467,15 @@ const handleBackUrlRemainingCosts = (request, url, question) => {
     }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
       if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
         return  'potential-amount-solar'
-    }else if(getYarValue(request, 'projectCost') > 1250000){
+      }else if(getYarValue(request, 'projectCost') > 1250000){
+      //  console.log('solar calc grant is ', getYarValue(request, 'solarCalculatedGrant'))
+      //  console.log('solar power cap is ',  getYarValue(request, 'solarPowerCapacity'))
+      //  console.log('bird number is ', getYarValue(request, 'solarBirdNumber'))
+      //  console.log('calc grant is ', getYarValue(request, 'calculatedGrant'))
         return 'potential-amount'
-    }else {
+      }else {
         return  'potential-amount-solar-calculation'
-    }
+     }
   }
   }else if(url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'No'){
       return  'potential-amount'

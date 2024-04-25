@@ -4,6 +4,8 @@ const { GRANT_PERCENTAGE_SOLAR, GRANT_PERCENTAGE } = require('../helpers/grant-d
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { formatUKCurrency } = require('../helpers/data-formats')
 const { ALL_QUESTIONS } = require('../config/question-bank')
+const { guardPage } = require('ffc-grants-common-functionality').pageGuard
+const { startPageUrl, serviceEndDate, serviceEndTime } = require('../config/server')
 const { setYarValue } = require('ffc-grants-common-functionality/lib/session')
 const viewTemplate = 'potential-amount-solar-calculation'
 const currentPath = `${urlPrefix}/${viewTemplate}`
@@ -28,6 +30,12 @@ module.exports = [{
         }
     },
     handler: async (request, h) => {
+        const preValidationKeys = ['projectCost', 'solarBirdNumber', 'solarPVCost', 'solarPowerCapacity']
+        const isRedirect = guardPage(request, preValidationKeys, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
+        if (isRedirect) {
+          return h.redirect(startPageUrl)
+        }
+
         setYarValue(request, 'solarPowerCapacity', Number(getYarValue(request, 'solarPowerCapacity').toString().replace(/,/g, '')))
         setYarValue(request, 'solarBirdNumber', Number(getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, '')))
 

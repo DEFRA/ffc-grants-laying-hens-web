@@ -114,7 +114,7 @@ describe('Page: /remaining-costs', () => {
     expect(response.payload).toContain('<a href=\"potential-amount-solar-capped" class=\"govuk-back-link\">Back</a>')
   })
 
-  it('page loads with correct back link - /potential-amount-solar-capped', async () => {
+  it('page loads with correct back link - /potential-amount', async () => {
     varList.solarPVSystem = 'No'
     varList.solarCalculatedGrant = null
     varList.solarBirdNumber = null
@@ -127,5 +127,26 @@ describe('Page: /remaining-costs', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"potential-amount" class=\"govuk-back-link\">Back</a>')
   })
+
+  // it('page loads with correct back link - /potential-amount', async () => {
+  //   varList.solarPVSystem = 'Yes'
+  //   varList.projectCost = 2000000
+  //   // varList.totalProjectCost = 2000000
+  //   varList.calculatedGrant = null
+  //   varList.totalRemainingCost = 1500000
+  //   varList.solarCalculatedGrant = null
+  //   varList.solarBirdNumber = null
+  //   varList.solarPowerCapacity = null
+  //   // varList.solarCalculatedGrant = 10000
+  //   // varList.solarBirdNumber = 1000
+  //   // varList.solarPowerCapacity = 5
+  //   const options = {
+  //     method: 'GET',
+  //     url: `${global.__URLPREFIX__}/remaining-costs`
+  //   }
+  //   const response = await global.__SERVER__.inject(options)
+  //   expect(response.statusCode).toBe(200)
+  //   expect(response.payload).toContain('<a href=\"potential-amount\" class=\"govuk-back-link\">Back</a>')
+  // })
 
 })
