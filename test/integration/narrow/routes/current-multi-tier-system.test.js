@@ -4,11 +4,13 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /current-multi-tier-system', () => {
   const varList = {
     poultryType: 'hen',
+    currentSystem: 'Barn'
   }
 
   const utilsList = {
     'poultry-type-A1': 'hen',
-    'poultry-type-A2': 'pullet'
+    'poultry-type-A2': 'pullet',
+    'current-system-A3': 'Barn'
   }
 
   let valList = {}

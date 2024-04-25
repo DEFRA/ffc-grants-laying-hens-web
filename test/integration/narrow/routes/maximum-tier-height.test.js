@@ -3,7 +3,8 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /maximum-tier-height', () => {
   let varList = {
-    poultryType: 'hen'
+    poultryType: 'hen',
+    rampConnection: 'Yes'
   }
 
   let valList = {}
