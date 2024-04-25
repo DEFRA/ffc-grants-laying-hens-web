@@ -6,7 +6,7 @@ const previousPath = `${urlPrefix}/remaining-costs`
 module.exports = [{
     method: 'GET',
     path: currentPath,
-    handler: (_request, h) => h.view('interruption-scoring', {backLink: previousPath, nextLink: nextPath})
+    handler: (_request, h) => h.view('interruption-scoring', { backLink: previousPath, nextLink: nextPath })
     }, 
     {
     method: 'POST',

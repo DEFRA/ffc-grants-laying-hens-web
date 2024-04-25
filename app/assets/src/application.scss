@@ -7,19 +7,19 @@ $govuk-assets-path: "~govuk-frontend/govuk/assets/";
 }
 
 .interruption-scoring-main {
-  @include govuk-responsive-padding(4, "left");
-  background-color: govuk-colour("blue");
-  
-  div {
-    h1, p {
-      color:  govuk-colour("white");
-    }
-  }
+  > div {
+    padding: govuk-spacing(7) govuk-spacing(4);
+    background-color: govuk-colour("blue");
 
-  a {
-    &, &:visited, &:hover {
-      background-color: govuk-colour("white");
-      color: govuk-colour("blue");
+    h1, p {
+      color: govuk-colour("white");
+    }
+  
+    a {
+      &, &:visited, &:hover, &:link, &:active  {
+        background-color: govuk-colour("white");
+        color: govuk-colour("blue");
+      }
     }
   }
 }

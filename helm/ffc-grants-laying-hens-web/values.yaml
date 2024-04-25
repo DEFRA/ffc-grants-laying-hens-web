@@ -74,6 +74,7 @@ container:
   worksheetHideEmptyRows: false
   excelUploadEnvironment: dummy
   grantPercentage: dummy
+  verandaFundingCapReached: dummy
 
 
 livenessProbe:

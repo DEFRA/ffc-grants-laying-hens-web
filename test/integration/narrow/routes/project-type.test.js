@@ -1,14 +1,29 @@
 const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
-
 describe('Page: /project-type', () => {
+  const OLD_ENV = process.env
+
+  beforeEach(() => {
+      jest.resetModules()
+      process.env = { ...OLD_ENV }
+  })
+
+  afterAll(() => {
+      process.env = OLD_ENV
+  })
+
   const varList = {
-    poultryType: 'Laying hens'
+    projectType: 'Adding a veranda only to the existing building'
+  }
+
+  const utilsList = {
+    'project-type-A1': 'Adding a veranda only to the existing building',
+    'project-responsibility-A2': 'No, I plan to ask my landlord to take full responsibility for my project'
   }
 
   let valList = {}
 
-  commonFunctionsMock(varList, undefined, {}, valList)
+  commonFunctionsMock(varList, 'Error', utilsList, valList)
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -67,17 +82,31 @@ it('user selects ineligible option: \'None of the above\' -> display ineligible 
     expect(postResponse.headers.location).toBe('applicant-type')
   })
 
-  it('user selects `Replacing the entire building with a new building` -> store user response and redirect to /applicant-type', async () => {
+  it('user selects `Adding a veranda only to the existing building` -> store user response and redirect to /applicant-type', async () => {
+    process.env.VERANDA_FUNDING_CAP_REACHED = 'true'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-type`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { projectType: 'Replacing the entire building with a new building', crumb: crumbToken }
+      payload: { projectType: 'Adding a veranda only to the existing building', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('applicant-type')
+  })
+
+  it('user selects `Adding a veranda only to the existing building` -> store user response and redirect to /veranda-funding-cap', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/project-type`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { projectType: 'Adding a veranda only to the existing building', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('/laying-hens/veranda-funding-cap')
   })
 
   it('page loads with correct back link ', async () => {
