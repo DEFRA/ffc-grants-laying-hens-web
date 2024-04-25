@@ -4353,11 +4353,10 @@ const questionBank = {
           order: 175,
           title: 'Score results',
           url: 'score',
-          //refactoring needed here
           baseUrl: 'score',
           backUrl: 'environmental-data-type',
           nextUrl: 'business-details',
-          // preValidationKeys: ['introducingInnovation'],
+          preValidationKeys: ['environmentalDataType'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your results',
@@ -4395,7 +4394,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-type-A1'],
             urlOptions: {
               thenUrl: 'veranda-remaining-costs',
-              elseUrl: 'project-type'
+              elseUrl: 'score'
             }
           },
           nextUrl: 'applying',

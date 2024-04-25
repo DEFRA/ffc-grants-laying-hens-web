@@ -33,7 +33,7 @@ module.exports = [{
         const preValidationKeys = ['projectCost', 'solarBirdNumber', 'solarPVCost', 'solarPowerCapacity']
         const isRedirect = guardPage(request, preValidationKeys, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
         if (isRedirect) {
-          return h.redirect(startPageUrl)
+            return h.redirect(startPageUrl)
         }
 
         setYarValue(request, 'solarPowerCapacity', Number(getYarValue(request, 'solarPowerCapacity').toString().replace(/,/g, '')))
