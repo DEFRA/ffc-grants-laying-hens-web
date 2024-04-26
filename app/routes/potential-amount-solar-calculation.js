@@ -63,7 +63,11 @@ module.exports = [{
         const solarGrantFunding = Number(GRANT_PERCENTAGE_SOLAR * (cost / 100).toFixed(2))
         const housingGrantFunding = Number(GRANT_PERCENTAGE * (projectCost / 100).toFixed(2))
         const totalCalculatedGrant = housingGrantFunding + solarGrantFunding
+        
         setYarValue(request, 'totalRemainingCost', totalProjectCost - totalCalculatedGrant)
+        setYarValue(request, 'totalProjectCost', totalProjectCost)
+        setYarValue(request, 'totalCalculatedGrant', totalCalculatedGrant)
+
         const totalCalculatedGrantFormat = formatUKCurrency(housingGrantFunding + solarGrantFunding)
         const projectTypeTableText = getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A2', ALL_QUESTIONS) ? 
         'Number of birds the refurbished part of the building will house': 'Number of birds the new building will house'
