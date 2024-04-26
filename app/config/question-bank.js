@@ -161,6 +161,31 @@ const questionBank = {
           yarKey: 'projectType'
         },
         {
+          key: 'veranda-funding-cap',
+          title: 'veranda funding cap',
+          order: 12,
+          url: 'veranda-funding-cap',
+          backUrl: 'project-type',
+          id: 'veranda-funding-cap',
+          nextUrl: '',
+          // preValidationKeys: ['projectType'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'We have reached the limit of applications for veranda grant funding',
+            messageContent: `The veranda grant funding is awarded on a first come, first served basis. We are not currently accepting applications for veranda-only grant funding.<br/><br/>
+            You can check your eligibility and provide your business details to <a class="govuk-link" href="./applicant-type" rel="noopener noreferrer">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.<br/><br/>
+            Alternatively, you can check if you are eligible comprehensive grant funding to refurbish or replace laying hen or pullet housing.`,
+            insertText: {
+              text: ''
+            },
+            messageLink: {
+              url: './start',
+              title: 'Check if you are eligible for comprehensive grant funding'
+            },
+            NoBtnVerandaFundingCap: true
+          }
+        },
+        {
           key: 'applicant-type',
           order: 15,
           title: 'What type of farmer are you?',
@@ -170,6 +195,12 @@ const questionBank = {
           baseUrl: 'applicant-type',
           backUrl: 'project-type',
           nextUrl: 'legal-status',
+          preValidationObject: {
+            preValidationKeys: ['projectType'],
+            preValidationAnswer: ['project-type-A4'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['project-type']
+          },
           hint: {
             text: 'Select all that apply'
           },
@@ -264,7 +295,12 @@ const questionBank = {
           nextUrl: 'country',
           url: 'legal-status',
           baseUrl: 'legal-status',
-          // preValidationKeys: ['applicantType'],
+          preValidationObject: {
+            preValidationKeys: ['applicantType'],
+            preValidationAnswer: ['applicant-type-A1'],
+            preValidationRule: 'INCLUDES',
+            preValidationUrls: ['applicant-type']
+          },
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -367,7 +403,12 @@ const questionBank = {
           nextUrl: 'planning-permission',
           url: 'country',
           baseUrl: 'country',
-          // preValidationKeys: ['legalStatus'],
+          preValidationObject: {
+            preValidationKeys: ['legalStatus'],
+            preValidationAnswer: ['legal-status-A12'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['legal-status']
+          },
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
@@ -417,7 +458,12 @@ const questionBank = {
           baseUrl: 'planning-permission',
           backUrl: 'country',
           nextUrl: 'project-started',
-          // preValidationKeys: ['inEngland'],
+          preValidationObject: {
+            preValidationKeys: ['inEngland'],
+            preValidationAnswer: ['country-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['country']
+          },
           ineligibleContent: {
             messageContent: 'You must have secured planning permission before you submit a full application.',
             messageLink: {
@@ -473,7 +519,12 @@ const questionBank = {
           backUrl: 'planning-permission',
           nextUrl: 'project-started',
           maybeEligible: true,
-          // preValidationKeys: ['planningPermission'],
+          preValidationObject: {
+            preValidationKeys: ['planningPermission'],
+            preValidationAnswer: ['planning-permission-A3'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['planning-permission']
+          },
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 30th January 2026.',
@@ -502,7 +553,12 @@ const questionBank = {
               elseUrl: 'planning-permission-condition'
             }
           },
-          // preValidationKeys: ['inEngland'],
+          preValidationObject: {
+            preValidationKeys: ['planningPermission'],
+            preValidationAnswer: ['planning-permission-A1', 'planning-permission-A2', 'planning-permission-A3'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['planning-permission']
+          },
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
@@ -574,6 +630,12 @@ const questionBank = {
           backUrl: 'project-started',
           nextUrl: 'poultry-type',
           // preValidationKeys: ['projectStart'],
+          preValidationObject: {
+            preValidationKeys: ['projectStart'],
+            preValidationAnswer: ['project-started-A1', 'project-started-A3'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['project-started']
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -618,13 +680,12 @@ const questionBank = {
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
           nextUrl: 'poultry-type', 
-          // routing TBC 
-          // preValidationObject: {
-          //   preValidationKeys: ['tenancy'],
-          //   preValidationAnswer: ['tenancy-A2'],
-          //   preValidationRule: 'AND',
-          //   preValidationUrls: ['tenancy']
-          // },
+          preValidationObject: {
+            preValidationKeys: ['tenancy'],
+            preValidationAnswer: ['tenancy-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['tenancy']
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswercount: 1,
@@ -675,6 +736,12 @@ const questionBank = {
             }
           },
           nextUrl: '1000-birds',
+          preValidationObject: {
+            preValidationKeys: ['tenancy', 'projectResponsibility'],
+            preValidationAnswer: ['tenancy-A1', 'project-responsibility-A1', 'project-responsibility-A2'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['tenancy', 'project-responsibility']
+          },
           ineligibleContent: {
             messageContent: 'This grant is only for laying hen or pullet projects.',
             messageLink: {
@@ -745,7 +812,12 @@ const questionBank = {
               dependantElseUrl: 'hen-veranda'
             }
           },
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['poultryType'],
+            preValidationAnswer: ['poultry-type-A3'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['poultry-type']
+          },
           hint: {
             html: 'You must have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months'
           },
@@ -829,6 +901,13 @@ const questionBank = {
               elseUrl: 'refurbishing-insulation',
             }
           },
+          preValidationObject: {
+            preValidationKeys: ['birdNumber'],
+            preValidationAnswer: ['1000-birds-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['1000-birds']
+          },
+          // preValidationKeys: ['birdNumber'],
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -837,7 +916,6 @@ const questionBank = {
               }]
             }]
           },
-          // preValidationKeys: ['poultryType'],
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
@@ -892,6 +970,12 @@ const questionBank = {
               elseUrl: 'pullet-housing-requirements'
             }
           },
+          preValidationObject: {
+            preValidationKeys: ['buildingItems', 'projectType'],
+            preValidationAnswer: ['building-items-A1', 'project-type-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['building-items', 'project-type']
+          },
           ineligibleContent: {
             messageContent: 'When the project is complete. the building must have full wall and roof insulation.',
             messageLink: {
@@ -943,6 +1027,12 @@ const questionBank = {
               thenUrl: 'lighting-features',
               elseUrl: 'pullet-housing-requirements'
             }
+          },
+          preValidationObject: {
+            preValidationKeys: ['buildingItems', 'projectType'],
+            preValidationAnswer: ['building-items-A1', 'project-type-A3'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['building-items', 'project-type']
           },
           ineligibleContent: {
             messageContent: `The building must have full wall and roof insulation.<br/><br/>
@@ -1009,7 +1099,12 @@ const questionBank = {
             }
           },
           nextUrl: 'external-taps',
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['concreteApron'],
+            preValidationAnswer: ['concrete-apron-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['concrete-apron']
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -1070,8 +1165,12 @@ const questionBank = {
           baseUrl: 'egg-store-access',
           nextUrl: 'changing-area',
           backUrl: 'concrete-apron',
-          // preValidationKeys: ['poultryType'],
-          hint: {
+          preValidationObject: {
+            preValidationKeys: ['poultryType', 'concreteApron'],
+            preValidationAnswer: ['poultry-type-A1', 'concrete-apron-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['poultry-type' ,'concrete-apron']
+          },          hint: {
             text: 'This must be separate from the main entrance lobby and connected changing area'
           },
           sidebar: {
@@ -1123,7 +1222,12 @@ const questionBank = {
           baseUrl: 'aviary-system',
           backUrl: 'aviary-welfare',
           nextUrl: 'mechanical-ventilation',
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['aviaryWelfare'],
+            preValidationAnswer: ['aviary-welfare-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['aviary-welfare']
+          },
           hint: {
             html: `
                   <p>The aviary system must have integrated:</p>
@@ -1184,6 +1288,12 @@ const questionBank = {
           baseUrl: 'aviary-welfare',
           backUrl: 'lighting-features',
           nextUrl: 'aviary-system',
+          preValidationObject: {
+            preValidationKeys: ['lightingFeatures', 'poultryType'],
+            preValidationAnswer: ['lighting-features-A1', 'poultry-type-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['lighting-features', 'poultry-type']
+          },
           hint: {
             text: 'This system must enable the birds to move between levels without flying or jumping more than one metre in height'
           },
@@ -1256,7 +1366,12 @@ const questionBank = {
           baseUrl: 'hen-veranda-features',
           backUrl: 'hen-veranda',
           nextUrl: 'building-items',
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['henVeranda'],
+            preValidationAnswer: ['hen-veranda-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['hen-veranda',]
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -1397,7 +1512,12 @@ const questionBank = {
               elseUrl: 'housing-density'
             }
           },
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['aviarySystem', 'housingDensity'],
+            preValidationAnswer: ['aviary-system-A1', 'housing-density-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['aviary-system' ,'housing-density']
+          },
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
@@ -1453,7 +1573,12 @@ const questionBank = {
           baseUrl: 'hen-ventilation-specification',
           backUrl: 'mechanical-ventilation',
           nextUrl: 'concrete-apron',
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['poultryType', 'mechanicalVentilation'],
+            preValidationAnswer: ['poultry-type-A1', 'mechanical-ventilation-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['poultry-type' ,'mechanical-ventilation']
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -1504,6 +1629,14 @@ const questionBank = {
           title: 'Will the building have a veranda that is the required size?',
           url: 'hen-veranda',
           baseUrl: 'hen-veranda',
+          backUrl: '1000-birds',
+          nextUrl: 'hen-veranda-features',
+          preValidationObject: {
+            preValidationKeys: ['poultryType', 'birdNumber'],
+            preValidationAnswer: ['poultry-type-A1', '1000-birds-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['poultry-type', '1000-birds']
+          },
           hint: {
             html: `
             <p>When the project is complete, the building must have a veranda that is at least either:</p>
@@ -1512,8 +1645,6 @@ const questionBank = {
                 <li>30% of the indoor hen housing area footprint</li>
               </ul>`
           },
-          backUrl: '1000-birds',
-          nextUrl: 'hen-veranda-features',
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
@@ -1584,7 +1715,12 @@ const questionBank = {
           baseUrl: 'pullet-ventilation-specification',
           backUrl: 'mechanical-ventilation',
           nextUrl: 'concrete-apron',
-          // preValidationKeys: ['poultryType'],
+          preValidationObject: {
+            preValidationKeys: ['poultryType', 'mechanicalVentilation'],
+            preValidationAnswer: ['poultry-type-A2', 'mechanical-ventilation-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['poultry-type' ,'mechanical-ventilation']
+          },
           sidebar: {
             values: [
               {
@@ -1656,6 +1792,12 @@ const questionBank = {
               thenUrl: 'aviary-welfare',
               elseUrl: 'multi-tier-system'
             }
+          },
+          preValidationObject: {
+            preValidationKeys: ['refurbishingInsulation', 'replacingInsulation', 'pulletHousingRequirements'],
+            preValidationAnswer: ['refurbishing-insulation-A1', 'replacing-insulation-A1', 'pullet-housing-requirements-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['refurbishing-insulation', 'replacing-insulation', 'pullet-housing-requirements']
           },
           hint: {
             html: `<p>When the project is complete, the house lighting system must have:</p>
@@ -1741,6 +1883,12 @@ const questionBank = {
               elseUrl: 'changing-area'
             }
           },
+          preValidationObject: {
+            preValidationKeys: ['henVentilationSpecification', 'pulletVentilationSpecification'],
+            preValidationAnswer: ['hen-ventilation-specification-A1', 'pullet-ventilation-specification-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['hen-ventilation-specification' ,'pullet-ventilation-specification']
+          },
           hint: {
             text: 'This should be continuous, unless there needs to be a gap where birds have direct access to a range'
           },
@@ -1801,6 +1949,12 @@ const questionBank = {
             }
           },
           nextUrl: 'mechanical-ventilation',
+          preValidationObject: {
+            preValidationKeys: ['rearingAviarySystem', 'stepUpSystem'],
+            preValidationAnswer: ['rearing-aviary-system-A1', 'step-up-system-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['rearing-aviary-system', 'step-up-system']
+          },
           hint: {
             html: `
             <p>To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within: </p>
@@ -1862,6 +2016,12 @@ const questionBank = {
             }
           },
           nextUrl: 'lighting-features',
+          preValidationObject: {
+            preValidationKeys: ['refurbishingInsulation', 'replacingInsulation'],
+            preValidationAnswer: ['refurbishing-insulation-A1', 'replacing-insulation-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['refurbishing-insulation', 'replacing-insulation']
+          },
           hint: {
             html: `
                   <p>When the project is complete, the building must have:</p>
@@ -1875,7 +2035,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
             <div class="govuk-list govuk-list--bullet">
-            <p class="govuk-body">The pullet housing must have:</p>
+            <p class="govuk-body">When the project is complete, the building must have:</p>
                   <ul>
                     <li>a useable area provided at multiple bird-accessible accessible heights from 10 days of age</li>
                     <li>height adjustable perches at equal to or more than 8cm per pullet</li>
@@ -1913,11 +2073,17 @@ const questionBank = {
         {
           key: 'multi-tier-system',
           order: 210,
-          title: 'Which multi-tier system will have the building have?',
+          title: 'Which multi-tier system will the building have?',
           pageTitle: '',
           url: 'multi-tier-system',
           baseUrl: 'multi-tier-system',
           backUrl: 'lighting-features',
+          preValidationObject: {
+            preValidationKeys: ['lightingFeatures', 'poultryType'],
+            preValidationAnswer: ['lighting-features-A1', 'poultry-type-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['lighting-features', 'poultry-type']
+          },
           sidebar: {
             values: [
               {
@@ -1984,6 +2150,12 @@ const questionBank = {
           baseUrl: 'rearing-aviary-system',
           backUrl: 'multi-tier-system',
           nextUrl: 'housing-density',
+          preValidationObject: {
+            preValidationKeys: ['multiTierSystem'],
+            preValidationAnswer: ['multi-tier-system-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['multi-tier-system']
+          },
           hint: {
             html: `
                 <p>The rearing aviary system must have:</p>
@@ -2044,6 +2216,12 @@ const questionBank = {
           baseUrl: 'step-up-system',
           backUrl: 'multi-tier-system',
           nextUrl: 'housing-density',
+          preValidationObject: {
+            preValidationKeys: ['multiTierSystem'],
+            preValidationAnswer: ['multi-tier-system-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['multi-tier-system']
+          },
           hint: {
             html: `
                 <p>The step-up system must have:</p>
@@ -2098,6 +2276,12 @@ const questionBank = {
           baseUrl: 'vehicle-washing',
           backUrl: 'external-taps',
           nextUrl: 'solar-PV-system',
+          preValidationObject: {
+            preValidationKeys: ['externalTaps'],
+            preValidationAnswer: ['external-taps-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['external-taps']
+          },
           hint: {
             html: `
                   <p>This must be an area on site that includes:</p>
@@ -2152,6 +2336,12 @@ const questionBank = {
           baseUrl: 'external-taps',
           backUrl: 'changing-area',
           nextUrl: 'vehicle-washing',
+          preValidationObject: {
+            preValidationKeys: ['changingArea'],
+            preValidationAnswer: ['changing-area-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['changing-area']
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -2199,6 +2389,12 @@ const questionBank = {
           baseUrl: 'solar-PV-system',
           backUrl: 'vehicle-washing',
           nextUrl: 'project-cost',
+          preValidationObject: {
+            preValidationKeys: ['vehicleWashing'],
+            preValidationAnswer: ['vehicle-washing-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['vehicle-washing']
+          },
           hint: {
             text: 'You have the option to buy and install a solar PV system with the grant. The solar PV panels must be installed on the roof of this building (or veranda if there is one)'
           },
@@ -2249,6 +2445,12 @@ const questionBank = {
           baseUrl: 'roof-support-solar-PV',
           backUrl: 'roof-solar-PV-exemption',
           nextUrl: 'project-cost',
+          preValidationObject: {
+            preValidationKeys: ['roofSolarPVExemption'],
+            preValidationAnswer: ['roof-solar-PV-exemption-A7'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['roof-solar-PV-exemption']
+          },
           hint: {
             html: `
             <p>Even if you are not installing a solar PV system, you must provide confirmation that the roof can support solar PV panels at full application.</p>
@@ -2300,7 +2502,12 @@ const questionBank = {
           baseUrl: 'roof-solar-PV-exemption',
           backUrl: 'solar-PV-system',
           nextUrl: 'project-cost',
-          preValidationKeys: '',
+          preValidationObject: {
+            preValidationKeys: ['solarPVSystem'],
+            preValidationAnswer: ['solar-PV-system-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['solar-PV-system']
+          },
           hint: {
             text: 'Select all that apply'
           },
@@ -2380,6 +2587,12 @@ const questionBank = {
           baseUrl: 'veranda-only-size',
           backUrl: '1000-birds',
           nextUrl: 'veranda-features',
+          preValidationObject: {
+            preValidationKeys: ['birdNumber', 'projectType'],
+            preValidationAnswer: ['1000-birds-A1', 'project-type-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['1000-birds', 'project-type']
+          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -2439,6 +2652,12 @@ const questionBank = {
           baseUrl: 'veranda-features',
           backUrl: 'veranda-only-size',
           nextUrl: 'veranda-project-cost',
+          preValidationObject: {
+            preValidationKeys: ['verandaOnlySize'],
+            preValidationAnswer: ['veranda-only-size-A1', 'veranda-only-size-A2'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['veranda-only-size']
+          },
           hint: {
             html: `
               <p>The veranda must have:</p>
@@ -2515,7 +2734,12 @@ const questionBank = {
           backUrl: 'veranda-features',
           nextUrl: 'veranda-potential-amount',
           fundingPriorities: '',
-          preValidationKeys: [],
+          preValidationObject: {
+            preValidationKeys: ['verandaFeatures'],
+            preValidationAnswer: ['veranda-features-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['veranda-features']
+          },
           grantInfo: {
             minGrant: VERANDA_MIN_GRANT,
             maxGrant: VERANDA_MAX_GRANT,
@@ -2587,7 +2811,7 @@ const questionBank = {
           baseUrl: 'veranda-potential-amount',
           backUrl: 'veranda-project-cost',
           nextUrl: 'veranda-remaining-costs',
-          // preValidationKeys: ['projectCost'],
+          preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             potentialAmountConditional: false,
@@ -2624,8 +2848,14 @@ const questionBank = {
               elseUrl: 'bird-number'
             }   
           },
+          // preValidationObject: {
+          //   preValidationKeys: ['roofSupportSolarPV', 'roofSolarPVExemption', 'solarPVSystem'],
+          //   preValidationAnswer: ['roof-support-solar-PV-A1', 'roof-solar-PV-exemption-A1', 'roof-solar-PV-exemption-A2', 'roof-solar-PV-exemption-A3', 'roof-solar-PV-exemption-A4', 'roof-solar-PV-exemption-A5', 'roof-solar-PV-exemption-A6', 'solar-PV-system-A1'],
+          //   preValidationRule: 'OR',
+          //   preValidationUrls: ['roof-support-solar-PV', 'roof-solar-PV-exemption', 'solar-PV-system']
+          // },
+          preValidationKeys: ['solarPVSystem'],
           fundingPriorities: '',
-          // preValidationKeys: [],
           grantInfo: {
             minGrant: MIN_GRANT,
             maxGrant: MAX_GRANT,
@@ -2731,7 +2961,7 @@ const questionBank = {
           baseUrl: 'veranda-remaining-costs',
           backUrl: 'veranda-potential-amount',
           nextUrl: 'business-details',
-          // preValidationKeys: ['projectCost'],
+          preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: `<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>`,
             insertText: {
@@ -2793,7 +3023,7 @@ const questionBank = {
           baseUrl: 'potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          // preValidationKeys: ['projectCost'],
+          preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -2830,6 +3060,7 @@ const questionBank = {
           baseUrl: 'potential-amount-solar',
           backUrl: 'solar-power-capacity',
           nextUrl: 'remaining-costs',
+          preValidationKeys: ['solarPowerCapacity'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -2855,6 +3086,7 @@ const questionBank = {
           baseUrl: 'potential-amount-solar-capped',
           backUrl: 'solar-power-capacity',
           nextUrl: 'remaining-costs',
+          preValidationKeys: ['solarPowerCapacity'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -2883,7 +3115,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
           nextUrl: 'interruption-scoring',
-          // preValidationKeys: ['projectCost'],
+          preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
             insertText: {
@@ -2951,7 +3183,12 @@ const questionBank = {
           nextUrl: 'current-multi-tier-system',
           url: 'current-system',
           baseUrl: 'current-system',
-          // preValidationKeys: ['remainingCosts'],
+          preValidationObject: {
+            preValidationKeys: ['remainingCosts'],
+            preValidationAnswer: ['remaining-costs-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['remaining-costs']
+          },
           hint: {
             text: 'The housing system you are replacing or refurbishing for this project'
           },
@@ -3022,7 +3259,12 @@ const questionBank = {
           baseUrl: 'current-multi-tier-system',
           nextUrl: 'ramp-connection',
           backUrl: 'current-system',
-          // preValidationKeys: ['currentSystem'],
+          preValidationObject: {
+            preValidationKeys: ['currentSystem'],
+            preValidationAnswer: ['current-system-A3', 'current-system-A4', 'current-system-A5', 'current-system-A6'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['current-system']
+          },
           score: {
             isScore: true,
             isDisplay: true
@@ -3072,6 +3314,7 @@ const questionBank = {
               elseUrl: 'pullet-multi-tier'
             }
           },
+          preValidationKeys: ['maximumTierHeight'],
           hint: {
             html: `The floor and the perches at the top of the {{_poultryType_}} system are not counted as tiers`
           },
@@ -3117,6 +3360,7 @@ const questionBank = {
           baseUrl: 'hen-multi-tier',
           backUrl: 'tier-number',
           nextUrl: 'natural-light',
+          preValidationKeys: ['tierNumber'],
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3166,6 +3410,7 @@ const questionBank = {
           baseUrl: 'pullet-multi-tier',
           backUrl: 'tier-number',
           nextUrl: 'natural-light',
+          preValidationKeys: ['tierNumber'],
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3225,6 +3470,7 @@ const questionBank = {
             }
           },
           nextUrl: 'building-biosecurity',
+          preValidationKeys: ['naturalLight'],
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3268,6 +3514,7 @@ const questionBank = {
           baseUrl: 'building-biosecurity',
           backUrl: 'easy-grip-perches',
           nextUrl: 'pollution-mitigation',
+          preValidationKeys: ['easyGripPerches'],
           hint: {
             text: 'Select all that apply'
           },
@@ -3340,6 +3587,13 @@ const questionBank = {
             }
           },
           nextUrl: 'maximum-tier-height',
+          // preValidationKeys: ['currentSystem'],
+          preValidationObject: {
+            preValidationKeys: ['currentSystem', 'currentMultiTierSystem'],
+            preValidationAnswer: ['current-system-A1', 'current-system-A2', 'current-multi-tier-system-A1', 'current-multi-tier-system-A2'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['current-system', 'current-multi-tier-system']
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3386,6 +3640,7 @@ const questionBank = {
           baseUrl: 'maximum-tier-height',
           backUrl: 'ramp-connection',
           nextUrl: 'tier-number',
+          preValidationKeys: ['rampConnection'],
           score: {
             isScore: true,
             isDisplay: true
@@ -3451,6 +3706,12 @@ const questionBank = {
               elseUrl: 'pullet-multi-tier'
             }
           },
+          preValidationObject: {
+            preValidationKeys: ['henMultiTier', 'pulletMultiTier'],
+            preValidationAnswer: ['hen-multi-tier-A1', 'hen-multi-tier-A2', 'hen-multi-tier-A3', 'pullet-multi-tier-A1', 'pullet-multi-tier-A2', 'pullet-multi-tier-A3'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['hen-multi-tier', 'pullet-multi-tier']
+          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -3507,6 +3768,7 @@ const questionBank = {
               elseUrl: 'pullet-veranda-features'
             }
           },
+          preValidationKeys: ['buildingBiosecurity'],
           hint: {
             text: 'Select all that apply'
           },
@@ -3576,6 +3838,7 @@ const questionBank = {
           baseUrl: 'pullet-veranda-features',
           nextUrl: 'renewable-energy',
           backUrl: 'pollution-mitigation',
+          preValidationKeys: ['pollutionMitigation'],
           hint: {
             html: `
               <div>
@@ -3637,6 +3900,7 @@ const questionBank = {
           baseUrl: 'dark-brooders',
           backUrl: 'natural-light',
           nextUrl: 'easy-grip-perches',
+          preValidationKeys: ['naturalLight'],
           hint: { text: 'A suspended horizontal heat source enclosed by a curtain to exclude light'},
           fundingPriorities: '',
           type: 'single-answer',
@@ -3685,6 +3949,7 @@ const questionBank = {
             }
           },
           nextUrl: 'bird-data-type',
+          preValidationKeys: ['pollutionMitigation'],
           hint: {
             text: 'Select all that apply'
           },
@@ -3757,6 +4022,7 @@ const questionBank = {
           baseUrl: 'bird-data-type',
           backUrl: 'renewable-energy',
           nextUrl: 'environmental-data-type',
+          preValidationKeys: ['renewableEnergy'],
           hint: {
             html: `
                 <p>Using digital systems</p>
@@ -3852,6 +4118,7 @@ const questionBank = {
           baseUrl: 'environmental-data-type',
           backUrl: 'bird-data-type',
           nextUrl: 'score',
+          preValidationKeys: ['birdDataType'],
           hint: {
             html: `
                 <p>Using digital systems</p>
@@ -3921,6 +4188,13 @@ const questionBank = {
           baseUrl: 'bird-number',
           backUrl: 'project-cost',
           nextUrl: 'solar-PV-cost',
+          preValidationKeys: ['projectCost'],
+          // preValidationObject: {
+          //   preValidationKeys: ['projectCost', 'solarPVSystem'],
+          //   preValidationAnswer: ['solar-PV-system-A1'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['project-cost', 'solar-PV-system']
+          // },
           fundingPriorities: '',
           type: 'input',
           label: {
@@ -3962,7 +4236,7 @@ const questionBank = {
           baseUrl: 'solar-PV-cost',
           backUrl: 'bird-number',
           nextUrl: 'solar-power-capacity',
-          preValidationKeys: [],
+          preValidationKeys: ['solarBirdNumber'],
           grantInfo: {
             grantPercentage: GRANT_PERCENTAGE_SOLAR,
           },
@@ -4022,7 +4296,7 @@ const questionBank = {
           baseUrl: 'solar-power-capacity',
           backUrl: 'solar-PV-cost',
           nextUrl: 'potential-amount-solar',
-          preValidationKeys: [],
+          preValidationKeys: ['solarPVCost'],
           type: 'input',
           prefix: {
             text: 'kW'
@@ -4080,9 +4354,9 @@ const questionBank = {
           title: 'Score results',
           url: 'score',
           baseUrl: 'score',
-          backUrl: 'introducing-innovation',
+          backUrl: 'environmental-data-type',
           nextUrl: 'business-details',
-          // preValidationKeys: ['introducingInnovation'],
+          preValidationKeys: ['environmentalDataType'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your results',
@@ -4114,16 +4388,22 @@ const questionBank = {
           pageTitle: '',
           url: 'business-details',
           baseUrl: 'business-details',
+          //refactoring needed here
           backUrlObject: {
             dependentQuestionYarKey: 'projectType',
             dependentAnswerKeysArray: ['project-type-A1'],
             urlOptions: {
               thenUrl: 'veranda-remaining-costs',
-              elseUrl: 'project-type'
+              elseUrl: 'score'
             }
           },
           nextUrl: 'applying',
-          // preValidationKeys: [],
+          preValidationObject: {
+            preValidationKeys: ['environmentalDataType', 'remainingCosts'],
+            preValidationAnswer: ['environmental-data-type-A1', 'environmental-data-type-A2', 'environmental-data-type-A3', 'environmental-data-type-A4', 'environmental-data-type-A5', 'veranda-remaining-costs-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['environmental-data-type', 'veranda-remaining-costs']
+          },
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
@@ -4334,7 +4614,13 @@ const questionBank = {
           url: 'applicant-details',
           baseUrl: 'applicant-details',
           nextUrl: 'check-details',
-          // preValidationKeys: ['applying'],
+          preValidationKeys: ['applying'],
+          // preValidationObject: {
+          //   preValidationKeys: ['applying'],
+          //   preValidationAnswer: ['applying-A1'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['applying']
+          // },
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A2'],
@@ -4662,8 +4948,13 @@ const questionBank = {
           baseUrl: 'agent-details',
           backUrl: 'applying',
           nextUrl: 'applicant-details',
+          preValidationObject: {
+            preValidationKeys: ['applying'],
+            preValidationAnswer: ['applying-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['applying']
+          },
           summaryPageUrl: 'check-details',
-          // preValidationKeys: ['applying'],
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
@@ -4987,7 +5278,7 @@ const questionBank = {
               elseUrl: 'confirm'
             }
           },
-          // preValidationKeys: ['applying'],
+          preValidationKeys: ['farmerDetails'],
           pageData: {
             businessDetailsLink: 'business-details',
             agentDetailsLink: 'agent-details',
@@ -5005,7 +5296,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails'],
+          preValidationKeys: ['farmerDetails'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -5031,9 +5322,10 @@ const questionBank = {
           title: 'Confirm and send',
           order: 410,
           url: 'veranda-confirm',
+          baseUrl: 'veranda-confirm',
           backUrl: 'check-details',
-          nextUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails'],
+          nextUrl: 'veranda-confirmation',
+          preValidationKeys: ['farmerDetails'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -5057,13 +5349,13 @@ const questionBank = {
           yarKey: 'consentOptional'
         },
         {
-          key: 'reference-number',
+          key: 'confirmation',
           order: 420,
           title: 'Details submitted',
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails'],
+          preValidationKeys: ['farmerDetails'],
           ga: { name: 'confirmation', params: {} },
           maybeEligible: true,
           maybeEligibleContent: {
@@ -5074,7 +5366,7 @@ const questionBank = {
             },
             messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
             If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Investment Fund.<br/><br/>
-            You can <a class="govuk-link" href="start">check if you can apply</a> for another building. The maximum total grant amount each business can apply for is £500,000 for omprehensive projects. 
+            You can <a class="govuk-link" href="start">check if you can apply</a> for another building. The maximum total grant amount each business can apply for is £500,000 for comprehensive projects. 
             <h2 class="govuk-heading-m">RPA helpline</h2>
             <h3 class="govuk-heading-s">Telephone</h3>
             Telephone: 0300 0200 301<br/>
@@ -5105,11 +5397,7 @@ const questionBank = {
             text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
           },
           surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
-          },
-          fundingPriorities: '',
-          type: '',
-          minAnswerCount: 1,
-          answers: []
+          }
         },
         {
           key: 'veranda-confirmation',
@@ -5118,7 +5406,9 @@ const questionBank = {
           pageTitle: '',
           url: 'veranda-confirmation',
           baseUrl: 'veranda-confirmation',
+          preValidationKeys: ['farmerDetails'],
           ga: { name: 'veranda-confirmation', params: {} },
+          preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
             reference: {
@@ -5158,11 +5448,58 @@ const questionBank = {
             text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
           },
           surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
+          }
+        },
+        {
+          key: 'veranda-waitlist-confirmation',
+          order: 425,
+          title: 'Details submitted',
+          pageTitle: '',
+          url: 'veranda-waitlist-confirmation',
+          baseUrl: 'veranda-waitlist-confirmation',
+          ga: { name: 'veranda-waitlist-confirmation', params: {} },
+          preValidationKeys: ['applying', 'consentOptional'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            reference: {
+              titleText: 'Details submitted',
+              html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
+              surveyLink: process.env.SURVEY_LINK
+            },
+            messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
+              If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Investment Fund scheme.<br/><br/>
+              <h2 class="govuk-heading-m">RPA helpline</h2>
+              <h3 class="govuk-heading-s">Telephone</h3>
+              <p>Telephone: 0300 0200 301</p>
+              <p>Monday to Friday, 9am to 5pm (except public holidays)</p>
+              <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
+              <h3 class="govuk-heading-s">Email</h3>
+              <a class="govuk-link" title="Send email to RPA" target="_blank" rel="noopener noreferrer" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a><br/><br/>
+            
+              <h2 class="govuk-heading-m">What happens next</h2>
+              <ol class="govuk-list govuk-list--number">
+                <li>If there is grant funding available, the RPA will contact you to invite you to 
+                submit a full application. If there is no grant funding available, 
+                the RPA will contact you to tell you by [INSERT DATE].</li>
+                <li>If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</li>
+              </ol>
+            `,
+            middleWarning: {
+              text: 'You must not start the project'
+            },
+            extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
+            <p>Before you start the project, you can:</p>
+            <ul>
+              <li>get quotes from suppliers</li>
+              <li>apply for planning permission</li>
+            </ul>
+            `,
+          addText: false,
+          conditionalInsertText: { 
+            text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
           },
-          fundingPriorities: '',
-          type: '',
-          minAnswerCount: 1,
-          answers: []
+          surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
+          }
         }
       ]
     }

@@ -1,0 +1,42 @@
+{% extends '.layout.njk' %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "./components/macro.njk" import crumbToken %}
+
+{% block pageTitle %}
+    Interruption scoring - {{siteTitle}}
+{% endblock %}
+
+{% block beforeContent %}
+    {{ govukBackLink({
+        text: 'Back',
+        href: backLink,
+        attributes: {id: 'linkBack'}
+    }) }}
+{% endblock %}
+
+{% set mainClasses = "interruption-scoring-main" %}
+{% block content %}
+  <div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">We will now score your project against our funding priorities</h1>
+        <div class="govuk-body">
+          <p>You have passed our eligibility criteria.</p>
+          <p>Your answers to the next questions will helpus decide which projects we will invite to make a full application.</p>
+          <p>Your project will get a score of weak, average or strong. You can then make changes to improve your score.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {{ govukButton({
+          href: nextLink,
+          text: "Continue",
+          attributes: {id: "btnContinue"}
+        }) }}
+      </div>
+    </div>
+  </div>  
+{% endblock %}

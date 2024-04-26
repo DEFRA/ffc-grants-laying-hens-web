@@ -7,7 +7,7 @@ const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
 const { guardPage } = require('ffc-grants-common-functionality').pageGuard
 const { getUrl } = require('../helpers/urls')
-const { GRANT_PERCENTAGE } = require('./grant-details')
+const { GRANT_PERCENTAGE, VERANDA_FUNDING_CAP_REACHED } = require('./grant-details')
 const senders = require('../messaging/senders')
 
 const { startPageUrl, urlPrefix, serviceEndDate, serviceEndTime } = require('./../config/server')
@@ -45,7 +45,7 @@ const checkYarKeyReset = (thisAnswer, request) => {
 }
 
 const getReplacementText = (request, key, questionType, questionKey, trueReturn, falseReturn) => {
-  return getYarValue(request, key) === getQuestionAnswer(questionType, questionKey, ALL_QUESTIONS) ? trueReturn : falseReturn;
+  return getYarValue(request, key) === getQuestionAnswer(questionType, questionKey, ALL_QUESTIONS) ? trueReturn : falseReturn
 }
 
 const insertYarValue = (field, url, request) => {
@@ -53,36 +53,36 @@ const insertYarValue = (field, url, request) => {
 
     switch (url) {
       case '1000-birds':
-        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets');
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
       case 'lighting-features':
-        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ` <li>a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)</li>`, '');
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A2', ` <li>a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)</li>`, '')
       case 'bird-number':
-        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'the refurbished part of this building', 'this new building');
+        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'the refurbished part of this building', 'this new building')
       case 'project-cost':
-        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'refurbishing', 'replacing');
+        return getReplacementText(request, additionalYarKeyName, 'project-type', 'project-type-A2', 'refurbishing', 'replacing')
       case 'ramp-connection':
       case 'tier-number':
       case 'current-multi-tier-system': 
-        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier');
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier')
       case 'easy-grip-perches':
-        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'an aviary\'s', 'a multi-tier system\'s');
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'an aviary\'s', 'a multi-tier system\'s')
       default:
-        return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName);
+        return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName)
     }
   })
 
   if (url === 'bird-number') {
-    const replacement =  getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A3', ALL_QUESTIONS) ? ' when it is complete' : '';
-    field = field.replace('[[_extraClause_]]', replacement);
+    const replacement =  getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A3', ALL_QUESTIONS) ? ' when it is complete' : ''
+    field = field.replace('[[_extraClause_]]', replacement)
   }
 
 
   if (url === 'current-multi-tier-system') {
-    const replacement =  getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? 'an' : 'a';
-    field = field.replace('[[_article_]]', replacement);
+    const replacement =  getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? 'an' : 'a'
+    field = field.replace('[[_article_]]', replacement)
   }
 
-  return field;
+  return field
 }
 
 const titleCheck = (question, title, url, request) => {
@@ -326,13 +326,14 @@ const handlePotentialAmount = (request, maybeEligibleContent, url) => {
   if (url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'No'){
     return {
       ...maybeEligibleContent,
-      messageContent: 'The maximum grant you can apply for is £500,000.',
-      insertText: { text:'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.' },
+      messageContent: 'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.',
+      extraMessageContent: 'The maximum grant you can apply for is £500,000.'
     }
-  } else if (url === 'potential-amount' && getYarValue(request, 'solarPVSystem') === 'Yes' && getYarValue(request, 'projectCost') > 1250000){
+  } else if (url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'Yes'){
     return {
       ...maybeEligibleContent,
-      messageContent: 'The maximum grant you can apply for is £500,000.',
+      messageContent: `You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.</br></br>
+      The maximum grant you can apply for is £500,000.`,
       insertText: { text:'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for building project costs.' },
       extraMessageContent: 'You can continue to check your eligibility for grant funding to replace or refurbish a {{_poultryType_}} house.'
     }
@@ -347,29 +348,29 @@ const handlePotentialAmount = (request, maybeEligibleContent, url) => {
       potentialAmountConditional: false
     }
   }
-  return maybeEligibleContent;
+  return maybeEligibleContent
 }
 
 const handleConfirmation = async (url, request, confirmationId, maybeEligibleContent, h) => {
   if (maybeEligibleContent.reference) {
     if (!getYarValue(request, 'consentMain')) {
-      return h.redirect(startPageUrl);
+      return h.redirect(startPageUrl)
     }
 
-    if((url === 'confirmation' || url === 'veranda-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
+    if((url === 'confirmation' || url === 'veranda-confirmation' || url === 'veranda-waitlist-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
       maybeEligibleContent = {
         ...maybeEligibleContent,
-          addText: true,
+          addText: true
       }
     }
 
-    confirmationId = getConfirmationId(request.yar.id, request);
+    confirmationId = getConfirmationId(request.yar.id, request)
     try {
-      const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id);
-      await senders.sendDesirabilitySubmitted(emailData, request.yar.id);
-      console.log('[CONFIRMATION EVENT SENT]');
+      const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), scoring: getYarValue(request, 'overAllScore') }, request.yar.id)
+      await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
+      console.log('[CONFIRMATION EVENT SENT]')
     } catch (err) {
-      console.log('ERROR: ', err);
+      console.log('ERROR: ', err)
     }
     maybeEligibleContent = {
       ...maybeEligibleContent,
@@ -382,9 +383,9 @@ const handleConfirmation = async (url, request, confirmationId, maybeEligibleCon
         )
       }
     }
-    request.yar.reset();
+    request.yar.reset()
   }
-  return maybeEligibleContent;
+  return maybeEligibleContent
 }
 
 
@@ -409,7 +410,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     ),
     extraMessageContent: maybeEligibleContent?.extraMessageContent ?  maybeEligibleContent.extraMessageContent.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-      getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
+      getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet')
       )
     ) : '',
     surveyLink: maybeEligibleContent?.surveyLink ? maybeEligibleContent.surveyLink.replace(
@@ -424,7 +425,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     consentOptionalData = getConsentOptionalData(consentOptional)
   }
 
-  maybeEligibleContent = await handleConfirmation(url, request, confirmationId, maybeEligibleContent, h);
+  maybeEligibleContent = await handleConfirmation(url, request, confirmationId, maybeEligibleContent, h)
 
   const MAYBE_ELIGIBLE = { ...maybeEligibleContent, consentOptionalData, url, nextUrl, backUrl }
   return h.view('maybe-eligible', MAYBE_ELIGIBLE)
@@ -466,9 +467,11 @@ const handleBackUrlRemainingCosts = (request, url, question) => {
     }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
       if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
         return  'potential-amount-solar'
-    }else{
+      }else if(getYarValue(request, 'projectCost') > 1250000){
+        return 'potential-amount'
+      }else {
         return  'potential-amount-solar-calculation'
-    }
+      }
   }
   }else if(url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'No'){
       return  'potential-amount'
@@ -482,11 +485,21 @@ const getPage = async (question, request, h) => {
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
+  
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }
 
   if (url === 'project-cost') {
+    setYarValue(request, 'solarBirdNumber', null)
+    setYarValue(request, 'solarPVCost', null)
+    setYarValue(request, 'solarPowerCapacity', null)
+    setYarValue(request, 'calculatedGrant', null)
+    setYarValue(request, 'solarCalculatedGrant', null)
+    setYarValue(request, 'totalCalculatedGrant', null)
+    setYarValue(request, 'solarCalculatedGrant', null)
+    setYarValue(request, 'totalRemainingCost', null)
+
     if (getYarValue(request, 'solarPVSystem') === 'Yes'){
       question.hint.html = question.hint.htmlSolar
       hint.html = question.hint.htmlSolar
@@ -591,25 +604,25 @@ const multiInputForLoop = (payload, answers, type, yarKey, request) => {
   return thisAnswer
 }
 const handleYarKey = (yarKey, request, payload, currentQuestion) => {
-  let calculatedGrant, remainingCost, projectCost;
+  let calculatedGrant, remainingCost, projectCost
 
   if (yarKey === 'solarPVCost' || yarKey === 'projectCost') {
-      ({ calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo));
+      ({ calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo))
   }
 
   switch (yarKey) {
     case 'projectCost':
-      setYarValue(request, 'calculatedGrant', calculatedGrant);
-      setYarValue(request, 'remainingCost', remainingCost);
-      setYarValue(request, 'projectCost', projectCost);
+      setYarValue(request, 'calculatedGrant', calculatedGrant)
+      setYarValue(request, 'remainingCost', remainingCost)
+      setYarValue(request, 'projectCost', projectCost)
       if(getYarValue(request, 'solarPVSystem') === 'No'){
         setYarValue(request, 'totalRemainingCost', getYarValue(request, 'remainingCost'))
       }
       break
     case 'solarPVCost':
-      setYarValue(request, 'solarCalculatedGrant', calculatedGrant);
-      setYarValue(request, 'solarRemainingCost', remainingCost);
-      setYarValue(request, 'solarProjectCost', projectCost);
+      setYarValue(request, 'solarCalculatedGrant', calculatedGrant)
+      setYarValue(request, 'solarRemainingCost', remainingCost)
+      setYarValue(request, 'solarProjectCost', projectCost)
       break
     default:
       break
@@ -646,6 +659,18 @@ const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
 }
 }
 
+const handleRedirects = (baseUrl, request, payload) => {
+  if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
+    setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'projectCost')) - 500000)
+    return '/laying-hens/potential-amount'
+  } else if (baseUrl === 'project-type' && VERANDA_FUNDING_CAP_REACHED && getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS)){
+    return '/laying-hens/veranda-funding-cap'
+  } else if (baseUrl === 'veranda-confirm' && VERANDA_FUNDING_CAP_REACHED){
+    return '/laying-hens/veranda-waitlist-confirmation'
+  }
+  return null
+}
+
 const showPostPage = (currentQuestion, request, h) => {
   let { yarKey, answers, baseUrl, ineligibleContent, nextUrlObject, title, hint, type, validate } = currentQuestion
   const payload = request.payload
@@ -671,7 +696,7 @@ const showPostPage = (currentQuestion, request, h) => {
     return errors
   }
 
-  const solarPVSystem = getYarValue(request, 'solarPVSystem');
+  const solarPVSystem = getYarValue(request, 'solarPVSystem')
 
   if (baseUrl === 'veranda-project-cost'){
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
@@ -694,8 +719,9 @@ const showPostPage = (currentQuestion, request, h) => {
 
   let nextUrl = handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
 
-  if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
-    return h.redirect('/laying-hens/potential-amount')
+  const redirectUrl = handleRedirects(baseUrl, request, payload)
+  if (redirectUrl) {
+    return h.redirect(redirectUrl)
   }
   
   handleYarKey(yarKey, request, payload, currentQuestion)

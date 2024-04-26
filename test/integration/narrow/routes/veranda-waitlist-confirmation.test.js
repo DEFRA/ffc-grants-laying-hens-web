@@ -2,18 +2,18 @@ const { crumbToken } = require('./test-helper')
 
 const senders = require('../../../../app/messaging/senders')
 const { commonFunctionsMock } = require('../../../session-mock')
-
+process.env.VERANDA_FUNDING_CAP_REACHED = 'true'
 describe('varanda confirm page', () => {
   const varList = { 
     farmerDetails: 'someValue', 
     projectType: 'Adding a veranda only to the existing building',
     projectResponsibility: ''
     }
+
     let valList = {}
   
     const utilsList = {
       'project-responsibility-A2': 'No, I plan to ask my landlord to take full responsibility for my project',
-      'project-type-A1': 'Adding a veranda only to the existing building'
     }
   
     commonFunctionsMock(varList, 'Error', utilsList, valList)
