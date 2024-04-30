@@ -461,19 +461,19 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 }
 
 const handleBackUrlRemainingCosts = (request, url, question) => {
-  if (url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'Yes'){
-    if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
+  if (url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'Yes') {
+    if (getYarValue(request, 'projectCost') > 1250000) {
+      return 'potential-amount'
+    } else if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000) {
         return  'potential-amount-solar-capped'
-    } else if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
-      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, '')) {
+    } else if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000) {
+      if (0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, '')) {
         return  'potential-amount-solar'
-      } else if (Number(getYarValue(request, 'projectCost').toString().replace(/,/g, '')) > 1250000){
-        return 'potential-amount'
       } else {
         return  'potential-amount-solar-calculation'
       }
   }
-  }else if(url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'No'){
+  } else if(url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'No') {
       return  'potential-amount'
   }else {
       return  question.backUrl
