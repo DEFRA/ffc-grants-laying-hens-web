@@ -87,7 +87,7 @@ describe('Create submission message', () => {
       'technology', 'itemsCost', 'potentialFunding', 'remainingCost',
       'projectStarted', 'projectName', 'businessName',
       'farmerName', 'farmerSurname', 'agentName', 'agentSurname', 'farmerEmail', 'agentEmail',
-      'contactConsent', 'scoreDate', 'projectCost', 'scoreDate', 'environmentalDataType', 'birdDataType',
+      'contactConsent', 'scoreDate', 'projectCost', 'scoreDate', 'environmentalDataType', 'birdDateType',
       'renewableEnergy', 'pollutionMitigation', 'buildingBiosecurity', 'easyGripPerches', 'naturalLighting',
       'consistentHousing'
     )

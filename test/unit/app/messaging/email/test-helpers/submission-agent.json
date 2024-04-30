@@ -103,7 +103,7 @@
     "buildingBiosecurity": ["Shower facilities in the biosecurity changing area", "An integrated externally accessible storage room with a separate air space"],
     "pollutionMitigation": ["Manure drying", "Air filtration at inlets"],
     "renewableEnergy": ["Solar PV system", "A heat exchanger (heating only"],
-    "birdDataType": ["Bird location", "Egg production parameters"],
+    "birdDateType": ["Bird location", "Egg production parameters"],
     "environmentalDataType": ["Ammonia", "Carbon monoxide"],
     "scoreDate": "12 April 2024",
     "henVeranda": null,

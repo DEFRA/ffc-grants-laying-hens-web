@@ -82,7 +82,7 @@ describe('Page: /bird-data-type', () => {
 
   for(let option of ['Bird location', 'Egg production parameters', 'Body weight', 'Disease detection', 'Feed date or conversion ratios', 'Locomotion or movement', 'Nest use', 'Sound analysis', 'Other', 'None of the above']) {
     it(`user selects eligible option - ${option} -> store user response and redirect to /environmental-data-type`, async () => {
-      await testNextLink('bird-data-type', 'birdDataType', option, 'environmental-data-type')
+      await testNextLink('bird-data-type', 'birdDateType', option, 'environmental-data-type')
     })
   }
 

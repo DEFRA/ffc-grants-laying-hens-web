@@ -16,7 +16,7 @@ module.exports = {
     'pollution-mitigation': 'pollutionMitigation',
     'pullet-veranda-features': 'pulletVerandaFeatures',
     'renewable-energy': 'renewableEnergy',
-    'bird-data-type': 'birdDataType',
+    'bird-data-type': 'birdDateType',
     'environmental-data-type': 'environmentalDataType'
   }
 }

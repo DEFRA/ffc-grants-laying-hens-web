@@ -31,7 +31,7 @@ const desirabilityAnswersSchema = Joi.object({
   pollutionMitigation: Joi.array().items(Joi.string()),
   pulletVerandaFeatures: Joi.string().allow(null),
   renewableEnergy: Joi.array().items(Joi.string()),
-  birdDataType: Joi.array().items(Joi.string()),
+  birdDateType: Joi.array().items(Joi.string()),
   environmentalDataType: Joi.array().items(Joi.string())
 })
 
@@ -53,7 +53,7 @@ function getDesirabilityAnswers (request) {
       pollutionMitigation: getDataFromYarValue(request, 'pollutionMitigation', multiAnswer),
       pulletVerandaFeatures: getYarValue(request, 'pulletVerandaFeatures'),
       renewableEnergy: getDataFromYarValue(request, 'renewableEnergy', multiAnswer),
-      birdDataType: getDataFromYarValue(request, 'birdDataType', multiAnswer),
+      birdDateType: getDataFromYarValue(request, 'birdDateType', multiAnswer),
       environmentalDataType: getDataFromYarValue(request, 'environmentalDataType', multiAnswer)
     }
 

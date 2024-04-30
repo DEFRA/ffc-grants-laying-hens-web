@@ -4107,7 +4107,7 @@ const questionBank = {
               value: 'None of the above',
             }
           ],
-          yarKey: 'birdDataType'
+          yarKey: 'birdDateType'
         },
         {
           key: 'environmental-data-type',
@@ -4118,7 +4118,7 @@ const questionBank = {
           baseUrl: 'environmental-data-type',
           backUrl: 'bird-data-type',
           nextUrl: 'score',
-          preValidationKeys: ['birdDataType'],
+          preValidationKeys: ['birdDateType'],
           hint: {
             html: `
                 <p>Using digital systems</p>

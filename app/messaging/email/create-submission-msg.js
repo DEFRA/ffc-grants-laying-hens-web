@@ -133,7 +133,7 @@ function getScoringFields(submission) {
     generateRow(496, 'Pollution Mitigation', [submission.pollutionMitigation].flat().join(', ')),
     generateRow(497, 'Veranda requirements', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.pulletVerandaFeatures : ''),
     generateRow(498, 'Renewable Energy Sources', [submission.renewableEnergy].flat().join(', ')),
-    generateRow(499, 'Poultry Management Data', [submission.birdDataType].flat().join(', ')),
+    generateRow(499, 'Poultry Management Data', [submission.birdDateType].flat().join(', ')),
     generateRow(500, 'Additional Environmental Data', [submission.environmentalDataType].flat().join(', ')),
   ]
 }
@@ -396,8 +396,8 @@ const scoringQuestions = (submission, desirabilityScore) => {
       pulletVerandaFeaturesScore: pulletJourney ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'pullet-veranda-features') : '',
       renewableEnergy: [submission.renewableEnergy].flat().join(', '),
       renewableEnergyScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'renewable-energy'),
-      birdDataType: [submission.birdDataType].flat().join(', '),
-      birdDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'bird-data-type'),
+      birdDateType: [submission.birdDateType].flat().join(', '),
+      birdDateTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'bird-data-type'),
       environmentalDataType: [submission.environmentalDataType].flat().join(', '),
       environmentalDataTypeScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'environmental-data-type'),
       scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),

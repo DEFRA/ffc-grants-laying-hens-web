@@ -87,7 +87,7 @@ const commonPages = [
     pageTitle: 'Poultry management data',
     url: 'bird-data-type',
     fundingPriorities: 'Support projects that use innovative systems',
-    yarKey: 'birdDataType'
+    yarKey: 'birdDateType'
   },
   {
     key: 'environmental-data-type',

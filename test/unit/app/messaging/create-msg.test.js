@@ -49,7 +49,7 @@ describe('create-msg', () => {
       pollutionMitigation: ['hello'],
       // pulletVerandaFeatures: 'hello'
       renewableEnergy: ['hello'],
-      birdDataType: ['hello'],
+      birdDateType: ['hello'],
       environmentalDataType: ['hello']
     }
     expect(getDesirabilityAnswers({})).toEqual({
@@ -68,7 +68,7 @@ describe('create-msg', () => {
       pollutionMitigation: ['hello'],
       // pulletVerandaFeatures: 'hello'
       renewableEnergy: ['hello'],
-      birdDataType: ['hello'],
+      birdDateType: ['hello'],
       environmentalDataType: ['hello']
     })
 
@@ -88,7 +88,7 @@ describe('create-msg', () => {
       pollutionMitigation: ['hello'],
       // pulletVerandaFeatures: null
       renewableEnergy: ['hello'],
-      birdDataType: ['hello'],
+      birdDateType: ['hello'],
       environmentalDataType: ['hello']
     }
     expect(getDesirabilityAnswers({})).toEqual({
@@ -107,7 +107,7 @@ describe('create-msg', () => {
       pollutionMitigation: ['hello'],
       // pulletVerandaFeatures: null
       renewableEnergy: ['hello'],
-      birdDataType: ['hello'],
+      birdDateType: ['hello'],
       environmentalDataType: ['hello']
     })
 
@@ -127,7 +127,7 @@ describe('create-msg', () => {
       pollutionMitigation: null,
       // pulletVerandaFeatures: null
       renewableEnergy: null,
-      birdDataType: null,
+      birdDateType: null,
       environmentalDataType: null
     }
 
