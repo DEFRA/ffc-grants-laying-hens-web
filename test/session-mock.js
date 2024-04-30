@@ -271,7 +271,7 @@ const commonFunctionsMock = (varList, returnType, utilsList = {}, valList = {}) 
               }
             }
           },
-          setOptionsLabel: (data, answers, conditonalHtml) => {
+          setOptionsLabel: (data, answers, conditionalHtml) => {
             const itemsList = answers.map(answer => {
               const { value, hint, text, conditional } = answer
           
