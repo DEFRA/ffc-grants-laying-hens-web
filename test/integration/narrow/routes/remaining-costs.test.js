@@ -130,7 +130,7 @@ describe('Page: /remaining-costs', () => {
 
   it('page loads with correct back link when solarPVSystem is Yes - /potential-amount', async () => {
     varList.solarPVSystem = 'Yes'
-    varList.projectCost = 2000000
+    varList.projectCost = 200000
     varList.calculatedGrant = 50
     varList.solarCalculatedGrant = 50
     varList.solarBirdNumber = 1000
