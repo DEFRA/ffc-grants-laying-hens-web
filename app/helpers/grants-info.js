@@ -1,6 +1,8 @@
 const getGrantValues = (projectCostValue, grantsInfo) => {
+
   // if (cappedGrant = true) then maxGrant becomes max grant available
-  projectCostValue = projectCostValue.replace(/,/g, '')
+  projectCostValue = Number(projectCostValue.toString().replace(/,/g, ''))
+
   const { minGrant, maxGrant, grantPercentage, cappedGrant } = grantsInfo
 
   let calculatedGrant = Number(grantPercentage * projectCostValue / 100).toFixed(2)

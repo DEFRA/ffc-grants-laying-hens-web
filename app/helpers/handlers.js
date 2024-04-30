@@ -467,7 +467,7 @@ const handleBackUrlRemainingCosts = (request, url, question) => {
     } else if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
       if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, '')) {
         return  'potential-amount-solar'
-      } else if (getYarValue(request, 'projectCost') > 1250000){
+      } else if (Number(getYarValue(request, 'projectCost').toString().replace(/,/g, '')) > 1250000){
         return 'potential-amount'
       } else {
         return  'potential-amount-solar-calculation'
@@ -660,7 +660,7 @@ const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
 }
 
 const handleRedirects = (baseUrl, request, payload) => {
-  if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && payload[Object.keys(payload)[0]] > 1250000) {
+  if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && Number(payload[Object.keys(payload)[0]].toString().replace(/,/g, '')) > 1250000) {
     setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'projectCost').toString().replace(/,/g, '')) - 500000)
     return '/laying-hens/potential-amount'
   } else if (baseUrl === 'project-type' && VERANDA_FUNDING_CAP_REACHED && getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS)){
@@ -718,14 +718,14 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   let nextUrl = handleNextUrlSolarPowerCapacity(request, baseUrl, currentQuestion)
+  handleYarKey(yarKey, request, payload, currentQuestion)
+
 
   const redirectUrl = handleRedirects(baseUrl, request, payload)
   if (redirectUrl) {
     return h.redirect(redirectUrl)
   }
-  
-  handleYarKey(yarKey, request, payload, currentQuestion)
-  
+    
   if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
