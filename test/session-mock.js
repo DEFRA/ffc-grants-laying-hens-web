@@ -1,5 +1,3 @@
-const { _validateInstrumentationKey } = require("applicationinsights/out/Library/Config")
-
 const commonFunctionsMock = (varList, returnType, utilsList = {}, valList = {}) => {
     return jest.mock('ffc-grants-common-functionality', () => ({
         session: {
@@ -32,7 +30,7 @@ const commonFunctionsMock = (varList, returnType, utilsList = {}, valList = {}) 
         // alternative is rewriting every unit test file to test for if the model is corrcet in a completely different way and making getOptions mock return something different
         // to whoever needs to rewrite this mock (and those tests), good luck o7
         answerOptions: {
-          getOptions: (data, question, conditionalHTML, request) => {
+          getOptions: (data, question, conditionalHtml, request) => {
             if (question.type === 'input' || question.type === 'email' || question.type === 'tel') {
               const { yarKey, prefix, suffix, label, classes, inputmode, pattern } = question
               return {
@@ -273,7 +271,7 @@ const commonFunctionsMock = (varList, returnType, utilsList = {}, valList = {}) 
               }
             }
           },
-          setOptionsLabel: (data, answers, conditonalHTML) => {
+          setOptionsLabel: (data, answers, conditonalHtml) => {
             const itemsList = answers.map(answer => {
               const { value, hint, text, conditional } = answer
           
