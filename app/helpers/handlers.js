@@ -644,7 +644,7 @@ const formatVariablesBlock = (currentQuestion, title, baseUrl, request, validate
 const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
   if (baseUrl === 'solar-power-capacity') {
     if (Number(getYarValue(request, 'calculatedGrant')) + Number(getYarValue(request, 'solarCalculatedGrant')) > 500000) {
-      setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'projectCost')) + Number(getYarValue(request, 'solarProjectCost')) - 500000)
+      setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'projectCost').toString().replace(/,/g, '')) + Number(getYarValue(request, 'solarProjectCost')) - 500000)
       return 'potential-amount-solar-capped'
     } else if (Number(getYarValue(request, 'calculatedGrant')) + Number(getYarValue(request, 'solarCalculatedGrant')) <= 500000) {
       if (0.005  >= Number(getYarValue(request, 'solarPowerCapacity')) / Number(getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, ''))) {
