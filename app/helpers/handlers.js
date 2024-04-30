@@ -462,14 +462,14 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 
 const handleBackUrlRemainingCosts = (request, url, question) => {
   if (url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'Yes'){
-    if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
+    if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000){
         return  'potential-amount-solar-capped'
-    }else if(getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
-      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber')){
+    } else if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000){
+      if(0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, '')) {
         return  'potential-amount-solar'
-      }else if(getYarValue(request, 'projectCost') > 1250000){
+      } else if (getYarValue(request, 'projectCost') > 1250000){
         return 'potential-amount'
-      }else {
+      } else {
         return  'potential-amount-solar-calculation'
       }
   }
@@ -647,7 +647,7 @@ const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
       setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'projectCost')) + Number(getYarValue(request, 'solarProjectCost')) - 500000)
       return 'potential-amount-solar-capped'
     } else if (Number(getYarValue(request, 'calculatedGrant')) + Number(getYarValue(request, 'solarCalculatedGrant')) <= 500000) {
-      if (0.005  >= Number(getYarValue(request, 'solarPowerCapacity')) / Number(getYarValue(request, 'solarBirdNumber'))) {
+      if (0.005  >= Number(getYarValue(request, 'solarPowerCapacity')) / Number(getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, ''))) {
         setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'remainingCost')) + Number(getYarValue(request, 'solarRemainingCost')))
         return 'potential-amount-solar'
     } else {

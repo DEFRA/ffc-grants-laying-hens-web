@@ -4247,7 +4247,7 @@ const questionBank = {
           grantInfo: {
             minGrant: 0,
             maxGrant: 500000,
-            grantPercentage: 25,
+            grantPercentage: GRANT_PERCENTAGE_SOLAR,
             cappedGrant: true
           },
           id: 'solarPVCost',
