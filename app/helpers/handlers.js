@@ -329,7 +329,7 @@ const handlePotentialAmount = (request, maybeEligibleContent, url) => {
       messageContent: 'You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.',
       extraMessageContent: 'The maximum grant you can apply for is £500,000.'
     }
-  } else if (url === 'potential-amount' && getYarValue(request, 'projectCost') > 1250000 && getYarValue(request, 'solarPVSystem') === 'Yes'){
+  } else if (url === 'potential-amount' && getYarValue(request, 'projectCost') >= 1250000 && getYarValue(request, 'solarPVSystem') === 'Yes'){
     return {
       ...maybeEligibleContent,
       messageContent: `You may be able to apply for a grant of up to £500,000, based on the estimated cost of £{{_projectCost_}}.</br></br>
@@ -462,7 +462,7 @@ const getUrlSwitchFunction = async (data, question, request, conditionalHtml, ba
 
 const handleBackUrlRemainingCosts = (request, url, question) => {
   if (url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'Yes') {
-    if (getYarValue(request, 'projectCost') > 1250000) {
+    if (getYarValue(request, 'projectCost') >= 1250000) {
       return 'potential-amount'
     } else if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000) {
       return 'potential-amount-solar-capped'
@@ -660,7 +660,7 @@ const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
 }
 
 const handleRedirects = (baseUrl, request, payload) => {
-  if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && Number(payload[Object.keys(payload)[0]].toString().replace(/,/g, '')) > 1250000) {
+  if (baseUrl === 'project-cost' && getYarValue(request, 'solarPVSystem') === 'Yes' && Number(payload[Object.keys(payload)[0]].toString().replace(/,/g, '')) >= 1250000) {
     setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'projectCost').toString().replace(/,/g, '')) - 500000)
     return '/laying-hens/potential-amount'
   } else if (baseUrl === 'project-type' && VERANDA_FUNDING_CAP_REACHED && getYarValue(request, 'projectType') === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS)){
