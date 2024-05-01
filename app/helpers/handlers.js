@@ -162,14 +162,14 @@ const sidebarCheck = (question, url, request ) => {
         ]
       }
     }
-}
+  }
 
   return question
 }
 
 const validateErrorCheck = (question, validate, url, request) => {
 
- // this sonar issue fix actually breaks all tests
+  // this sonar issue fix actually breaks all tests
   if (question?.validate && question.validate[0].error.includes('{{_')) {
     question = {
       ...question,
@@ -191,8 +191,8 @@ const ineligibleContentCheck = (question, ineligibleContent, url,  request) => {
     question = {
       ...question,
       ineligibleContent: {
-            ...question.ineligibleContent,
-            messageContent: insertYarValue(ineligibleContent.messageContent,url, request)
+        ...question.ineligibleContent,
+        messageContent: insertYarValue(ineligibleContent.messageContent,url, request)
       }
     }
   }
@@ -201,9 +201,9 @@ const ineligibleContentCheck = (question, ineligibleContent, url,  request) => {
 }
 
 const showHideAnswer = (question, request) => { 
-  if(question?.answers){
-    for(let answer of question.answers) {
-      if(answer.dependantShowHideKey && getYarValue(request, answer.dependantShowHideYarKey) === getQuestionAnswer(answer.dependantShowHideKey, answer.dependantShowHideAnswerKey, ALL_QUESTIONS)){
+  if (question?.answers){
+    for (let answer of question.answers) {
+      if (answer.dependantShowHideKey && getYarValue(request, answer.dependantShowHideYarKey) === getQuestionAnswer(answer.dependantShowHideKey, answer.dependantShowHideAnswerKey, ALL_QUESTIONS)){
         question = {
           ...question,
           answers:  question.answers.filter(a =>  a.key !== answer.key)
@@ -357,10 +357,10 @@ const handleConfirmation = async (url, request, confirmationId, maybeEligibleCon
       return h.redirect(startPageUrl)
     }
 
-    if((url === 'confirmation' || url === 'veranda-confirmation' || url === 'veranda-waitlist-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
+    if ((url === 'confirmation' || url === 'veranda-confirmation' || url === 'veranda-waitlist-confirmation') && getYarValue(request, 'projectResponsibility') === getQuestionAnswer('project-responsibility','project-responsibility-A2', ALL_QUESTIONS)){
       maybeEligibleContent = {
         ...maybeEligibleContent,
-          addText: true
+        addText: true
       }
     }
 
@@ -410,7 +410,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
     ),
     extraMessageContent: maybeEligibleContent?.extraMessageContent ?  maybeEligibleContent.extraMessageContent.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
-      getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet')
+        getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet')
       )
     ) : '',
     surveyLink: maybeEligibleContent?.surveyLink ? maybeEligibleContent.surveyLink.replace(
@@ -465,18 +465,18 @@ const handleBackUrlRemainingCosts = (request, url, question) => {
     if (getYarValue(request, 'projectCost') > 1250000) {
       return 'potential-amount'
     } else if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') > 500000) {
-        return  'potential-amount-solar-capped'
+      return 'potential-amount-solar-capped'
     } else if (getYarValue(request, 'calculatedGrant') + getYarValue(request, 'solarCalculatedGrant') <= 500000) {
       if (0.005  >= getYarValue(request, 'solarPowerCapacity') / getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, '')) {
-        return  'potential-amount-solar'
+        return 'potential-amount-solar'
       } else {
-        return  'potential-amount-solar-calculation'
+        return 'potential-amount-solar-calculation'
       }
-  }
-  } else if(url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'No') {
-      return  'potential-amount'
-  }else {
-      return  question.backUrl
+    }
+  } else if (url === 'remaining-costs' && getYarValue(request, 'solarPVSystem') === 'No') {
+    return  'potential-amount'
+  } else {
+    return  question.backUrl
   }
 }
 
@@ -607,7 +607,7 @@ const handleYarKey = (yarKey, request, payload, currentQuestion) => {
   let calculatedGrant, remainingCost, projectCost
 
   if (yarKey === 'solarPVCost' || yarKey === 'projectCost') {
-      ({ calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo))
+    ({ calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo))
   }
 
   switch (yarKey) {
@@ -615,7 +615,7 @@ const handleYarKey = (yarKey, request, payload, currentQuestion) => {
       setYarValue(request, 'calculatedGrant', calculatedGrant)
       setYarValue(request, 'remainingCost', remainingCost)
       setYarValue(request, 'projectCost', projectCost)
-      if(getYarValue(request, 'solarPVSystem') === 'No'){
+      if (getYarValue(request, 'solarPVSystem') === 'No'){
         setYarValue(request, 'totalRemainingCost', getYarValue(request, 'remainingCost'))
       }
       break
@@ -650,13 +650,13 @@ const handleNextUrlSolarPowerCapacity = (request, baseUrl, currentQuestion) => {
       if (0.005  >= Number(getYarValue(request, 'solarPowerCapacity')) / Number(getYarValue(request, 'solarBirdNumber').toString().replace(/,/g, ''))) {
         setYarValue(request, 'totalRemainingCost', Number(getYarValue(request, 'remainingCost')) + Number(getYarValue(request, 'solarRemainingCost')))
         return 'potential-amount-solar'
-    } else {
-      return 'potential-amount-solar-calculation'
+      } else {
+        return 'potential-amount-solar-calculation'
+      }
     }
+  } else {
+    return currentQuestion.nextUrl
   }
-}else {
-  return currentQuestion.nextUrl
-}
 }
 
 const handleRedirects = (baseUrl, request, payload) => {
@@ -700,14 +700,14 @@ const showPostPage = (currentQuestion, request, h) => {
 
   if (baseUrl === 'veranda-project-cost'){
     NOT_ELIGIBLE = { ...NOT_ELIGIBLE, specificTitle: `The minimum grant you can apply for is £5,000 (${GRANT_PERCENTAGE}% of £12,500)` }
-  }else if (baseUrl === 'project-cost') {
+  } else if (baseUrl === 'project-cost') {
     const insertText = solarPVSystem === 'Yes' ? { 
-        text: 'You cannot apply for funding for solar PV system if you have not requested the minimum grant funding amount for a building.' 
+      text: 'You cannot apply for funding for solar PV system if you have not requested the minimum grant funding amount for a building.' 
     } : ''
     NOT_ELIGIBLE = { 
-        ...NOT_ELIGIBLE, 
-        specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, 
-        insertText
+      ...NOT_ELIGIBLE, 
+      specificTitle: `The minimum grant you can apply for is £15,000 (${GRANT_PERCENTAGE}% of £37,500)`, 
+      insertText
     }
   }
 
