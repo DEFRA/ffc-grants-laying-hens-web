@@ -176,6 +176,7 @@ describe('Project cost page', () => {
   })
 
   it('solarPVSystem = Yes -> store valid user input and redirect to potential-amount page', async () => {
+    varList.projectCost = 1260000
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-cost`,

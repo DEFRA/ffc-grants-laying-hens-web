@@ -248,8 +248,8 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(502, 'Date and Time of OA Receipt', submission.dateTimeToday),
     generateRow(370, 'Status', 'Pending RPA review'),
     generateRow(85, 'Full Application Submission Date', '30/01/2026'),
-    generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
-    generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
+    generateRow(375, 'OA percent', desirabilityScore ? String(desirabilityScore.desirability.overallRating.score) : ''),
+    generateRow(365, 'OA score', desirabilityScore ? desirabilityScore.desirability.overallRating.band : ''),
     ...addAgentDetails(submission.agentsDetails)
   ]
 }
@@ -337,8 +337,8 @@ function getScoreChance(rating) {
 const getDetails = (submission) => {
   const henJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS)
   const pulletJourney = submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS)
-  const isSolarPVSystemYes = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS)
-  const isSolarPVSystemNo = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS)
+  const isSolarPVSystemYes = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A1', ALL_QUESTIONS) && submission.projectCost < 1250000
+  const isSolarPVSystemNo = submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS) 
   const rearingAviarySystemTrue = submission.rearingAviarySystem === getQuestionAnswer('rearing-aviary-system', 'rearing-aviary-system-A1', ALL_QUESTIONS)
   const stepUpSystemTrue = submission.stepUpSystem === getQuestionAnswer('step-up-system', 'step-up-system-A1', ALL_QUESTIONS)
   const verandaJourney = submission.projectType === getQuestionAnswer('project-type','project-type-A1', ALL_QUESTIONS)

@@ -80,6 +80,7 @@ describe('Page: /solar-power-capacity', () => {
     varList.solarCalculatedGrant = 1000
     varList.solarBirdNumber = 1000
     varList.solarPowerCapacity = 5
+    varList.projectCost = 12346
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-power-capacity`,

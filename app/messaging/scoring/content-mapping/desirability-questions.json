@@ -167,16 +167,16 @@
       "key": "bird-data-type",
       "title": "What poultry management data will you automatically collect and store?",
       "answers": {
-        "bird-data-type-A1": "Bird performance data",
-        "bird-data-type-A2": "Body weight",
-        "bird-data-type-A3": "Disease detection",
-        "bird-data-type-A4": "Feed data or conversion ratios",
-        "bird-data-type-A5": "Location data",
-        "bird-data-type-A6": "Locomotion or movement data",
-        "bird-data-type-A7": "Next use",
+        "bird-data-type-A1": "Bird location",
+        "bird-data-type-A2": "Egg production parameters",
+        "bird-data-type-A3": "Body weight",
+        "bird-data-type-A4": "Disease detection",
+        "bird-data-type-A5": "Feed data or conversion ratios",
+        "bird-data-type-A6": "Locomotion or movement",
+        "bird-data-type-A7": "Nest use",
         "bird-data-type-A8": "Sound analysis",
         "bird-data-type-A9": "Other",
-        "bird-data-type-A10": "I will not monitor any poultry management data"
+        "bird-data-type-A10": "None of the above"
 
       }
     }
@@ -190,7 +190,7 @@
         "environmental-data-type-A2": "Carbon monoxide",
         "environmental-data-type-A3": "Inhalable dust",
         "environmental-data-type-A4": "Other",
-        "environmental-data-type-A5": "I will not collect and store additional environmental data"
+        "environmental-data-type-A5": "None of the above"
       }
     }
   ]

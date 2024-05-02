@@ -4078,7 +4078,7 @@ const questionBank = {
             },
             {
               key: 'bird-data-type-A5',
-              value: 'Feed date or conversion ratios'
+              value: 'Feed data or conversion ratios'
             },
             {
               key: 'bird-data-type-A6',
@@ -4247,7 +4247,7 @@ const questionBank = {
           grantInfo: {
             minGrant: 0,
             maxGrant: 500000,
-            grantPercentage: 25,
+            grantPercentage: GRANT_PERCENTAGE_SOLAR,
             cappedGrant: true
           },
           id: 'solarPVCost',

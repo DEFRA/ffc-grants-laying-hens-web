@@ -30,7 +30,7 @@ describe('Page: /bird-data-type', () => {
     expect(response.payload).toContain('Egg production parameters')
     expect(response.payload).toContain('Body weight')
     expect(response.payload).toContain('Disease detection')
-    expect(response.payload).toContain('Feed date or conversion ratios')
+    expect(response.payload).toContain('Feed data or conversion ratios')
     expect(response.payload).toContain('Locomotion or movement')
     expect(response.payload).toContain('Nest use')
     expect(response.payload).toContain('Sound analysis')
@@ -55,7 +55,7 @@ describe('Page: /bird-data-type', () => {
     expect(response.payload).toContain('Bird location')
     expect(response.payload).toContain('Body weight')
     expect(response.payload).toContain('Disease detection')
-    expect(response.payload).toContain('Feed date or conversion ratios')
+    expect(response.payload).toContain('Feed data or conversion ratios')
     expect(response.payload).toContain('Locomotion or movement')
     expect(response.payload).toContain('Sound analysis')
     expect(response.payload).toContain('Other')
@@ -80,7 +80,7 @@ describe('Page: /bird-data-type', () => {
     expect(postResponse.payload).toContain('Select what poultry management data you will automatically collect and store')
   })
 
-  for(let option of ['Bird location', 'Egg production parameters', 'Body weight', 'Disease detection', 'Feed date or conversion ratios', 'Locomotion or movement', 'Nest use', 'Sound analysis', 'Other', 'None of the above']) {
+  for(let option of ['Bird location', 'Egg production parameters', 'Body weight', 'Disease detection', 'Feed data or conversion ratios', 'Locomotion or movement', 'Nest use', 'Sound analysis', 'Other', 'None of the above']) {
     it(`user selects eligible option - ${option} -> store user response and redirect to /environmental-data-type`, async () => {
       await testNextLink('bird-data-type', 'birdDataType', option, 'environmental-data-type')
     })
