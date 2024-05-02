@@ -72,28 +72,28 @@ function addFarmerTypeBlock(beef, horticulture, businessTypeArray) {
 
 function getAllNewFields(submission) {
   return [
-    generateRow(459, 'Poultry Type', submission.poultryType),
-    generateRow(460, 'Bird Number', submission.birdNumber),
-    generateRow(461, 'Veranda', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.henVeranda : ''),
-    generateRow(462, 'Veranda Features', submission.projectType === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS) ? submission.verandaOnlySize : ''),
-    generateRow(463, 'Veranda Specification', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.henVerandaFeatures : ''),
-    generateRow(464, 'Building Items', submission.buildingItems),
-    generateRow(465, 'Insulation', submission.replacingInsulation ?? submission.refurbishingInsulation),
-    generateRow(466, 'Pullet Housing', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.pulletHousingRequirements : ''),
-    generateRow(467, 'House Lighting System', submission.lightingFeatures),
-    generateRow(468, 'Aviary System', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.aviaryWelfare : ''),
-    generateRow(469, 'Aviary System Features', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.aviarySystem : ''),
-    generateRow(470, 'Multi-tier System', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.multiTierSystem : ''),
-    generateRow(471, 'Rearing System', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) && submission.multiTierSystem === getQuestionAnswer('multi-tier-system', 'multi-tier-system-A1', ALL_QUESTIONS) ? submission.rearingAviarySystem : ''),
-    generateRow(472, 'Step-up System', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) && submission.multiTierSystem === getQuestionAnswer('multi-tier-system', 'multi-tier-system-A2', ALL_QUESTIONS) ? submission.rearingAviarySystem : ''),
-    generateRow(473, 'Housing Density', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.housingDensity : ''),
-    generateRow(474, 'Ventilation Features', submission.mechanicalVentilation),
-    generateRow(475, 'Ventilation Specification', submission.henVentilationSpecification ?? submission.pulletVentilationSpecification),
-    generateRow(476, 'Concrete Apron', submission.concreteApron),
-    generateRow(477, 'Egg Store Access', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.eggStoreAccess : ''),
-    generateRow(478, 'Changing Area', submission.changingArea),
-    generateRow(479, 'External Taps', submission.externalTaps),
-    generateRow(480, 'Vehicle Washing Area', submission.vehicleWashing)
+    generateRow(520, 'Project type', submission.poultryType),
+    generateRow(477, 'Bird Number', submission.birdNumber),
+    generateRow(478, 'Veranda', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.henVeranda : ''),
+    generateRow(479, 'Veranda Features', submission.projectType === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS) ? submission.verandaOnlySize : ''),
+    generateRow(480, 'Veranda Specification', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.henVerandaFeatures : ''),
+    generateRow(481, 'Building Items', submission.buildingItems),
+    generateRow(482, 'Insulation', submission.replacingInsulation ?? submission.refurbishingInsulation),
+    generateRow(483, 'Pullet Housing', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.pulletHousingRequirements : ''),
+    generateRow(484, 'House Lighting System', submission.lightingFeatures),
+    generateRow(485, 'Aviary System', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.aviaryWelfare : ''),
+    generateRow(486, 'Aviary System Features', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.aviarySystem : ''),
+    generateRow(487, 'Multi-tier System', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.multiTierSystem : ''),
+    generateRow(488, 'Rearing System', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) && submission.multiTierSystem === getQuestionAnswer('multi-tier-system', 'multi-tier-system-A1', ALL_QUESTIONS) ? submission.rearingAviarySystem : ''),
+    generateRow(489, 'Step-up System', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) && submission.multiTierSystem === getQuestionAnswer('multi-tier-system', 'multi-tier-system-A2', ALL_QUESTIONS) ? submission.rearingAviarySystem : ''),
+    generateRow(490, 'Housing Density', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.housingDensity : ''),
+    generateRow(491, 'Ventilation Features', submission.mechanicalVentilation),
+    generateRow(492, 'Ventilation Specification', submission.henVentilationSpecification ?? submission.pulletVentilationSpecification),
+    generateRow(493, 'Concrete Apron', submission.concreteApron),
+    generateRow(494, 'Egg Store Access', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? submission.eggStoreAccess : ''),
+    generateRow(495, 'Changing Area', submission.changingArea),
+    generateRow(496, 'External Taps', submission.externalTaps),
+    generateRow(497, 'Vehicle Washing Area', submission.vehicleWashing)
   ]
 }
 function getSolarAndFinanceFields(submission) {
@@ -101,9 +101,9 @@ function getSolarAndFinanceFields(submission) {
     generateRow(419, 'Solar PV Panels', submission.roofSupportSolarPV),
     generateRow(442, 'Solar PV system', submission.solarPVSystem),
 
-    generateRow(481, 'Roof support for Solar PV exemption', submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS) ? submission.roofSolarPVExemption : ''),
-    generateRow(482, 'Number of Birds', submission.solarBirdNumber ?? ''),
-    generateRow(483, 'Solar Power Capacity', submission.solarPowerCapacity ?? ''),
+    generateRow(498, 'Roof support for Solar PV exemption', submission.solarPVSystem === getQuestionAnswer('solar-PV-system', 'solar-PV-system-A2', ALL_QUESTIONS) ? submission.roofSolarPVExemption : ''),
+    generateRow(499, 'Number of Birds', submission.solarBirdNumber ?? ''),
+    generateRow(500, 'Solar Power Capacity', submission.solarPowerCapacity ?? ''),
 
     generateRow(55, 'Total project expenditure', submission.solarPVCost ? String(Number(submission.totalProjectCost).toFixed(2)) : String(Number(submission.projectCost).toFixed(2))), // total cost, solar is totalProjectCost
     generateRow(57, 'Grant rate', submission.solarPVCost ? Number((submission.totalCalculatedGrant / submission.totalProjectCost) * 100).toFixed(2) : GRANT_PERCENTAGE), // if no soalr, 40. If solar, calculated grant / total cost * 100
@@ -113,28 +113,28 @@ function getSolarAndFinanceFields(submission) {
     generateRow(446, 'Solar grant amount', submission.solarCalculatedGrant ?? ''), // calculated solar cost
 
     // hen amounts, only used if solar too
-    generateRow(484, 'Laying Hen Cost', submission.solarPVCost ? submission.projectCost : ''),
-    generateRow(485, 'Laying Hen Grant Amount', submission.solarPVCost ? submission.calculatedGrant : '')
+    generateRow(501, 'Laying Hen Cost', submission.solarPVCost ? submission.projectCost : ''),
+    generateRow(502, 'Laying Hen Grant Amount', submission.solarPVCost ? submission.calculatedGrant : '')
   ]
 }
 
 function getScoringFields(submission) {
   return [
-    generateRow(486, 'Current System', submission.currentSystem),
-    generateRow(487, 'Current multi-tier System', submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A1', ALL_QUESTIONS) || submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A2', ALL_QUESTIONS) ? '' : submission.currentMultiTierSystem),
-    generateRow(488, 'Level Ramp Connection', submission.rampConnection),
-    generateRow(489, 'Maximum Height of Highest Tier', submission.maximumTierHeight),
-    generateRow(490, 'Tiers directly above each other', submission.tierNumber),
-    generateRow(491, 'Consistent Housing', submission.henMultiTier ?? submission.pulletMultiTier),
-    generateRow(492, 'Natural Light', submission.naturalLight),
-    generateRow(493, 'Dark Brooders', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.darkBrooders : ''),
-    generateRow(494, 'Perch Grip features', submission.easyGripPerches),
-    generateRow(495, 'Building Biosecurity', [submission.buildingBiosecurity].flat().join(', ')),
-    generateRow(496, 'Pollution Mitigation', [submission.pollutionMitigation].flat().join(', ')),
-    generateRow(497, 'Veranda requirements', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.pulletVerandaFeatures : ''),
-    generateRow(498, 'Renewable Energy Sources', [submission.renewableEnergy].flat().join(', ')),
-    generateRow(499, 'Poultry Management Data', [submission.birdDataType].flat().join(', ')),
-    generateRow(500, 'Additional Environmental Data', [submission.environmentalDataType].flat().join(', ')),
+    generateRow(503, 'Current System', submission.currentSystem),
+    generateRow(504, 'Current multi-tier System', submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A1', ALL_QUESTIONS) || submission.currentSystem === getQuestionAnswer('current-system', 'current-system-A2', ALL_QUESTIONS) ? '' : submission.currentMultiTierSystem),
+    generateRow(505, 'Level Ramp Connection', submission.rampConnection),
+    generateRow(506, 'Maximum Height of Highest Tier', submission.maximumTierHeight),
+    generateRow(507, 'Tiers directly above each other', submission.tierNumber),
+    generateRow(508, 'Consistent Housing', submission.henMultiTier ?? submission.pulletMultiTier),
+    generateRow(509, 'Natural Light', submission.naturalLight),
+    generateRow(510, 'Dark Brooders', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.darkBrooders : ''),
+    generateRow(511, 'Perch Grip features', submission.easyGripPerches),
+    generateRow(512, 'Building Biosecurity', [submission.buildingBiosecurity].flat().join(', ')),
+    generateRow(513, 'Pollution Mitigation', [submission.pollutionMitigation].flat().join(', ')),
+    generateRow(514, 'Veranda requirements', submission.poultryType === getQuestionAnswer('poultry-type', 'poultry-type-A2', ALL_QUESTIONS) ? submission.pulletVerandaFeatures : ''),
+    generateRow(515, 'Renewable Energy Sources', [submission.renewableEnergy].flat().join(', ')),
+    generateRow(516, 'Poultry Management Data', [submission.birdDataType].flat().join(', ')),
+    generateRow(517, 'Additional Environmental Data', [submission.environmentalDataType].flat().join(', ')),
   ]
 }
 
@@ -195,7 +195,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(40, 'Scheme', 'Farming Transformation Fund'),
     generateRow(39, 'Sub scheme', subScheme),
     generateRow(43, 'Theme', subTheme),
-    generateRow(90, 'Sub-Theme / Project type', submission.project === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS) ? 'Veranda-only' : 'Comprehensive'),
+    generateRow(90, 'Sub-Theme / Project type', ''),
     generateRow(41, 'Owner', 'RD'),
     generateRow(53, 'Business type', getBusinessTypeC53(businessTypeArray, horticulture)),
     generateRow(341, 'Grant Launch Date', '26/06/2024'),
@@ -219,7 +219,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(366, 'Date of OA decision', ''), // confirm
     generateRow(42, 'Project name', submission.businessDetails.projectName),
     generateRow(4, 'Single business identifier (SBI)', submission.businessDetails.sbi || '000000000'),
-    generateRow(501, 'CPH Number', submission.businessDetails.cph),
+    generateRow(518, 'CPH Number', submission.businessDetails.cph),
     generateRow(7, 'Business name', submission.businessDetails.businessName),
     generateRow(367, 'Annual Turnover', submission.businessDetails.businessTurnover),
     generateRow(22, 'Employees', submission.businessDetails.numberEmployees),
@@ -245,7 +245,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(92, 'RAG rating', 'Green'),
     generateRow(93, 'RAG date reviewed ', todayStr),
     generateRow(54, 'Electronic OA received date ', todayStr),
-    generateRow(502, 'Date and Time of OA Receipt', submission.dateTimeToday),
+    generateRow(519, 'Date and Time of OA Receipt', submission.dateTimeToday),
     generateRow(370, 'Status', 'Pending RPA review'),
     generateRow(85, 'Full Application Submission Date', '30/01/2026'),
     generateRow(375, 'OA percent', desirabilityScore ? String(desirabilityScore.desirability.overallRating.score) : ''),
@@ -259,7 +259,7 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
   const today = new Date()
   const todayStr = today.toLocaleDateString('en-GB')
   const subScheme = 'FTF-AHW-Laying Hens'
-  const subTheme = 'Laying hens'
+  const subTheme = submission.projectType === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS) ? 'Veranda Only' : ' Comprehensive'  
 
   const DD = String(today.getDate()).padStart(2, '0')
   const MM = String(today.getMonth() + 1).padStart(2, '0')
