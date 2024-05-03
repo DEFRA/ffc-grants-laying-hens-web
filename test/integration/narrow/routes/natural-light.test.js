@@ -21,7 +21,7 @@ describe('Page: /natural-light', () => {
     expect(response.payload).toContain('Will the building have windows that provide natural light to the indoor housing?')
     expect(response.payload).toContain('The windows must be:')
     expect(response.payload).toContain('fitted with an insulated blind to manage light intensity and housing temperature')
-    expect(response.payload).toContain('equal to at least 3% of size of the bird space footprint')
+    expect(response.payload).toContain('equal to at least 3% of the size of the bird space footprint')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
