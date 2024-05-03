@@ -480,7 +480,7 @@ const questionBank = {
               content: [{
                 para: `You must have secured planning permission before you submit a full application.
 
-                        The application deadline is 31 December 2025.`
+                        The application deadline is 30th January 2026.`
               }]
             }]
           },
@@ -527,7 +527,7 @@ const questionBank = {
           },
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 31 December 2025.',
+            messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 30th January 2026.',
             insertText: { text: '' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
@@ -5466,8 +5466,8 @@ const questionBank = {
               html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
               surveyLink: process.env.SURVEY_LINK
             },
-            messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
-              If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Investment Fund scheme.<br/><br/>
+            messageContent: `You have registered your interest for veranda-only grant funding. We have sent you a confirmation email with a record of your answers.<br/><br/>
+              If you do not get an email within 72 hours, contact the RPA helpline and follow the options for the Farming Investment Fund scheme.<br/><br/>
               <h2 class="govuk-heading-m">RPA helpline</h2>
               <h3 class="govuk-heading-s">Telephone</h3>
               <p>Telephone: 0300 0200 301</p>
@@ -5478,16 +5478,14 @@ const questionBank = {
             
               <h2 class="govuk-heading-m">What happens next</h2>
               <ol class="govuk-list govuk-list--number">
-                <li>If there is grant funding available, the RPA will contact you to invite you to 
-                submit a full application. If there is no grant funding available, 
-                the RPA will contact you to tell you by [INSERT DATE].</li>
+                <li>If there is grant funding available, the RPA will contact you to invite you to submit a full application. If there is no grant funding available, the RPA aim to contact you within 20 working days of this service closing.</li>
                 <li>If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</li>
               </ol>
             `,
             middleWarning: {
-              text: 'You must not start the project'
+              text: 'You must not start the project.'
             },
-            extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
+            extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p>
             <p>Before you start the project, you can:</p>
             <ul>
               <li>get quotes from suppliers</li>
