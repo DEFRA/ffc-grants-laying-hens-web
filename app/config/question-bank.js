@@ -2970,7 +2970,7 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                     <li>loans</li>
                     <li>overdrafts</li>
-                    <li>the Basic Payment Scheme</li>
+                    <li>delinked payments</li>
                   </ul>
             </span>`
             },
@@ -2991,7 +2991,7 @@ const questionBank = {
                   {
                     para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.
                   You can use:`,
-                    items: ['loans', 'overdrafts', 'the Basic Payment Scheme']
+                    items: ['loans', 'overdrafts', 'delinked payments']
                   }
                 ]
               }
@@ -3124,7 +3124,7 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                     <li>loans</li>
                     <li>overdrafts</li>
-                    <li>the Basic Payment Scheme</li>
+                    <li>delinked payments</li>
                   </ul>
             </span>`
             },
@@ -3148,7 +3148,7 @@ const questionBank = {
                   items: [
                     'loans',
                     'overdrafts',
-                    'the Basic Payment Scheme'
+                    'delinked payments'
                   ]
                 }]
               }
