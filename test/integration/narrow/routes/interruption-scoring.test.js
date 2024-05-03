@@ -12,7 +12,7 @@ describe('Page: /interruption scoring', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('We will now score your project against our funding priorities')    
     expect(response.payload).toContain('You have passed our eligibility criteria.')
-    expect(response.payload).toContain('Your answers to the next questions will helpus decide which projects we will invite to make a full application.')
+    expect(response.payload).toContain('Your answers to the next questions will help us decide which projects we will invite to make a full application.')
     expect(response.payload).toContain('Your project will get a score of weak, average or strong. You can then make changes to improve your score.')
   })
 

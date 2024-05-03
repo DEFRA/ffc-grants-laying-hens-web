@@ -139,7 +139,7 @@ const questionBank = {
               key: 'project-type-A2',
               value: 'Refurbishing the existing building',
               hint: {
-                text: 'A comprehensive project to upgrading an existing building by adding a mechanical ventilation, LED lighting and an aviary or multi-tier system where they do not have exist already'
+                text: 'A comprehensive project to upgrade an existing building by adding mechanical ventilation, LED lighting and an aviary or multi-tier system where they do not exist already'
               },
             },
             {
@@ -2970,7 +2970,7 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                     <li>loans</li>
                     <li>overdrafts</li>
-                    <li>the Basic Payment Scheme</li>
+                    <li>delinked payments</li>
                   </ul>
             </span>`
             },
@@ -2991,7 +2991,7 @@ const questionBank = {
                   {
                     para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.
                   You can use:`,
-                    items: ['loans', 'overdrafts', 'the Basic Payment Scheme']
+                    items: ['loans', 'overdrafts', 'delinked payments']
                   }
                 ]
               }
@@ -3034,25 +3034,25 @@ const questionBank = {
             }
           }
         },
-        {
-          key: 'potential-amount-conditional',
-          order: 160,
-          url: 'potential-amount-conditional',
-          baseUrl: 'potential-amount-conditional',
-          backUrl: 'project-cost-solar',
-          nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: 'You have requested the maximum grant amount of £500,000 for calf housing.',
-            insertText: { text: '' },
-            warning: {
-              text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
-            },
-            extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.</p>'
-          }
-        },
+        // {
+        //   key: 'potential-amount-conditional',
+        //   order: 160,
+        //   url: 'potential-amount-conditional',
+        //   baseUrl: 'potential-amount-conditional',
+        //   backUrl: 'project-cost-solar',
+        //   nextUrl: 'remaining-costs',
+        //   preValidationKeys: ['projectCost'],
+        //   maybeEligible: true,
+        //   maybeEligibleContent: {
+        //     messageHeader: 'Potential grant funding',
+        //     messageContent: 'You have requested the maximum grant amount of £500,000 for calf housing.',
+        //     insertText: { text: '' },
+        //     warning: {
+        //       text: 'You cannot apply for funding for a solar PV system if you have requested the maximum funding amount for calf housing.'
+        //     },
+        //     extraMessageContent: '<p class="govuk-body">You can continue to check your eligibility for grant funding to build or upgrade calf housing.</p>'
+        //   }
+        // },
         {
           key: 'potential-amount-solar',
           order: 165,
@@ -3124,7 +3124,7 @@ const questionBank = {
                   <ul class="govuk-list--bullet">
                     <li>loans</li>
                     <li>overdrafts</li>
-                    <li>the Basic Payment Scheme</li>
+                    <li>delinked payments</li>
                   </ul>
             </span>`
             },
@@ -3148,7 +3148,7 @@ const questionBank = {
                   items: [
                     'loans',
                     'overdrafts',
-                    'the Basic Payment Scheme'
+                    'delinked payments'
                   ]
                 }]
               }
@@ -3685,7 +3685,7 @@ const questionBank = {
                   <p>The windows must be:</p>
                   <ul class="govuk-list--bullet">
                     <li>fitted with an insulated blind to manage light intensity and housing temperature</li>
-                    <li>equal to at least 3% of size of the bird space footprint</li>
+                    <li>equal to at least 3% of the size of the bird space footprint</li>
                   </ul>`
           },
           url: 'natural-light',
@@ -3894,7 +3894,7 @@ const questionBank = {
         {
           key: 'dark-brooders',
           order: 320,
-          title: 'Will the housing include dark boorders?',
+          title: 'Will the housing include dark brooders?',
           pageTitle: '',
           url: 'dark-brooders',
           baseUrl: 'dark-brooders',

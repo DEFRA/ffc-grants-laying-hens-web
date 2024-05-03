@@ -98,7 +98,7 @@
   "dark-brooders": [
     {
       "key": "dark-brooders",
-      "title": "Will the housing include dark boorders?",
+      "title": "Will the housing include dark brooders?",
       "answers": {
         "dark-brooders-A1": "Yes",
         "dark-brooders-A2": "No"
