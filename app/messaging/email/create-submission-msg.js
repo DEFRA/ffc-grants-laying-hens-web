@@ -259,7 +259,7 @@ function getSpreadsheetDetails(submission, desirabilityScore) {
   const today = new Date()
   const todayStr = today.toLocaleDateString('en-GB')
   const subScheme = 'FTF-AHW-Laying Hens'
-  const subTheme = submission.projectType === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS) ? 'Veranda Only' : ' Comprehensive'  
+  const subTheme = submission.projectType === getQuestionAnswer('project-type', 'project-type-A1', ALL_QUESTIONS) ? 'Veranda Only' : 'Comprehensive'  
 
   const DD = String(today.getDate()).padStart(2, '0')
   const MM = String(today.getMonth() + 1).padStart(2, '0')

@@ -16,7 +16,7 @@ describe('Page: /dark-brooders', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the housing include dark boorders?')
+    expect(response.payload).toContain('Will the housing include dark brooders?')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
