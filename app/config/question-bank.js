@@ -528,11 +528,7 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 30th January 2026.',
-            insertText: { text: '' },
-            messageLink: {
-              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
-              title: 'See other grants you may be eligible for.'
-            }
+            insertText: { text: '' }
           },
           yarKey: 'planningPermissionCondition'
         },
