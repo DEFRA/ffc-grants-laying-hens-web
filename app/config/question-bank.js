@@ -3183,6 +3183,7 @@ const questionBank = {
           nextUrl: 'current-multi-tier-system',
           url: 'current-system',
           baseUrl: 'current-system',
+          ga: { name: 'eligibility_passed', params: {} },
           preValidationObject: {
             preValidationKeys: ['remainingCosts'],
             preValidationAnswer: ['remaining-costs-A1'],
@@ -5407,7 +5408,7 @@ const questionBank = {
           url: 'veranda-confirmation',
           baseUrl: 'veranda-confirmation',
           preValidationKeys: ['farmerDetails'],
-          ga: { name: 'veranda-confirmation', params: {} },
+          ga: { name: 'confirmation', params: {} },
           preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -5457,7 +5458,7 @@ const questionBank = {
           pageTitle: '',
           url: 'veranda-waitlist-confirmation',
           baseUrl: 'veranda-waitlist-confirmation',
-          ga: { name: 'veranda-waitlist-confirmation', params: {} },
+          ga: { name: 'confirmation', params: {} },
           preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
