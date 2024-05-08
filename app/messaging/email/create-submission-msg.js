@@ -1,5 +1,5 @@
 const emailConfig = require('./config/email')
-const { GRANT_PERCENTAGE, GRANT_PERCENTAGE_SOLAR } = require('../../helpers/grant-details')
+const { GRANT_PERCENTAGE, GRANT_PERCENTAGE_SOLAR, VERANDA_FUNDING_CAP_REACHED } = require('../../helpers/grant-details')
 const { ALL_QUESTIONS } = require('../../config/question-bank')
 const spreadsheetConfig = require('./config/spreadsheet')
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
@@ -528,7 +528,8 @@ function getEmailDetails(submission, desirabilityScore, rpaEmail, isAgentEmail =
          // veranda Questions
         ...verandaQuestions(submission),
           // Farmer and Agent details
-        ...commonBusinessQuestions(submission, isAgentEmail)
+        ...commonBusinessQuestions(submission, isAgentEmail),
+        verandaFundingCapReached: VERANDA_FUNDING_CAP_REACHED
       }
     }
   }else{
