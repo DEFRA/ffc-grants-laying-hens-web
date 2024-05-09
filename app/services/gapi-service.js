@@ -32,7 +32,7 @@ const sendGAEvent = async (request, metrics) => {
     ...(isEliminationEvent && { elimination_time: timeSinceStart }),
     ...(isEligibilityEvent && { eligibility_time: timeSinceStart }),
     ...(isScoreEvent && { score_time: timeSinceStart }),
-    ...(isConfirmationEvent && { final_score: getYarValue(request, 'current-score'), user_type: getYarValue(request, 'applying'), confirmation_time: timeSinceStart }),
+    ...(isConfirmationEvent && { final_score: getYarValue(request, 'current-score') ?? 'Eligible', user_type: getYarValue(request, 'applying'), confirmation_time: timeSinceStart }),
     ...(params?.score_presented && { score_presented: params.score_presented }),
     ...(params?.scoreReached && { scoreReached: params.scoreReached }),
     grant_type: grantType,
