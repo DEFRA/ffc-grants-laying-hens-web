@@ -2957,6 +2957,7 @@ const questionBank = {
           baseUrl: 'veranda-remaining-costs',
           backUrl: 'veranda-potential-amount',
           nextUrl: 'business-details',
+          ga: { name: 'eligibility_passed', params: {} },
           preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: `<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>`,
@@ -3111,6 +3112,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
           nextUrl: 'interruption-scoring',
+          ga: { name: 'eligibility_passed', params: {} },
           preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
@@ -5403,7 +5405,7 @@ const questionBank = {
           url: 'veranda-confirmation',
           baseUrl: 'veranda-confirmation',
           preValidationKeys: ['farmerDetails'],
-          ga: { name: 'veranda-confirmation', params: {} },
+          ga: { name: 'confirmation', params: {} },
           preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -5453,7 +5455,7 @@ const questionBank = {
           pageTitle: '',
           url: 'veranda-waitlist-confirmation',
           baseUrl: 'veranda-waitlist-confirmation',
-          ga: { name: 'veranda-waitlist-confirmation', params: {} },
+          ga: { name: 'confirmation', params: {} },
           preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {

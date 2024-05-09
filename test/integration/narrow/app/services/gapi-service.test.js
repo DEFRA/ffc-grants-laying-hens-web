@@ -36,10 +36,17 @@ describe('sendGAEvent', () => {
         info: { hostname: 'localhost' },
         ga: { view: gaViewMock },
       };
-      metrics = { name: 'eligibility_passed', params: {} };
+      metrics = { name: 'confirmation', params: {} };
     });
   
     it('should send the correct event', async () => {
+      await sendGAEvent(request, metrics);
+      expect(gaViewMock).toHaveBeenCalledWith(request, [{ name: metrics.name, params: expect.any(Object) }]);
+    });
+
+    it('should send the correct event - no score', async () => {
+      varList['current-score'] = null
+
       await sendGAEvent(request, metrics);
       expect(gaViewMock).toHaveBeenCalledWith(request, [{ name: metrics.name, params: expect.any(Object) }]);
     });
