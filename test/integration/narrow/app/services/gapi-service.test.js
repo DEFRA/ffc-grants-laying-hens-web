@@ -43,6 +43,12 @@ describe('sendGAEvent', () => {
       await sendGAEvent(request, metrics);
       expect(gaViewMock).toHaveBeenCalledWith(request, [{ name: metrics.name, params: expect.any(Object) }]);
     });
+
+    it('should send the correct event - no score', async () => {
+      varList['current-score'] = null
+      await sendGAEvent(request, metrics);
+      expect(gaViewMock).toHaveBeenCalledWith(request, [{ name: metrics.name, params: expect.any(Object) }]);
+    });
   
     it('should log an exception if sending the event fails', async () => {
       varList['journey-start-time'] = false
