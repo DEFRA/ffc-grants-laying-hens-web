@@ -2957,6 +2957,7 @@ const questionBank = {
           baseUrl: 'veranda-remaining-costs',
           backUrl: 'veranda-potential-amount',
           nextUrl: 'business-details',
+          ga: { name: 'eligibility_passed', params: {} },
           preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: `<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>`,
@@ -3111,6 +3112,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
           nextUrl: 'interruption-scoring',
+          ga: { name: 'eligibility_passed', params: {} },
           preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
@@ -3179,7 +3181,6 @@ const questionBank = {
           nextUrl: 'current-multi-tier-system',
           url: 'current-system',
           baseUrl: 'current-system',
-          ga: { name: 'eligibility_passed', params: {} },
           preValidationObject: {
             preValidationKeys: ['remainingCosts'],
             preValidationAnswer: ['remaining-costs-A1'],
