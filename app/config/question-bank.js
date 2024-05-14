@@ -4579,7 +4579,7 @@ const questionBank = {
           url: 'applying',
           baseUrl: 'applying',
           backUrl: 'business-details',
-          // preValidationKeys: ['businessDetails'],
+          preValidationKeys: ['businessDetails'],
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios govuk-fieldset__legend--l',
@@ -4613,12 +4613,6 @@ const questionBank = {
           baseUrl: 'applicant-details',
           nextUrl: 'check-details',
           preValidationKeys: ['applying'],
-          // preValidationObject: {
-          //   preValidationKeys: ['applying'],
-          //   preValidationAnswer: ['applying-A1'],
-          //   preValidationRule: 'AND',
-          //   preValidationUrls: ['applying']
-          // },
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A2'],
