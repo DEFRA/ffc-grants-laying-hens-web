@@ -168,7 +168,7 @@ const questionBank = {
           backUrl: 'project-type',
           id: 'veranda-funding-cap',
           nextUrl: '',
-          // preValidationKeys: ['projectType'],
+          preValidationKeys: ['projectType'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'We have reached the limit of applications for veranda grant funding',
@@ -1435,7 +1435,7 @@ const questionBank = {
           baseUrl: 'hen-veranda-biosecurity',
           backUrl: 'hen-veranda-features',
           nextUrl: 'concrete-apron',
-          // preValidationKeys: ['poultryType'],
+          preValidationKeys: ['henVerandaFeatures'],
           sidebar: {
             values: [{
               heading: 'Eligibility',
