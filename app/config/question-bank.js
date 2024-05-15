@@ -168,7 +168,7 @@ const questionBank = {
           backUrl: 'project-type',
           id: 'veranda-funding-cap',
           nextUrl: '',
-          // preValidationKeys: ['projectType'],
+          preValidationKeys: ['projectType'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'We have reached the limit of applications for veranda grant funding',
@@ -1435,7 +1435,7 @@ const questionBank = {
           baseUrl: 'hen-veranda-biosecurity',
           backUrl: 'hen-veranda-features',
           nextUrl: 'concrete-apron',
-          // preValidationKeys: ['poultryType'],
+          preValidationKeys: ['henVerandaFeatures'],
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -4579,7 +4579,7 @@ const questionBank = {
           url: 'applying',
           baseUrl: 'applying',
           backUrl: 'business-details',
-          // preValidationKeys: ['businessDetails'],
+          preValidationKeys: ['businessDetails'],
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios govuk-fieldset__legend--l',
@@ -4613,12 +4613,6 @@ const questionBank = {
           baseUrl: 'applicant-details',
           nextUrl: 'check-details',
           preValidationKeys: ['applying'],
-          // preValidationObject: {
-          //   preValidationKeys: ['applying'],
-          //   preValidationAnswer: ['applying-A1'],
-          //   preValidationRule: 'AND',
-          //   preValidationUrls: ['applying']
-          // },
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A2'],
