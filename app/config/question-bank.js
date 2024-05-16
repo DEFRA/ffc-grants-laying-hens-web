@@ -106,7 +106,7 @@ const questionBank = {
                 </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -208,7 +208,7 @@ const questionBank = {
             messageContent: 'This grant is for laying hen or pullet farmers.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           sidebar: {
@@ -309,7 +309,7 @@ const questionBank = {
             },
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             },
             warning: {
               text: 'Other types of business may be supported in future schemes',
@@ -414,7 +414,7 @@ const questionBank = {
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -468,7 +468,7 @@ const questionBank = {
             messageContent: 'You must have secured planning permission before you submit a full application.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           // fundingPriorities: 'Improving Adding Value',
@@ -560,7 +560,7 @@ const questionBank = {
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -742,7 +742,7 @@ const questionBank = {
             messageContent: 'This grant is only for laying hen or pullet projects.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -837,7 +837,7 @@ const questionBank = {
             </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -925,7 +925,7 @@ const questionBank = {
               </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -976,7 +976,7 @@ const questionBank = {
             messageContent: 'When the project is complete. the building must have full wall and roof insulation.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -1035,7 +1035,7 @@ const questionBank = {
             The new building must have wall and roof insulation with a U-Value of less than 0.3 watts per square metre, per degree Kelvin (0.3W/m²K).`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -1127,7 +1127,7 @@ const questionBank = {
               </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -1184,7 +1184,7 @@ const questionBank = {
                 </p>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -1249,7 +1249,7 @@ const questionBank = {
               </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -1311,7 +1311,7 @@ const questionBank = {
             },
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -1397,7 +1397,7 @@ const questionBank = {
             `,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -1449,7 +1449,7 @@ const questionBank = {
             messageContent: 'The veranda must be capable of being secured with mesh (with a maximum of 6mm spacing) during disease driven housing orders.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -1526,7 +1526,7 @@ const questionBank = {
                 </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -1594,7 +1594,7 @@ const questionBank = {
               </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -1653,7 +1653,7 @@ const questionBank = {
             </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -1737,7 +1737,7 @@ const questionBank = {
                 </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -1819,7 +1819,7 @@ const questionBank = {
               </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           sidebar: {
@@ -1904,7 +1904,7 @@ const questionBank = {
             <p class="govuk-body">This should be continuous, unless there needs to be a gap where birds have direct access to range.</p>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -1970,7 +1970,7 @@ const questionBank = {
             </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -2040,7 +2040,7 @@ const questionBank = {
             </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -2094,7 +2094,7 @@ const questionBank = {
             messageContent: 'The building must have a multi-tier system.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -2177,7 +2177,7 @@ const questionBank = {
                 </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -2237,7 +2237,7 @@ const questionBank = {
                 </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -2298,7 +2298,7 @@ const questionBank = {
             </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -2464,7 +2464,7 @@ const questionBank = {
             messageContent: `The roof of this building must be able to support solar PV panels, allowing for potential use in the future.`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -2609,7 +2609,7 @@ const questionBank = {
             </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -2695,7 +2695,7 @@ const questionBank = {
               </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'single-answer',
@@ -2791,7 +2791,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `You can apply for grant funding to add verandas to multiple buildings. You must submit a separate application for each veranda.</br></br>
             If the total grant funding for your combined veranda projects is more than £5,000 (${GRANT_PERCENTAGE}% of £12,500), you may still be eligible to apply for grant funding.</br></br>
-            If you are applying for grant funding for a single veranda, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> see other grants you may be eligible for.</a>`,
+            If you are applying for grant funding for a single veranda, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency">see other grants you may be eligible for</a>`,
             messageLink: {
               url: `veranda-potential-amount`,
               title: 'I am applying to add verandas to multiple buildings'
@@ -2939,7 +2939,7 @@ const questionBank = {
             building projects is more than £15,000 (40% of £37,500), you may still be eligible to apply for grant funding.
             `,
             insertText: '',
-            additionalPara: `If you are applying for grant funding for a single building, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> see other grants you may be eligible for.</a>`,
+            additionalPara: `If you are applying for grant funding for a single building, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> See other grants you may be eligible for</a>`,
             messageLink: {
               url: 'potential-amount',
               title: 'I am applying for multiple building projects'
@@ -2973,7 +2973,7 @@ const questionBank = {
             },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
@@ -3128,7 +3128,7 @@ const questionBank = {
             },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',

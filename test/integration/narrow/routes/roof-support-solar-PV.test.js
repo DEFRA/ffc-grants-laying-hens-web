@@ -62,7 +62,7 @@ describe('Page: /roof-support-solar-PV', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('The roof of this building must be able to support solar PV panels, allowing for potential use in the future.')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link - /roof-solar-PV-exemption', async () => {

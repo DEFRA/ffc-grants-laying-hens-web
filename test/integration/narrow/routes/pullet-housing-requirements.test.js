@@ -72,7 +72,7 @@ describe('Page: /pullet-housing-requirements', () => {
     expect(postResponse.payload).toContain('a useable area provided at multiple bird-accessible accessible heights from 10 days of age')
     expect(postResponse.payload).toContain('height adjustable perches at equal to or more than 8cm per pullet')
     expect(postResponse.payload).toContain('a minimum of 50% of the floor area available for litter.')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link - /replacing-insulation', async () => {

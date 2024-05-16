@@ -80,7 +80,7 @@ describe('Page: /mechanical-ventilation', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('The mechanical ventilation system must have:')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
   it('page loads with correct back link - hen / Rearing aviary journey', async () => {
     varList.poultryType = 'hen'

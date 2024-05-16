@@ -72,7 +72,7 @@ describe('Page: /hen-ventilation-specification', () => {
     expect(postResponse.payload).toContain('In extreme heat, the ventilation system must be able to provide:')
     expect(postResponse.payload).toContain('an air speed of one metre per second over birds')
     expect(postResponse.payload).toContain('a maximum ventilation rate of 10,800m³ per hour per 1000 birds.')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link - /mechanical-ventilation', async () => {
