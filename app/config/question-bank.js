@@ -2044,7 +2044,7 @@ const questionBank = {
                   <ul>
                     <li>a useable area provided at multiple bird-accessible accessible heights from 10 days of age</li>
                     <li>height adjustable perches at equal to or more than 8cm per pullet</li>
-                    <li>a minimum of 50% of the floor area available for litter.</li>
+                    <li>a minimum of 50% of the floor area available for litter</li>
                   </ul>
             </div>`,
             messageLink: {
@@ -2603,7 +2603,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: 'The veranda must be at least either:',
-                items: ['4 metres wide along the length of the bird housing area', '30% of the size of the indoor bird housing area footprint.']
+                items: ['4 metres wide along the length of the bird housing area', '30% of the size of the indoor bird housing area footprint']
               }]
             }]
           },
@@ -2613,7 +2613,7 @@ const questionBank = {
                 <p class="govuk-body">The veranda must be either:</p>
                 <ul class="govuk-list--bullet">
                     <li>4 metres wide along the length of the bird housing area</li>
-                    <li>30% of the size of the indoor bird housing area footprint.</li>
+                    <li>30% of the size of the indoor bird housing area footprint</li>
                 </ul>
             </div>`,
             messageLink: {
@@ -2683,7 +2683,7 @@ const questionBank = {
                 para: `The width of the pop hole openings along the length of the hen house must add up to a total of 2 metres for every 1,000 hens in the building.
                 
                       The base of all pop holes must either:`,
-                items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.'],
+                items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes'],
                 additionalPara: 'You must not put perches in front of the pop holes.'
               }],
             }]
@@ -2772,7 +2772,7 @@ const questionBank = {
                   </span>
                 </summary>
                 <div class="govuk-details__text">
-                  <p>Enter the costs of adding this veranda only</p>
+                  <p>Enter the costs of adding this veranda only.</p>
                   <p>You must submit a separate application for each veranda.</p>
                 </div>
               </details>
