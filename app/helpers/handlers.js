@@ -484,11 +484,11 @@ const getPage = async (question, request, h) => {
   let { url, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
-  // const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
+  const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
   
-  // if (isRedirect) {
-  //   return h.redirect(startPageUrl)
-  // }
+  if (isRedirect) {
+    return h.redirect(startPageUrl)
+  }
 
   if (url === 'project-cost') {
     setYarValue(request, 'solarBirdNumber', null)
