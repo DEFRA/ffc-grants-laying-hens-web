@@ -2948,7 +2948,7 @@ const questionBank = {
             building projects is more than £15,000 (40% of £37,500), you may still be eligible to apply for grant funding.
             `,
             insertText: '',
-            additionalPara: `If you are applying for grant funding for a single building, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency"> See other grants you may be eligible for</a>`,
+            additionalPara: `If you are applying for grant funding for a single building, you can <a href="https://www.gov.uk/government/organisations/rural-payments-agency">see other grants you may be eligible for</a>`,
             messageLink: {
               url: 'potential-amount',
               title: 'I am applying for multiple building projects'
@@ -3333,7 +3333,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund aviary systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone fractures from collisions and falls.`
+                para: `RPA want to fund {{_poultryType_}} systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone fractures from collisions and falls.`
               }]
             }]
           },
