@@ -72,7 +72,7 @@ describe('Page: /changing-area', () => {
     expect(postResponse.payload).toContain('Each biosecurity changing area must include:')
     expect(postResponse.payload).toContain('changing facilities, with a step-over barrier between the outer and inner areas')
     expect(postResponse.payload).toContain('in the outer area, handwashing facilities with running water and storage for clothes and boots you use outside this building')
-    expect(postResponse.payload).toContain('in the inner area, a footbath and storage for clothes and boots you use inside the bird living area.')
+    expect(postResponse.payload).toContain('in the inner area, a footbath and storage for clothes and boots you use inside the bird living area')
     expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 

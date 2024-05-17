@@ -28,7 +28,7 @@ describe('Project cost page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What is the total estimated cost of refurbishing this building?')
+    expect(response.payload).toContain('What is the estimated cost of refurbishing this building?')
     expect(response.payload).toContain('You can only apply for a grant of up to 40% of the estimated costs of refurbishing this building.')
     expect(response.payload).toContain('I am replacing or refurbishing multiple buildings')
     expect(response.payload).toContain('Enter the costs of refurbishing this building only.')
@@ -47,7 +47,7 @@ describe('Project cost page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What is the total estimated cost of replacing this building?')
+    expect(response.payload).toContain('What is the estimated cost of replacing this building?')
     expect(response.payload).toContain('You can only apply for a grant of up to 40% of the estimated costs of replacing this building.')
     expect(response.payload).toContain('I am replacing or refurbishing multiple buildings')
     expect(response.payload).toContain('Enter the costs of replacing this building only.')

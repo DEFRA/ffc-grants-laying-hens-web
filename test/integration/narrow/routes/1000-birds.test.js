@@ -95,7 +95,7 @@ describe('Page: /1000-birds', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('You must:')
     expect(postResponse.payload).toContain('be the registered keeper of at least 1,000 laying hens')
-    expect(postResponse.payload).toContain('have housed at least 1,000 laying hens on your farm in the last 6 months.')
+    expect(postResponse.payload).toContain('have housed at least 1,000 laying hens on your farm in the last 6 months')
     expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
@@ -113,7 +113,7 @@ describe('Page: /1000-birds', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('You must:')
     expect(postResponse.payload).toContain('be the registered keeper of at least 1,000 pullets')
-    expect(postResponse.payload).toContain('have housed at least 1,000 pullets on your farm in the last 6 months.')
+    expect(postResponse.payload).toContain('have housed at least 1,000 pullets on your farm in the last 6 months')
     expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 

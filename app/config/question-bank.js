@@ -101,7 +101,7 @@ const questionBank = {
                       <ul>
                         <li>adding a veranda only to an existing laying hen or pullet building </li>
                         <li>refurbishing an existing laying hen or pullet building</li>
-                        <li>replacing an entire laying hen or pullet building with a new building.</li>
+                        <li>replacing an entire laying hen or pullet building with a new building</li>
                       </ul>
                 </div>`,
             messageLink: {
@@ -753,7 +753,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'This grant is only for laying hens or pullet projects.'
+                para: 'This grant is only for laying hen or pullet projects.'
               }]
             }]
           },
@@ -822,7 +822,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: 'You must:',
-                items: ['be the registered keeper of at least 1,000 {{_poultryType_}}', 'have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months.']
+                items: ['be the registered keeper of at least 1,000 {{_poultryType_}}', 'have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months']
               }]
             }]
           },
@@ -832,7 +832,7 @@ const questionBank = {
                 <p class="govuk-body">You must:</p>
                 <ul class="govuk-list--bullet">
                     <li>be the registered keeper of at least 1,000 {{_poultryType_}}</li>
-                    <li>have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months.</li>
+                    <li>have housed at least 1,000 {{_poultryType_}} on your farm in the last 6 months</li>
                 </ul>
             </div>`,
             messageLink: {
@@ -920,7 +920,7 @@ const questionBank = {
                       <li>a fixed structure with a solid concrete floor</li>
                       <li>water-tight roof and walls</li>
                       <li>mesh capping applied to any roof or wall inlets and outlets (using a mesh hole size of 25 millimetres or less)</li>
-                      <li>catch trays under all chimneys and roof-mounted vents.</li>
+                      <li>catch trays under all chimneys and roof-mounted vents</li>
                   </ul>
               </div>`,
             messageLink: {
@@ -973,7 +973,7 @@ const questionBank = {
             preValidationUrls: ['building-items', 'project-type']
           },
           ineligibleContent: {
-            messageContent: 'When the project is complete. the building must have full wall and roof insulation.',
+            messageContent: 'When the project is complete, the building must have full wall and roof insulation.',
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for'
@@ -1122,7 +1122,7 @@ const questionBank = {
                 <ul>
                   <li>changing facilities, with a step-over barrier between the outer and inner areas</li>
                   <li>in the outer area, handwashing facilities with running water and storage for clothes and boots you use outside this building</li>
-                  <li>in the inner area, a footbath and storage for clothes and boots you use inside the bird living area.</li>
+                  <li>in the inner area, a footbath and storage for clothes and boots you use inside the bird living area</li>
                 </ul>
               </div>`,
             messageLink: {
@@ -1180,7 +1180,7 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
                 <p class="govuk-body">
-                You must be able to remove eggs and deliver empty egg trays to and from the hen housing's egg store without going into the entrance lobby or connected changing area.
+                You must be able to remove eggs and deliver empty egg trays to and from the building’s egg store without going into the entrance lobby or connected changing area.
                 </p>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
@@ -1305,7 +1305,7 @@ const questionBank = {
             }]
           },
           ineligibleContent: {
-            messageContent: 'The building must have a high welfare laying hen aviary system',
+            messageContent: 'The building must have a high welfare laying hen aviary system.',
             insertText: {
               text: 'You must not install a combi-cage system in your grant-funded housing.'
             },
@@ -1375,7 +1375,7 @@ const questionBank = {
                 para: `The width of the pop hole openings along the length of the internal hen house wall must add up to a total of 2 metres for every 1,000 hens in the building.
                 
                   The base of all pop holes must either:`,
-                items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes.'],
+                items: ['be less than 30cm from floor level', 'have access ramps that are as wide as the pop holes'],
                 additionalPara: 'You must not put perches in front of the pop holes.'
               }],
             }]
@@ -1391,7 +1391,7 @@ const questionBank = {
                   <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
                   <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                   <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
-                  <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down.</li>
+                  <li>a mesh roller screen running underneath the length of the roof, that fits securely against the wall when you roll it down</li>
                 </ul>
               </div>
             `,
@@ -1486,7 +1486,7 @@ const questionBank = {
                 <ul class="govuk-list--bullet">
                   <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
                   <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
-                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures.</li>
+                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
                 </ul>
             </span>`
           },
@@ -1514,6 +1514,15 @@ const questionBank = {
             preValidationRule: 'OR',
             preValidationUrls: ['aviary-system' ,'housing-density']
           },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The ventilation system must be able to protect the birds in extreme heat. It must also be able to assess indoor air quality by monitoring indoor CO₂ levels.',
+                items: []
+              }]
+            }]
+          },
           ineligibleContent: {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
@@ -1521,7 +1530,7 @@ const questionBank = {
                 <ul>
                   <li>a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels</li>
                   <li>an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity</li>
-                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures.</li>
+                  <li>an emergency power supply, for example a high-capacity generator, in case of electrical or other failures</li>
                 </ul>
                 </div>`,
             messageLink: {
@@ -1589,7 +1598,7 @@ const questionBank = {
               <div class="govuk-list govuk-list--bullet">
                 <ul>
                   <li>an air speed of one metre per second over birds</li>
-                  <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds.</li>
+                  <li>a maximum ventilation rate of 10,800m³ per hour per 1000 birds</li>
                 </ul>
               </div>`,
             messageLink: {
@@ -1648,7 +1657,7 @@ const questionBank = {
             <p>The veranda must be at least either:</p>
                   <ul>
                     <li>4 metres wide along the length of the hen housing area</li>
-                    <li>30% of the indoor hen housing area footprint.</li>
+                    <li>30% of the indoor hen housing area footprint</li>
                   </ul>
             </div>`,
             messageLink: {
@@ -1733,7 +1742,7 @@ const questionBank = {
                 <p class="govuk-body">In extreme heat, the ventilation system must be able to provide:</p>
                 <ul class="govuk-list--bullet">
                   <li>an air speed of one metre per second over birds</li>
-                  <li>a maximum ventilation rate of 9,000m³ per hour per 1000 birds.</li>
+                  <li>a maximum ventilation rate of 9,000m³ per hour per 1000 birds</li>
                 </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
@@ -1814,7 +1823,7 @@ const questionBank = {
                       <li>capacity for zonal dimming between 0 and 60 lux</li>
                       <li>full coverage of the entire floor-litter (scratch) area</li>
                       <span>{{_poultryType_}}</span>
-                      <li>an option for red light to reduce feather pecking.</li>
+                      <li>an option for red light to reduce feather pecking</li>
                   </ul>
               </div>`,
             messageLink: {
@@ -1827,7 +1836,7 @@ const questionBank = {
               {
                 heading: 'Eligibility',
                 content: [{
-                  para: 'When the project is complete. the house lighting system must have these features to promote positive bird behaviour and reduce stress.',
+                  para: 'When the project is complete, the house lighting system must have these features to promote positive bird behaviour and reduce stress.',
                   items: [],
                 }]
               }
@@ -1901,7 +1910,7 @@ const questionBank = {
           },
           ineligibleContent: {
             messageContent: `<p class="govuk-body">The building (and veranda if there is one) must be surrounded by a concrete apron.</p>
-            <p class="govuk-body">This should be continuous, unless there needs to be a gap where birds have direct access to range.</p>`,
+            <p class="govuk-body">This should be continuous, unless there needs to be a gap where birds have direct access to a range.</p>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
               title: 'See other grants you may be eligible for'
@@ -2293,7 +2302,7 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
                   <ul>
                     <li>a concrete surface that is appropriate to the size of the vehicles entering the facility (minimum width of 3 metres)</li>
-                    <li>a drainage system and storage tanks for soiled water.</li>
+                    <li>a drainage system and storage tanks for soiled water</li>
                   </ul>
             </div>`,
             messageLink: {
@@ -2392,10 +2401,10 @@ const questionBank = {
             preValidationUrls: ['vehicle-washing']
           },
           hint: {
-            text: 'You have the option to buy and install a solar PV system with the grant. The solar PV panels must be installed on the roof of this building (or veranda if there is one)'
+            text: 'You have the option to buy and install a solar PV system with the grant. The solar PV panels must be installed on the roof of this building (or veranda if there is one).'
           },
           warning: {
-            text: 'You cannot buy a Solar PV system with this grant if the roof of the building only faces north or is heavily shaded.',
+            text: 'You cannot buy a solar PV system with this grant if the roof of the building only faces north or is heavily shaded.',
             iconFallbackText: 'Warning'
           },
           sidebar: {
@@ -2450,7 +2459,7 @@ const questionBank = {
           hint: {
             html: `
             <p>Even if you are not installing a solar PV system, you must provide confirmation that the roof can support solar PV panels at full application.</p>
-            <p>This confirmation must come from a building expert, contractor or structural engineer</p>`
+            <p>This confirmation must come from a building expert, contractor or structural engineer.</p>`
           },
           sidebar: {
             values: [{
@@ -2511,7 +2520,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The roof must be able to support solar PV panels, allowing for potential use in the future, unless any of these statements apply. `
+                para: `The roof of this building must be able to support solar PV panels, allowing for potential use in the future, unless any of these statements apply.`
               }]
             }]
           },
@@ -2863,13 +2872,13 @@ const questionBank = {
             text: '£'
           },
           label: {
-            text: 'What is the total estimated cost of {{_projectType_}} this building?',
+            text: 'What is the estimated cost of {{_projectType_}} this building?',
             classes: 'govuk-label--l',
             isPageHeading: true
           },
           hint: {
             htmlSolar: `
-              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building. Do not include the solar PV system costs in the estimated building project costs.</p>
+              <p>You can only apply for a grant of up to ${GRANT_PERCENTAGE}% of the estimated costs of {{_projectType_}} this building. Do not include the solar PV system costs.</p>
               <details class="govuk-details">
                 <summary class="govuk-details__summary">
                   <span class="govuk-details__summary-text">
@@ -4310,7 +4319,7 @@ const questionBank = {
             html: `
                   <p>This grant will fund a solar PV system that has a power capacity of up to 5kW per 1,000 birds.</p>
                   <p>You can install a solar PV system that has a power capacity of more than 5kW of energy per 1,000 birds. You must fund the 
-                  remaining solar PV system costs above the power capacity of 5kw per 1,000 birds. </p>
+                  remaining solar PV system costs above the power capacity of 5kW per 1,000 birds. </p>
                   <p>Enter estimated power capacity, for example 10</p>
               `
           },

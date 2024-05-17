@@ -62,7 +62,7 @@ describe('Page: /egg-store-access', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain(`You must be able to remove eggs and deliver empty egg trays to and from the hen housing's egg store without going into the entrance lobby or connected changing area.`)
+    expect(postResponse.payload).toContain(`You must be able to remove eggs and deliver empty egg trays to and from the building’s egg store without going into the entrance lobby or connected changing area.`)
   })
 
   it('page loads with correct back link', async () => {

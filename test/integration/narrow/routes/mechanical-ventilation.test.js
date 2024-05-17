@@ -21,7 +21,7 @@ describe('Page: /mechanical-ventilation', () => {
     expect(response.payload).toContain('Will the building have a mechanical ventilation system with these features?')
     expect(response.payload).toContain('a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels')
     expect(response.payload).toContain('an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity')
-    expect(response.payload).toContain('an emergency power supply, for example a high-capacity generator, in case of electrical or other failures.')
+    expect(response.payload).toContain('an emergency power supply, for example a high-capacity generator, in case of electrical or other failures')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
