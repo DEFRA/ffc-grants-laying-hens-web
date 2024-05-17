@@ -3333,7 +3333,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `RPA want to fund multi-tier systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone fractures from collisions and falls.`
+                para: `RPA want to fund aviary systems that have 3 tiers or fewer directly above each other, to reduce the risk of keel bone fractures from collisions and falls.`
               }]
             }]
           },
@@ -3729,7 +3729,7 @@ const questionBank = {
                       
                         Natural light can: 
                       `,
-                items: ['promote positive, active behaviour', 'improve visibility to help reduce collisions between birds', 'increase range use.']
+                items: ['promote positive, active behaviour', 'improve visibility to help reduce collisions between birds', 'increase range use']
               }]
             }]
           },
