@@ -4,7 +4,7 @@ const { formatUKCurrency } = require('../../../../app/helpers/data-formats')
 const utilsList = {
   'project-type-A2': 'Refurbishing the existing building',
   'poultry-type-A3': 'Replacing the entire building with a new building'
-}
+} 
 
 describe('Page: /potential-amount-solar-calculation', () => {
   process.env.GRANT_PERCENTAGE = 40
