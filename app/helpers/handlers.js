@@ -50,8 +50,7 @@ const getReplacementText = (request, key, questionType, questionKey, trueReturn,
 
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
-  console.log('additionalYarKeyName is', additionalYarKeyName)
-  console.log('SELECT_VARIABLE_TO_REPLACE is', SELECT_VARIABLE_TO_REPLACE)
+    
     switch (url) {
       case '1000-birds':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
