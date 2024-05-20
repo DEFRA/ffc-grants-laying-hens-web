@@ -5,7 +5,7 @@ const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('ffc-grants-common-functionality').regex
 const { getYarValue, setYarValue } = require('ffc-grants-common-functionality').session
 const { getQuestionAnswer } = require('ffc-grants-common-functionality').utils
-const { guardPage } = require('ffc-grants-common-functionality').pageGuard
+// const { guardPage } = require('ffc-grants-common-functionality').pageGuard
 const { getUrl } = require('../helpers/urls')
 const { GRANT_PERCENTAGE, VERANDA_FUNDING_CAP_REACHED } = require('./grant-details')
 const senders = require('../messaging/senders')
@@ -50,7 +50,8 @@ const getReplacementText = (request, key, questionType, questionKey, trueReturn,
 
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
-
+  console.log('additionalYarKeyName is', additionalYarKeyName)
+  console.log('SELECT_VARIABLE_TO_REPLACE is', SELECT_VARIABLE_TO_REPLACE)
     switch (url) {
       case '1000-birds':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
@@ -66,6 +67,9 @@ const insertYarValue = (field, url, request) => {
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier')
       case 'easy-grip-perches':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'an aviary\'s', 'a multi-tier system\'s')
+      case 'veranda-features':
+      return field.includes('{{_poultryType_}}') ? getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet') : 
+        getReplacementText(request, 'poultryType', 'poultry-type', 'poultry-type-A1', '30', '10')
       default:
         return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName)
     }
@@ -133,7 +137,8 @@ const sidebarCheck = (question, url, request ) => {
           {
             ...question.sidebar.values[0],
             content: [{
-              para: insertYarValue(question.sidebar.values[0].content[0].para, url, request)
+              ...question.sidebar.values[0].content[0],
+              para: insertYarValue(question.sidebar.values[0].content[0].para, url, request),
             }
             ]
           }
@@ -484,11 +489,11 @@ const getPage = async (question, request, h) => {
   let { url, nextUrlObject, type, title, hint, yarKey, ineligibleContent, label } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys 
   const nextUrl = getUrl(nextUrlObject, question.nextUrl, request)
-  const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
+  // const isRedirect = guardPage(request, preValidationObject, startPageUrl, serviceEndDate, serviceEndTime, ALL_QUESTIONS)
   
-  if (isRedirect) {
-    return h.redirect(startPageUrl)
-  }
+  // if (isRedirect) {
+  //   return h.redirect(startPageUrl)
+  // }
 
   if (url === 'project-cost') {
     setYarValue(request, 'solarBirdNumber', null)
