@@ -21,7 +21,7 @@ describe('Page: /mechanical-ventilation', () => {
     expect(response.payload).toContain('Will the building have a mechanical ventilation system with these features?')
     expect(response.payload).toContain('a control system to automatically measure and record the daily temperature, humidity, and CO₂ levels')
     expect(response.payload).toContain('an alarm system (that detects excessive high or low temperatures and system failures) with a power supply independent of mains electricity')
-    expect(response.payload).toContain('an emergency power supply, for example a high-capacity generator, in case of electrical or other failures.')
+    expect(response.payload).toContain('an emergency power supply, for example a high-capacity generator, in case of electrical or other failures')
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
   })
@@ -80,7 +80,7 @@ describe('Page: /mechanical-ventilation', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('The mechanical ventilation system must have:')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
   it('page loads with correct back link - hen / Rearing aviary journey', async () => {
     varList.poultryType = 'hen'

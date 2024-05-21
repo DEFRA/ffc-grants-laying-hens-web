@@ -78,8 +78,8 @@ describe('Page: /refurbishing-insulation', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('When the project is complete. the building must have full wall and roof insulation.')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('When the project is complete, the building must have full wall and roof insulation.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link', async () => {

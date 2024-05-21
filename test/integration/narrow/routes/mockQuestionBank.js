@@ -51,7 +51,7 @@ const questionBank = {
             messageContent: 'Contractors cannot apply for grant funding for solar project items.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
     
@@ -156,7 +156,7 @@ const questionBank = {
             },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             },
             warning: {
               text: 'Other types of business may be supported in future schemes',
@@ -392,7 +392,7 @@ const questionBank = {
             messageContent: 'If you do not have an existing solar PV system, you must apply for funding for solar PV panels to be eligible for this grant.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           eliminationAnswerKeys: '',
@@ -481,7 +481,7 @@ const questionBank = {
                     </div>`,
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           sidebar: {
@@ -600,7 +600,7 @@ const questionBank = {
             insertText: { text: 'The minimum grant you can apply for is £15,000 (25% of £60,000). The maximum grant is £100,000 (25% of £400,000).' },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           answers: [],
@@ -629,7 +629,7 @@ const questionBank = {
             messageContent: 'Automatic technology must fit at least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           type: 'multi-answer',
@@ -734,7 +734,7 @@ const questionBank = {
                             </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+              title: 'See other grants you may be eligible for'
             }
           },
           sidebar: {

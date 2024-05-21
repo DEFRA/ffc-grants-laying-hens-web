@@ -67,7 +67,7 @@ describe('Page: /poultry-type', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('This grant is only for laying hen or pullet projects.')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('`Yes` option selected on /tenancy -> page loads with correct back link', async () => {
