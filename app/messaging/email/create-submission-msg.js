@@ -200,7 +200,6 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
     generateRow(53, 'Business type', getBusinessTypeC53(businessTypeArray, horticulture)),
     generateRow(341, 'Grant Launch Date', '26/06/2024'),
     generateRow(23, 'Business Form Classification (Status of Applicant)', submission.legalStatus),
-    generateRow(405, 'Project Type', submission.project),
 
     generateRow(44, 'Description of Project', projectDescriptionString),
 

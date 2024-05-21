@@ -66,7 +66,7 @@ describe('Page: /housing-density', () => {
     expect(postResponse.payload).toContain('To be eligible for grant funding, the maximum stocking density for multi-tier pullet housing at the age of 16 weeks must be within:')
     expect(postResponse.payload).toContain('20kg per m² of the total usable area')
     expect(postResponse.payload).toContain('33kg per m² of the total usable area at floor level')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
   it('page loads with correct back link - /rearing-aviary-system', async () => {
     varList.poultryType = 'pullet'

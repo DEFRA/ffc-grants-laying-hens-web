@@ -66,7 +66,7 @@ describe('Page: /step-up-system', () => {
     expect(postResponse.payload).toContain('The step-up system must have:')
     expect(postResponse.payload).toContain('height-adjustable tiers with food and water that birds can access after 10 days')
     expect(postResponse.payload).toContain('welfare ramps')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link - /multi-tier-system', async () => {

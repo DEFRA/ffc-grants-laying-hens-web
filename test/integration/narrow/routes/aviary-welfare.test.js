@@ -67,7 +67,7 @@ describe('Page: /aviary-welfare', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The building must have a high welfare laying hen aviary system')
+    expect(postResponse.payload).toContain('The building must have a high welfare laying hen aviary system.')
     expect(postResponse.payload).toContain('You must not install a combi-cage system in your grant-funded housing.')
   })
 
