@@ -1,6 +1,6 @@
 {% macro crumbToken(crumb) %}
-  {% from "govuk/components/details/macro.njk" import govukDetails %}
-  {% from "govuk/components/button/macro.njk" import govukButton %} <input type="hidden" name="crumb" id="crumb" value="{{ crumb }}" autocomplete="off"/>
+  {% from "dist/govuk/components/details/macro.njk" import govukDetails %}
+  {% from "dist/govuk/components/button/macro.njk" import govukButton %} <input type="hidden" name="crumb" id="crumb" value="{{ crumb }}" autocomplete="off"/>
 {% endmacro %}
 {% macro sideBar(content) %}
   <div class="govuk-grid-column-one-third  govuk-!-padding-top-4 govuk-body">
