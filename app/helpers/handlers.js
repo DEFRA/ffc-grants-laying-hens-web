@@ -67,8 +67,7 @@ const insertYarValue = (field, url, request) => {
       case 'easy-grip-perches':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'an aviary\'s', 'a multi-tier system\'s')
       case 'veranda-features':
-      return field.includes('{{_poultryType_}}') ? getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet') : 
-        getReplacementText(request, 'poultryType', 'poultry-type', 'poultry-type-A1', '30', '10')
+      return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet') 
       default:
         return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName)
     }
@@ -83,6 +82,11 @@ const insertYarValue = (field, url, request) => {
   if (url === 'current-multi-tier-system') {
     const replacement =  getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? 'an' : 'a'
     field = field.replace('[[_article_]]', replacement)
+  }
+
+  if (url === 'veranda-features') {
+    const replacement =  getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? '30' : '10'
+    field = field.replace('[[_baseSize_]]', replacement)
   }
 
   return field
@@ -146,7 +150,7 @@ const sidebarCheck = (question, url, request ) => {
     }
   }
 
-  if (question.sidebar?.values[0]?.content[0]?.items?.some(item => item.includes('{{_'))) {
+  if (question.sidebar?.values[0]?.content[0]?.items?.some(item => item.includes('{{_') || item.includes('[[_'))) {
     question = {
       ...question,
       sidebar: {
@@ -157,7 +161,7 @@ const sidebarCheck = (question, url, request ) => {
               {
                 ...question.sidebar.values[0].content[0],
                 items: question.sidebar.values[0].content[0].items.map(item => 
-                  item.includes('{{_') ? insertYarValue(item, url, request) : item
+                  item.includes('{{_') || item.includes('[[_') ? insertYarValue(item, url, request) : item
                 
                 )
               }
