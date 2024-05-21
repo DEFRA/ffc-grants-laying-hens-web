@@ -80,7 +80,7 @@ describe('Page: /multi-tier-system', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('The building must have a multi-tier system.')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link - /lighting-features', async () => {

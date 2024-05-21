@@ -120,7 +120,7 @@ describe('Page: /building-items', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('When the project is complete, the building must have:')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link when hen-veranda page is /Yes/', async () => {

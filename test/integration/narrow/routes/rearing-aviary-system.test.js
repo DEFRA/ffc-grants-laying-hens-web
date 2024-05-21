@@ -72,7 +72,7 @@ describe('Page: /rearing-aviary-system', () => {
     expect(postResponse.payload).toContain('integrated height-adjustable feed lines, nipple drinkers and platforms')
     expect(postResponse.payload).toContain('integrated and fully dimmable non-flicker LED lighting')
     expect(postResponse.payload).toContain('welfare ramps when the pullets are 14 days old')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link - /multi-tier-system', async () => {

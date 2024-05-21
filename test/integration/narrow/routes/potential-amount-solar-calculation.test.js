@@ -4,7 +4,7 @@ const { formatUKCurrency } = require('../../../../app/helpers/data-formats')
 const utilsList = {
   'project-type-A2': 'Refurbishing the existing building',
   'poultry-type-A3': 'Replacing the entire building with a new building'
-}
+} 
 
 describe('Page: /potential-amount-solar-calculation', () => {
   process.env.GRANT_PERCENTAGE = 40
@@ -60,7 +60,7 @@ describe('Page: /potential-amount-solar-calculation', () => {
     expect(response.payload).toContain('How is the solar PV system grant funding calculated?')
     expect(response.payload).toContain(`Based on the building's bird capacity (${varList.numberOfBirdsFormat} birds), you can apply ${varList.grantSolarPercentage}% of the costs of a solar PV system with a power capacity of up to ${varList.powerCap}kW.`)
     expect(response.payload).toContain(`This is based on the solar PV system costs (£${varList.solarCostFormat}) divided by the solar PV system’s power capacity (${varList.energyRating}kW). With these figures, the cost of the solar PV system is equal to £${varList.solarcap} per kW.`)
-    expect(response.payload).toContain(`You can apply for grant funding of £${varList.solarGrantFundingFormat} for solar PV system costs. This is ${varList.grantSolarPercentage}% of £${varList.costFormat} , the amount based on your solar PV system costing £${varList.solarcap} per kW, multiplied by the power rating of ${varList.powerCap}kW.`)
+    expect(response.payload).toContain(`You can apply for grant funding of £${varList.solarGrantFundingFormat} for solar PV system costs. This is ${varList.grantSolarPercentage}% of £${varList.costFormat}, the amount based on your solar PV system costing £${varList.solarcap} per kW, multiplied by the power rating of ${varList.powerCap}kW.`)
     expect(response.payload).toContain(`You must pay the remaining solar PV system costs over £${varList.solarGrantFundingFormat}.`)
     expect(response.payload).toContain(varList.numberOfBirdsFormat)
     expect(response.payload).toContain(varList.projectTypeTableText)

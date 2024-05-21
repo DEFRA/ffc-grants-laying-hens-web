@@ -104,6 +104,6 @@ describe('Page: /planning-permission', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('You must have secured planning permission before you submit a full application.')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 })

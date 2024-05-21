@@ -62,7 +62,7 @@ describe('Page: /vehicle-washing', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('There must be a designated washing and disinfecting area on site with:')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link - /external-taps', async () => {

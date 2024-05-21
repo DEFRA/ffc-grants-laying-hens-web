@@ -118,7 +118,7 @@ describe('Page: /lighting-features', () => {
     expect(postResponse.payload).toContain('capacity for zonal dimming between 0 and 60 lux')
     expect(postResponse.payload).toContain('full coverage of the entire floor-litter (scratch) area')
     expect(postResponse.payload).toContain('an option for red light to reduce feather pecking')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('user selects ineligible option `No` -> display ineligible page - pullet', async () => {
@@ -138,7 +138,7 @@ describe('Page: /lighting-features', () => {
     expect(postResponse.payload).toContain('full coverage of the entire floor-litter (scratch) area')
     expect(postResponse.payload).toContain('a simulated stepped dawn and dusk (unless this is already provided as part of an aviary lighting system)')
     expect(postResponse.payload).toContain('an option for red light to reduce feather pecking')
-    expect(postResponse.payload).toContain('See other grants you may be eligible for.')
+    expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
   it('page loads with correct back link - /refurbishing-insulation', async () => {
