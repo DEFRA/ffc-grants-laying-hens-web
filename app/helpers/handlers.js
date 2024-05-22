@@ -50,7 +50,7 @@ const getReplacementText = (request, key, questionType, questionKey, trueReturn,
 
 const insertYarValue = (field, url, request) => {
   field = field.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => {
-
+    
     switch (url) {
       case '1000-birds':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'laying hens', 'pullets')
@@ -66,6 +66,9 @@ const insertYarValue = (field, url, request) => {
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier')
       case 'easy-grip-perches':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'an aviary\'s', 'a multi-tier system\'s')
+      case 'veranda-features':
+      return field.includes('{{_poultryType_}}') ? getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet') : 
+        getReplacementText(request, 'poultryType', 'poultry-type', 'poultry-type-A1', '30', '10')
       default:
         return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName)
     }
@@ -133,7 +136,8 @@ const sidebarCheck = (question, url, request ) => {
           {
             ...question.sidebar.values[0],
             content: [{
-              para: insertYarValue(question.sidebar.values[0].content[0].para, url, request)
+              ...question.sidebar.values[0].content[0],
+              para: insertYarValue(question.sidebar.values[0].content[0].para, url, request),
             }
             ]
           }
