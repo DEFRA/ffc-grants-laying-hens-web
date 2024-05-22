@@ -248,12 +248,13 @@ const scorePageData = async (request, backUrl, url, h) => {
     let tableOrder = getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? tableOrderHen : tableOrderPullet
 
     if (getYarValue(request, 'currentMultiTierSystem')) {
+      let titleName = getYarValue(request, 'poultryType') === getQuestionAnswer('poultry-type', 'poultry-type-A1', ALL_QUESTIONS) ? 'Does your current building include an aviary system?' : 'Does your current building include a multi-tier system?'
       let currentMultiTierSystemValue = {
         key: 'current-multi-tier-system',
         answers: [
           {
             key: 'current-multi-tier-system',
-            title: 'Does your current building include a thing?',
+            title: titleName,
             input: [
               {
                 key: getYarValue(request, 'currentMultiTierSystem') === getQuestionAnswer('current-multi-tier-system', 'current-multi-tier-system-A1', ALL_QUESTIONS) ? 'current-multi-tier-system-A1' : 'current-multi-tier-system-A2',
