@@ -2752,6 +2752,7 @@ const questionBank = {
             cappedGrant: true
           },
           type: 'input',
+          inputmode: "numeric",
           prefix: {
             text: '£'
           },
@@ -2868,6 +2869,7 @@ const questionBank = {
             cappedGrant: true
           },
           type: 'input',
+          inputmode: "numeric",
           prefix: {
             text: '£'
           },
@@ -4204,6 +4206,7 @@ const questionBank = {
           // },
           fundingPriorities: '',
           type: 'input',
+          inputmode: "numeric",
           label: {
             text: `How many birds will {{_projectType_}} be able to house[[_extraClause_]]?`,
             classes: 'govuk-label--l',
@@ -4248,6 +4251,7 @@ const questionBank = {
             grantPercentage: GRANT_PERCENTAGE_SOLAR,
           },
           type: 'input',
+          inputmode: "numeric",
           prefix: {
             text: '£'
           },
@@ -4305,6 +4309,7 @@ const questionBank = {
           nextUrl: 'potential-amount-solar',
           preValidationKeys: ['solarPVCost'],
           type: 'input',
+          inputmode: "numeric",
           prefix: {
             text: 'kW'
           },
@@ -4507,6 +4512,7 @@ const questionBank = {
             {
               yarKey: 'businessTurnover',
               type: 'number',
+              inputmode: "numeric",
               classes: 'govuk-input--width-10',
               prefix: {
                 text: '£'
@@ -4518,7 +4524,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter your annual business turnover'
+                  error: 'Enter your annual business turnover, in pounds'
                 },
                 {
                   type: 'REGEX',
@@ -4527,9 +4533,9 @@ const questionBank = {
                 },
                 {
                   type: 'MIN_MAX',
-                  min: 1,
+                  min: 0,
                   max: 999999999,
-                  error: 'Number must be between 1-999999999'
+                  error: 'Number must be between 0-999999999'
                 }
               ]
             },
