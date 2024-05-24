@@ -6,7 +6,7 @@ const questionBanner = document.querySelector('.js-question-banner')
 const cookieBanner = document.querySelector('.js-cookies-banner')
 const cookieContainer = document.querySelector('.js-cookies-container')
 
-if (cookieContainer && cookieContainer.style) {
+if (cookieContainer?.style) {
   cookieContainer.style.display = 'block'
 
   function showBanner (banner) {
