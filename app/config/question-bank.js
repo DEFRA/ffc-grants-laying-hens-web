@@ -2679,7 +2679,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `The width of the pop hole openings along the length of the {{_poultryType_}} house must add up to a total of 2 metres for every 1,000 {{_poultryType_}}s in the building.
+                para: `The width of the pop hole openings along the length of the internal {{_poultryType_}} house wall must add up to a total of 2 metres for every 1,000 {{_poultryType_}}s in the building.
                 
                       The base of all pop holes must either:`,
                 items: [`be less than {{_baseSize_}}cm from floor level`, 'have access ramps that are as wide as the pop holes.'],
@@ -5362,7 +5362,7 @@ const questionBank = {
           url: 'confirmation',
           baseUrl: 'confirmation',
           preValidationKeys: ['farmerDetails'],
-          ga: { name: 'confirmation', params: {} },
+          ga: { name: 'confirmation', params: { journey: 'comprehensive'} },
           maybeEligible: true,
           maybeEligibleContent: {
             reference: {
@@ -5413,7 +5413,7 @@ const questionBank = {
           url: 'veranda-confirmation',
           baseUrl: 'veranda-confirmation',
           preValidationKeys: ['farmerDetails'],
-          ga: { name: 'confirmation', params: {} },
+          ga: { name: 'confirmation', params: { journey: 'veranda'} },
           preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -5463,7 +5463,7 @@ const questionBank = {
           pageTitle: '',
           url: 'veranda-waitlist-confirmation',
           baseUrl: 'veranda-waitlist-confirmation',
-          ga: { name: 'confirmation', params: {} },
+          ga: { name: 'confirmation', params: { journey: 'veranda'} },
           preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
