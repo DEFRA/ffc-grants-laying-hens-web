@@ -2681,9 +2681,9 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: `The width of the pop hole openings along the length of the internal {{_poultryType_}} house wall must add up to a total of 2 metres for every 1,000 {{_poultryType_}}s in the building.
-                
+                 
                       The base of all pop holes must either:`,
-                items: [`be less than {{_baseSize_}}cm from floor level`, 'have access ramps that are as wide as the pop holes.'],
+                items: [`be less than {{_baseSize_}}cm from floor level`, 'have access ramps that are as wide as the pop holes'],
                 additionalPara: 'You must not put perches in front of the pop holes.'
               }],
             }]
