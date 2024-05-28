@@ -5363,7 +5363,7 @@ const questionBank = {
           url: 'confirmation',
           baseUrl: 'confirmation',
           preValidationKeys: ['farmerDetails'],
-          ga: { name: 'confirmation', params: {} },
+          ga: { name: 'confirmation', params: { journey: 'comprehensive'} },
           maybeEligible: true,
           maybeEligibleContent: {
             reference: {
@@ -5414,7 +5414,7 @@ const questionBank = {
           url: 'veranda-confirmation',
           baseUrl: 'veranda-confirmation',
           preValidationKeys: ['farmerDetails'],
-          ga: { name: 'confirmation', params: {} },
+          ga: { name: 'confirmation', params: { journey: 'veranda'} },
           preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -5464,7 +5464,7 @@ const questionBank = {
           pageTitle: '',
           url: 'veranda-waitlist-confirmation',
           baseUrl: 'veranda-waitlist-confirmation',
-          ga: { name: 'confirmation', params: {} },
+          ga: { name: 'confirmation', params: { journey: 'veranda'} },
           preValidationKeys: ['applying', 'consentOptional'],
           maybeEligible: true,
           maybeEligibleContent: {
