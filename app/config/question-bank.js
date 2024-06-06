@@ -4524,18 +4524,18 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter your annual business turnover, in pounds'
+                  error: 'Enter your annual business turnover'
                 },
                 {
                   type: 'REGEX',
                   regex: WHOLE_NUMBER_REGEX,
-                  error: 'Annual business turnover must be a whole number, like 100000'
+                  error: 'Enter your annual business turnover, in pounds'
                 },
                 {
                   type: 'MIN_MAX',
                   min: 0,
                   max: 999999999,
-                  error: 'Number must be between 0-999999999'
+                  error: 'Enter your annual business turnover, in pounds'
                 }
               ]
             },
