@@ -42,7 +42,7 @@ describe('Page: /business-details', () => {
     }
 
     valList.businessTurnover = {
-      error: 'Enter your annual business turnover, in pounds',
+      error: 'Enter your annual business turnover',
       return: false
     }
 
@@ -63,7 +63,7 @@ describe('Page: /business-details', () => {
     expect(postResponse.payload).toContain('Enter a project name')
     expect(postResponse.payload).toContain('Enter a business name')
     expect(postResponse.payload).toContain('Enter the number of employees')
-    expect(postResponse.payload).toContain('Enter your annual business turnover, in pounds')
+    expect(postResponse.payload).toContain('Enter your annual business turnover')
     expect(postResponse.payload).toContain('Enter your Country parish holding (CPH) number')
   })
 
@@ -180,7 +180,7 @@ describe('Page: /business-details', () => {
 
   it('should validate business turnover - only digits', async () => {
     valList.businessTurnover = {
-      error: 'Annual business turnover must be a whole number, like 100000',
+      error: 'Enter your annual business turnover, in pounds',
       return: false
     }
     const postOptions = {
@@ -195,7 +195,7 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Annual business turnover must be a whole number, like 100000')
+    expect(postResponse.payload).toContain('Enter your annual business turnover, in pounds')
   })
 
   it('should validate business turnover - no spaces', async () => {
@@ -211,12 +211,12 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Annual business turnover must be a whole number, like 100000')
+    expect(postResponse.payload).toContain('Enter your annual business turnover, in pounds')
   })
 
   it('should validate business turnover - maximum value is 999999999', async () => {
     valList.businessTurnover = {
-      error: 'Number must be between 0-999999999',
+      error: 'Enter your annual business turnover, in pounds',
       return: false
     }
     const postOptions = {
@@ -231,7 +231,7 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Number must be between 0-999999999')
+    expect(postResponse.payload).toContain('Enter your annual business turnover, in pounds')
   })
 
   it('should validate business turnover - minimum value is 0', async () => {
@@ -247,7 +247,7 @@ describe('Page: /business-details', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Number must be between 0-999999999')
+    expect(postResponse.payload).toContain('Enter your annual business turnover, in pounds')
   })
 
   it('should validate SBI, if entered - only digits', async () => {
