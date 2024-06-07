@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-laying-hens-web",
-  "version": "1.100.6",
+  "version": "1.101.0",
   "description": "Web frontend for laying hens",
   "homepage": "https://github.com/DEFRA/ffc-grants-laying-hens-web",
   "main": "app/index.js",
@@ -47,7 +47,7 @@
     "ffc-grants-common-functionality": "^1.7.0",
     "ffc-messaging": "^2.9.0",
     "ffc-protective-monitoring": "^1.0.3",
-    "govuk-frontend": "^4.3.1",
+    "govuk-frontend": "^5.4.0",
     "joi": "^17.6.0",
     "nunjucks": "^3.2.4",
     "uuid": "^8.3.2"
@@ -74,7 +74,7 @@
     "npm-run-all": "^4.1.2",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.54.7",
-    "sass-loader": "^13.0.2",
+    "sass-loader": "^14.2.1",
     "snyk": "^1.1051.0",
     "standard": "^16.0.4",
     "string-replace-loader": "^3.1.0",
