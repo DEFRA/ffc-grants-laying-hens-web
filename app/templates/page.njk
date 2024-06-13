@@ -107,8 +107,12 @@ conditionalButtons %}
             {% set secButtonText = 'Back to details' %}
           {% endif %}
         </div>
-        {%if key === 'introducing-innovation' or key === 'environmental-data-type' %}
+        {% if key === 'environmental-data-type' %}
           {% set buttonText = 'Get your score'%}
+          {% set diaplaySecondryBtn = false %}
+        {% endif %}
+
+        {% if key === 'current-system' %}
           {% set diaplaySecondryBtn = false %}
         {% endif %}
         {{ conditionalButtons(diaplaySecondryBtn, buttonText, secButtonText) }}
