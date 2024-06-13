@@ -192,7 +192,7 @@ const generateDoraRows = (submission, subScheme, subTheme, businessTypeArray, pr
   return [
     generateRow(1, 'Field Name', 'Field Value', true),
     generateRow(2, 'FA or OA(EOI):', 'Outline Application'),
-    generateRow(40, 'Scheme', 'Farming Transformation Fund'),
+    generateRow(40, 'Scheme', 'Farming Investment Fund'),
     generateRow(39, 'Sub scheme', subScheme),
     generateRow(43, 'Theme', subTheme),
     generateRow(90, 'Sub-Theme / Project type', ''),
