@@ -73,7 +73,7 @@ describe('Page: /veranda-features', () => {
     expect(postResponse.payload).toContain('The veranda must have a:')
     expect(postResponse.payload).toContain('a solid concrete floor')
     expect(postResponse.payload).toContain('a waterproof insulated roof')
-    expect(postResponse.payload).toContain('a dimmable LED lighting system with a range between 0 lux and 60 lux')
+    expect(postResponse.payload).toContain('a dimmable LED lighting system between 0 lux and 60 lux')
     expect(postResponse.payload).toContain('a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access')
     expect(postResponse.payload).toContain('closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system')
     expect(postResponse.payload).toContain('internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide')
