@@ -28,7 +28,7 @@ describe('Page: /building-items', () => {
     expect(response.payload).toContain('Will the building have these features?')
     expect(response.payload).toContain('When the project is complete, the building must have:')
     expect(response.payload).toContain('a fixed structure with a solid concrete floor')
-    expect(response.payload).toContain('water-tight roof and walls')
+    expect(response.payload).toContain('watertight roof and walls')
     expect(response.payload).toContain('mesh capping applied to any roof or wall inlets and outlets (using a mesh hole size of 25 millimetres or less)')
     expect(response.payload).toContain('catch trays under all chimneys and roof-mounted vents')
     expect(response.payload).toContain('Yes')

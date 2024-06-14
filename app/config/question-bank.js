@@ -312,7 +312,7 @@ const questionBank = {
               title: 'See other grants you may be eligible for'
             },
             warning: {
-              text: 'Other types of business may be supported in future schemes',
+              text: 'Other types of business may be supported in future schemes.',
               iconFallbackText: 'Warning'
             }
           },
@@ -480,7 +480,7 @@ const questionBank = {
               content: [{
                 para: `You must have secured planning permission before you submit a full application.
 
-                        The application deadline is 30th January 2026.`
+                        The application deadline is 30 January 2026.`
               }]
             }]
           },
@@ -871,7 +871,7 @@ const questionBank = {
                   <p>When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
                     <li>a fixed structure with a solid concrete floor</li>
-                    <li>water-tight roof and walls</li>
+                    <li>watertight roof and walls</li>
                     <li>mesh capping applied to any roof or wall inlets and outlets (using a mesh hole size of 25 millimetres or less)</li>
                     <li>catch trays under all chimneys and roof-mounted vents</li>
                   </ul>`
@@ -917,7 +917,7 @@ const questionBank = {
                   <p class="govuk-body">When the project is complete, the building must have:</p>
                   <ul class="govuk-list--bullet">
                       <li>a fixed structure with a solid concrete floor</li>
-                      <li>water-tight roof and walls</li>
+                      <li>watertight roof and walls</li>
                       <li>mesh capping applied to any roof or wall inlets and outlets (using a mesh hole size of 25 millimetres or less)</li>
                       <li>catch trays under all chimneys and roof-mounted vents</li>
                   </ul>
@@ -1244,7 +1244,7 @@ const questionBank = {
               <p class="govuk-body">The aviary system must have integrated:</p>
               <ul class="govuk-list govuk-list--bullet">
                 <li>manure removal belts</li>
-                <li>integrated non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk.</li>
+                <li>non-flicker LED lighting at each level (including under the system) capable of automatically simulating dawn and dusk</li>
               </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/organisations/rural-payments-agency',
@@ -1806,9 +1806,9 @@ const questionBank = {
           hint: {
             html: `<p>When the project is complete, the house lighting system must have:</p>
                   <ul>
-                      <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
+                      <li>non-flicker LED light with a colour temperature between 2,700 and 4,000 Kelvin</li>
                       <li>capacity for zonal dimming between 0 and 60 lux</li>
-                      <li>full coverage of the entire floor-litter (scratch) area</li>
+                      <li>full coverage of the exposed floor-litter (scratch) area</li>
                       <span>{{_poultryType_}}</span>
                       <li>an option for red light to reduce feather pecking</li>
                   </ul>`
@@ -1818,9 +1818,9 @@ const questionBank = {
             <div class="govuk-list govuk-list--bullet">
                   <p class="govuk-body">When the project is complete, the house lighting system must have:</p>
                   <ul>
-                      <li>non-flicker LED light with a colour temperature between 2700 and 4000 Kelvin</li>
+                      <li>non-flicker LED light with a colour temperature between 2,700 and 4,000 Kelvin</li>
                       <li>capacity for zonal dimming between 0 and 60 lux</li>
-                      <li>full coverage of the entire floor-litter (scratch) area</li>
+                      <li>full coverage of the exposed floor-litter (scratch) area</li>
                       <span>{{_poultryType_}}</span>
                       <li>an option for red light to reduce feather pecking</li>
                   </ul>
@@ -2164,7 +2164,7 @@ const questionBank = {
                 <p>The rearing aviary system must have:</p>
                 <ul>
                     <li>the capacity to provide or retain friable litter while the birds are held within the system</li>
-                    <li>an integrated manure removal belt-system</li>
+                    <li>an integrated manure removal belt system</li>
                     <li>integrated height-adjustable feed lines, nipple drinkers and platforms</li>
                     <li>integrated and fully dimmable non-flicker LED lighting</li>
                     <li>welfare ramps when the pullets are 14 days old</li>
@@ -2176,7 +2176,7 @@ const questionBank = {
                     <p>The rearing aviary system must have:</p>
                     <ul>
                         <li>the capacity to provide or retain friable litter while the birds are held within the system</li>
-                        <li>an integrated manure removal belt-system</li>
+                        <li>an integrated manure removal belt system</li>
                         <li>integrated height-adjustable feed lines, nipple drinkers and platforms</li>
                         <li>integrated and fully dimmable non-flicker LED lighting</li>
                         <li>welfare ramps when the pullets are 14 days old</li>
@@ -2693,7 +2693,7 @@ const questionBank = {
               <ul>
                 <li>a solid concrete floor</li>
                 <li>a waterproof insulated roof</li>
-                <li>a dimmable LED lighting system with a range between 0 lux and 60 lux</li>
+                <li>a dimmable LED lighting system between 0 lux and 60 lux</li>
                 <li>a perimeter wall, at least one metre high, that includes a biosecure entrance for cleaning access</li>
                 <li>closable pop holes in the perimeter wall, unless the veranda is part of an indoor barn system</li>
                 <li>internal access along the length of the wall of the hen house through closable pop holes that are at least 35cm high and 40cm wide</li>
@@ -2996,6 +2996,7 @@ const questionBank = {
                 content: [
                   {
                     para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.
+
                   You can use:`,
                     items: ['loans', 'overdrafts', 'delinked payments']
                   }
@@ -3150,7 +3151,7 @@ const questionBank = {
                 heading: 'Eligibility',
                 content: [{
                   para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.
-                  
+                 
                   You can use:`,
                   items: [
                     'loans',
@@ -4308,7 +4309,7 @@ const questionBank = {
           preValidationKeys: ['solarPVCost'],
           type: 'input',
           inputmode: "numeric",
-          prefix: {
+          suffix: {
             text: 'kW'
           },
           id: 'solarPowerCapacity',
@@ -5343,7 +5344,7 @@ const questionBank = {
             },
             extraMessageContent: `<h2 class="govuk-heading-m">Improving our schemes</h2>
             As we develop new services we get feedback from farmers and agents.</br></br>
-            You may be contacted by us or a third party that we work with`
+            You may be contacted by us or a third party that we work with.`
           },
           answers: [
             {
@@ -5388,7 +5389,7 @@ const questionBank = {
             </ol>
             `,
             middleWarning: {
-              text: 'You must not start the project'
+              text: 'You must not start the project.'
             },
             extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
             <p>Before you start the project, you can:</p>
@@ -5439,7 +5440,7 @@ const questionBank = {
               </ol>
             `,
             middleWarning: {
-              text: 'You must not start the project'
+              text: 'You must not start the project.'
             },
             extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
             <p>Before you start the project, you can:</p>
@@ -5472,7 +5473,7 @@ const questionBank = {
               surveyLink: process.env.SURVEY_LINK
             },
             messageContent: `You have registered your interest for veranda-only grant funding. We have sent you a confirmation email with a record of your answers.<br/><br/>
-              If you do not get an email within 72 hours, contact the RPA helpline and follow the options for the Farming Investment Fund scheme.<br/><br/>
+              If you do not get an email within 72 hours, contact the RPA helpline and follow the options for the Farming Investment Fund scheme.
               <h2 class="govuk-heading-m">RPA helpline</h2>
               <h3 class="govuk-heading-s">Telephone</h3>
               <p>Telephone: 0300 0200 301</p>

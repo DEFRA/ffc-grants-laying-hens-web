@@ -106,11 +106,6 @@
         {{ crumbToken(crumb)}}
         {{ govukCheckboxes(checkboxConfirmOptional) }}
           {{ govukInput(consentOptionalData.hiddenInput) }}
-          {{ govukWarningText({
-            text: 'You can only submit your details once',
-            iconFallbackText: 'Warning'
-          })
-        }}
         {{ govukButton({
           text: "Confirm and send",
           attributes: {id: "btnConfirmSend"}
