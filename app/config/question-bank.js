@@ -527,7 +527,7 @@ const questionBank = {
           },
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 30th January 2026.',
+            messageContent: 'You must have secured planning permission before you submit a full application. The application deadline is 30 January 2026.',
             insertText: { text: '' }
           },
           yarKey: 'planningPermissionCondition'
