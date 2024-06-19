@@ -174,7 +174,7 @@ const questionBank = {
             messageHeader: 'We have reached the limit of applications for veranda grant funding',
             messageContent: `The veranda grant funding is awarded on a first come, first served basis. We are not currently accepting applications for veranda-only grant funding.<br/><br/>
             You can check your eligibility and provide your business details to <a class="govuk-link" href="./applicant-type" rel="noopener noreferrer">register your interest for veranda-only grant funding.</a>The RPA will contact you if funding becomes available.<br/><br/>
-            Alternatively, you can check if you are eligible comprehensive grant funding to refurbish or replace laying hen or pullet housing.`,
+            Alternatively, you can check if you are eligible for comprehensive grant funding to refurbish or replace laying hen or pullet housing.`,
             insertText: {
               text: ''
             },
@@ -1115,7 +1115,7 @@ const questionBank = {
             messageContent: `
               <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">
-                  The building must have a biosecurity changing area at each external pedestrian point. 
+                  The building must have a biosecurity changing area at each external pedestrian access point. 
                 </p>
                 <p class="govuk-body">Each biosecurity changing area must include:</p>
                 <ul>
@@ -4541,10 +4541,10 @@ const questionBank = {
             {
               yarKey: 'sbi',
               type: 'number',
-              title: 'Single Business Identifier (SBI) - Optional',
+              title: 'Single Business Identifier (SBI) (Optional)',
               classes: 'govuk-input govuk-input--width-10',
               label: {
-                text: 'Single Business Identifier (SBI) - Optional',
+                text: 'Single Business Identifier (SBI) (Optional)',
                 classes: 'govuk-label'
               },
               hint: {
@@ -5340,7 +5340,7 @@ const questionBank = {
             I am aware that the information I submit will be checked by the RPA.</br></br>
             I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.`,
             insertText: {
-              text: 'I understand that the RPA will award the veranda-only grant funding on a first come, first served basis'
+              text: 'I understand that the RPA will award the veranda-only grant funding on a first come, first served basis.'
             },
             extraMessageContent: `<h2 class="govuk-heading-m">Improving our schemes</h2>
             As we develop new services we get feedback from farmers and agents.</br></br>

@@ -68,7 +68,7 @@ describe('Page: /changing-area', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('The building must have a biosecurity changing area at each external pedestrian point.')
+    expect(postResponse.payload).toContain('The building must have a biosecurity changing area at each external pedestrian access point.')
     expect(postResponse.payload).toContain('Each biosecurity changing area must include:')
     expect(postResponse.payload).toContain('changing facilities, with a step-over barrier between the outer and inner areas')
     expect(postResponse.payload).toContain('in the outer area, handwashing facilities with running water and storage for clothes and boots you use outside this building')
