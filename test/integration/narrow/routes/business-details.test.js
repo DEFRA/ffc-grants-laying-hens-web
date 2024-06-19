@@ -21,7 +21,7 @@ describe('Page: /business-details', () => {
     expect(response.payload).toContain('Business name')
     expect(response.payload).toContain('Number of employees')
     expect(response.payload).toContain('Annual business turnover (£)')
-    expect(response.payload).toContain('Single Business Identifier')
+    expect(response.payload).toContain('Single Business Identifier (SBI) (Optional)')
     expect(response.payload).toContain('County parish holding (CPH) number')
   })
 

@@ -43,7 +43,7 @@ describe('confirm page', () => {
     expect(response.payload).toContain('I confirm that, to the best of my knowledge, the details I have provided are correct.')
     expect(response.payload).toContain('I understand the project’s eligibility and score is based on the answers I provided.')
     expect(response.payload).toContain('I am aware that the information I submit will be checked by the RPA.')
-    expect(response.payload).toContain('I understand that the RPA will award the veranda-only grant funding on a first come, first served basis')
+    expect(response.payload).toContain('I understand that the RPA will award the veranda-only grant funding on a first come, first served basis.')
     expect(response.payload).toContain('Improving our schemes')
     expect(response.payload).toContain('As we develop new services we get feedback from farmers and agents.')
     expect(response.payload).toContain('You may be contacted by us or a third party that we work with')
