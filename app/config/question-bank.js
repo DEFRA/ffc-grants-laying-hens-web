@@ -5476,6 +5476,7 @@ const questionBank = {
               If you do not get an email within 72 hours, contact the RPA helpline and follow the options for the Farming Investment Fund scheme.
               <h2 class="govuk-heading-m">RPA helpline</h2>
               <h3 class="govuk-heading-s">Telephone</h3>
+              <p>Telephone: 0300 0200 301</p>
               <p>Monday to Friday, 9am to 5pm (except public holidays)</p>
               <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
               <h3 class="govuk-heading-s">Email</h3>
