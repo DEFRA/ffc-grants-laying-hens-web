@@ -418,7 +418,7 @@ const maybeEligibleGet = async (request, confirmationId, question, url, nextUrl,
         getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet')
       )
     ) : '',
-    surveyLink: maybeEligibleContent?.surveyLink ? maybeEligibleContent.surveyLink.replace(
+    surveyLinkText: maybeEligibleContent?.surveyLinkText ? maybeEligibleContent.surveyLinkText.replace(
       SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       )

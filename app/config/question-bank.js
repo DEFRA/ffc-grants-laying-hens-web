@@ -5402,7 +5402,7 @@ const questionBank = {
           conditionalInsertText: { 
             text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
           },
-          surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
+          surveyLinkText: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
           }
         },
         {
@@ -5453,7 +5453,7 @@ const questionBank = {
           conditionalInsertText: { 
             text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
           },
-          surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
+          surveyLinkText: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
           }
         },
         {
@@ -5476,7 +5476,6 @@ const questionBank = {
               If you do not get an email within 72 hours, contact the RPA helpline and follow the options for the Farming Investment Fund scheme.
               <h2 class="govuk-heading-m">RPA helpline</h2>
               <h3 class="govuk-heading-s">Telephone</h3>
-              <p>Telephone: 0300 0200 301</p>
               <p>Monday to Friday, 9am to 5pm (except public holidays)</p>
               <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
               <h3 class="govuk-heading-s">Email</h3>
@@ -5502,7 +5501,7 @@ const questionBank = {
           conditionalInsertText: { 
             text: `If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.` 
           },
-          surveyLink: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`
+          surveyLinkText: `<p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`,
           }
         }
       ]
