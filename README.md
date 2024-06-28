@@ -42,44 +42,44 @@ This application requires the following to be run locally:
 
 There are many required Environment Variables needed for this project, which would be saved in a .env file. The following is a list of all of these, with a brief description of what they are needed/used for:
 
-Environment Variable Name | Brief Description | Example (if needed)
---- | --- | ---
-PORT | Used to Determine what Port the application should run on when running locally. Usually this is set to 3600 | 3600
-SERVICE_BUS_HOST | The Azure Host Address that contains the necessary Service Buses | N/A
-SERVICE_BUS_PASSWORD | The password in order to access the Azure Service Buses | N/A
-SERVICE_BUS_USER | The user in order to access the Azure Service Buses | N/A
-COOKIE_PASSWORD | The password needed for authorizing the cookies | N/A
-BACKEND_POLLING_HOST | The localhost address for Backend Polling (This should be the full localhost address and should ***not*** have the same port as specified in **PORT** ) | http://localhost:3021/
-NODE_ENV | The environemnt to be used locally (this is only needed for things like the cookie authentication etc) | dev
-SITE_URL | The url of the local application (This should have the same port number used in **PORT**) | localhost:3600
-APPINSIGHT_INSTRUMENTATION_KEY | The key needed to connect to App Insights | N/A
-REDIS_HOSTNAME | The hostname needed for connecting to Azure Redis | N/A
-REDIS_PORT | The port needed for connecting to Azure Redis | N/A
-REDIS_PASSWORD | The password needed for connecting to Azure Redis | N/A
-REDIS_PARTITION | The name of the application, needed for Azure Redis | ffc-grants-laying-hens-web
-SERVER_TIMEOUT | How long the server timeout should be when running loclaly | 5
---- | ---  | ---
-SCORE_REQUEST_QUEUE_ADDRESS | The name of the Azure Service Bus Queue used for sending the score request (without the users initials) | ffc-grants-queue-req
-SCORE_RESPONSE_QUEUE_ADDRESS | The name of the Azure Service Bus Queue used for receiving the score data from the scoring service (without the users initials) | ffc-grants-queue-res
-MESSAGE_QUEUE_SUFFIX | The users initials, which would be used at the end of the scoring queues | -zd
---- | --- | ---
-LOGIN_REQUIRED | A vaiable to determine whether the login screen should be active or not (Optional, app automatically sets to false if this is absent) | false
-AUTH_USERNAME | The username needed for the login screen (Optional, only needed if LOGIN_REQUIRED is true) | grants
-AUTH_PASSWORD_HASH | The password needed for the login screen (Optional, only needed if LOGIN_REQUIRED is true) | grants
---- | --- | ---
-NOTIFY_EMAIL_TEMPLATE | The email template needed for the application | N/A
-NOTIFY_EMAIL_VERANDA_TEMPLATE | The email template needed if veranda journey is selected for the application | N/A
-WORKSHEET_HIDE_EMPTY_ROWS | A true/false value to determine if empty rows in the DORA excel sheet should be hidden (defaults to true) | true
-WORKSHEET_PROTECT_ENABLED | A true/false value to determine if the DORA excel sheet should be protected (defaults to false) | false
-SEND_EMAIL_TO_RPA |A true/false value to determine if the generated email should be sent to RPA (default to false) | false
-WORKSHEET_PROTECT_PASSWORD | The password to protect the DORA excel sheet | N/A
-EXCEL_UPLOAD_ENVIRONMENT | The environment to upload the DORA excel sheet to | DEV
-DESIRABILITY_SUBMITTED_TOPIC_ADDRESS | The name of the Azure Service Bus Topic used for sending the Email and DORA details | ffc-grants-topic
---- | --- | ---
-GOOGLE_TAG_MANAGER_KEY | The key needed to connect to Google Tag Manager (Optional, only required if needing to send analytics to Google Analytics) | N/A
-GOOGLE_TAG_MANAGER_SERVER_KEY | The server key needed to connect to Google Tag Manager (Optional, only required if needing to send analytics to Google Analytics) | N/A
-ANALYTICS_PROPERTY_API | The API key needed for connecting to Google Analytics (Optional, only required if needing to send analytics to Google Analytics) | N/A
-ANALYTICS_TAG_KEY | The key needed to send analytics to Google Analytics (Optional, only required if needing to send analytics to Google Analytics) | N/A
+| Environment Variable Name            | Brief Description                                                                                                                                       | Example (if needed)        |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| PORT                                 | Used to Determine what Port the application should run on when running locally. Usually this is set to 3600                                             | 3600                       |
+| SERVICE_BUS_HOST                     | The Azure Host Address that contains the necessary Service Buses                                                                                        | N/A                        |
+| SERVICE_BUS_PASSWORD                 | The password in order to access the Azure Service Buses                                                                                                 | N/A                        |
+| SERVICE_BUS_USER                     | The user in order to access the Azure Service Buses                                                                                                     | N/A                        |
+| COOKIE_PASSWORD                      | The password needed for authorizing the cookies                                                                                                         | N/A                        |
+| BACKEND_POLLING_HOST                 | The localhost address for Backend Polling (This should be the full localhost address and should ***not*** have the same port as specified in **PORT** ) | http://localhost:3021/     |
+| NODE_ENV                             | The environemnt to be used locally (this is only needed for things like the cookie authentication etc)                                                  | dev                        |
+| SITE_URL                             | The url of the local application (This should have the same port number used in **PORT**)                                                               | localhost:3600             |
+| APPINSIGHT_INSTRUMENTATION_KEY       | The key needed to connect to App Insights                                                                                                               | N/A                        |
+| REDIS_HOSTNAME                       | The hostname needed for connecting to Azure Redis                                                                                                       | N/A                        |
+| REDIS_PORT                           | The port needed for connecting to Azure Redis                                                                                                           | N/A                        |
+| REDIS_PASSWORD                       | The password needed for connecting to Azure Redis                                                                                                       | N/A                        |
+| REDIS_PARTITION                      | The name of the application, needed for Azure Redis                                                                                                     | ffc-grants-laying-hens-web |
+| SERVER_TIMEOUT                       | How long the server timeout should be when running loclaly                                                                                              | 5                          |
+| ---                                  | ---                                                                                                                                                     | ---                        |
+| SCORE_REQUEST_QUEUE_ADDRESS          | The name of the Azure Service Bus Queue used for sending the score request (without the users initials)                                                 | ffc-grants-queue-req       |
+| SCORE_RESPONSE_QUEUE_ADDRESS         | The name of the Azure Service Bus Queue used for receiving the score data from the scoring service (without the users initials)                         | ffc-grants-queue-res       |
+| MESSAGE_QUEUE_SUFFIX                 | The users initials, which would be used at the end of the scoring queues                                                                                | -zd                        |
+| ---                                  | ---                                                                                                                                                     | ---                        |
+| LOGIN_REQUIRED                       | A vaiable to determine whether the login screen should be active or not (Optional, app automatically sets to false if this is absent)                   | false                      |
+| AUTH_USERNAME                        | The username needed for the login screen (Optional, only needed if LOGIN_REQUIRED is true)                                                              | grants                     |
+| AUTH_PASSWORD_HASH                   | The password needed for the login screen (Optional, only needed if LOGIN_REQUIRED is true)                                                              | grants                     |
+| ---                                  | ---                                                                                                                                                     | ---                        |
+| NOTIFY_EMAIL_TEMPLATE                | The email template needed for the application                                                                                                           | N/A                        |
+| NOTIFY_EMAIL_VERANDA_TEMPLATE        | The email template needed if veranda journey is selected for the application                                                                            | N/A                        |
+| WORKSHEET_HIDE_EMPTY_ROWS            | A true/false value to determine if empty rows in the DORA excel sheet should be hidden (defaults to true)                                               | true                       |
+| WORKSHEET_PROTECT_ENABLED            | A true/false value to determine if the DORA excel sheet should be protected (defaults to false)                                                         | false                      |
+| SEND_EMAIL_TO_RPA                    | A true/false value to determine if the generated email should be sent to RPA (default to false)                                                         | false                      |
+| WORKSHEET_PROTECT_PASSWORD           | The password to protect the DORA excel sheet                                                                                                            | N/A                        |
+| EXCEL_UPLOAD_ENVIRONMENT             | The environment to upload the DORA excel sheet to                                                                                                       | DEV                        |
+| DESIRABILITY_SUBMITTED_TOPIC_ADDRESS | The name of the Azure Service Bus Topic used for sending the Email and DORA details                                                                     | ffc-grants-topic           |
+| ---                                  | ---                                                                                                                                                     | ---                        |
+| GOOGLE_TAG_MANAGER_KEY               | The key needed to connect to Google Tag Manager (Optional, only required if needing to send analytics to Google Analytics)                              | N/A                        |
+| GOOGLE_TAG_MANAGER_SERVER_KEY        | The server key needed to connect to Google Tag Manager (Optional, only required if needing to send analytics to Google Analytics)                       | N/A                        |
+| ANALYTICS_PROPERTY_API               | The API key needed for connecting to Google Analytics (Optional, only required if needing to send analytics to Google Analytics)                        | N/A                        |
+| ANALYTICS_TAG_KEY                    | The key needed to send analytics to Google Analytics (Optional, only required if needing to send analytics to Google Analytics)                         | N/A                        |
 
 All of these values can be found in either the Azure App Configurations for the SND environment, or the Azure Service Bus for the SND environment.
 
