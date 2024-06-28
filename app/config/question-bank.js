@@ -99,7 +99,7 @@ const questionBank = {
                 <div class="govuk-list govuk-list--bullet">
                 <p class="govuk-body">This grant is for:</p>
                       <ul>
-                        <li>adding a veranda only to an existing laying hen or pullet building </li>
+                        <li>adding a veranda to an existing laying hen or pullet building </li>
                         <li>refurbishing an existing laying hen or pullet building</li>
                         <li>replacing an entire laying hen or pullet building with a new building</li>
                       </ul>
