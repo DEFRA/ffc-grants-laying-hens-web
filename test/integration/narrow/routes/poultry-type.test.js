@@ -49,7 +49,7 @@ describe('Page: /poultry-type', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/poultry-type`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { poultryType: 'hen', crumb: crumbToken }
+      payload: { poultryType: 'Hens', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -66,7 +66,7 @@ describe('Page: /poultry-type', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('This grant is only for laying hen or pullet projects.')
+    expect(postResponse.payload).toContain('This grant is only for laying hens or pullets projects.')
     expect(postResponse.payload).toContain('See other grants you may be eligible for')
   })
 
