@@ -2,8 +2,8 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /pollution-mitigation', () => {
-  let varList = {}
-  let valList = {}
+  const varList = {}
+  const valList = {}
   const NON_HENS = 'Pullets'
 
   commonFunctionsMock(varList, undefined, {}, valList)

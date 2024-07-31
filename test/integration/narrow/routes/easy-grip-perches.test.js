@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /easy-grip-perches', () => {
   const varList = {}
-  let valList = {}
+  const valList = {}
   const NON_HENS = 'Pullets'
 
   const utilsList = {

@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /poultry-type', () => {
   const varList = {}
-  let valList = {}
+  const valList = {}
 
   commonFunctionsMock(varList, undefined, {}, valList)
 
