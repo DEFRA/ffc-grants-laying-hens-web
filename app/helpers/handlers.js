@@ -66,9 +66,10 @@ const insertYarValue = (field, url, request) => {
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'aviary', 'multi-tier')
       case 'easy-grip-perches':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'an aviary\'s', 'a multi-tier system\'s')
+      case 'renewable-energy':
       case 'veranda-features':
-      return field.includes('{{_poultryType_}}') ? getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet') : 
-        getReplacementText(request, 'poultryType', 'poultry-type', 'poultry-type-A1', '30', '10')
+        return field.includes('{{_poultryType_}}') ? getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet') : 
+          getReplacementText(request, 'poultryType', 'poultry-type', 'poultry-type-A1', '30', '10')
       default:
         return field.includes('£') ? formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0) : getYarValue(request, additionalYarKeyName)
     }

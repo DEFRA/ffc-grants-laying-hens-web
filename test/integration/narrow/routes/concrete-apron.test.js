@@ -2,12 +2,9 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /concrete-apron', () => {
-  let varList = {
-    poultryType: '',
-    henVeranda: ''
-  }
-  
-  let valList = {}
+  const varList = {}
+  const valList = {}
+  const NON_HENS = 'Pullets'
   commonFunctionsMock(varList, undefined, {}, valList)
 
   it('page loads successfully, with all the options', async () => {
@@ -23,7 +20,7 @@ describe('Page: /concrete-apron', () => {
     expect(response.payload).toContain('No')
   })
   it('no option selected -> show error message', async () => {
-    valList['NOT_EMPTY'] = {
+    valList.NOT_EMPTY = {
       error: 'Select yes if the structure will be surrounded by a concrete apron',
       return: false
     }
@@ -37,10 +34,11 @@ describe('Page: /concrete-apron', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select yes if the structure will be surrounded by a concrete apron')
+    delete valList.NOT_EMPTY
   })
 
   it('user selects eligible option -> store user response and redirect to /egg-store-access', async () => {
-    varList.poultryType = 'hen'
+    varList.poultryType = 'Hens'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/concrete-apron`,
@@ -51,9 +49,10 @@ describe('Page: /concrete-apron', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('egg-store-access')
+    delete varList.poultryType
   })
   it('user selects eligible option -> store user response and redirect to /changing-area', async () => {
-    varList.poultryType = 'pullet'
+    varList.poultryType = NON_HENS
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/concrete-apron`,
@@ -64,6 +63,7 @@ describe('Page: /concrete-apron', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('changing-area')
+    delete varList.poultryType
   })
 
   it('user selects ineligible option `No` -> display ineligible page', async () => {
@@ -82,7 +82,7 @@ describe('Page: /concrete-apron', () => {
   })
 
   it('page loads with correct back link - /pullet-ventilation-specification', async () => {
-    varList.poultryType = 'pullet'
+    varList.poultryType = NON_HENS
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/concrete-apron`
@@ -90,10 +90,11 @@ describe('Page: /concrete-apron', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"pullet-ventilation-specification\" class=\"govuk-back-link\">Back</a>')
+    delete varList.poultryType
   })
 
   it('page loads with correct back link - /hen-ventilation-specifications', async () => {
-    varList.poultryType = 'hen'
+    varList.poultryType = 'Hens'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/concrete-apron`
@@ -101,5 +102,6 @@ describe('Page: /concrete-apron', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"hen-ventilation-specification\" class=\"govuk-back-link\">Back</a>')
+    delete varList.poultryType
   })
 })
