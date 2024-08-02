@@ -2,11 +2,9 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /pollution-mitigation', () => {
-  let varList = {
-      poultryType: 'hen',
-    }
-
-  let valList = {}
+  const varList = {}
+  const valList = {}
+  const NON_HENS = 'Pullets'
 
   commonFunctionsMock(varList, undefined, {}, valList)
 
@@ -43,11 +41,11 @@ describe('Page: /pollution-mitigation', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select if the building will have any of the following')
+    delete valList.pollutionMitigation
   })
 
-  it('user selects eligible option -> store user response and redirect to /renewable-energy - hen', async () => {
-    varList.poultryType = 'hen'
-    valList.pollutionMitigation = null
+  it('user selects eligible option -> store user response and redirect to /renewable-energy - hens', async () => {
+    varList.poultryType = 'Hens'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pollution-mitigation`,
@@ -58,10 +56,11 @@ describe('Page: /pollution-mitigation', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('renewable-energy')
+    delete varList.poultryType
   })
 
-  it('user selects eligible option -> store user response and redirect to /pullet-veranda-features - pullet', async () => {
-    varList.poultryType = 'pullet'
+  it('user selects eligible option -> store user response and redirect to /pullet-veranda-features - pullets', async () => {
+    varList.poultryType = NON_HENS
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/pollution-mitigation`,
@@ -72,6 +71,7 @@ describe('Page: /pollution-mitigation', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('pullet-veranda-features')
+    delete varList.poultryType
   })
 
   it('page loads with correct back link', async () => {

@@ -2,12 +2,9 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /changing-area', () => {
-  const varList = {
-    poultryType: 'hen',
-    projectType: 'Replacing the entire building with a new building'
-  }
-
-  let valList = {}
+  const varList = {}
+  const valList = {}
+  const NON_HENS = 'Pullets'
 
   commonFunctionsMock(varList, undefined, {}, valList)
 
@@ -43,9 +40,10 @@ describe('Page: /changing-area', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select yes if the building will have a biosecurity changing area')
+    delete valList.changingArea
   })
+
   it('user selects eligible option -> store user response and redirect to /external-taps', async () => {
-    valList.changingArea = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/changing-area`,
@@ -77,7 +75,7 @@ describe('Page: /changing-area', () => {
   })
 
   it('page loads with correct back link when poultry type is hen /egg-store-access', async () => {
-    varList.poultryType = 'hen'
+    varList.poultryType = 'Hens'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/changing-area`
@@ -85,10 +83,11 @@ describe('Page: /changing-area', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"egg-store-access\" class=\"govuk-back-link\">Back</a>')
+    delete varList.poultryType
   })
 
   it('page loads with correct back lin when poultry type is pullet /concrete-apron', async () => {
-    varList.poultryType = 'pullet'
+    varList.poultryType = NON_HENS
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/changing-area`
@@ -96,5 +95,6 @@ describe('Page: /changing-area', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"concrete-apron\" class=\"govuk-back-link\">Back</a>')
+    delete varList.poultryType
   })
 })

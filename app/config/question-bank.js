@@ -766,14 +766,14 @@ const questionBank = {
             {
               key: 'poultry-type-A1',
               text: 'Laying hens (over 17 weeks old)',
-              value: 'hen',
+              value: 'Hens',
               yarKeysReset: ['multiTierSystem', 'pulletHousingRequirements', 'housingDensity', 'darkBrooders',
                               'rearingAviarySystem', 'stepUpSystem', 'pulletVentilationSpecification', 'pulletVerandaFeatures']
             },
             {
               key: 'poultry-type-A2',
               text: 'Pullets (up to and including 17 weeks old)',
-              value: 'pullet',
+              value: 'Pullets',
               yarKeysReset: ['henVeranda', 'henVerandaFeatures', 'henVentilationSpecification', 'aviaryWelfare', 'aviarySystem', 'eggStoreAccess']
             },
             {

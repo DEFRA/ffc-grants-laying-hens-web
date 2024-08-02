@@ -4,8 +4,8 @@
       "key": "poultry-type",
       "title": "What type of poultry will be housed in this building?",
       "answers": {
-        "poultry-type-A1": "hen",
-        "poultry-type-A2": "pullet"
+        "poultry-type-A1": "Hens",
+        "poultry-type-A2": "Pullets"
       }
     }
   ],

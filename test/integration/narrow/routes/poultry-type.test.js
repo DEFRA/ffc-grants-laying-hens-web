@@ -2,12 +2,8 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /poultry-type', () => {
-  const varList = {
-    tenancy: 'Yes',
-    projectType: ''
-  }
-
-  let valList = {}
+  const varList = {}
+  const valList = {}
 
   commonFunctionsMock(varList, undefined, {}, valList)
 
@@ -40,22 +36,24 @@ describe('Page: /poultry-type', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select what type of poultry will be housed in the building')
+    delete valList.poultryType
   })
 
   it('user selects eligible option and projectType is `Replacing the entire building with a new building` -> store user response and redirect to /1000-birds', async () => {
     varList.projectType = 'Replacing the entire building with a new building'
-    valList.poultryType = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/poultry-type`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { poultryType: 'hen', crumb: crumbToken }
+      payload: { poultryType: 'Hens', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('1000-birds')
+    delete varList.projectType
   })
+
   it('user selects ineligible option `None of the above` -> display ineligible page', async () => {
     const postOptions = {
       method: 'POST',
@@ -79,6 +77,7 @@ describe('Page: /poultry-type', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href="tenancy" class="govuk-back-link">Back</a>')
+    delete varList.tenancy
   })
 
   it('`No` option selected on /tenancy -> page loads with correct back link', async () => {
@@ -90,5 +89,6 @@ describe('Page: /poultry-type', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href="project-responsibility" class="govuk-back-link">Back</a>')
+    delete varList.tenancy
   })
 })

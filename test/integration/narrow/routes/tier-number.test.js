@@ -2,20 +2,17 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /tier-number', () => {
-  let varList = {
-    poultryType: 'hen',
-  }
-
-  let valList = {}
-  const utilsList = {
-    'poultry-type-A1': 'hen',
-    'poultry-type-A2': 'pullet'
-  }  
+  const varList = {}
+  const valList = {}
+  const utilsList = {}  
+  const NON_HENS = 'Pullets'
   
   commonFunctionsMock(varList, undefined, utilsList, valList)
 
-  it('page loads successfully, with all the options - hen', async () => {
-    varList.poultryType = 'hen'
+  it('page loads successfully, with all the options - Hens', async () => {
+    varList.poultryType = 'Hens'
+    utilsList['poultry-type-A1'] = 'Hens'
+    utilsList['poultry-type-A2'] = 'Pullets'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/tier-number`
@@ -27,10 +24,13 @@ describe('Page: /tier-number', () => {
     expect(response.payload).toContain('The floor and the perches at the top of the aviary system are not counted as tiers')
     expect(response.payload).toContain('3 tiers or fewer')
     expect(response.payload).toContain('4 tiers')
+    delete varList.poultryType
+    delete utilsList['poultry-type-A1']
+    delete utilsList['poultry-type-A2']
   })
 
-  it('page loads successfully, with all the options - pullet', async () => {
-    varList.poultryType = 'pullet'
+  it('page loads successfully, with all the options - Pullets', async () => {
+    varList.poultryType = NON_HENS
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/tier-number`
@@ -42,14 +42,17 @@ describe('Page: /tier-number', () => {
     expect(response.payload).toContain('The floor and the perches at the top of the multi-tier system are not counted as tiers')
     expect(response.payload).toContain('3 tiers or fewer')
     expect(response.payload).toContain('4 tiers')
+    delete varList.poultryType
   })
 
-  it('no option selected -> show error message - hen', async () => {
-    varList.poultryType = 'hen'
-    valList['NOT_EMPTY'] = {
+  it('no option selected -> show error message - Hens', async () => {
+    varList.poultryType = 'Hens'
+    valList.NOT_EMPTY = {
       error: 'Select how many tiers will be positioned directly above each other in the aviary system',
       return: false
     }
+    utilsList['poultry-type-A1'] = 'Hens'
+    utilsList['poultry-type-A2'] = 'Pullets'
     
     const postOptions = {
       method: 'POST',
@@ -61,10 +64,14 @@ describe('Page: /tier-number', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select how many tiers will be positioned directly above each other in the aviary system')
+    delete varList.poultryType
+    delete valList.NON_EMPTY
+    delete utilsList['poultry-type-A1']
+    delete utilsList['poultry-type-A2']
   })
 
-  it('no option selected -> show error message - pullet', async () => {
-    varList.poultryType = 'pullet'
+  it('no option selected -> show error message - Pullets', async () => {
+    varList.poultryType = NON_HENS
     valList['NOT_EMPTY'] = {
       error: 'Select how many tiers will be positioned directly above each other in the multi-tier system',
       return: false
@@ -80,10 +87,12 @@ describe('Page: /tier-number', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select how many tiers will be positioned directly above each other in the multi-tier system')
+    delete varList.poultryType
+    delete valList.NON_EMPTY
   })
 
   it('user selects eligible option -> store user response and redirect to /hen-multi-tier', async () => {
-    varList.poultryType = 'hen'
+    varList.poultryType = 'Hens'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tier-number`,
@@ -94,10 +103,11 @@ describe('Page: /tier-number', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('hen-multi-tier')
+    delete varList.poultryType
   })
 
   it('user selects eligible option -> store user response and redirect to /pullet-multi-tier', async () => {
-    varList.poultryType = 'pullet'
+    varList.poultryType = NON_HENS
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tier-number`,
@@ -108,6 +118,7 @@ describe('Page: /tier-number', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('pullet-multi-tier')
+    delete varList.poultryType
   })
 
   it('page loads with correct back link - /maximum-tier-height', async () => {
