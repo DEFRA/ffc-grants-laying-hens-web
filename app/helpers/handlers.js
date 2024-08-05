@@ -67,6 +67,8 @@ const insertYarValue = (field, url, request) => {
       case 'easy-grip-perches':
         return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'an aviary\'s', 'a multi-tier system\'s')
       case 'renewable-energy':
+      case 'current-system':
+        return getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet')
       case 'veranda-features':
         return field.includes('{{_poultryType_}}') ? getReplacementText(request, additionalYarKeyName, 'poultry-type', 'poultry-type-A1', 'hen', 'pullet') : 
           getReplacementText(request, 'poultryType', 'poultry-type', 'poultry-type-A1', '30', '10')

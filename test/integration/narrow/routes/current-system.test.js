@@ -2,21 +2,22 @@ const { commonFunctionsMock } = require('../../../session-mock')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /current-system', () => {
-  let varList = {
-    poultryType: 'hen',
-  }
-
+  let varList = {}
   let valList = {}
+  let utilsList = {}
   
-  commonFunctionsMock(varList, undefined, {}, valList)
+  commonFunctionsMock(varList, undefined, utilsList, valList)
 
   it('page loads successfully, with all the options', async () => {
+    varList.poultryType = 'Hens'
+    utilsList['poultry-type-A1'] = 'Hens'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/current-system`
     }
 
     const response = await global.__SERVER__.inject(options)
+
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('What type of hen housing system do you currently use in the building?')
     expect(response.payload).toContain('Colony cage')
@@ -25,9 +26,13 @@ describe('Page: /current-system', () => {
     expect(response.payload).toContain('Free range')
     expect(response.payload).toContain('Organic')
     expect(response.payload).toContain('None of the above')
+    delete varList.poultryType
+    delete utilsList['poultry-type-A1']
   })
 
   it('no option selected -> show error message', async () => {
+    varList.poultryType = 'Hens'
+    utilsList['poultry-type-A1'] = 'Hens'
     valList['NOT_EMPTY'] = {
       error: 'Select what type of hen housing system you currently use',
       return: false
@@ -43,6 +48,9 @@ describe('Page: /current-system', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select what type of hen housing system you currently use')
+    delete varList.poultryType
+    delete utilsList['poultry-type-A1']
+    delete valList['NOT_EMPTY']
   })
 
   it('user selects eligible option(Barn) -> store user response and redirect to /current-multi-tier-system', async () => {

@@ -4,17 +4,14 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /easy-grip-perches', () => {
   const varList = {}
   const valList = {}
+  const utilsList = { }
   const NON_HENS = 'Pullets'
 
-  const utilsList = {
-    'poultry-type-A1': 'Hens',
-    'poultry-type-A2': 'Pullets'
-  }
-  
   commonFunctionsMock(varList, undefined, utilsList, valList)
 
   it('page loads successfully, with all the options - hens', async () => {
     varList.poultryType = 'Hens'
+    utilsList['poultry-type-A1'] = 'Hens'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/easy-grip-perches`
@@ -27,10 +24,12 @@ describe('Page: /easy-grip-perches', () => {
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
     delete varList.poultryType
+    delete utilsList['poultry-type-A1']
   })
 
   it('page loads successfully, with all the options - pullets', async () => {
     varList.poultryType = NON_HENS
+    utilsList['poultry-type-A2'] = NON_HENS
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/easy-grip-perches`
@@ -43,6 +42,7 @@ describe('Page: /easy-grip-perches', () => {
     expect(response.payload).toContain('Yes')
     expect(response.payload).toContain('No')
     delete varList.poultryType
+    delete utilsList['poultry-type-A2']
   })
 
   it('no option selected -> show error message - hens', async () => {
@@ -98,6 +98,5 @@ describe('Page: /easy-grip-perches', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"dark-brooders\" class=\"govuk-back-link\">Back</a>')
   })
-
 
 })
